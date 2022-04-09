@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		285F3F3E2801562800E84CF2 /* SelectCalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F3D2801562800E84CF2 /* SelectCalenderViewController.swift */; };
+		285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */; };
 		288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */; };
 		288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288367A8280129F30010CEAD /* StudyGoal.storyboard */; };
 		288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */; };
@@ -24,7 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		285F3F3D2801562800E84CF2 /* SelectCalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCalenderViewController.swift; sourceTree = "<group>"; };
+		285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
 		288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		288367A8280129F30010CEAD /* StudyGoal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyGoal.storyboard; sourceTree = "<group>"; };
 		288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 			children = (
 				288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */,
 				288367AD280134280010CEAD /* PlanStudyGoalViewController.swift */,
-				285F3F3D2801562800E84CF2 /* SelectCalenderViewController.swift */,
+				285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */,
 			);
 			path = StudyGoal;
 			sourceTree = "<group>";
@@ -279,7 +279,7 @@
 			files = (
 				28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
-				285F3F3E2801562800E84CF2 /* SelectCalenderViewController.swift in Sources */,
+				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */,
 				28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
