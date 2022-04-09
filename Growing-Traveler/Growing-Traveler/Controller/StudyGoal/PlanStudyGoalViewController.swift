@@ -185,7 +185,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     @objc func selectCategoryTagButton(sender: UIButton) {
         
-        // 跳出選擇 Category Tag
+        let categoryViewController = CategoryViewController()
+        
+        let navController = UINavigationController(rootViewController: categoryViewController)
+        
+        self.present(navController, animated: true, completion: nil)
         
     }
     
