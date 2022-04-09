@@ -7,6 +7,6 @@ target 'Growing-Traveler' do
 
   # Pods for Growing-Traveler
     pod 'SwiftLint'
-
+    pod 'FSCalendar'
 
 end
