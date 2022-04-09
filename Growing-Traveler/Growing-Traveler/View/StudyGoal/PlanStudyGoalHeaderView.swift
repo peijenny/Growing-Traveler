@@ -9,7 +9,6 @@ import UIKit
 
 class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
   
-
     @IBOutlet weak var studyGoalTitleTextField: UITextField!
     
     @IBOutlet weak var startDateLabel: UILabel!
@@ -30,6 +29,5 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
         super.awakeFromNib()
         // Initialization code
     }
-
 
 }
