@@ -48,8 +48,38 @@
 				A54E3632DB38C498B42C6229 /* Pods-Growing-Traveler.debug.xcconfig */,
 				59D1AA67F7C7E82E240245D2 /* Pods-Growing-Traveler.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		288367A22801250F0010CEAD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28CE2D4227FECBF400ACA813 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		288367A32801251C0010CEAD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28CE2D4927FECBF500ACA813 /* LaunchScreen.storyboard */,
+				28CE2D4427FECBF400ACA813 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		288367A4280125230010CEAD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		288367A5280125750010CEAD /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		28CE2D3227FECBF400ACA813 = {
@@ -73,12 +103,13 @@
 		28CE2D3D27FECBF400ACA813 /* Growing-Traveler */ = {
 			isa = PBXGroup;
 			children = (
+				288367A5280125750010CEAD /* Extension */,
+				288367A4280125230010CEAD /* Model */,
+				288367A32801251C0010CEAD /* View */,
+				288367A22801250F0010CEAD /* Controller */,
 				28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */,
 				28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */,
-				28CE2D4227FECBF400ACA813 /* ViewController.swift */,
-				28CE2D4427FECBF400ACA813 /* Main.storyboard */,
 				28CE2D4727FECBF500ACA813 /* Assets.xcassets */,
-				28CE2D4927FECBF500ACA813 /* LaunchScreen.storyboard */,
 				28CE2D4C27FECBF500ACA813 /* Info.plist */,
 			);
 			path = "Growing-Traveler";
