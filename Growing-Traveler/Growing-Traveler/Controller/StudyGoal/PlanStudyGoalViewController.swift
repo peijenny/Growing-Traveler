@@ -55,12 +55,62 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: PlanStudyGoalHeaderView.self))
+        let headerView = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: String(describing: PlanStudyGoalHeaderView.self)
+        )
 
         guard let headerView = headerView as? PlanStudyGoalHeaderView else { return headerView }
         
+        headerView.startDateCalenderButton.addTarget(
+            self,
+            action: #selector(selectStartDateButton),
+            for: .touchUpInside
+        )
+        
+        headerView.endDateCalenderButton.addTarget(
+            self,
+            action: #selector(selectEndDateButton),
+            for: .touchUpInside
+        )
+        
+        headerView.categoryTagButton.addTarget(
+            self,
+            action: #selector(selectCategoryTagButton),
+            for: .touchUpInside
+        )
+        
+        headerView.addStudyItemButton.addTarget(
+            self,
+            action: #selector(addStudyItemButton),
+            for: .touchUpInside
+        )
+        
         return headerView
 
+    }
+    
+    @objc func selectStartDateButton(sender: UIButton) {
+        
+        // 跳出選擇開始日期的 Calender
+        
+    }
+    
+    @objc func selectEndDateButton(sender: UIButton) {
+        
+        // 跳出選擇結束日期的 Calender
+        
+    }
+    
+    @objc func selectCategoryTagButton(sender: UIButton) {
+        
+        // 跳出選擇 Category Tag
+        
+    }
+    
+    @objc func addStudyItemButton(sender: UIButton) {
+        
+        // 跳出輸入框
+        
     }
     
 }

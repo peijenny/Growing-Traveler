@@ -22,7 +22,7 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var categoryTagLabel: UILabel!
     
-    @IBOutlet weak var selectCategoryTagButton: UIButton!
+    @IBOutlet weak var categoryTagButton: UIButton!
     
     @IBOutlet weak var addStudyItemButton: UIButton!
     

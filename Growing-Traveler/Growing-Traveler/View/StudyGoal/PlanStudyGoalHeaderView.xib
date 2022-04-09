@@ -179,10 +179,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="addStudyItemButton" destination="lA3-BD-eIS" id="WZR-AS-ve2"/>
+                <outlet property="categoryTagButton" destination="2Js-zV-rdu" id="9na-pG-xwB"/>
                 <outlet property="categoryTagLabel" destination="Shr-8E-u9Z" id="MFU-vQ-zUU"/>
                 <outlet property="endDateCalenderButton" destination="khI-wM-Aqo" id="aQq-pc-pph"/>
                 <outlet property="endDateLabel" destination="mQu-v5-7yv" id="YfR-MG-SAX"/>
-                <outlet property="selectCategoryTagButton" destination="2Js-zV-rdu" id="cTU-Io-pSU"/>
                 <outlet property="startDateCalenderButton" destination="tKQ-Ro-0GY" id="SCh-Dx-6uj"/>
                 <outlet property="startDateLabel" destination="Kkz-9G-f1P" id="PT7-jA-K4W"/>
                 <outlet property="studyGoalTitleTextField" destination="C2k-C9-LBc" id="oLQ-Um-J7u"/>
