@@ -9,21 +9,58 @@ import UIKit
 
 class PlanStudyGoalViewController: UIViewController {
 
+    @IBOutlet weak var planStudyGoalTableView: UITableView! {
+        
+        didSet {
+            
+            planStudyGoalTableView.delegate = self
+            
+            planStudyGoalTableView.dataSource = self
+            
+        }
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        planStudyGoalTableView.register(
+            UINib(nibName: String(describing: PlanStudyGoalHeaderView.self), bundle: nil),
+            forHeaderFooterViewReuseIdentifier: String(describing: PlanStudyGoalHeaderView.self)
+        )
+        
     }
     
+}
 
-    /*
-    // MARK: - Navigation
+extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+        
     }
-    */
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        return UITableViewCell()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: PlanStudyGoalHeaderView.self))
 
+        guard let headerView = headerView as? PlanStudyGoalHeaderView else { return headerView }
+        
+        return headerView
+
+    }
+    
 }

@@ -11,6 +11,8 @@
 		288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288367A8280129F30010CEAD /* StudyGoal.storyboard */; };
 		288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */; };
 		288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AD280134280010CEAD /* PlanStudyGoalViewController.swift */; };
+		288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288367B428013E800010CEAD /* PlanStudyGoalHeaderView.xib */; };
+		288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367B628013E900010CEAD /* PlanStudyGoalHeaderView.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -25,6 +27,8 @@
 		288367A8280129F30010CEAD /* StudyGoal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyGoal.storyboard; sourceTree = "<group>"; };
 		288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalViewController.swift; sourceTree = "<group>"; };
 		288367AD280134280010CEAD /* PlanStudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanStudyGoalViewController.swift; sourceTree = "<group>"; };
+		288367B428013E800010CEAD /* PlanStudyGoalHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanStudyGoalHeaderView.xib; sourceTree = "<group>"; };
+		288367B628013E900010CEAD /* PlanStudyGoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanStudyGoalHeaderView.swift; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +75,7 @@
 		288367A32801251C0010CEAD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				288367AF2801396D0010CEAD /* StudyGoal */,
 				28CE2D4927FECBF500ACA813 /* LaunchScreen.storyboard */,
 				28CE2D4427FECBF400ACA813 /* Main.storyboard */,
 				288367A8280129F30010CEAD /* StudyGoal.storyboard */,
@@ -98,6 +103,15 @@
 			children = (
 				288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */,
 				288367AD280134280010CEAD /* PlanStudyGoalViewController.swift */,
+			);
+			path = StudyGoal;
+			sourceTree = "<group>";
+		};
+		288367AF2801396D0010CEAD /* StudyGoal */ = {
+			isa = PBXGroup;
+			children = (
+				288367B428013E800010CEAD /* PlanStudyGoalHeaderView.xib */,
+				288367B628013E900010CEAD /* PlanStudyGoalHeaderView.swift */,
 			);
 			path = StudyGoal;
 			sourceTree = "<group>";
@@ -203,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
+				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
 				288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */,
@@ -247,6 +262,7 @@
 				28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
+				288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
