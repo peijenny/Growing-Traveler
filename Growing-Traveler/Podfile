@@ -8,5 +8,10 @@ target 'Growing-Traveler' do
   # Pods for Growing-Traveler
     pod 'SwiftLint'
     pod 'FSCalendar'
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Firestore'
+    pod 'FirebaseFirestoreSwift'
+
 
 end
