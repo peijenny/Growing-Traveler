@@ -8,22 +8,36 @@
 import UIKit
 
 class StudyGoalViewController: UIViewController {
-
+    
+    @IBOutlet weak var addGoalButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 
-    /*
-    // MARK: - Navigation
+        addGoalButton.imageView?.contentMode = .scaleAspectFill
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        addGoalButton.layer.cornerRadius = addGoalButton.frame.width / 2
+        
     }
-    */
-
+    
+    @IBAction func addStudyGoalButton(_ sender: UIButton) {
+        
+        let viewController = UIStoryboard(
+            name: "StudyGoal",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: String(describing: PlanStudyGoalViewController.self)
+        )
+        
+        guard let viewController = viewController as? PlanStudyGoalViewController else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
 }

@@ -58,11 +58,19 @@
                                 <rect key="frame" x="0.0" y="119" width="414" height="743"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1D-fh-S7D">
-                                <rect key="frame" x="354.5" y="811" width="43.5" height="31"/>
-                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1D-fh-S7D" userLabel="addStudyGoalButton">
+                                <rect key="frame" x="344" y="792" width="50" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="D9e-28-Tgn"/>
+                                    <constraint firstAttribute="height" constant="50" id="yXR-K7-ZY8"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                                <connections>
+                                    <action selector="addStudyGoalButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9Hf-Xj-p0p"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -70,7 +78,7 @@
                         <constraints>
                             <constraint firstItem="s7B-ph-YYk" firstAttribute="top" secondItem="4j2-rB-qVK" secondAttribute="bottom" id="J5o-bQ-mmm"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4j2-rB-qVK" secondAttribute="trailing" id="MJC-tD-mQZ"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="t1D-fh-S7D" secondAttribute="trailing" constant="16" id="Txz-Qh-shs"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="t1D-fh-S7D" secondAttribute="trailing" constant="20" id="Txz-Qh-shs"/>
                             <constraint firstItem="s7B-ph-YYk" firstAttribute="bottom" secondItem="t1D-fh-S7D" secondAttribute="bottom" constant="20" id="UjL-zA-il7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="s7B-ph-YYk" secondAttribute="bottom" id="UwY-un-CMC"/>
                             <constraint firstItem="s7B-ph-YYk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="WHe-aF-GXg"/>
@@ -80,19 +88,34 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="成長旅客" id="2yK-Wb-cqv"/>
+                    <connections>
+                        <outlet property="addGoalButton" destination="t1D-fh-S7D" id="VSr-sw-hdW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="121.73913043478262" y="95.758928571428569"/>
+        </scene>
+        <!--Plan Study Goal View Controller-->
+        <scene sceneID="XyE-rh-2wn">
+            <objects>
+                <viewController storyboardIdentifier="PlanStudyGoalViewController" id="Peh-Is-zNz" customClass="PlanStudyGoalViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YHS-Ee-epe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Tox-EJ-OEw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zCL-uO-4ua" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="881" y="96"/>
         </scene>
     </scenes>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
