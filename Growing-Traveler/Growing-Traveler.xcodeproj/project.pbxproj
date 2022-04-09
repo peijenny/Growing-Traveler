@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */; };
+		288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288367A8280129F30010CEAD /* StudyGoal.storyboard */; };
+		288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
-		28CE2D4327FECBF400ACA813 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* ViewController.swift */; };
+		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
 		28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28CE2D4427FECBF400ACA813 /* Main.storyboard */; };
 		28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28CE2D4727FECBF500ACA813 /* Assets.xcassets */; };
 		28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28CE2D4927FECBF500ACA813 /* LaunchScreen.storyboard */; };
@@ -19,10 +21,12 @@
 
 /* Begin PBXFileReference section */
 		288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
+		288367A8280129F30010CEAD /* StudyGoal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyGoal.storyboard; sourceTree = "<group>"; };
+		288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalViewController.swift; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		28CE2D4227FECBF400ACA813 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		28CE2D4527FECBF400ACA813 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		28CE2D4727FECBF500ACA813 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28CE2D4A27FECBF500ACA813 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,7 +60,8 @@
 		288367A22801250F0010CEAD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				28CE2D4227FECBF400ACA813 /* ViewController.swift */,
+				288367AC28012A450010CEAD /* StudyGoal */,
+				28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -66,6 +71,7 @@
 			children = (
 				28CE2D4927FECBF500ACA813 /* LaunchScreen.storyboard */,
 				28CE2D4427FECBF400ACA813 /* Main.storyboard */,
+				288367A8280129F30010CEAD /* StudyGoal.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -83,6 +89,14 @@
 				288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		288367AC28012A450010CEAD /* StudyGoal */ = {
+			isa = PBXGroup;
+			children = (
+				288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */,
+			);
+			path = StudyGoal;
 			sourceTree = "<group>";
 		};
 		28CE2D3227FECBF400ACA813 = {
@@ -188,6 +202,7 @@
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
+				288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,10 +238,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28CE2D4327FECBF400ACA813 /* ViewController.swift in Sources */,
+				28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
 				288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */,
 				28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */,
+				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
