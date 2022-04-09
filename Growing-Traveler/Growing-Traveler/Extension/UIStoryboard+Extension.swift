@@ -9,13 +9,17 @@ import UIKit
 
 private struct StoryboardCategory {
     
-    static let main = "main"
+    static let main = "Main"
+    
+    static let studyGoal = "StudyGoal"
     
 }
 
 extension UIStoryboard {
     
     static var main: UIStoryboard { return storyboard(name: StoryboardCategory.main) }
+    
+    static var studyGoal: UIStoryboard { return storyboard(name: StoryboardCategory.studyGoal)}
     
     private static func storyboard(name: String) -> UIStoryboard {
         
