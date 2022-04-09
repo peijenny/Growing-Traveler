@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */; };
+		285F3F4328017AEF00E84CF2 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F4228017AEF00E84CF2 /* CategoryViewController.swift */; };
+		285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F4828018ED400E84CF2 /* CategoryTableViewCell.swift */; };
+		285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285F3F4928018ED400E84CF2 /* CategoryTableViewCell.xib */; };
 		288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */; };
 		288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288367A8280129F30010CEAD /* StudyGoal.storyboard */; };
 		288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */; };
@@ -25,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
+		285F3F4228017AEF00E84CF2 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		285F3F4828018ED400E84CF2 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		285F3F4928018ED400E84CF2 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		288367A8280129F30010CEAD /* StudyGoal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyGoal.storyboard; sourceTree = "<group>"; };
 		288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +112,7 @@
 				288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */,
 				288367AD280134280010CEAD /* PlanStudyGoalViewController.swift */,
 				285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */,
+				285F3F4228017AEF00E84CF2 /* CategoryViewController.swift */,
 			);
 			path = StudyGoal;
 			sourceTree = "<group>";
@@ -113,8 +120,10 @@
 		288367AF2801396D0010CEAD /* StudyGoal */ = {
 			isa = PBXGroup;
 			children = (
-				288367B428013E800010CEAD /* PlanStudyGoalHeaderView.xib */,
 				288367B628013E900010CEAD /* PlanStudyGoalHeaderView.swift */,
+				288367B428013E800010CEAD /* PlanStudyGoalHeaderView.xib */,
+				285F3F4828018ED400E84CF2 /* CategoryTableViewCell.swift */,
+				285F3F4928018ED400E84CF2 /* CategoryTableViewCell.xib */,
 			);
 			path = StudyGoal;
 			sourceTree = "<group>";
@@ -224,6 +233,7 @@
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
+				285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
 				288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */,
 			);
@@ -301,8 +311,10 @@
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */,
 				28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */,
+				285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
+				285F3F4328017AEF00E84CF2 /* CategoryViewController.swift in Sources */,
 				288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
