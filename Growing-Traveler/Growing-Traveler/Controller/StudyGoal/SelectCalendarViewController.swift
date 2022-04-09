@@ -56,8 +56,7 @@ class SelectCalendarViewController: UIViewController {
 
 }
 
-
-extension SelectCalendarViewController:  FSCalendarDelegate, FSCalendarDataSource {
+extension SelectCalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     // MARK: - Calendar DataSource
     

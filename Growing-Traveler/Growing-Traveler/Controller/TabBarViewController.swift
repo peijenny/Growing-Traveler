@@ -42,7 +42,7 @@ private enum Tab {
     
 }
 
-class TabBarViewController: UITabBarController,UITabBarControllerDelegate {
+class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     private let tabs: [Tab] = [.studyGoal]
     
@@ -59,4 +59,3 @@ class TabBarViewController: UITabBarController,UITabBarControllerDelegate {
     }
     
 }
-
