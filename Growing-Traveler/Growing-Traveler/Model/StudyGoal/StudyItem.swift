@@ -11,7 +11,7 @@ struct StudyItem: Codable {
     
     var itemTitle: String
     
-    var selectTime: Int
+    var studyTime: Int
     
     var content: String
     

@@ -84,6 +84,11 @@ class PlanStudyGoalViewController: UIViewController {
             forHeaderFooterViewReuseIdentifier: String(describing: PlanStudyGoalHeaderView.self)
         )
         
+        planStudyGoalTableView.register(
+            UINib(nibName: String(describing: StudyItemTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: StudyItemTableViewCell.self)
+        )
+        
     }
     
 }
@@ -103,7 +108,42 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: StudyItemTableViewCell.self),
+            for: indexPath
+        )
+
+        guard let cell = cell as? StudyItemTableViewCell else { return cell }
+        
+        cell.deleteItemButton.addTarget(
+            self,
+            action: #selector(deleteItemButton),
+            for: .touchUpInside
+        )
+        
+        cell.showStudyItem(
+            itemTitle: studyItems[indexPath.row].itemTitle,
+            studyTime: studyItems[indexPath.row].studyTime)
+        
+        return cell
+        
+    }
+    
+    @objc func deleteItemButton(sender: UIButton) {
+        
+        let point = sender.convert(CGPoint.zero, to: planStudyGoalTableView)
+
+        if let indexPath = planStudyGoalTableView.indexPathForRow(at: point) {
+
+            studyItems.remove(at: indexPath.row)
+
+            planStudyGoalTableView.beginUpdates()
+
+            planStudyGoalTableView.deleteRows(at: [indexPath], with: .left)
+
+            planStudyGoalTableView.endUpdates()
+            
+        }
         
     }
     

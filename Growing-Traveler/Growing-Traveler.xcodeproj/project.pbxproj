@@ -13,6 +13,8 @@
 		285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285F3F4928018ED400E84CF2 /* CategoryTableViewCell.xib */; };
 		285F3F4D2801948600E84CF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 285F3F4C2801948600E84CF2 /* GoogleService-Info.plist */; };
 		28754AC7280305370079F430 /* StudyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28754AC6280305370079F430 /* StudyItem.swift */; };
+		28754ACA2803079A0079F430 /* StudyItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28754AC82803079A0079F430 /* StudyItemTableViewCell.swift */; };
+		28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28754AC92803079A0079F430 /* StudyItemTableViewCell.xib */; };
 		288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */; };
 		288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288367A8280129F30010CEAD /* StudyGoal.storyboard */; };
 		288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */; };
@@ -38,6 +40,8 @@
 		285F3F4928018ED400E84CF2 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		285F3F4C2801948600E84CF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		28754AC6280305370079F430 /* StudyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyItem.swift; sourceTree = "<group>"; };
+		28754AC82803079A0079F430 /* StudyItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyItemTableViewCell.swift; sourceTree = "<group>"; };
+		28754AC92803079A0079F430 /* StudyItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyItemTableViewCell.xib; sourceTree = "<group>"; };
 		288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		288367A8280129F30010CEAD /* StudyGoal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyGoal.storyboard; sourceTree = "<group>"; };
 		288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 				288367B428013E800010CEAD /* PlanStudyGoalHeaderView.xib */,
 				285F3F4828018ED400E84CF2 /* CategoryTableViewCell.swift */,
 				285F3F4928018ED400E84CF2 /* CategoryTableViewCell.xib */,
+				28754AC82803079A0079F430 /* StudyItemTableViewCell.swift */,
+				28754AC92803079A0079F430 /* StudyItemTableViewCell.xib */,
 			);
 			path = StudyGoal;
 			sourceTree = "<group>";
@@ -259,6 +265,7 @@
 				285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */,
 				285F3F4D2801948600E84CF2 /* GoogleService-Info.plist in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
+				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
 				288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +348,7 @@
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
+				28754ACA2803079A0079F430 /* StudyItemTableViewCell.swift in Sources */,
 				288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */,
 				28754AC7280305370079F430 /* StudyItem.swift in Sources */,
 				28D702BF28019E0300FE9AEA /* Category.swift in Sources */,
