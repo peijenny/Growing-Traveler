@@ -74,6 +74,8 @@ class PlanStudyGoalViewController: UIViewController {
         
     }
     
+    var studyItems: [StudyItem] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -96,7 +98,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        return studyItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -244,6 +246,14 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         self.view.addSubview(selectStudyItemViewController.view)
 
         self.addChild(selectStudyItemViewController)
+        
+        selectStudyItemViewController.getStudyItem = { [weak self] studyItem in
+            
+            self?.studyItems.append(studyItem)
+            
+            self?.planStudyGoalTableView.reloadData()
+            
+        }
         
     }
     

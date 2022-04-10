@@ -12,6 +12,7 @@
 		285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F4828018ED400E84CF2 /* CategoryTableViewCell.swift */; };
 		285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285F3F4928018ED400E84CF2 /* CategoryTableViewCell.xib */; };
 		285F3F4D2801948600E84CF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 285F3F4C2801948600E84CF2 /* GoogleService-Info.plist */; };
+		28754AC7280305370079F430 /* StudyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28754AC6280305370079F430 /* StudyItem.swift */; };
 		288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */; };
 		288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288367A8280129F30010CEAD /* StudyGoal.storyboard */; };
 		288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */; };
@@ -36,6 +37,7 @@
 		285F3F4828018ED400E84CF2 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		285F3F4928018ED400E84CF2 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		285F3F4C2801948600E84CF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		28754AC6280305370079F430 /* StudyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyItem.swift; sourceTree = "<group>"; };
 		288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		288367A8280129F30010CEAD /* StudyGoal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyGoal.storyboard; sourceTree = "<group>"; };
 		288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				28D702BC28019D0C00FE9AEA /* CategoryManager.swift */,
 				28D702BE28019E0300FE9AEA /* Category.swift */,
+				28754AC6280305370079F430 /* StudyItem.swift */,
 			);
 			path = StudyGoal;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
 				288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */,
+				28754AC7280305370079F430 /* StudyItem.swift in Sources */,
 				28D702BF28019E0300FE9AEA /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
