@@ -43,7 +43,7 @@ class PlanStudyGoalViewController: UIViewController {
     
     var formatter = DateFormatter()
     
-    var selectDate = Date() {
+    var selectStartDate = Date() {
         
         didSet {
             
@@ -51,6 +51,15 @@ class PlanStudyGoalViewController: UIViewController {
             
         }
         
+    }
+    
+    var selectEndDate = Date() {
+        
+        didSet {
+            
+            planStudyGoalTableView.reloadData()
+            
+        }
     }
     
     var selectDateType = String()
@@ -132,11 +141,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         if selectDateType == SelectDateType.startDate.title {
             
-            headerView.startDateLabel.text = formatter.string(from: selectDate)
+            headerView.startDateLabel.text = formatter.string(from: selectStartDate)
             
         } else if selectDateType == SelectDateType.endDate.title {
             
-            headerView.endDateLabel.text = formatter.string(from: selectDate)
+            headerView.endDateLabel.text = formatter.string(from: selectEndDate)
             
         }
         
@@ -154,7 +163,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         selectCalenderViewController.getSelectDate = { [weak self] date in
             
-            self?.selectDate = date
+            self?.selectStartDate = date
             
             self?.selectDateType = SelectDateType.startDate.title
             
@@ -166,11 +175,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     @objc func selectEndDateButton(sender: UIButton) {
         
-        selectCalenderViewController.startDate = selectDate
+        selectCalenderViewController.startDate = selectStartDate
         
         selectCalenderViewController.getSelectDate = { [weak self] date in
             
-            self?.selectDate = date
+            self?.selectEndDate = date
             
             self?.selectDateType = SelectDateType.endDate.title
             
@@ -182,22 +191,17 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     func setSelectCalenderViewController() {
         
-        selectCalenderViewController.view.backgroundColor = UIColor.systemGray5
-        
-        view.addSubview(selectCalenderViewController.view)
-        
-        selectCalenderViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            selectCalenderViewController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            selectCalenderViewController.view.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            selectCalenderViewController.view.widthAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
-            selectCalenderViewController.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)
-        ])
-
-        self.addChild(selectCalenderViewController)
-        
         selectCalenderViewController.calendar.reloadData()
+        
+        let navController = UINavigationController(rootViewController: selectCalenderViewController)
+        
+        if let sheetPresentationController = navController.sheetPresentationController {
+            
+            sheetPresentationController.detents = [.medium()]
+            
+        }
+        
+        self.present(navController, animated: true, completion: nil)
         
     }
     
