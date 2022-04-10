@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoryViewController: UIViewController {
+class SelectCategoryViewController: UIViewController {
     
     var tableView = UITableView()
     
@@ -99,7 +99,7 @@ class CategoryViewController: UIViewController {
 
 }
 
-extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
+extension SelectCategoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         

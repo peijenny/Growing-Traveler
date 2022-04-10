@@ -203,7 +203,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     @objc func selectCategoryTagButton(sender: UIButton) {
         
-        let categoryViewController = CategoryViewController()
+        let categoryViewController = SelectCategoryViewController()
         
         categoryViewController.getSelectCategoryItem = { [weak self] item in
             
