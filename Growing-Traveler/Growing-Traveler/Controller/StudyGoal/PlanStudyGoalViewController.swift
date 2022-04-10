@@ -218,8 +218,22 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     @objc func addStudyItemButton(sender: UIButton) {
-        
-        // 跳出輸入框
+
+        guard let selectStudyItemViewController = UIStoryboard
+            .studyGoal
+            .instantiateViewController(
+                withIdentifier: String(describing: SelectStudyItemViewController.self)
+                ) as? SelectStudyItemViewController else {
+
+                    return
+
+                }
+
+        selectStudyItemViewController.view.center = view.center
+
+        self.view.addSubview(selectStudyItemViewController.view)
+
+        self.addChild(selectStudyItemViewController)
         
     }
     
