@@ -24,6 +24,8 @@
 		28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28CE2D4427FECBF400ACA813 /* Main.storyboard */; };
 		28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28CE2D4727FECBF500ACA813 /* Assets.xcassets */; };
 		28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28CE2D4927FECBF500ACA813 /* LaunchScreen.storyboard */; };
+		28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702BC28019D0C00FE9AEA /* CategoryManager.swift */; };
+		28D702BF28019E0300FE9AEA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702BE28019E0300FE9AEA /* Category.swift */; };
 		6DAAA26455954CD3CA3F47AE /* Pods_Growing_Traveler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,8 @@
 		28CE2D4727FECBF500ACA813 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28CE2D4A27FECBF500ACA813 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28CE2D4C27FECBF500ACA813 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28D702BC28019D0C00FE9AEA /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
+		28D702BE28019E0300FE9AEA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		59D1AA67F7C7E82E240245D2 /* Pods-Growing-Traveler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.release.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.release.xcconfig"; sourceTree = "<group>"; };
 		A54E3632DB38C498B42C6229 /* Pods-Growing-Traveler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.debug.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.debug.xcconfig"; sourceTree = "<group>"; };
 		D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Growing_Traveler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +100,7 @@
 		288367A4280125230010CEAD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				28D702BB28019CB300FE9AEA /* StudyGoal */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -162,6 +167,15 @@
 				28CE2D4C27FECBF500ACA813 /* Info.plist */,
 			);
 			path = "Growing-Traveler";
+			sourceTree = "<group>";
+		};
+		28D702BB28019CB300FE9AEA /* StudyGoal */ = {
+			isa = PBXGroup;
+			children = (
+				28D702BC28019D0C00FE9AEA /* CategoryManager.swift */,
+				28D702BE28019E0300FE9AEA /* Category.swift */,
+			);
+			path = StudyGoal;
 			sourceTree = "<group>";
 		};
 		53CE560C6C7735E585252070 /* Frameworks */ = {
@@ -315,11 +329,13 @@
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */,
 				28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */,
+				28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */,
 				285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* CategoryViewController.swift in Sources */,
 				288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */,
+				28D702BF28019E0300FE9AEA /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +397,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;

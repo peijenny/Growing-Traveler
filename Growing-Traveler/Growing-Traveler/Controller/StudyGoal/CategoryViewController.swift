@@ -9,12 +9,24 @@ import UIKit
 
 class CategoryViewController: UIViewController {
     
-    var fakeData = ["國文", "數學", "英文"]
-    
     var tableView = UITableView()
+    
+    var categoryManager = CategoryManager()
+    
+    var category: [Category]? {
+        
+        didSet {
+            
+            tableView.reloadData()
+            
+        }
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchData()
         
         self.title = "分類標籤"
 
@@ -62,19 +74,40 @@ class CategoryViewController: UIViewController {
         
     }
     
+    func fetchData() {
+        
+        categoryManager.fetchData(completion: { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let data):
+                
+                strongSelf.category = data
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        })
+    }
+
 }
 
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 1
+        return category?.count ?? 0
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return fakeData.count
+        return category?[section].items.count ?? 0
         
     }
     
@@ -87,9 +120,14 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
 
         guard let cell = cell as? CategoryTableViewCell else { return cell }
         
-        cell.categoryItemLabel.text = fakeData[indexPath.row]
+        cell.categoryItemLabel.text = category?[indexPath.section].items[indexPath.row].title
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return category?[section].title ?? ""
     }
     
 }
