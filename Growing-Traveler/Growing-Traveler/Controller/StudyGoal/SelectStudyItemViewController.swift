@@ -101,7 +101,7 @@ class SelectStudyItemViewController: UIViewController {
                 return
             }
             
-            let studyItem = StudyItem(itemTitle: itemTitle, selectTime: selectTime, content: content)
+            let studyItem = StudyItem(itemTitle: itemTitle, studyTime: selectTime, content: content)
             
             self.getStudyItem?(studyItem)
             
