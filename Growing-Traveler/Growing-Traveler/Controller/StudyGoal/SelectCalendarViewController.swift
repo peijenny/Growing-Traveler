@@ -29,6 +29,16 @@ class SelectCalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "日期篩選"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .close,
+            target: self,
+            action: #selector(setClosePageButton)
+        )
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
         setCalenderFrame()
         
         view.backgroundColor = UIColor.white
@@ -39,6 +49,12 @@ class SelectCalendarViewController: UIViewController {
         // 修改 weekendColor
         calendar.appearance.titleWeekendColor = UIColor.lightGray
 
+    }
+    
+    @objc func setClosePageButton() {
+        
+        dismiss(animated: true, completion: .none)
+        
     }
 
     func setCalenderFrame() {
