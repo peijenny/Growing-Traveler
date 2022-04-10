@@ -21,15 +21,44 @@ class SelectStudyItemViewController: UIViewController {
     
     var timeButtons: [UIButton] = []
     
-    var selectTime: Int?
+    var selectStudyTime: Int?
     
-    var getStudyItem: ((_ studyItem: StudyItem) -> Void)?
+    var getStudyItem: ((_ studyItem: StudyItem, _ whetherToUpdate: Bool) -> Void)?
+    
+    var modifyStudyItem: StudyItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         createTimeButton()
+        
+        if modifyStudyItem != nil {
+            
+            modifyStudyItemData()
+            
+        }
 
+    }
+    
+    func modifyStudyItemData() {
+        
+        itemTextField.text = modifyStudyItem?.itemTitle
+        
+        contentTextView.text = modifyStudyItem?.content
+        
+        selectStudyTime = modifyStudyItem?.studyTime
+        
+        for index in 0..<studyTime.count {
+            
+            guard let studyTime = modifyStudyItem?.studyTime else { return }
+            
+            if "\(studyTime)" == timeButtons[index].titleLabel?.text {
+                
+                timeButtons[index].backgroundColor = UIColor.black
+                
+            }
+                
+        }
     }
     
     @IBAction func closeButton(_ sender: UIButton) {
@@ -79,7 +108,7 @@ class SelectStudyItemViewController: UIViewController {
         
         guard let selectSender = sender.titleLabel?.text else { return }
         
-        selectTime = Int(selectSender)
+        selectStudyTime = Int(selectSender)
         
     }
     
@@ -89,21 +118,29 @@ class SelectStudyItemViewController: UIViewController {
             
             hintLabel.text = "項目名稱不可為空！"
             
-        } else if selectTime == nil {
+        } else if selectStudyTime == nil {
             
             hintLabel.text = "請選擇項目的學習時間！"
             
         } else {
             
             guard let itemTitle = itemTextField?.text,
-                  let selectTime = selectTime,
+                  let selectTime = selectStudyTime,
                   let content = contentTextView?.text else {
                 return
             }
             
             let studyItem = StudyItem(itemTitle: itemTitle, studyTime: selectTime, content: content)
             
-            self.getStudyItem?(studyItem)
+            if modifyStudyItem != nil {
+                
+                self.getStudyItem?(studyItem, true)
+                
+            } else {
+                
+                self.getStudyItem?(studyItem, false)
+                
+            }
             
             self.view.removeFromSuperview()
             
