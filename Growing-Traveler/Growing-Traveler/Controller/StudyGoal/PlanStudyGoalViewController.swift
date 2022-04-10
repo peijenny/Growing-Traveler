@@ -43,9 +43,27 @@ class PlanStudyGoalViewController: UIViewController {
     
     var formatter = DateFormatter()
     
-    var selectDate = Date()
+    var selectDate = Date() {
+        
+        didSet {
+            
+            planStudyGoalTableView.reloadData()
+            
+        }
+        
+    }
     
-    var selectType = String()
+    var selectDateType = String()
+    
+    var selectCategoryItem: Item? {
+        
+        didSet {
+            
+            planStudyGoalTableView.reloadData()
+            
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,15 +130,19 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         formatter.dateFormat = "yyyy.MM.dd"
         
-        if selectType == SelectDateType.startDate.title {
+        if selectDateType == SelectDateType.startDate.title {
             
             headerView.startDateLabel.text = formatter.string(from: selectDate)
             
-        } else if selectType == SelectDateType.endDate.title {
+        } else if selectDateType == SelectDateType.endDate.title {
             
             headerView.endDateLabel.text = formatter.string(from: selectDate)
             
         }
+        
+        guard let categoryItemTitle = selectCategoryItem?.title else { return headerView }
+        
+        headerView.categoryTagLabel.text = categoryItemTitle
         
         return headerView
 
@@ -134,9 +156,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
             
             self?.selectDate = date
             
-            self?.selectType = SelectDateType.startDate.title
-            
-            self?.planStudyGoalTableView.reloadData()
+            self?.selectDateType = SelectDateType.startDate.title
             
         }
         
@@ -152,9 +172,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
             
             self?.selectDate = date
             
-            self?.selectType = SelectDateType.endDate.title
-            
-            self?.planStudyGoalTableView.reloadData()
+            self?.selectDateType = SelectDateType.endDate.title
             
         }
         
@@ -186,6 +204,12 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     @objc func selectCategoryTagButton(sender: UIButton) {
         
         let categoryViewController = CategoryViewController()
+        
+        categoryViewController.getSelectCategoryItem = { [weak self] item in
+            
+            self?.selectCategoryItem = item
+            
+        }
         
         let navController = UINavigationController(rootViewController: categoryViewController)
         

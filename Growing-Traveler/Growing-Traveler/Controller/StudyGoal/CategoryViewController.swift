@@ -22,6 +22,8 @@ class CategoryViewController: UIViewController {
         }
         
     }
+    
+    var getSelectCategoryItem: ((_ item: Item) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +48,7 @@ class CategoryViewController: UIViewController {
     
     @objc func setClosePageButton() {
         
-        self.dismiss(animated: true, completion: .none)
+        dismiss(animated: true, completion: .none)
         
     }
     
@@ -128,6 +130,16 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return category?[section].title ?? ""
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let item = category?[indexPath.section].items[indexPath.row] else { return }
+        
+        getSelectCategoryItem?(item)
+        
+        dismiss(animated: true, completion: .none)
+        
     }
     
 }
