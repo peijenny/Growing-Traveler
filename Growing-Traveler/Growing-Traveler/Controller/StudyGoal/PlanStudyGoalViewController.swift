@@ -76,6 +76,10 @@ class PlanStudyGoalViewController: UIViewController {
     
     var studyItems: [StudyItem] = []
     
+    var checkStudyGoalFillIn = false
+    
+    var alreadyFilledIn = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -89,6 +93,27 @@ class PlanStudyGoalViewController: UIViewController {
             forCellReuseIdentifier: String(describing: StudyItemTableViewCell.self)
         )
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(submitButton)
+        )
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func submitButton(sender: UIButton) {
+        
+        checkStudyGoalFillIn = true
+        
+        planStudyGoalTableView.reloadData()
+
+        if alreadyFilledIn {
+
+            print("Yes!")
+        }
+            
     }
     
 }
@@ -116,8 +141,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         guard let cell = cell as? StudyItemTableViewCell else { return cell }
         
         cell.deleteItemButton.addTarget(
-            self,
-            action: #selector(deleteItemButton),
+            self, action: #selector(deleteItemButton),
             for: .touchUpInside
         )
         
@@ -150,32 +174,63 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: String(describing: PlanStudyGoalHeaderView.self)
-        )
+            withIdentifier: String(describing: PlanStudyGoalHeaderView.self))
 
         guard let headerView = headerView as? PlanStudyGoalHeaderView else { return headerView }
         
+        headerView.studyGoalTitleTextField.delegate = self
+        
+        if checkStudyGoalFillIn == true {
+            
+            alreadyFilledIn = false
+
+            if headerView.studyGoalTitleTextField.text == "" {
+
+                headerView.hintLabel.text = "標題不可為空！"
+
+            } else if headerView.startDateTextField.text == "" {
+
+                headerView.hintLabel.text = "尚未選擇開始時間！"
+
+            } else if headerView.endDateTextField.text == "" {
+
+                headerView.hintLabel.text = "尚未選擇結束時間！"
+
+            } else if headerView.categoryTextField.text == "" {
+
+                headerView.hintLabel.text = "尚未選擇分類標籤！"
+
+            } else if studyItems.count == 0 {
+
+                headerView.hintLabel.text = "學習項目不可為空！"
+
+            } else {
+
+                alreadyFilledIn = true
+                
+            }
+
+            checkStudyGoalFillIn = false
+
+        }
+
         headerView.startDateCalenderButton.addTarget(
-            self,
-            action: #selector(selectStartDateButton),
+            self, action: #selector(selectStartDateButton),
             for: .touchUpInside
         )
         
         headerView.endDateCalenderButton.addTarget(
-            self,
-            action: #selector(selectEndDateButton),
+            self, action: #selector(selectEndDateButton),
             for: .touchUpInside
         )
         
         headerView.categoryTagButton.addTarget(
-            self,
-            action: #selector(selectCategoryTagButton),
+            self, action: #selector(selectCategoryTagButton),
             for: .touchUpInside
         )
         
         headerView.addStudyItemButton.addTarget(
-            self,
-            action: #selector(addStudyItemButton),
+            self, action: #selector(addStudyItemButton),
             for: .touchUpInside
         )
         
@@ -183,17 +238,15 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         if selectDateType == SelectDateType.startDate.title {
             
-            headerView.startDateLabel.text = formatter.string(from: selectStartDate)
+            headerView.startDateTextField.text = formatter.string(from: selectStartDate)
             
         } else if selectDateType == SelectDateType.endDate.title {
             
-            headerView.endDateLabel.text = formatter.string(from: selectEndDate)
+            headerView.endDateTextField.text = formatter.string(from: selectEndDate)
             
         }
-        
-        guard let categoryItemTitle = selectCategoryItem?.title else { return headerView }
-        
-        headerView.categoryTagLabel.text = categoryItemTitle
+
+        headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
         
         return headerView
 
@@ -295,12 +348,13 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
 
         self.addChild(selectStudyItemViewController)
         
-        selectStudyItemViewController.getStudyItem = {
-            [weak self] studyItem, whetherToUpdate in
+        selectStudyItemViewController.getStudyItem = { [weak self] studyItem, whetherToUpdate in
             
             if whetherToUpdate == false {
                 
                 self?.studyItems.append(studyItem)
+                
+                self?.alreadyFilledIn = true
                 
             } else {
                 
@@ -320,6 +374,17 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
             studyItem: studyItems[indexPath.row],
             selectRow: indexPath.row)
 
+    }
+    
+}
+
+extension PlanStudyGoalViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
     }
     
 }
