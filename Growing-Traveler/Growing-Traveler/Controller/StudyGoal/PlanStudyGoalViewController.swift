@@ -217,6 +217,12 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         let navController = UINavigationController(rootViewController: categoryViewController)
         
+        if let sheetPresentationController = navController.sheetPresentationController {
+            
+            sheetPresentationController.detents = [.medium()]
+            
+        }
+        
         self.present(navController, animated: true, completion: nil)
         
     }
