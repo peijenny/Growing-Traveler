@@ -11,19 +11,21 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
   
     @IBOutlet weak var studyGoalTitleTextField: UITextField!
     
-    @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var startDateTextField: UITextField!
     
     @IBOutlet weak var startDateCalenderButton: UIButton!
     
-    @IBOutlet weak var endDateLabel: UILabel!
+    @IBOutlet weak var endDateTextField: UITextField!
     
     @IBOutlet weak var endDateCalenderButton: UIButton!
     
-    @IBOutlet weak var categoryTagLabel: UILabel!
+    @IBOutlet weak var categoryTextField: UITextField!
     
     @IBOutlet weak var categoryTagButton: UIButton!
     
     @IBOutlet weak var addStudyItemButton: UIButton!
+    
+    @IBOutlet weak var hintLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
