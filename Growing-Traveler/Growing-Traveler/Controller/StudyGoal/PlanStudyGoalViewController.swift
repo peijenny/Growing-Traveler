@@ -271,6 +271,12 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     @objc func addStudyItemButton(sender: UIButton) {
 
+        popupSelectStudyItemPage(studyItem: nil, selectRow: nil)
+        
+    }
+    
+    func popupSelectStudyItemPage(studyItem: StudyItem?, selectRow: Int?) {
+        
         guard let selectStudyItemViewController = UIStoryboard
             .studyGoal
             .instantiateViewController(
@@ -280,6 +286,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
                     return
 
                 }
+        
+        selectStudyItemViewController.modifyStudyItem = studyItem
 
         selectStudyItemViewController.view.center = view.center
 
@@ -287,14 +295,31 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
 
         self.addChild(selectStudyItemViewController)
         
-        selectStudyItemViewController.getStudyItem = { [weak self] studyItem in
+        selectStudyItemViewController.getStudyItem = {
+            [weak self] studyItem, whetherToUpdate in
             
-            self?.studyItems.append(studyItem)
+            if whetherToUpdate == false {
+                
+                self?.studyItems.append(studyItem)
+                
+            } else {
+                
+                self?.studyItems[selectRow ?? 0] = studyItem
+                
+            }
             
             self?.planStudyGoalTableView.reloadData()
             
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        popupSelectStudyItemPage(
+            studyItem: studyItems[indexPath.row],
+            selectRow: indexPath.row)
+
     }
     
 }
