@@ -328,7 +328,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     func setSelectCalenderViewController() {
         
-        selectCalenderViewController.calendar.reloadData()
+        selectCalenderViewController.calendarView.reloadData()
         
         let navController = UINavigationController(rootViewController: selectCalenderViewController)
         
