@@ -89,6 +89,7 @@
                     <navigationItem key="navigationItem" title="成長旅客" id="2yK-Wb-cqv"/>
                     <connections>
                         <outlet property="addGoalButton" destination="t1D-fh-S7D" id="VSr-sw-hdW"/>
+                        <outlet property="studyGoalTableView" destination="s7B-ph-YYk" id="6FP-c5-7Eg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

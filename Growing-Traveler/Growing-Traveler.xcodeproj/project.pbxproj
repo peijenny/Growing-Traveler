@@ -23,7 +23,7 @@
 		288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288367B428013E800010CEAD /* PlanStudyGoalHeaderView.xib */; };
 		288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367B628013E900010CEAD /* PlanStudyGoalHeaderView.swift */; };
 		28AF15AD2804033B004E97B8 /* StudyGoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */; };
-		28AF15AE2804033B004E97B8 /* studyGoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15AC2804033B004E97B8 /* studyGoalTableViewCell.xib */; };
+		28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */; };
 		28AF15B128040948004E97B8 /* StudyGoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B028040948004E97B8 /* StudyGoalHeaderView.swift */; };
 		28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15B228040954004E97B8 /* StudyGoalHeaderView.xib */; };
 		28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B428040A82004E97B8 /* StudyGoalFooterView.swift */; };
@@ -58,7 +58,7 @@
 		288367B428013E800010CEAD /* PlanStudyGoalHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanStudyGoalHeaderView.xib; sourceTree = "<group>"; };
 		288367B628013E900010CEAD /* PlanStudyGoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanStudyGoalHeaderView.swift; sourceTree = "<group>"; };
 		28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalTableViewCell.swift; sourceTree = "<group>"; };
-		28AF15AC2804033B004E97B8 /* studyGoalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = studyGoalTableViewCell.xib; sourceTree = "<group>"; };
+		28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalTableViewCell.xib; sourceTree = "<group>"; };
 		28AF15B028040948004E97B8 /* StudyGoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalHeaderView.swift; sourceTree = "<group>"; };
 		28AF15B228040954004E97B8 /* StudyGoalHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalHeaderView.xib; sourceTree = "<group>"; };
 		28AF15B428040A82004E97B8 /* StudyGoalFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalFooterView.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 			children = (
 				28AF15AF2804090D004E97B8 /* PlanStudyGoal */,
 				28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */,
-				28AF15AC2804033B004E97B8 /* studyGoalTableViewCell.xib */,
+				28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */,
 				28AF15B028040948004E97B8 /* StudyGoalHeaderView.swift */,
 				28AF15B228040954004E97B8 /* StudyGoalHeaderView.xib */,
 				28AF15B428040A82004E97B8 /* StudyGoalFooterView.swift */,
@@ -299,7 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28AF15AE2804033B004E97B8 /* studyGoalTableViewCell.xib in Resources */,
+				28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */,
 				28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */,
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
