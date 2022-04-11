@@ -202,6 +202,14 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
         
         headerView.endDateLabel.text = formatter.string(from: studyGoals?[section].studyPeriod.endTime ?? Date())
         
+        tableView.tableHeaderView = UIView.init(
+            frame: CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
+        )
+        
+        tableView.contentInset = UIEdgeInsets.init(
+            top: -headerView.frame.height, left: 0, bottom: 0, right: 0
+        )
+        
         return headerView
         
     }
@@ -217,6 +225,13 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
         
         footerView.deleteButton.addTarget(
             self, action: #selector(deleteRowButton), for: .touchUpInside
+        )
+        
+        tableView.tableFooterView = UIView.init(
+            frame: CGRect.init(x: 0, y: 0, width: footerView.frame.width, height: footerView.frame.height)
+        )
+        tableView.contentInset = UIEdgeInsets.init(
+            top: 0, left: 0, bottom: -footerView.frame.height, right: 0
         )
         
         return footerView
