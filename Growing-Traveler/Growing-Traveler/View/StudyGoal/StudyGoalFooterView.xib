@@ -39,15 +39,24 @@
                                 <constraint firstAttribute="width" constant="120" id="RJq-zW-UX4"/>
                             </constraints>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9u-Xt-LNL">
+                            <rect key="frame" x="146" y="10" width="42" height="25"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="j9u-Xt-LNL" secondAttribute="bottom" constant="10" id="FdR-hK-dZQ"/>
                         <constraint firstItem="rU0-Im-g4N" firstAttribute="leading" secondItem="ZKC-au-2sh" secondAttribute="trailing" constant="226" id="LWA-lO-IqJ"/>
                         <constraint firstItem="ZKC-au-2sh" firstAttribute="top" secondItem="0lN-sN-QgT" secondAttribute="top" constant="7" id="LsG-nX-W5X"/>
                         <constraint firstAttribute="bottom" secondItem="rU0-Im-g4N" secondAttribute="bottom" constant="7" id="Zdo-Cj-L9A"/>
                         <constraint firstItem="rU0-Im-g4N" firstAttribute="top" secondItem="0lN-sN-QgT" secondAttribute="top" constant="7" id="aOX-5K-H6e"/>
                         <constraint firstAttribute="bottom" secondItem="ZKC-au-2sh" secondAttribute="bottom" constant="7" id="fd7-99-N90"/>
                         <constraint firstAttribute="trailing" secondItem="rU0-Im-g4N" secondAttribute="trailing" constant="16" id="oVF-qg-HEp"/>
+                        <constraint firstItem="j9u-Xt-LNL" firstAttribute="leading" secondItem="ZKC-au-2sh" secondAttribute="trailing" constant="10" id="odr-sP-s6K"/>
+                        <constraint firstItem="j9u-Xt-LNL" firstAttribute="top" secondItem="0lN-sN-QgT" secondAttribute="top" constant="10" id="r8i-gf-ID0"/>
                         <constraint firstItem="ZKC-au-2sh" firstAttribute="leading" secondItem="0lN-sN-QgT" secondAttribute="leading" constant="16" id="sV7-TK-0T6"/>
                     </constraints>
                 </view>
@@ -63,8 +72,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="categoryBackgroundView" destination="ZKC-au-2sh" id="qMW-xE-YEb"/>
-                <outlet property="categoryLable" destination="Lco-q6-nic" id="Jxd-aD-8N5"/>
+                <outlet property="categoryLabel" destination="Lco-q6-nic" id="kF3-Zo-NCp"/>
                 <outlet property="deleteButton" destination="rU0-Im-g4N" id="d0p-TM-8vy"/>
+                <outlet property="hideRecordLabel" destination="j9u-Xt-LNL" id="Eb6-JD-lzG"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="86.71875"/>
         </view>

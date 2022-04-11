@@ -35,6 +35,10 @@ class StudyGoalViewController: UIViewController {
         
     }
     
+    var topCGFloat = CGFloat()
+    
+    var bottomCGFloat = CGFloat()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +63,7 @@ class StudyGoalViewController: UIViewController {
         super.viewDidAppear(animated)
         
         listenData()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -210,13 +215,17 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
         
         headerView.endDateLabel.text = formatter.string(from: studyGoals?[section].studyPeriod.endTime ?? Date())
         
+        topCGFloat = headerView.frame.height
+        
         tableView.tableHeaderView = UIView.init(
             frame: CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
         )
+
+        setContentInset()
         
-        tableView.contentInset = UIEdgeInsets.init(
-            top: -headerView.frame.height, left: 0, bottom: 0, right: 0
-        )
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        
+        headerView.addGestureRecognizer(tapGestureRecognizer)
         
         return headerView
         
@@ -229,20 +238,61 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
 
         guard let footerView = footerView as? StudyGoalFooterView else { return footerView }
         
-        footerView.categoryLable.text = studyGoals?[section].category.title
+        footerView.categoryLabel.text = studyGoals?[section].category.title
+        
+        footerView.hideRecordLabel.text = "\(studyGoals?[section].id ?? "")"
         
         footerView.deleteButton.addTarget(
             self, action: #selector(deleteRowButton), for: .touchUpInside
         )
         
+        bottomCGFloat = footerView.frame.height
+        
         tableView.tableFooterView = UIView.init(
             frame: CGRect.init(x: 0, y: 0, width: footerView.frame.width, height: footerView.frame.height)
         )
-        tableView.contentInset = UIEdgeInsets.init(
-            top: 0, left: 0, bottom: -footerView.frame.height, right: 0
-        )
+        
+        setContentInset()
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        
+        footerView.addGestureRecognizer(tapGestureRecognizer)
         
         return footerView
+    }
+    
+    func setContentInset() {
+        
+        studyGoalTableView.contentInset = UIEdgeInsets.init(
+            top: -topCGFloat, left: 0, bottom: -bottomCGFloat, right: 0
+        )
+        
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+
+        let headerView = sender.view as? StudyGoalHeaderView
+        
+        let footerView = sender.view as? StudyGoalFooterView
+        
+        for index in 0..<(studyGoals?.count ?? 0) {
+            
+            if sender.view == headerView &&
+                headerView?.studyGoalTitleLabel.text == studyGoals?[index].title {
+                
+                pushToPlanStudyGoalPage(studyGoal: studyGoals?[index])
+                
+            }
+            
+            if sender.view == footerView &&
+                footerView?.hideRecordLabel.text == studyGoals?[index].id {
+                
+                pushToPlanStudyGoalPage(studyGoal: studyGoals?[index])
+                
+            }
+            
+        }
+        
     }
     
     @objc func deleteRowButton(sender: UIButton) {

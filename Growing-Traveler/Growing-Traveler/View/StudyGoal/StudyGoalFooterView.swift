@@ -11,8 +11,10 @@ class StudyGoalFooterView: UITableViewHeaderFooterView {
 
     @IBOutlet weak var categoryBackgroundView: UIView!
     
-    @IBOutlet weak var categoryLable: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     
     @IBOutlet weak var deleteButton: UIButton!
+    
+    @IBOutlet weak var hideRecordLabel: UILabel!
     
 }
