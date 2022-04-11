@@ -61,8 +61,6 @@ class StudyGoalManager {
         
         do {
             
-            let documentID = database.document().documentID
-            
             try database.document(studyGoal.id).setData(from: studyGoal)
             
         } catch {
@@ -70,6 +68,7 @@ class StudyGoalManager {
             print(error)
             
         }
+        
     }
     
     // 取得 所有的學習計劃 至 StudyFoalViewController
@@ -117,10 +116,37 @@ class StudyGoalManager {
     }
     
     // 修改 選取的學習計劃 至 Firebase Firestore
-    func updateData() {
+    func updateData(studyGoal: StudyGoal) {
         
+        do {
+
+            try database.document(studyGoal.id).setData(from: studyGoal, merge: true)
+
+        } catch {
+
+            print(error)
+
+        }
+
     }
     
     // 刪除 選取的學習計劃 至 Firebase Firestore
+    
+    func deleteData(studyGoal: StudyGoal) {
+        
+        database.document(studyGoal.id).delete() { error in
+            
+            if let error = error {
+                
+                print(error)
+                
+            } else {
+                
+                print("Success")
+            }
+            
+        }
+        
+    }
     
 }

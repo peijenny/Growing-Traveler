@@ -52,9 +52,13 @@ class StudyGoalViewController: UIViewController {
             UINib(nibName: String(describing: StudyGoalTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
         )
-
-        fetchData()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        listenData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -81,9 +85,9 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    func fetchData() {
+    func listenData() {
         
-        studyGoalManager.fetchData(completion: { [weak self] result in
+        studyGoalManager.listenData(completion: { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -157,15 +161,30 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func checkItemButton(sender: UIButton) {
         
-        if sender.backgroundColor?.cgColor == UIColor.systemGray.cgColor {
+        let point = sender.convert(CGPoint.zero, to: studyGoalTableView)
 
-            sender.backgroundColor = UIColor.black
+        if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
+            
+            guard var studyGoals = studyGoals else { return }
 
-        } else {
+            if sender.backgroundColor?.cgColor == UIColor.systemGray.cgColor {
 
-            sender.backgroundColor = UIColor.systemGray
+                sender.backgroundColor = UIColor.black
+                
+                studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = true
 
+            } else {
+
+                sender.backgroundColor = UIColor.systemGray
+                
+                studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = false
+
+            }
+            
+            studyGoalManager.updateData(studyGoal: studyGoals[indexPath.section])
+            
         }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -209,12 +228,16 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
 
         if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
             
+            if let studyGoal = studyGoals?[indexPath.section] {
+                
+                studyGoalManager.deleteData(studyGoal: studyGoal)
+                
+            }
+            
             studyGoals?.remove(at: indexPath.section)
             
         }
-        
-        studyGoalTableView.reloadData()
-        
+
     }
     
 }
