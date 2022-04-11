@@ -55,6 +55,10 @@
                 <constraint firstItem="tqY-t7-bZd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hPX-Qp-z3d"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="endDateLabel" destination="PLx-Mq-Rsl" id="cUE-VT-BgR"/>
+                <outlet property="studyGoalTitleLabel" destination="oX2-DH-Yk7" id="hjt-xk-ORx"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="86.71875"/>
         </view>
     </objects>

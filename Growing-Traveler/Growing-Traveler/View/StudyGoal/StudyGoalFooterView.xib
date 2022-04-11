@@ -61,6 +61,11 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="0lN-sN-QgT" secondAttribute="bottom" id="rfo-hM-455"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="categoryBackgroundView" destination="ZKC-au-2sh" id="qMW-xE-YEb"/>
+                <outlet property="categoryLable" destination="Lco-q6-nic" id="Jxd-aD-8N5"/>
+                <outlet property="deleteButton" destination="rU0-Im-g4N" id="d0p-TM-8vy"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="86.71875"/>
         </view>
     </objects>
