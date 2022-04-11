@@ -9,7 +9,7 @@ import UIKit
 
 class SelectCategoryViewController: UIViewController {
     
-    var tableView = UITableView()
+    var categoryTableView = UITableView()
     
     var categoryManager = CategoryManager()
     
@@ -17,7 +17,7 @@ class SelectCategoryViewController: UIViewController {
         
         didSet {
             
-            tableView.reloadData()
+            categoryTableView.reloadData()
             
         }
         
@@ -54,25 +54,25 @@ class SelectCategoryViewController: UIViewController {
     
     func setTableView() {
         
-        view.addSubview(tableView)
+        view.addSubview(categoryTableView)
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        categoryTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            tableView.heightAnchor.constraint(equalTo: view.heightAnchor)
+            categoryTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            categoryTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            categoryTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            categoryTableView.heightAnchor.constraint(equalTo: view.heightAnchor)
         ])
         
-        tableView.register(
+        categoryTableView.register(
             UINib(nibName: String(describing: CategoryTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: CategoryTableViewCell.self)
         )
 
-        tableView.delegate = self
+        categoryTableView.delegate = self
         
-        tableView.dataSource = self
+        categoryTableView.dataSource = self
         
     }
     

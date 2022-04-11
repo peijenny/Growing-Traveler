@@ -10,7 +10,7 @@ import FSCalendar
 
 class SelectCalendarViewController: UIViewController {
     
-    var calendar = FSCalendar()
+    var calendarView = FSCalendar()
     
     var getSelectDate: ((_ date: Date) -> Void)?
     
@@ -18,9 +18,9 @@ class SelectCalendarViewController: UIViewController {
         
         didSet {
             
-            calendar.delegate = self
+            calendarView.delegate = self
             
-            calendar.dataSource = self
+            calendarView.dataSource = self
             
         }
         
@@ -44,10 +44,10 @@ class SelectCalendarViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         // 左右滑動
-        calendar.scrollDirection = .horizontal
+        calendarView.scrollDirection = .horizontal
         
         // 修改 weekendColor
-        calendar.appearance.titleWeekendColor = UIColor.lightGray
+        calendarView.appearance.titleWeekendColor = UIColor.lightGray
 
     }
     
@@ -59,15 +59,15 @@ class SelectCalendarViewController: UIViewController {
 
     func setCalenderFrame() {
         
-        view.addSubview(calendar)
+        view.addSubview(calendarView)
         
-        calendar.translatesAutoresizingMaskIntoConstraints = false
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            calendar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            calendar.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            calendar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            calendar.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)
+            calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            calendarView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            calendarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            calendarView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)
         ])
         
     }
