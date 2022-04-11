@@ -292,6 +292,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         studyGoalManager.addData(studyGoal: studyGoal)
         
+        navigationController?.popViewController(animated: true)
+        
     }
     
     @objc func selectStartDateButton(sender: UIButton) {
