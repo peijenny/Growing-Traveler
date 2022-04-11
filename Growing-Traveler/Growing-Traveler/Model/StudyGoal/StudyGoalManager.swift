@@ -134,7 +134,7 @@ class StudyGoalManager {
     
     func deleteData(studyGoal: StudyGoal) {
         
-        database.document(studyGoal.id).delete() { error in
+        database.document(studyGoal.id).delete { error in
             
             if let error = error {
                 
