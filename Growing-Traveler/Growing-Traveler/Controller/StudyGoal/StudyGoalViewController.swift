@@ -109,13 +109,13 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 2
+        return studyGoals?.count ?? 0
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        return studyGoals?[section].studyItems.count ?? 0
         
     }
     
@@ -128,8 +128,27 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
 
         guard let cell = cell as? StudyGoalTableViewCell else { return cell }
         
+        cell.studyItemLabel.text = studyGoals?[indexPath.section].studyItems[indexPath.row].itemTitle
+        
+        cell.checkButton.addTarget(
+            self, action: #selector(checkItemButton), for: .touchUpInside
+        )
+        
         return cell
         
+    }
+    
+    @objc func checkItemButton(sender: UIButton) {
+        
+        if sender.backgroundColor?.cgColor == UIColor.systemGray.cgColor {
+            
+            sender.backgroundColor = UIColor.black
+            
+        } else {
+            
+            sender.backgroundColor = UIColor.systemGray
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -138,6 +157,14 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: String(describing: StudyGoalHeaderView.self))
 
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
+        
+        headerView.studyGoalTitleLabel.text = studyGoals?[section].title
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        headerView.endDateLabel.text = formatter.string(from: studyGoals?[section].studyPeriod.endTime ?? Date())
         
         return headerView
         
@@ -150,7 +177,27 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
 
         guard let footerView = footerView as? StudyGoalFooterView else { return footerView }
         
+        footerView.categoryLable.text = studyGoals?[section].category.title
+        
+        footerView.deleteButton.addTarget(
+            self, action: #selector(deleteRowButton), for: .touchUpInside
+        )
+        
         return footerView
+    }
+    
+    @objc func deleteRowButton(sender: UIButton) {
+        
+        let point = sender.convert(CGPoint.zero, to: studyGoalTableView)
+
+        if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
+            
+            studyGoals?.remove(at: indexPath.section)
+            
+        }
+        
+        studyGoalTableView.reloadData()
+        
     }
     
 }
