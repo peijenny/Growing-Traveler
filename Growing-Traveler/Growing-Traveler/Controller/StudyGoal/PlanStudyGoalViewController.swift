@@ -25,6 +25,38 @@ enum SelectDateType {
     }
 }
 
+enum InputError {
+    
+    case studyGoalTitleEmpty
+    
+    case startTimeEmpty
+    
+    case endTimeEmpty
+    
+    case categoryEmpty
+    
+    case studyItemEmpty
+    
+    var title: String {
+        
+        switch self {
+            
+        case .studyGoalTitleEmpty: return "標題不可為空！"
+            
+        case .startTimeEmpty: return "尚未選擇開始時間！"
+            
+        case .endTimeEmpty: return "尚未選擇結束時間！"
+            
+        case .categoryEmpty: return "尚未選擇分類標籤！"
+            
+        case .studyItemEmpty: return "學習項目不可為空！"
+            
+        }
+        
+    }
+    
+}
+
 class PlanStudyGoalViewController: UIViewController {
 
     @IBOutlet weak var planStudyGoalTableView: UITableView! {
@@ -186,23 +218,23 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
 
             if headerView.studyGoalTitleTextField.text == "" {
 
-                headerView.hintLabel.text = "標題不可為空！"
+                headerView.hintLabel.text = InputError.studyGoalTitleEmpty.title
 
             } else if headerView.startDateTextField.text == "" {
 
-                headerView.hintLabel.text = "尚未選擇開始時間！"
+                headerView.hintLabel.text = InputError.startTimeEmpty.title
 
             } else if headerView.endDateTextField.text == "" {
 
-                headerView.hintLabel.text = "尚未選擇結束時間！"
+                headerView.hintLabel.text = InputError.endTimeEmpty.title
 
             } else if headerView.categoryTextField.text == "" {
 
-                headerView.hintLabel.text = "尚未選擇分類標籤！"
+                headerView.hintLabel.text = InputError.categoryEmpty.title
 
             } else if studyItems.count == 0 {
 
-                headerView.hintLabel.text = "學習項目不可為空！"
+                headerView.hintLabel.text = InputError.studyItemEmpty.title
 
             } else {
 
