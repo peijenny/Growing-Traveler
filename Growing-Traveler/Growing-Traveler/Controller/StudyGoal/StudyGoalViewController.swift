@@ -72,6 +72,12 @@ class StudyGoalViewController: UIViewController {
     
     @IBAction func addStudyGoalButton(_ sender: UIButton) {
         
+        pushToPlanStudyGoalPage(studyGoal: nil)
+        
+    }
+    
+    func pushToPlanStudyGoalPage(studyGoal: StudyGoal?) {
+        
         let viewController = UIStoryboard(
             name: "StudyGoal",
             bundle: nil
@@ -80,6 +86,8 @@ class StudyGoalViewController: UIViewController {
         )
         
         guard let viewController = viewController as? PlanStudyGoalViewController else { return }
+        
+        viewController.studyGoal = studyGoal
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -253,6 +261,16 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
 
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let studyGoal = studyGoals?[indexPath.section] {
+            
+            pushToPlanStudyGoalPage(studyGoal: studyGoal)
+            
+        }
+        
     }
     
 }

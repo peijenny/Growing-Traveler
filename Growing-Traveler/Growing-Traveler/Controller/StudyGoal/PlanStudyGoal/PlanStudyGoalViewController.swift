@@ -135,6 +135,20 @@ class PlanStudyGoalViewController: BaseViewController {
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
+        modifyPlanStudyGoalSetting()
+        
+    }
+    
+    func modifyPlanStudyGoalSetting() {
+        
+        studyItems = studyGoal?.studyItems ?? []
+        
+        selectCategoryItem = studyGoal?.category
+        
+        selectStartDate = studyGoal?.studyPeriod.startTime ?? Date()
+        
+        selectEndDate = studyGoal?.studyPeriod.endTime ?? Date()
+        
     }
     
     @objc func submitButton(sender: UIButton) {
@@ -158,6 +172,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return studyItems.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -235,12 +250,25 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
                 
                 guard let selectCategoryItem = selectCategoryItem else { return headerView }
                 
-                studyGoal = StudyGoal(
-                    id: studyGoalManager.database.document().documentID,
-                    title: headerView.studyGoalTitleTextField.text ?? "",
-                    category: selectCategoryItem,
-                    studyPeriod: StudyPeriod(startTime: selectStartDate, endTime: selectEndDate),
-                    studyItems: studyItems, createTime: NSDate().timeIntervalSince1970)
+                if studyGoal != nil {
+                    
+                    studyGoal = StudyGoal(
+                        id: studyGoal?.id ?? "",
+                        title: headerView.studyGoalTitleTextField.text ?? "",
+                        category: selectCategoryItem,
+                        studyPeriod: StudyPeriod(startTime: selectStartDate, endTime: selectEndDate),
+                        studyItems: studyItems, createTime: NSDate().timeIntervalSince1970)
+                    
+                } else {
+                    
+                    studyGoal = StudyGoal(
+                        id: studyGoalManager.database.document().documentID,
+                        title: headerView.studyGoalTitleTextField.text ?? "",
+                        category: selectCategoryItem,
+                        studyPeriod: StudyPeriod(startTime: selectStartDate, endTime: selectEndDate),
+                        studyItems: studyItems, createTime: NSDate().timeIntervalSince1970)
+                    
+                }
                 
                 addStudyGoalToDatabase()
                 
@@ -275,6 +303,20 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         }
         
         headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
+        
+        if studyGoal != nil {
+            
+            guard let studyGoal = studyGoal else { return headerView }
+            
+            headerView.studyGoalTitleTextField.text = studyGoal.title
+            
+            headerView.startDateTextField.text = formatter.string(from: studyGoal.studyPeriod.startTime)
+            
+            headerView.endDateTextField.text = formatter.string(from: studyGoal.studyPeriod.endTime)
+            
+            headerView.categoryTextField.text = studyGoal.category.title
+            
+        }
 
         return headerView
 
@@ -282,13 +324,15 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     func addStudyGoalToDatabase() {
         
-        guard let studyGoal = studyGoal else { return }
-        
-        print("Test \(studyGoal)")
-        
-        studyGoalManager.addData(studyGoal: studyGoal)
-        
-        navigationController?.popViewController(animated: true)
+        if let studyGoal = studyGoal {
+            
+            print("Test \(studyGoal)")
+            
+            studyGoalManager.addData(studyGoal: studyGoal)
+            
+            navigationController?.popViewController(animated: true)
+            
+        }
         
     }
     
