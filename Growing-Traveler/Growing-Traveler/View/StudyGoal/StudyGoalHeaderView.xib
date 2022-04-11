@@ -33,6 +33,15 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iuj-Xj-uYV">
+                            <rect key="frame" x="10" y="10" width="0.0" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" id="tjT-fd-7GK"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
@@ -41,8 +50,11 @@
                         <constraint firstItem="oX2-DH-Yk7" firstAttribute="top" secondItem="tqY-t7-bZd" secondAttribute="top" constant="10" id="MdQ-Fm-K9U"/>
                         <constraint firstItem="oX2-DH-Yk7" firstAttribute="leading" secondItem="tqY-t7-bZd" secondAttribute="leading" constant="16" id="QXR-VM-1V6"/>
                         <constraint firstItem="PLx-Mq-Rsl" firstAttribute="top" secondItem="tqY-t7-bZd" secondAttribute="top" constant="10" id="hha-rX-M5G"/>
+                        <constraint firstAttribute="bottom" secondItem="iuj-Xj-uYV" secondAttribute="bottom" constant="10" id="hwg-Zh-KOp"/>
                         <constraint firstAttribute="bottom" secondItem="PLx-Mq-Rsl" secondAttribute="bottom" constant="10" id="irq-vx-vZN"/>
                         <constraint firstAttribute="trailing" secondItem="PLx-Mq-Rsl" secondAttribute="trailing" constant="16" id="jZY-UO-ZXn"/>
+                        <constraint firstItem="iuj-Xj-uYV" firstAttribute="leading" secondItem="tqY-t7-bZd" secondAttribute="leading" constant="10" id="pL5-s2-68I"/>
+                        <constraint firstItem="iuj-Xj-uYV" firstAttribute="top" secondItem="tqY-t7-bZd" secondAttribute="top" constant="10" id="rA7-sy-I4K"/>
                     </constraints>
                 </view>
             </subviews>
@@ -57,6 +69,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="endDateLabel" destination="PLx-Mq-Rsl" id="cUE-VT-BgR"/>
+                <outlet property="hideRecordLabel" destination="iuj-Xj-uYV" id="8Xx-Ci-lyO"/>
                 <outlet property="studyGoalTitleLabel" destination="oX2-DH-Yk7" id="hjt-xk-ORx"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="86.71875"/>
