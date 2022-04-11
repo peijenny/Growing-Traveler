@@ -23,7 +23,7 @@ class SelectCategoryViewController: UIViewController {
         
     }
     
-    var getSelectCategoryItem: ((_ item: Item) -> Void)?
+    var getSelectCategoryItem: ((_ item: CategoryItem) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -64,7 +64,7 @@ class PlanStudyGoalViewController: UIViewController {
     
     var selectDateType = String()
     
-    var selectCategoryItem: Item? {
+    var selectCategoryItem: CategoryItem? {
         
         didSet {
             
