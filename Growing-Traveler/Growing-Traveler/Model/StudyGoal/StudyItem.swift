@@ -15,4 +15,6 @@ struct StudyItem: Codable {
     
     var content: String
     
+    var isCompleted: Bool
+    
 }

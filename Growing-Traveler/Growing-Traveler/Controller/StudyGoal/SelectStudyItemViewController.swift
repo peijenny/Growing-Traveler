@@ -130,7 +130,7 @@ class SelectStudyItemViewController: UIViewController {
                 return
             }
             
-            let studyItem = StudyItem(itemTitle: itemTitle, studyTime: selectTime, content: content)
+            let studyItem = StudyItem(itemTitle: itemTitle, studyTime: selectTime, content: content, isCompleted: false)
             
             if modifyStudyItem != nil {
                 
