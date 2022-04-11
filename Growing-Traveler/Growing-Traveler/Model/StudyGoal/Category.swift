@@ -11,11 +11,11 @@ struct Category: Codable {
     
     var title: String
     
-    var items: [Item]
+    var items: [CategoryItem]
     
 }
 
-struct Item: Codable {
+struct CategoryItem: Codable {
     
     var id: Int
     
