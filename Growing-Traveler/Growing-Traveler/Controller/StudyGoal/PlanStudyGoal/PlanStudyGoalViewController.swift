@@ -112,6 +112,8 @@ class PlanStudyGoalViewController: BaseViewController {
     
     var studyGoal: StudyGoal?
     
+    let studyGoalManager = StudyGoalManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -234,11 +236,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
                 guard let selectCategoryItem = selectCategoryItem else { return headerView }
                 
                 studyGoal = StudyGoal(
+                    id: studyGoalManager.database.document().documentID,
                     title: headerView.studyGoalTitleTextField.text ?? "",
                     category: selectCategoryItem,
                     studyPeriod: StudyPeriod(startTime: selectStartDate, endTime: selectEndDate),
-                    studyItems: studyItems,
-                    createTime: NSDate().timeIntervalSince1970)
+                    studyItems: studyItems, createTime: NSDate().timeIntervalSince1970)
                 
                 addStudyGoalToDatabase()
                 
@@ -249,20 +251,16 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         headerView.startDateCalenderButton.addTarget(
-            self, action: #selector(selectStartDateButton), for: .touchUpInside
-        )
+            self, action: #selector(selectStartDateButton), for: .touchUpInside)
         
         headerView.endDateCalenderButton.addTarget(
-            self, action: #selector(selectEndDateButton), for: .touchUpInside
-        )
+            self, action: #selector(selectEndDateButton), for: .touchUpInside)
         
         headerView.categoryTagButton.addTarget(
-            self, action: #selector(selectCategoryTagButton), for: .touchUpInside
-        )
+            self, action: #selector(selectCategoryTagButton), for: .touchUpInside)
         
         headerView.addStudyItemButton.addTarget(
-            self, action: #selector(addStudyItemButton), for: .touchUpInside
-        )
+            self, action: #selector(addStudyItemButton), for: .touchUpInside)
         
         formatter.dateFormat = "yyyy.MM.dd"
         
@@ -287,8 +285,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         guard let studyGoal = studyGoal else { return }
         
         print("Test \(studyGoal)")
-        
-        let studyGoalManager = StudyGoalManager()
         
         studyGoalManager.addData(studyGoal: studyGoal)
         

@@ -12,16 +12,58 @@ import FirebaseFirestoreSwift
 
 class StudyGoalManager {
     
-    // 上傳 新建的學習計劃 至 Firebase Firestore
     let database = Firestore.firestore().collection("studyGoal")
     
+    // 監聽 即時修改的學習計劃 至 Firebase Firestore
+    func listenData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
+        
+        database.addSnapshotListener { snapshot, error in
+            
+            var studyGoals: [StudyGoal] = []
+            
+            guard let snapshot = snapshot else {
+                
+                print("Error fetching document: \(error!)")
+                
+                completion(Result.failure(error!))
+                
+                return
+                
+            }
+            
+            for document in snapshot.documents {
+                
+                do {
+                    
+                    if let studyGoal = try document.data(as: StudyGoal.self, decoder: Firestore.Decoder()) {
+                        
+                        studyGoals.append(studyGoal)
+                        
+                        completion(Result.success(studyGoals))
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
+                
+            }
+            
+        }
+    }
+    
+    // 上傳 新建的學習計劃 至 Firebase Firestore
     func addData(studyGoal: StudyGoal) {
         
         do {
             
             let documentID = database.document().documentID
             
-            try database.document(documentID).setData(from: studyGoal)
+            try database.document(studyGoal.id).setData(from: studyGoal)
             
         } catch {
             
@@ -75,6 +117,9 @@ class StudyGoalManager {
     }
     
     // 修改 選取的學習計劃 至 Firebase Firestore
+    func updateData() {
+        
+    }
     
     // 刪除 選取的學習計劃 至 Firebase Firestore
     
