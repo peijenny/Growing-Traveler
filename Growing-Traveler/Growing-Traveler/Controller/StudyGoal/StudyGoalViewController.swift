@@ -23,6 +23,18 @@ class StudyGoalViewController: UIViewController {
     
     @IBOutlet weak var addGoalButton: UIButton!
     
+    var studyGoalManager = StudyGoalManager()
+    
+    var studyGoals: [StudyGoal]? {
+        
+        didSet {
+            
+            studyGoalTableView.reloadData()
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +53,8 @@ class StudyGoalViewController: UIViewController {
             forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
         )
 
+        fetchData()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,6 +78,28 @@ class StudyGoalViewController: UIViewController {
         guard let viewController = viewController as? PlanStudyGoalViewController else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    func fetchData() {
+        
+        studyGoalManager.fetchData(completion: { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let data):
+                
+                strongSelf.studyGoals = data
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        })
         
     }
     
