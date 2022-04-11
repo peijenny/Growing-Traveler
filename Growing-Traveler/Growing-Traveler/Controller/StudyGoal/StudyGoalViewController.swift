@@ -134,6 +134,23 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
             self, action: #selector(checkItemButton), for: .touchUpInside
         )
         
+        guard let isCompleted = studyGoals?[indexPath.section]
+            .studyItems[indexPath.row].isCompleted else {
+            
+            return cell
+            
+        }
+        
+        if isCompleted {
+            
+            cell.checkButton.backgroundColor = UIColor.black
+            
+        } else {
+            
+            cell.checkButton.backgroundColor = UIColor.systemGray
+            
+        }
+        
         return cell
         
     }
@@ -141,13 +158,13 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
     @objc func checkItemButton(sender: UIButton) {
         
         if sender.backgroundColor?.cgColor == UIColor.systemGray.cgColor {
-            
+
             sender.backgroundColor = UIColor.black
-            
+
         } else {
-            
+
             sender.backgroundColor = UIColor.systemGray
-            
+
         }
     }
     
