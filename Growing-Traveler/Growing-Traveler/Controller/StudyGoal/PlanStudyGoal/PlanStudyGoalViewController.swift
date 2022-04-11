@@ -452,6 +452,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        print("TEST")
+        
         popupSelectStudyItemPage(
             studyItem: studyItems[indexPath.row],
             selectRow: indexPath.row)
