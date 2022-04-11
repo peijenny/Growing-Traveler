@@ -288,6 +288,10 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         print("Test \(studyGoal)")
         
+        let studyGoalManager = StudyGoalManager()
+        
+        studyGoalManager.addData(studyGoal: studyGoal)
+        
     }
     
     @objc func selectStartDateButton(sender: UIButton) {
