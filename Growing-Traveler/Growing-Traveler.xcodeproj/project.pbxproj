@@ -141,11 +141,8 @@
 		288367AC28012A450010CEAD /* StudyGoal */ = {
 			isa = PBXGroup;
 			children = (
+				28AF15B828040E3C004E97B8 /* PlanStudyGoal */,
 				288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */,
-				288367AD280134280010CEAD /* PlanStudyGoalViewController.swift */,
-				285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */,
-				285F3F4228017AEF00E84CF2 /* SelectCategoryViewController.swift */,
-				28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */,
 			);
 			path = StudyGoal;
 			sourceTree = "<group>";
@@ -173,6 +170,17 @@
 				285F3F4928018ED400E84CF2 /* CategoryTableViewCell.xib */,
 				28754AC82803079A0079F430 /* StudyItemTableViewCell.swift */,
 				28754AC92803079A0079F430 /* StudyItemTableViewCell.xib */,
+			);
+			path = PlanStudyGoal;
+			sourceTree = "<group>";
+		};
+		28AF15B828040E3C004E97B8 /* PlanStudyGoal */ = {
+			isa = PBXGroup;
+			children = (
+				288367AD280134280010CEAD /* PlanStudyGoalViewController.swift */,
+				285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */,
+				285F3F4228017AEF00E84CF2 /* SelectCategoryViewController.swift */,
+				28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */,
 			);
 			path = PlanStudyGoal;
 			sourceTree = "<group>";
