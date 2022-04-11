@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectStudyItemViewController: UIViewController {
+class SelectStudyItemViewController: BaseViewController {
 
     @IBOutlet weak var itemTextField: UITextField!
     
@@ -37,6 +37,16 @@ class SelectStudyItemViewController: UIViewController {
             modifyStudyItemData()
             
         }
+        
+        contentTextView.layer.borderColor = UIColor.systemGray5.cgColor
+        
+        contentTextView.layer.borderWidth = 1
+        
+        contentTextView.layer.cornerRadius = 5
+        
+        itemTextField.delegate = self
+        
+        itemTextField.delegate = self
 
     }
     

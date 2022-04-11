@@ -57,7 +57,7 @@ enum InputError {
     
 }
 
-class PlanStudyGoalViewController: UIViewController {
+class PlanStudyGoalViewController: BaseViewController {
 
     @IBOutlet weak var planStudyGoalTableView: UITableView! {
         
@@ -414,17 +414,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
             studyItem: studyItems[indexPath.row],
             selectRow: indexPath.row)
 
-    }
-    
-}
-
-extension PlanStudyGoalViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        
-        return true
     }
     
 }
