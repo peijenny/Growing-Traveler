@@ -215,6 +215,8 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
         
         headerView.endDateLabel.text = formatter.string(from: studyGoals?[section].studyPeriod.endTime ?? Date())
         
+        headerView.hideRecordLabel.text = "\(studyGoals?[section].id ?? "")"
+        
         topCGFloat = headerView.frame.height
         
         tableView.tableHeaderView = UIView.init(
@@ -278,7 +280,7 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
         for index in 0..<(studyGoals?.count ?? 0) {
             
             if sender.view == headerView &&
-                headerView?.studyGoalTitleLabel.text == studyGoals?[index].title {
+                headerView?.hideRecordLabel.text == studyGoals?[index].id {
                 
                 pushToPlanStudyGoalPage(studyGoal: studyGoals?[index])
                 

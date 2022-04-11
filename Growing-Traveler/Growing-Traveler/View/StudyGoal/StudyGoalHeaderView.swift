@@ -13,4 +13,6 @@ class StudyGoalHeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var endDateLabel: UILabel!
     
+    @IBOutlet weak var hideRecordLabel: UILabel!
+    
 }
