@@ -28,7 +28,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022.04.11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLx-Mq-Rsl">
-                            <rect key="frame" x="332" y="10" width="66" height="25"/>
+                            <rect key="frame" x="321" y="10" width="77" height="25"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -36,7 +36,7 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="PLx-Mq-Rsl" firstAttribute="leading" secondItem="oX2-DH-Yk7" secondAttribute="trailing" constant="16" id="CJG-L5-uDt"/>
+                        <constraint firstItem="PLx-Mq-Rsl" firstAttribute="leading" secondItem="oX2-DH-Yk7" secondAttribute="trailing" constant="5" id="CJG-L5-uDt"/>
                         <constraint firstAttribute="bottom" secondItem="oX2-DH-Yk7" secondAttribute="bottom" constant="10" id="KAt-DH-mR2"/>
                         <constraint firstItem="oX2-DH-Yk7" firstAttribute="top" secondItem="tqY-t7-bZd" secondAttribute="top" constant="10" id="MdQ-Fm-K9U"/>
                         <constraint firstItem="oX2-DH-Yk7" firstAttribute="leading" secondItem="tqY-t7-bZd" secondAttribute="leading" constant="16" id="QXR-VM-1V6"/>
