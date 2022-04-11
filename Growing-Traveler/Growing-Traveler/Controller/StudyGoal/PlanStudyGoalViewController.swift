@@ -110,7 +110,7 @@ class PlanStudyGoalViewController: UIViewController {
     
     var checkStudyGoalFillIn = false
     
-    var alreadyFilledIn = false
+    var studyGoal: StudyGoal?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,11 +140,6 @@ class PlanStudyGoalViewController: UIViewController {
         checkStudyGoalFillIn = true
         
         planStudyGoalTableView.reloadData()
-
-        if alreadyFilledIn {
-
-            print("Yes!")
-        }
             
     }
     
@@ -213,8 +208,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         headerView.studyGoalTitleTextField.delegate = self
         
         if checkStudyGoalFillIn == true {
-            
-            alreadyFilledIn = false
 
             if headerView.studyGoalTitleTextField.text == "" {
 
@@ -237,8 +230,17 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
                 headerView.hintLabel.text = InputError.studyItemEmpty.title
 
             } else {
-
-                alreadyFilledIn = true
+                
+                guard let selectCategoryItem = selectCategoryItem else { return headerView }
+                
+                studyGoal = StudyGoal(
+                    title: headerView.studyGoalTitleTextField.text ?? "",
+                    category: selectCategoryItem,
+                    studyPeriod: StudyPeriod(startTime: selectStartDate, endTime: selectEndDate),
+                    studyItems: studyItems,
+                    createTime: NSDate().timeIntervalSince1970)
+                
+                addStudyGoalToDatabase()
                 
             }
 
@@ -247,23 +249,19 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         }
 
         headerView.startDateCalenderButton.addTarget(
-            self, action: #selector(selectStartDateButton),
-            for: .touchUpInside
+            self, action: #selector(selectStartDateButton), for: .touchUpInside
         )
         
         headerView.endDateCalenderButton.addTarget(
-            self, action: #selector(selectEndDateButton),
-            for: .touchUpInside
+            self, action: #selector(selectEndDateButton), for: .touchUpInside
         )
         
         headerView.categoryTagButton.addTarget(
-            self, action: #selector(selectCategoryTagButton),
-            for: .touchUpInside
+            self, action: #selector(selectCategoryTagButton), for: .touchUpInside
         )
         
         headerView.addStudyItemButton.addTarget(
-            self, action: #selector(addStudyItemButton),
-            for: .touchUpInside
+            self, action: #selector(addStudyItemButton), for: .touchUpInside
         )
         
         formatter.dateFormat = "yyyy.MM.dd"
@@ -277,11 +275,19 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
             headerView.endDateTextField.text = formatter.string(from: selectEndDate)
             
         }
-
-        headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
         
+        headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
+
         return headerView
 
+    }
+    
+    func addStudyGoalToDatabase() {
+        
+        guard let studyGoal = studyGoal else { return }
+        
+        print("Test \(studyGoal)")
+        
     }
     
     @objc func selectStartDateButton(sender: UIButton) {
@@ -385,8 +391,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
             if whetherToUpdate == false {
                 
                 self?.studyItems.append(studyItem)
-                
-                self?.alreadyFilledIn = true
                 
             } else {
                 

@@ -13,7 +13,7 @@ struct StudyGoal: Codable {
     
     var category: CategoryItem
     
-    var studyPeriod: [StudyPeriod]
+    var studyPeriod: StudyPeriod
     
     var studyItems: [StudyItem]
     
