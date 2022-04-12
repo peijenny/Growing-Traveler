@@ -7,6 +7,28 @@
 
 import UIKit
 
+enum StatusType {
+    
+    case pending
+    
+    case running
+    
+    case finished
+    
+    var title: String {
+        
+        switch self {
+            
+        case .pending: return "待處理"
+            
+        case .running: return "處理中"
+            
+        case .finished: return "已處理"
+            
+        }
+    }
+}
+
 class StudyGoalViewController: UIViewController {
     
     @IBOutlet weak var studyGoalTableView: UITableView! {
@@ -59,7 +81,7 @@ class StudyGoalViewController: UIViewController {
             forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
         )
         
-        listenData(status: "處理中")
+        listenData(status: StatusType.running.title)
         
     }
     
@@ -116,7 +138,7 @@ class StudyGoalViewController: UIViewController {
                 
                 utcDateFormatter.dateFormat = "yyyy.MM.dd"
                 
-                if status == "待處理" {
+                if status == StatusType.pending.title {
 
                     resultData = data.filter({
                         
@@ -132,7 +154,7 @@ class StudyGoalViewController: UIViewController {
 
                     })
                     
-                } else if status == "處理中" {
+                } else if status == StatusType.running.title {
                     
                     resultData = data.filter({
                         
@@ -152,7 +174,7 @@ class StudyGoalViewController: UIViewController {
 
                     })
                     
-                } else if status == "已處理" {
+                } else if status == StatusType.finished.title {
                     
                     resultData = data.filter({
                         
@@ -182,7 +204,6 @@ class StudyGoalViewController: UIViewController {
         
         guard let titleText = sender.titleLabel?.text else { return }
         
-        // 將 studyGoals 重新放入資料
         listenData(status: "\(titleText)")
         
     }
