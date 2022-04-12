@@ -67,7 +67,7 @@ class SelectCalendarViewController: UIViewController {
             calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             calendarView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             calendarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            calendarView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)
+            calendarView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75)
         ])
         
     }
