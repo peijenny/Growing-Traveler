@@ -8,7 +8,7 @@
 import UIKit
 import FSCalendar
 
-class CalenderViewController: UIViewController {
+class CalendarViewController: UIViewController {
 
     @IBOutlet weak var calendarView: FSCalendar! {
         
@@ -42,7 +42,7 @@ class CalenderViewController: UIViewController {
 
 }
 
-extension CalenderViewController: FSCalendarDelegate, FSCalendarDataSource {
+extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     // MARK: - Calendar DataSource
     
@@ -62,7 +62,7 @@ extension CalenderViewController: FSCalendarDelegate, FSCalendarDataSource {
     
 }
 
-extension CalenderViewController: UITableViewDelegate, UITableViewDataSource {
+extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
