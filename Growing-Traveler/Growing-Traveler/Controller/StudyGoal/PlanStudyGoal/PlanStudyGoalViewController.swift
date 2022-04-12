@@ -29,9 +29,9 @@ enum InputError {
     
     case studyGoalTitleEmpty
     
-    case startTimeEmpty
+    case startDateEmpty
     
-    case endTimeEmpty
+    case endDateEmpty
     
     case categoryEmpty
     
@@ -43,9 +43,9 @@ enum InputError {
             
         case .studyGoalTitleEmpty: return "標題不可為空！"
             
-        case .startTimeEmpty: return "尚未選擇開始時間！"
+        case .startDateEmpty: return "尚未選擇開始日期！"
             
-        case .endTimeEmpty: return "尚未選擇結束時間！"
+        case .endDateEmpty: return "尚未選擇結束日期！"
             
         case .categoryEmpty: return "尚未選擇分類標籤！"
             
@@ -146,11 +146,11 @@ class PlanStudyGoalViewController: BaseViewController {
         selectCategoryItem = studyGoal?.category
         
         selectStartDate = Date(
-            timeIntervalSince1970: studyGoal?.studyPeriod.startTime ?? TimeInterval()
+            timeIntervalSince1970: studyGoal?.studyPeriod.startDate ?? TimeInterval()
         )
         
         selectEndDate = Date(
-            timeIntervalSince1970: studyGoal?.studyPeriod.endTime ?? TimeInterval()
+            timeIntervalSince1970: studyGoal?.studyPeriod.endDate ?? TimeInterval()
         )
         
     }
@@ -192,6 +192,12 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
             self, action: #selector(deleteItemButton),
             for: .touchUpInside
         )
+        
+        studyItems = studyItems.sorted { (lhs, rhs) in
+            
+            return lhs.id ?? 0 < rhs.id ?? 0
+            
+        }
         
         cell.showStudyItem(
             itemTitle: studyItems[indexPath.row].itemTitle,
@@ -236,11 +242,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
 
             } else if headerView.startDateTextField.text == "" {
 
-                headerView.hintLabel.text = InputError.startTimeEmpty.title
+                headerView.hintLabel.text = InputError.startDateEmpty.title
 
             } else if headerView.endDateTextField.text == "" {
 
-                headerView.hintLabel.text = InputError.endTimeEmpty.title
+                headerView.hintLabel.text = InputError.endDateEmpty.title
 
             } else if headerView.categoryTextField.text == "" {
 
@@ -252,35 +258,21 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
 
             } else {
                 
-                guard let selectCategoryItem = selectCategoryItem else { return headerView }
-                
                 if studyGoal != nil {
                     
-                    studyGoal = StudyGoal(
+                    addStudyGoalToDatabase(
                         id: studyGoal?.id ?? "",
-                        title: headerView.studyGoalTitleTextField.text ?? "",
-                        category: selectCategoryItem,
-                        studyPeriod: StudyPeriod(startTime: selectStartDate.timeIntervalSince1970,
-                                                 endTime: selectEndDate.timeIntervalSince1970),
-                        studyItems: studyItems,
-                        createTime: Date().timeIntervalSince1970,
-                        userID: userID)
+                        title: headerView.studyGoalTitleTextField.text ?? ""
+                    )
                     
                 } else {
                     
-                    studyGoal = StudyGoal(
+                    addStudyGoalToDatabase(
                         id: studyGoalManager.database.document().documentID,
-                        title: headerView.studyGoalTitleTextField.text ?? "",
-                        category: selectCategoryItem,
-                        studyPeriod: StudyPeriod(startTime: selectStartDate.timeIntervalSince1970,
-                                                 endTime: selectEndDate.timeIntervalSince1970),
-                        studyItems: studyItems,
-                        createTime: Date().timeIntervalSince1970,
-                        userID: userID)
+                        title: headerView.studyGoalTitleTextField.text ?? ""
+                    )
                     
                 }
-                
-                addStudyGoalToDatabase()
                 
             }
 
@@ -321,11 +313,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
             headerView.studyGoalTitleTextField.text = studyGoal.title
             
             headerView.startDateTextField.text = Date(
-                timeIntervalSince1970: studyGoal.studyPeriod.startTime
+                timeIntervalSince1970: studyGoal.studyPeriod.startDate
             ).formatted()
             
             headerView.endDateTextField.text = Date(
-                timeIntervalSince1970: studyGoal.studyPeriod.endTime
+                timeIntervalSince1970: studyGoal.studyPeriod.endDate
             ).formatted()
             
             headerView.categoryTextField.text = studyGoal.category.title
@@ -336,7 +328,21 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
 
     }
     
-    func addStudyGoalToDatabase() {
+    func addStudyGoalToDatabase(id: String, title: String) {
+
+        guard let selectCategoryItem = selectCategoryItem else { return }
+        
+        studyGoal = StudyGoal(
+            id: id,
+            title: title,
+            category: selectCategoryItem,
+            studyPeriod: StudyPeriod(
+                startDate: selectStartDate.timeIntervalSince1970,
+                endDate: selectEndDate.timeIntervalSince1970),
+            studyItems: studyItems,
+            createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
+            userID: userID
+        )
         
         if let studyGoal = studyGoal {
             
@@ -438,6 +444,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
 
                 }
         
+        selectStudyItemViewController.itemNumber = studyItems.count
+        
         selectStudyItemViewController.modifyStudyItem = studyItem
 
         selectStudyItemViewController.view.center = view.center
@@ -470,7 +478,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         popupSelectStudyItemPage(
             studyItem: studyItems[indexPath.row],
-            selectRow: indexPath.row)
+            selectRow: indexPath.row
+        )
 
     }
     

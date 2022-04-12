@@ -27,6 +27,8 @@ class SelectStudyItemViewController: BaseViewController {
     
     var modifyStudyItem: StudyItem?
     
+    var itemNumber: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -140,13 +142,15 @@ class SelectStudyItemViewController: BaseViewController {
                 return
             }
             
-            let studyItem = StudyItem(itemTitle: itemTitle, studyTime: selectTime, content: content, isCompleted: false)
+            var studyItem = StudyItem(itemTitle: itemTitle, studyTime: selectTime, content: content, isCompleted: false)
             
             if modifyStudyItem != nil {
-                
+
                 self.getStudyItem?(studyItem, true)
                 
             } else {
+                
+                studyItem.id = itemNumber
                 
                 self.getStudyItem?(studyItem, false)
                 
