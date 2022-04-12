@@ -37,18 +37,33 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Nz-We-I3v">
                                         <rect key="frame" x="0.0" y="0.0" width="138" height="31"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="待處理"/>
+                                        <connections>
+                                            <action selector="handleStatusButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="P6W-oK-izq"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azx-6w-Wlk">
                                         <rect key="frame" x="138" y="0.0" width="138" height="31"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="處理中"/>
+                                        <connections>
+                                            <action selector="handleStatusButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sKf-cW-vcF"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9f-0F-UcN">
                                         <rect key="frame" x="276" y="0.0" width="138" height="31"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="已處理"/>
+                                        <connections>
+                                            <action selector="handleStatusButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ls7-dS-768"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -90,6 +105,9 @@
                     <connections>
                         <outlet property="addGoalButton" destination="t1D-fh-S7D" id="VSr-sw-hdW"/>
                         <outlet property="studyGoalTableView" destination="s7B-ph-YYk" id="6FP-c5-7Eg"/>
+                        <outletCollection property="statusButton" destination="5Nz-We-I3v" collectionClass="NSMutableArray" id="M4A-uG-aIL"/>
+                        <outletCollection property="statusButton" destination="azx-6w-Wlk" collectionClass="NSMutableArray" id="py3-pL-kz1"/>
+                        <outletCollection property="statusButton" destination="M9f-0F-UcN" collectionClass="NSMutableArray" id="XgY-Vh-uVc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
