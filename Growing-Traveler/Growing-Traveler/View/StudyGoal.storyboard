@@ -327,11 +327,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JOb-KR-Wnh" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="44" width="414" height="331"/>
-                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="372.5"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vre-O3-QHD">
-                                <rect key="frame" x="0.0" y="375" width="414" height="487"/>
+                                <rect key="frame" x="0.0" y="416.5" width="414" height="445.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -346,7 +345,7 @@
                             <constraint firstItem="vre-O3-QHD" firstAttribute="leading" secondItem="CgF-VL-NYS" secondAttribute="leading" id="awi-8e-SLM"/>
                             <constraint firstItem="CgF-VL-NYS" firstAttribute="trailing" secondItem="JOb-KR-Wnh" secondAttribute="trailing" id="e7o-Wv-GAh"/>
                             <constraint firstItem="JOb-KR-Wnh" firstAttribute="width" secondItem="HqA-k6-w9S" secondAttribute="width" id="tdo-Hx-v3H"/>
-                            <constraint firstItem="JOb-KR-Wnh" firstAttribute="height" secondItem="HqA-k6-w9S" secondAttribute="width" multiplier="0.8" id="xCo-0b-00N"/>
+                            <constraint firstItem="JOb-KR-Wnh" firstAttribute="height" secondItem="HqA-k6-w9S" secondAttribute="width" multiplier="0.9" id="xCo-0b-00N"/>
                         </constraints>
                     </view>
                     <connections>
@@ -367,9 +366,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
