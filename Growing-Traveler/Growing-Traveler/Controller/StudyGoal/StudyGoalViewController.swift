@@ -49,15 +49,7 @@ class StudyGoalViewController: UIViewController {
     
     var studyGoalManager = StudyGoalManager()
     
-    var studyGoals: [StudyGoal]? {
-        
-        didSet {
-            
-            studyGoalTableView.reloadData()
-            
-        }
-        
-    }
+    var studyGoals: [StudyGoal]?
     
     var topCGFloat = CGFloat()
     

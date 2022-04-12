@@ -189,7 +189,7 @@
                                             <constraint firstAttribute="height" constant="32" id="gRp-Rl-tID"/>
                                         </constraints>
                                     </stackView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxo-U7-9gw">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="請輸入學習項目名稱" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxo-U7-9gw">
                                         <rect key="frame" x="106" y="72" width="252" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="l9M-Pa-4JB"/>
@@ -197,7 +197,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="描述內容......." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="z9g-MW-1UT">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="請描述內容......." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="z9g-MW-1UT">
                                         <rect key="frame" x="106" y="184" width="252" height="160"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>

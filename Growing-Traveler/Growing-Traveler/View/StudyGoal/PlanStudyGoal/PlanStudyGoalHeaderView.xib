@@ -86,7 +86,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C2k-C9-LBc">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="請輸入學習目標名稱" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C2k-C9-LBc">
                             <rect key="frame" x="105" y="16" width="293" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="j2C-4e-RN8"/>
@@ -114,7 +114,7 @@
                             <color key="textColor" systemColor="systemRedColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JNr-92-086">
+                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="請選擇開始日期" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JNr-92-086">
                             <rect key="frame" x="102" y="72" width="240" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="fnM-Hl-aHS"/>
@@ -122,7 +122,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8X-OK-C79">
+                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="請選擇分類標籤" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8X-OK-C79">
                             <rect key="frame" x="102" y="178" width="240" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="bhV-xv-Ig0"/>
@@ -130,7 +130,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1dB-V7-sDS">
+                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="請選擇結束日期" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1dB-V7-sDS">
                             <rect key="frame" x="102" y="122" width="240" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="ol9-Wp-M2i"/>
