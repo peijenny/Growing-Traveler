@@ -160,7 +160,7 @@ class StudyGoalViewController: UIViewController {
 
                     resultData = data.filter({
                         
-                        let startDate = Date(timeIntervalSince1970: $0.studyPeriod.startTime).formatted()
+                        let startDate = Date(timeIntervalSince1970: $0.studyPeriod.startDate).formatted()
                         
                         let nowDate = Date().formatted()
                         
@@ -179,7 +179,7 @@ class StudyGoalViewController: UIViewController {
                     
                     resultData = data.filter({
                         
-                        let startDate = Date(timeIntervalSince1970: $0.studyPeriod.startTime).formatted()
+                        let startDate = Date(timeIntervalSince1970: $0.studyPeriod.startDate).formatted()
                         
                         let nowDate = Date().formatted()
                         
@@ -324,7 +324,7 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
         
         formatter.dateFormat = "yyyy.MM.dd"
         
-        let endDate = Date(timeIntervalSince1970: studyGoals?[section].studyPeriod.endTime ?? TimeInterval()
+        let endDate = Date(timeIntervalSince1970: studyGoals?[section].studyPeriod.endDate ?? TimeInterval()
         )
         
         headerView.endDateLabel.text = formatter.string(from: endDate)

@@ -26,13 +26,15 @@ struct StudyGoal: Codable {
 
 struct StudyPeriod: Codable {
     
-    var startTime: TimeInterval
+    var startDate: TimeInterval
     
-    var endTime: TimeInterval
+    var endDate: TimeInterval
     
 }
 
 struct StudyItem: Codable {
+    
+    var id: Int?
     
     var itemTitle: String
     

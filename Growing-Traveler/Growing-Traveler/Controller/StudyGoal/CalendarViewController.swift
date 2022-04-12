@@ -73,13 +73,13 @@ class CalendarViewController: UIViewController {
                 strongSelf.studyGoals = data.filter({
                     
                     let startDate = Date(
-                        timeIntervalSince1970: $0.studyPeriod.startTime
+                        timeIntervalSince1970: $0.studyPeriod.startDate
                     ).formatted()
 
                     let selectDate = date.formatted()
 
                     let endDate = Date(
-                        timeIntervalSince1970: $0.studyPeriod.endTime
+                        timeIntervalSince1970: $0.studyPeriod.endDate
                     ).formatted()
                     
                     print("TEST \(startDate) \(selectDate) \(endDate)")
@@ -159,7 +159,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 
         formatter.dateFormat = "yyyy.MM.dd"
         
-        let endDate = Date(timeIntervalSince1970: studyGoals[section].studyPeriod.endTime)
+        let endDate = Date(timeIntervalSince1970: studyGoals[section].studyPeriod.endDate)
         
         headerView.endDateLabel.text = formatter.string(from: endDate)
 
