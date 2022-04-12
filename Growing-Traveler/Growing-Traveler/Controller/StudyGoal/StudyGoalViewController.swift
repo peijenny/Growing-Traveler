@@ -273,9 +273,13 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.checkButton.backgroundColor = UIColor.black
             
+            cell.checkButton.tintColor = UIColor.white
+            
         } else {
             
-            cell.checkButton.backgroundColor = UIColor.systemGray
+            cell.checkButton.backgroundColor = UIColor.systemGray5
+            
+            cell.checkButton.tintColor = UIColor.clear
             
         }
         
@@ -291,15 +295,19 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard var studyGoals = studyGoals else { return }
 
-            if sender.backgroundColor?.cgColor == UIColor.systemGray.cgColor {
+            if sender.backgroundColor?.cgColor == UIColor.systemGray5.cgColor {
 
                 sender.backgroundColor = UIColor.black
+                
+                sender.tintColor = UIColor.white
                 
                 studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = true
 
             } else {
 
-                sender.backgroundColor = UIColor.systemGray
+                sender.backgroundColor = UIColor.systemGray5
+                
+                sender.tintColor = UIColor.clear
                 
                 studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = false
 
