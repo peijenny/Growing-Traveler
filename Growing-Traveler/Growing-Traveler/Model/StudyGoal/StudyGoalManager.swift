@@ -41,8 +41,6 @@ class StudyGoalManager {
                         
                         studyGoals.append(studyGoal)
                         
-                        completion(Result.success(studyGoals))
-                        
                     }
                     
                 } catch {
@@ -54,6 +52,14 @@ class StudyGoalManager {
                 }
                 
             }
+            
+            studyGoals = studyGoals.sorted { (lhs, rhs) in
+                
+                return lhs.studyPeriod.endDate < rhs.studyPeriod.endDate
+                
+            }
+            
+            completion(Result.success(studyGoals))
             
         }
     }
