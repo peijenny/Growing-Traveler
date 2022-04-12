@@ -83,10 +83,13 @@ class StudyGoalViewController: UIViewController {
         
         listenData(status: StatusType.running.title)
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .search,
+            target: self,
+            action: #selector(pushToCalenderPage)
+        )
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
     }
     
@@ -96,6 +99,21 @@ class StudyGoalViewController: UIViewController {
         addGoalButton.imageView?.contentMode = .scaleAspectFill
 
         addGoalButton.layer.cornerRadius = addGoalButton.frame.width / 2
+        
+    }
+
+    @objc func pushToCalenderPage(sender: UIButton) {
+        
+        let viewController = UIStoryboard(
+            name: "StudyGoal",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: String(describing: CalendarViewController.self)
+        )
+        
+        guard let viewController = viewController as? CalendarViewController else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
     
