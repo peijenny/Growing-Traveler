@@ -23,6 +23,8 @@ class StudyGoalViewController: UIViewController {
     
     @IBOutlet weak var addGoalButton: UIButton!
     
+    @IBOutlet var statusButton: [UIButton]!
+    
     var studyGoalManager = StudyGoalManager()
     
     var studyGoals: [StudyGoal]? {
@@ -57,12 +59,12 @@ class StudyGoalViewController: UIViewController {
             forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
         )
         
+        listenData(status: "處理中")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        listenData()
         
     }
     
@@ -98,7 +100,7 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    func listenData() {
+    func listenData(status: String) {
         
         studyGoalManager.listenData(completion: { [weak self] result in
             
@@ -108,7 +110,59 @@ class StudyGoalViewController: UIViewController {
                 
             case .success(let data):
                 
-                strongSelf.studyGoals = data
+                var resultData: [StudyGoal] = []
+                
+                let utcDateFormatter = DateFormatter()
+                
+                utcDateFormatter.dateFormat = "yyyy.MM.dd"
+                
+                if status == "待處理" {
+
+                    resultData = data.filter({
+                        
+                        if $0.studyItems.allSatisfy({ $0.isCompleted == false }) == true &&
+                                    utcDateFormatter.string(from: $0.studyPeriod.startTime) >
+                                    utcDateFormatter.string(from: Date()) {
+                                
+                                return true
+                            
+                        }
+                        
+                        return false
+
+                    })
+                    
+                } else if status == "處理中" {
+                    
+                    resultData = data.filter({
+                        
+                        if $0.studyItems.allSatisfy({ $0.isCompleted == true }) == true {
+                            
+                            return false
+                            
+                        } else if $0.studyItems.allSatisfy({ $0.isCompleted == false }) == true &&
+                                    utcDateFormatter.string(from: $0.studyPeriod.startTime) >
+                                    utcDateFormatter.string(from: Date()) {
+                                
+                                return false
+                            
+                        }
+                        
+                        return true
+
+                    })
+                    
+                } else if status == "已處理" {
+                    
+                    resultData = data.filter({
+                        
+                        $0.studyItems.allSatisfy({ $0.isCompleted == true })
+
+                    })
+
+                }
+                
+                strongSelf.studyGoals = resultData
                 
             case .failure(let error):
                 
@@ -120,6 +174,18 @@ class StudyGoalViewController: UIViewController {
         
     }
     
+    @IBAction func handleStatusButton(_ sender: UIButton) {
+        
+        _ = statusButton.map({ $0.backgroundColor = UIColor.lightGray })
+        
+        sender.backgroundColor = UIColor.black
+        
+        guard let titleText = sender.titleLabel?.text else { return }
+        
+        // 將 studyGoals 重新放入資料
+        listenData(status: "\(titleText)")
+        
+    }
 }
 
 extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
