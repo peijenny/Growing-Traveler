@@ -72,13 +72,19 @@ class CalendarViewController: UIViewController {
                 
                 strongSelf.studyGoals = data.filter({
                     
-                    let startDate = strongSelf.formatter.string(from: $0.studyPeriod.startTime)
+                    let startDate = Date(
+                        timeIntervalSince1970: $0.studyPeriod.startTime
+                    ).formatted()
 
-                    let selectDate = strongSelf.formatter.string(from: date)
+                    let selectDate = date.formatted()
 
-                    let endDate = strongSelf.formatter.string(from: $0.studyPeriod.endTime)
+                    let endDate = Date(
+                        timeIntervalSince1970: $0.studyPeriod.endTime
+                    ).formatted()
                     
-                    if startDate >= selectDate || endDate >= selectDate {
+                    print("TEST \(startDate) \(selectDate) \(endDate)")
+                    
+                    if startDate <= selectDate && endDate >= selectDate {
                         
                         return true
                         
@@ -107,11 +113,11 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     // MARK: - Calendar DataSource
     
-    func minimumDate(for calendar: FSCalendar) -> Date {
-
-        return Date()
-
-    }
+//    func minimumDate(for calendar: FSCalendar) -> Date {
+//
+//        return Date()
+//
+//    }
     
     // MARK: - Calendar Delegate
     
@@ -150,10 +156,13 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
         
         headerView.studyGoalTitleLabel.text = studyGoals[section].title
+
+        formatter.dateFormat = "yyyy.MM.dd"
         
-        headerView.endDateLabel.text = formatter.string(
-            from: studyGoals[section].studyPeriod.endTime)
+        let endDate = Date(timeIntervalSince1970: studyGoals[section].studyPeriod.endTime)
         
+        headerView.endDateLabel.text = formatter.string(from: endDate)
+
         return headerView
         
     }

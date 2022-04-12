@@ -186,6 +186,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9y-OW-uFQ">
                                         <rect key="frame" x="106" y="128" width="223" height="40"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" secondItem="m9y-OW-uFQ" secondAttribute="height" multiplier="223:40" id="8sP-08-igC"/>
                                             <constraint firstAttribute="height" constant="40" id="gRp-Rl-tID"/>
                                         </constraints>
                                     </stackView>

@@ -145,9 +145,13 @@ class PlanStudyGoalViewController: BaseViewController {
         
         selectCategoryItem = studyGoal?.category
         
-        selectStartDate = studyGoal?.studyPeriod.startTime ?? Date()
+        selectStartDate = Date(
+            timeIntervalSince1970: studyGoal?.studyPeriod.startTime ?? TimeInterval()
+        )
         
-        selectEndDate = studyGoal?.studyPeriod.endTime ?? Date()
+        selectEndDate = Date(
+            timeIntervalSince1970: studyGoal?.studyPeriod.endTime ?? TimeInterval()
+        )
         
     }
     
@@ -256,8 +260,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
                         id: studyGoal?.id ?? "",
                         title: headerView.studyGoalTitleTextField.text ?? "",
                         category: selectCategoryItem,
-                        studyPeriod: StudyPeriod(startTime: selectStartDate, endTime: selectEndDate),
-                        studyItems: studyItems, createTime: NSDate().timeIntervalSince1970)
+                        studyPeriod: StudyPeriod(startTime: selectStartDate.timeIntervalSince1970,
+                                                 endTime: selectEndDate.timeIntervalSince1970),
+                        studyItems: studyItems,
+                        createTime: Date().timeIntervalSince1970,
+                        userID: userID)
                     
                 } else {
                     
@@ -265,8 +272,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
                         id: studyGoalManager.database.document().documentID,
                         title: headerView.studyGoalTitleTextField.text ?? "",
                         category: selectCategoryItem,
-                        studyPeriod: StudyPeriod(startTime: selectStartDate, endTime: selectEndDate),
-                        studyItems: studyItems, createTime: NSDate().timeIntervalSince1970)
+                        studyPeriod: StudyPeriod(startTime: selectStartDate.timeIntervalSince1970,
+                                                 endTime: selectEndDate.timeIntervalSince1970),
+                        studyItems: studyItems,
+                        createTime: Date().timeIntervalSince1970,
+                        userID: userID)
                     
                 }
                 
@@ -310,9 +320,13 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
             
             headerView.studyGoalTitleTextField.text = studyGoal.title
             
-            headerView.startDateTextField.text = formatter.string(from: studyGoal.studyPeriod.startTime)
+            headerView.startDateTextField.text = Date(
+                timeIntervalSince1970: studyGoal.studyPeriod.startTime
+            ).formatted()
             
-            headerView.endDateTextField.text = formatter.string(from: studyGoal.studyPeriod.endTime)
+            headerView.endDateTextField.text = Date(
+                timeIntervalSince1970: studyGoal.studyPeriod.endTime
+            ).formatted()
             
             headerView.categoryTextField.text = studyGoal.category.title
             
