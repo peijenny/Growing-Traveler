@@ -139,6 +139,20 @@ class PlanStudyGoalViewController: BaseViewController {
         
     }
     
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
     func modifyPlanStudyGoalSetting() {
         
         studyItems = studyGoal?.studyItems ?? []
