@@ -348,6 +348,10 @@
                             <constraint firstItem="JOb-KR-Wnh" firstAttribute="height" secondItem="HqA-k6-w9S" secondAttribute="width" multiplier="0.8" id="xCo-0b-00N"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="calendarView" destination="JOb-KR-Wnh" id="raV-Z7-gf3"/>
+                        <outlet property="displayTableView" destination="vre-O3-QHD" id="0BA-Jr-m7f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UKt-rs-t7t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
