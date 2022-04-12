@@ -28,7 +28,7 @@
 		28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15B228040954004E97B8 /* StudyGoalHeaderView.xib */; };
 		28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B428040A82004E97B8 /* StudyGoalFooterView.swift */; };
 		28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15B628040A8E004E97B8 /* StudyGoalFooterView.xib */; };
-		28AF15BA2804EDFF004E97B8 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B92804EDFF004E97B8 /* CalenderViewController.swift */; };
+		28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -64,7 +64,7 @@
 		28AF15B228040954004E97B8 /* StudyGoalHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalHeaderView.xib; sourceTree = "<group>"; };
 		28AF15B428040A82004E97B8 /* StudyGoalFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalFooterView.swift; sourceTree = "<group>"; };
 		28AF15B628040A8E004E97B8 /* StudyGoalFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalFooterView.xib; sourceTree = "<group>"; };
-		28AF15B92804EDFF004E97B8 /* CalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewController.swift; sourceTree = "<group>"; };
+		28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 			children = (
 				28AF15B828040E3C004E97B8 /* PlanStudyGoal */,
 				288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */,
-				28AF15B92804EDFF004E97B8 /* CalenderViewController.swift */,
+				28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */,
 			);
 			path = StudyGoal;
 			sourceTree = "<group>";
@@ -401,7 +401,7 @@
 				28754ACA2803079A0079F430 /* StudyItemTableViewCell.swift in Sources */,
 				288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */,
 				28754AC7280305370079F430 /* StudyGoal.swift in Sources */,
-				28AF15BA2804EDFF004E97B8 /* CalenderViewController.swift in Sources */,
+				28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */,
 				28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */,
 				28D702BF28019E0300FE9AEA /* Category.swift in Sources */,
 			);

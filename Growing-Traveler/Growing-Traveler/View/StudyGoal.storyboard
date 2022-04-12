@@ -317,10 +317,10 @@
             </objects>
             <point key="canvasLocation" x="1636" y="96"/>
         </scene>
-        <!--Calender View Controller-->
+        <!--Calendar View Controller-->
         <scene sceneID="6h3-cw-byP">
             <objects>
-                <viewController storyboardIdentifier="CalenderViewController" id="4ex-9L-GWj" customClass="CalenderViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarViewController" id="4ex-9L-GWj" customClass="CalendarViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HqA-k6-w9S">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
