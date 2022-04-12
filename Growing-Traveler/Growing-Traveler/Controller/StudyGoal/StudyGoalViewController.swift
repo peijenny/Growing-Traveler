@@ -152,17 +152,20 @@ class StudyGoalViewController: UIViewController {
                 
                 var resultData: [StudyGoal] = []
                 
-                let utcDateFormatter = DateFormatter()
+                let formatter = DateFormatter()
                 
-                utcDateFormatter.dateFormat = "yyyy.MM.dd"
+                formatter.dateFormat = "yyyy.MM.dd"
                 
                 if status == StatusType.pending.title {
 
                     resultData = data.filter({
                         
+                        let startDate = Date(timeIntervalSince1970: $0.studyPeriod.startTime).formatted()
+                        
+                        let nowDate = Date().formatted()
+                        
                         if $0.studyItems.allSatisfy({ $0.isCompleted == false }) == true &&
-                                    utcDateFormatter.string(from: $0.studyPeriod.startTime) >
-                                    utcDateFormatter.string(from: Date()) {
+                            startDate > nowDate {
                                 
                                 return true
                             
@@ -176,13 +179,16 @@ class StudyGoalViewController: UIViewController {
                     
                     resultData = data.filter({
                         
+                        let startDate = Date(timeIntervalSince1970: $0.studyPeriod.startTime).formatted()
+                        
+                        let nowDate = Date().formatted()
+                        
                         if $0.studyItems.allSatisfy({ $0.isCompleted == true }) == true {
                             
                             return false
                             
                         } else if $0.studyItems.allSatisfy({ $0.isCompleted == false }) == true &&
-                                    utcDateFormatter.string(from: $0.studyPeriod.startTime) >
-                                    utcDateFormatter.string(from: Date()) {
+                                    startDate > nowDate {
                                 
                                 return false
                             
@@ -318,8 +324,11 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
         
         formatter.dateFormat = "yyyy.MM.dd"
         
-        headerView.endDateLabel.text = formatter.string(from: studyGoals?[section].studyPeriod.endTime ?? Date())
+        let endDate = Date(timeIntervalSince1970: studyGoals?[section].studyPeriod.endTime ?? TimeInterval()
+        )
         
+        headerView.endDateLabel.text = formatter.string(from: endDate)
+
         headerView.hideRecordLabel.text = "\(studyGoals?[section].id ?? "")"
         
         topCGFloat = headerView.frame.height
