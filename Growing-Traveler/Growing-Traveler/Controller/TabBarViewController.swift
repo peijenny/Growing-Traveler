@@ -34,8 +34,8 @@ private enum Tab {
         switch self {
             
         case .studyGoal:
-            
-            return UITabBarItem(title: "計劃", image: nil, selectedImage: nil)
+
+            return UITabBarItem(tabBarSystemItem: .mostViewed, tag: 0)
             
         }
     }
