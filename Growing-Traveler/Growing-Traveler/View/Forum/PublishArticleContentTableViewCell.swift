@@ -1,5 +1,5 @@
 //
-//  ArticleTypeTableViewCell.swift
+//  ArticleContentTableViewCell.swift
 //  Growing-Traveler
 //
 //  Created by Jenny Hung on 2022/4/13.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ArticleTypeTableViewCell: UITableViewCell {
+class PublishArticleContentTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

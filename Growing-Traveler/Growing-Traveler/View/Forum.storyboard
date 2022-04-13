@@ -113,7 +113,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="PublishForumArticleTableView" destination="tow-jv-cA5" id="ncx-N6-1di"/>
+                        <outlet property="publishArticleTableView" destination="tow-jv-cA5" id="1C6-na-PrZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iub-wA-DHH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

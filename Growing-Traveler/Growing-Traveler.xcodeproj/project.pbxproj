@@ -32,10 +32,10 @@
 		28BB6EE628066441002B0458 /* Forum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EE528066441002B0458 /* Forum.storyboard */; };
 		28BB6EE928066639002B0458 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EE828066639002B0458 /* FormViewController.swift */; };
 		28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */; };
-		28BB6EEE28066FC1002B0458 /* ArticleTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEC28066FC1002B0458 /* ArticleTypeTableViewCell.swift */; };
-		28BB6EEF28066FC1002B0458 /* ArticleTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EED28066FC1002B0458 /* ArticleTypeTableViewCell.xib */; };
-		28BB6EF228067007002B0458 /* ArticleContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EF028067007002B0458 /* ArticleContentTableViewCell.swift */; };
-		28BB6EF328067007002B0458 /* ArticleContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EF128067007002B0458 /* ArticleContentTableViewCell.xib */; };
+		28BB6EEE28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEC28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift */; };
+		28BB6EEF28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EED28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib */; };
+		28BB6EF228067007002B0458 /* PublishArticleContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EF028067007002B0458 /* PublishArticleContentTableViewCell.swift */; };
+		28BB6EF328067007002B0458 /* PublishArticleContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EF128067007002B0458 /* PublishArticleContentTableViewCell.xib */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -75,10 +75,10 @@
 		28BB6EE528066441002B0458 /* Forum.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Forum.storyboard; sourceTree = "<group>"; };
 		28BB6EE828066639002B0458 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishForumArticleViewController.swift; sourceTree = "<group>"; };
-		28BB6EEC28066FC1002B0458 /* ArticleTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTypeTableViewCell.swift; sourceTree = "<group>"; };
-		28BB6EED28066FC1002B0458 /* ArticleTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleTypeTableViewCell.xib; sourceTree = "<group>"; };
-		28BB6EF028067007002B0458 /* ArticleContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContentTableViewCell.swift; sourceTree = "<group>"; };
-		28BB6EF128067007002B0458 /* ArticleContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleContentTableViewCell.xib; sourceTree = "<group>"; };
+		28BB6EEC28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishArticleTypeTableViewCell.swift; sourceTree = "<group>"; };
+		28BB6EED28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishArticleTypeTableViewCell.xib; sourceTree = "<group>"; };
+		28BB6EF028067007002B0458 /* PublishArticleContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishArticleContentTableViewCell.swift; sourceTree = "<group>"; };
+		28BB6EF128067007002B0458 /* PublishArticleContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishArticleContentTableViewCell.xib; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -208,10 +208,10 @@
 		28BB6EE428066418002B0458 /* Forum */ = {
 			isa = PBXGroup;
 			children = (
-				28BB6EEC28066FC1002B0458 /* ArticleTypeTableViewCell.swift */,
-				28BB6EED28066FC1002B0458 /* ArticleTypeTableViewCell.xib */,
-				28BB6EF028067007002B0458 /* ArticleContentTableViewCell.swift */,
-				28BB6EF128067007002B0458 /* ArticleContentTableViewCell.xib */,
+				28BB6EEC28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift */,
+				28BB6EED28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib */,
+				28BB6EF028067007002B0458 /* PublishArticleContentTableViewCell.swift */,
+				28BB6EF128067007002B0458 /* PublishArticleContentTableViewCell.xib */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -343,11 +343,11 @@
 				28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */,
 				28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */,
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
-				28BB6EEF28066FC1002B0458 /* ArticleTypeTableViewCell.xib in Resources */,
+				28BB6EEF28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
 				28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */,
-				28BB6EF328067007002B0458 /* ArticleContentTableViewCell.xib in Resources */,
+				28BB6EF328067007002B0458 /* PublishArticleContentTableViewCell.xib in Resources */,
 				285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */,
 				285F3F4D2801948600E84CF2 /* GoogleService-Info.plist in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
@@ -425,8 +425,8 @@
 			files = (
 				28D702C12802B41B00FE9AEA /* SelectStudyItemViewController.swift in Sources */,
 				28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */,
-				28BB6EEE28066FC1002B0458 /* ArticleTypeTableViewCell.swift in Sources */,
-				28BB6EF228067007002B0458 /* ArticleContentTableViewCell.swift in Sources */,
+				28BB6EEE28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift in Sources */,
+				28BB6EF228067007002B0458 /* PublishArticleContentTableViewCell.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				28AF15AD2804033B004E97B8 /* StudyGoalTableViewCell.swift in Sources */,
