@@ -38,3 +38,14 @@ struct ArticleMessage: Codable {
     var message: [ArticleContent]
     
 }
+
+struct UploadImageResult: Decodable {
+    
+    struct Data: Decodable {
+        
+        let link: URL
+        
+    }
+    
+    let data: Data
+}

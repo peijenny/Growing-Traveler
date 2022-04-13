@@ -7,6 +7,7 @@
 
 import UIKit
 import JXPhotoBrowser
+import Alamofire
 
 class PublishForumArticleViewController: UIViewController {
 
@@ -33,6 +34,18 @@ class PublishForumArticleViewController: UIViewController {
     }
     
     var image: UIImage?
+    
+    var imageString: String? {
+        
+        didSet {
+        
+            publishArticleTableView.reloadData()
+            
+        }
+        
+    }
+    
+    var textArray: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,9 +109,12 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
 
             cell.addImageButton.addTarget(self, action: #selector(insertImage), for: .touchUpInside)
             
-            guard let image = image else { return cell }
+            guard let imageString = imageString else { return cell }
             
-            cell.insertPictureToTextView(image: image)
+            cell.insertPictureToTextView(imageString: imageString)
+            
+            // 儲存 TextView 內容的字串
+            textArray = cell.contentTextView.attributedText.string.split(separator: "\0").map({ String($0) })
             
             return cell
             
@@ -144,12 +160,55 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        image = info[.originalImage] as? UIImage
+//        image = info[.originalImage] as? UIImage
+        
+//        if let image = info[.originalImage] as? UIImage {
+//
+//            uploadImage(uiImage: image)
+//
+//
+//        }
 
-        publishArticleTableView.reloadData()
-
+        imageString = "https://i.imgur.com/4KuCb34.jpeg"
+        
         dismiss(animated: true)
 
+    }
+    
+    func uploadImage(uiImage: UIImage) {
+        
+        let headers: HTTPHeaders = ["Authorization": "Client-ID fbe53d91453b687"]
+        
+        AF.upload(multipartFormData: { data in
+            
+            if let imageData = uiImage.jpegData(compressionQuality: 0.9) {
+                
+                data.append(imageData, withName: "image")
+                
+            }
+            
+        }, to: "https://api.imgur.com/3/image", headers: headers
+        ).responseDecodable(
+            of: UploadImageResult.self, queue: .main, decoder: JSONDecoder()
+        ) { [weak self] response in
+            
+            guard let strongSelf = self else { return }
+            
+            switch response.result {
+                
+            case .success(let result):
+                
+                print("TEST \(result.data.link)")
+                
+                strongSelf.imageString = "\(result.data.link)"
+                
+            case .failure(let error):
+                
+                print(error)
+            }
+            
+        }
+        
     }
     
 }

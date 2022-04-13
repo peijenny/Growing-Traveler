@@ -24,52 +24,54 @@ class PublishArticleContentTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func insertPictureToTextView(image: UIImage) {
+    func insertPictureToTextView(imageString: String) {
         
-        let imageString = "https://i.imgur.com/4KuCb34.jpeg"
+//        let imageString = "https://i.imgur.com/4KuCb34.jpeg"
         
-        let imageURL = URL(string: imageString)
+        guard let imageURL = URL(string: imageString) else { return }
         
-        let data = try? Data(contentsOf: imageURL!)
+        let data = try? Data(contentsOf: imageURL)
         
-        // 建立附檔
+        // 建立圖檔
         let attachment = NSTextAttachment()
         
-        let image = UIImage(data: data ?? Data())!
+        guard let image = UIImage(data: data ?? Data()) else { return }
         
         attachment.image = image
 
-        // 設定附檔的大小
+        // 設定圖檔的大小
         let imageAspectRatio = CGFloat(image.size.height / image.size.width)
 
-        let peddingX: CGFloat =  0
-
-        let imageWidth = contentTextView.frame.width - 2 * peddingX
+        let imageWidth = contentTextView.frame.width - 2 * CGFloat(0)
 
         let imageHeight = imageWidth * imageAspectRatio
 
 //        attachment.image = UIImage(data: image.jpegData(compressionQuality: 0.5)!)
 
-        attachment.bounds = CGRect(x: 0, y: 0,
-                                   width: imageWidth,
-                                   height: imageHeight)
+        attachment.bounds = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
 
-        // 將附檔轉成 NSAttributedString 類型的屬性
-        let attImage = NSAttributedString(attachment: attachment)
-
+        // 將圖檔轉成 NSAttributedString 類型的屬性
+//        let attImage = NSAttributedString(attachment: attachment)
+        
         // 取得 textView 所有的內容，轉成可以修改的
         let mutableStr = NSMutableAttributedString(attributedString: contentTextView.attributedText)
-
+        
         // 取得目前游標的位置
         let selectedRange = contentTextView.selectedRange
-
-        // 插入附檔
-        mutableStr.insert(attImage, at: selectedRange.location)
+        
+        // 插入圖檔
+//        mutableStr.insert(attImage, at: selectedRange.location)
+        
+        mutableStr.insert(NSAttributedString(string: "\0\n\(imageString)"), at: selectedRange.location)
 
         // 插入圖片後的下一行
-        mutableStr.insert(NSAttributedString(string: "\n"), at: selectedRange.location + 1)
+        mutableStr.insert(NSAttributedString(string: "\0\n"), at: selectedRange.location + 2)
 
-        contentTextView.attributedText = mutableStr
+        let attribute = [ NSAttributedString.Key.font: UIFont(name: "Arial", size: 18.0)! ]
+        
+//        contentTextView.attributedText = mutableStr
+        
+        contentTextView.attributedText = NSAttributedString(string: mutableStr.string, attributes: attribute)
         
     }
     

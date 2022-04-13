@@ -18,7 +18,7 @@ class ForumArticleManager {
         
         do {
             
-            try database.document(database.document().documentID).setData(from: articleContent)
+            try database.document("article1").setData(from: articleContent)
             
         } catch {
             
