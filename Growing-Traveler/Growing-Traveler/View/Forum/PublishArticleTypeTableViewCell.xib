@@ -54,7 +54,7 @@
                             <segment title="閒聊"/>
                         </segments>
                     </segmentedControl>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g56-qu-5ux">
+                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇分類標籤" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g56-qu-5ux">
                         <rect key="frame" x="102" y="67" width="245" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="YFY-YR-Dr9"/>
@@ -62,7 +62,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v90-nX-ccQ">
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入發文標題" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v90-nX-ccQ">
                         <rect key="frame" x="102" y="118" width="296" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="k4J-GG-oqj"/>
