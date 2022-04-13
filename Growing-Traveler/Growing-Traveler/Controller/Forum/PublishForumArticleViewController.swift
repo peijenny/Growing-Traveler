@@ -9,9 +9,17 @@ import UIKit
 
 class PublishForumArticleViewController: UIViewController {
 
+    @IBOutlet weak var PublishForumArticleTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
 
 }
+
+
+//extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDataSource {
+//    
+//    
+//}
