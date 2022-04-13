@@ -15,6 +15,8 @@ class PublishArticleTypeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleTextField: UITextField!
     
+    @IBOutlet weak var selectCategoryButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

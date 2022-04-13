@@ -21,6 +21,16 @@ class PublishForumArticleViewController: UIViewController {
         
     }
     
+    var selectCategoryItem: CategoryItem? {
+        
+        didSet {
+        
+            publishArticleTableView.reloadData()
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +71,11 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
 
             guard let cell = cell as? PublishArticleTypeTableViewCell else { return cell }
             
+            cell.selectCategoryButton.addTarget(
+                self, action: #selector(selectCategoryTagButton), for: .touchUpInside)
+            
+            cell.categoryTextField.text = selectCategoryItem?.title
+            
             return cell
             
         } else {
@@ -78,6 +93,26 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         
     }
     
-
+    @objc func selectCategoryTagButton(sender: UIButton) {
+        
+        let categoryViewController = SelectCategoryViewController()
+        
+        categoryViewController.getSelectCategoryItem = { [weak self] item in
+            
+            self?.selectCategoryItem = item
+            
+        }
+        
+        let navController = UINavigationController(rootViewController: categoryViewController)
+        
+        if let sheetPresentationController = navController.sheetPresentationController {
+            
+            sheetPresentationController.detents = [.medium()]
+            
+        }
+        
+        self.present(navController, animated: true, completion: nil)
+        
+    }
 
 }
