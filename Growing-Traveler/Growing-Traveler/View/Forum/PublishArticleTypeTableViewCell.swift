@@ -9,6 +9,12 @@ import UIKit
 
 class PublishArticleTypeTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var categoryTextField: UITextField!
+    
+    @IBOutlet weak var titleTextField: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

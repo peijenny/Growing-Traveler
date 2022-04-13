@@ -105,6 +105,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="categoryTextField" destination="g56-qu-5ux" id="Hhm-wU-HMc"/>
+                <outlet property="titleTextField" destination="v90-nX-ccQ" id="iqL-Ul-1g1"/>
+                <outlet property="typeSegmentedControl" destination="1bS-Yl-K8M" id="GAZ-BI-OHL"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="63.616071428571423"/>
         </tableViewCell>
     </objects>

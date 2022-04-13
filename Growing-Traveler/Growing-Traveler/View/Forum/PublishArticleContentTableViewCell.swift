@@ -9,6 +9,10 @@ import UIKit
 
 class PublishArticleContentTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var addImageButton: UIButton!
+    
+    @IBOutlet weak var contentTextView: UITextView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
