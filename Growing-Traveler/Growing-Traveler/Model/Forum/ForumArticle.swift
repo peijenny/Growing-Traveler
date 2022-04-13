@@ -23,9 +23,10 @@ struct ForumArticle: Codable {
 
 struct ArticleContent: Codable {
     
-    var text: String?
+    var text: [String]?
     
     var image: String?
+    
 }
 
 struct ArticleMessage: Codable {
