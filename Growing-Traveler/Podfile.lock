@@ -327,6 +327,7 @@ PODS:
   - gRPC-Core/Interface (1.28.2)
   - GTMSessionFetcher/Core (1.7.1)
   - IQKeyboardManagerSwift (6.5.9)
+  - JXPhotoBrowser (3.1.3)
   - leveldb-library (1.22.1)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
@@ -343,6 +344,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - FSCalendar
   - IQKeyboardManagerSwift
+  - JXPhotoBrowser (~> 3.0)
   - SwiftLint
 
 SPEC REPOS:
@@ -365,6 +367,7 @@ SPEC REPOS:
     - gRPC-Core
     - GTMSessionFetcher
     - IQKeyboardManagerSwift
+    - JXPhotoBrowser
     - leveldb-library
     - nanopb
     - PromisesObjC
@@ -389,11 +392,12 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: 4577a4cc914a5a07c40a8a0ad0acc22080418c2d
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  JXPhotoBrowser: d32e94e1226d43bf5ed83164e3f5b651fed625e0
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
 
-PODFILE CHECKSUM: 745d944ad6cf77c62785c243fb960fd5b81c3045
+PODFILE CHECKSUM: 5d868514a54821f78828b90009efaa7743e0ea16
 
 COCOAPODS: 1.11.2

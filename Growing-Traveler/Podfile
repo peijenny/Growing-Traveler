@@ -13,6 +13,7 @@ target 'Growing-Traveler' do
     pod 'Firebase/Firestore'
     pod 'FirebaseFirestoreSwift'
     pod 'IQKeyboardManagerSwift'
+    pod 'JXPhotoBrowser', '~> 3.0'
 
 
 end
