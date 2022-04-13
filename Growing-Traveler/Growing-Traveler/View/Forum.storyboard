@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="F4j-Vk-IsC">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="d9h-dH-HZf">
+            <objects>
+                <navigationController id="F4j-Vk-IsC" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n0A-BW-O5K">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="6KV-4R-PMy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8r0-PF-Nqn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-816" y="49"/>
+        </scene>
+        <!--討論區-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="FormViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gK1-Su-8Lg">
+                                <rect key="frame" x="20" y="88" width="374" height="34"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZh-N3-uFJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="318.5" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1y-fa-3Ah">
+                                        <rect key="frame" x="328.5" y="0.0" width="45.5" height="34"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eEy-Fd-zt4">
+                                <rect key="frame" x="0.0" y="142" width="414" height="720"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWO-8Y-0I2">
+                                <rect key="frame" x="344" y="792" width="50" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Fu7-0Z-hao"/>
+                                    <constraint firstAttribute="height" constant="50" id="pph-mz-gxG"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eEy-Fd-zt4" firstAttribute="top" secondItem="gK1-Su-8Lg" secondAttribute="bottom" constant="20" id="D04-8N-qXL"/>
+                            <constraint firstItem="eEy-Fd-zt4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="MWc-BL-QKp"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eEy-Fd-zt4" secondAttribute="bottom" id="PpD-Kg-lK8"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TWO-8Y-0I2" secondAttribute="trailing" constant="20" id="QGj-ZB-G7o"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eEy-Fd-zt4" secondAttribute="trailing" id="Qa4-kY-dxB"/>
+                            <constraint firstItem="gK1-Su-8Lg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="fOo-lL-4l7"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="gK1-Su-8Lg" secondAttribute="trailing" constant="20" id="la8-xw-J9h"/>
+                            <constraint firstItem="gK1-Su-8Lg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="syU-yY-JHV"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="TWO-8Y-0I2" secondAttribute="bottom" constant="20" id="zmh-Gf-UbB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="討論區" id="CLd-5v-9Wr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="23" y="49"/>
+        </scene>
+        <!--Publish Forum Article View Controller-->
+        <scene sceneID="yzu-AI-Pkd">
+            <objects>
+                <viewController storyboardIdentifier="PublishForumArticleViewController" id="HX2-w9-t09" customClass="PublishForumArticleViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wh9-Kr-AaD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tow-jv-cA5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FPb-BG-4o2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FPb-BG-4o2" firstAttribute="trailing" secondItem="tow-jv-cA5" secondAttribute="trailing" id="G2Z-jv-uzD"/>
+                            <constraint firstItem="FPb-BG-4o2" firstAttribute="bottom" secondItem="tow-jv-cA5" secondAttribute="bottom" id="GXV-Lr-PPq"/>
+                            <constraint firstItem="tow-jv-cA5" firstAttribute="leading" secondItem="FPb-BG-4o2" secondAttribute="leading" id="Z38-oD-H3D"/>
+                            <constraint firstItem="tow-jv-cA5" firstAttribute="top" secondItem="FPb-BG-4o2" secondAttribute="top" id="cOq-uc-SE2"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iub-wA-DHH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="858" y="49"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

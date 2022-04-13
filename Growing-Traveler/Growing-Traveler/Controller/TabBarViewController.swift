@@ -11,6 +11,8 @@ private enum Tab {
     
     case studyGoal
     
+    case forum
+    
     func controller() -> UIViewController {
         
         var controller: UIViewController
@@ -18,6 +20,9 @@ private enum Tab {
         switch self {
             
         case .studyGoal: controller = UIStoryboard.studyGoal.instantiateInitialViewController() ?? UIViewController()
+            
+        case .forum: controller = UIStoryboard.forum.instantiateInitialViewController() ??
+            UIViewController()
             
         }
         
@@ -37,6 +42,10 @@ private enum Tab {
 
             return UITabBarItem(tabBarSystemItem: .mostViewed, tag: 0)
             
+        case .forum:
+            
+            return UITabBarItem(tabBarSystemItem: .featured, tag: 0)
+            
         }
     }
     
@@ -44,7 +53,7 @@ private enum Tab {
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
-    private let tabs: [Tab] = [.studyGoal]
+    private let tabs: [Tab] = [.studyGoal, .forum]
     
     var trolleyTabBarItem: UITabBarItem!
     

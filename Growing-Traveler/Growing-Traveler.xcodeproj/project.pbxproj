@@ -29,6 +29,9 @@
 		28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B428040A82004E97B8 /* StudyGoalFooterView.swift */; };
 		28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15B628040A8E004E97B8 /* StudyGoalFooterView.xib */; };
 		28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */; };
+		28BB6EE628066441002B0458 /* Forum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EE528066441002B0458 /* Forum.storyboard */; };
+		28BB6EE928066639002B0458 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EE828066639002B0458 /* FormViewController.swift */; };
+		28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -65,6 +68,9 @@
 		28AF15B428040A82004E97B8 /* StudyGoalFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalFooterView.swift; sourceTree = "<group>"; };
 		28AF15B628040A8E004E97B8 /* StudyGoalFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalFooterView.xib; sourceTree = "<group>"; };
 		28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		28BB6EE528066441002B0458 /* Forum.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Forum.storyboard; sourceTree = "<group>"; };
+		28BB6EE828066639002B0458 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishForumArticleViewController.swift; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +112,7 @@
 		288367A22801250F0010CEAD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				28BB6EE72806661F002B0458 /* Forum */,
 				288367AC28012A450010CEAD /* StudyGoal */,
 				28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */,
 				283D2C3D2803E63C004D19E4 /* BaseViewController.swift */,
@@ -116,10 +123,12 @@
 		288367A32801251C0010CEAD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				28BB6EE428066418002B0458 /* Forum */,
 				288367AF2801396D0010CEAD /* StudyGoal */,
 				28CE2D4927FECBF500ACA813 /* LaunchScreen.storyboard */,
 				28CE2D4427FECBF400ACA813 /* Main.storyboard */,
 				288367A8280129F30010CEAD /* StudyGoal.storyboard */,
+				28BB6EE528066441002B0458 /* Forum.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +195,22 @@
 				28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */,
 			);
 			path = PlanStudyGoal;
+			sourceTree = "<group>";
+		};
+		28BB6EE428066418002B0458 /* Forum */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Forum;
+			sourceTree = "<group>";
+		};
+		28BB6EE72806661F002B0458 /* Forum */ = {
+			isa = PBXGroup;
+			children = (
+				28BB6EE828066639002B0458 /* FormViewController.swift */,
+				28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */,
+			);
+			path = Forum;
 			sourceTree = "<group>";
 		};
 		28CE2D3227FECBF400ACA813 = {
@@ -302,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28BB6EE628066441002B0458 /* Forum.storyboard in Resources */,
 				28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */,
 				28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */,
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
@@ -394,7 +420,9 @@
 				28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */,
 				283D2C3E2803E63C004D19E4 /* BaseViewController.swift in Sources */,
 				285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */,
+				28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */,
 				28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */,
+				28BB6EE928066639002B0458 /* FormViewController.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
