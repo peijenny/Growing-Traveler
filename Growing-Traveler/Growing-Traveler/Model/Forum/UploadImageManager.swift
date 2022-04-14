@@ -8,8 +8,6 @@
 import Foundation
 import Alamofire
 
-var clientID = "fbe53d91453b687"
-
 class UploadImageManager {
     
     let headers: HTTPHeaders = ["Authorization": "Client-ID \(clientID)"]

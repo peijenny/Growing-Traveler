@@ -39,6 +39,9 @@
 		28BB6EF6280690EB002B0458 /* ForumArticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EF5280690EB002B0458 /* ForumArticleManager.swift */; };
 		28BB6EF828069112002B0458 /* ForumArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EF728069111002B0458 /* ForumArticle.swift */; };
 		28BB6EFC2807C25C002B0458 /* UploadImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EFB2807C25C002B0458 /* UploadImageManager.swift */; };
+		28BB6EFF2807C86C002B0458 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EFD2807C86C002B0458 /* ArticleTableViewCell.swift */; };
+		28BB6F002807C86C002B0458 /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EFE2807C86C002B0458 /* ArticleTableViewCell.xib */; };
+		28BB6F022807CABE002B0458 /* KeyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F012807CABE002B0458 /* KeyToken.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -85,6 +88,9 @@
 		28BB6EF5280690EB002B0458 /* ForumArticleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumArticleManager.swift; sourceTree = "<group>"; };
 		28BB6EF728069111002B0458 /* ForumArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumArticle.swift; sourceTree = "<group>"; };
 		28BB6EFB2807C25C002B0458 /* UploadImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageManager.swift; sourceTree = "<group>"; };
+		28BB6EFD2807C86C002B0458 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
+		28BB6EFE2807C86C002B0458 /* ArticleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleTableViewCell.xib; sourceTree = "<group>"; };
+		28BB6F012807CABE002B0458 /* KeyToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyToken.swift; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 			children = (
 				28BB6EF4280690C8002B0458 /* Forum */,
 				28D702BB28019CB300FE9AEA /* StudyGoal */,
+				28BB6F012807CABE002B0458 /* KeyToken.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -216,6 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				28BB6EF92807B1D4002B0458 /* PublishArticle */,
+				28BB6EFD2807C86C002B0458 /* ArticleTableViewCell.swift */,
+				28BB6EFE2807C86C002B0458 /* ArticleTableViewCell.xib */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -374,6 +383,7 @@
 				28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */,
 				28BB6EF328067007002B0458 /* PublishArticleContentTableViewCell.xib in Resources */,
 				285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */,
+				28BB6F002807C86C002B0458 /* ArticleTableViewCell.xib in Resources */,
 				285F3F4D2801948600E84CF2 /* GoogleService-Info.plist in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
 				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
@@ -465,6 +475,7 @@
 				285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */,
 				28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */,
 				28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */,
+				28BB6EFF2807C86C002B0458 /* ArticleTableViewCell.swift in Sources */,
 				28BB6EE928066639002B0458 /* FormViewController.swift in Sources */,
 				28BB6EFC2807C25C002B0458 /* UploadImageManager.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
@@ -474,6 +485,7 @@
 				288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */,
 				28754AC7280305370079F430 /* StudyGoal.swift in Sources */,
 				28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */,
+				28BB6F022807CABE002B0458 /* KeyToken.swift in Sources */,
 				28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */,
 				28D702BF28019E0300FE9AEA /* Category.swift in Sources */,
 			);
