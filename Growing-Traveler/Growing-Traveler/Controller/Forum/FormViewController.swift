@@ -73,7 +73,7 @@ class FormViewController: UIViewController {
     
     func fetchData() {
         
-        forumArticleManager.fetchData(completion: { [weak self] result in
+        forumArticleManager.listenData(completion: { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -91,11 +91,9 @@ class FormViewController: UIViewController {
                 
             }
             
-            
         })
         
     }
-    
     
 }
 
