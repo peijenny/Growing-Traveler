@@ -15,6 +15,7 @@ target 'Growing-Traveler' do
     pod 'IQKeyboardManagerSwift'
     pod 'JXPhotoBrowser', '~> 3.0'
     pod 'Alamofire', '~> 5.5'
+    pod 'Kingfisher'
 
 post_install do |installer|
     installer.pods_project.build_configurations.each do |config|
