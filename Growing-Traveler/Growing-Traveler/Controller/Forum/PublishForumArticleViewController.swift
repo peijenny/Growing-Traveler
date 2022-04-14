@@ -8,7 +8,7 @@
 import UIKit
 import JXPhotoBrowser
 
-class PublishForumArticleViewController: UIViewController {
+class PublishForumArticleViewController: BaseViewController {
 
     @IBOutlet weak var publishArticleTableView: UITableView! {
         
