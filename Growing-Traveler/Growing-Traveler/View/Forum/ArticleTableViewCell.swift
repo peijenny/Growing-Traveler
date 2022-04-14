@@ -30,11 +30,11 @@ class ArticleTableViewCell: UITableViewCell {
     
     func checkImage(forumArticle: ForumArticle) {
         
-        let test = forumArticle.content.filter({ $0.contentType == "image" })
+        let article = forumArticle.content.filter({ $0.contentType == "image" })
         
-        if test.count > 0 {
+        if article.count > 0 {
             
-            mainImageView.loadImage(test[0].contentText)
+            mainImageView.loadImage(article[0].contentText)
             
             mainImageView.isHidden = false
             
