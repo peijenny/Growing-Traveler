@@ -249,31 +249,29 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-//        if let image = info[.originalImage] as? UIImage {
-//
-//            let uploadImageManager = UploadImageManager()
-//
-//            uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
-//
-//                guard let strongSelf = self else { return }
-//
-//                switch result {
-//
-//                case.success(let imageLink):
-//
-//                    strongSelf.imageLink = imageLink
-//
-//                case .failure(let error):
-//
-//                    print(error)
-//
-//                }
-//
-//            })
-//
-//        }
-        
-        imageLink = "https://i.imgur.com/svlrAtw.jpeg"
+        if let image = info[.originalImage] as? UIImage {
+
+            let uploadImageManager = UploadImageManager()
+
+            uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
+
+                guard let strongSelf = self else { return }
+
+                switch result {
+
+                case.success(let imageLink):
+
+                    strongSelf.imageLink = imageLink
+
+                case .failure(let error):
+
+                    print(error)
+
+                }
+
+            })
+
+        }
 
         dismiss(animated: true)
 
