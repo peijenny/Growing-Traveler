@@ -7,7 +7,6 @@
 
 import UIKit
 import JXPhotoBrowser
-import Alamofire
 
 class PublishForumArticleViewController: UIViewController {
 
@@ -33,7 +32,7 @@ class PublishForumArticleViewController: UIViewController {
         
     }
 
-    var imageString: String? {
+    var imageLink: String? {
         
         didSet {
         
@@ -198,7 +197,7 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
                 
             }
             
-            guard let imageString = imageString else { return cell }
+            guard let imageString = imageLink else { return cell }
             
             cell.insertPictureToTextView(imageString: imageString)
             
@@ -248,48 +247,30 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
         
         if let image = info[.originalImage] as? UIImage {
 
-            uploadImage(uiImage: image)
+            let uploadImageManager = UploadImageManager()
+            
+            uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
+                
+                guard let strongSelf = self else { return }
+                
+                switch result {
+                    
+                case.success(let imageLink):
+                    
+                    strongSelf.imageLink = imageLink
+                    
+                case .failure(let error):
+                    
+                    print(error)
+                    
+                }
+                
+            })
 
         }
 
         dismiss(animated: true)
 
-    }
-    
-    func uploadImage(uiImage: UIImage) {
-        
-        let headers: HTTPHeaders = ["Authorization": "Client-ID fbe53d91453b687"]
-        
-        AF.upload(multipartFormData: { data in
-            
-            if let imageData = uiImage.jpegData(compressionQuality: 0.9) {
-                
-                data.append(imageData, withName: "image")
-                
-            }
-            
-        }, to: "https://api.imgur.com/3/image", headers: headers
-        ).responseDecodable(
-            of: UploadImageResult.self, queue: .main, decoder: JSONDecoder()
-        ) { [weak self] response in
-            
-            guard let strongSelf = self else { return }
-            
-            switch response.result {
-                
-            case .success(let result):
-                
-                print("TEST \(result.data.link)")
-                
-                strongSelf.imageString = "\(result.data.link)"
-                
-            case .failure(let error):
-                
-                print(error)
-            }
-            
-        }
-        
     }
     
 }
