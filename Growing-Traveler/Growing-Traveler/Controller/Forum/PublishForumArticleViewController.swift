@@ -32,9 +32,7 @@ class PublishForumArticleViewController: UIViewController {
         }
         
     }
-    
-    var image: UIImage?
-    
+
     var imageString: String? {
         
         didSet {
@@ -45,13 +43,13 @@ class PublishForumArticleViewController: UIViewController {
         
     }
     
-    var forumArticle: ForumArticle?
-    
     var contentArray: [String] = []
     
     var checkArticleFullIn = false
     
     var forumArticleManager = ForumArticleManager()
+    
+    var inputTitle: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,34 +87,50 @@ class PublishForumArticleViewController: UIViewController {
         var articleContents: [ArticleContent] = []
         
         var articleType = String()
-
-        for index in 0..<contentArray.count {
+        
+        if contentArray != [] {
             
-            if contentArray[index].range(of: "https://") != nil {
+            for index in 0..<contentArray.count {
                 
-                articleType = "image"
+                if contentArray[index].range(of: "https://") != nil {
+                    
+                    articleType = "image"
+                    
+                } else {
+                    
+                    articleType = "string"
+                    
+                }
                 
-            } else {
-                
-                articleType = "string"
+                articleContents.append(ArticleContent(
+                    orderID: index,
+                    contentType: articleType,
+                    contentText: contentArray[index]
+                    ))
                 
             }
             
-            articleContents.append(ArticleContent(
-                orderID: index,
-                contentType: articleType,
-                contentText: contentArray[index]
-                ))
+            guard let inputTitle = inputTitle else { return }
             
-            forumArticle?.content = articleContents
+            guard let selectCategoryItem = selectCategoryItem else { return }
             
+            let forumArticle = ForumArticle(
+                id: forumArticleManager.database.document().documentID,
+                userID: userID,
+                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
+                title: inputTitle,
+                category: selectCategoryItem,
+                content: articleContents
+            )
+
+            forumArticleManager.addData(forumArticle: forumArticle)
+            
+            navigationController?.popViewController(animated: true)
+
         }
         
-        guard let forumArticle = forumArticle else { return }
+        checkArticleFullIn = false
 
-        forumArticleManager.addData(forumArticle: forumArticle)
-        
-        navigationController?.popViewController(animated: true)
     }
 
 }
@@ -153,25 +167,10 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
                 
                 if cell.checkInput() {
                     
-                    guard let inputTitle = cell.titleTextField.text else { return cell }
-                    
-                    guard let selectCategoryItem = selectCategoryItem else { return cell }
-                    
-                    forumArticle = ForumArticle(
-                        id: forumArticleManager.database.document().documentID,
-                        userID: userID,
-                        createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-                        title: inputTitle,
-                        category: selectCategoryItem,
-                        content: [ArticleContent]()
-                    )
-                    
-                    handleArticleContentData()
+                    inputTitle = cell.titleTextField.text
                     
                 }
 
-                checkArticleFullIn = false
-                
             }
             
             return cell
@@ -187,21 +186,22 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
 
             cell.addImageButton.addTarget(self, action: #selector(insertImage), for: .touchUpInside)
             
+            if checkArticleFullIn {
+
+                if cell.checkInput() != [] {
+                    
+                    contentArray = cell.checkInput()
+                    
+                    handleArticleContentData()
+                    
+                }
+                
+            }
+            
             guard let imageString = imageString else { return cell }
             
             cell.insertPictureToTextView(imageString: imageString)
             
-            if contentArray == [] {
-                
-                contentArray.append(cell.contentTextView.text)
-                
-            } else if contentArray != [] && !checkArticleFullIn {
-                
-                contentArray = cell.contentTextView
-                    .attributedText.string.split(separator: "\0").map({ String($0) })
-                
-            }
-
             return cell
             
         }
@@ -246,17 +246,12 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-//        image = info[.originalImage] as? UIImage
-//
-//        if let image = info[.originalImage] as? UIImage {
-//
-//            uploadImage(uiImage: image)
-//
-//
-//        }
+        if let image = info[.originalImage] as? UIImage {
 
-        imageString = "https://i.imgur.com/4KuCb34.jpeg"
-        
+            uploadImage(uiImage: image)
+
+        }
+
         dismiss(animated: true)
 
     }

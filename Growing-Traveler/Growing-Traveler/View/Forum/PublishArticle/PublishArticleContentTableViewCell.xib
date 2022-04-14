@@ -37,7 +37,7 @@
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="folder.badge.plus" catalog="system"/>
                     </button>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="請描述內容....." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gdm-L5-74b">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gdm-L5-74b">
                         <rect key="frame" x="16" y="59" width="382" height="525"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>

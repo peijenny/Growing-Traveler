@@ -63,4 +63,31 @@ class PublishArticleContentTableViewCell: UITableViewCell {
         
     }
     
+    func checkInput() -> [String] {
+        
+        var contentArray: [String] = []
+        
+        if contentTextView.text.range(of: "https://") == nil {
+            
+            if contentTextView.text != "" {
+                
+                contentArray.append(contentTextView.text)
+                
+            } else {
+                
+                print("內容輸入不可為空")
+                
+            }
+            
+        } else {
+            
+            contentArray = contentTextView
+                .attributedText.string.split(separator: "\0").map({ String($0) })
+            
+        }
+        
+        return contentArray
+        
+    }
+    
 }

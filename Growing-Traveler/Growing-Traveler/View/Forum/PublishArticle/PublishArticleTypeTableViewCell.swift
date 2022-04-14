@@ -30,7 +30,7 @@ class PublishArticleTypeTableViewCell: UITableViewCell {
     
     func checkInput() -> Bool {
         
-        if categoryTextField.text == "" {
+        if titleTextField.text == "" {
 
             print(InputError.studyGoalTitleEmpty.title)
             
@@ -44,9 +44,8 @@ class PublishArticleTypeTableViewCell: UITableViewCell {
             
         } else {
             
-            print("Save!")
-            
             return true
+            
         }
         
     }

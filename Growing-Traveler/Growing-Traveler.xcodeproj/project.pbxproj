@@ -213,10 +213,7 @@
 		28BB6EE428066418002B0458 /* Forum */ = {
 			isa = PBXGroup;
 			children = (
-				28BB6EEC28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift */,
-				28BB6EED28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib */,
-				28BB6EF028067007002B0458 /* PublishArticleContentTableViewCell.swift */,
-				28BB6EF128067007002B0458 /* PublishArticleContentTableViewCell.xib */,
+				28BB6EF92807B1D4002B0458 /* PublishArticle */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -237,6 +234,17 @@
 				28BB6EF728069111002B0458 /* ForumArticle.swift */,
 			);
 			path = Forum;
+			sourceTree = "<group>";
+		};
+		28BB6EF92807B1D4002B0458 /* PublishArticle */ = {
+			isa = PBXGroup;
+			children = (
+				28BB6EEC28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift */,
+				28BB6EED28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib */,
+				28BB6EF028067007002B0458 /* PublishArticleContentTableViewCell.swift */,
+				28BB6EF128067007002B0458 /* PublishArticleContentTableViewCell.xib */,
+			);
+			path = PublishArticle;
 			sourceTree = "<group>";
 		};
 		28CE2D3227FECBF400ACA813 = {
