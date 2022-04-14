@@ -21,6 +21,8 @@ struct ForumArticle: Codable {
     
     var content: [ArticleContent]
     
+    var forumType: String
+    
 }
 
 struct ArticleContent: Codable {
