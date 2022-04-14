@@ -52,10 +52,10 @@ class PublishArticleContentTableViewCell: UITableViewCell {
         // 取得目前游標的位置
         let selectedRange = contentTextView.selectedRange
         
-        mutableStr.insert(NSAttributedString(string: "\0\n\(imageString)"), at: selectedRange.location)
+        mutableStr.insert(NSAttributedString(string: "\n\0\(imageString)\0\n\n"), at: selectedRange.location)
 
-        // 插入圖片後的下一行
-        mutableStr.insert(NSAttributedString(string: "\0\n"), at: selectedRange.location + 2)
+//        // 插入圖片後的下一行
+//        mutableStr.insert(NSAttributedString(string: "\0\n"), at: selectedRange.location + 2)
 
         let attribute = [ NSAttributedString.Key.font: UIFont(name: "Arial", size: 18.0)! ]
 

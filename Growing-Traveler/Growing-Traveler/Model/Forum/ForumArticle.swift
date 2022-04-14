@@ -10,12 +10,14 @@ import Foundation
 struct ForumArticle: Codable {
     
     var id: String
-    
+
     var userID: String
-    
+
     var createTime: TimeInterval
-    
+
     var title: String
+    
+    var category: CategoryItem
     
     var content: [ArticleContent]
     
@@ -23,9 +25,11 @@ struct ForumArticle: Codable {
 
 struct ArticleContent: Codable {
     
-    var text: [String]?
+    var orderID: Int
     
-    var image: String?
+    var contentType: String
+    
+    var contentText: String
     
 }
 

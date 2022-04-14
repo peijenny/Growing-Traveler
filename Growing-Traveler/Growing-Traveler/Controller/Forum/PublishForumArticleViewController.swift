@@ -45,7 +45,13 @@ class PublishForumArticleViewController: UIViewController {
         
     }
     
-    var textArray: [String] = []
+    var forumArticle: ForumArticle?
+    
+    var contentArray: [String] = []
+    
+    var checkArticleFullIn = false
+    
+    var forumArticleManager = ForumArticleManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +65,58 @@ class PublishForumArticleViewController: UIViewController {
             UINib(nibName: String(describing: PublishArticleContentTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: PublishArticleContentTableViewCell.self)
         )
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(submitButton)
+        )
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
 
+    }
+    
+    @objc func submitButton(sender: UIButton) {
+        
+        checkArticleFullIn = true
+        
+        publishArticleTableView.reloadData()
+        
+    }
+    
+    func handleArticleContentData() {
+        
+        var articleContents: [ArticleContent] = []
+        
+        var articleType = String()
+
+        for index in 0..<contentArray.count {
+            
+            if contentArray[index].range(of: "https://") != nil {
+                
+                articleType = "image"
+                
+            } else {
+                
+                articleType = "string"
+                
+            }
+            
+            articleContents.append(ArticleContent(
+                orderID: index,
+                contentType: articleType,
+                contentText: contentArray[index]
+                ))
+            
+            forumArticle?.content = articleContents
+            
+        }
+        
+        guard let forumArticle = forumArticle else { return }
+
+        forumArticleManager.addData(forumArticle: forumArticle)
+        
+        navigationController?.popViewController(animated: true)
     }
 
 }
@@ -92,6 +149,31 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
             
             cell.categoryTextField.text = selectCategoryItem?.title
             
+            if checkArticleFullIn {
+                
+                if cell.checkInput() {
+                    
+                    guard let inputTitle = cell.titleTextField.text else { return cell }
+                    
+                    guard let selectCategoryItem = selectCategoryItem else { return cell }
+                    
+                    forumArticle = ForumArticle(
+                        id: forumArticleManager.database.document().documentID,
+                        userID: userID,
+                        createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
+                        title: inputTitle,
+                        category: selectCategoryItem,
+                        content: [ArticleContent]()
+                    )
+                    
+                    handleArticleContentData()
+                    
+                }
+
+                checkArticleFullIn = false
+                
+            }
+            
             return cell
             
         } else {
@@ -109,9 +191,17 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
             
             cell.insertPictureToTextView(imageString: imageString)
             
-            // 儲存 TextView 內容的字串
-            textArray = cell.contentTextView.attributedText.string.split(separator: "\0").map({ String($0) })
-            
+            if contentArray == [] {
+                
+                contentArray.append(cell.contentTextView.text)
+                
+            } else if contentArray != [] && !checkArticleFullIn {
+                
+                contentArray = cell.contentTextView
+                    .attributedText.string.split(separator: "\0").map({ String($0) })
+                
+            }
+
             return cell
             
         }
@@ -157,7 +247,7 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
 //        image = info[.originalImage] as? UIImage
-        
+//
 //        if let image = info[.originalImage] as? UIImage {
 //
 //            uploadImage(uiImage: image)

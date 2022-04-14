@@ -28,4 +28,27 @@ class PublishArticleTypeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func checkInput() -> Bool {
+        
+        if categoryTextField.text == "" {
+
+            print(InputError.studyGoalTitleEmpty.title)
+            
+            return false
+
+        } else if categoryTextField.text == "" {
+
+            print(InputError.categoryEmpty.title)
+            
+            return false
+            
+        } else {
+            
+            print("Save!")
+            
+            return true
+        }
+        
+    }
+    
 }
