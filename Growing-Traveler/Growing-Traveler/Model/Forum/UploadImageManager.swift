@@ -10,7 +10,7 @@ import Alamofire
 
 class UploadImageManager {
     
-    let headers: HTTPHeaders = ["Authorization": "Client-ID \(clientID)"]
+    let headers: HTTPHeaders = ["Authorization": "Client-ID \(imgurClientID)"]
     
     let apiURL: String = "https://api.imgur.com/3/image"
     

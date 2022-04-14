@@ -10,7 +10,7 @@ import Foundation
 
 // 存放金鑰的檔案
 
-let clientID = "fbe53d91453b687"
+let imgurClientID = "fbe53d91453b687"
 
 let userID = "TESTUSERID"
 
