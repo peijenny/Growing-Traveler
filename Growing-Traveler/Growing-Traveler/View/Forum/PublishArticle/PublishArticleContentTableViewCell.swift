@@ -24,9 +24,9 @@ class PublishArticleContentTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func insertPictureToTextView(imageString: String) {
+    func insertPictureToTextView(imageLink: String) {
 
-        guard let imageURL = URL(string: imageString) else { return }
+        guard let imageURL = URL(string: imageLink) else { return }
         
         let data = try? Data(contentsOf: imageURL)
         
@@ -52,7 +52,7 @@ class PublishArticleContentTableViewCell: UITableViewCell {
         // 取得目前游標的位置
         let selectedRange = contentTextView.selectedRange
         
-        mutableStr.insert(NSAttributedString(string: "\n\0\(imageString)\0\n\n"), at: selectedRange.location)
+        mutableStr.insert(NSAttributedString(string: "\n\0\(imageLink)\0\n\n"), at: selectedRange.location)
 
 //        // 插入圖片後的下一行
 //        mutableStr.insert(NSAttributedString(string: "\0\n"), at: selectedRange.location + 2)
@@ -71,7 +71,7 @@ class PublishArticleContentTableViewCell: UITableViewCell {
             
             if contentTextView.text != "" {
                 
-                contentArray.append(contentTextView.text)
+                contentArray = [contentTextView.text]
                 
             } else {
                 
