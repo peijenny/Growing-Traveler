@@ -28,4 +28,24 @@ class ArticleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func checkImage(forumArticle: ForumArticle) {
+        
+        let test = forumArticle.content.filter({ $0.contentType == "image" })
+        
+        if test.count > 0 {
+            
+            mainImageView.loadImage(test[0].contentText)
+            
+            mainImageView.isHidden = false
+            
+        } else {
+            
+            mainImageView.backgroundColor = UIColor.clear
+            
+            mainImageView.isHidden = true
+            
+        }
+        
+    }
+    
 }

@@ -7,6 +7,30 @@
 
 import UIKit
 
+enum ForumType {
+    
+    case essay
+    
+    case question
+    
+    case chat
+    
+    var title: String {
+        
+        switch self {
+            
+        case .essay: return "發文"
+            
+        case .question: return "問題"
+            
+        case .chat: return "閒聊"
+            
+        }
+        
+    }
+    
+}
+
 class FormViewController: UIViewController {
 
     @IBOutlet weak var addArticleButton: UIButton!
@@ -34,6 +58,12 @@ class FormViewController: UIViewController {
         }
         
     }
+    
+    var forumType: [String] = [
+        ForumType.essay.title,
+        ForumType.question.title,
+        ForumType.chat.title
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,13 +131,15 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 1
+        return forumType.count
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return forumArticles.count 
+        let articles = forumArticles.filter({ $0.forumType == forumType[section] })
+        
+        return articles.count
         
     }
     
@@ -120,31 +152,27 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = cell as? ArticleTableViewCell else { return cell }
         
-        cell.titleLabel.text = forumArticles[indexPath.row].title
+        let articles = forumArticles.filter({ $0.forumType == forumType[indexPath.section] })
         
-        cell.categoryLabel.text = forumArticles[indexPath.row].category.title
-        
+        cell.titleLabel.text = articles[indexPath.row].title
+
+        cell.categoryLabel.text = articles[indexPath.row].category.title
+
         cell.userIDLabel.text = userID
-        
-        for index in 0..<forumArticles[indexPath.row].content.count {
-            
-            if forumArticles[indexPath.row].content[index].contentType == "image" {
-                
-                guard let imageURL = URL(string: forumArticles[indexPath.row].content[index].contentText) else {
-                    
-                    print("圖片連結錯誤！")
-                    
-                    return cell
-                }
-                
-                cell.mainImageView.load(url: imageURL)
-                
-                return cell
-            }
-            
-        }
+
+        cell.mainImageView.image = nil
+
+        cell.checkImage(forumArticle: articles[indexPath.row])
         
         return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        tableView.backgroundColor = UIColor.lightGray
+        
+        return forumType[section]
         
     }
     
