@@ -35,10 +35,10 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GmG-5H-94K">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GmG-5H-94K">
                         <rect key="frame" x="16" y="16" width="382" height="150"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="l3p-q3-1tb"/>
+                            <constraint firstAttribute="height" constant="150" id="l3p-q3-1tb"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="teh-Uh-rYo">

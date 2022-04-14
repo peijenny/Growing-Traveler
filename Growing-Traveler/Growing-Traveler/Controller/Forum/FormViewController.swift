@@ -107,7 +107,7 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        return forumArticles.count 
         
     }
     
@@ -119,6 +119,30 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
         )
         
         guard let cell = cell as? ArticleTableViewCell else { return cell }
+        
+        cell.titleLabel.text = forumArticles[indexPath.row].title
+        
+        cell.categoryLabel.text = forumArticles[indexPath.row].category.title
+        
+        cell.userIDLabel.text = userID
+        
+        for index in 0..<forumArticles[indexPath.row].content.count {
+            
+            if forumArticles[indexPath.row].content[index].contentType == "image" {
+                
+                guard let imageURL = URL(string: forumArticles[indexPath.row].content[index].contentText) else {
+                    
+                    print("圖片連結錯誤！")
+                    
+                    return cell
+                }
+                
+                cell.mainImageView.load(url: imageURL)
+                
+                return cell
+            }
+            
+        }
         
         return cell
         

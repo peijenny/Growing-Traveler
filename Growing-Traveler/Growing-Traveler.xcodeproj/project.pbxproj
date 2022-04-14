@@ -42,6 +42,7 @@
 		28BB6EFF2807C86C002B0458 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EFD2807C86C002B0458 /* ArticleTableViewCell.swift */; };
 		28BB6F002807C86C002B0458 /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EFE2807C86C002B0458 /* ArticleTableViewCell.xib */; };
 		28BB6F022807CABE002B0458 /* KeyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F012807CABE002B0458 /* KeyToken.swift */; };
+		28BB6F042807EC75002B0458 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F032807EC75002B0458 /* UIImageView+Extension.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -91,6 +92,7 @@
 		28BB6EFD2807C86C002B0458 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
 		28BB6EFE2807C86C002B0458 /* ArticleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleTableViewCell.xib; sourceTree = "<group>"; };
 		28BB6F012807CABE002B0458 /* KeyToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyToken.swift; sourceTree = "<group>"; };
+		28BB6F032807EC75002B0458 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */,
+				28BB6F032807EC75002B0458 /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
+				28BB6F042807EC75002B0458 /* UIImageView+Extension.swift in Sources */,
 				28754ACA2803079A0079F430 /* StudyItemTableViewCell.swift in Sources */,
 				288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */,
 				28754AC7280305370079F430 /* StudyGoal.swift in Sources */,
