@@ -50,6 +50,8 @@ class PublishForumArticleViewController: BaseViewController {
     
     var inputTitle: String?
     
+    var forumType: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -113,13 +115,16 @@ class PublishForumArticleViewController: BaseViewController {
             
             guard let selectCategoryItem = selectCategoryItem else { return }
             
+            guard let forumType = forumType else { return }
+            
             let forumArticle = ForumArticle(
                 id: forumArticleManager.database.document().documentID,
                 userID: userID,
                 createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
                 title: inputTitle,
                 category: selectCategoryItem,
-                content: articleContents
+                content: articleContents,
+                forumType: forumType
             )
 
             forumArticleManager.addData(forumArticle: forumArticle)
@@ -167,6 +172,10 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
                 if cell.checkInput() {
                     
                     inputTitle = cell.titleTextField.text
+                    
+                    forumType = cell.typeSegmentedControl.titleForSegment(
+                        at: cell.typeSegmentedControl.selectedSegmentIndex
+                    )
                     
                 }
 
