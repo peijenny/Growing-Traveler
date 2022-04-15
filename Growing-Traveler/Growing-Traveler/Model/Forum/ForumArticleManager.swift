@@ -85,9 +85,9 @@ class ForumArticleManager {
     }
     
     // 取得 屬於論壇的所有文章 至 ArticleViewController
-    func fetchData(completion: @escaping (Result<[ForumArticle]>) -> Void) {
+    func fetchData(forumType: String, completion: @escaping (Result<[ForumArticle]>) -> Void) {
         
-        database.order(by: "createTime", descending: true)
+        database.whereField("forumType", isEqualTo: forumType)
             .getDocuments { snapshot, error in
                 
                 var forumArticles: [ForumArticle] = []
@@ -122,7 +122,13 @@ class ForumArticleManager {
                     
                 }
                 
-                completion(Result.success(forumArticles))
+                let sortForumArticles = forumArticles.sorted { (lhs, rhs) in
+                    
+                    return lhs.createTime < rhs.createTime
+                    
+                }
+                
+                completion(Result.success(sortForumArticles))
                 
             }
         
