@@ -38,7 +38,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GmG-5H-94K">
                         <rect key="frame" x="16" y="16" width="382" height="154"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="154" id="EgV-ji-Qkk"/>
+                            <constraint firstAttribute="height" constant="154" id="EgV-ji-Qkk"/>
                             <constraint firstAttribute="width" constant="382" id="H7s-gM-wN1"/>
                         </constraints>
                     </imageView>
@@ -95,6 +95,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="categoryLabel" destination="Kcn-QG-A3y" id="JSw-Pm-b22"/>
+                <outlet property="imageViewHeightConstraint" destination="EgV-ji-Qkk" id="ZM7-QF-d32"/>
                 <outlet property="mainImageView" destination="GmG-5H-94K" id="PN1-XX-Ez1"/>
                 <outlet property="titleLabel" destination="gfM-is-cXg" id="e5X-ZX-1RR"/>
                 <outlet property="userIDLabel" destination="ZJl-cN-RiK" id="2sI-vi-Iqc"/>

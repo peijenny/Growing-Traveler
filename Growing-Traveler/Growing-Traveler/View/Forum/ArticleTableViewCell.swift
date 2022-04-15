@@ -17,6 +17,8 @@ class ArticleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userIDLabel: UILabel!
     
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -40,10 +42,7 @@ class ArticleTableViewCell: UITableViewCell {
             
         } else {
             
-            mainImageView.backgroundColor = UIColor.clear
-            
-            mainImageView.isHidden = true
-            
+            imageViewHeightConstraint.constant = 0.0
         }
         
     }

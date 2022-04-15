@@ -154,15 +154,13 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
         
         let articles = forumArticles.filter({ $0.forumType == forumType[indexPath.section] })
         
+        cell.checkImage(forumArticle: articles[indexPath.row])
+        
         cell.titleLabel.text = articles[indexPath.row].title
 
         cell.categoryLabel.text = articles[indexPath.row].category.title
 
         cell.userIDLabel.text = userID
-
-        cell.mainImageView.image = nil
-
-        cell.checkImage(forumArticle: articles[indexPath.row])
         
         return cell
         
