@@ -110,7 +110,14 @@ class PlanStudyGoalViewController: BaseViewController {
     
     var checkStudyGoalFillIn = false
     
-    var studyGoal: StudyGoal?
+    var studyGoal: StudyGoal? {
+        
+        didSet {
+            
+            planStudyGoalTableView.reloadData()
+            
+        }
+    }
     
     let studyGoalManager = StudyGoalManager()
     
