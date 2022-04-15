@@ -73,11 +73,6 @@ class FormViewController: UIViewController {
             forCellReuseIdentifier: String(describing: ArticleTableViewCell.self)
         )
         
-        articleTableView.register(
-            UINib(nibName: String(describing: ReloadArticleTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: ReloadArticleTableViewCell.self)
-        )
-        
         fetchData()
 
     }
@@ -144,11 +139,13 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
         
         let articles = forumArticles.filter({ $0.forumType == forumType[section] })
         
-        return articles.count + 1
+        return articles.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let articles = forumArticles.filter({ $0.forumType == forumType[indexPath.section] })
         
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: ArticleTableViewCell.self),
@@ -157,17 +154,27 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = cell as? ArticleTableViewCell else { return cell }
         
-        let articles = forumArticles.filter({ $0.forumType == forumType[indexPath.section] })
-        
         cell.checkImage(forumArticle: articles[indexPath.row])
-        
+
         cell.titleLabel.text = articles[indexPath.row].title
+        
+        cell.forumTypeLabel.text = articles[indexPath.row].forumType
 
         cell.categoryLabel.text = articles[indexPath.row].category.title
 
         cell.userIDLabel.text = userID
         
+        cell.showLoadMoreButton(indexPathCount: indexPath.count - 1, indexPathRow: indexPath.row)
+        
+        cell.loadMoreButton.addTarget(self, action: #selector(loadMoreButton), for: .touchUpInside)
+        
         return cell
+        
+    }
+    
+    @objc func loadMoreButton(sender: UIButton) {
+        
+        print("TEST")
         
     }
     

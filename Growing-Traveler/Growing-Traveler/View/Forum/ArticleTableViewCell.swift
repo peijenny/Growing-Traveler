@@ -11,6 +11,8 @@ class ArticleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var mainImageView: UIImageView!
     
+    @IBOutlet weak var forumTypeLabel: UILabel!
+    
     @IBOutlet weak var categoryLabel: UILabel!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -18,6 +20,10 @@ class ArticleTableViewCell: UITableViewCell {
     @IBOutlet weak var userIDLabel: UILabel!
     
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var loadMoreButton: UIButton!
+    
+    @IBOutlet weak var buttonHeightConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +49,20 @@ class ArticleTableViewCell: UITableViewCell {
         } else {
             
             imageViewHeightConstraint.constant = 0.0
+        }
+        
+    }
+    
+    func showLoadMoreButton(indexPathCount: Int, indexPathRow: Int) {
+        
+        if indexPathRow == indexPathCount {
+            
+            buttonHeightConstraint.constant = 40.0
+            
+        } else {
+            
+            buttonHeightConstraint.constant = 0.0
+            
         }
         
     }

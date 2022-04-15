@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class ForumArticleManager {
@@ -27,7 +28,7 @@ class ForumArticleManager {
         for index in 0..<forumTypes.count {
             
             database
-                .whereField("forumType", isEqualTo: forumTypes[index]).limit(to: 3)
+                .whereField("forumType", isEqualTo: forumTypes[index]).limit(to: 2)
                 .addSnapshotListener { snapshot, error in
                 
                 guard let snapshot = snapshot else {
