@@ -245,6 +245,25 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let articles = forumArticles.filter({ $0.forumType == forumType[indexPath.section] })
+        
+        let viewController = UIStoryboard(
+            name: "Forum",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: String(describing: ArticleDetailViewController.self)
+        )
+        
+        guard let viewController = viewController as? ArticleDetailViewController else { return }
+        
+        viewController.forumArticle = articles[indexPath.row]
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         tableView.backgroundColor = UIColor.lightGray
