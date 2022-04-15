@@ -33,6 +33,10 @@ enum ForumType {
 
 class FormViewController: UIViewController {
 
+    @IBOutlet weak var searchTextField: UITextField!
+    
+    @IBOutlet weak var searchButton: UIButton!
+    
     @IBOutlet weak var addArticleButton: UIButton!
     
     @IBOutlet weak var articleTableView: UITableView! {
@@ -59,6 +63,16 @@ class FormViewController: UIViewController {
         
     }
     
+    var searchForumArticles: [ForumArticle] = [] {
+        
+        didSet {
+            
+            articleTableView.reloadData()
+            
+        }
+        
+    }
+    
     var forumType: [String] = [
         ForumType.essay.title,
         ForumType.question.title,
@@ -74,6 +88,8 @@ class FormViewController: UIViewController {
         )
         
         fetchData()
+        
+        fetchSearchData()
 
     }
     
@@ -122,6 +138,40 @@ class FormViewController: UIViewController {
             }
             
         })
+        
+    }
+    
+    func fetchSearchData() {
+        
+        forumArticleManager.fetchSearchData(completion: { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let data):
+                
+                strongSelf.searchForumArticles = data
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        })
+        
+    }
+    
+    @IBAction func searchArticleButton(_ sender: UIButton) {
+        
+        guard let inputText = searchTextField.text else { return }
+        
+        print("TEST \(inputText)")
+        
+        forumArticles = searchForumArticles.filter({ $0.title.range(of: inputText) != nil })
+        
+        print("TEST22 \(forumArticles)")
         
     }
     

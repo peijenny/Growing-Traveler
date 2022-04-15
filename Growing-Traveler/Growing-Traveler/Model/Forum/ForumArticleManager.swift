@@ -134,6 +134,50 @@ class ForumArticleManager {
         
     }
     
+    // 取得 屬於論壇的所有文章 至 ArticleViewController
+    func fetchSearchData(completion: @escaping (Result<[ForumArticle]>) -> Void) {
+        
+        database.order(by: "createTime", descending: true)
+            .getDocuments { snapshot, error in
+                
+                var forumArticles: [ForumArticle] = []
+                
+                guard let snapshot = snapshot else {
+                    
+                    print("Error fetching document: \(error!)")
+                    
+                    completion(Result.failure(error!))
+                    
+                    return
+                    
+                }
+                
+                for document in snapshot.documents {
+                    
+                    do {
+                        
+                        if let forumArticle = try document.data(as: ForumArticle.self, decoder: Firestore.Decoder()) {
+                            
+                            forumArticles.append(forumArticle)
+                            
+                        }
+                        
+                    } catch {
+                        
+                        print(error)
+                        
+                        completion(Result.failure(error))
+                        
+                    }
+                    
+                }
+                
+                completion(Result.success(forumArticles))
+                
+            }
+        
+    }
+    
     // 修改 論壇區的文章 至 Firebase Firestore
     func updateData(forumArticle: ForumArticle) {
         
