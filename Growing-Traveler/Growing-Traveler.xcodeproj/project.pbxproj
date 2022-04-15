@@ -47,6 +47,8 @@
 		28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F2D28096C40002B0458 /* MoreArticlesTableViewCell.swift */; };
 		28BB6F3028096C40002B0458 /* MoreArticlesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6F2E28096C40002B0458 /* MoreArticlesTableViewCell.xib */; };
 		28BB6F3228098BC6002B0458 /* ArticleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F3128098BC6002B0458 /* ArticleDetailViewController.swift */; };
+		28BB6F3828098CC1002B0458 /* ArticleDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F3728098CC1002B0458 /* ArticleDetailHeaderView.swift */; };
+		28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6F3928098CCD002B0458 /* ArticleDetailHeaderView.xib */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -101,6 +103,8 @@
 		28BB6F2D28096C40002B0458 /* MoreArticlesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreArticlesTableViewCell.swift; sourceTree = "<group>"; };
 		28BB6F2E28096C40002B0458 /* MoreArticlesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreArticlesTableViewCell.xib; sourceTree = "<group>"; };
 		28BB6F3128098BC6002B0458 /* ArticleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewController.swift; sourceTree = "<group>"; };
+		28BB6F3728098CC1002B0458 /* ArticleDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailHeaderView.swift; sourceTree = "<group>"; };
+		28BB6F3928098CCD002B0458 /* ArticleDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleDetailHeaderView.xib; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 				28BB6EFE2807C86C002B0458 /* ArticleTableViewCell.xib */,
 				28BB6F2D28096C40002B0458 /* MoreArticlesTableViewCell.swift */,
 				28BB6F2E28096C40002B0458 /* MoreArticlesTableViewCell.xib */,
+				28BB6F3728098CC1002B0458 /* ArticleDetailHeaderView.swift */,
+				28BB6F3928098CCD002B0458 /* ArticleDetailHeaderView.xib */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -403,6 +409,7 @@
 				285F3F4D2801948600E84CF2 /* GoogleService-Info.plist in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
 				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
+				28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */,
 				288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,6 +506,7 @@
 				28BB6EFC2807C25C002B0458 /* UploadImageManager.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
+				28BB6F3828098CC1002B0458 /* ArticleDetailHeaderView.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
 				28BB6F042807EC75002B0458 /* UIImageView+Extension.swift in Sources */,
 				28754ACA2803079A0079F430 /* StudyItemTableViewCell.swift in Sources */,
