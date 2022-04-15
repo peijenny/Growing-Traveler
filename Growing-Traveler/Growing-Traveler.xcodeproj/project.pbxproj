@@ -46,6 +46,7 @@
 		28BB6F2C28096AAA002B0458 /* MoreArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F2B28096AAA002B0458 /* MoreArticlesViewController.swift */; };
 		28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F2D28096C40002B0458 /* MoreArticlesTableViewCell.swift */; };
 		28BB6F3028096C40002B0458 /* MoreArticlesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6F2E28096C40002B0458 /* MoreArticlesTableViewCell.xib */; };
+		28BB6F3228098BC6002B0458 /* ArticleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F3128098BC6002B0458 /* ArticleDetailViewController.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -99,6 +100,7 @@
 		28BB6F2B28096AAA002B0458 /* MoreArticlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreArticlesViewController.swift; sourceTree = "<group>"; };
 		28BB6F2D28096C40002B0458 /* MoreArticlesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreArticlesTableViewCell.swift; sourceTree = "<group>"; };
 		28BB6F2E28096C40002B0458 /* MoreArticlesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreArticlesTableViewCell.xib; sourceTree = "<group>"; };
+		28BB6F3128098BC6002B0458 /* ArticleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewController.swift; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				28BB6EE828066639002B0458 /* FormViewController.swift */,
 				28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */,
 				28BB6F2B28096AAA002B0458 /* MoreArticlesViewController.swift */,
+				28BB6F3128098BC6002B0458 /* ArticleDetailViewController.swift */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */,
 				28BB6EEE28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift in Sources */,
 				28BB6EF228067007002B0458 /* PublishArticleContentTableViewCell.swift in Sources */,
+				28BB6F3228098BC6002B0458 /* ArticleDetailViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
