@@ -13,6 +13,8 @@ class MoreArticlesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var imageViewLeadingConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var forumTypeLabel: UILabel!
     
     @IBOutlet weak var categoryLabel: UILabel!
@@ -32,6 +34,27 @@ class MoreArticlesTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func checkImage(forumArticle: ForumArticle) {
+        
+        let article = forumArticle.content.filter({ $0.contentType == "image" })
+        
+        if article.count > 0 {
+            
+            mainImageView.loadImage(article[0].contentText)
+            
+            imageViewWidthConstraint.constant = 70.0
+            
+            imageViewLeadingConstraint.constant = 16.0
+            
+        } else {
+            
+            imageViewWidthConstraint.constant = 0.0
+            
+            imageViewLeadingConstraint.constant = 6.0
+        }
+        
     }
     
 }

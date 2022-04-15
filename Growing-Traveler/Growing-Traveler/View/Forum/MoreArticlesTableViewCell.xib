@@ -30,9 +30,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TESTNAMEID" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLk-ma-s5o">
-                        <rect key="frame" x="149" y="67.5" width="249" height="22.5"/>
+                        <rect key="frame" x="152" y="67.5" width="246" height="22.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="249" id="gAa-lt-5ch"/>
+                            <constraint firstAttribute="width" constant="246" id="7HC-PM-vP7"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
@@ -83,8 +83,9 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發文者" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENV-Ga-dh5">
-                        <rect key="frame" x="96" y="67.5" width="43" height="22.5"/>
+                        <rect key="frame" x="96" y="67.5" width="46" height="22.5"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="46" id="ugC-jl-Rgq"/>
                             <constraint firstAttribute="height" constant="22.5" id="zvA-3B-s0d"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -121,7 +122,8 @@
                 <outlet property="categoryLabel" destination="eyd-Op-SYy" id="JPe-v5-Dhe"/>
                 <outlet property="createTimeLabel" destination="U7d-p7-w7K" id="J6n-eb-HkW"/>
                 <outlet property="forumTypeLabel" destination="I4A-2f-1hz" id="2k9-tp-X59"/>
-                <outlet property="imageViewWidthConstraint" destination="spm-vV-eiv" id="xZq-cU-Rs0"/>
+                <outlet property="imageViewLeadingConstraint" destination="PzY-cm-Bw6" id="Kwd-kn-3FO"/>
+                <outlet property="imageViewWidthConstraint" destination="spm-vV-eiv" id="J4b-s8-to8"/>
                 <outlet property="mainImageView" destination="wgE-7I-iNs" id="c5I-Uv-24K"/>
                 <outlet property="titleLabel" destination="pyT-a9-80X" id="Yqh-T6-WY9"/>
                 <outlet property="userIDLabel" destination="xLk-ma-s5o" id="a3n-Bn-qAn"/>
