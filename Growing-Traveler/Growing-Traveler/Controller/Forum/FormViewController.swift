@@ -73,6 +73,11 @@ class FormViewController: UIViewController {
             forCellReuseIdentifier: String(describing: ArticleTableViewCell.self)
         )
         
+        articleTableView.register(
+            UINib(nibName: String(describing: ReloadArticleTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: ReloadArticleTableViewCell.self)
+        )
+        
         fetchData()
 
     }
@@ -139,7 +144,7 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
         
         let articles = forumArticles.filter({ $0.forumType == forumType[section] })
         
-        return articles.count
+        return articles.count + 1
         
     }
     
