@@ -38,7 +38,7 @@ class ArticleTableViewCell: UITableViewCell {
             
             mainImageView.loadImage(article[0].contentText)
             
-            mainImageView.isHidden = false
+            imageViewHeightConstraint.constant = 150.0
             
         } else {
             
