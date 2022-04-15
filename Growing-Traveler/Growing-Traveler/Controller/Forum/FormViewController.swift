@@ -174,16 +174,24 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func loadMoreButton(sender: UIButton) {
         
-        let viewController = UIStoryboard(
-            name: "Forum",
-            bundle: nil
-        ).instantiateViewController(
-            withIdentifier: String(describing: MoreArticlesViewController.self)
-        )
-        
-        guard let viewController = viewController as? MoreArticlesViewController else { return }
-        
-        navigationController?.pushViewController(viewController, animated: true)
+        let point = sender.convert(CGPoint.zero, to: articleTableView)
+
+        if let indexPath = articleTableView.indexPathForRow(at: point) {
+
+            let viewController = UIStoryboard(
+                name: "Forum",
+                bundle: nil
+            ).instantiateViewController(
+                withIdentifier: String(describing: MoreArticlesViewController.self)
+            )
+            
+            guard let viewController = viewController as? MoreArticlesViewController else { return }
+            
+            viewController.forumType = forumType[indexPath.section]
+            
+            navigationController?.pushViewController(viewController, animated: true)
+            
+        }
         
     }
     

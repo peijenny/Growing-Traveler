@@ -143,6 +143,9 @@
                             <constraint firstItem="1WD-Tu-1yL" firstAttribute="top" secondItem="pOY-Si-GxI" secondAttribute="top" id="XUF-5e-glE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="moreArticlesTableView" destination="1WD-Tu-1yL" id="Iac-6U-d3m"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QW1-aW-PQB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
