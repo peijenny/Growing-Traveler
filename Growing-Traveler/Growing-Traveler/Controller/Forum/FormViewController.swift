@@ -19,7 +19,7 @@ enum ForumType {
         
         switch self {
             
-        case .essay: return "發文"
+        case .essay: return "文章"
             
         case .question: return "問題"
             

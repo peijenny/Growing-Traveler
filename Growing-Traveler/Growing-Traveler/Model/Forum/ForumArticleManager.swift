@@ -16,44 +16,56 @@ class ForumArticleManager {
     // 監聽 討論區的文章 從 Firebase Firestore
     func listenData(completion: @escaping (Result<[ForumArticle]>) -> Void) {
         
-        database.order(by: "createTime", descending: true)
-            .addSnapshotListener { snapshot, error in
+        var forumArticles: [ForumArticle] = []
+        
+        let forumTypes: [String] = [
+            ForumType.essay.title,
+            ForumType.question.title,
+            ForumType.chat.title
+        ]
+
+        for index in 0..<forumTypes.count {
             
-            var forumArticles: [ForumArticle] = []
-            
-            guard let snapshot = snapshot else {
+            database
+                .whereField("forumType", isEqualTo: forumTypes[index]).limit(to: 3)
+                .addSnapshotListener { snapshot, error in
                 
-                print("Error fetching document: \(error!)")
-                
-                completion(Result.failure(error!))
-                
-                return
-                
-            }
-            
-            for document in snapshot.documents {
-                
-                do {
+                guard let snapshot = snapshot else {
                     
-                    if let forumArticle = try document.data(as: ForumArticle.self, decoder: Firestore.Decoder()) {
-                        
-                        forumArticles.append(forumArticle)
-                        
-                    }
+                    print("Error fetching document: \(error!)")
                     
-                } catch {
+                    completion(Result.failure(error!))
                     
-                    print(error)
-                    
-                    completion(Result.failure(error))
+                    return
                     
                 }
                 
+                for document in snapshot.documents {
+                    
+                    do {
+                        
+                        if let forumArticle = try document.data(as: ForumArticle.self, decoder: Firestore.Decoder()) {
+                            
+                            forumArticles.append(forumArticle)
+                            
+                        }
+                        
+                    } catch {
+                        
+                        print(error)
+                        
+                        completion(Result.failure(error))
+                        
+                    }
+                    
+                }
+                    
+                    completion(Result.success(forumArticles))
+                
             }
             
-            completion(Result.success(forumArticles))
-            
         }
+
     }
     
     // 上傳 新的論壇文章 至 Firebase Firestore
