@@ -174,7 +174,16 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func loadMoreButton(sender: UIButton) {
         
-        print("TEST")
+        let viewController = UIStoryboard(
+            name: "Forum",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: String(describing: MoreArticlesViewController.self)
+        )
+        
+        guard let viewController = viewController as? MoreArticlesViewController else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
     

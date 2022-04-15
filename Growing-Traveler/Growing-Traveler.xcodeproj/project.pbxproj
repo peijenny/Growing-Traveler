@@ -43,6 +43,7 @@
 		28BB6F002807C86C002B0458 /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EFE2807C86C002B0458 /* ArticleTableViewCell.xib */; };
 		28BB6F022807CABE002B0458 /* KeyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F012807CABE002B0458 /* KeyToken.swift */; };
 		28BB6F042807EC75002B0458 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F032807EC75002B0458 /* UIImageView+Extension.swift */; };
+		28BB6F2C28096AAA002B0458 /* MoreArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F2B28096AAA002B0458 /* MoreArticlesViewController.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -93,6 +94,7 @@
 		28BB6EFE2807C86C002B0458 /* ArticleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleTableViewCell.xib; sourceTree = "<group>"; };
 		28BB6F012807CABE002B0458 /* KeyToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyToken.swift; sourceTree = "<group>"; };
 		28BB6F032807EC75002B0458 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		28BB6F2B28096AAA002B0458 /* MoreArticlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreArticlesViewController.swift; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			children = (
 				28BB6EE828066639002B0458 /* FormViewController.swift */,
 				28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */,
+				28BB6F2B28096AAA002B0458 /* MoreArticlesViewController.swift */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				28BB6EF828069112002B0458 /* ForumArticle.swift in Sources */,
 				28BB6EF6280690EB002B0458 /* ForumArticleManager.swift in Sources */,
+				28BB6F2C28096AAA002B0458 /* MoreArticlesViewController.swift in Sources */,
 				28AF15AD2804033B004E97B8 /* StudyGoalTableViewCell.swift in Sources */,
 				28AF15B128040948004E97B8 /* StudyGoalHeaderView.swift in Sources */,
 				288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */,
