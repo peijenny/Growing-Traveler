@@ -8,14 +8,18 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
+            <connections>
+                <outlet property="categoryLabel" destination="L59-rx-B5v" id="NqL-vj-aj2"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ArticleDetailHeaderView" customModule="Growing_Traveler" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yc6-74-Tsx">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="文章標題" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xB-Zl-yCk">
                             <rect key="frame" x="16" y="16" width="382" height="21.5"/>
@@ -56,7 +60,7 @@
                                 <constraint firstAttribute="width" constant="41" id="0YD-76-a20"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBZ-UN-0g3">
@@ -67,7 +71,7 @@
                             </constraints>
                         </view>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Only One" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JQk-ee-D78">
-                            <rect key="frame" x="16" y="181" width="382" height="43"/>
+                            <rect key="frame" x="16" y="181" width="382" height="40"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="bWs-15-5rm"/>
@@ -76,23 +80,33 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7D-c0-gG6">
+                            <rect key="frame" x="16" y="237" width="382" height="2"/>
+                            <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="2" id="n4R-3v-6ck"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="tBZ-UN-0g3" secondAttribute="trailing" constant="16" id="05o-FU-qv1"/>
                         <constraint firstItem="L59-rx-B5v" firstAttribute="leading" secondItem="cXK-m5-6fR" secondAttribute="trailing" constant="10" id="3kg-4P-0Q4"/>
+                        <constraint firstAttribute="trailing" secondItem="w7D-c0-gG6" secondAttribute="trailing" constant="16" id="6CJ-4u-rs5"/>
                         <constraint firstAttribute="trailing" secondItem="Dfj-mo-CqU" secondAttribute="trailing" constant="16" id="6Iv-7T-jsV"/>
                         <constraint firstItem="cXK-m5-6fR" firstAttribute="top" secondItem="Dfj-mo-CqU" secondAttribute="bottom" constant="16" id="C0J-C2-uDQ"/>
                         <constraint firstItem="Dfj-mo-CqU" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="Dii-xO-IwU"/>
+                        <constraint firstAttribute="bottom" secondItem="w7D-c0-gG6" secondAttribute="bottom" constant="11" id="LmX-p7-wEX"/>
                         <constraint firstItem="JQk-ee-D78" firstAttribute="top" secondItem="tBZ-UN-0g3" secondAttribute="bottom" constant="16" id="MVI-oT-mS1"/>
                         <constraint firstAttribute="trailing" secondItem="0xB-Zl-yCk" secondAttribute="trailing" constant="16" id="Qhi-TY-lpS"/>
                         <constraint firstItem="0xB-Zl-yCk" firstAttribute="top" secondItem="Yc6-74-Tsx" secondAttribute="top" constant="16" id="S1V-Nx-JxN"/>
                         <constraint firstItem="bUc-ku-e6R" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="Sdq-wu-TuQ"/>
                         <constraint firstItem="L59-rx-B5v" firstAttribute="top" secondItem="Dfj-mo-CqU" secondAttribute="bottom" constant="16" id="UbU-AH-9qR"/>
-                        <constraint firstAttribute="bottom" secondItem="JQk-ee-D78" secondAttribute="bottom" constant="16" id="Unm-RR-20X"/>
                         <constraint firstItem="tBZ-UN-0g3" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="aIb-Db-Reb"/>
                         <constraint firstItem="cXK-m5-6fR" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="i2p-0c-yTp"/>
+                        <constraint firstItem="w7D-c0-gG6" firstAttribute="top" secondItem="JQk-ee-D78" secondAttribute="bottom" constant="16" id="kAW-fS-gIE"/>
                         <constraint firstItem="JQk-ee-D78" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="kMz-pf-aBg"/>
+                        <constraint firstItem="w7D-c0-gG6" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="kyu-C0-NC8"/>
                         <constraint firstItem="bUc-ku-e6R" firstAttribute="top" secondItem="0xB-Zl-yCk" secondAttribute="bottom" constant="16" id="lFq-0U-KZw"/>
                         <constraint firstItem="Dfj-mo-CqU" firstAttribute="top" secondItem="bUc-ku-e6R" secondAttribute="bottom" constant="16" id="mqZ-mu-YRn"/>
                         <constraint firstItem="tBZ-UN-0g3" firstAttribute="top" secondItem="L59-rx-B5v" secondAttribute="bottom" constant="16" id="oTf-Mb-dMg"/>
@@ -112,6 +126,14 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Yc6-74-Tsx" secondAttribute="bottom" id="zun-Zh-htF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="categoryLabel" destination="L59-rx-B5v" id="gxV-Mh-xO1"/>
+                <outlet property="contentTextView" destination="JQk-ee-D78" id="KOP-0h-Hrg"/>
+                <outlet property="createTimeLabel" destination="Dfj-mo-CqU" id="mQS-bL-X76"/>
+                <outlet property="forumTypeLabel" destination="cXK-m5-6fR" id="Xd1-oc-tm1"/>
+                <outlet property="titleLabel" destination="0xB-Zl-yCk" id="TyV-RZ-gCz"/>
+                <outlet property="userIDLabel" destination="bUc-ku-e6R" id="qgI-cz-V6q"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="103.79464285714285"/>
         </view>
     </objects>

@@ -9,12 +9,16 @@ import UIKit
 
 class ArticleDetailHeaderView: UITableViewHeaderFooterView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var userIDLabel: UILabel!
+    
+    @IBOutlet weak var createTimeLabel: UILabel!
+    
+    @IBOutlet weak var forumTypeLabel: UILabel!
+    
+    @IBOutlet weak var categoryLabel: UILabel!
+    
+    @IBOutlet weak var contentTextView: UITextView!
+    
 }
