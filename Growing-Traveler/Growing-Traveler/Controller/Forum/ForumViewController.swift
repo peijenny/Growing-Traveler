@@ -31,7 +31,7 @@ enum ForumType {
     
 }
 
-class FormViewController: UIViewController {
+class ForumViewController: UIViewController {
 
     @IBOutlet weak var searchTextField: UITextField!
     
@@ -81,16 +81,22 @@ class FormViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         articleTableView.register(
             UINib(nibName: String(describing: ArticleTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: ArticleTableViewCell.self)
         )
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
         fetchData()
         
         fetchSearchData()
-
+        
+        searchTextField.text = nil
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -164,7 +170,7 @@ class FormViewController: UIViewController {
     
 }
 
-extension FormViewController: UITableViewDelegate, UITableViewDataSource {
+extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -239,9 +245,13 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        tableView.backgroundColor = UIColor.lightGray
-        
         return forumType[section]
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 40.0
         
     }
     

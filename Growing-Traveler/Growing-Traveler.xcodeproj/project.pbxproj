@@ -34,7 +34,7 @@
 		28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15B628040A8E004E97B8 /* StudyGoalFooterView.xib */; };
 		28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */; };
 		28BB6EE628066441002B0458 /* Forum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EE528066441002B0458 /* Forum.storyboard */; };
-		28BB6EE928066639002B0458 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EE828066639002B0458 /* FormViewController.swift */; };
+		28BB6EE928066639002B0458 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EE828066639002B0458 /* ForumViewController.swift */; };
 		28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */; };
 		28BB6EEE28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEC28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift */; };
 		28BB6EEF28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EED28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib */; };
@@ -97,7 +97,7 @@
 		28AF15B628040A8E004E97B8 /* StudyGoalFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalFooterView.xib; sourceTree = "<group>"; };
 		28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		28BB6EE528066441002B0458 /* Forum.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Forum.storyboard; sourceTree = "<group>"; };
-		28BB6EE828066639002B0458 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		28BB6EE828066639002B0458 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
 		28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishForumArticleViewController.swift; sourceTree = "<group>"; };
 		28BB6EEC28066FC1002B0458 /* PublishArticleTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishArticleTypeTableViewCell.swift; sourceTree = "<group>"; };
 		28BB6EED28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishArticleTypeTableViewCell.xib; sourceTree = "<group>"; };
@@ -264,7 +264,7 @@
 		28BB6EE72806661F002B0458 /* Forum */ = {
 			isa = PBXGroup;
 			children = (
-				28BB6EE828066639002B0458 /* FormViewController.swift */,
+				28BB6EE828066639002B0458 /* ForumViewController.swift */,
 				28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */,
 				28BB6F2B28096AAA002B0458 /* MoreArticlesViewController.swift */,
 				28BB6F3128098BC6002B0458 /* ArticleDetailViewController.swift */,
@@ -537,7 +537,7 @@
 				28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */,
 				28BB6EFF2807C86C002B0458 /* ArticleTableViewCell.swift in Sources */,
 				28A6F45B280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift in Sources */,
-				28BB6EE928066639002B0458 /* FormViewController.swift in Sources */,
+				28BB6EE928066639002B0458 /* ForumViewController.swift in Sources */,
 				28BB6EFC2807C25C002B0458 /* UploadImageManager.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
