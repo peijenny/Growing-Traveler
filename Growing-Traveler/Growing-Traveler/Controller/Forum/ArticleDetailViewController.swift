@@ -49,6 +49,8 @@ class ArticleDetailViewController: UIViewController {
                     return
 
                 }
+        
+        selectStudyItemViewController.articleID = forumArticle?.id ?? ""
 
         self.view.addSubview(selectStudyItemViewController.view)
 

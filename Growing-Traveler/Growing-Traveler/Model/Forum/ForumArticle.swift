@@ -39,10 +39,12 @@ struct ArticleMessage: Codable {
     
     var userID: String
     
+    var articleID: String
+    
     var createTime: TimeInterval
     
-    var message: [ArticleContent]
-    
+    var message: ArticleContent
+
 }
 
 struct UploadImageResult: Decodable {

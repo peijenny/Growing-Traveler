@@ -278,6 +278,9 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="photo" catalog="system"/>
+                                        <connections>
+                                            <action selector="selectImageButton:" destination="rxg-J9-1qK" eventType="touchUpInside" id="ivT-uN-oI4"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -314,7 +317,6 @@
                     </view>
                     <connections>
                         <outlet property="messageTextField" destination="a7G-Ff-4w4" id="TCX-eI-jjV"/>
-                        <outlet property="sendImageView" destination="dVd-rc-8us" id="zaZ-ih-d6h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ak5-G3-8aa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

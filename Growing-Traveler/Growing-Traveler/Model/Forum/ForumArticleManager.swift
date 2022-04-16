@@ -213,3 +213,25 @@ class ForumArticleManager {
     }
     
 }
+
+extension ForumArticleManager {
+    
+    func addMessageData(articleMessage: ArticleMessage) {
+        
+        do {
+            
+            try database
+                .document(articleMessage.articleID)
+                .collection("message")
+                .document("\(articleMessage.createTime)")
+                .setData(from: articleMessage)
+            
+        } catch {
+            
+            print(error)
+            
+        }
+        
+    }
+    
+}
