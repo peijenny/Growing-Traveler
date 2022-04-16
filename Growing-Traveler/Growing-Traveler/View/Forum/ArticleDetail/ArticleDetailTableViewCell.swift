@@ -44,6 +44,8 @@ class ArticleDetailTableViewCell: UITableViewCell {
             
             contentImageView.loadImage(content.contentText)
             
+            imageViewHeightConstraint.constant = 223.0
+            
             labelHeightConstraint.constant = 0.0
             
         } 

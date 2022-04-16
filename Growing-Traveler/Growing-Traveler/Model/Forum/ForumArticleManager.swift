@@ -216,6 +216,49 @@ class ForumArticleManager {
 
 extension ForumArticleManager {
     
+    //  監聽 論壇區的文章留言 從 Firebase Firestore
+    func listenMessageData(articleID: String, completion: @escaping (Result<[ArticleMessage]>) -> Void) {
+        
+        var articleMessages: [ArticleMessage] = []
+        
+        database.document(articleID).collection("message").addSnapshotListener{ snapshot, error in
+            
+            guard let snapshot = snapshot else {
+                
+                print("Error fetching document: \(error!)")
+                
+                completion(Result.failure(error!))
+                
+                return
+                
+            }
+            
+            for document in snapshot.documents {
+                
+                do {
+                    
+                    if let articleMessage = try document.data(as: ArticleMessage.self, decoder: Firestore.Decoder()) {
+                        
+                        articleMessages.append(articleMessage)
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
+                
+            }
+                
+                completion(Result.success(articleMessages))
+            
+        }
+    }
+    
+    //  新增 論壇區的文章留言 到 Firebase Firestore
     func addMessageData(articleMessage: ArticleMessage) {
         
         do {

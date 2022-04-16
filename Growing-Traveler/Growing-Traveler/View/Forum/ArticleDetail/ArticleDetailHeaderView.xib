@@ -60,10 +60,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBZ-UN-0g3">
-                            <rect key="frame" x="16" y="163" width="382" height="2"/>
+                            <rect key="frame" x="16" y="163" width="382" height="1"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="2" id="DIp-fa-DSi"/>
+                                <constraint firstAttribute="height" constant="1" id="DIp-fa-DSi"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -78,7 +78,7 @@
                         <constraint firstItem="0xB-Zl-yCk" firstAttribute="top" secondItem="Yc6-74-Tsx" secondAttribute="top" constant="16" id="S1V-Nx-JxN"/>
                         <constraint firstItem="bUc-ku-e6R" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="Sdq-wu-TuQ"/>
                         <constraint firstItem="L59-rx-B5v" firstAttribute="top" secondItem="Dfj-mo-CqU" secondAttribute="bottom" constant="16" id="UbU-AH-9qR"/>
-                        <constraint firstAttribute="bottom" secondItem="tBZ-UN-0g3" secondAttribute="bottom" constant="15" id="Zch-8A-N1j"/>
+                        <constraint firstAttribute="bottom" secondItem="tBZ-UN-0g3" secondAttribute="bottom" constant="16" id="Zch-8A-N1j"/>
                         <constraint firstItem="tBZ-UN-0g3" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="aIb-Db-Reb"/>
                         <constraint firstItem="cXK-m5-6fR" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="i2p-0c-yTp"/>
                         <constraint firstItem="bUc-ku-e6R" firstAttribute="top" secondItem="0xB-Zl-yCk" secondAttribute="bottom" constant="16" id="lFq-0U-KZw"/>

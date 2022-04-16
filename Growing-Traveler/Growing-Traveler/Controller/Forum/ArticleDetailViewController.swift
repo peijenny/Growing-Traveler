@@ -10,7 +10,7 @@ import JXPhotoBrowser
 
 class ArticleDetailViewController: UIViewController {
     
-    var articleDetailTableView = UITableView()
+    var articleDetailTableView = UITableView(frame: .zero, style: .grouped)
     
     var forumArticle: ForumArticle? {
         
@@ -23,10 +23,23 @@ class ArticleDetailViewController: UIViewController {
     
     var formatter = DateFormatter()
     
+    var forumArticleManager = ForumArticleManager()
+    
+    var articleMessages: [ArticleMessage] = [] {
+        
+        didSet {
+            
+          articleDetailTableView.reloadData()
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTableView()
+        
+        listenMessageData()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .compose,
@@ -36,6 +49,31 @@ class ArticleDetailViewController: UIViewController {
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
 
+    }
+    
+    func listenMessageData() {
+        
+        guard let articleID = forumArticle?.id else { return }
+        
+        forumArticleManager.listenMessageData(
+            articleID: articleID,
+            completion: { [weak self] result in
+                
+                guard let strongSelf = self else { return }
+            
+                switch result {
+                    
+                case .success(let data):
+                    
+                    strongSelf.articleMessages = data
+                    
+                case .failure(let error):
+                    
+                    print(error)
+                    
+                }
+            
+        })
     }
     
     @objc func sendMessageButton(sender: UIButton) {
@@ -82,7 +120,7 @@ class ArticleDetailViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             articleDetailTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80.0),
-            articleDetailTableView.bottomAnchor.constraint(equalTo: view.centerYAnchor),
+            articleDetailTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 80.0),
             articleDetailTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
             articleDetailTableView.heightAnchor.constraint(equalTo: view.heightAnchor)
         ])
@@ -95,6 +133,11 @@ class ArticleDetailViewController: UIViewController {
         articleDetailTableView.register(
             UINib(nibName: String(describing: ArticleDetailTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self)
+        )
+        
+        articleDetailTableView.register(
+            UINib(nibName: String(describing: ArticleMessageHeaderView.self), bundle: nil),
+            forHeaderFooterViewReuseIdentifier: String(describing: ArticleMessageHeaderView.self)
         )
 
         articleDetailTableView.delegate = self
@@ -109,13 +152,21 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 1
+        return 2
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return forumArticle?.content.count ?? 0
+        if section == 0 {
+            
+            return forumArticle?.content.count ?? 0
+            
+        } else {
+            
+            return articleMessages.count
+            
+        }
         
     }
     
@@ -128,9 +179,17 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         
         guard let cell = cell as? ArticleDetailTableViewCell else { return cell }
         
-        guard let forumArticle = forumArticle else { return cell }
-        
-        cell.setArticleContent(content: forumArticle.content[indexPath.row])
+        if indexPath.section == 0 {
+            
+            guard let forumArticle = forumArticle else { return cell }
+            
+            cell.setArticleContent(content: forumArticle.content[indexPath.row])
+            
+        } else {
+            
+            cell.setArticleContent(content: articleMessages[indexPath.row].message)
+            
+        }
         
         return cell
     }
@@ -139,7 +198,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         
         guard let forumArticle = forumArticle else { return }
         
-        if forumArticle.content[indexPath.row].contentType == "image" {
+        if indexPath.section == 0 && forumArticle.content[indexPath.row].contentType == "image" {
             
             let myImageView = UIImageView()
             
@@ -165,36 +224,48 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: String(describing: ArticleDetailHeaderView.self))
+        if section == 0 {
+            
+            let headerView = tableView.dequeueReusableHeaderFooterView(
+                withIdentifier: String(describing: ArticleDetailHeaderView.self))
 
-        guard let headerView = headerView as? ArticleDetailHeaderView else { return headerView }
-        
-        guard let forumArticle = forumArticle else { return headerView }
-        
-        headerView.titleLabel.text = forumArticle.title
-        
-        headerView.categoryLabel.text = forumArticle.category.title
-        
-        formatter.dateFormat = "yyyy.MM.dd"
-        
-        let createTime = Date(timeIntervalSince1970: forumArticle.createTime)
-        
-        headerView.createTimeLabel.text = formatter.string(from: createTime)
-        
-        headerView.forumTypeLabel.text = forumArticle.forumType
-        
-        headerView.userIDLabel.text = userID
-        
-        tableView.tableHeaderView = UIView.init(
-            frame: CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
-        )
-        
-        tableView.contentInset = UIEdgeInsets.init(
-            top: -headerView.frame.height, left: 0, bottom: 0, right: 0
-        )
+            guard let headerView = headerView as? ArticleDetailHeaderView else { return headerView }
+            
+            guard let forumArticle = forumArticle else { return headerView }
+            
+            headerView.titleLabel.text = forumArticle.title
+            
+            headerView.categoryLabel.text = forumArticle.category.title
+            
+            formatter.dateFormat = "yyyy.MM.dd"
+            
+            let createTime = Date(timeIntervalSince1970: forumArticle.createTime)
+            
+            headerView.createTimeLabel.text = formatter.string(from: createTime)
+            
+            headerView.forumTypeLabel.text = forumArticle.forumType
+            
+            headerView.userIDLabel.text = userID
+            
+    //        tableView.tableHeaderView = UIView.init(
+    //            frame: CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
+    //        )
+    //
+    //        tableView.contentInset = UIEdgeInsets.init(
+    //            top: -headerView.frame.height, left: 0, bottom: 0, right: 0
+    //        )
 
-        return headerView
+            return headerView
+            
+        } else {
+            
+            let headerView = tableView.dequeueReusableHeaderFooterView(
+                withIdentifier: String(describing: ArticleMessageHeaderView.self))
+
+            guard let headerView = headerView as? ArticleMessageHeaderView else { return headerView }
+            
+            return headerView
+        }
         
     }
     
