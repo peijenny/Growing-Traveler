@@ -51,6 +51,7 @@
 		28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6F3928098CCD002B0458 /* ArticleDetailHeaderView.xib */; };
 		28BB6F41280A919C002B0458 /* ArticleDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F3F280A919C002B0458 /* ArticleDetailTableViewCell.swift */; };
 		28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6F40280A919C002B0458 /* ArticleDetailTableViewCell.xib */; };
+		28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F43280AA722002B0458 /* ArticleMessageViewController.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -109,6 +110,7 @@
 		28BB6F3928098CCD002B0458 /* ArticleDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleDetailHeaderView.xib; sourceTree = "<group>"; };
 		28BB6F3F280A919C002B0458 /* ArticleDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailTableViewCell.swift; sourceTree = "<group>"; };
 		28BB6F40280A919C002B0458 /* ArticleDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleDetailTableViewCell.xib; sourceTree = "<group>"; };
+		28BB6F43280AA722002B0458 /* ArticleMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleMessageViewController.swift; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */,
 				28BB6F2B28096AAA002B0458 /* MoreArticlesViewController.swift */,
 				28BB6F3128098BC6002B0458 /* ArticleDetailViewController.swift */,
+				28BB6F43280AA722002B0458 /* ArticleMessageViewController.swift */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				28BB6EF228067007002B0458 /* PublishArticleContentTableViewCell.swift in Sources */,
 				28BB6F3228098BC6002B0458 /* ArticleDetailViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
+				28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				28BB6EF828069112002B0458 /* ForumArticle.swift in Sources */,

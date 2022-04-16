@@ -27,7 +27,33 @@ class ArticleDetailViewController: UIViewController {
         super.viewDidLoad()
         
         setTableView()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .compose,
+            target: self,
+            action: #selector(sendMessageButton)
+        )
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
 
+    }
+    
+    @objc func sendMessageButton(sender: UIButton) {
+        
+        guard let selectStudyItemViewController = UIStoryboard
+            .forum
+            .instantiateViewController(
+                withIdentifier: String(describing: ArticleMessageViewController.self)
+                ) as? ArticleMessageViewController else {
+
+                    return
+
+                }
+
+        self.view.addSubview(selectStudyItemViewController.view)
+
+        self.addChild(selectStudyItemViewController)
+        
     }
     
     override var hidesBottomBarWhenPushed: Bool {
