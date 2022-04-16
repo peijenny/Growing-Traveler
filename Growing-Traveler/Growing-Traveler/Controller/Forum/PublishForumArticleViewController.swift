@@ -10,17 +10,7 @@ import JXPhotoBrowser
 
 class PublishForumArticleViewController: BaseViewController {
 
-    @IBOutlet weak var publishArticleTableView: UITableView! {
-        
-        didSet {
-            
-            publishArticleTableView.delegate = self
-            
-            publishArticleTableView.dataSource = self
-            
-        }
-        
-    }
+    var publishArticleTableView = UITableView()
     
     var selectCategoryItem: CategoryItem? {
         
@@ -55,15 +45,9 @@ class PublishForumArticleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        publishArticleTableView.register(
-            UINib(nibName: String(describing: PublishArticleTypeTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: PublishArticleTypeTableViewCell.self)
-        )
+        view.backgroundColor = UIColor.white
         
-        publishArticleTableView.register(
-            UINib(nibName: String(describing: PublishArticleContentTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: PublishArticleContentTableViewCell.self)
-        )
+        title = "新增發佈"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .done,
@@ -72,6 +56,8 @@ class PublishForumArticleViewController: BaseViewController {
         )
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+        setTableView()
 
     }
     
@@ -149,6 +135,39 @@ class PublishForumArticleViewController: BaseViewController {
         
         checkArticleFullIn = false
 
+    }
+    
+    func setTableView() {
+        
+        publishArticleTableView.backgroundColor = UIColor.clear
+        
+        publishArticleTableView.separatorStyle = .none
+        
+        view.addSubview(publishArticleTableView)
+        
+        publishArticleTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            publishArticleTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            publishArticleTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+        ])
+        
+        publishArticleTableView.register(
+            UINib(nibName: String(describing: PublishArticleTypeTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: PublishArticleTypeTableViewCell.self)
+        )
+        
+        publishArticleTableView.register(
+            UINib(nibName: String(describing: PublishArticleContentTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: PublishArticleContentTableViewCell.self)
+        )
+
+        publishArticleTableView.delegate = self
+        
+        publishArticleTableView.dataSource = self
+        
     }
 
 }

@@ -103,15 +103,17 @@ class FormViewController: UIViewController {
     }
     
     @IBAction func addArticleButton(_ sender: UIButton) {
-        
-        let viewController = UIStoryboard(
-            name: "Forum",
-            bundle: nil
-        ).instantiateViewController(
-            withIdentifier: String(describing: PublishForumArticleViewController.self)
-        )
-        
-        guard let viewController = viewController as? PublishForumArticleViewController else { return }
+//        
+//        let viewController = UIStoryboard(
+//            name: "Forum",
+//            bundle: nil
+//        ).instantiateViewController(
+//            withIdentifier: String(describing: PublishForumArticleViewController.self)
+//        )
+//        
+//        guard let viewController = viewController as? PublishForumArticleViewController else { return }
+//        
+        let viewController = PublishForumArticleViewController()
         
         navigationController?.pushViewController(viewController, animated: true)
         

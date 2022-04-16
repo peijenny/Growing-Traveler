@@ -96,36 +96,6 @@
             </objects>
             <point key="canvasLocation" x="23" y="49"/>
         </scene>
-        <!--Publish Forum Article View Controller-->
-        <scene sceneID="yzu-AI-Pkd">
-            <objects>
-                <viewController storyboardIdentifier="PublishForumArticleViewController" id="HX2-w9-t09" customClass="PublishForumArticleViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wh9-Kr-AaD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tow-jv-cA5">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="FPb-BG-4o2"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="FPb-BG-4o2" firstAttribute="trailing" secondItem="tow-jv-cA5" secondAttribute="trailing" id="G2Z-jv-uzD"/>
-                            <constraint firstItem="FPb-BG-4o2" firstAttribute="bottom" secondItem="tow-jv-cA5" secondAttribute="bottom" id="GXV-Lr-PPq"/>
-                            <constraint firstItem="tow-jv-cA5" firstAttribute="leading" secondItem="FPb-BG-4o2" secondAttribute="leading" id="Z38-oD-H3D"/>
-                            <constraint firstItem="tow-jv-cA5" firstAttribute="top" secondItem="FPb-BG-4o2" secondAttribute="top" id="cOq-uc-SE2"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="publishArticleTableView" destination="tow-jv-cA5" id="1C6-na-PrZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iub-wA-DHH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="858" y="49"/>
-        </scene>
         <!--Article Message View Controller-->
         <scene sceneID="dzZ-ux-Kr5">
             <objects>
@@ -237,7 +207,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ak5-G3-8aa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2503" y="49"/>
+            <point key="canvasLocation" x="833" y="49"/>
         </scene>
     </scenes>
     <resources>
