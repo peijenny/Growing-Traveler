@@ -227,15 +227,8 @@ extension FormViewController: UITableViewDelegate, UITableViewDataSource {
         let point = sender.convert(CGPoint.zero, to: articleTableView)
 
         if let indexPath = articleTableView.indexPathForRow(at: point) {
-
-            let viewController = UIStoryboard(
-                name: "Forum",
-                bundle: nil
-            ).instantiateViewController(
-                withIdentifier: String(describing: MoreArticlesViewController.self)
-            )
             
-            guard let viewController = viewController as? MoreArticlesViewController else { return }
+            let viewController = MoreArticlesViewController()
             
             viewController.forumType = forumType[indexPath.section]
             

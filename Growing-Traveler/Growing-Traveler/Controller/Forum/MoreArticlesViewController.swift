@@ -9,17 +9,7 @@ import UIKit
 
 class MoreArticlesViewController: UIViewController {
     
-    @IBOutlet weak var moreArticlesTableView: UITableView! {
-        
-        didSet {
-            
-            moreArticlesTableView.delegate = self
-            
-            moreArticlesTableView.dataSource = self
-            
-        }
-        
-    }
+    var moreArticlesTableView = UITableView()
     
     var forumType: String?
     
@@ -40,6 +30,8 @@ class MoreArticlesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.white
+        
         if let forumType = forumType {
             
             title = "更多\(forumType)"
@@ -48,10 +40,7 @@ class MoreArticlesViewController: UIViewController {
         
         fetchData()
         
-        moreArticlesTableView.register(
-            UINib(nibName: String(describing: MoreArticlesTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: MoreArticlesTableViewCell.self)
-        )
+        setTableView()
         
     }
     
@@ -90,6 +79,34 @@ class MoreArticlesViewController: UIViewController {
             }
             
         })
+        
+    }
+    
+    func setTableView() {
+        
+        moreArticlesTableView.backgroundColor = UIColor.clear
+        
+        moreArticlesTableView.separatorStyle = .none
+        
+        view.addSubview(moreArticlesTableView)
+        
+        moreArticlesTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            moreArticlesTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            moreArticlesTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            moreArticlesTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            moreArticlesTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+        ])
+        
+        moreArticlesTableView.register(
+            UINib(nibName: String(describing: MoreArticlesTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: MoreArticlesTableViewCell.self)
+        )
+
+        moreArticlesTableView.delegate = self
+        
+        moreArticlesTableView.dataSource = self
         
     }
 
