@@ -205,9 +205,6 @@
                             <constraint firstItem="RjB-5c-gAp" firstAttribute="trailing" secondItem="yik-gV-E3o" secondAttribute="trailing" id="ukl-IC-6K9"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="articleDetailTableView" destination="yik-gV-E3o" id="9la-3n-lyo"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qYU-iD-Yk6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

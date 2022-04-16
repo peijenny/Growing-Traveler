@@ -49,6 +49,8 @@
 		28BB6F3228098BC6002B0458 /* ArticleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F3128098BC6002B0458 /* ArticleDetailViewController.swift */; };
 		28BB6F3828098CC1002B0458 /* ArticleDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F3728098CC1002B0458 /* ArticleDetailHeaderView.swift */; };
 		28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6F3928098CCD002B0458 /* ArticleDetailHeaderView.xib */; };
+		28BB6F41280A919C002B0458 /* ArticleDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F3F280A919C002B0458 /* ArticleDetailTableViewCell.swift */; };
+		28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6F40280A919C002B0458 /* ArticleDetailTableViewCell.xib */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -105,6 +107,8 @@
 		28BB6F3128098BC6002B0458 /* ArticleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewController.swift; sourceTree = "<group>"; };
 		28BB6F3728098CC1002B0458 /* ArticleDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailHeaderView.swift; sourceTree = "<group>"; };
 		28BB6F3928098CCD002B0458 /* ArticleDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleDetailHeaderView.xib; sourceTree = "<group>"; };
+		28BB6F3F280A919C002B0458 /* ArticleDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailTableViewCell.swift; sourceTree = "<group>"; };
+		28BB6F40280A919C002B0458 /* ArticleDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleDetailTableViewCell.xib; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -237,13 +241,12 @@
 		28BB6EE428066418002B0458 /* Forum */ = {
 			isa = PBXGroup;
 			children = (
+				28BB6F3E280A9157002B0458 /* ArticleDetail */,
 				28BB6EF92807B1D4002B0458 /* PublishArticle */,
 				28BB6EFD2807C86C002B0458 /* ArticleTableViewCell.swift */,
 				28BB6EFE2807C86C002B0458 /* ArticleTableViewCell.xib */,
 				28BB6F2D28096C40002B0458 /* MoreArticlesTableViewCell.swift */,
 				28BB6F2E28096C40002B0458 /* MoreArticlesTableViewCell.xib */,
-				28BB6F3728098CC1002B0458 /* ArticleDetailHeaderView.swift */,
-				28BB6F3928098CCD002B0458 /* ArticleDetailHeaderView.xib */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -278,6 +281,17 @@
 				28BB6EF128067007002B0458 /* PublishArticleContentTableViewCell.xib */,
 			);
 			path = PublishArticle;
+			sourceTree = "<group>";
+		};
+		28BB6F3E280A9157002B0458 /* ArticleDetail */ = {
+			isa = PBXGroup;
+			children = (
+				28BB6F3728098CC1002B0458 /* ArticleDetailHeaderView.swift */,
+				28BB6F3928098CCD002B0458 /* ArticleDetailHeaderView.xib */,
+				28BB6F3F280A919C002B0458 /* ArticleDetailTableViewCell.swift */,
+				28BB6F40280A919C002B0458 /* ArticleDetailTableViewCell.xib */,
+			);
+			path = ArticleDetail;
 			sourceTree = "<group>";
 		};
 		28CE2D3227FECBF400ACA813 = {
@@ -399,6 +413,7 @@
 				28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */,
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
 				28BB6EEF28066FC1002B0458 /* PublishArticleTypeTableViewCell.xib in Resources */,
+				28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
 				28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */,
@@ -507,6 +522,7 @@
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
 				28BB6F3828098CC1002B0458 /* ArticleDetailHeaderView.swift in Sources */,
+				28BB6F41280A919C002B0458 /* ArticleDetailTableViewCell.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
 				28BB6F042807EC75002B0458 /* UIImageView+Extension.swift in Sources */,
 				28754ACA2803079A0079F430 /* StudyItemTableViewCell.swift in Sources */,
