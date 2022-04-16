@@ -58,4 +58,24 @@ class ArticleMessageTableViewCell: UITableViewCell {
         
     }
     
+    func showMessages(articleMessage: ArticleMessage) {
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd HH:mm:ss"
+        
+        let createTime = Date(timeIntervalSince1970: articleMessage.createTime)
+
+        setArticleContent(content: articleMessage.message)
+        
+        userIDLabel.text = userID
+        
+        createTimeLabel.text = formatter.string(from: createTime)
+        
+        orderIDLabel.text = "\(articleMessage.message.orderID) 樓"
+        
+        setArticleContent(content: articleMessage.message)
+        
+    }
+    
 }

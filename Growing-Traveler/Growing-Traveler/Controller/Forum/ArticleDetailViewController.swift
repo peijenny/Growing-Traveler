@@ -109,6 +109,8 @@ class ArticleDetailViewController: UIViewController {
     
     func setTableView() {
         
+        articleDetailTableView.backgroundColor = UIColor.clear
+        
         articleDetailTableView.separatorStyle = .none
         
         view.addSubview(articleDetailTableView)
@@ -116,10 +118,10 @@ class ArticleDetailViewController: UIViewController {
         articleDetailTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            articleDetailTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80.0),
-            articleDetailTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 80.0),
+            articleDetailTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            articleDetailTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             articleDetailTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            articleDetailTableView.heightAnchor.constraint(equalTo: view.heightAnchor)
+            articleDetailTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
         ])
         
         articleDetailTableView.register(
@@ -174,7 +176,6 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         if indexPath.section == 0 {
             
             let cell = tableView.dequeueReusableCell(
@@ -197,21 +198,9 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
                 for: indexPath
             )
             
-            formatter.dateFormat = "yyyy.MM.dd HH:mm:ss"
-            
-            let createTime = Date(timeIntervalSince1970: articleMessages[indexPath.row].createTime)
-            
             guard let cell = cell as? ArticleMessageTableViewCell else { return cell }
             
-            cell.setArticleContent(content: articleMessages[indexPath.row].message)
-            
-            cell.userIDLabel.text = userID
-            
-            cell.createTimeLabel.text = formatter.string(from: createTime)
-            
-            cell.orderIDLabel.text = "\(articleMessages[indexPath.row].message.orderID) 樓"
-            
-            cell.setArticleContent(content: articleMessages[indexPath.row].message)
+            cell.showMessages(articleMessage: articleMessages[indexPath.row])
             
             return cell
             
@@ -221,30 +210,34 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let myImageView = UIImageView()
+        
         guard let forumArticle = forumArticle else { return }
         
         if indexPath.section == 0 && forumArticle.content[indexPath.row].contentType == "image" {
             
-            let myImageView = UIImageView()
-            
             myImageView.loadImage(forumArticle.content[indexPath.row].contentText)
             
-            // 展示 image (pop-up Image 單獨顯示的視窗)
-            let browser = JXPhotoBrowser()
-
-            browser.numberOfItems = { 1 }
-
-            browser.reloadCellAtIndex = { context in
-
-                let browserCell = context.cell as? JXPhotoBrowserImageCell
-                
-                browserCell?.imageView.image = myImageView.image
-                
-            }
-
-            browser.show()
+        } else if indexPath.section == 1 && articleMessages[indexPath.row].message.contentType == "image" {
+            
+            myImageView.loadImage(articleMessages[indexPath.row].message.contentText)
             
         }
+        
+        // 展示 image (pop-up Image 單獨顯示的視窗)
+        let browser = JXPhotoBrowser()
+
+        browser.numberOfItems = { 1 }
+
+        browser.reloadCellAtIndex = { context in
+
+            let browserCell = context.cell as? JXPhotoBrowserImageCell
+            
+            browserCell?.imageView.image = myImageView.image
+            
+        }
+
+        browser.show()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -258,28 +251,8 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             guard let forumArticle = forumArticle else { return headerView }
             
-            headerView.titleLabel.text = forumArticle.title
+            headerView.showArticleDetail(forumArticle: forumArticle)
             
-            headerView.categoryLabel.text = forumArticle.category.title
-            
-            formatter.dateFormat = "yyyy.MM.dd"
-            
-            let createTime = Date(timeIntervalSince1970: forumArticle.createTime)
-            
-            headerView.createTimeLabel.text = formatter.string(from: createTime)
-            
-            headerView.forumTypeLabel.text = forumArticle.forumType
-            
-            headerView.userIDLabel.text = userID
-            
-    //        tableView.tableHeaderView = UIView.init(
-    //            frame: CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
-    //        )
-    //
-    //        tableView.contentInset = UIEdgeInsets.init(
-    //            top: -headerView.frame.height, left: 0, bottom: 0, right: 0
-    //        )
-
             return headerView
             
         } else {
