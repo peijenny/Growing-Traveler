@@ -34,6 +34,8 @@ class MoreArticlesViewController: UIViewController {
         }
         
     }
+    
+    var formatter = DateFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +105,12 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
         cell.forumTypeLabel.text = forumArticles[indexPath.row].forumType
 
         cell.categoryLabel.text = forumArticles[indexPath.row].category.title
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        let createTime = Date(timeIntervalSince1970: forumArticles[indexPath.row].createTime)
+        
+        cell.createTimeLabel.text = formatter.string(from: createTime)
 
         cell.userIDLabel.text = userID
         
@@ -110,6 +118,20 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
         
     }
     
-    
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let viewController = UIStoryboard(
+            name: "Forum",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: String(describing: ArticleDetailViewController.self)
+        )
+        
+        guard let viewController = viewController as? ArticleDetailViewController else { return }
+        
+        viewController.forumArticle = forumArticles[indexPath.row]
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
 }
