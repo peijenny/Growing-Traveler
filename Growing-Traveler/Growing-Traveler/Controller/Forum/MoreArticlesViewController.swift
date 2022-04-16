@@ -49,6 +49,20 @@ class MoreArticlesViewController: UIViewController {
         
     }
     
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
     func fetchData() {
         
         forumArticleManager.fetchData(forumType: forumType ?? "", completion: { [weak self] result in

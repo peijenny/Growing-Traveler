@@ -75,6 +75,20 @@ class PublishForumArticleViewController: BaseViewController {
 
     }
     
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
     @objc func submitButton(sender: UIButton) {
         
         checkArticleFullIn = true

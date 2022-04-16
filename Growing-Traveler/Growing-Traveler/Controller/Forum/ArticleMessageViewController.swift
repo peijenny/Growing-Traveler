@@ -22,6 +22,20 @@ class ArticleMessageViewController: BaseViewController {
 
         // Do any additional setup after loading the view.
     }
+
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
     
     @IBAction func closeButton(_ sender: UIButton) {
         
