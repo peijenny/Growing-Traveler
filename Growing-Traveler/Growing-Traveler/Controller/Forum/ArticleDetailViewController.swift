@@ -30,6 +30,8 @@ class ArticleDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.white
+        
         title = forumArticle?.forumType
         
         setTableView()

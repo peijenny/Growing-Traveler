@@ -140,14 +140,7 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let viewController = UIStoryboard(
-            name: "Forum",
-            bundle: nil
-        ).instantiateViewController(
-            withIdentifier: String(describing: ArticleDetailViewController.self)
-        )
-        
-        guard let viewController = viewController as? ArticleDetailViewController else { return }
+        let viewController = ArticleDetailViewController()
         
         viewController.forumArticle = forumArticles[indexPath.row]
         
