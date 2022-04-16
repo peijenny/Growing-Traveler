@@ -24,6 +24,8 @@
 		288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367B628013E900010CEAD /* PlanStudyGoalHeaderView.swift */; };
 		28A6F45B280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A6F45A280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift */; };
 		28A6F45E280ADAC900EFCC2C /* ArticleMessageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A6F45D280ADAC900EFCC2C /* ArticleMessageHeaderView.xib */; };
+		28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */; };
+		28A6F466280AED1600EFCC2C /* ArticleMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */; };
 		28AF15AD2804033B004E97B8 /* StudyGoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */; };
 		28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */; };
 		28AF15B128040948004E97B8 /* StudyGoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B028040948004E97B8 /* StudyGoalHeaderView.swift */; };
@@ -85,6 +87,8 @@
 		288367B628013E900010CEAD /* PlanStudyGoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanStudyGoalHeaderView.swift; sourceTree = "<group>"; };
 		28A6F45A280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleMessageHeaderView.swift; sourceTree = "<group>"; };
 		28A6F45D280ADAC900EFCC2C /* ArticleMessageHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleMessageHeaderView.xib; sourceTree = "<group>"; };
+		28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleMessageTableViewCell.swift; sourceTree = "<group>"; };
+		28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleMessageTableViewCell.xib; sourceTree = "<group>"; };
 		28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalTableViewCell.swift; sourceTree = "<group>"; };
 		28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalTableViewCell.xib; sourceTree = "<group>"; };
 		28AF15B028040948004E97B8 /* StudyGoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalHeaderView.swift; sourceTree = "<group>"; };
@@ -299,6 +303,8 @@
 				28BB6F40280A919C002B0458 /* ArticleDetailTableViewCell.xib */,
 				28A6F45A280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift */,
 				28A6F45D280ADAC900EFCC2C /* ArticleMessageHeaderView.xib */,
+				28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */,
+				28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */,
 			);
 			path = ArticleDetail;
 			sourceTree = "<group>";
@@ -417,6 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28A6F466280AED1600EFCC2C /* ArticleMessageTableViewCell.xib in Resources */,
 				28BB6EE628066441002B0458 /* Forum.storyboard in Resources */,
 				28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */,
 				28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */,
@@ -513,6 +520,7 @@
 				28BB6F3228098BC6002B0458 /* ArticleDetailViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
 				28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */,
+				28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				28BB6EF828069112002B0458 /* ForumArticle.swift in Sources */,

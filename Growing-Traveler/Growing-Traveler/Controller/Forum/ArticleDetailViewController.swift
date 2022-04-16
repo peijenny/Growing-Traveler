@@ -25,14 +25,7 @@ class ArticleDetailViewController: UIViewController {
     
     var forumArticleManager = ForumArticleManager()
     
-    var articleMessages: [ArticleMessage] = [] {
-        
-        didSet {
-            
-          articleDetailTableView.reloadData()
-            
-        }
-    }
+    var articleMessages: [ArticleMessage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +60,8 @@ class ArticleDetailViewController: UIViewController {
                     
                     strongSelf.articleMessages = data
                     
+                    strongSelf.articleDetailTableView.reloadData()
+                    
                 case .failure(let error):
                     
                     print(error)
@@ -78,7 +73,7 @@ class ArticleDetailViewController: UIViewController {
     
     @objc func sendMessageButton(sender: UIButton) {
         
-        guard let selectStudyItemViewController = UIStoryboard
+        guard let viewController = UIStoryboard
             .forum
             .instantiateViewController(
                 withIdentifier: String(describing: ArticleMessageViewController.self)
@@ -88,11 +83,13 @@ class ArticleDetailViewController: UIViewController {
 
                 }
         
-        selectStudyItemViewController.articleID = forumArticle?.id ?? ""
+        viewController.articleID = forumArticle?.id ?? ""
+        
+        viewController.orderID = articleMessages.count
 
-        self.view.addSubview(selectStudyItemViewController.view)
+        self.view.addSubview(viewController.view)
 
-        self.addChild(selectStudyItemViewController)
+        self.addChild(viewController)
         
     }
     
@@ -139,6 +136,11 @@ class ArticleDetailViewController: UIViewController {
             UINib(nibName: String(describing: ArticleMessageHeaderView.self), bundle: nil),
             forHeaderFooterViewReuseIdentifier: String(describing: ArticleMessageHeaderView.self)
         )
+        
+        articleDetailTableView.register(
+            UINib(nibName: String(describing: ArticleMessageTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: ArticleMessageTableViewCell.self)
+        )
 
         articleDetailTableView.delegate = self
         
@@ -172,26 +174,49 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: ArticleDetailTableViewCell.self),
-            for: indexPath
-        )
-        
-        guard let cell = cell as? ArticleDetailTableViewCell else { return cell }
         
         if indexPath.section == 0 {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: ArticleDetailTableViewCell.self),
+                for: indexPath
+            )
+            
+            guard let cell = cell as? ArticleDetailTableViewCell else { return cell }
             
             guard let forumArticle = forumArticle else { return cell }
             
             cell.setArticleContent(content: forumArticle.content[indexPath.row])
             
+            return cell
+            
         } else {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: ArticleMessageTableViewCell.self),
+                for: indexPath
+            )
+            
+            formatter.dateFormat = "yyyy.MM.dd HH:mm:ss"
+            
+            let createTime = Date(timeIntervalSince1970: articleMessages[indexPath.row].createTime)
+            
+            guard let cell = cell as? ArticleMessageTableViewCell else { return cell }
             
             cell.setArticleContent(content: articleMessages[indexPath.row].message)
             
+            cell.userIDLabel.text = userID
+            
+            cell.createTimeLabel.text = formatter.string(from: createTime)
+            
+            cell.orderIDLabel.text = "\(articleMessages[indexPath.row].message.orderID) 樓"
+            
+            cell.setArticleContent(content: articleMessages[indexPath.row].message)
+            
+            return cell
+            
         }
         
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

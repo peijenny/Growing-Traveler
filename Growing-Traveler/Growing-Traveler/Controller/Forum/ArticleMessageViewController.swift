@@ -15,6 +15,8 @@ class ArticleMessageViewController: BaseViewController {
     
     var articleID = String()
     
+    var orderID = Int()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,7 +55,7 @@ class ArticleMessageViewController: BaseViewController {
         }
         
         let message = ArticleContent(
-            orderID: 0,
+            orderID: orderID,
             contentType: contentType,
             contentText: contentText
         )

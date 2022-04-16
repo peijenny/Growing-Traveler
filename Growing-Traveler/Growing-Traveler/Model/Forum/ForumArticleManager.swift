@@ -219,9 +219,9 @@ extension ForumArticleManager {
     //  監聽 論壇區的文章留言 從 Firebase Firestore
     func listenMessageData(articleID: String, completion: @escaping (Result<[ArticleMessage]>) -> Void) {
         
-        var articleMessages: [ArticleMessage] = []
-        
         database.document(articleID).collection("message").addSnapshotListener{ snapshot, error in
+            
+            var articleMessages: [ArticleMessage] = []
             
             guard let snapshot = snapshot else {
                 
