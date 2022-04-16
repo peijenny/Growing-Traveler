@@ -70,8 +70,6 @@ class MoreArticlesViewController: UIViewController {
 
                 strongSelf.forumArticles = data
                 
-                print("TEST \(data)")
-                
             case .failure(let error):
                 
                 print(error)

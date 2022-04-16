@@ -96,8 +96,6 @@ class CalendarViewController: UIViewController {
                         timeIntervalSince1970: $0.studyPeriod.endDate
                     ).formatted()
                     
-                    print("TEST \(startDate) \(selectDate) \(endDate)")
-                    
                     if startDate <= selectDate && endDate >= selectDate {
                         
                         return true
@@ -107,9 +105,7 @@ class CalendarViewController: UIViewController {
                     return false
                     
                 })
-                
-                print("TEST \(strongSelf.studyGoals.count)")
-                
+
                 strongSelf.displayTableView.reloadData()
                 
             case .failure(let error):

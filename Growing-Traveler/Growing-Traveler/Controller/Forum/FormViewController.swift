@@ -103,16 +103,7 @@ class FormViewController: UIViewController {
     }
     
     @IBAction func addArticleButton(_ sender: UIButton) {
-//        
-//        let viewController = UIStoryboard(
-//            name: "Forum",
-//            bundle: nil
-//        ).instantiateViewController(
-//            withIdentifier: String(describing: PublishForumArticleViewController.self)
-//        )
-//        
-//        guard let viewController = viewController as? PublishForumArticleViewController else { return }
-//        
+
         let viewController = PublishForumArticleViewController()
         
         navigationController?.pushViewController(viewController, animated: true)
@@ -130,8 +121,6 @@ class FormViewController: UIViewController {
             case .success(let data):
                 
                 strongSelf.forumArticles = data
-                
-                print("TEST \(strongSelf.forumArticles)")
                 
             case .failure(let error):
                 
@@ -168,12 +157,8 @@ class FormViewController: UIViewController {
     @IBAction func searchArticleButton(_ sender: UIButton) {
         
         guard let inputText = searchTextField.text else { return }
-        
-        print("TEST \(inputText)")
-        
+
         forumArticles = searchForumArticles.filter({ $0.title.range(of: inputText) != nil })
-        
-        print("TEST22 \(forumArticles)")
         
     }
     

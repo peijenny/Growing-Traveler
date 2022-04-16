@@ -360,8 +360,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         if let studyGoal = studyGoal {
             
-            print("Test \(studyGoal)")
-            
             studyGoalManager.addData(studyGoal: studyGoal)
             
             navigationController?.popViewController(animated: true)
@@ -487,9 +485,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        print("TEST")
-        
+
         popupSelectStudyItemPage(
             studyItem: studyItems[indexPath.row],
             selectRow: indexPath.row
