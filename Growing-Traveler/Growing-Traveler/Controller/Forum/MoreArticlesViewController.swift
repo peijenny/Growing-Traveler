@@ -40,6 +40,12 @@ class MoreArticlesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let forumType = forumType {
+            
+            title = "更多\(forumType)"
+            
+        }
+        
         fetchData()
         
         moreArticlesTableView.register(

@@ -30,6 +30,8 @@ class ArticleDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = forumArticle?.forumType
+        
         setTableView()
         
         listenMessageData()
