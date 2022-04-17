@@ -25,9 +25,10 @@ enum SelectDateType {
     }
 }
 
+// MARK: - 檢查項目是否為空
 enum InputError {
     
-    case studyGoalTitleEmpty
+    case titleEmpty
     
     case startDateEmpty
     
@@ -43,7 +44,7 @@ enum InputError {
         
         switch self {
             
-        case .studyGoalTitleEmpty: return "標題不可為空！"
+        case .titleEmpty: return "標題不可為空！"
             
         case .startDateEmpty: return "尚未選擇開始日期！"
             
@@ -129,23 +130,22 @@ class PlanStudyGoalViewController: BaseViewController {
             
         }
         
+        // MARK: - 開啟 TableView 可以修改
         planStudyGoalTableView.isEditing = true
         
         planStudyGoalTableView.register(
             UINib(nibName: String(describing: PlanStudyGoalHeaderView.self), bundle: nil),
-            forHeaderFooterViewReuseIdentifier: String(describing: PlanStudyGoalHeaderView.self)
-        )
+            forHeaderFooterViewReuseIdentifier: String(describing: PlanStudyGoalHeaderView.self))
         
         planStudyGoalTableView.register(
             UINib(nibName: String(describing: StudyItemTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: StudyItemTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: StudyItemTableViewCell.self))
         
+        // MARK: - 確認送出資料 Button
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .done,
             target: self,
-            action: #selector(submitButton)
-        )
+            action: #selector(submitButton))
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
@@ -167,6 +167,7 @@ class PlanStudyGoalViewController: BaseViewController {
         
     }
     
+    // MARK: - 修改個人學習計劃設定
     func modifyPlanStudyGoalSetting() {
         
         studyItems = studyGoal?.studyItems ?? []
@@ -193,6 +194,7 @@ class PlanStudyGoalViewController: BaseViewController {
     
 }
 
+// MARK: - TableView DataSource
 extension PlanStudyGoalViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -239,12 +241,14 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
 
     }
     
+    // MARK: - tableView Row 可以被修改
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         
         return true
         
     }
     
+    // MARK: - 移動 TableView Row (修改排序 id)
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
         studyItems[sourceIndexPath.row].id = destinationIndexPath.row
@@ -253,8 +257,8 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
         
     }
     
-    func tableView(
-        _ tableView: UITableView,
+    // MARK: - 刪除 TableView Row
+    func tableView(_ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
     -> UISwipeActionsConfiguration? {
         
@@ -278,7 +282,7 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
 
 }
 
-
+// MARK: - TableView Delegate
 extension PlanStudyGoalViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
