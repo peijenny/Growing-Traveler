@@ -77,8 +77,6 @@ class PlanStudyGoalViewController: BaseViewController {
     
     let selectCalenderViewController = SelectCalendarViewController()
     
-    var formatter = DateFormatter()
-    
     var selectStartDate = Date() {
         
         didSet {
@@ -130,6 +128,8 @@ class PlanStudyGoalViewController: BaseViewController {
             title = "編輯個人學習計劃"
             
         }
+        
+        planStudyGoalTableView.isEditing = true
         
         planStudyGoalTableView.register(
             UINib(nibName: String(describing: PlanStudyGoalHeaderView.self), bundle: nil),
@@ -193,7 +193,7 @@ class PlanStudyGoalViewController: BaseViewController {
     
 }
 
-extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
+extension PlanStudyGoalViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -216,11 +216,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
 
         guard let cell = cell as? StudyItemTableViewCell else { return cell }
         
-        cell.deleteItemButton.addTarget(
-            self, action: #selector(deleteItemButton),
-            for: .touchUpInside
-        )
-        
         studyItems = studyItems.sorted { (lhs, rhs) in
             
             return lhs.id ?? 0 < rhs.id ?? 0
@@ -235,23 +230,56 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
     }
     
-    @objc func deleteItemButton(sender: UIButton) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        popupSelectStudyItemPage(
+            studyItem: studyItems[indexPath.row],
+            selectRow: indexPath.row
+        )
+
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         
-        let point = sender.convert(CGPoint.zero, to: planStudyGoalTableView)
+        return true
+        
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
-        if let indexPath = planStudyGoalTableView.indexPathForRow(at: point) {
+        studyItems[sourceIndexPath.row].id = destinationIndexPath.row
 
-            studyItems.remove(at: indexPath.row)
+        studyItems[destinationIndexPath.row].id = sourceIndexPath.row
+        
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+        
+        let contextItem = UIContextualAction(style: .destructive, title: "刪除") {  _, _, _ in
+            
+            self.studyItems.remove(at: indexPath.row)
+            
+            self.planStudyGoalTableView.beginUpdates()
 
-            planStudyGoalTableView.beginUpdates()
+            self.planStudyGoalTableView.deleteRows(at: [indexPath], with: .left)
 
-            planStudyGoalTableView.deleteRows(at: [indexPath], with: .left)
-
-            planStudyGoalTableView.endUpdates()
+            self.planStudyGoalTableView.endUpdates()
             
         }
         
+        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
+        
+        return swipeActions
+        
     }
+
+}
+
+
+extension PlanStudyGoalViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -262,51 +290,34 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         headerView.studyGoalTitleTextField.delegate = self
         
-        if checkStudyGoalFillIn == true {
-
-            if headerView.studyGoalTitleTextField.text == "" {
-
-                headerView.hintLabel.text = InputError.studyGoalTitleEmpty.title
-
-            } else if headerView.startDateTextField.text == "" {
-
-                headerView.hintLabel.text = InputError.startDateEmpty.title
-
-            } else if headerView.endDateTextField.text == "" {
-
-                headerView.hintLabel.text = InputError.endDateEmpty.title
-
-            } else if headerView.categoryTextField.text == "" {
-
-                headerView.hintLabel.text = InputError.categoryEmpty.title
-
-            } else if studyItems.count == 0 {
-
-                headerView.hintLabel.text = InputError.studyItemEmpty.title
-
+        if checkStudyGoalFillIn == true && headerView.checkFullIn(studyItemsCount: studyItems.count) {
+            
+            if studyGoal != nil {
+                
+                addStudyGoalToDatabase(
+                    id: studyGoal?.id ?? "",
+                    title: headerView.studyGoalTitleTextField.text ?? ""
+                )
+                
             } else {
                 
-                if studyGoal != nil {
-                    
-                    addStudyGoalToDatabase(
-                        id: studyGoal?.id ?? "",
-                        title: headerView.studyGoalTitleTextField.text ?? ""
-                    )
-                    
-                } else {
-                    
-                    addStudyGoalToDatabase(
-                        id: studyGoalManager.database.document().documentID,
-                        title: headerView.studyGoalTitleTextField.text ?? ""
-                    )
-                    
-                }
+                addStudyGoalToDatabase(
+                    id: studyGoalManager.database.document().documentID,
+                    title: headerView.studyGoalTitleTextField.text ?? ""
+                )
                 
             }
-
+            
             checkStudyGoalFillIn = false
-
+            
         }
+        
+        headerView.showSelectedDate(dateType: selectDateType,
+            startDate: selectStartDate, endDate: selectEndDate)
+        
+        headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
+        
+        headerView.modifyStudyGoal(studyGoal: studyGoal)
 
         headerView.startDateCalenderButton.addTarget(
             self, action: #selector(selectStartDateButton), for: .touchUpInside)
@@ -320,38 +331,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         headerView.addStudyItemButton.addTarget(
             self, action: #selector(addStudyItemButton), for: .touchUpInside)
         
-        formatter.dateFormat = "yyyy.MM.dd"
-        
-        if selectDateType == SelectDateType.startDate.title {
-            
-            headerView.startDateTextField.text = formatter.string(from: selectStartDate)
-            
-        } else if selectDateType == SelectDateType.endDate.title {
-            
-            headerView.endDateTextField.text = formatter.string(from: selectEndDate)
-            
-        }
-        
-        headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
-        
-        if studyGoal != nil {
-            
-            guard let studyGoal = studyGoal else { return headerView }
-            
-            headerView.studyGoalTitleTextField.text = studyGoal.title
-            
-            headerView.startDateTextField.text = Date(
-                timeIntervalSince1970: studyGoal.studyPeriod.startDate
-            ).formatted()
-            
-            headerView.endDateTextField.text = Date(
-                timeIntervalSince1970: studyGoal.studyPeriod.endDate
-            ).formatted()
-            
-            headerView.categoryTextField.text = studyGoal.category.title
-            
-        }
-
         return headerView
 
     }
@@ -496,15 +475,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
             
         }
         
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        popupSelectStudyItemPage(
-            studyItem: studyItems[indexPath.row],
-            selectRow: indexPath.row
-        )
-
     }
     
 }
