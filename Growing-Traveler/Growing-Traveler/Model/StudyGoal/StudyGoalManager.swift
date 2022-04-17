@@ -10,8 +10,6 @@ import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-let userID = "TESTUSERID"
-
 class StudyGoalManager {
     
     let database = Firestore.firestore().collection("studyGoal")

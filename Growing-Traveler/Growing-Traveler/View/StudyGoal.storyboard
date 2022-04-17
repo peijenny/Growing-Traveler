@@ -189,7 +189,7 @@
                                             <constraint firstAttribute="height" constant="32" id="gRp-Rl-tID"/>
                                         </constraints>
                                     </stackView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="請輸入學習項目名稱" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxo-U7-9gw">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入學習項目名稱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxo-U7-9gw">
                                         <rect key="frame" x="106" y="72" width="252" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="l9M-Pa-4JB"/>
