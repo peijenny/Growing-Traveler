@@ -18,20 +18,20 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="320"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="學習項目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNA-cl-UmP">
-                            <rect key="frame" x="16" y="234" width="69.5" height="40"/>
+                            <rect key="frame" x="16" y="234" width="64" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="hVc-5S-R81"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分類標籤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIg-jo-dlT">
-                            <rect key="frame" x="16" y="178" width="70" height="40"/>
+                            <rect key="frame" x="16" y="178" width="64" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="xlQ-Pf-mgw"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -47,11 +47,11 @@
                             <buttonConfiguration key="configuration" style="plain" image="tag" catalog="system"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="學習期間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iws-J7-pml">
-                            <rect key="frame" x="16" y="72" width="70" height="90"/>
+                            <rect key="frame" x="16" y="72" width="64" height="90"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="90" id="NAm-Tj-KFj"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -78,24 +78,24 @@
                             <buttonConfiguration key="configuration" style="plain" image="calendar" catalog="system"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="學習目標" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cx-w5-uky">
-                            <rect key="frame" x="15" y="16" width="70" height="40"/>
+                            <rect key="frame" x="15" y="16" width="64" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="MRf-k8-L61"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入學習目標名稱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C2k-C9-LBc">
-                            <rect key="frame" x="105" y="16" width="293" height="40"/>
+                            <rect key="frame" x="99" y="16" width="299" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="j2C-4e-RN8"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lA3-BD-eIS">
-                            <rect key="frame" x="105.5" y="234" width="40" height="40"/>
+                            <rect key="frame" x="100" y="234" width="40" height="40"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="oVk-us-Cxs"/>
@@ -110,32 +110,32 @@
                             <constraints>
                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="14" id="nsq-Xd-fLE"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                             <color key="textColor" systemColor="systemRedColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇開始日期" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JNr-92-086">
-                            <rect key="frame" x="102" y="72" width="240" height="40"/>
+                            <rect key="frame" x="96" y="72" width="246" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="fnM-Hl-aHS"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇分類標籤" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8X-OK-C79">
-                            <rect key="frame" x="102" y="178" width="240" height="40"/>
+                            <rect key="frame" x="96" y="178" width="246" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="bhV-xv-Ig0"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇結束日期" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1dB-V7-sDS">
-                            <rect key="frame" x="102" y="122" width="240" height="40"/>
+                            <rect key="frame" x="96" y="122" width="246" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="ol9-Wp-M2i"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68h-KJ-h9q">
