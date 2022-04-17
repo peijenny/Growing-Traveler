@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="295"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[1樓]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sep-yV-Soy">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[1樓]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sep-yV-Soy">
                         <rect key="frame" x="16" y="10" width="40" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="LQX-Sj-Wzd"/>
@@ -51,7 +51,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TESTUSERIDTESTTEST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6g-Zu-RVc">
-                        <rect key="frame" x="66" y="10" width="135" height="21"/>
+                        <rect key="frame" x="61" y="10" width="135" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="135" id="Rhm-f8-LzC"/>
                             <constraint firstAttribute="height" constant="21" id="ZSA-Bm-uuI"/>
@@ -73,7 +73,7 @@
                     <constraint firstItem="sep-yV-Soy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="LZf-uF-3Y4"/>
                     <constraint firstItem="S6g-Zu-RVc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="N7V-iE-xjh"/>
                     <constraint firstItem="u4u-aW-uf6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="O7o-mt-CaK"/>
-                    <constraint firstItem="S6g-Zu-RVc" firstAttribute="leading" secondItem="sep-yV-Soy" secondAttribute="trailing" constant="10" id="ZNy-Gi-Ley"/>
+                    <constraint firstItem="S6g-Zu-RVc" firstAttribute="leading" secondItem="sep-yV-Soy" secondAttribute="trailing" constant="5" id="ZNy-Gi-Ley"/>
                     <constraint firstAttribute="trailing" secondItem="u4u-aW-uf6" secondAttribute="trailing" constant="16" id="geE-x0-uCO"/>
                     <constraint firstAttribute="trailing" secondItem="4bs-zr-DF5" secondAttribute="trailing" constant="16" id="hOO-tM-ktV"/>
                     <constraint firstItem="LHm-Uc-jYj" firstAttribute="top" secondItem="u4u-aW-uf6" secondAttribute="bottom" id="laz-EF-2KS"/>

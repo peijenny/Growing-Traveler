@@ -72,7 +72,7 @@ class ArticleMessageTableViewCell: UITableViewCell {
         
         createTimeLabel.text = formatter.string(from: createTime)
         
-        orderIDLabel.text = "\(articleMessage.message.orderID) 樓"
+        orderIDLabel.text = "[\(articleMessage.message.orderID + 1) 樓]"
         
         setArticleContent(content: articleMessage.message)
         
