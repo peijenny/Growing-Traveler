@@ -66,6 +66,7 @@ class StudyGoalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: - 註冊 TableView header / footer / cell
         studyGoalTableView.register(
             UINib(nibName: String(describing: StudyGoalHeaderView.self), bundle: nil),
             forHeaderFooterViewReuseIdentifier: String(describing: StudyGoalHeaderView.self)
@@ -83,6 +84,7 @@ class StudyGoalViewController: UIViewController {
         
         listenData(status: StatusType.running.title)
         
+        // MARK: - 右上角的 成長日曆 Button
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .search,
             target: self,
@@ -95,13 +97,15 @@ class StudyGoalViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
+        // MARK: - 右下角 新增個人學習計劃 Button 修改圖片的顯示方式與加上圓角
         addGoalButton.imageView?.contentMode = .scaleAspectFill
 
         addGoalButton.layer.cornerRadius = addGoalButton.frame.width / 2
         
     }
 
+    // MARK: - 跳轉到成長日曆頁面
     @objc func pushToCalenderPage(sender: UIButton) {
         
         let viewController = UIStoryboard(
@@ -117,12 +121,14 @@ class StudyGoalViewController: UIViewController {
         
     }
     
+    // MARK: - 新增個人學習計劃 Button
     @IBAction func addStudyGoalButton(_ sender: UIButton) {
         
         pushToPlanStudyGoalPage(studyGoal: nil)
         
     }
     
+    // MARK: - 跳轉到個人學習計劃 Button (新增 / 修改)
     func pushToPlanStudyGoalPage(studyGoal: StudyGoal?) {
         
         let viewController = UIStoryboard(
@@ -140,6 +146,7 @@ class StudyGoalViewController: UIViewController {
         
     }
     
+    // MARK: - 即時監聽 Firestore 的個人學習計畫
     func listenData(status: String) {
         
         studyGoalManager.listenData(completion: { [weak self] result in
@@ -220,6 +227,7 @@ class StudyGoalViewController: UIViewController {
         
     }
     
+    // MARK: - NavBar 下方的 (待處理 / 處理中 / 已處理) Button
     @IBAction func handleStatusButton(_ sender: UIButton) {
         
         _ = statusButton.map({ $0.backgroundColor = UIColor.lightGray })
@@ -231,9 +239,11 @@ class StudyGoalViewController: UIViewController {
         listenData(status: "\(titleText)")
         
     }
+    
 }
 
-extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - TableView DataSource
+extension StudyGoalViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -256,31 +266,20 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
 
         guard let cell = cell as? StudyGoalTableViewCell else { return cell }
         
-        cell.studyItemLabel.text = studyGoals?[indexPath.section].studyItems[indexPath.row].itemTitle
-        
         cell.checkButton.addTarget(
-            self, action: #selector(checkItemButton), for: .touchUpInside
-        )
+            self, action: #selector(checkItemButton), for: .touchUpInside)
         
-        guard let isCompleted = studyGoals?[indexPath.section]
-            .studyItems[indexPath.row].isCompleted else {
+        if let isCompleted = studyGoals?[indexPath.section]
+            .studyItems[indexPath.row].isCompleted {
             
-            return cell
+            cell.checkIsCompleted(isCompleted: isCompleted)
             
         }
         
-        if isCompleted {
+        if let studyItem = studyGoals?[indexPath.section]
+            .studyItems[indexPath.row] {
             
-            cell.checkButton.backgroundColor = UIColor.black
-            
-            cell.checkButton.tintColor = UIColor.white
-            
-        } else {
-            
-            cell.checkButton.backgroundColor = UIColor.systemGray5
-            
-            cell.checkButton.tintColor = UIColor.clear
-            
+            cell.showStudyItem(studyItem: studyItem)
         }
         
         return cell
@@ -319,6 +318,21 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let studyGoal = studyGoals?[indexPath.section] {
+            
+            pushToPlanStudyGoalPage(studyGoal: studyGoal)
+            
+        }
+        
+    }
+    
+}
+
+// MARK: - TableView Delegate
+extension StudyGoalViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = tableView.dequeueReusableHeaderFooterView(
@@ -326,25 +340,17 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
 
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
         
-        headerView.studyGoalTitleLabel.text = studyGoals?[section].title
-        
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "yyyy.MM.dd"
-        
-        let endDate = Date(timeIntervalSince1970: studyGoals?[section].studyPeriod.endDate ?? TimeInterval()
-        )
-        
-        headerView.endDateLabel.text = formatter.string(from: endDate)
+        if let studyGoal = studyGoals?[section] {
+            
+            headerView.showStudyGoalHeader(studyGoal: studyGoal)
+            
+        }
 
-        headerView.hideRecordLabel.text = "\(studyGoals?[section].id ?? "")"
+        tableView.tableHeaderView = UIView.init(frame: CGRect.init(
+            x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height))
         
         topCGFloat = headerView.frame.height
         
-        tableView.tableHeaderView = UIView.init(
-            frame: CGRect.init(x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height)
-        )
-
         setContentInset()
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
@@ -362,19 +368,19 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
 
         guard let footerView = footerView as? StudyGoalFooterView else { return footerView }
         
-        footerView.categoryLabel.text = studyGoals?[section].category.title
-        
-        footerView.hideRecordLabel.text = "\(studyGoals?[section].id ?? "")"
+        if let studyGoal = studyGoals?[section] {
+            
+            footerView.showStudyGoalFooter(studyGoal: studyGoal)
+            
+        }
         
         footerView.deleteButton.addTarget(
-            self, action: #selector(deleteRowButton), for: .touchUpInside
-        )
+            self, action: #selector(deleteRowButton), for: .touchUpInside)
+        
+        tableView.tableFooterView = UIView.init(frame: CGRect.init(
+            x: 0, y: 0, width: footerView.frame.width, height: footerView.frame.height))
         
         bottomCGFloat = footerView.frame.height
-        
-        tableView.tableFooterView = UIView.init(
-            frame: CGRect.init(x: 0, y: 0, width: footerView.frame.width, height: footerView.frame.height)
-        )
         
         setContentInset()
 
@@ -435,16 +441,6 @@ extension StudyGoalViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
 
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if let studyGoal = studyGoals?[indexPath.section] {
-            
-            pushToPlanStudyGoalPage(studyGoal: studyGoal)
-            
-        }
-        
     }
     
 }

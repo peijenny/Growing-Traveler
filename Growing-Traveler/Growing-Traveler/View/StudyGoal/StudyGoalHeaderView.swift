@@ -15,4 +15,20 @@ class StudyGoalHeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var hideRecordLabel: UILabel!
     
+    func showStudyGoalHeader(studyGoal: StudyGoal) {
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        let endDate = Date(timeIntervalSince1970: studyGoal.studyPeriod.endDate)
+        
+        endDateLabel.text = formatter.string(from: endDate)
+        
+        studyGoalTitleLabel.text = studyGoal.title
+
+        hideRecordLabel.text = "\(studyGoal.id)"
+        
+    }
+    
 }
