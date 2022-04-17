@@ -24,8 +24,6 @@ class MoreArticlesViewController: UIViewController {
         }
         
     }
-    
-    var formatter = DateFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,21 +131,7 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
         
         guard let cell = cell as? MoreArticlesTableViewCell else { return cell }
         
-        cell.checkImage(forumArticle: forumArticles[indexPath.row])
-
-        cell.titleLabel.text = forumArticles[indexPath.row].title
-        
-        cell.forumTypeLabel.text = forumArticles[indexPath.row].forumType
-
-        cell.categoryLabel.text = forumArticles[indexPath.row].category.title
-        
-        formatter.dateFormat = "yyyy.MM.dd"
-        
-        let createTime = Date(timeIntervalSince1970: forumArticles[indexPath.row].createTime)
-        
-        cell.createTimeLabel.text = formatter.string(from: createTime)
-
-        cell.userIDLabel.text = userID
+        cell.showMoreArticles(forumArticle: forumArticles[indexPath.row])
         
         return cell
         

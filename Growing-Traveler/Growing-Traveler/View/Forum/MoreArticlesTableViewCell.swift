@@ -36,6 +36,28 @@ class MoreArticlesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func showMoreArticles(forumArticle: ForumArticle) {
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        let createTime = Date(timeIntervalSince1970: forumArticle.createTime)
+        
+        checkImage(forumArticle: forumArticle)
+
+        titleLabel.text = forumArticle.title
+        
+        forumTypeLabel.text = forumArticle.forumType
+
+        categoryLabel.text = forumArticle.category.title
+        
+        createTimeLabel.text = formatter.string(from: createTime)
+
+        userIDLabel.text = forumArticle.userID
+        
+    }
+    
     func checkImage(forumArticle: ForumArticle) {
         
         let article = forumArticle.content.filter({ $0.contentType == "image" })
