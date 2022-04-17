@@ -27,6 +27,8 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var hintLabel: UILabel!
     
+    @IBOutlet weak var openEditButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

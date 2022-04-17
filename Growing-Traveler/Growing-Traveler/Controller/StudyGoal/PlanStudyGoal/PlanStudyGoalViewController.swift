@@ -117,6 +117,8 @@ class PlanStudyGoalViewController: BaseViewController {
     
     let studyGoalManager = StudyGoalManager()
     
+    var isOpenEdited = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -129,9 +131,6 @@ class PlanStudyGoalViewController: BaseViewController {
             title = "編輯個人學習計劃"
             
         }
-        
-        // MARK: - 開啟 TableView 可以修改
-        planStudyGoalTableView.isEditing = true
         
         planStudyGoalTableView.register(
             UINib(nibName: String(describing: PlanStudyGoalHeaderView.self), bundle: nil),
@@ -335,6 +334,9 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         headerView.addStudyItemButton.addTarget(
             self, action: #selector(addStudyItemButton), for: .touchUpInside)
         
+        headerView.openEditButton.addTarget(
+            self, action: #selector(editStudyItemButton), for: .touchUpInside)
+        
         return headerView
 
     }
@@ -360,6 +362,24 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             studyGoalManager.addData(studyGoal: studyGoal)
             
             navigationController?.popViewController(animated: true)
+            
+        }
+        
+    }
+    
+    @objc func editStudyItemButton(sender: UIButton) {
+        
+        if isOpenEdited {
+            
+            isOpenEdited = false
+            
+            planStudyGoalTableView.isEditing = isOpenEdited
+            
+        } else {
+            
+            isOpenEdited = true
+            
+            planStudyGoalTableView.isEditing = isOpenEdited
             
         }
         
