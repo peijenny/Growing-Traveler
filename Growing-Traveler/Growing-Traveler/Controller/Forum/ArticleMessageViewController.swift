@@ -11,6 +11,8 @@ class ArticleMessageViewController: BaseViewController {
 
     @IBOutlet weak var messageTextField: UITextField!
     
+    @IBOutlet weak var hintLabel: UILabel!
+    
     var forumArticleManager = ForumArticleManager()
     
     var articleID = String()
@@ -42,6 +44,7 @@ class ArticleMessageViewController: BaseViewController {
         self.view.removeFromSuperview()
         
     }
+    
     @IBAction func selectImageButton(_ sender: UIButton) {
         
         let picker = UIImagePickerController()
@@ -56,34 +59,43 @@ class ArticleMessageViewController: BaseViewController {
         
         guard let contentText = messageTextField.text else { return }
         
-        var contentType = ""
-        
-        if contentText.range(of: "https://") != nil {
+        if contentText == "" {
             
-            contentType = "image"
+            hintLabel.text = "留言不可為空！"
+//            print("留言不可為空！")
             
         } else {
-            
-            contentType = "string"
+
+            var contentType = ""
+
+            if contentText.range(of: "https://") != nil {
+
+                contentType = "image"
+
+            } else {
+
+                contentType = "string"
+
+            }
+
+            let message = ArticleContent(
+                orderID: orderID,
+                contentType: contentType,
+                contentText: contentText
+            )
+
+            let articleMessage = ArticleMessage(
+                userID: userID,
+                articleID: articleID,
+                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
+                message: message
+            )
+
+            forumArticleManager.addMessageData(articleMessage: articleMessage)
+
+            self.view.removeFromSuperview()
             
         }
-        
-        let message = ArticleContent(
-            orderID: orderID,
-            contentType: contentType,
-            contentText: contentText
-        )
-        
-        let articleMessage = ArticleMessage(
-            userID: userID,
-            articleID: articleID,
-            createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-            message: message
-        )
-        
-        forumArticleManager.addMessageData(articleMessage: articleMessage)
-        
-        self.view.removeFromSuperview()
         
     }
     
