@@ -24,4 +24,28 @@ class StudyGoalTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func checkIsCompleted(isCompleted: Bool) {
+        
+        if isCompleted {
+            
+            checkButton.backgroundColor = UIColor.black
+            
+            checkButton.tintColor = UIColor.white
+            
+        } else {
+            
+            checkButton.backgroundColor = UIColor.systemGray5
+            
+            checkButton.tintColor = UIColor.clear
+            
+        }
+        
+    }
+    
+    func showStudyItem(studyItem: StudyItem) {
+        
+        studyItemLabel.text = studyItem.itemTitle
+        
+    }
+    
 }

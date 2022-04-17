@@ -17,4 +17,12 @@ class StudyGoalFooterView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var hideRecordLabel: UILabel!
     
+    func showStudyGoalFooter(studyGoal: StudyGoal) {
+        
+        categoryLabel.text = studyGoal.category.title
+        
+        hideRecordLabel.text = "\(studyGoal.id)"
+        
+    }
+    
 }
