@@ -40,6 +40,8 @@ enum InputError {
     
     case contentEmpty
     
+    case startDatereLativelyLate
+    
     var title: String {
         
         switch self {
@@ -55,6 +57,8 @@ enum InputError {
         case .studyItemEmpty: return "學習項目不可為空！"
             
         case .contentEmpty: return "內容輸入不可為空！"
+            
+        case .startDatereLativelyLate: return "開始日期大於結束日期！"
             
         }
         
@@ -258,7 +262,7 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
     
     // MARK: - 刪除 TableView Row
     func tableView(_ tableView: UITableView,
-        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
     -> UISwipeActionsConfiguration? {
         
         let contextItem = UIContextualAction(style: .destructive, title: "刪除") {  _, _, _ in
@@ -293,21 +297,26 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         headerView.studyGoalTitleTextField.delegate = self
         
-        if checkStudyGoalFillIn == true && headerView.checkFullIn(studyItemsCount: studyItems.count) {
+        if checkStudyGoalFillIn == true {
             
-            if studyGoal != nil {
+            if headerView.checkFullIn(itemCount: studyItems.count,
+                startDate: selectStartDate, endDate: selectEndDate) {
                 
-                addStudyGoalToDatabase(
-                    id: studyGoal?.id ?? "",
-                    title: headerView.studyGoalTitleTextField.text ?? ""
-                )
-                
-            } else {
-                
-                addStudyGoalToDatabase(
-                    id: studyGoalManager.database.document().documentID,
-                    title: headerView.studyGoalTitleTextField.text ?? ""
-                )
+                if studyGoal != nil {
+                    
+                    addStudyGoalToDatabase(
+                        id: studyGoal?.id ?? "",
+                        title: headerView.studyGoalTitleTextField.text ?? ""
+                    )
+                    
+                } else {
+                    
+                    addStudyGoalToDatabase(
+                        id: studyGoalManager.database.document().documentID,
+                        title: headerView.studyGoalTitleTextField.text ?? ""
+                    )
+                    
+                }
                 
             }
             
@@ -315,12 +324,20 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             
         }
         
-        headerView.showSelectedDate(dateType: selectDateType,
-            startDate: selectStartDate, endDate: selectEndDate)
-        
         headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
         
         headerView.modifyStudyGoal(studyGoal: studyGoal)
+        
+        if studyGoal != nil {
+            
+            studyGoal?.studyPeriod.startDate = selectStartDate.timeIntervalSince1970
+            
+            studyGoal?.studyPeriod.endDate = selectEndDate.timeIntervalSince1970
+            
+        }
+        
+        headerView.showSelectedDate(dateType: selectDateType,
+            startDate: selectStartDate, endDate: selectEndDate)
 
         headerView.startDateCalenderButton.addTarget(
             self, action: #selector(selectStartDateButton), for: .touchUpInside)
@@ -373,15 +390,13 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             
             isOpenEdited = false
             
-            planStudyGoalTableView.isEditing = isOpenEdited
-            
         } else {
             
             isOpenEdited = true
             
-            planStudyGoalTableView.isEditing = isOpenEdited
-            
         }
+        
+        planStudyGoalTableView.isEditing = isOpenEdited
         
     }
     
@@ -391,9 +406,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         selectCalenderViewController.getSelectDate = { [weak self] date in
             
-            self?.selectStartDate = date
+            guard let strongSelf = self else { return }
             
-            self?.selectDateType = SelectDateType.startDate.title
+            strongSelf.selectStartDate = date
+            
+            strongSelf.selectDateType = SelectDateType.startDate.title
             
         }
         
@@ -403,13 +420,23 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
     
     @objc func selectEndDateButton(sender: UIButton) {
         
-        selectCalenderViewController.startDate = selectStartDate
+        if selectStartDate >= Date() {
+            
+            selectCalenderViewController.startDate = selectStartDate
+            
+        } else {
+            
+            selectCalenderViewController.startDate = Date()
+            
+        }
         
         selectCalenderViewController.getSelectDate = { [weak self] date in
             
-            self?.selectEndDate = date
+            guard let strongSelf = self else { return }
             
-            self?.selectDateType = SelectDateType.endDate.title
+            strongSelf.selectEndDate = date
+            
+            strongSelf.selectDateType = SelectDateType.endDate.title
             
         }
         
