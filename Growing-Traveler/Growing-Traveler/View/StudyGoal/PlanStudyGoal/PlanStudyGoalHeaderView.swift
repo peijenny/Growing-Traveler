@@ -78,7 +78,7 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
         
         if studyGoalTitleTextField.text == "" {
 
-            hintLabel.text = InputError.studyGoalTitleEmpty.title
+            hintLabel.text = InputError.titleEmpty.title
 
         } else if startDateTextField.text == "" {
 

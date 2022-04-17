@@ -45,7 +45,7 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         if titleTextField.text == "" {
             
-            hintLabel.text = InputError.studyGoalTitleEmpty.title
+            hintLabel.text = InputError.titleEmpty.title
             
             return false
 
