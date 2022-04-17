@@ -1,5 +1,5 @@
 //
-//  ArticleContentTableViewCell.swift
+//  ArticleTypeTableViewCell.swift
 //  Growing-Traveler
 //
 //  Created by Jenny Hung on 2022/4/13.
@@ -7,11 +7,21 @@
 
 import UIKit
 
-class PublishArticleContentTableViewCell: UITableViewCell {
+class PublishArticleTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var categoryTextField: UITextField!
+    
+    @IBOutlet weak var titleTextField: UITextField!
+    
+    @IBOutlet weak var selectCategoryButton: UIButton!
+    
     @IBOutlet weak var addImageButton: UIButton!
     
     @IBOutlet weak var contentTextView: UITextView!
+    
+    @IBOutlet weak var hintLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +32,35 @@ class PublishArticleContentTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
+        contentTextView.layer.borderColor = UIColor.systemGray5.cgColor
+        
+        contentTextView.layer.borderWidth = 1
+        
+        contentTextView.layer.cornerRadius = 5
+        
+    }
+    
+    func checkInputType() -> Bool {
+        
+        if titleTextField.text == "" {
+            
+            hintLabel.text = InputError.studyGoalTitleEmpty.title
+            
+            return false
+
+        } else if categoryTextField.text == "" {
+            
+            hintLabel.text = InputError.categoryEmpty.title
+            
+            return false
+            
+        } else {
+            
+            return true
+            
+        }
+        
     }
     
     func insertPictureToTextView(imageLink: String) {
@@ -54,16 +93,13 @@ class PublishArticleContentTableViewCell: UITableViewCell {
         
         mutableStr.insert(NSAttributedString(string: "\n\0\(imageLink)\0\n\n"), at: selectedRange.location)
 
-//        // 插入圖片後的下一行
-//        mutableStr.insert(NSAttributedString(string: "\0\n"), at: selectedRange.location + 2)
-
         let attribute = [ NSAttributedString.Key.font: UIFont(name: "Arial", size: 18.0)! ]
 
         contentTextView.attributedText = NSAttributedString(string: mutableStr.string, attributes: attribute)
         
     }
     
-    func checkInput() -> [String] {
+    func checkInputContent() -> [String] {
         
         var contentArray: [String] = []
         
@@ -75,7 +111,7 @@ class PublishArticleContentTableViewCell: UITableViewCell {
                 
             } else {
                 
-                print("內容輸入不可為空")
+                hintLabel.text = InputError.contentEmpty.title
                 
             }
             

@@ -155,13 +155,8 @@ class PublishForumArticleViewController: BaseViewController {
         ])
         
         publishArticleTableView.register(
-            UINib(nibName: String(describing: PublishArticleTypeTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: PublishArticleTypeTableViewCell.self)
-        )
-        
-        publishArticleTableView.register(
-            UINib(nibName: String(describing: PublishArticleContentTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: PublishArticleContentTableViewCell.self)
+            UINib(nibName: String(describing: PublishArticleTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: PublishArticleTableViewCell.self)
         )
 
         publishArticleTableView.delegate = self
@@ -181,75 +176,53 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 {
-            
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: PublishArticleTypeTableViewCell.self),
-                for: indexPath
-            )
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: PublishArticleTableViewCell.self),
+            for: indexPath
+        )
 
-            guard let cell = cell as? PublishArticleTypeTableViewCell else { return cell }
+        guard let cell = cell as? PublishArticleTableViewCell else { return cell }
+        
+        cell.categoryTextField.text = selectCategoryItem?.title
+        
+        cell.selectCategoryButton.addTarget(
+            self, action: #selector(selectCategoryTagButton), for: .touchUpInside)
+        
+        cell.addImageButton.addTarget(
+            self, action: #selector(insertImage), for: .touchUpInside)
+        
+        if let imageLink = self.imageLink {
             
-            cell.selectCategoryButton.addTarget(
-                self, action: #selector(selectCategoryTagButton), for: .touchUpInside)
+            cell.insertPictureToTextView(imageLink: imageLink)
             
-            cell.categoryTextField.text = selectCategoryItem?.title
-            
-            if checkArticleFullIn {
-                
-                if cell.checkInput() {
-                    
-                    inputTitle = cell.titleTextField.text
-                    
-                    forumType = cell.typeSegmentedControl.titleForSegment(
-                        at: cell.typeSegmentedControl.selectedSegmentIndex
-                    )
-                    
-                }
-
-            }
-            
-            return cell
-            
-        } else {
-            
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: PublishArticleContentTableViewCell.self),
-                for: indexPath
-            )
-
-            guard let cell = cell as? PublishArticleContentTableViewCell else { return cell }
-
-            cell.addImageButton.addTarget(self, action: #selector(insertImage), for: .touchUpInside)
-            
-            if checkArticleFullIn {
-
-                if cell.checkInput() != [] {
-                    
-                    contentArray = cell.checkInput()
-                    
-                    handleArticleContentData()
-                    
-                }
-                
-            }
-            
-            if let imageLink = self.imageLink {
-                
-                cell.insertPictureToTextView(imageLink: imageLink)
-                
-                self.imageLink = nil
-                
-            }
-            
-            return cell
+            self.imageLink = nil
             
         }
+        
+        if checkArticleFullIn && cell.checkInputType() {
+            
+            inputTitle = cell.titleTextField.text
+            
+            forumType = cell.typeSegmentedControl.titleForSegment(
+                at: cell.typeSegmentedControl.selectedSegmentIndex
+            )
+            
+            if cell.checkInputContent() != [] {
+                
+                contentArray = cell.checkInputContent()
+                
+                handleArticleContentData()
+                
+            }
+            
+        }
+        
+        return cell
         
     }
     

@@ -37,6 +37,8 @@ enum InputError {
     
     case studyItemEmpty
     
+    case contentEmpty
+    
     var title: String {
         
         switch self {
@@ -50,6 +52,8 @@ enum InputError {
         case .categoryEmpty: return "尚未選擇分類標籤！"
             
         case .studyItemEmpty: return "學習項目不可為空！"
+            
+        case .contentEmpty: return "內容輸入不可為空！"
             
         }
         
