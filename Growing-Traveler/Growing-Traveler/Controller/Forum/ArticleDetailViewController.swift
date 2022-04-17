@@ -27,6 +27,8 @@ class ArticleDetailViewController: UIViewController {
     
     var articleMessages: [ArticleMessage] = []
     
+    let myImageView = UIImageView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -214,19 +216,25 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let myImageView = UIImageView()
-        
         guard let forumArticle = forumArticle else { return }
         
         if indexPath.section == 0 && forumArticle.content[indexPath.row].contentType == "image" {
             
             myImageView.loadImage(forumArticle.content[indexPath.row].contentText)
             
+            showPhoto()
+            
         } else if indexPath.section == 1 && articleMessages[indexPath.row].message.contentType == "image" {
             
             myImageView.loadImage(articleMessages[indexPath.row].message.contentText)
             
+            showPhoto()
+            
         }
+        
+    }
+    
+    func showPhoto() {
         
         // 展示 image (pop-up Image 單獨顯示的視窗)
         let browser = JXPhotoBrowser()
@@ -237,11 +245,12 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
 
             let browserCell = context.cell as? JXPhotoBrowserImageCell
             
-            browserCell?.imageView.image = myImageView.image
+            browserCell?.imageView.image = self.myImageView.image
             
         }
 
         browser.show()
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

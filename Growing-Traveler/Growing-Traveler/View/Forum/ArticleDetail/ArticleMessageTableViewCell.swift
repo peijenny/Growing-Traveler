@@ -68,7 +68,16 @@ class ArticleMessageTableViewCell: UITableViewCell {
 
         setArticleContent(content: articleMessage.message)
         
-        userIDLabel.text = userID
+        if articleMessage.userID == userID {
+            
+            userIDLabel.text = "\(articleMessage.userID) (原Po)"
+            
+        } else {
+            
+            userIDLabel.text = articleMessage.userID
+            
+        }
+        
         
         createTimeLabel.text = formatter.string(from: createTime)
         

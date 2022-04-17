@@ -31,7 +31,7 @@ enum ForumType {
     
 }
 
-class ForumViewController: UIViewController {
+class ForumViewController: BaseViewController {
 
     @IBOutlet weak var searchTextField: UITextField!
     
@@ -189,6 +189,8 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let articles = forumArticles.filter({ $0.forumType == forumType[indexPath.section] })
+        
+        let searchArticels = searchForumArticles.filter({ $0.forumType == forumType[indexPath.section] })
 
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: ArticleTableViewCell.self),
@@ -199,7 +201,14 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.showForumArticle(forumArticle: articles[indexPath.row])
         
-        cell.showLoadMoreButton(indexPathCount: articles.count - 1, indexPathRow: indexPath.row)
+        let amountOver: Bool = (searchArticels.count > articles.count)
+        
+        let isSearch: Bool = (searchTextField.text != "")
+        
+        let isLastOne: Bool = (articles.count - 1 == indexPath.row)
+        
+        cell.showLoadMoreButton(
+            amountOver: amountOver, isSearch: isSearch, isLastOne: isLastOne)
         
         cell.loadMoreButton.addTarget(self, action: #selector(loadMoreButton), for: .touchUpInside)
         

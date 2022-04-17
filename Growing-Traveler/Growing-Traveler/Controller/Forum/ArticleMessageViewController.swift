@@ -68,7 +68,7 @@ class ArticleMessageViewController: BaseViewController {
 
             var contentType = ""
 
-            if contentText.range(of: "https://") != nil {
+            if contentText.range(of: "https://i.imgur.com") != nil {
 
                 contentType = "image"
 
