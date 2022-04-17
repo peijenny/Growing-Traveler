@@ -15,6 +15,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="n0A-BW-O5K">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="6KV-4R-PMy"/>
@@ -35,9 +38,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gK1-Su-8Lg">
                                 <rect key="frame" x="20" y="88" width="374" height="34"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZh-N3-uFJ">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入標題關鍵字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZh-N3-uFJ">
                                         <rect key="frame" x="0.0" y="0.0" width="318.5" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1y-fa-3Ah">
@@ -84,7 +87,9 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="TWO-8Y-0I2" secondAttribute="bottom" constant="20" id="zmh-Gf-UbB"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="討論區" id="CLd-5v-9Wr"/>
+                    <navigationItem key="navigationItem" title="討論區" id="CLd-5v-9Wr">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Iro-N9-qRT"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="addArticleButton" destination="TWO-8Y-0I2" id="7LB-HC-Gop"/>
                         <outlet property="articleTableView" destination="eEy-Fd-zt4" id="5Bs-N7-Mc1"/>
@@ -116,7 +121,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="iZ0-kd-3rU"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -125,7 +130,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="gFw-HQ-jqq"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRw-b7-xOy">
@@ -149,7 +154,9 @@
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="確認"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="確認">
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="submitButton:" destination="rxg-J9-1qK" eventType="touchUpInside" id="6WK-2w-gEb"/>
                                         </connections>

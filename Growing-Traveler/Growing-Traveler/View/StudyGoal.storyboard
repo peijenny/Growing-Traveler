@@ -15,6 +15,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bez-1B-xaU">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="B5n-MD-5MG"/>
@@ -33,34 +36,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4j2-rB-qVK">
-                                <rect key="frame" x="0.0" y="88" width="414" height="31"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="36.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Nz-We-I3v">
-                                        <rect key="frame" x="0.0" y="0.0" width="138" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="138" height="36.5"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="待處理"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="待處理">
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="handleStatusButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="P6W-oK-izq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azx-6w-Wlk">
-                                        <rect key="frame" x="138" y="0.0" width="138" height="31"/>
+                                        <rect key="frame" x="138" y="0.0" width="138" height="36.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="處理中"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="處理中">
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="handleStatusButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sKf-cW-vcF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9f-0F-UcN">
-                                        <rect key="frame" x="276" y="0.0" width="138" height="31"/>
+                                        <rect key="frame" x="276" y="0.0" width="138" height="36.5"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="已處理"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="已處理">
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="handleStatusButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ls7-dS-768"/>
                                         </connections>
@@ -68,8 +77,8 @@
                                 </subviews>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s7B-ph-YYk">
-                                <rect key="frame" x="0.0" y="119" width="414" height="743"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s7B-ph-YYk">
+                                <rect key="frame" x="0.0" y="124.5" width="414" height="737.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1D-fh-S7D" userLabel="addStudyGoalButton">
@@ -101,7 +110,9 @@
                             <constraint firstItem="4j2-rB-qVK" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="wfY-eU-9WX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="成長旅客" id="2yK-Wb-cqv"/>
+                    <navigationItem key="navigationItem" title="成長旅客" id="2yK-Wb-cqv">
+                        <barButtonItem key="backBarButtonItem" title=" " id="G0r-9i-rdH"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="addGoalButton" destination="t1D-fh-S7D" id="VSr-sw-hdW"/>
                         <outlet property="studyGoalTableView" destination="s7B-ph-YYk" id="6FP-c5-7Eg"/>
@@ -160,51 +171,51 @@
                                 <rect key="frame" x="20" y="198.5" width="374" height="460"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="項目名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g53-PE-vwA">
-                                        <rect key="frame" x="16" y="72" width="70" height="40"/>
+                                        <rect key="frame" x="16" y="72" width="64" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="qaU-ym-ef6"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="內容描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKx-MT-4HI">
-                                        <rect key="frame" x="16" y="184" width="70" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="16" y="184" width="64" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="學習時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WC-L7-gPm">
-                                        <rect key="frame" x="16" y="128" width="70" height="40"/>
+                                        <rect key="frame" x="16" y="128" width="64" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="cBD-GL-z9x"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9y-OW-uFQ">
-                                        <rect key="frame" x="106" y="132" width="223" height="32"/>
+                                        <rect key="frame" x="100" y="132" width="229" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="gRp-Rl-tID"/>
                                         </constraints>
                                     </stackView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入學習項目名稱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxo-U7-9gw">
-                                        <rect key="frame" x="106" y="72" width="252" height="40"/>
+                                        <rect key="frame" x="100" y="72" width="258" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="l9M-Pa-4JB"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="請描述內容......." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="z9g-MW-1UT">
-                                        <rect key="frame" x="106" y="184" width="252" height="160"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="100" y="184" width="258" height="160"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="160" id="azs-X2-pf1"/>
                                         </constraints>
                                         <color key="textColor" systemColor="labelColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分鐘" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5S-xz-A6a">
@@ -213,7 +224,7 @@
                                             <constraint firstAttribute="width" constant="30" id="9TC-gb-RB5"/>
                                             <constraint firstAttribute="height" constant="30" id="A8T-ur-ksh"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -225,7 +236,9 @@
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="確認"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="確認">
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="confirmButton:" destination="I2E-Nz-5xc" eventType="touchUpInside" id="pOS-6h-s3Z"/>
                                         </connections>
@@ -235,7 +248,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="yvu-oK-EAq"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -253,7 +266,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="24" id="7Jp-ZL-qIa"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -368,6 +381,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

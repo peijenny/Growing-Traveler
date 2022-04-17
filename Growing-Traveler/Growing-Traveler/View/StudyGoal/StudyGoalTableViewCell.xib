@@ -22,7 +22,7 @@
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="or0-HV-fsb"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>

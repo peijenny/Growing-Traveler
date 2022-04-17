@@ -13,8 +13,6 @@ class StudyItemTableViewCell: UITableViewCell {
     
     @IBOutlet weak var studyTimeLabel: UILabel!
     
-    @IBOutlet weak var deleteItemButton: UIButton!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

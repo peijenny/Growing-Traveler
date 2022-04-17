@@ -20,11 +20,11 @@ enum Result<T> {
 
 class CategoryManager {
     
-    let categorys = Firestore.firestore().collection("category")
+    let database = Firestore.firestore().collection("category")
     
     func fetchData(completion: @escaping (Result<[Category]>) -> Void) {
         
-        categorys
+        database
             .order(by: "items", descending: false)
             .getDocuments { snapshot, error in
             

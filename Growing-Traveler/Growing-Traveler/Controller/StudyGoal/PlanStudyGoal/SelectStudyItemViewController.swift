@@ -145,6 +145,8 @@ class SelectStudyItemViewController: BaseViewController {
             var studyItem = StudyItem(itemTitle: itemTitle, studyTime: selectTime, content: content, isCompleted: false)
             
             if modifyStudyItem != nil {
+                
+                studyItem.id = modifyStudyItem?.id
 
                 self.getStudyItem?(studyItem, true)
                 

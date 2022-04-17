@@ -119,6 +119,7 @@ class CalendarViewController: UIViewController {
 
 }
 
+// MARK: - FSCalendar Delegate / DataSource
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     // MARK: - Calendar DataSource
@@ -139,7 +140,8 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
 }
 
-extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - TableView DataSource
+extension CalendarViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -158,6 +160,11 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+}
+
+// MARK: - TableView Delegate
+extension CalendarViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = tableView.dequeueReusableHeaderFooterView(
@@ -165,15 +172,41 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
         
-        headerView.studyGoalTitleLabel.text = studyGoals[section].title
-
-        formatter.dateFormat = "yyyy.MM.dd"
+        headerView.showStudyGoalHeader(studyGoal: studyGoals[section])
         
-        let endDate = Date(timeIntervalSince1970: studyGoals[section].studyPeriod.endDate)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         
-        headerView.endDateLabel.text = formatter.string(from: endDate)
-
+        headerView.addGestureRecognizer(tapGestureRecognizer)
+        
         return headerView
+        
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+
+        let headerView = sender.view as? StudyGoalHeaderView
+        
+        for index in 0..<studyGoals.count {
+            
+            if sender.view == headerView &&
+                headerView?.hideRecordLabel.text == studyGoals[index].id {
+                
+                let viewController = UIStoryboard(
+                    name: "StudyGoal",
+                    bundle: nil
+                ).instantiateViewController(
+                    withIdentifier: String(describing: PlanStudyGoalViewController.self)
+                )
+                
+                guard let viewController = viewController as? PlanStudyGoalViewController else { return }
+                
+                viewController.studyGoal = studyGoals[index]
+                
+                navigationController?.pushViewController(viewController, animated: true)
+                
+            }
+            
+        }
         
     }
     

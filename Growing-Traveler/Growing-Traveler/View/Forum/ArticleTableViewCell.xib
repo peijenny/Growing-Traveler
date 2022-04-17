@@ -17,20 +17,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發文標題" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfM-is-cXg">
-                        <rect key="frame" x="16" y="214" width="382" height="20"/>
+                        <rect key="frame" x="16" y="214" width="382" height="21.5"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="OGE-Wt-EmP"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發文者" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crT-1a-Uaf">
-                        <rect key="frame" x="16" y="244" width="43" height="17"/>
+                        <rect key="frame" x="16" y="245.5" width="43" height="15.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="43" id="n97-zB-ipX"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -45,7 +45,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="個人品牌經營" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcn-QG-A3y">
                                 <rect key="frame" x="0.0" y="0.0" width="98" height="26"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -61,11 +61,11 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TESTNAMEID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJl-cN-RiK">
-                        <rect key="frame" x="69" y="244" width="329" height="20"/>
+                        <rect key="frame" x="64" y="245.5" width="334" height="18.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="329" id="lvq-hm-GE1"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="334" id="egN-VW-Mfu"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -77,14 +77,16 @@
                         </constraints>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="載入更多"/>
+                        <buttonConfiguration key="configuration" style="plain" title="載入更多">
+                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
+                        </buttonConfiguration>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Bz-Nv-d5G">
                         <rect key="frame" x="16" y="178" width="53" height="26"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發問" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojK-Nr-S8i">
                                 <rect key="frame" x="0.0" y="0.0" width="53" height="26"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -103,8 +105,8 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="b3i-0v-Yax"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -115,7 +117,7 @@
                     <constraint firstItem="NI3-8R-g2h" firstAttribute="top" secondItem="GmG-5H-94K" secondAttribute="bottom" constant="8" id="3wH-m2-flO"/>
                     <constraint firstItem="crT-1a-Uaf" firstAttribute="top" secondItem="gfM-is-cXg" secondAttribute="bottom" constant="10" id="AmX-a1-Q6j"/>
                     <constraint firstItem="teh-Uh-rYo" firstAttribute="leading" secondItem="8Bz-Nv-d5G" secondAttribute="trailing" id="CTI-L1-aeX"/>
-                    <constraint firstItem="ZJl-cN-RiK" firstAttribute="leading" secondItem="crT-1a-Uaf" secondAttribute="trailing" constant="10" id="E0u-Mr-1tB"/>
+                    <constraint firstItem="ZJl-cN-RiK" firstAttribute="leading" secondItem="crT-1a-Uaf" secondAttribute="trailing" constant="5" id="E0u-Mr-1tB"/>
                     <constraint firstItem="Zx3-EC-Tcm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="FZp-tG-zpd"/>
                     <constraint firstItem="ZJl-cN-RiK" firstAttribute="top" secondItem="gfM-is-cXg" secondAttribute="bottom" constant="10" id="GpC-LI-mrC"/>
                     <constraint firstItem="gfM-is-cXg" firstAttribute="top" secondItem="teh-Uh-rYo" secondAttribute="bottom" constant="10" id="HsH-AU-dsZ"/>

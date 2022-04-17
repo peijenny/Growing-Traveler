@@ -54,10 +54,6 @@ private enum Tab {
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     private let tabs: [Tab] = [.studyGoal, .forum]
-    
-    var trolleyTabBarItem: UITabBarItem!
-    
-    var orderObserver: NSKeyValueObservation!
 
     override func viewDidLoad() {
         super.viewDidLoad()

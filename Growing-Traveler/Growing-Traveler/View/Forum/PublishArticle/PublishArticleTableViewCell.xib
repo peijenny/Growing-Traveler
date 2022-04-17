@@ -18,34 +18,34 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發文類型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05z-wP-CBG">
-                        <rect key="frame" x="16" y="16" width="70" height="35"/>
+                        <rect key="frame" x="16" y="16" width="64" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="Nt3-jp-R16"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分類標籤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ld-b2-Dn4">
-                        <rect key="frame" x="16" y="67" width="70" height="35"/>
+                        <rect key="frame" x="16" y="67" width="64" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="4da-5P-erZ"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發文標題" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0E-wA-aKl">
-                        <rect key="frame" x="16" y="118" width="70" height="35"/>
+                        <rect key="frame" x="16" y="118" width="64" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="SjW-nv-rJF"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1bS-Yl-K8M">
-                        <rect key="frame" x="102" y="16" width="296" height="36"/>
+                        <rect key="frame" x="96" y="16" width="302" height="36"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="lo8-L4-rKC"/>
                         </constraints>
@@ -56,19 +56,19 @@
                         </segments>
                     </segmentedControl>
                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇分類標籤" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g56-qu-5ux">
-                        <rect key="frame" x="102" y="67" width="245" height="35"/>
+                        <rect key="frame" x="96" y="67" width="251" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="YFY-YR-Dr9"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入發文標題" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v90-nX-ccQ">
-                        <rect key="frame" x="102" y="118" width="296" height="35"/>
+                        <rect key="frame" x="96" y="118" width="302" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="k4J-GG-oqj"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAG-FC-Sz0">
@@ -83,11 +83,11 @@
                         <buttonConfiguration key="configuration" style="plain" image="tag" catalog="system"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="描述內容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ar-dX-hAV">
-                        <rect key="frame" x="16" y="163" width="70" height="35"/>
+                        <rect key="frame" x="16" y="163" width="64" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="YXH-7Q-LNl"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -109,7 +109,7 @@
                             <constraint firstAttribute="height" constant="440" id="myn-8l-9dJ"/>
                         </constraints>
                         <color key="textColor" systemColor="labelColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eq-2Z-hKz">
@@ -117,7 +117,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="hQc-sz-f7Y"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                         <color key="textColor" systemColor="systemRedColor"/>
                         <nil key="highlightedColor"/>
                     </label>

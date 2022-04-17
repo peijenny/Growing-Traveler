@@ -22,7 +22,7 @@
                             <constraint firstAttribute="height" constant="40" id="EG0-Bn-iff"/>
                             <constraint firstAttribute="width" secondItem="sNT-US-WfR" secondAttribute="height" multiplier="191:20" id="kzb-5n-Pqo"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
