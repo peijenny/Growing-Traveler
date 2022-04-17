@@ -93,7 +93,7 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         mutableStr.insert(NSAttributedString(string: "\n\0\(imageLink)\0\n\n"), at: selectedRange.location)
 
-        let attribute = [ NSAttributedString.Key.font: UIFont(name: "Arial", size: 18.0)! ]
+        let attribute = [ NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 15.0)! ]
 
         contentTextView.attributedText = NSAttributedString(string: mutableStr.string, attributes: attribute)
         
@@ -103,7 +103,7 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         var contentArray: [String] = []
         
-        if contentTextView.text.range(of: "https://") == nil {
+        if contentTextView.text.range(of: "https://i.imgur.com") == nil {
             
             if contentTextView.text != "" {
                 

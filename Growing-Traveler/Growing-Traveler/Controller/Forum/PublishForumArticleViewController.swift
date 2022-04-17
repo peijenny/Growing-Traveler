@@ -93,7 +93,7 @@ class PublishForumArticleViewController: BaseViewController {
             
             for index in 0..<contentArray.count {
                 
-                if contentArray[index].range(of: "https://") != nil {
+                if contentArray[index].range(of: "https://i.imgur.com") != nil {
                     
                     articleType = "image"
                     

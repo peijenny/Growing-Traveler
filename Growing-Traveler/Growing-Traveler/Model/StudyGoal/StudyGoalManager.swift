@@ -17,7 +17,8 @@ class StudyGoalManager {
     // 監聽 即時修改的學習計劃 至 Firebase Firestore
     func listenData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
-        database.addSnapshotListener { snapshot, error in
+        database.whereField("userID", isEqualTo: userID)
+            .addSnapshotListener { snapshot, error in
             
             var studyGoals: [StudyGoal] = []
             

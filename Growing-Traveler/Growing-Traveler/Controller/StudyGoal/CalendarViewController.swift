@@ -54,6 +54,8 @@ class CalendarViewController: UIViewController {
         
         calendarView.appearance.titleWeekendColor = UIColor.lightGray
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
     }
     
     override var hidesBottomBarWhenPushed: Bool {
