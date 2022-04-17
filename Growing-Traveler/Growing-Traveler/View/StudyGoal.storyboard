@@ -101,7 +101,9 @@
                             <constraint firstItem="4j2-rB-qVK" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="wfY-eU-9WX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="成長旅客" id="2yK-Wb-cqv"/>
+                    <navigationItem key="navigationItem" title="成長旅客" id="2yK-Wb-cqv">
+                        <barButtonItem key="backBarButtonItem" title=" " id="G0r-9i-rdH"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="addGoalButton" destination="t1D-fh-S7D" id="VSr-sw-hdW"/>
                         <outlet property="studyGoalTableView" destination="s7B-ph-YYk" id="6FP-c5-7Eg"/>
