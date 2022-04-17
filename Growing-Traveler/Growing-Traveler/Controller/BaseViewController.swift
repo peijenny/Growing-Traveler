@@ -8,6 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
+// MARK: - BaseVC 處理 keyboard 事件
 class BaseViewController: UIViewController {
     
     static var identifier: String {
