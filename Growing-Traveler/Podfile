@@ -13,6 +13,14 @@ target 'Growing-Traveler' do
     pod 'Firebase/Firestore'
     pod 'FirebaseFirestoreSwift'
     pod 'IQKeyboardManagerSwift'
+    pod 'JXPhotoBrowser', '~> 3.0'
+    pod 'Alamofire', '~> 5.5'
+    pod 'Kingfisher'
 
+post_install do |installer|
+    installer.pods_project.build_configurations.each do |config|
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+   end
+ end
 
 end

@@ -37,6 +37,8 @@ enum InputError {
     
     case studyItemEmpty
     
+    case contentEmpty
+    
     var title: String {
         
         switch self {
@@ -50,6 +52,8 @@ enum InputError {
         case .categoryEmpty: return "尚未選擇分類標籤！"
             
         case .studyItemEmpty: return "學習項目不可為空！"
+            
+        case .contentEmpty: return "內容輸入不可為空！"
             
         }
         
@@ -367,8 +371,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
         
         if let studyGoal = studyGoal {
             
-            print("Test \(studyGoal)")
-            
             studyGoalManager.addData(studyGoal: studyGoal)
             
             navigationController?.popViewController(animated: true)
@@ -494,9 +496,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        print("TEST")
-        
+
         popupSelectStudyItemPage(
             studyItem: studyItems[indexPath.row],
             selectRow: indexPath.row
