@@ -54,6 +54,8 @@ class SelectCategoryViewController: UIViewController {
     
     func setTableView() {
         
+        categoryTableView.separatorInset.right = 15.0
+        
         view.addSubview(categoryTableView)
         
         categoryTableView.translatesAutoresizingMaskIntoConstraints = false
