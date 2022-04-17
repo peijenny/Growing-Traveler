@@ -189,7 +189,7 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let articles = forumArticles.filter({ $0.forumType == forumType[indexPath.section] })
-        
+
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: ArticleTableViewCell.self),
             for: indexPath
@@ -197,17 +197,9 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = cell as? ArticleTableViewCell else { return cell }
         
-        cell.checkImage(forumArticle: articles[indexPath.row])
-
-        cell.titleLabel.text = articles[indexPath.row].title
+        cell.showForumArticle(forumArticle: articles[indexPath.row])
         
-        cell.forumTypeLabel.text = articles[indexPath.row].forumType
-
-        cell.categoryLabel.text = articles[indexPath.row].category.title
-
-        cell.userIDLabel.text = userID
-        
-        cell.showLoadMoreButton(indexPathCount: indexPath.count - 1, indexPathRow: indexPath.row)
+        cell.showLoadMoreButton(indexPathCount: articles.count - 1, indexPathRow: indexPath.row)
         
         cell.loadMoreButton.addTarget(self, action: #selector(loadMoreButton), for: .touchUpInside)
         
