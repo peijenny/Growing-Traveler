@@ -25,6 +25,8 @@ class ArticleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var buttonHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var createTimeLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,6 +36,28 @@ class ArticleTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func showForumArticle(forumArticle: ForumArticle) {
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        let createTime = Date(timeIntervalSince1970: forumArticle.createTime)
+        
+        createTimeLabel.text = formatter.string(from: createTime)
+        
+        checkImage(forumArticle: forumArticle)
+
+        titleLabel.text = forumArticle.title
+        
+        forumTypeLabel.text = forumArticle.forumType
+
+        categoryLabel.text = forumArticle.category.title
+
+        userIDLabel.text = forumArticle.userID
+        
     }
     
     func checkImage(forumArticle: ForumArticle) {

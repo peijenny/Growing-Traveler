@@ -98,17 +98,28 @@
                             <constraint firstAttribute="bottom" secondItem="ojK-Nr-S8i" secondAttribute="bottom" id="oLI-BM-81q"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022.04.11" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NI3-8R-g2h">
+                        <rect key="frame" x="298" y="178" width="100" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="b3i-0v-Yax"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="teh-Uh-rYo" secondAttribute="trailing" constant="227" id="2bw-Yd-bSp"/>
                     <constraint firstItem="8Bz-Nv-d5G" firstAttribute="top" secondItem="GmG-5H-94K" secondAttribute="bottom" constant="8" id="2ub-XG-jOc"/>
                     <constraint firstItem="GmG-5H-94K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="3ar-sI-ZeK"/>
+                    <constraint firstItem="NI3-8R-g2h" firstAttribute="top" secondItem="GmG-5H-94K" secondAttribute="bottom" constant="8" id="3wH-m2-flO"/>
                     <constraint firstItem="crT-1a-Uaf" firstAttribute="top" secondItem="gfM-is-cXg" secondAttribute="bottom" constant="10" id="AmX-a1-Q6j"/>
                     <constraint firstItem="teh-Uh-rYo" firstAttribute="leading" secondItem="8Bz-Nv-d5G" secondAttribute="trailing" id="CTI-L1-aeX"/>
                     <constraint firstItem="ZJl-cN-RiK" firstAttribute="leading" secondItem="crT-1a-Uaf" secondAttribute="trailing" constant="10" id="E0u-Mr-1tB"/>
                     <constraint firstItem="Zx3-EC-Tcm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="FZp-tG-zpd"/>
                     <constraint firstItem="ZJl-cN-RiK" firstAttribute="top" secondItem="gfM-is-cXg" secondAttribute="bottom" constant="10" id="GpC-LI-mrC"/>
                     <constraint firstItem="gfM-is-cXg" firstAttribute="top" secondItem="teh-Uh-rYo" secondAttribute="bottom" constant="10" id="HsH-AU-dsZ"/>
+                    <constraint firstAttribute="trailing" secondItem="NI3-8R-g2h" secondAttribute="trailing" constant="16" id="L6q-qY-BGF"/>
                     <constraint firstItem="teh-Uh-rYo" firstAttribute="top" secondItem="GmG-5H-94K" secondAttribute="bottom" constant="8" id="TBa-2q-pUr"/>
                     <constraint firstItem="gfM-is-cXg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="X1D-Pu-eo1"/>
                     <constraint firstItem="crT-1a-Uaf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="YdJ-FK-0hD"/>
@@ -121,6 +132,7 @@
                     <constraint firstItem="GmG-5H-94K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="sED-QP-hy2"/>
                     <constraint firstAttribute="trailing" secondItem="Zx3-EC-Tcm" secondAttribute="trailing" constant="16" id="ucX-5X-y04"/>
                     <constraint firstAttribute="trailing" secondItem="GmG-5H-94K" secondAttribute="trailing" constant="16" id="vJ3-IN-h4V"/>
+                    <constraint firstItem="gfM-is-cXg" firstAttribute="top" secondItem="NI3-8R-g2h" secondAttribute="bottom" constant="10" id="vQc-Hy-hnG"/>
                     <constraint firstAttribute="trailing" secondItem="gfM-is-cXg" secondAttribute="trailing" constant="16" id="xwb-SA-7nl"/>
                 </constraints>
             </tableViewCellContentView>
@@ -128,6 +140,7 @@
             <connections>
                 <outlet property="buttonHeightConstraint" destination="drQ-uM-ehG" id="KJT-Xu-WU0"/>
                 <outlet property="categoryLabel" destination="Kcn-QG-A3y" id="JSw-Pm-b22"/>
+                <outlet property="createTimeLabel" destination="NI3-8R-g2h" id="08q-Y5-0ZI"/>
                 <outlet property="forumTypeLabel" destination="ojK-Nr-S8i" id="YwX-6M-vma"/>
                 <outlet property="imageViewHeightConstraint" destination="EgV-ji-Qkk" id="ZM7-QF-d32"/>
                 <outlet property="loadMoreButton" destination="Zx3-EC-Tcm" id="64l-2e-oA2"/>
