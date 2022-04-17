@@ -76,7 +76,7 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
 
     }
     
-    func checkFullIn(studyItemsCount: Int) -> Bool {
+    func checkFullIn(itemCount: Int, startDate: Date, endDate: Date) -> Bool {
         
         if studyGoalTitleTextField.text == "" {
 
@@ -94,10 +94,14 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
 
             hintLabel.text = InputError.categoryEmpty.title
 
-        } else if studyItemsCount == 0 {
+        } else if itemCount == 0 {
 
             hintLabel.text = InputError.studyItemEmpty.title
 
+        } else if startDate > endDate {
+            
+            hintLabel.text = InputError.startDatereLativelyLate.title
+            
         } else {
             
             return true
