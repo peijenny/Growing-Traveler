@@ -114,20 +114,23 @@ class PlanStudyGoalViewController: BaseViewController {
     
     var checkStudyGoalFillIn = false
     
-    var studyGoal: StudyGoal? {
-        
-        didSet {
-            
-            planStudyGoalTableView.reloadData()
-            
-        }
-    }
+    var studyGoal: StudyGoal?
     
     let studyGoalManager = StudyGoalManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if studyGoal == nil {
+            
+            title = "新增個人學習計劃"
+            
+        } else {
+            
+            title = "編輯個人學習計劃"
+            
+        }
+        
         planStudyGoalTableView.register(
             UINib(nibName: String(describing: PlanStudyGoalHeaderView.self), bundle: nil),
             forHeaderFooterViewReuseIdentifier: String(describing: PlanStudyGoalHeaderView.self)

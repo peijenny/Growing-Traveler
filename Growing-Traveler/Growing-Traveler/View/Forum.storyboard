@@ -84,7 +84,9 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="TWO-8Y-0I2" secondAttribute="bottom" constant="20" id="zmh-Gf-UbB"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="討論區" id="CLd-5v-9Wr"/>
+                    <navigationItem key="navigationItem" title="討論區" id="CLd-5v-9Wr">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Iro-N9-qRT"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="addArticleButton" destination="TWO-8Y-0I2" id="7LB-HC-Gop"/>
                         <outlet property="articleTableView" destination="eEy-Fd-zt4" id="5Bs-N7-Mc1"/>
