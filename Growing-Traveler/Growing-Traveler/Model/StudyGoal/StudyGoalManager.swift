@@ -81,7 +81,8 @@ class StudyGoalManager {
     // 取得 所有的學習計劃 至 StudyFoalViewController
     func fetchData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
-        database.order(by: "studyPeriod", descending: false)
+        database
+            .whereField("userID", isEqualTo: userID)
             .getDocuments { snapshot, error in
             
             var studyGoals: [StudyGoal] = []
