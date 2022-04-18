@@ -432,15 +432,17 @@ extension StudyGoalViewController: UITableViewDelegate {
         let point = sender.convert(CGPoint.zero, to: studyGoalTableView)
 
         if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
-            
+
             if let studyGoal = studyGoals?[indexPath.section] {
-                
+
                 studyGoalManager.deleteData(studyGoal: studyGoal)
-                
+
             }
-            
+
             studyGoals?.remove(at: indexPath.section)
-            
+
+            studyGoalTableView.reloadData()
+
         }
 
     }
