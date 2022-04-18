@@ -58,7 +58,7 @@ class ArticleMessageTableViewCell: UITableViewCell {
         
     }
     
-    func showMessages(articleMessage: ArticleMessage) {
+    func showMessages(articleMessage: ArticleMessage, articleUserID: String) {
         
         let formatter = DateFormatter()
         
@@ -68,7 +68,7 @@ class ArticleMessageTableViewCell: UITableViewCell {
 
         setArticleContent(content: articleMessage.message)
         
-        if articleMessage.userID == userID {
+        if articleMessage.userID == articleUserID {
             
             userIDLabel.text = "\(articleMessage.userID) (原Po)"
             
@@ -77,8 +77,7 @@ class ArticleMessageTableViewCell: UITableViewCell {
             userIDLabel.text = articleMessage.userID
             
         }
-        
-        
+                
         createTimeLabel.text = formatter.string(from: createTime)
         
         orderIDLabel.text = "[\(articleMessage.message.orderID + 1) 樓]"
