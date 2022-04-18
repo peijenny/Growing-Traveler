@@ -131,6 +131,8 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
         
         guard let cell = cell as? MoreArticlesTableViewCell else { return cell }
         
+        cell.selectionStyle = .none
+        
         cell.showMoreArticles(forumArticle: forumArticles[indexPath.row])
         
         return cell

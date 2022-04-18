@@ -266,6 +266,8 @@ extension StudyGoalViewController: UITableViewDataSource {
 
         guard let cell = cell as? StudyGoalTableViewCell else { return cell }
         
+        cell.selectionStyle = .none
+        
         cell.checkButton.addTarget(
             self, action: #selector(checkItemButton), for: .touchUpInside)
         

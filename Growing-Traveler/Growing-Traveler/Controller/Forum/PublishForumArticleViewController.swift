@@ -188,6 +188,8 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
 
         guard let cell = cell as? PublishArticleTableViewCell else { return cell }
         
+        cell.selectionStyle = .none
+        
         cell.contentTextView.delegate = self
         
         cell.categoryTextField.text = selectCategoryItem?.title

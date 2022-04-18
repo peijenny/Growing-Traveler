@@ -168,6 +168,12 @@ class ForumViewController: BaseViewController {
 
         forumArticles = searchForumArticles.filter({ $0.title.range(of: inputText) != nil })
         
+        if inputText == "" {
+            
+            fetchData()
+            
+        }
+        
     }
     
 }
