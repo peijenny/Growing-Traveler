@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pyh-ik-ciz">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="PUr-Xb-69H">
+            <objects>
+                <navigationController id="Pyh-ik-ciz" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uZ0-R9-mRq">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="6A1-fh-jFG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UXU-vQ-MBO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-774" y="54"/>
+        </scene>
+        <!--好友列表-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WMq-2c-fwb">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WMq-2c-fwb" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="FGf-cX-6nB"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WMq-2c-fwb" secondAttribute="trailing" id="SkH-P9-MTq"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="WMq-2c-fwb" secondAttribute="bottom" id="YYI-Js-l8n"/>
+                            <constraint firstItem="WMq-2c-fwb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cnS-RY-7Iw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="好友列表" id="idY-Gf-ohl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="30" y="54"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Bcl-EN-rLB">
+            <objects>
+                <viewController id="vV2-N2-JZ4" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pZl-l8-Suc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="n3K-HG-jVn">
+                                <rect key="frame" x="0.0" y="44" width="414" height="746"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入訊息" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2TK-MT-eaB">
+                                <rect key="frame" x="81" y="806" width="254" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2h0-JU-9d6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxb-Ts-Lr8">
+                                <rect key="frame" x="351" y="806" width="47" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Ry3-qB-7X5"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1e9-pP-Hbq">
+                                <rect key="frame" x="16" y="806" width="49" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="R8V-ML-Tfy"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="folder.fill.badge.plus" catalog="system"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="AH4-fn-PXL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="n3K-HG-jVn" firstAttribute="top" secondItem="AH4-fn-PXL" secondAttribute="top" id="0bf-hh-89s"/>
+                            <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="2TK-MT-eaB" secondAttribute="bottom" constant="16" id="6zQ-7S-Ymq"/>
+                            <constraint firstItem="Kxb-Ts-Lr8" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="aEz-Xg-TDK"/>
+                            <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="1e9-pP-Hbq" secondAttribute="bottom" constant="16" id="aSg-PE-PcA"/>
+                            <constraint firstItem="AH4-fn-PXL" firstAttribute="trailing" secondItem="n3K-HG-jVn" secondAttribute="trailing" id="aUy-7E-zWb"/>
+                            <constraint firstItem="1e9-pP-Hbq" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="c0b-gJ-bEm"/>
+                            <constraint firstItem="Kxb-Ts-Lr8" firstAttribute="leading" secondItem="2TK-MT-eaB" secondAttribute="trailing" constant="16" id="cZm-mP-U7u"/>
+                            <constraint firstItem="1e9-pP-Hbq" firstAttribute="leading" secondItem="AH4-fn-PXL" secondAttribute="leading" constant="16" id="eGe-oT-aGV"/>
+                            <constraint firstItem="AH4-fn-PXL" firstAttribute="trailing" secondItem="Kxb-Ts-Lr8" secondAttribute="trailing" constant="16" id="k9A-uy-G2q"/>
+                            <constraint firstItem="2TK-MT-eaB" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="pLR-4U-1Zl"/>
+                            <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="Kxb-Ts-Lr8" secondAttribute="bottom" constant="16" id="wRb-VU-RHv"/>
+                            <constraint firstItem="2TK-MT-eaB" firstAttribute="leading" secondItem="1e9-pP-Hbq" secondAttribute="trailing" constant="16" id="xmF-Ji-l5b"/>
+                            <constraint firstItem="n3K-HG-jVn" firstAttribute="leading" secondItem="AH4-fn-PXL" secondAttribute="leading" id="yCD-7R-qg1"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vOl-Z0-TzL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="837.68115942028987" y="53.571428571428569"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="folder.fill.badge.plus" catalog="system" width="128" height="91"/>
+        <image name="paperplane.fill" catalog="system" width="128" height="118"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
