@@ -62,10 +62,10 @@ class StudyGoalViewController: UIViewController {
     var topCGFloat = CGFloat()
     
     var bottomCGFloat = CGFloat()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // MARK: - 註冊 TableView header / footer / cell
         studyGoalTableView.register(
             UINib(nibName: String(describing: StudyGoalHeaderView.self), bundle: nil),
@@ -266,6 +266,8 @@ extension StudyGoalViewController: UITableViewDataSource {
 
         guard let cell = cell as? StudyGoalTableViewCell else { return cell }
         
+        cell.selectionStyle = .none
+        
         cell.checkButton.addTarget(
             self, action: #selector(checkItemButton), for: .touchUpInside)
         
@@ -374,9 +376,6 @@ extension StudyGoalViewController: UITableViewDelegate {
             
         }
         
-        footerView.deleteButton.addTarget(
-            self, action: #selector(deleteRowButton), for: .touchUpInside)
-        
         tableView.tableFooterView = UIView.init(frame: CGRect.init(
             x: 0, y: 0, width: footerView.frame.width, height: footerView.frame.height))
         
@@ -387,6 +386,11 @@ extension StudyGoalViewController: UITableViewDelegate {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         
         footerView.addGestureRecognizer(tapGestureRecognizer)
+        
+        footerView.deleteButton.addTarget(
+            self, action: #selector(deleteRowButton), for: .touchUpInside)
+        
+        footerView.deleteButton.tag = section
         
         return footerView
     }
@@ -425,21 +429,17 @@ extension StudyGoalViewController: UITableViewDelegate {
         
     }
     
-    @objc func deleteRowButton(sender: UIButton) {
-        
-        let point = sender.convert(CGPoint.zero, to: studyGoalTableView)
+    @objc func deleteRowButton(_ sender: UIButton) {
 
-        if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
-            
-            if let studyGoal = studyGoals?[indexPath.section] {
-                
-                studyGoalManager.deleteData(studyGoal: studyGoal)
-                
-            }
-            
-            studyGoals?.remove(at: indexPath.section)
-            
+        if let studyGoal = studyGoals?[sender.tag] {
+
+            studyGoalManager.deleteData(studyGoal: studyGoal)
+
         }
+
+        studyGoals?.remove(at: sender.tag)
+
+        studyGoalTableView.reloadData()
 
     }
     

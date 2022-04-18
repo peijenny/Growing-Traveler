@@ -125,7 +125,7 @@ class ForumArticleManager {
                 
                 let sortForumArticles = forumArticles.sorted { (lhs, rhs) in
                     
-                    return lhs.createTime < rhs.createTime
+                    return lhs.createTime > rhs.createTime
                     
                 }
                 

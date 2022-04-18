@@ -93,7 +93,7 @@ class PublishForumArticleViewController: BaseViewController {
             
             for index in 0..<contentArray.count {
                 
-                if contentArray[index].range(of: "https://") != nil {
+                if contentArray[index].range(of: "https://i.imgur.com") != nil {
                     
                     articleType = "image"
                     
@@ -187,6 +187,10 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         )
 
         guard let cell = cell as? PublishArticleTableViewCell else { return cell }
+        
+        cell.selectionStyle = .none
+        
+        cell.contentTextView.delegate = self
         
         cell.categoryTextField.text = selectCategoryItem?.title
         
@@ -292,4 +296,30 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
 
     }
     
+}
+
+extension PublishForumArticleViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        if textView.textColor == UIColor.systemGray3 {
+            
+            textView.text = nil
+            
+            textView.textColor = UIColor.black
+            
+        }
+        
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        if textView.text.isEmpty {
+            
+            textView.text = "請描述內容......"
+            
+            textView.textColor = UIColor.systemGray3
+            
+        }
+    }
 }

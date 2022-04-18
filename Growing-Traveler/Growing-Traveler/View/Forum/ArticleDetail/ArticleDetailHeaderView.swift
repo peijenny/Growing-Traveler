@@ -44,7 +44,7 @@ class ArticleDetailHeaderView: UITableViewHeaderFooterView {
         
         forumTypeLabel.text = forumArticle.forumType
         
-        userIDLabel.text = userID
+        userIDLabel.text = forumArticle.userID
         
     }
     
