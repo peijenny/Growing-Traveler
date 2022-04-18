@@ -208,7 +208,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             guard let cell = cell as? ArticleMessageTableViewCell else { return cell }
             
-            cell.showMessages(articleMessage: articleMessages[indexPath.row])
+            cell.showMessages(articleMessage: articleMessages[indexPath.row], articleUserID: forumArticle?.userID ?? "")
             
             cell.selectionStyle = .none
             
