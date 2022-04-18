@@ -39,6 +39,16 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         contentTextView.layer.cornerRadius = 5
         
+        if contentTextView.text == "請描述內容......" {
+            
+            contentTextView.textColor = UIColor.systemGray3
+            
+        } else {
+            
+            contentTextView.textColor = UIColor.black
+            
+        }
+        
     }
     
     func checkInputType() -> Bool {
@@ -47,19 +57,21 @@ class PublishArticleTableViewCell: UITableViewCell {
             
             hintLabel.text = InputError.titleEmpty.title
             
-            return false
-
         } else if categoryTextField.text == "" {
             
             hintLabel.text = InputError.categoryEmpty.title
             
-            return false
+        } else if contentTextView.text == "請描述內容......" {
+            
+            hintLabel.text = InputError.contentEmpty.title
             
         } else {
             
             return true
             
         }
+        
+        return false
         
     }
     

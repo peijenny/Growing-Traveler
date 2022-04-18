@@ -87,6 +87,8 @@ class ForumViewController: BaseViewController {
             forCellReuseIdentifier: String(describing: ArticleTableViewCell.self)
         )
 
+        searchTextField.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

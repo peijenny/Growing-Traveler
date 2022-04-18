@@ -34,6 +34,8 @@ enum InputError {
     
     case endDateEmpty
     
+    case studyTimeEmpty
+    
     case categoryEmpty
     
     case studyItemEmpty
@@ -51,6 +53,8 @@ enum InputError {
         case .startDateEmpty: return "尚未選擇開始日期！"
             
         case .endDateEmpty: return "尚未選擇結束日期！"
+            
+        case .studyTimeEmpty: return "請選擇項目的學習時間！"
             
         case .categoryEmpty: return "尚未選擇分類標籤！"
             

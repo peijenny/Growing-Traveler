@@ -46,6 +46,20 @@ class SelectStudyItemViewController: BaseViewController {
         
         contentTextView.layer.cornerRadius = 5
         
+        if contentTextView.text == "請描述內容......." {
+            
+            contentTextView.textColor = UIColor.systemGray3
+            
+        } else {
+            
+            contentTextView.textColor = UIColor.black
+            
+        }
+        
+        
+        
+        contentTextView.delegate = self
+        
         itemTextField.delegate = self
         
         itemTextField.delegate = self
@@ -128,11 +142,15 @@ class SelectStudyItemViewController: BaseViewController {
         
         if itemTextField?.text == "" {
             
-            hintLabel.text = "項目名稱不可為空！"
+            hintLabel.text = InputError.titleEmpty.title
             
         } else if selectStudyTime == nil {
             
-            hintLabel.text = "請選擇項目的學習時間！"
+            hintLabel.text = InputError.studyTimeEmpty.title
+            
+        } else if contentTextView.text == "請描述內容......." {
+            
+            hintLabel.text = InputError.contentEmpty.title
             
         } else {
             
@@ -164,4 +182,30 @@ class SelectStudyItemViewController: BaseViewController {
         
     }
     
+}
+
+extension SelectStudyItemViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        if textView.textColor == UIColor.systemGray3 {
+            
+            textView.text = nil
+            
+            textView.textColor = UIColor.black
+            
+        }
+        
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        if textView.text.isEmpty {
+            
+            textView.text = "請描述內容......."
+            
+            textView.textColor = UIColor.systemGray3
+            
+        }
+    }
 }

@@ -18,7 +18,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rU0-Im-g4N">
-                            <rect key="frame" x="362" y="7" width="36" height="31"/>
+                            <rect key="frame" x="354" y="7" width="44" height="31"/>
                             <color key="tintColor" systemColor="systemRedColor"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system"/>
@@ -49,7 +49,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="j9u-Xt-LNL" secondAttribute="bottom" constant="10" id="FdR-hK-dZQ"/>
-                        <constraint firstItem="rU0-Im-g4N" firstAttribute="leading" secondItem="ZKC-au-2sh" secondAttribute="trailing" constant="226" id="LWA-lO-IqJ"/>
+                        <constraint firstItem="rU0-Im-g4N" firstAttribute="leading" relation="lessThanOrEqual" secondItem="ZKC-au-2sh" secondAttribute="trailing" constant="226" id="LWA-lO-IqJ"/>
                         <constraint firstItem="ZKC-au-2sh" firstAttribute="top" secondItem="0lN-sN-QgT" secondAttribute="top" constant="7" id="LsG-nX-W5X"/>
                         <constraint firstAttribute="bottom" secondItem="rU0-Im-g4N" secondAttribute="bottom" constant="7" id="Zdo-Cj-L9A"/>
                         <constraint firstItem="rU0-Im-g4N" firstAttribute="top" secondItem="0lN-sN-QgT" secondAttribute="top" constant="7" id="aOX-5K-H6e"/>
