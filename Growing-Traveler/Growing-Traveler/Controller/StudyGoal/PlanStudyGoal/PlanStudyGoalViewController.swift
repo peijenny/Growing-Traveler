@@ -225,6 +225,8 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
 
         guard let cell = cell as? StudyItemTableViewCell else { return cell }
         
+        cell.selectionStyle = .none
+        
         studyItems = studyItems.sorted { (lhs, rhs) in
             
             return lhs.id ?? 0 < rhs.id ?? 0
@@ -328,17 +330,21 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             
         }
         
-        headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
-        
         headerView.modifyStudyGoal(studyGoal: studyGoal)
         
         if studyGoal != nil {
+            
+            guard let selectCategoryItem = selectCategoryItem else { return headerView }
+            
+            studyGoal?.category = selectCategoryItem
             
             studyGoal?.studyPeriod.startDate = selectStartDate.timeIntervalSince1970
             
             studyGoal?.studyPeriod.endDate = selectEndDate.timeIntervalSince1970
             
         }
+        
+        headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
         
         headerView.showSelectedDate(dateType: selectDateType,
             startDate: selectStartDate, endDate: selectEndDate)

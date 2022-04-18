@@ -195,6 +195,8 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             cell.setArticleContent(content: forumArticle.content[indexPath.row])
             
+            cell.selectionStyle = .none
+            
             return cell
             
         } else {
@@ -207,6 +209,8 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             guard let cell = cell as? ArticleMessageTableViewCell else { return cell }
             
             cell.showMessages(articleMessage: articleMessages[indexPath.row])
+            
+            cell.selectionStyle = .none
             
             return cell
             
