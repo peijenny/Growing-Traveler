@@ -160,7 +160,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let viewController = viewController as? ChatViewController else { return }
         
-        viewController.friendID = friendsInfo[indexPath.row].userID
+        viewController.friendInfo = friendsInfo[indexPath.row]
         
         navigationController?.pushViewController(viewController, animated: true)
         

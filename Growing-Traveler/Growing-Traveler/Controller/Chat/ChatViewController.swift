@@ -25,7 +25,7 @@ class ChatViewController: BaseViewController {
     
     var chatRoomManager = ChatRoomManager()
     
-    var friendID: String? {
+    var friendInfo: User? {
         
         didSet {
             
@@ -38,6 +38,8 @@ class ChatViewController: BaseViewController {
     var chatMessage: Chat? {
         
         didSet {
+            
+            self.title = "\(friendInfo?.userName ?? "")"
             
             chatTableView.reloadData()
             
@@ -86,7 +88,7 @@ class ChatViewController: BaseViewController {
     
     func fetchData() {
         
-        chatRoomManager.fetchData(friendID: friendID ?? "", completion: { [weak self] result in
+        chatRoomManager.fetchData(friendID: friendInfo?.userID ?? "", completion: { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -178,7 +180,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if chatMessage?.messageContent[indexPath.row].sendUserID == friendID {
+        if chatMessage?.messageContent[indexPath.row].sendUserID == friendInfo?.userID {
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: ReceiveMessageTableViewCell.self),
