@@ -16,6 +16,7 @@
 		280C1B0B280D78B90091B9DC /* FriendListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280C1B09280D78B90091B9DC /* FriendListTableViewCell.xib */; };
 		280C1B0E280E424C0091B9DC /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B0D280E424C0091B9DC /* Friend.swift */; };
 		280C1B10280E42780091B9DC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B0F280E42780091B9DC /* User.swift */; };
+		280C1B12280E42FC0091B9DC /* FriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B11280E42FC0091B9DC /* FriendManager.swift */; };
 		283D2C3E2803E63C004D19E4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2C3D2803E63C004D19E4 /* BaseViewController.swift */; };
 		285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */; };
 		285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F4228017AEF00E84CF2 /* SelectCategoryViewController.swift */; };
@@ -86,6 +87,7 @@
 		280C1B09280D78B90091B9DC /* FriendListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendListTableViewCell.xib; sourceTree = "<group>"; };
 		280C1B0D280E424C0091B9DC /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		280C1B0F280E42780091B9DC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		280C1B11280E42FC0091B9DC /* FriendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendManager.swift; sourceTree = "<group>"; };
 		283D2C3D2803E63C004D19E4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
 		285F3F4228017AEF00E84CF2 /* SelectCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			children = (
 				280C1B0D280E424C0091B9DC /* Friend.swift */,
 				280C1B0F280E42780091B9DC /* User.swift */,
+				280C1B11280E42FC0091B9DC /* FriendManager.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */,
 				28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */,
 				28BB6EFF2807C86C002B0458 /* ArticleTableViewCell.swift in Sources */,
+				280C1B12280E42FC0091B9DC /* FriendManager.swift in Sources */,
 				28A6F45B280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift in Sources */,
 				28BB6EE928066639002B0458 /* ForumViewController.swift in Sources */,
 				28BB6EFC2807C25C002B0458 /* UploadImageManager.swift in Sources */,

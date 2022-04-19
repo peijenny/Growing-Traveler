@@ -45,6 +45,18 @@ class FriendViewController: UIViewController {
         
     }
     
+    var friendManager = FriendManager()
+    
+    var friend: Friend? {
+        
+        didSet {
+            
+            friendListTableView.reloadData()
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,8 +65,32 @@ class FriendViewController: UIViewController {
             forCellReuseIdentifier: String(describing: FriendListTableViewCell.self)
         )
         
+        fetchFriendListData()
+        
     }
-
+    
+    func fetchFriendListData() {
+        
+        friendManager.fetchData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let friend):
+                
+                strongSelf.friend = friend
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
 extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
@@ -67,7 +103,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return friend?.friendList.count ?? 0
         
     }
     
