@@ -141,23 +141,6 @@ class ChatViewController: BaseViewController {
         
     }
     
-    // 自動會滑動至下方(應該是說，會讓消息停留在最底下的)
-    func scrollToBottom(animated: Bool = true) {
-
-        DispatchQueue.main.async {
-
-            var yOffset: CGFloat = 0.0
-
-            if self.chatTableView.contentSize.height > self.chatTableView.bounds.size.height {
-
-                yOffset = self.chatTableView.contentSize.height - self.chatTableView.bounds.size.height
-            }
-
-            self.chatTableView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: animated)
-        }
-
-    }
-    
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
