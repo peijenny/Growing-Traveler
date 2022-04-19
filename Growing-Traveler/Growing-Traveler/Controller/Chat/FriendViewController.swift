@@ -49,7 +49,7 @@ class FriendViewController: UIViewController {
     
     var friend: Friend?
     
-    var friendsInfo: [User] = []  {
+    var friendsInfo: [User] = [] {
         
         didSet {
             
@@ -150,6 +150,19 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         cell.showFriendInfo(friendName: friendsInfo[indexPath.row].userName)
         
         return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let viewController = UIStoryboard(name: "Chat", bundle: nil)
+            .instantiateViewController(withIdentifier: String(describing: ChatViewController.self))
+        
+        guard let viewController = viewController as? ChatViewController else { return }
+        
+        viewController.friendID = friendsInfo[indexPath.row].userID
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
     
