@@ -68,14 +68,6 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="746"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入訊息" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2TK-MT-eaB">
-                                <rect key="frame" x="81" y="806" width="254" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="2h0-JU-9d6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxb-Ts-Lr8">
                                 <rect key="frame" x="351" y="806" width="47" height="40"/>
                                 <constraints>
@@ -84,6 +76,9 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="sendInputMessageButton:" destination="vV2-N2-JZ4" eventType="touchUpInside" id="44n-Yr-YOi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1e9-pP-Hbq">
                                 <rect key="frame" x="16" y="806" width="49" height="40"/>
@@ -94,27 +89,35 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="folder.fill.badge.plus" catalog="system"/>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pcf-eM-Fi9">
+                                <rect key="frame" x="75" y="800" width="266" height="52"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AH4-fn-PXL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="n3K-HG-jVn" firstAttribute="top" secondItem="AH4-fn-PXL" secondAttribute="top" id="0bf-hh-89s"/>
-                            <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="2TK-MT-eaB" secondAttribute="bottom" constant="16" id="6zQ-7S-Ymq"/>
-                            <constraint firstItem="Kxb-Ts-Lr8" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="aEz-Xg-TDK"/>
+                            <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="Pcf-eM-Fi9" secondAttribute="bottom" constant="10" id="70X-OI-h3R"/>
+                            <constraint firstItem="Pcf-eM-Fi9" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="10" id="PHo-NM-Y6e"/>
+                            <constraint firstItem="Pcf-eM-Fi9" firstAttribute="leading" secondItem="1e9-pP-Hbq" secondAttribute="trailing" constant="10" id="PHy-Nz-xSC"/>
+                            <constraint firstItem="Kxb-Ts-Lr8" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="VUf-Vb-Mq7"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="1e9-pP-Hbq" secondAttribute="bottom" constant="16" id="aSg-PE-PcA"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="trailing" secondItem="n3K-HG-jVn" secondAttribute="trailing" id="aUy-7E-zWb"/>
-                            <constraint firstItem="1e9-pP-Hbq" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="c0b-gJ-bEm"/>
-                            <constraint firstItem="Kxb-Ts-Lr8" firstAttribute="leading" secondItem="2TK-MT-eaB" secondAttribute="trailing" constant="16" id="cZm-mP-U7u"/>
                             <constraint firstItem="1e9-pP-Hbq" firstAttribute="leading" secondItem="AH4-fn-PXL" secondAttribute="leading" constant="16" id="eGe-oT-aGV"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="trailing" secondItem="Kxb-Ts-Lr8" secondAttribute="trailing" constant="16" id="k9A-uy-G2q"/>
-                            <constraint firstItem="2TK-MT-eaB" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="pLR-4U-1Zl"/>
+                            <constraint firstItem="Kxb-Ts-Lr8" firstAttribute="leading" secondItem="Pcf-eM-Fi9" secondAttribute="trailing" constant="10" id="lX7-Xf-xfV"/>
+                            <constraint firstItem="1e9-pP-Hbq" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="nK5-RF-wa0"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="Kxb-Ts-Lr8" secondAttribute="bottom" constant="16" id="wRb-VU-RHv"/>
-                            <constraint firstItem="2TK-MT-eaB" firstAttribute="leading" secondItem="1e9-pP-Hbq" secondAttribute="trailing" constant="16" id="xmF-Ji-l5b"/>
                             <constraint firstItem="n3K-HG-jVn" firstAttribute="leading" secondItem="AH4-fn-PXL" secondAttribute="leading" id="yCD-7R-qg1"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="chatTableView" destination="n3K-HG-jVn" id="fgt-ti-pLy"/>
+                        <outlet property="snedInputTextView" destination="Pcf-eM-Fi9" id="om9-P4-R2e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOl-Z0-TzL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -125,8 +128,14 @@
     <resources>
         <image name="folder.fill.badge.plus" catalog="system" width="128" height="91"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

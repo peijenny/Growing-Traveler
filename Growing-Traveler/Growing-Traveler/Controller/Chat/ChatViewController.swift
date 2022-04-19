@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatViewController: UIViewController {
+class ChatViewController: BaseViewController {
     
     @IBOutlet weak var chatTableView: UITableView! {
         
@@ -20,6 +20,8 @@ class ChatViewController: UIViewController {
         }
         
     }
+    
+    @IBOutlet weak var snedInputTextView: UITextView!
     
     var chatRoomManager = ChatRoomManager()
     
@@ -38,6 +40,14 @@ class ChatViewController: UIViewController {
         didSet {
             
             chatTableView.reloadData()
+            
+            if let messageCount = chatMessage?.messageContent.count {
+                
+                let indexPath = IndexPath(row: messageCount - 1, section: 0)
+                
+                chatTableView.scrollToRow(at: indexPath, at: .top, animated: false)
+                
+            }
             
         }
         
@@ -94,6 +104,60 @@ class ChatViewController: UIViewController {
         
     }
     
+    @IBAction func sendInputMessageButton(_ sender: UIButton) {
+        
+        guard let sendInput = snedInputTextView.text else { return }
+        
+        var sendType = String()
+        
+        if sendInput != "" {
+            
+            if sendInput.range(of: "https://i.imgur.com") != nil {
+
+                sendType = "image"
+
+            } else {
+
+                sendType = "string"
+
+            }
+            
+            let messageContent = MessageContent(
+                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
+                sendMessage: sendInput,
+                sendType: sendType,
+                sendUserID: userID
+            )
+            
+            chatMessage?.messageContent.append(messageContent)
+            
+            guard let chatMessage = chatMessage else { return }
+            
+            chatRoomManager.addData(chat: chatMessage)
+            
+            snedInputTextView.text = nil
+            
+        }
+        
+    }
+    
+    // 自動會滑動至下方(應該是說，會讓消息停留在最底下的)
+    func scrollToBottom(animated: Bool = true) {
+
+        DispatchQueue.main.async {
+
+            var yOffset: CGFloat = 0.0
+
+            if self.chatTableView.contentSize.height > self.chatTableView.bounds.size.height {
+
+                yOffset = self.chatTableView.contentSize.height - self.chatTableView.bounds.size.height
+            }
+
+            self.chatTableView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: animated)
+        }
+
+    }
+    
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
@@ -126,7 +190,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.showMessage(receiveMessage: receiveMessage)
                 
             }
-
+            
             return cell
             
         } else {

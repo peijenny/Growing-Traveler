@@ -56,8 +56,6 @@ class SelectStudyItemViewController: BaseViewController {
             
         }
         
-        
-        
         contentTextView.delegate = self
         
         itemTextField.delegate = self
