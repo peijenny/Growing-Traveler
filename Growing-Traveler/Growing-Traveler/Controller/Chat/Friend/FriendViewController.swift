@@ -75,7 +75,7 @@ class FriendViewController: UIViewController {
     
     func fetchFriendListData() {
         
-        friendManager.fetchFriendListData { [weak self] result in
+        friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -141,9 +141,11 @@ class FriendViewController: UIViewController {
         
         guard let viewController = viewController as? ApplyFriendViewController else { return }
         
-        if let applyList = friend?.applyList {
+        if let applyList = friend?.applyList, let friend = friend {
             
             viewController.applyList = applyList
+            
+            viewController.ownFriend = friend
             
         }
         

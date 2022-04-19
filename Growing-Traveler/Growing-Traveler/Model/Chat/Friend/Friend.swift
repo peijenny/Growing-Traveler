@@ -17,4 +17,6 @@ struct Friend: Codable {
     
     var applyList: [String]
     
+    var deliveryList: [String]
+    
 }

@@ -9,15 +9,144 @@ import UIKit
 
 class ApplyFriendViewController: UIViewController {
     
-    var applyList: [String] = []
-
+    @IBOutlet weak var applyTableView: UITableView! {
+        
+        didSet {
+            
+            applyTableView.delegate = self
+            
+            applyTableView.dataSource = self
+            
+        }
+        
+    }
+    
+    var applyList: [String] = [] {
+        
+        didSet {
+            
+            fetchFriendInfoData(friendList: applyList)
+            
+        }
+        
+    }
+    
+    var friendsInfo: [User] = [] {
+        
+        didSet {
+            
+            applyTableView.reloadData()
+            
+        }
+        
+    }
+    
+    var ownFriend: Friend?
+    
+    var otherFriend: Friend?
+    
+    var friendManager = FriendManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "好友邀請"
 
-        print("ApplyList: \(applyList)")
+        applyTableView.register(
+            UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self)
+        )
+        
+    }
+    
+    func fetchFriendInfoData(friendList: [String]) {
+        
+        friendManager.fetchFriendInfoData(
+            friendList: friendList,
+            completion: { [weak self] result in
+                
+                guard let strongSelf = self else { return }
+                
+                switch result {
+                    
+                case .success(let friendsInfo):
+                    
+                    if friendsInfo.count == friendList.count {
+                        
+                        strongSelf.friendsInfo = friendsInfo
+                        
+                    }
+                    
+                case .failure(let error):
+                    
+                    print(error)
+                    
+                }
+            
+        })
+        
+    }
+    
+    func fetchData(friendID: String) {
+        
+        friendManager.fetchFriendListData(fetchUserID: friendID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let friend):
+                
+                strongSelf.otherFriend = friend
+                
+                print("TEST \(friend)")
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
         
     }
 
+}
+
+extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return friendsInfo.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: FriendListTableViewCell.self),
+            for: indexPath
+        )
+        
+        guard let cell = cell as? FriendListTableViewCell else { return cell }
+        
+        cell.showFriendInfo(friendName: friendsInfo[indexPath.row].userName)
+        
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        fetchData(friendID: applyList[indexPath.row])
+        
+        
+    }
+    
 }

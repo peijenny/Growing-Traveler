@@ -15,10 +15,10 @@ class FriendManager {
     let database = Firestore.firestore()
     
     // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
-    func fetchFriendListData(completion: @escaping (Result<Friend>) -> Void) {
+    func fetchFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
         
         database.collection("friend")
-        .whereField("userID", isEqualTo: userID)
+        .whereField("userID", isEqualTo: fetchUserID)
         .getDocuments { snapshot, error in
         
             guard let snapshot = snapshot else {

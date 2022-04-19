@@ -137,10 +137,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kUE-So-3bk">
-                                <rect key="frame" x="0.0" y="314" width="414" height="714.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gn6-hQ-aS8">
                                 <rect key="frame" x="0.0" y="44" width="414" height="212.5"/>
                                 <subviews>
@@ -233,28 +229,38 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發出邀請的使用者" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5Y-ec-9ID">
-                                <rect key="frame" x="16" y="272.5" width="382" height="25.5"/>
+                                <rect key="frame" x="16" y="272.5" width="382" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="tw5-0q-Hhe"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kUE-So-3bk">
+                                <rect key="frame" x="0.0" y="307.5" width="414" height="554.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="76H-af-BAN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Gn6-hQ-aS8" firstAttribute="height" secondItem="xLd-0e-2Jd" secondAttribute="height" multiplier="0.2" id="1M3-GH-kAt"/>
                             <constraint firstItem="D5Y-ec-9ID" firstAttribute="leading" secondItem="76H-af-BAN" secondAttribute="leading" constant="16" id="Cen-MX-kGh"/>
-                            <constraint firstItem="76H-af-BAN" firstAttribute="trailing" secondItem="kUE-So-3bk" secondAttribute="trailing" id="O0R-R1-AzQ"/>
                             <constraint firstItem="D5Y-ec-9ID" firstAttribute="top" secondItem="Gn6-hQ-aS8" secondAttribute="bottom" constant="16" id="QYX-4Q-feA"/>
-                            <constraint firstItem="kUE-So-3bk" firstAttribute="leading" secondItem="76H-af-BAN" secondAttribute="leading" id="Wvo-Fn-xQD"/>
                             <constraint firstItem="76H-af-BAN" firstAttribute="trailing" secondItem="D5Y-ec-9ID" secondAttribute="trailing" constant="16" id="bub-TT-oXp"/>
+                            <constraint firstItem="76H-af-BAN" firstAttribute="bottom" secondItem="kUE-So-3bk" secondAttribute="bottom" constant="166.5" id="e3c-LW-88Y"/>
+                            <constraint firstItem="kUE-So-3bk" firstAttribute="leading" secondItem="76H-af-BAN" secondAttribute="leading" id="e9X-sQ-lz4"/>
                             <constraint firstItem="76H-af-BAN" firstAttribute="trailing" secondItem="Gn6-hQ-aS8" secondAttribute="trailing" id="iCc-HH-ygg"/>
-                            <constraint firstItem="76H-af-BAN" firstAttribute="bottom" secondItem="kUE-So-3bk" secondAttribute="bottom" id="ix5-J7-0a4"/>
                             <constraint firstItem="Gn6-hQ-aS8" firstAttribute="leading" secondItem="76H-af-BAN" secondAttribute="leading" id="pME-0Q-LJ4"/>
-                            <constraint firstItem="kUE-So-3bk" firstAttribute="top" secondItem="D5Y-ec-9ID" secondAttribute="bottom" constant="16" id="s9g-UA-6P3"/>
                             <constraint firstItem="Gn6-hQ-aS8" firstAttribute="top" secondItem="76H-af-BAN" secondAttribute="top" id="x9J-Gc-anX"/>
+                            <constraint firstItem="kUE-So-3bk" firstAttribute="top" secondItem="D5Y-ec-9ID" secondAttribute="bottom" constant="10" id="ySw-sC-TXp"/>
+                            <constraint firstItem="76H-af-BAN" firstAttribute="trailing" secondItem="kUE-So-3bk" secondAttribute="trailing" id="zcy-m4-XgT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="applyTableView" destination="kUE-So-3bk" id="CNS-rj-7Uq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v0B-ID-n6F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -207,8 +207,7 @@
 		280C1B07280D77AC0091B9DC /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				280C1B08280D78B90091B9DC /* FriendListTableViewCell.swift */,
-				280C1B09280D78B90091B9DC /* FriendListTableViewCell.xib */,
+				282522C6280EDCD90008B916 /* Friend */,
 				280C1B13280E58BB0091B9DC /* ReceiveMessageTableViewCell.swift */,
 				280C1B14280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib */,
 				280C1B17280E58C70091B9DC /* SendMessageTableViewCell.swift */,
@@ -240,6 +239,15 @@
 				280C1B03280D77770091B9DC /* FriendViewController.swift */,
 				282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */,
 				282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */,
+			);
+			path = Friend;
+			sourceTree = "<group>";
+		};
+		282522C6280EDCD90008B916 /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+				280C1B08280D78B90091B9DC /* FriendListTableViewCell.swift */,
+				280C1B09280D78B90091B9DC /* FriendListTableViewCell.xib */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
