@@ -12,11 +12,11 @@ import FirebaseFirestoreSwift
 
 class ChatRoomManager {
     
-    let database = Firestore.firestore().collection("friend").document(userID).collection("message")
-    
+    let database = Firestore.firestore().collection("friend")
+
     func fetchData(friendID: String, completion: @escaping (Result<Chat>) -> Void) {
         
-        database
+        database.document(userID).collection("message")
         .whereField("friendID", isEqualTo: friendID)
         .addSnapshotListener { snapshot, error in
             
@@ -48,6 +48,30 @@ class ChatRoomManager {
                 
             }
             
+        }
+        
+    }
+    
+    func addData(chat: Chat) {
+        
+        var friendChat = chat
+        
+        friendChat.friendID = userID
+        
+        do {
+
+            // 修改自己的 Document
+            try database.document(userID).collection("message")
+                .document(chat.friendID).setData(from: chat, merge: true)
+            
+            // 修改朋友的 Document
+            try database.document(chat.friendID).collection("message")
+                .document(userID).setData(from: friendChat, merge: true)
+
+        } catch {
+
+            print(error)
+
         }
         
     }
