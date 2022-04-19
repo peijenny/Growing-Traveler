@@ -52,6 +52,8 @@ class ChatViewController: BaseViewController {
         }
         
     }
+    
+    var myImageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,11 +110,17 @@ class ChatViewController: BaseViewController {
         
         guard let sendInput = snedInputTextView.text else { return }
         
+        addMessageData(inputContent: sendInput)
+        
+    }
+    
+    func addMessageData(inputContent: String) {
+        
         var sendType = String()
         
-        if sendInput != "" {
+        if inputContent != "" {
             
-            if sendInput.range(of: "https://i.imgur.com") != nil {
+            if inputContent.range(of: "https://i.imgur.com") != nil {
 
                 sendType = "image"
 
@@ -124,7 +132,7 @@ class ChatViewController: BaseViewController {
             
             let messageContent = MessageContent(
                 createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-                sendMessage: sendInput,
+                sendMessage: inputContent,
                 sendType: sendType,
                 sendUserID: userID
             )
@@ -132,8 +140,10 @@ class ChatViewController: BaseViewController {
             chatMessage?.messageContent.append(messageContent)
             
             guard let chatMessage = chatMessage else { return }
-            
+
             chatRoomManager.addData(chat: chatMessage)
+            
+            print("TEST \(chatMessage)")
             
             snedInputTextView.text = nil
             
@@ -141,6 +151,15 @@ class ChatViewController: BaseViewController {
         
     }
     
+    @IBAction func sendImageButton(_ sender: UIButton) {
+        
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        
+        present(picker, animated: true)
+        
+    }
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
@@ -195,6 +214,54 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let sendMessage = chatMessage?.messageContent[indexPath.row] else { return }
+        
+        if sendMessage.sendType == "image" {
+            
+            myImageView.loadImage(sendMessage.sendMessage)
+            
+            myImageView.showPhoto(imageView: myImageView)
+            
+        }
+        
+    }
+    
+}
+
+extension ChatViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[.originalImage] as? UIImage {
+
+            let uploadImageManager = UploadImageManager()
+
+            uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
+
+                guard let strongSelf = self else { return }
+
+                switch result {
+
+                case.success(let imageLink):
+
+                    strongSelf.addMessageData(inputContent: imageLink)
+
+                case .failure(let error):
+
+                    print(error)
+
+                }
+
+            })
+
+        }
+
+        dismiss(animated: true)
+
     }
     
 }

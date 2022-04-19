@@ -88,6 +88,9 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="folder.fill.badge.plus" catalog="system"/>
+                                <connections>
+                                    <action selector="sendImageButton:" destination="vV2-N2-JZ4" eventType="touchUpInside" id="Uom-hK-ry7"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pcf-eM-Fi9">
                                 <rect key="frame" x="75" y="800" width="266" height="52"/>

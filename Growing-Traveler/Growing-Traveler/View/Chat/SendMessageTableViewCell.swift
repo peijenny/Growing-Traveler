@@ -13,6 +13,20 @@ class SendMessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var sendTimeLabel: UILabel!
     
+    @IBOutlet weak var sendIamgeView: UIImageView!
+    
+    @IBOutlet weak var sendMessageView: UIView!
+    
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var labelTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var labelBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var labelHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var viewConstraint: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -42,12 +56,36 @@ class SendMessageTableViewCell: UITableViewCell {
         
         if type == "string" {
             
+            sendIamgeView.image = nil
+            
+            imageViewHeightConstraint.constant = 0.0
+            
+            labelHeightConstraint.constant = 35.0
+            
+            labelTopConstraint.constant = 10.0
+            
+            labelBottomConstraint.constant = 10.0
+            
+            viewConstraint.constant = 55.0
+            
             sendMessageLabel.text = message
             
         } else if type == "image" {
-            
+
             sendMessageLabel.text = nil
             
+            imageViewHeightConstraint.constant = 100.0
+            
+            labelTopConstraint.constant = 0.0
+            
+            labelHeightConstraint.constant = 0.0
+            
+            labelBottomConstraint.constant = 0.0
+            
+            viewConstraint.constant = 0.0
+            
+            sendIamgeView.loadImage(message)
+
         }
         
     }

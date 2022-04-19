@@ -11,10 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ReceiveMessageTableViewCell" customModule="Growing_Traveler" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rAU-hn-k0R">
@@ -26,7 +26,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLF-vV-zWP">
-                        <rect key="frame" x="56" y="10" width="78.5" height="55"/>
+                        <rect key="frame" x="55" y="10" width="78.5" height="55"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pT-kn-rpc">
                                 <rect key="frame" x="10" y="10" width="58.5" height="35"/>
@@ -48,28 +48,44 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYM-kc-Bq6">
-                        <rect key="frame" x="56" y="70" width="88" height="20"/>
+                        <rect key="frame" x="55" y="170" width="88" height="20"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OXJ-8w-EEd">
+                        <rect key="frame" x="55" y="65" width="150" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="84f-xR-fFh"/>
+                            <constraint firstAttribute="height" constant="100" id="ffy-v4-05d"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="pYM-kc-Bq6" firstAttribute="top" secondItem="HLF-vV-zWP" secondAttribute="bottom" constant="5" id="2d9-DI-iaz"/>
-                    <constraint firstItem="pYM-kc-Bq6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="56" id="64e-GF-eSk"/>
+                    <constraint firstItem="OXJ-8w-EEd" firstAttribute="leading" secondItem="rAU-hn-k0R" secondAttribute="trailing" constant="10" id="40r-i9-naB"/>
+                    <constraint firstItem="pYM-kc-Bq6" firstAttribute="leading" secondItem="rAU-hn-k0R" secondAttribute="trailing" constant="10" id="64e-GF-eSk"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HLF-vV-zWP" secondAttribute="trailing" constant="50" id="7gx-jC-YMx"/>
                     <constraint firstAttribute="bottom" secondItem="pYM-kc-Bq6" secondAttribute="bottom" constant="10" id="BQn-Qm-PpV"/>
                     <constraint firstItem="rAU-hn-k0R" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Frm-v5-htT"/>
-                    <constraint firstItem="HLF-vV-zWP" firstAttribute="leading" secondItem="rAU-hn-k0R" secondAttribute="trailing" constant="11" id="Z76-TL-8tt"/>
+                    <constraint firstItem="OXJ-8w-EEd" firstAttribute="top" secondItem="HLF-vV-zWP" secondAttribute="bottom" id="U6z-ug-M2f"/>
+                    <constraint firstItem="HLF-vV-zWP" firstAttribute="leading" secondItem="rAU-hn-k0R" secondAttribute="trailing" constant="10" id="Z76-TL-8tt"/>
                     <constraint firstItem="HLF-vV-zWP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ZAz-MY-LTs"/>
+                    <constraint firstItem="pYM-kc-Bq6" firstAttribute="top" secondItem="OXJ-8w-EEd" secondAttribute="bottom" constant="5" id="k4R-ib-8Oq"/>
                     <constraint firstItem="rAU-hn-k0R" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="rjV-v0-iUk"/>
+                    <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="OXJ-8w-EEd" secondAttribute="trailing" constant="189" id="vvD-YO-PIQ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="friendImageView" destination="rAU-hn-k0R" id="x9L-q5-2wD"/>
+                <outlet property="imageViewHeightConstraint" destination="ffy-v4-05d" id="N1B-Dl-jdD"/>
+                <outlet property="labelBottomConstraint" destination="mnF-fn-MMm" id="pUQ-kl-78B"/>
+                <outlet property="labelHeightConstraint" destination="GPn-qK-Urj" id="6K2-c9-BJ9"/>
+                <outlet property="labelTopConstraint" destination="kfI-Pt-odq" id="NJc-Zp-e0I"/>
+                <outlet property="receiveImageView" destination="OXJ-8w-EEd" id="oGa-SO-rDc"/>
                 <outlet property="receiveMessageLabel" destination="8pT-kn-rpc" id="58f-2n-xry"/>
                 <outlet property="receiveTimeLabel" destination="pYM-kc-Bq6" id="ODx-h7-YZh"/>
+                <outlet property="viewConstraint" destination="esn-W6-4rP" id="vZj-mo-BP1"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="79.6875"/>
         </tableViewCell>

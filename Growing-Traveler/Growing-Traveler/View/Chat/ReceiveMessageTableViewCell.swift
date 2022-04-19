@@ -15,6 +15,18 @@ class ReceiveMessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var receiveTimeLabel: UILabel!
     
+    @IBOutlet weak var receiveImageView: UIImageView!
+    
+    @IBOutlet weak var viewConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var labelTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var labelBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var labelHeightConstraint: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -44,12 +56,36 @@ class ReceiveMessageTableViewCell: UITableViewCell {
         
         if type == "string" {
             
+            receiveImageView.image = nil
+            
+            imageViewHeightConstraint.constant = 0.0
+            
+            labelHeightConstraint.constant = 35.0
+            
+            labelTopConstraint.constant = 10.0
+            
+            labelBottomConstraint.constant = 10.0
+            
+            viewConstraint.constant = 55.0
+            
             receiveMessageLabel.text = message
             
         } else if type == "image" {
             
             receiveMessageLabel.text = nil
             
+            imageViewHeightConstraint.constant = 100.0
+            
+            labelTopConstraint.constant = 0.0
+            
+            labelHeightConstraint.constant = 0.0
+            
+            labelBottomConstraint.constant = 0.0
+            
+            viewConstraint.constant = 0.0
+            
+            receiveImageView.loadImage(message)
+
         }
         
     }
