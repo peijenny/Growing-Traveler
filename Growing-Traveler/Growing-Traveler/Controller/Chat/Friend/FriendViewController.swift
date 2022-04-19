@@ -61,6 +61,8 @@ class FriendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setNavigationItems()
 
         friendListTableView.register(
             UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
@@ -120,6 +122,50 @@ class FriendViewController: UIViewController {
                 }
             
         })
+        
+    }
+    
+    func setNavigationItems() {
+        
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriendButton)),
+            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(applyFriendButton))
+        ]
+        
+    }
+    
+    @objc func applyFriendButton(sender: UIButton) {
+        
+        let viewController = UIStoryboard(name: "Chat", bundle: nil)
+            .instantiateViewController(withIdentifier: String(describing: ApplyFriendViewController.self))
+        
+        guard let viewController = viewController as? ApplyFriendViewController else { return }
+        
+        if let applyList = friend?.applyList {
+            
+            viewController.applyList = applyList
+            
+        }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    @objc func blockadeFriendButton(sender: UIButton) {
+        
+        let viewController = UIStoryboard(name: "Chat", bundle: nil)
+            .instantiateViewController(withIdentifier: String(describing: BlockadeFriendViewController.self))
+        
+        guard let viewController = viewController as? BlockadeFriendViewController else { return }
+        
+        if let blockadeList = friend?.blockadeList {
+            
+            viewController.blockadeList = blockadeList
+            
+        }
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
     }
     
 }
