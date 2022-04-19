@@ -24,4 +24,10 @@ class FriendListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func showFriendInfo(friendName: String) {
+        
+        friendNameLabel.text = friendName
+        
+    }
+    
 }

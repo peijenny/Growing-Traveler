@@ -47,7 +47,9 @@ class FriendViewController: UIViewController {
     
     var friendManager = FriendManager()
     
-    var friend: Friend? {
+    var friend: Friend?
+    
+    var friendsInfo: [User] = []  {
         
         didSet {
             
@@ -71,7 +73,7 @@ class FriendViewController: UIViewController {
     
     func fetchFriendListData() {
         
-        friendManager.fetchData { [weak self] result in
+        friendManager.fetchFriendListData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -81,6 +83,8 @@ class FriendViewController: UIViewController {
                 
                 strongSelf.friend = friend
                 
+                strongSelf.fetchFriendInfoData(friendList: friend.friendList)
+                
             case .failure(let error):
                 
                 print(error)
@@ -89,6 +93,33 @@ class FriendViewController: UIViewController {
             
         }
         
+    }
+    
+    func fetchFriendInfoData(friendList: [String]) {
+        
+        friendManager.fetchFriendInfoData(
+            friendList: friendList,
+            completion: { [weak self] result in
+                
+                guard let strongSelf = self else { return }
+                
+                switch result {
+                    
+                case .success(let friendsInfo):
+                    
+                    if friendsInfo.count == friendList.count {
+                        
+                        strongSelf.friendsInfo = friendsInfo
+                        
+                    }
+                    
+                case .failure(let error):
+                    
+                    print(error)
+                    
+                }
+            
+        })
     }
     
 }
@@ -103,7 +134,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return friend?.friendList.count ?? 0
+        return friendsInfo.count
         
     }
     
@@ -115,6 +146,8 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         )
         
         guard let cell = cell as? FriendListTableViewCell else { return cell }
+        
+        cell.showFriendInfo(friendName: friendsInfo[indexPath.row].userName)
         
         return cell
         
