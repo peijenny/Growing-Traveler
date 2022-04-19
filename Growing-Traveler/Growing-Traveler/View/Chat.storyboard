@@ -24,7 +24,7 @@
             </objects>
             <point key="canvasLocation" x="-774" y="54"/>
         </scene>
-        <!--好友聊天-->
+        <!--好友列表-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="FriendViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
@@ -47,7 +47,7 @@
                             <constraint firstItem="WMq-2c-fwb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cnS-RY-7Iw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="好友聊天" id="idY-Gf-ohl">
+                    <navigationItem key="navigationItem" title="好友列表" id="idY-Gf-ohl">
                         <barButtonItem key="backBarButtonItem" title=" " id="QoK-9A-qP3"/>
                     </navigationItem>
                     <connections>
