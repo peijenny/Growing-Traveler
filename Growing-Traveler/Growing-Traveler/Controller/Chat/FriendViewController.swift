@@ -7,23 +7,78 @@
 
 import UIKit
 
+enum FriendType {
+    
+    case friend
+    
+    case blockade
+    
+    case apply
+    
+    var title: String {
+        
+        switch self {
+            
+        case .friend: return "好友列表"
+            
+        case .blockade: return "封鎖列表"
+            
+        case .apply: return "發出邀請列表"
+            
+        }
+        
+    }
+    
+}
+
 class FriendViewController: UIViewController {
 
+    @IBOutlet weak var friendListTableView: UITableView! {
+        
+        didSet {
+            
+            friendListTableView.delegate = self
+            
+            friendListTableView.dataSource = self
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        friendListTableView.register(
+            UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self)
+        )
+        
+    }
+
+}
+
+extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+    
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 10
+        
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FriendListTableViewCell.self), for: indexPath)
+        
+        guard let cell = cell as? FriendListTableViewCell else { return cell }
+        
+        return cell
+        
+    }
+    
 }
