@@ -9,7 +9,19 @@ import UIKit
 
 class ChatViewController: UIViewController {
     
-    var friendID: String?
+    var chatRoomManager = ChatRoomManager()
+    
+    var friendID: String? {
+        
+        didSet {
+            
+            fetchData()
+            
+        }
+        
+    }
+    
+    var chatMessage: Chat?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +39,28 @@ class ChatViewController: UIViewController {
             super.hidesBottomBarWhenPushed = newValue
             
         }
+        
+    }
+    
+    func fetchData() {
+        
+        chatRoomManager.fetchData(friendID: friendID ?? "", completion: { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let chatMessage):
+                
+                strongSelf.chatMessage = chatMessage
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        })
         
     }
     
