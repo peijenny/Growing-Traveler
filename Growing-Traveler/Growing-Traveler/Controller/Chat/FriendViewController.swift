@@ -73,7 +73,10 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FriendListTableViewCell.self), for: indexPath)
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: FriendListTableViewCell.self),
+            for: indexPath
+        )
         
         guard let cell = cell as? FriendListTableViewCell else { return cell }
         

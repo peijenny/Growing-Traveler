@@ -24,24 +24,5 @@ struct MessageContent: Codable {
     var sendType: String
     
     var sendUserID: String
-}
-
-struct Friend: Codable {
-    
-    var userID: String
-    
-    var friendList: [String]
-    
-    var blockedList: [String]
-    
-    var applyList: [String]
-    
-}
-
-struct User: Codable {
-    
-    var userID: String
-    
-    var userName: String
     
 }
