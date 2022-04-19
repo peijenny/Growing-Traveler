@@ -32,7 +32,7 @@ class SendMessageTableViewCell: UITableViewCell {
         
         let createTime = Date(timeIntervalSince1970: sendMessage.createTime)
         
-        sendTimeLabel.text = "\(createTime)"
+        sendTimeLabel.text = formatter.string(from: createTime)
 
         setMessageContent(message: sendMessage.sendMessage, type: sendMessage.sendType)
         

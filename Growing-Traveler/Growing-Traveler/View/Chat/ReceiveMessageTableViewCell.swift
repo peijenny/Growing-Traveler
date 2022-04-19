@@ -34,7 +34,7 @@ class ReceiveMessageTableViewCell: UITableViewCell {
         
         let createTime = Date(timeIntervalSince1970: receiveMessage.createTime)
         
-        receiveTimeLabel.text = "\(createTime)"
+        receiveTimeLabel.text = formatter.string(from: createTime)
 
         setMessageContent(message: receiveMessage.sendMessage, type: receiveMessage.sendType)
         
