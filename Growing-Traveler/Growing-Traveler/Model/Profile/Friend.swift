@@ -13,7 +13,7 @@ struct Friend: Codable {
     
     var friendList: [String]
     
-    var blockedList: [String]
+    var blockadeList: [String]
     
     var applyList: [String]
     
