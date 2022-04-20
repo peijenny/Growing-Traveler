@@ -291,7 +291,118 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cWe-1V-gGV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2443" y="54"/>
+            <point key="canvasLocation" x="3207" y="54"/>
+        </scene>
+        <!--Confirm Apply View Controller-->
+        <scene sceneID="S8T-li-4Jl">
+            <objects>
+                <viewController storyboardIdentifier="ConfirmApplyViewController" id="BU2-ag-va2" customClass="ConfirmApplyViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v7z-Jo-gk8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMx-we-rfE">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZv-vV-YgR">
+                                <rect key="frame" x="20" y="344" width="374" height="218"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請問是否同意該使用者的好友邀請呢？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DpK-AD-J9e">
+                                        <rect key="frame" x="16" y="91" width="342" height="22"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3P4-Wz-ja7">
+                                        <rect key="frame" x="318" y="16" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="RDf-3n-z13"/>
+                                            <constraint firstAttribute="height" constant="40" id="yeE-aN-TcP"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                                        <connections>
+                                            <action selector="closeButton:" destination="BU2-ag-va2" eventType="touchUpInside" id="cRb-9J-lIe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hni-27-usi">
+                                        <rect key="frame" x="50" y="148" width="100" height="40"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="BPI-pP-ZMh"/>
+                                            <constraint firstAttribute="width" constant="100" id="rmY-Fd-Q3Q"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="拒絕"/>
+                                        <connections>
+                                            <action selector="refuseApplyButton:" destination="BU2-ag-va2" eventType="touchUpInside" id="2bS-SH-121"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mO4-eM-71t">
+                                        <rect key="frame" x="224" y="148" width="100" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="8ql-56-bFI"/>
+                                            <constraint firstAttribute="width" constant="100" id="Q6H-Iz-3En"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="同意"/>
+                                        <connections>
+                                            <action selector="agreeApplyButton:" destination="BU2-ag-va2" eventType="touchUpInside" id="iTm-Sm-ITU"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="好友邀請確認" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTZ-qX-DR5">
+                                        <rect key="frame" x="80" y="16" width="214" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="bdi-e5-zBN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="DpK-AD-J9e" secondAttribute="trailing" constant="16" id="AAY-gq-lWV"/>
+                                    <constraint firstAttribute="bottom" secondItem="mO4-eM-71t" secondAttribute="bottom" constant="30" id="AqV-02-JzL"/>
+                                    <constraint firstItem="mO4-eM-71t" firstAttribute="top" secondItem="DpK-AD-J9e" secondAttribute="bottom" constant="35" id="BHg-Ud-v6F"/>
+                                    <constraint firstAttribute="trailing" secondItem="dTZ-qX-DR5" secondAttribute="trailing" constant="80" id="Gq0-mq-1EX"/>
+                                    <constraint firstAttribute="trailing" secondItem="mO4-eM-71t" secondAttribute="trailing" constant="50" id="IcU-uv-AJk"/>
+                                    <constraint firstItem="dTZ-qX-DR5" firstAttribute="leading" secondItem="PZv-vV-YgR" secondAttribute="leading" constant="80" id="MWT-AO-xMN"/>
+                                    <constraint firstItem="mO4-eM-71t" firstAttribute="leading" relation="lessThanOrEqual" secondItem="hni-27-usi" secondAttribute="trailing" constant="74" id="R2S-8V-WCH"/>
+                                    <constraint firstAttribute="trailing" secondItem="3P4-Wz-ja7" secondAttribute="trailing" constant="16" id="RUz-S4-fzF"/>
+                                    <constraint firstAttribute="bottom" secondItem="hni-27-usi" secondAttribute="bottom" constant="30" id="c8k-Aw-fDt"/>
+                                    <constraint firstAttribute="height" constant="218" id="dHm-la-H1i"/>
+                                    <constraint firstItem="hni-27-usi" firstAttribute="top" secondItem="DpK-AD-J9e" secondAttribute="bottom" constant="35" id="eks-pV-oOo"/>
+                                    <constraint firstItem="3P4-Wz-ja7" firstAttribute="top" secondItem="PZv-vV-YgR" secondAttribute="top" constant="16" id="hAc-xT-iKM"/>
+                                    <constraint firstItem="DpK-AD-J9e" firstAttribute="top" secondItem="dTZ-qX-DR5" secondAttribute="bottom" constant="35" id="muZ-kJ-Q2r"/>
+                                    <constraint firstItem="dTZ-qX-DR5" firstAttribute="top" secondItem="PZv-vV-YgR" secondAttribute="top" constant="16" id="rOt-PN-Gx2"/>
+                                    <constraint firstItem="hni-27-usi" firstAttribute="leading" secondItem="PZv-vV-YgR" secondAttribute="leading" constant="50" id="thz-Tw-QQT"/>
+                                    <constraint firstItem="DpK-AD-J9e" firstAttribute="leading" secondItem="PZv-vV-YgR" secondAttribute="leading" constant="16" id="vEg-5L-ZiY"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FIK-h2-cVa"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FIK-h2-cVa" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="PZv-vV-YgR" secondAttribute="bottom" constant="300" id="ADp-Uq-VGz"/>
+                            <constraint firstItem="PZv-vV-YgR" firstAttribute="leading" secondItem="FIK-h2-cVa" secondAttribute="leading" constant="20" id="PT7-8H-ujJ"/>
+                            <constraint firstItem="nMx-we-rfE" firstAttribute="top" secondItem="FIK-h2-cVa" secondAttribute="top" id="PZG-V2-Xrj"/>
+                            <constraint firstItem="PZv-vV-YgR" firstAttribute="top" relation="lessThanOrEqual" secondItem="FIK-h2-cVa" secondAttribute="top" constant="300" id="Qh9-Vo-0tH"/>
+                            <constraint firstItem="FIK-h2-cVa" firstAttribute="bottom" secondItem="nMx-we-rfE" secondAttribute="bottom" id="W3h-tV-0J6"/>
+                            <constraint firstItem="FIK-h2-cVa" firstAttribute="trailing" secondItem="nMx-we-rfE" secondAttribute="trailing" id="gSv-7W-q8a"/>
+                            <constraint firstItem="FIK-h2-cVa" firstAttribute="trailing" secondItem="PZv-vV-YgR" secondAttribute="trailing" constant="20" id="lPa-au-UMe"/>
+                            <constraint firstItem="nMx-we-rfE" firstAttribute="leading" secondItem="FIK-h2-cVa" secondAttribute="leading" id="shB-ug-jh6"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="so6-tu-umK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2424.6376811594205" y="53.571428571428569"/>
         </scene>
     </scenes>
     <resources>
@@ -299,6 +410,7 @@
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <image name="person.fill.badge.plus" catalog="system" width="128" height="124"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -49,13 +49,27 @@ class ApplyFriendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = "好友邀請"
 
         applyTableView.register(
             UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: FriendListTableViewCell.self)
         )
+        
+    }
+    
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
         
     }
     
@@ -98,8 +112,8 @@ class ApplyFriendViewController: UIViewController {
             case .success(let friend):
                 
                 strongSelf.otherFriend = friend
-                
-                print("TEST \(friend)")
+
+                strongSelf.popupConfirmApplyPage()
                 
             case .failure(let error):
                 
@@ -108,6 +122,30 @@ class ApplyFriendViewController: UIViewController {
             }
             
         }
+        
+    }
+    
+    func popupConfirmApplyPage() {
+        
+        guard let viewController = UIStoryboard
+            .chat
+            .instantiateViewController(
+                withIdentifier: String(describing: ConfirmApplyViewController.self)
+                ) as? ConfirmApplyViewController else {
+
+                    return
+
+                }
+        
+        guard let ownFriend = ownFriend else { return }
+        
+        guard let otherFriend = otherFriend else { return }
+
+        viewController.bothSides = BothSides(owner: ownFriend, other: otherFriend)
+
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
         
     }
 
@@ -145,7 +183,6 @@ extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         fetchData(friendID: applyList[indexPath.row])
-        
         
     }
     

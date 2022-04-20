@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct BothSides: Codable {
+    
+    var owner: Friend
+    
+    var other: Friend
+    
+}
+
 struct Friend: Codable {
     
     var userID: String
