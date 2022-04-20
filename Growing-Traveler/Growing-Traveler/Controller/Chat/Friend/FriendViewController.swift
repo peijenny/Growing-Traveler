@@ -133,7 +133,7 @@ class FriendViewController: UIViewController {
     func setNavigationItems() {
         
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriendButton)),
+//            UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriendButton)),
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(applyFriendButton))
         ]
         
