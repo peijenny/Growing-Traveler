@@ -13,6 +13,8 @@ enum ConfirmType {
     
     case refuse
     
+    case apply
+    
     var title: String {
         
         switch self {
@@ -20,6 +22,8 @@ enum ConfirmType {
         case .agree: return "同意"
             
         case .refuse: return "取消"
+            
+        case .apply: return "申請"
             
         }
         

@@ -14,6 +14,48 @@ class FriendManager {
     
     let database = Firestore.firestore()
     
+    func fetchFriendEmailData(completion: @escaping (Result<[User]>) -> Void) {
+        
+        database.collection("user").addSnapshotListener { snapshot, error in
+            
+            var users: [User] = []
+            
+            guard let snapshot = snapshot else {
+                
+                print("Error fetching document: \(error!)")
+                
+                completion(Result.failure(error!))
+                
+                return
+                
+            }
+            
+            for document in snapshot.documents {
+                
+                do {
+                    
+                    if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                        
+                        users.append(user)
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
+                
+            }
+            
+            completion(Result.success(users))
+            
+        }
+        
+    }
+    
     // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
     func fetchFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
         
