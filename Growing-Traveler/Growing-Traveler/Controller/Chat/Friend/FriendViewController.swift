@@ -69,6 +69,11 @@ class FriendViewController: UIViewController {
             forCellReuseIdentifier: String(describing: FriendListTableViewCell.self)
         )
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         fetchFriendListData()
         
     }
