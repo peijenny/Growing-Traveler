@@ -206,7 +206,7 @@
                                             <constraint firstItem="Nfh-EP-778" firstAttribute="leading" secondItem="F4D-vy-ekj" secondAttribute="trailing" constant="10" id="wyE-sa-QDy"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hint Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngl-K9-dzr">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngl-K9-dzr">
                                         <rect key="frame" x="16" y="72" width="382" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="ono-IY-Pyk"/>
