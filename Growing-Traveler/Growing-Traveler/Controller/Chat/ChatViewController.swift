@@ -45,9 +45,13 @@ class ChatViewController: BaseViewController {
             
             if let messageCount = chatMessage?.messageContent.count {
                 
-                let indexPath = IndexPath(row: messageCount - 1, section: 0)
-                
-                chatTableView.scrollToRow(at: indexPath, at: .top, animated: false)
+                if chatMessage?.messageContent.count != 0 {
+                    
+                    let indexPath = IndexPath(row: messageCount - 1, section: 0)
+                    
+                    chatTableView.scrollToRow(at: indexPath, at: .top, animated: false)
+                    
+                }
                 
             }
             

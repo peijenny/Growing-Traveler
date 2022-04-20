@@ -21,16 +21,6 @@ class ApplyFriendViewController: UIViewController {
         
     }
     
-    var applyList: [String] = [] {
-        
-        didSet {
-            
-            fetchFriendInfoData(friendList: applyList)
-            
-        }
-        
-    }
-    
     var friendsInfo: [User] = [] {
         
         didSet {
@@ -41,7 +31,18 @@ class ApplyFriendViewController: UIViewController {
         
     }
     
-    var ownFriend: Friend?
+    var ownFriend: Friend? {
+        
+        didSet {
+            
+            if let applyList = ownFriend?.applyList {
+                
+                fetchFriendInfoData(friendList: applyList)
+                
+            }
+            
+        }
+    }
     
     var otherFriend: Friend?
     
@@ -142,8 +143,31 @@ class ApplyFriendViewController: UIViewController {
         guard let otherFriend = otherFriend else { return }
 
         viewController.bothSides = BothSides(owner: ownFriend, other: otherFriend)
-
+        
         self.view.addSubview(viewController.view)
+        
+        viewController.getConfirmStatus = { [weak self] isConfirm in
+
+            guard let strongSelf = self else { return }
+            
+            guard let otherFriend = strongSelf.otherFriend else { return }
+
+            if isConfirm {
+                
+                for index in 0..<strongSelf.friendsInfo.count {
+                    
+                    if strongSelf.friendsInfo[index].userID == otherFriend.userID {
+                        
+                        strongSelf.friendsInfo.remove(at: index)
+                        
+                    }
+                }
+                
+                strongSelf.applyTableView.reloadData()
+
+            }
+
+        }
 
         self.addChild(viewController)
         
@@ -182,7 +206,7 @@ extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        fetchData(friendID: applyList[indexPath.row])
+        fetchData(friendID: friendsInfo[indexPath.row].userID)
         
     }
     

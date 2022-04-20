@@ -101,4 +101,42 @@ class FriendManager {
         
     }
     
+    func addFriendData(bothSides: BothSides, confirmType: String) {
+        
+        let ownChat = Chat(friendID: bothSides.other.userID, messageContent: [])
+
+        let otherChat = Chat(friendID: bothSides.owner.userID, messageContent: [])
+        
+        do {
+            
+            // MARK: - 修改好友狀態
+            // 修改自己的好友狀態 Document
+            try database.collection("friend").document(bothSides.owner.userID)
+                .setData(from: bothSides.owner, merge: true)
+            
+            // 修改對方的好友狀態 Document
+            try database.collection("friend").document(bothSides.other.userID)
+                .setData(from: bothSides.other, merge: false)
+            
+            // MARK: - 加入聊天室
+            if confirmType == ConfirmType.agree.title {
+                
+                // 修改自己的聊天室 Document
+                try database.collection("friend").document(bothSides.owner.userID).collection("message")
+                    .document(bothSides.other.userID).setData(from: ownChat, merge: true)
+                
+                // 修改對方的聊天室 Document
+                try database.collection("friend").document(bothSides.other.userID).collection("message")
+                    .document(bothSides.owner.userID).setData(from: otherChat, merge: true)
+                
+            }
+            
+        } catch {
+
+            print(error)
+
+        }
+        
+    }
+    
 }

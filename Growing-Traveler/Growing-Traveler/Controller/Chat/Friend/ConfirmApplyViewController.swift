@@ -7,9 +7,33 @@
 
 import UIKit
 
+enum ConfirmType {
+    
+    case agree
+    
+    case refuse
+    
+    var title: String {
+        
+        switch self {
+            
+        case .agree: return "同意"
+            
+        case .refuse: return "取消"
+            
+        }
+        
+    }
+    
+}
+
 class ConfirmApplyViewController: UIViewController {
     
     var bothSides: BothSides?
+    
+    var friendManager = FriendManager()
+    
+    var getConfirmStatus: ((_ isConfirm: Bool) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +58,8 @@ class ConfirmApplyViewController: UIViewController {
         
         self.view.removeFromSuperview()
         
+        getConfirmStatus?(false)
+        
     }
     
     @IBAction func refuseApplyButton(_ sender: UIButton) {
@@ -55,8 +81,12 @@ class ConfirmApplyViewController: UIViewController {
             }
             
         }
+
+        friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.refuse.title)
         
-        print("TEST \(bothSides)")
+        self.view.removeFromSuperview()
+        
+        getConfirmStatus?(true)
         
     }
     
@@ -84,7 +114,11 @@ class ConfirmApplyViewController: UIViewController {
             
         }
         
-        print("TEST \(bothSides)")
+        friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.agree.title)
         
+        self.view.removeFromSuperview()
+        
+        getConfirmStatus?(true)
+
     }
 }

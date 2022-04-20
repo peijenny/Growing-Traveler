@@ -141,10 +141,8 @@ class FriendViewController: UIViewController {
         
         guard let viewController = viewController as? ApplyFriendViewController else { return }
         
-        if let applyList = friend?.applyList, let friend = friend {
-            
-            viewController.applyList = applyList
-            
+        if let friend = friend {
+
             viewController.ownFriend = friend
             
         }
