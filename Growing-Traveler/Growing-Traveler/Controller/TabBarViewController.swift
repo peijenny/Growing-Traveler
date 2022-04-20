@@ -13,6 +13,8 @@ private enum Tab {
     
     case forum
     
+    case chat
+    
     func controller() -> UIViewController {
         
         var controller: UIViewController
@@ -22,6 +24,9 @@ private enum Tab {
         case .studyGoal: controller = UIStoryboard.studyGoal.instantiateInitialViewController() ?? UIViewController()
             
         case .forum: controller = UIStoryboard.forum.instantiateInitialViewController() ??
+            UIViewController()
+            
+        case .chat: controller = UIStoryboard.chat.instantiateInitialViewController() ??
             UIViewController()
             
         }
@@ -46,6 +51,10 @@ private enum Tab {
             
             return UITabBarItem(tabBarSystemItem: .featured, tag: 0)
             
+        case .chat:
+            
+            return UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+            
         }
     }
     
@@ -53,7 +62,7 @@ private enum Tab {
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
-    private let tabs: [Tab] = [.studyGoal, .forum]
+    private let tabs: [Tab] = [.studyGoal, .forum, .chat]
 
     override func viewDidLoad() {
         super.viewDidLoad()
