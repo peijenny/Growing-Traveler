@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2808C912280FEC7600DC1EC5 /* Analysis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2808C911280FEC7600DC1EC5 /* Analysis.storyboard */; };
 		2808C914280FECA800DC1EC5 /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C913280FECA800DC1EC5 /* AnalysisViewController.swift */; };
+		2808C918280FF2B700DC1EC5 /* AnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */; };
+		2808C91A28100F6000DC1EC5 /* Calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C91928100F6000DC1EC5 /* Calculate.swift */; };
 		280C1AFC280D5D7C0091B9DC /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 280C1AFB280D5D7C0091B9DC /* Chat.storyboard */; };
 		280C1AFF280D680A0091B9DC /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1AFE280D680A0091B9DC /* Chat.swift */; };
 		280C1B01280D772E0091B9DC /* ChatRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B00280D772E0091B9DC /* ChatRoomManager.swift */; };
@@ -89,6 +91,8 @@
 /* Begin PBXFileReference section */
 		2808C911280FEC7600DC1EC5 /* Analysis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Analysis.storyboard; sourceTree = "<group>"; };
 		2808C913280FECA800DC1EC5 /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
+		2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisManager.swift; sourceTree = "<group>"; };
+		2808C91928100F6000DC1EC5 /* Calculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculate.swift; sourceTree = "<group>"; };
 		280C1AFB280D5D7C0091B9DC /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		280C1AFE280D680A0091B9DC /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		280C1B00280D772E0091B9DC /* ChatRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomManager.swift; sourceTree = "<group>"; };
@@ -201,6 +205,8 @@
 		2808C90F280FEC3700DC1EC5 /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
+				2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */,
+				2808C91928100F6000DC1EC5 /* Calculate.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -660,6 +666,7 @@
 				282522DB280FE5520008B916 /* KeyToken.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
+				2808C91A28100F6000DC1EC5 /* Calculate.swift in Sources */,
 				28BB6EF828069112002B0458 /* ForumArticle.swift in Sources */,
 				280C1B06280D77900091B9DC /* ChatViewController.swift in Sources */,
 				28BB6EF6280690EB002B0458 /* ForumArticleManager.swift in Sources */,
@@ -678,6 +685,7 @@
 				280C1B10280E42780091B9DC /* User.swift in Sources */,
 				28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */,
 				28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */,
+				2808C918280FF2B700DC1EC5 /* AnalysisManager.swift in Sources */,
 				28BB6EFF2807C86C002B0458 /* ArticleTableViewCell.swift in Sources */,
 				280C1B12280E42FC0091B9DC /* FriendManager.swift in Sources */,
 				28A6F45B280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift in Sources */,
