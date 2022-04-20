@@ -6,20 +6,32 @@
 //
 
 import UIKit
-import Charts
 
 class AnalysisViewController: UIViewController {
-
-    @IBOutlet weak var analysisBarChatView: BarChartView!
     
-    @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet weak var analysisTableView: UITableView! {
+        
+        didSet {
+            
+            analysisTableView.delegate = self
+            
+            analysisTableView.dataSource = self
+            
+        }
+        
+    }
     
-    // 測試顯示資料
     var sevenDaysArray: [String] = []
     
-    var calculateStudyTime: [Double] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-    
-    var axisFormatDelgate: AxisValueFormatter?
+    var calculateStudyTime: [Double] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] {
+        
+        didSet {
+            
+            analysisTableView.reloadData()
+            
+        }
+        
+    }
     
     var analysisManager = AnalysisManager()
     
@@ -33,6 +45,11 @@ class AnalysisViewController: UIViewController {
         super.viewDidLoad()
         
         fetchData()
+        
+        analysisTableView.register(
+            UINib(nibName: String(describing: AnalysisChatTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: AnalysisChatTableViewCell.self)
+        )
         
     }
     
@@ -175,7 +192,6 @@ class AnalysisViewController: UIViewController {
                 
         }
 
-        updateChatsData()
     }
     
     func checkDiff(start: Date, end: Date) -> Int {
@@ -201,36 +217,35 @@ class AnalysisViewController: UIViewController {
         return 0
         
     }
+
+}
+
+extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func updateChatsData() {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
-        // 存放資料的陣列，型態為 BarChartDataEntry
-        var dataEntries: [BarChartDataEntry] = []
-        
-        // 使用迴圈將資料加入存放資料的陣列中
-        for index in 0..<calculateStudyTime.count {
-            
-            // 設定 x, y 座標要顯示的東西有哪些
-            let dataEntry = BarChartDataEntry(x: Double(index), y: calculateStudyTime[index])
-            
-            // 將資料加入到陣列中
-            dataEntries.append(dataEntry)
-            
-        }
-        
-        // 設定 BarChartDataSet 設定要顯示的資料是什麼，以及圖表下方的 Label
-        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Last Sevent day")
-        
-        chartDataSet.colors = ChartColorTemplates.colorful()
-        
-        let chartData = BarChartData(dataSet: chartDataSet)
-        
-        analysisBarChatView.data = chartData
-        
-        analysisBarChatView.xAxis.valueFormatter = IndexAxisValueFormatter(values: sevenDaysArray)
-        
-        analysisBarChatView.xAxis.granularity = 1
+        return 1
         
     }
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 1
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: AnalysisChatTableViewCell.self),
+            for: indexPath)
+        
+        guard let cell = cell as? AnalysisChatTableViewCell else { return cell }
+        
+        cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
+        
+        return cell
+        
+    }
+    
 }

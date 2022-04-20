@@ -32,47 +32,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rrq-fe-9eK" customClass="BarChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="88" width="414" height="274"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSe-hP-Xjx">
-                                <rect key="frame" x="20" y="412" width="374" height="400"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V24-1N-Fg5">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Rrq-fe-9eK" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="05s-md-Iv7"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Rrq-fe-9eK" secondAttribute="trailing" id="JdO-Wg-KgL"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Rrq-fe-9eK" secondAttribute="bottom" constant="500" id="aRn-2L-zgR"/>
-                            <constraint firstItem="wSe-hP-Xjx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="by4-CV-M4c"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="wSe-hP-Xjx" secondAttribute="trailing" constant="20" id="gDG-sr-9KK"/>
-                            <constraint firstItem="Rrq-fe-9eK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="lxZ-6q-UTp"/>
-                            <constraint firstItem="wSe-hP-Xjx" firstAttribute="top" secondItem="Rrq-fe-9eK" secondAttribute="bottom" constant="50" id="yL8-tG-IAQ"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="wSe-hP-Xjx" secondAttribute="bottom" constant="50" id="zZc-jR-UTG"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="V24-1N-Fg5" secondAttribute="bottom" id="90c-Fs-E0O"/>
+                            <constraint firstItem="V24-1N-Fg5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="F8b-qi-Ct4"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="V24-1N-Fg5" secondAttribute="trailing" id="gqs-zM-eQz"/>
+                            <constraint firstItem="V24-1N-Fg5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="kSX-lF-tyP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="成長分析" id="knS-Ad-fS8"/>
                     <connections>
-                        <outlet property="analysisBarChatView" destination="Rrq-fe-9eK" id="62q-9n-FSE"/>
-                        <outlet property="testLabel" destination="wSe-hP-Xjx" id="HSF-XV-oge"/>
+                        <outlet property="analysisTableView" destination="V24-1N-Fg5" id="gTi-GY-hf8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="80"/>
+            <point key="canvasLocation" x="131.8840579710145" y="79.6875"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
