@@ -8,7 +8,7 @@
 import UIKit
 import Charts
 
-class AnalysisChatTableViewCell: UITableViewCell {
+class AnalysisBarChatTableViewCell: UITableViewCell {
     
     @IBOutlet weak var analysisBarChatView: BarChartView!
 

@@ -47,8 +47,8 @@ class AnalysisViewController: UIViewController {
         fetchData()
         
         analysisTableView.register(
-            UINib(nibName: String(describing: AnalysisChatTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: AnalysisChatTableViewCell.self)
+            UINib(nibName: String(describing: AnalysisBarChatTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: AnalysisBarChatTableViewCell.self)
         )
         
     }
@@ -237,10 +237,10 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: AnalysisChatTableViewCell.self),
+            withIdentifier: String(describing: AnalysisBarChatTableViewCell.self),
             for: indexPath)
         
-        guard let cell = cell as? AnalysisChatTableViewCell else { return cell }
+        guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
         
         cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
         
