@@ -384,32 +384,7 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
 
             guard let cell = cell as? AnalysisContentTableViewCell else { return cell }
             
-            let paragraphStyle = NSMutableParagraphStyle()
-            
-            paragraphStyle.lineSpacing = 10
-            
-            paragraphStyle.alignment = .left
-            
-            let interesteAttributes = NSAttributedString(
-                string: interesteText,
-                attributes: [ NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                              NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 15.0)! ])
-            
-            cell.interesteLabel.attributedText = interesteAttributes
-            
-            if certificateText == "" {
-                
-                certificateText = "目前暫無推薦考取的證照！"
-                
-            }
-            
-            let certificateAttributes = NSAttributedString(
-                string: certificateText,
-                attributes: [ NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                               NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 15.0)!,
-                               NSAttributedString.Key.foregroundColor: UIColor.red ])
-            
-            cell.certificateLabel.attributedText = certificateAttributes
+            cell.showPieText(certificateText: certificateText, interesteText: interesteText)
             
             return cell
             
