@@ -212,10 +212,10 @@
 			children = (
 				2808C91F28103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.swift */,
 				2808C92028103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.xib */,
-				2808C924281131A400DC1EC5 /* AnalysisContentTableViewCell.swift */,
-				2808C925281131A400DC1EC5 /* AnalysisContentTableViewCell.xib */,
 				2808C928281131C700DC1EC5 /* AnalysisPieChartTableViewCell.swift */,
 				2808C929281131C700DC1EC5 /* AnalysisPieChartTableViewCell.xib */,
+				2808C924281131A400DC1EC5 /* AnalysisContentTableViewCell.swift */,
+				2808C925281131A400DC1EC5 /* AnalysisContentTableViewCell.xib */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";

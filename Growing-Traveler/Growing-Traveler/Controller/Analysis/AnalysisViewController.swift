@@ -21,6 +21,8 @@ class AnalysisViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var selectSegmentedControl: UISegmentedControl!
+    
     var sevenDaysArray: [String] = []
     
     var calculateStudyTime: [Double] = [] {
@@ -57,6 +59,15 @@ class AnalysisViewController: UIViewController {
             UINib(nibName: String(describing: AnalysisPieChartTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: AnalysisPieChartTableViewCell.self)
         )
+        
+        selectSegmentedControl.addTarget(
+            self, action: #selector(selectIndexChanged(_:)), for: .valueChanged)
+        
+    }
+    
+    @objc func selectIndexChanged(_ send: UISegmentedControl) {
+        
+        analysisTableView.reloadData()
         
     }
     
@@ -313,23 +324,34 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        let cell = tableView.dequeueReusableCell(
-//            withIdentifier: String(describing: AnalysisBarChatTableViewCell.self),
-//            for: indexPath)
-//
-//        guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
-//
-//        cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
-        
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: AnalysisPieChartTableViewCell.self),
-            for: indexPath)
+        guard let select = selectSegmentedControl.titleForSegment(
+            at: selectSegmentedControl.selectedSegmentIndex) else { return UITableViewCell() }
+         
+        if select == "近七天學習時間" {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: AnalysisBarChatTableViewCell.self),
+                for: indexPath)
 
-        guard let cell = cell as? AnalysisPieChartTableViewCell else { return cell }
-        
-        cell.updateChatsData(spendStudyItem: spendStudyItem)
-        
-        return cell
+            guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
+
+            cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
+            
+            return cell
+                    
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: AnalysisPieChartTableViewCell.self),
+                for: indexPath)
+
+            guard let cell = cell as? AnalysisPieChartTableViewCell else { return cell }
+            
+            cell.updateChatsData(spendStudyItem: spendStudyItem)
+            
+            return cell
+            
+        }
         
     }
     
