@@ -9,6 +9,10 @@ import UIKit
 
 class AnalysisContentTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var interesteLabel: UILabel!
+    
+    @IBOutlet weak var certificateLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
