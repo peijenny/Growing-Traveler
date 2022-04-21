@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Calculate: Codable {
+struct CalculateBar: Codable {
     
     var startDate: Date // 開始天數
     
@@ -30,5 +30,21 @@ struct Included: Codable {
     var day: Date
     
     var time: Int
+    
+}
+
+struct CalculateSpendStudyItem: Codable {
+    
+    var itemsTime: [Double]
+
+    var itemsTitle: [String]
+
+}
+
+struct CalculatePie: Codable {
+    
+    var totalMinutes: Double
+    
+    var categoryItem: CategoryItem
     
 }

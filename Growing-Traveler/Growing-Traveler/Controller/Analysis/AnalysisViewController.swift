@@ -23,7 +23,7 @@ class AnalysisViewController: UIViewController {
     
     var sevenDaysArray: [String] = []
     
-    var calculateStudyTime: [Double] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] {
+    var calculateStudyTime: [Double] = [] {
         
         didSet {
             
@@ -35,26 +35,33 @@ class AnalysisViewController: UIViewController {
     
     var analysisManager = AnalysisManager()
     
+    var categoryManager = CategoryManager()
+    
     var studyGoals: [StudyGoal] = []
     
-    var calculates: [Calculate] = []
+    var calculates: [CalculateBar] = []
+    
+    var spendStudyItem = CalculateSpendStudyItem(itemsTime: [], itemsTitle: [])
     
     let day = 24 * 60 * 60
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchData()
-        
         analysisTableView.register(
             UINib(nibName: String(describing: AnalysisBarChatTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: AnalysisBarChatTableViewCell.self)
         )
         
+        analysisTableView.register(
+            UINib(nibName: String(describing: AnalysisPieChartTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: AnalysisPieChartTableViewCell.self)
+        )
+        
     }
     
     func fetchData() {
-        
+
         analysisManager.fetchData { [weak self] result in
             
             switch result {
@@ -63,7 +70,9 @@ class AnalysisViewController: UIViewController {
                 
                 self?.studyGoals = studyGoals
                 
-                self?.handleData()
+                self?.handlePieChartData()
+                
+                self?.handleBarChartData()
                 
             case .failure(let error):
                 
@@ -74,7 +83,70 @@ class AnalysisViewController: UIViewController {
         }
     }
     
-    func handleData() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        fetchData()
+
+    }
+
+    func handlePieChartData() {
+        
+        spendStudyItem.itemsTime.removeAll()
+        
+        spendStudyItem.itemsTitle.removeAll()
+        
+        let finishedStudyGoals = studyGoals.filter({
+            
+            $0.studyItems.allSatisfy({ $0.isCompleted == true })
+
+        })
+        
+        var finishedCalculates: [CalculatePie] = []
+        
+        for finishedIndex in 0..<finishedStudyGoals.count {
+            
+            var totalMinutes = 0
+            
+            for index in 0..<finishedStudyGoals[finishedIndex].studyItems.count {
+                
+                if studyGoals[finishedIndex].studyItems[index].isCompleted == true {
+                    
+                    totalMinutes += studyGoals[finishedIndex].studyItems[index].studyTime
+                    
+                }
+                
+            }
+            
+            finishedCalculates.append(
+                CalculatePie(totalMinutes: Double(totalMinutes), categoryItem: studyGoals[finishedIndex].category))
+            
+        }
+        
+        var allTime: Double = 0
+        
+        for index in 0..<finishedCalculates.count {
+            
+            allTime += finishedCalculates[index].totalMinutes
+        }
+        
+        allTime /= 100
+        
+        for index in 0..<finishedCalculates.count {
+
+            let itemTime = (finishedCalculates[index].totalMinutes / allTime)
+            
+            spendStudyItem.itemsTime.append(itemTime)
+            
+            spendStudyItem.itemsTitle.append(finishedCalculates[index].categoryItem.title)
+            
+        }
+        
+        print("TEST \(spendStudyItem)")
+
+    }
+    
+    func handleBarChartData() {
         
         let yesterday = Date().addingTimeInterval(-Double((day))).addingTimeInterval(Double(day / 3))
         
@@ -154,7 +226,7 @@ class AnalysisViewController: UIViewController {
 
             }
             
-            calculates.append(Calculate(
+            calculates.append(CalculateBar(
                 startDate: startDate, endDate: endDate, periodDays: periodDays, totalMinutes: totalMinutes,
                 averageMinutes: averageTime, includedDays: includedDays, included: includedArray))
             
@@ -181,6 +253,11 @@ class AnalysisViewController: UIViewController {
     }
     
     func calculateSevenDayStudyTime() {
+        
+        for _ in 0..<7 {
+            
+            calculateStudyTime.append(0.0)
+        }
         
         for calculateIndex in 0..<calculates.count {
             
@@ -236,15 +313,53 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+//        let cell = tableView.dequeueReusableCell(
+//            withIdentifier: String(describing: AnalysisBarChatTableViewCell.self),
+//            for: indexPath)
+//
+//        guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
+//
+//        cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
+        
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: AnalysisBarChatTableViewCell.self),
+            withIdentifier: String(describing: AnalysisPieChartTableViewCell.self),
             for: indexPath)
+
+        guard let cell = cell as? AnalysisPieChartTableViewCell else { return cell }
         
-        guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
-        
-        cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
+        cell.updateChatsData(spendStudyItem: spendStudyItem)
         
         return cell
+        
+    }
+    
+}
+
+extension Double {
+    
+    // 無條件進位
+    func ceiling(toDecimal decimal: Int) -> Double {
+        
+        let numberOfDigits = abs(pow(10.0, Double(decimal)))
+        
+        if self.sign == .minus {
+            
+            return Double(Int(self * numberOfDigits)) / numberOfDigits
+            
+        } else {
+            
+            return Double(ceil(self * numberOfDigits)) / numberOfDigits
+            
+        }
+        
+    }
+    
+    // 四捨五入
+    func rounding(toDecimal decimal: Int) -> Double {
+        
+        let numberOfDigits = pow(10.0, Double(decimal))
+        
+        return (self * numberOfDigits).rounded(.toNearestOrAwayFromZero) / numberOfDigits
         
     }
     
