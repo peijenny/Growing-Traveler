@@ -271,6 +271,7 @@
 		280C1B0C280E42230091B9DC /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				280C1B0F280E42780091B9DC /* User.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -279,7 +280,6 @@
 			isa = PBXGroup;
 			children = (
 				280C1B0D280E424C0091B9DC /* Friend.swift */,
-				280C1B0F280E42780091B9DC /* User.swift */,
 				280C1B11280E42FC0091B9DC /* FriendManager.swift */,
 			);
 			path = Friend;

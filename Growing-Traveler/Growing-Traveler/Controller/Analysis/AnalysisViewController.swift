@@ -45,7 +45,13 @@ class AnalysisViewController: UIViewController {
     
     var spendStudyItem = CalculateSpendStudyItem(itemsTime: [], itemsTitle: [])
     
+    var finishedCalculates: [CalculatePie] = []
+    
     let day = 24 * 60 * 60
+    
+    var certificateText = ""
+    
+    var interesteText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +64,11 @@ class AnalysisViewController: UIViewController {
         analysisTableView.register(
             UINib(nibName: String(describing: AnalysisPieChartTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: AnalysisPieChartTableViewCell.self)
+        )
+        
+        analysisTableView.register(
+            UINib(nibName: String(describing: AnalysisContentTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: AnalysisContentTableViewCell.self)
         )
         
         selectSegmentedControl.addTarget(
@@ -113,8 +124,6 @@ class AnalysisViewController: UIViewController {
 
         })
         
-        var finishedCalculates: [CalculatePie] = []
-        
         for finishedIndex in 0..<finishedStudyGoals.count {
             
             var totalMinutes = 0
@@ -153,8 +162,24 @@ class AnalysisViewController: UIViewController {
             
         }
         
-        print("TEST \(spendStudyItem)")
+        handleFeedbackText()
 
+    }
+    
+    func handleFeedbackText() {
+        
+        for categoryIndex in 0..<finishedCalculates.count {
+            
+            interesteText += " ○ " + finishedCalculates[categoryIndex].categoryItem.intereste + "\n"
+            
+            for index in 0..<finishedCalculates[categoryIndex].categoryItem.certificate.count {
+                
+                certificateText += " □ " + finishedCalculates[categoryIndex].categoryItem.certificate[index] + "\n"
+                
+            }
+            
+        }
+        
     }
     
     func handleBarChartData() {
@@ -318,7 +343,7 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 1
+        return 2
         
     }
     
@@ -327,7 +352,7 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
         guard let select = selectSegmentedControl.titleForSegment(
             at: selectSegmentedControl.selectedSegmentIndex) else { return UITableViewCell() }
          
-        if select == "近七天學習時間" {
+        if indexPath.row == 0 && select == "近七天學習時間" {
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: AnalysisBarChatTableViewCell.self),
@@ -339,7 +364,7 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
                     
-        } else {
+        } else if indexPath.row == 0 && select == "近七天學習類型" {
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: AnalysisPieChartTableViewCell.self),
@@ -348,6 +373,43 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = cell as? AnalysisPieChartTableViewCell else { return cell }
             
             cell.updateChatsData(spendStudyItem: spendStudyItem)
+            
+            return cell
+            
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: AnalysisContentTableViewCell.self),
+                for: indexPath)
+
+            guard let cell = cell as? AnalysisContentTableViewCell else { return cell }
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            
+            paragraphStyle.lineSpacing = 10
+            
+            paragraphStyle.alignment = .left
+            
+            let interesteAttributes = NSAttributedString(
+                string: interesteText,
+                attributes: [ NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                              NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 15.0)! ])
+            
+            cell.interesteLabel.attributedText = interesteAttributes
+            
+            if certificateText == "" {
+                
+                certificateText = "目前暫無推薦考取的證照！"
+                
+            }
+            
+            let certificateAttributes = NSAttributedString(
+                string: certificateText,
+                attributes: [ NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                               NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 15.0)!,
+                               NSAttributedString.Key.foregroundColor: UIColor.red ])
+            
+            cell.certificateLabel.attributedText = certificateAttributes
             
             return cell
             
