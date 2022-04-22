@@ -82,7 +82,7 @@ class ProfileViewController: UIViewController {
         
         var snapshot = NSDiffableDataSourceSnapshot<Int, FeatureType>()
         
-        snapshot.appendSections([0])
+        snapshot.appendSections([0, 1])
         
         snapshot.appendItems(featureList, toSection: 0)
         
@@ -105,7 +105,7 @@ class ProfileViewController: UIViewController {
             top: padding, leading: padding, bottom: padding, trailing: padding)
 
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+            widthDimension: .fractionalWidth(0.7), heightDimension: .fractionalHeight(0.8))
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
@@ -131,5 +131,26 @@ extension ProfileViewController: UICollectionViewDelegate {
         
         print("TEST \(indexPath.item)")
         
+        switch indexPath.item {
+
+        case 0:
+            
+            let viewController = MandateViewController()
+            
+            navigationController?.pushViewController(viewController, animated: true)
+            
+        case 1: break
+
+        case 2: break
+
+        case 3: break
+
+        case 4: break
+
+        default: break
+            
+        }
+        
     }
+    
 }
