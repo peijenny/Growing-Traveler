@@ -15,4 +15,6 @@ struct User: Codable {
     
     var userEmail: String
     
+    var experienceValue: Int
+    
 }

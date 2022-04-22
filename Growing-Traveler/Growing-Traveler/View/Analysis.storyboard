@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZK4-br-LxG">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="iuu-Fo-Xlq">
+            <objects>
+                <navigationController id="ZK4-br-LxG" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="y5r-RX-I6O">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="clu-Bb-0kY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OM6-7T-eeZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-688" y="80"/>
+        </scene>
+        <!--成長分析-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="AnalysisViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V24-1N-Fg5">
+                                <rect key="frame" x="0.0" y="148" width="414" height="714"/>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="abF-9Q-ix4">
+                                <rect key="frame" x="30" y="98" width="354" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Bjx-dD-vjU"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="近七天學習時間"/>
+                                    <segment title="近七天學習類型"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="V24-1N-Fg5" secondAttribute="bottom" id="90c-Fs-E0O"/>
+                            <constraint firstItem="abF-9Q-ix4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="C1i-cX-mNa"/>
+                            <constraint firstItem="V24-1N-Fg5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="F8b-qi-Ct4"/>
+                            <constraint firstItem="abF-9Q-ix4" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="QKk-8A-JaO"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="V24-1N-Fg5" secondAttribute="trailing" id="gqs-zM-eQz"/>
+                            <constraint firstItem="V24-1N-Fg5" firstAttribute="top" secondItem="abF-9Q-ix4" secondAttribute="bottom" constant="10" id="rh2-ju-m1v"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="abF-9Q-ix4" secondAttribute="trailing" constant="30" id="x6f-rE-O4X"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="成長分析" id="knS-Ad-fS8"/>
+                    <connections>
+                        <outlet property="analysisTableView" destination="V24-1N-Fg5" id="gTi-GY-hf8"/>
+                        <outlet property="selectSegmentedControl" destination="abF-9Q-ix4" id="wmM-gh-M0a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="79.6875"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
