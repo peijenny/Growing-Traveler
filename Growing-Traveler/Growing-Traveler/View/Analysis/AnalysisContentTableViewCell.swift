@@ -9,9 +9,16 @@ import UIKit
 
 class AnalysisContentTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var interesteLabel: UILabel!
     
-    @IBOutlet weak var certificateLabel: UILabel!
+    @IBOutlet weak var topTitleLabel: UILabel!
+    
+    @IBOutlet weak var topContentLabel: UILabel!
+    
+    @IBOutlet weak var bottomTitleLabel: UILabel!
+    
+    @IBOutlet weak var bottomContentLabel: UILabel!
+    
+    let paragraphStyle = NSMutableParagraphStyle()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,9 +33,11 @@ class AnalysisContentTableViewCell: UITableViewCell {
     
     func showPieText(certificateText: String, interesteText: String) {
         
-        var certificateText = certificateText
+        topTitleLabel.text = "或許可以延伸的項目："
         
-        let paragraphStyle = NSMutableParagraphStyle()
+        bottomTitleLabel.text = "可以考取的證照："
+        
+        var certificateText = certificateText
         
         paragraphStyle.lineSpacing = 10
         
@@ -39,7 +48,7 @@ class AnalysisContentTableViewCell: UITableViewCell {
             attributes: [ NSAttributedString.Key.paragraphStyle: paragraphStyle,
                           NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 15.0)! ])
         
-        interesteLabel.attributedText = interesteAttributes
+        topContentLabel.attributedText = interesteAttributes
         
         if certificateText == "" {
             
@@ -53,7 +62,35 @@ class AnalysisContentTableViewCell: UITableViewCell {
                            NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 15.0)!,
                            NSAttributedString.Key.foregroundColor: UIColor.orange ])
         
-        certificateLabel.attributedText = certificateAttributes
+        bottomContentLabel.attributedText = certificateAttributes
+        
+    }
+    
+    func showBarText(feedback: Feedback, experienceValue: Int) {
+        
+        topTitleLabel.text = "近期學習狀況 → \(feedback.title)"
+        
+        bottomTitleLabel.text = "近期學習的評語："
+        
+        paragraphStyle.lineSpacing = 10
+        
+        paragraphStyle.alignment = .left
+        
+        let experienceAttributes = NSAttributedString(
+            string: "獲得的經驗值： \(experienceValue)",
+            attributes: [ NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                          NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 16.0)!,
+                          NSAttributedString.Key.foregroundColor: UIColor.lightGray ])
+        
+        topContentLabel.attributedText = experienceAttributes
+        
+        let commentAttributes = NSAttributedString(
+            string: feedback.comment,
+            attributes: [ NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                           NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 15.0)!,
+                           NSAttributedString.Key.foregroundColor: UIColor.orange ])
+        
+        bottomContentLabel.attributedText = commentAttributes
         
     }
     

@@ -21,7 +21,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Bfj-ah-D6g"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -36,7 +36,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="op8-QP-Ejt"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -65,8 +65,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="certificateLabel" destination="BWn-Xn-R35" id="Qhp-u2-9ny"/>
-                <outlet property="interesteLabel" destination="Rda-mf-adK" id="mG9-3y-7pz"/>
+                <outlet property="bottomContentLabel" destination="BWn-Xn-R35" id="asF-pu-bcB"/>
+                <outlet property="bottomTitleLabel" destination="cpn-JS-b1l" id="Pgi-Pz-5wM"/>
+                <outlet property="topContentLabel" destination="Rda-mf-adK" id="qD6-dB-4fX"/>
+                <outlet property="topTitleLabel" destination="tP6-tb-MKR" id="3i1-gf-eT6"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="82.366071428571431"/>
         </tableViewCell>

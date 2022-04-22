@@ -12,11 +12,11 @@ import FirebaseFirestoreSwift
 
 class AnalysisManager {
     
-    let database = Firestore.firestore().collection("studyGoal")
+    let database = Firestore.firestore()
     
-    func fetchData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
+    func fetchStudyData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
-        database.getDocuments { snapshot, error in
+        database.collection("studyGoal").getDocuments { snapshot, error in
             
             var studyGoals: [StudyGoal] = []
             
@@ -55,4 +55,46 @@ class AnalysisManager {
         }
         
     }
+    
+    func fetchFeedbackData(completion: @escaping (Result<[Feedback]>) -> Void) {
+        
+        database.collection("feedback").getDocuments { snapshot, error in
+            
+            var feedbacks: [Feedback] = []
+            
+            guard let snapshot = snapshot else {
+                
+                print("Error fetching document: \(error!)")
+                
+                completion(Result.failure(error!))
+                
+                return
+                
+            }
+            
+            for document in snapshot.documents {
+                
+                do {
+                    
+                    if let feedback = try document.data(as: Feedback.self, decoder: Firestore.Decoder()) {
+                        
+                        feedbacks.append(feedback)
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
+                
+            }
+            
+            completion(Result.success(feedbacks))
+        }
+        
+    }
+    
 }

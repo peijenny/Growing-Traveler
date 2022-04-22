@@ -37,6 +37,9 @@
 		282522D9280FE54C0008B916 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 282522D8280FE54C0008B916 /* GoogleService-Info.plist */; };
 		282522DB280FE5520008B916 /* KeyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522DA280FE5520008B916 /* KeyToken.swift */; };
 		283D2C3E2803E63C004D19E4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2C3D2803E63C004D19E4 /* BaseViewController.swift */; };
+		2857035A2811856A00849FAA /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285703592811856A00849FAA /* UserManager.swift */; };
+		2857035C28118F8D00849FAA /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2857035B28118F8D00849FAA /* Feedback.swift */; };
+		2857035E281197FC00849FAA /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2857035D281197FC00849FAA /* Double+Extension.swift */; };
 		285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */; };
 		285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F4228017AEF00E84CF2 /* SelectCategoryViewController.swift */; };
 		285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F3F4828018ED400E84CF2 /* CategoryTableViewCell.swift */; };
@@ -125,6 +128,9 @@
 		282522D8280FE54C0008B916 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		282522DA280FE5520008B916 /* KeyToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyToken.swift; sourceTree = "<group>"; };
 		283D2C3D2803E63C004D19E4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		285703592811856A00849FAA /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		2857035B28118F8D00849FAA /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		2857035D281197FC00849FAA /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		285F3F3F2801586200E84CF2 /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
 		285F3F4228017AEF00E84CF2 /* SelectCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryViewController.swift; sourceTree = "<group>"; };
 		285F3F4828018ED400E84CF2 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -225,6 +231,7 @@
 			children = (
 				2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */,
 				2808C91928100F6000DC1EC5 /* CalculateBar.swift */,
+				2857035B28118F8D00849FAA /* Feedback.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -272,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				280C1B0F280E42780091B9DC /* User.swift */,
+				285703592811856A00849FAA /* UserManager.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -353,6 +361,7 @@
 			children = (
 				288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */,
 				28BB6F032807EC75002B0458 /* UIImageView+Extension.swift */,
+				2857035D281197FC00849FAA /* Double+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -683,6 +692,7 @@
 				282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
 				28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */,
+				2857035E281197FC00849FAA /* Double+Extension.swift in Sources */,
 				28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */,
 				282522DB280FE5520008B916 /* KeyToken.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
@@ -711,6 +721,7 @@
 				2808C918280FF2B700DC1EC5 /* AnalysisManager.swift in Sources */,
 				28BB6EFF2807C86C002B0458 /* ArticleTableViewCell.swift in Sources */,
 				280C1B12280E42FC0091B9DC /* FriendManager.swift in Sources */,
+				2857035A2811856A00849FAA /* UserManager.swift in Sources */,
 				28A6F45B280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift in Sources */,
 				28BB6EE928066639002B0458 /* ForumViewController.swift in Sources */,
 				280C1B15280E58BB0091B9DC /* ReceiveMessageTableViewCell.swift in Sources */,
@@ -731,6 +742,7 @@
 				28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */,
 				28D702BF28019E0300FE9AEA /* Category.swift in Sources */,
 				280C1B0E280E424C0091B9DC /* Friend.swift in Sources */,
+				2857035C28118F8D00849FAA /* Feedback.swift in Sources */,
 				280C1B19280E58C70091B9DC /* SendMessageTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

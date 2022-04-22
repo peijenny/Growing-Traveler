@@ -39,6 +39,8 @@ class AnalysisViewController: UIViewController {
     
     var categoryManager = CategoryManager()
     
+    var userManager = UserManager()
+    
     var studyGoals: [StudyGoal] = []
     
     var calculates: [CalculateBar] = []
@@ -47,11 +49,17 @@ class AnalysisViewController: UIViewController {
     
     var finishedCalculates: [CalculatePie] = []
     
+    var feedbacks: [Feedback] = []
+    
+    var feedback: Feedback?
+    
     let day = 24 * 60 * 60
     
     var certificateText = ""
     
     var interesteText = ""
+    
+    var experienceValue = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,25 +84,36 @@ class AnalysisViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        fetchStudyGoalData()
+        
+        fetchFeedbackData()
+
+    }
+    
     @objc func selectIndexChanged(_ send: UISegmentedControl) {
         
         analysisTableView.reloadData()
         
     }
     
-    func fetchData() {
+    func fetchStudyGoalData() {
 
-        analysisManager.fetchData { [weak self] result in
+        analysisManager.fetchStudyData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
             
             switch result {
                 
             case .success(let studyGoals):
                 
-                self?.studyGoals = studyGoals
+                strongSelf.studyGoals = studyGoals
                 
-                self?.handlePieChartData()
+                strongSelf.handlePieChartData()
                 
-                self?.handleBarChartData()
+                strongSelf.handleBarChartData()
                 
             case .failure(let error):
                 
@@ -103,13 +122,29 @@ class AnalysisViewController: UIViewController {
             }
             
         }
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        fetchData()
-
+    func fetchFeedbackData() {
+        
+        analysisManager.fetchFeedbackData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let feetbacks):
+                
+                strongSelf.feedbacks = feetbacks
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
     }
 
     func handlePieChartData() {
@@ -162,11 +197,11 @@ class AnalysisViewController: UIViewController {
             
         }
         
-        handleFeedbackText()
+        handlePieChatFeedbackText()
 
     }
     
-    func handleFeedbackText() {
+    func handlePieChatFeedbackText() {
         
         for categoryIndex in 0..<finishedCalculates.count {
             
@@ -269,6 +304,33 @@ class AnalysisViewController: UIViewController {
         }
         
         calculateSevenDayStudyTime()
+        
+        handleBarChatFeedbackText()
+
+    }
+    
+    func handleBarChatFeedbackText() {
+        
+        var totalStudyTime = 0.0
+        
+        for index in 0..<calculateStudyTime.count {
+            
+            totalStudyTime += calculateStudyTime[index]
+            
+        }
+        
+        experienceValue = Int(totalStudyTime * 50)
+        
+        for index in 0..<feedbacks.count {
+            
+            if Int(totalStudyTime) >= feedbacks[index].timeLimit.lower &&
+                Int(totalStudyTime) <= feedbacks[index].timeLimit.upper {
+                
+                feedback = feedbacks[index]
+                
+            }
+            
+        }
 
     }
     
@@ -352,29 +414,33 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
         guard let select = selectSegmentedControl.titleForSegment(
             at: selectSegmentedControl.selectedSegmentIndex) else { return UITableViewCell() }
          
-        if indexPath.row == 0 && select == "近七天學習時間" {
+        if indexPath.row == 0 {
             
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: AnalysisBarChatTableViewCell.self),
-                for: indexPath)
+            if select == "近七天學習時間" {
+                
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: AnalysisBarChatTableViewCell.self),
+                    for: indexPath)
 
-            guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
+                guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
 
-            cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
-            
-            return cell
-                    
-        } else if indexPath.row == 0 && select == "近七天學習類型" {
-            
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: AnalysisPieChartTableViewCell.self),
-                for: indexPath)
+                cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
+                
+                return cell
+                
+            } else {
+                
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: AnalysisPieChartTableViewCell.self),
+                    for: indexPath)
 
-            guard let cell = cell as? AnalysisPieChartTableViewCell else { return cell }
-            
-            cell.updateChatsData(spendStudyItem: spendStudyItem)
-            
-            return cell
+                guard let cell = cell as? AnalysisPieChartTableViewCell else { return cell }
+                
+                cell.updateChatsData(spendStudyItem: spendStudyItem)
+                
+                return cell
+                
+            }
             
         } else {
             
@@ -384,41 +450,23 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
 
             guard let cell = cell as? AnalysisContentTableViewCell else { return cell }
             
-            cell.showPieText(certificateText: certificateText, interesteText: interesteText)
+            if select == "近七天學習時間" {
+                
+                if let feedback = feedback {
+                    
+                    cell.showBarText(feedback: feedback, experienceValue: experienceValue)
+                    
+                }
+                
+            } else {
+                
+                cell.showPieText(certificateText: certificateText, interesteText: interesteText)
+                
+            }
             
             return cell
             
         }
-        
-    }
-    
-}
-
-extension Double {
-    
-    // 無條件進位
-    func ceiling(toDecimal decimal: Int) -> Double {
-        
-        let numberOfDigits = abs(pow(10.0, Double(decimal)))
-        
-        if self.sign == .minus {
-            
-            return Double(Int(self * numberOfDigits)) / numberOfDigits
-            
-        } else {
-            
-            return Double(ceil(self * numberOfDigits)) / numberOfDigits
-            
-        }
-        
-    }
-    
-    // 四捨五入
-    func rounding(toDecimal decimal: Int) -> Double {
-        
-        let numberOfDigits = pow(10.0, Double(decimal))
-        
-        return (self * numberOfDigits).rounded(.toNearestOrAwayFromZero) / numberOfDigits
         
     }
     
