@@ -9,6 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var profileView: ProfileView!
+    
+    @IBOutlet weak var featureCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
