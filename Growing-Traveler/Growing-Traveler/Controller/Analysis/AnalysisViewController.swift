@@ -41,7 +41,15 @@ class AnalysisViewController: UIViewController {
     
     var userManager = UserManager()
     
-    var studyGoals: [StudyGoal] = []
+    var studyGoals: [StudyGoal] = [] {
+        
+        didSet {
+            
+            analysisTableView.reloadData()
+            
+        }
+        
+    }
     
     var calculates: [CalculateBar] = []
     
@@ -82,13 +90,15 @@ class AnalysisViewController: UIViewController {
         selectSegmentedControl.addTarget(
             self, action: #selector(selectIndexChanged(_:)), for: .valueChanged)
         
+        fetchStudyGoalData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         fetchStudyGoalData()
-        
+
         fetchFeedbackData()
 
     }
@@ -100,7 +110,7 @@ class AnalysisViewController: UIViewController {
     }
     
     func fetchStudyGoalData() {
-
+        
         analysisManager.fetchStudyData { [weak self] result in
             
             guard let strongSelf = self else { return }
@@ -149,10 +159,10 @@ class AnalysisViewController: UIViewController {
 
     func handlePieChartData() {
         
-        spendStudyItem.itemsTime.removeAll()
+        finishedCalculates.removeAll()
         
-        spendStudyItem.itemsTitle.removeAll()
-        
+        spendStudyItem = CalculateSpendStudyItem(itemsTime: [], itemsTitle: [])
+
         let finishedStudyGoals = studyGoals.filter({
             
             $0.studyItems.allSatisfy({ $0.isCompleted == true })
@@ -163,18 +173,17 @@ class AnalysisViewController: UIViewController {
             
             var totalMinutes = 0
             
-            for index in 0..<finishedStudyGoals[finishedIndex].studyItems.count {
+            let allStudyTime = finishedStudyGoals[finishedIndex].studyItems.map({ $0.studyTime })
+            
+            for index in 0..<allStudyTime.count {
                 
-                if studyGoals[finishedIndex].studyItems[index].isCompleted == true {
-                    
-                    totalMinutes += studyGoals[finishedIndex].studyItems[index].studyTime
-                    
-                }
+                totalMinutes += allStudyTime[index]
                 
             }
             
-            finishedCalculates.append(
-                CalculatePie(totalMinutes: Double(totalMinutes), categoryItem: studyGoals[finishedIndex].category))
+            finishedCalculates.append(CalculatePie(
+                    totalMinutes: Double(totalMinutes),
+                    categoryItem: finishedStudyGoals[finishedIndex].category))
             
         }
         
@@ -197,15 +206,55 @@ class AnalysisViewController: UIViewController {
             
         }
         
+        var filterItemsTitle: [String] = []
+        
+        var filterItemTime: [Double] = []
+        
+        for (index, value) in spendStudyItem.itemsTitle.enumerated() {
+
+            if filterItemsTitle.contains(value) {
+                
+                for filterIndex in 0..<filterItemsTitle.count {
+                    
+                    if filterItemsTitle[filterIndex] == value {
+                        
+                        filterItemTime[filterIndex] += spendStudyItem.itemsTime[index]
+                        
+                    }
+                    
+                }
+                
+                continue
+                
+            }
+            
+            filterItemsTitle.append(value)
+            
+            filterItemTime.append(spendStudyItem.itemsTime[index])
+
+        }
+        
+        spendStudyItem.itemsTitle = filterItemsTitle
+        
+        spendStudyItem.itemsTime = filterItemTime
+        
         handlePieChatFeedbackText()
 
     }
     
     func handlePieChatFeedbackText() {
         
+        interesteText = ""
+        
+        certificateText = ""
+        
         for categoryIndex in 0..<finishedCalculates.count {
             
-            interesteText += " ○ " + finishedCalculates[categoryIndex].categoryItem.intereste + "\n"
+            if interesteText.range(of: finishedCalculates[categoryIndex].categoryItem.intereste) == nil {
+                
+                interesteText += " ○ " + finishedCalculates[categoryIndex].categoryItem.intereste + "\n"
+                
+            }
             
             for index in 0..<finishedCalculates[categoryIndex].categoryItem.certificate.count {
                 
@@ -218,6 +267,8 @@ class AnalysisViewController: UIViewController {
     }
     
     func handleBarChartData() {
+        
+        calculates.removeAll()
         
         let yesterday = Date().addingTimeInterval(-Double((day))).addingTimeInterval(Double(day / 3))
         
@@ -336,6 +387,8 @@ class AnalysisViewController: UIViewController {
     
     func handleSevenDays(yesterday: Date) {
         
+        sevenDaysArray = []
+        
         for index in 0..<7 {
             
             let formatter = DateFormatter()
@@ -352,15 +405,18 @@ class AnalysisViewController: UIViewController {
     
     func calculateSevenDayStudyTime() {
         
-        for _ in 0..<7 {
+        calculateStudyTime = []
+        
+        for _ in 0..<sevenDaysArray.count {
             
             calculateStudyTime.append(0.0)
+            
         }
         
         for calculateIndex in 0..<calculates.count {
             
             for index in 0..<calculates[calculateIndex].included.count {
-                
+
                 calculateStudyTime[index] += Double(calculates[calculateIndex].included[index].time) / 60.0
                 
             }
