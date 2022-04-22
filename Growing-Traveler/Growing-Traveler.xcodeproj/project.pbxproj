@@ -93,6 +93,8 @@
 		28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702BC28019D0C00FE9AEA /* CategoryManager.swift */; };
 		28D702BF28019E0300FE9AEA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702BE28019E0300FE9AEA /* Category.swift */; };
 		28D702C12802B41B00FE9AEA /* SelectStudyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */; };
+		28DA832D281272560081CB14 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28DA832C281272560081CB14 /* Profile.storyboard */; };
+		28DA832F281272770081CB14 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA832E281272770081CB14 /* ProfileViewController.swift */; };
 		28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F7C971280347F200BE4C76 /* StudyGoalManager.swift */; };
 		6DAAA26455954CD3CA3F47AE /* Pods_Growing_Traveler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */; };
 /* End PBXBuildFile section */
@@ -186,6 +188,8 @@
 		28D702BC28019D0C00FE9AEA /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
 		28D702BE28019E0300FE9AEA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStudyItemViewController.swift; sourceTree = "<group>"; };
+		28DA832C281272560081CB14 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		28DA832E281272770081CB14 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		28F7C971280347F200BE4C76 /* StudyGoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalManager.swift; sourceTree = "<group>"; };
 		59D1AA67F7C7E82E240245D2 /* Pods-Growing-Traveler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.release.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.release.xcconfig"; sourceTree = "<group>"; };
 		A54E3632DB38C498B42C6229 /* Pods-Growing-Traveler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.debug.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.debug.xcconfig"; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 		288367A22801250F0010CEAD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				28DA8329281272240081CB14 /* Profile */,
 				2808C910280FEC6800DC1EC5 /* Analysis */,
 				280C1AFA280D5D3C0091B9DC /* Chat */,
 				28BB6EE72806661F002B0458 /* Forum */,
@@ -329,6 +334,7 @@
 		288367A32801251C0010CEAD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				28DA832A281272390081CB14 /* Profile */,
 				2808C90E280FEC2B00DC1EC5 /* Analysis */,
 				280C1B07280D77AC0091B9DC /* Chat */,
 				28BB6EE428066418002B0458 /* Forum */,
@@ -339,6 +345,7 @@
 				28BB6EE528066441002B0458 /* Forum.storyboard */,
 				280C1AFB280D5D7C0091B9DC /* Chat.storyboard */,
 				2808C911280FEC7600DC1EC5 /* Analysis.storyboard */,
+				28DA832C281272560081CB14 /* Profile.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -518,6 +525,21 @@
 			path = StudyGoal;
 			sourceTree = "<group>";
 		};
+		28DA8329281272240081CB14 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				28DA832E281272770081CB14 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		28DA832A281272390081CB14 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		53CE560C6C7735E585252070 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,6 +635,7 @@
 				282522D9280FE54C0008B916 /* GoogleService-Info.plist in Resources */,
 				28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */,
 				280C1AFC280D5D7C0091B9DC /* Chat.storyboard in Resources */,
+				28DA832D281272560081CB14 /* Profile.storyboard in Resources */,
 				288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,6 +728,7 @@
 				2808C92128103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.swift in Sources */,
 				28AF15AD2804033B004E97B8 /* StudyGoalTableViewCell.swift in Sources */,
 				280C1AFF280D680A0091B9DC /* Chat.swift in Sources */,
+				28DA832F281272770081CB14 /* ProfileViewController.swift in Sources */,
 				28AF15B128040948004E97B8 /* StudyGoalHeaderView.swift in Sources */,
 				288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */,
 				280C1B01280D772E0091B9DC /* ChatRoomManager.swift in Sources */,
