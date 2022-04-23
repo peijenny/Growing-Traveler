@@ -18,6 +18,7 @@ target 'Growing-Traveler' do
     pod 'Kingfisher'
     pod 'PKHUD', '~> 5.0'
     pod 'Charts'
+    pod 'lottie-ios'
 
 post_install do |installer|
     installer.pods_project.build_configurations.each do |config|

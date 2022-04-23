@@ -335,6 +335,7 @@ PODS:
   - JXPhotoBrowser (3.1.3)
   - Kingfisher (7.2.1)
   - leveldb-library (1.22.1)
+  - lottie-ios (3.3.0)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -356,6 +357,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - JXPhotoBrowser (~> 3.0)
   - Kingfisher
+  - lottie-ios
   - PKHUD (~> 5.0)
   - SwiftLint
 
@@ -384,6 +386,7 @@ SPEC REPOS:
     - JXPhotoBrowser
     - Kingfisher
     - leveldb-library
+    - lottie-ios
     - nanopb
     - PKHUD
     - PromisesObjC
@@ -414,12 +417,13 @@ SPEC CHECKSUMS:
   JXPhotoBrowser: d32e94e1226d43bf5ed83164e3f5b651fed625e0
   Kingfisher: 7c084bebf7d548c623ad41bcf765fb200efed369
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
 
-PODFILE CHECKSUM: 3ab5139705b819336827e318c8c9f92ed30284dc
+PODFILE CHECKSUM: 6f4b18b63c6b2366a0a276e58beb7b7d6077bd57
 
 COCOAPODS: 1.11.2
