@@ -23,7 +23,7 @@ class MandateManager {
             for index in 0..<mandates.count {
                 
                 try database.collection("user").document(userID)
-                    .collection("madate").document(mandates[index].mandateTitle)
+                    .collection("mandate").document(mandates[index].mandateTitle)
                     .setData(from: mandates[index], merge: true)
                 
             }
