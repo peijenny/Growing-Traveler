@@ -75,7 +75,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="mandateCompletionLable" destination="x1d-Eh-uai" id="cyh-c1-eC3"/>
+                <outlet property="mandateCompletionLabel" destination="x1d-Eh-uai" id="VAh-jt-fIw"/>
                 <outlet property="mandateContentLabel" destination="wGl-dT-Xjp" id="Tcs-Pz-bq8"/>
                 <outlet property="mandateImageView" destination="tfe-uj-k7A" id="Jq5-hk-OYG"/>
                 <outlet property="mandateProgressView" destination="HkK-8I-2Um" id="UJK-Cy-Md9"/>

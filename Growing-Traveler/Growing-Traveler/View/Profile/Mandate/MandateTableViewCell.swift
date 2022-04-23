@@ -17,7 +17,7 @@ class MandateTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mandateProgressView: UIProgressView!
     
-    @IBOutlet weak var mandateCompletionLable: UILabel!
+    @IBOutlet weak var mandateCompletionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +26,34 @@ class MandateTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+    }
+    
+    func showMandateItem(mandateItem: MandateItem) {
+        
+        mandateTitleLabel.text = mandateItem.title
+        
+        mandateContentLabel.text = mandateItem.content
+        
+        mandateProgressView.layer.masksToBounds = true
+        
+        mandateProgressView.layer.cornerRadius = 8.5
+        
+        var progress = 1.0
+        
+        if Int(mandateItem.pogress) < mandateItem.upperLimit {
+            
+            progress = 1.0 / Double(mandateItem.upperLimit) * mandateItem.pogress
+            
+            mandateCompletionLabel.text = "\(Int(mandateItem.pogress)) / \(mandateItem.upperLimit)"
+            
+        } else {
+            
+            mandateCompletionLabel.text = "\(mandateItem.upperLimit) / \(mandateItem.upperLimit)"
+            
+        }
+        
+        mandateProgressView.progress = Float(progress)
         
     }
     

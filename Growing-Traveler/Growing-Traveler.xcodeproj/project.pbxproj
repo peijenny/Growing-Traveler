@@ -106,6 +106,8 @@
 		28DA83432812AF950081CB14 /* 93125-progress-bar.json in Resources */ = {isa = PBXBuildFile; fileRef = 28DA83422812AF950081CB14 /* 93125-progress-bar.json */; };
 		28DA83452812B3460081CB14 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA83442812B3460081CB14 /* LottieAnimation.swift */; };
 		28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F7C971280347F200BE4C76 /* StudyGoalManager.swift */; };
+		28FF433D2813D08E00C58E6B /* Mandate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF433C2813D08E00C58E6B /* Mandate.swift */; };
+		28FF433F2813D12200C58E6B /* MandateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF433E2813D12200C58E6B /* MandateManager.swift */; };
 		6DAAA26455954CD3CA3F47AE /* Pods_Growing_Traveler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */; };
 /* End PBXBuildFile section */
 
@@ -211,6 +213,8 @@
 		28DA83422812AF950081CB14 /* 93125-progress-bar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "93125-progress-bar.json"; sourceTree = "<group>"; };
 		28DA83442812B3460081CB14 /* LottieAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimation.swift; sourceTree = "<group>"; };
 		28F7C971280347F200BE4C76 /* StudyGoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalManager.swift; sourceTree = "<group>"; };
+		28FF433C2813D08E00C58E6B /* Mandate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mandate.swift; sourceTree = "<group>"; };
+		28FF433E2813D12200C58E6B /* MandateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateManager.swift; sourceTree = "<group>"; };
 		59D1AA67F7C7E82E240245D2 /* Pods-Growing-Traveler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.release.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.release.xcconfig"; sourceTree = "<group>"; };
 		A54E3632DB38C498B42C6229 /* Pods-Growing-Traveler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.debug.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.debug.xcconfig"; sourceTree = "<group>"; };
 		D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Growing_Traveler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -590,6 +594,8 @@
 		28DA83462813CF3D0081CB14 /* Mandate */ = {
 			isa = PBXGroup;
 			children = (
+				28FF433C2813D08E00C58E6B /* Mandate.swift */,
+				28FF433E2813D12200C58E6B /* MandateManager.swift */,
 			);
 			path = Mandate;
 			sourceTree = "<group>";
@@ -815,10 +821,12 @@
 				28BB6EFC2807C25C002B0458 /* UploadImageManager.swift in Sources */,
 				28DA833828127AEE0081CB14 /* FeatureCollectionViewCell.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
+				28FF433F2813D12200C58E6B /* MandateManager.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
 				28BB6F3828098CC1002B0458 /* ArticleDetailHeaderView.swift in Sources */,
 				28BB6F41280A919C002B0458 /* ArticleDetailTableViewCell.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
+				28FF433D2813D08E00C58E6B /* Mandate.swift in Sources */,
 				28BB6F042807EC75002B0458 /* UIImageView+Extension.swift in Sources */,
 				280C1B04280D77770091B9DC /* FriendViewController.swift in Sources */,
 				28754ACA2803079A0079F430 /* StudyItemTableViewCell.swift in Sources */,

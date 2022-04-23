@@ -12,6 +12,28 @@ class MandateViewController: UIViewController {
     
     var mandateTableView = UITableView()
     
+    var mandateManager = MandateManager()
+    
+    var mandates: [Mandate] = [] {
+        
+        didSet {
+            
+            fetchOwnerData()
+            
+        }
+        
+    }
+    
+    var ownMandates: [Mandate] = [] {
+        
+        didSet {
+            
+            mandateTableView.reloadData()
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,6 +42,62 @@ class MandateViewController: UIViewController {
         title = "成長任務"
         
         view.backgroundColor = UIColor.white
+        
+        fetchData()
+        
+    }
+    
+    func fetchOwnerData() {
+        
+        mandateManager.fetchOwnerData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            
+            case .success(let mandates):
+                
+                if mandates.count == 0 {
+                 
+                    strongSelf.mandateManager.addData(mandates: strongSelf.mandates)
+                    
+                    strongSelf.ownMandates = strongSelf.mandates
+                    
+                } else {
+                    
+                    strongSelf.ownMandates = mandates
+
+                }
+
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+    }
+    
+    func fetchData() {
+        
+        mandateManager.fetchMandateData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            
+            case .success(let mandates):
+                
+                strongSelf.mandates = mandates
+
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
         
     }
     
@@ -57,13 +135,13 @@ extension MandateViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 1
+        return ownMandates.count
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return ownMandates[section].mandate.count
         
     }
     
@@ -75,14 +153,10 @@ extension MandateViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = cell as? MandateTableViewCell else { return cell }
         
-        cell.mandateProgressView.layer.masksToBounds = true
+        let mandateItem = ownMandates[indexPath.section].mandate[indexPath.row]
         
-        cell.mandateProgressView.layer.cornerRadius = 8.5
+        cell.showMandateItem(mandateItem: mandateItem)
         
-//        cell.mandateProgressView.setProgress(0.7, animated: true)
-        
-        cell.mandateProgressView.progress = 1
-                
         return cell
         
     }
