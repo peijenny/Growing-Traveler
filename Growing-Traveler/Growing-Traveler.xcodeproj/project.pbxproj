@@ -104,7 +104,6 @@
 		28DA833F2812AB940081CB14 /* MandateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA833D2812AB940081CB14 /* MandateTableViewCell.swift */; };
 		28DA83402812AB940081CB14 /* MandateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DA833E2812AB940081CB14 /* MandateTableViewCell.xib */; };
 		28DA83432812AF950081CB14 /* 93125-progress-bar.json in Resources */ = {isa = PBXBuildFile; fileRef = 28DA83422812AF950081CB14 /* 93125-progress-bar.json */; };
-		28DA83452812B3460081CB14 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA83442812B3460081CB14 /* LottieAnimation.swift */; };
 		28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F7C971280347F200BE4C76 /* StudyGoalManager.swift */; };
 		28FF433D2813D08E00C58E6B /* Mandate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF433C2813D08E00C58E6B /* Mandate.swift */; };
 		28FF433F2813D12200C58E6B /* MandateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF433E2813D12200C58E6B /* MandateManager.swift */; };
@@ -211,7 +210,6 @@
 		28DA833D2812AB940081CB14 /* MandateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateTableViewCell.swift; sourceTree = "<group>"; };
 		28DA833E2812AB940081CB14 /* MandateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MandateTableViewCell.xib; sourceTree = "<group>"; };
 		28DA83422812AF950081CB14 /* 93125-progress-bar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "93125-progress-bar.json"; sourceTree = "<group>"; };
-		28DA83442812B3460081CB14 /* LottieAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimation.swift; sourceTree = "<group>"; };
 		28F7C971280347F200BE4C76 /* StudyGoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalManager.swift; sourceTree = "<group>"; };
 		28FF433C2813D08E00C58E6B /* Mandate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mandate.swift; sourceTree = "<group>"; };
 		28FF433E2813D12200C58E6B /* MandateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateManager.swift; sourceTree = "<group>"; };
@@ -586,7 +584,6 @@
 			isa = PBXGroup;
 			children = (
 				28DA83422812AF950081CB14 /* 93125-progress-bar.json */,
-				28DA83442812B3460081CB14 /* LottieAnimation.swift */,
 			);
 			path = LottieFiles;
 			sourceTree = "<group>";
@@ -781,7 +778,6 @@
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
 				28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */,
 				2857035E281197FC00849FAA /* Double+Extension.swift in Sources */,
-				28DA83452812B3460081CB14 /* LottieAnimation.swift in Sources */,
 				28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */,
 				282522DB280FE5520008B916 /* KeyToken.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
