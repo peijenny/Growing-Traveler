@@ -9,6 +9,16 @@ import UIKit
 
 class MandateTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var mandateImageView: UIImageView!
+    
+    @IBOutlet weak var mandateTitleLabel: UILabel!
+    
+    @IBOutlet weak var mandateContentLabel: UILabel!
+    
+    @IBOutlet weak var mandateProgressView: UIProgressView!
+    
+    @IBOutlet weak var mandateCompletionLable: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -16,8 +26,7 @@ class MandateTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
     }
     
 }

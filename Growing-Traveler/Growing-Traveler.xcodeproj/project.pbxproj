@@ -101,6 +101,10 @@
 		28DA833828127AEE0081CB14 /* FeatureCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA833628127AEE0081CB14 /* FeatureCollectionViewCell.swift */; };
 		28DA833928127AEE0081CB14 /* FeatureCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DA833728127AEE0081CB14 /* FeatureCollectionViewCell.xib */; };
 		28DA833B28129CFF0081CB14 /* MandateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA833A28129CFF0081CB14 /* MandateViewController.swift */; };
+		28DA833F2812AB940081CB14 /* MandateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA833D2812AB940081CB14 /* MandateTableViewCell.swift */; };
+		28DA83402812AB940081CB14 /* MandateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DA833E2812AB940081CB14 /* MandateTableViewCell.xib */; };
+		28DA83432812AF950081CB14 /* 93125-progress-bar.json in Resources */ = {isa = PBXBuildFile; fileRef = 28DA83422812AF950081CB14 /* 93125-progress-bar.json */; };
+		28DA83452812B3460081CB14 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA83442812B3460081CB14 /* LottieAnimation.swift */; };
 		28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F7C971280347F200BE4C76 /* StudyGoalManager.swift */; };
 		6DAAA26455954CD3CA3F47AE /* Pods_Growing_Traveler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */; };
 /* End PBXBuildFile section */
@@ -202,6 +206,10 @@
 		28DA833628127AEE0081CB14 /* FeatureCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCollectionViewCell.swift; sourceTree = "<group>"; };
 		28DA833728127AEE0081CB14 /* FeatureCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeatureCollectionViewCell.xib; sourceTree = "<group>"; };
 		28DA833A28129CFF0081CB14 /* MandateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateViewController.swift; sourceTree = "<group>"; };
+		28DA833D2812AB940081CB14 /* MandateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateTableViewCell.swift; sourceTree = "<group>"; };
+		28DA833E2812AB940081CB14 /* MandateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MandateTableViewCell.xib; sourceTree = "<group>"; };
+		28DA83422812AF950081CB14 /* 93125-progress-bar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "93125-progress-bar.json"; sourceTree = "<group>"; };
+		28DA83442812B3460081CB14 /* LottieAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimation.swift; sourceTree = "<group>"; };
 		28F7C971280347F200BE4C76 /* StudyGoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalManager.swift; sourceTree = "<group>"; };
 		59D1AA67F7C7E82E240245D2 /* Pods-Growing-Traveler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.release.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.release.xcconfig"; sourceTree = "<group>"; };
 		A54E3632DB38C498B42C6229 /* Pods-Growing-Traveler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.debug.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.debug.xcconfig"; sourceTree = "<group>"; };
@@ -365,6 +373,7 @@
 		288367A4280125230010CEAD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				28DA83462813CF3D0081CB14 /* Mandate */,
 				2808C90F280FEC3700DC1EC5 /* Analysis */,
 				280C1B0C280E42230091B9DC /* Profile */,
 				280C1AFD280D678F0091B9DC /* Chat */,
@@ -514,6 +523,7 @@
 		28CE2D3D27FECBF400ACA813 /* Growing-Traveler */ = {
 			isa = PBXGroup;
 			children = (
+				28DA83412812AF7A0081CB14 /* LottieFiles */,
 				288367A5280125750010CEAD /* Extension */,
 				288367A4280125230010CEAD /* Model */,
 				288367A32801251C0010CEAD /* View */,
@@ -550,12 +560,38 @@
 		28DA832A281272390081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				28DA833C2812AB420081CB14 /* Mandate */,
 				28DA83302812744F0081CB14 /* ProfileView.xib */,
 				28DA8334281274E30081CB14 /* ProfileView.swift */,
 				28DA833628127AEE0081CB14 /* FeatureCollectionViewCell.swift */,
 				28DA833728127AEE0081CB14 /* FeatureCollectionViewCell.xib */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		28DA833C2812AB420081CB14 /* Mandate */ = {
+			isa = PBXGroup;
+			children = (
+				28DA833D2812AB940081CB14 /* MandateTableViewCell.swift */,
+				28DA833E2812AB940081CB14 /* MandateTableViewCell.xib */,
+			);
+			path = Mandate;
+			sourceTree = "<group>";
+		};
+		28DA83412812AF7A0081CB14 /* LottieFiles */ = {
+			isa = PBXGroup;
+			children = (
+				28DA83422812AF950081CB14 /* 93125-progress-bar.json */,
+				28DA83442812B3460081CB14 /* LottieAnimation.swift */,
+			);
+			path = LottieFiles;
+			sourceTree = "<group>";
+		};
+		28DA83462813CF3D0081CB14 /* Mandate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mandate;
 			sourceTree = "<group>";
 		};
 		53CE560C6C7735E585252070 /* Frameworks */ = {
@@ -634,6 +670,7 @@
 				2808C92B281131C700DC1EC5 /* AnalysisPieChartTableViewCell.xib in Resources */,
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
 				28BB6EEF28066FC1002B0458 /* PublishArticleTableViewCell.xib in Resources */,
+				28DA83432812AF950081CB14 /* 93125-progress-bar.json in Resources */,
 				28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
@@ -653,6 +690,7 @@
 				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
 				282522D9280FE54C0008B916 /* GoogleService-Info.plist in Resources */,
 				28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */,
+				28DA83402812AB940081CB14 /* MandateTableViewCell.xib in Resources */,
 				280C1AFC280D5D7C0091B9DC /* Chat.storyboard in Resources */,
 				28DA832D281272560081CB14 /* Profile.storyboard in Resources */,
 				288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */,
@@ -727,6 +765,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28DA833F2812AB940081CB14 /* MandateTableViewCell.swift in Sources */,
 				28D702C12802B41B00FE9AEA /* SelectStudyItemViewController.swift in Sources */,
 				28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */,
 				28BB6EEE28066FC1002B0458 /* PublishArticleTableViewCell.swift in Sources */,
@@ -736,6 +775,7 @@
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
 				28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */,
 				2857035E281197FC00849FAA /* Double+Extension.swift in Sources */,
+				28DA83452812B3460081CB14 /* LottieAnimation.swift in Sources */,
 				28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */,
 				282522DB280FE5520008B916 /* KeyToken.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
