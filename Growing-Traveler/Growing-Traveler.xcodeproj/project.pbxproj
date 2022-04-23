@@ -38,7 +38,6 @@
 		28D702BF28019E0300FE9AEA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702BE28019E0300FE9AEA /* Category.swift */; };
 		28D702C12802B41B00FE9AEA /* SelectStudyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */; };
 		28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F7C971280347F200BE4C76 /* StudyGoalManager.swift */; };
-		28FF43452813E8FF00C58E6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28FF43442813E8FF00C58E6B /* GoogleService-Info.plist */; };
 		6DAAA26455954CD3CA3F47AE /* Pods_Growing_Traveler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +75,6 @@
 		28D702BE28019E0300FE9AEA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStudyItemViewController.swift; sourceTree = "<group>"; };
 		28F7C971280347F200BE4C76 /* StudyGoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalManager.swift; sourceTree = "<group>"; };
-		28FF43442813E8FF00C58E6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		59D1AA67F7C7E82E240245D2 /* Pods-Growing-Traveler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.release.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.release.xcconfig"; sourceTree = "<group>"; };
 		A54E3632DB38C498B42C6229 /* Pods-Growing-Traveler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.debug.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.debug.xcconfig"; sourceTree = "<group>"; };
 		D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Growing_Traveler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,7 +214,6 @@
 				28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */,
 				28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */,
 				28CE2D4727FECBF500ACA813 /* Assets.xcassets */,
-				28FF43442813E8FF00C58E6B /* GoogleService-Info.plist */,
 				28CE2D4C27FECBF500ACA813 /* Info.plist */,
 			);
 			path = "Growing-Traveler";
@@ -310,7 +307,6 @@
 				28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */,
 				285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
-				28FF43452813E8FF00C58E6B /* GoogleService-Info.plist in Resources */,
 				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
 				288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */,
 			);
