@@ -62,6 +62,8 @@
 		28D702BF28019E0300FE9AEA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702BE28019E0300FE9AEA /* Category.swift */; };
 		28D702C12802B41B00FE9AEA /* SelectStudyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */; };
 		28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F7C971280347F200BE4C76 /* StudyGoalManager.swift */; };
+		28FF43492813EAFF00C58E6B /* KeyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF43482813EAFF00C58E6B /* KeyToken.swift */; };
+		28FF434B2813EB0B00C58E6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28FF434A2813EB0B00C58E6B /* GoogleService-Info.plist */; };
 		6DAAA26455954CD3CA3F47AE /* Pods_Growing_Traveler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +125,8 @@
 		28D702BE28019E0300FE9AEA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStudyItemViewController.swift; sourceTree = "<group>"; };
 		28F7C971280347F200BE4C76 /* StudyGoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalManager.swift; sourceTree = "<group>"; };
+		28FF43482813EAFF00C58E6B /* KeyToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyToken.swift; sourceTree = "<group>"; };
+		28FF434A2813EB0B00C58E6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		59D1AA67F7C7E82E240245D2 /* Pods-Growing-Traveler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.release.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.release.xcconfig"; sourceTree = "<group>"; };
 		A54E3632DB38C498B42C6229 /* Pods-Growing-Traveler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.debug.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.debug.xcconfig"; sourceTree = "<group>"; };
 		D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Growing_Traveler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +180,7 @@
 		288367A4280125230010CEAD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				28FF43482813EAFF00C58E6B /* KeyToken.swift */,
 				28BB6EF4280690C8002B0458 /* Forum */,
 				28D702BB28019CB300FE9AEA /* StudyGoal */,
 			);
@@ -325,6 +330,7 @@
 				288367A22801250F0010CEAD /* Controller */,
 				28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */,
 				28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */,
+				28FF434A2813EB0B00C58E6B /* GoogleService-Info.plist */,
 				28CE2D4727FECBF500ACA813 /* Assets.xcassets */,
 				28CE2D4C27FECBF500ACA813 /* Info.plist */,
 			);
@@ -422,6 +428,7 @@
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
 				28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */,
 				28A6F45E280ADAC900EFCC2C /* ArticleMessageHeaderView.xib in Resources */,
+				28FF434B2813EB0B00C58E6B /* GoogleService-Info.plist in Resources */,
 				285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */,
 				28BB6F002807C86C002B0458 /* ArticleTableViewCell.xib in Resources */,
 				28BB6F3028096C40002B0458 /* MoreArticlesTableViewCell.xib in Resources */,
@@ -518,6 +525,7 @@
 				28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */,
 				283D2C3E2803E63C004D19E4 /* BaseViewController.swift in Sources */,
 				285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */,
+				28FF43492813EAFF00C58E6B /* KeyToken.swift in Sources */,
 				28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */,
 				28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */,
 				28BB6EFF2807C86C002B0458 /* ArticleTableViewCell.swift in Sources */,
