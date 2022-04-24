@@ -49,6 +49,10 @@ class StudyGoalViewController: UIViewController {
     
     var studyGoalManager = StudyGoalManager()
     
+    var userManager = UserManager()
+    
+    var user: User?
+    
     var studyGoals: [StudyGoal]? {
         
         didSet {
@@ -93,6 +97,8 @@ class StudyGoalViewController: UIViewController {
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
+        fetchUserData()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,6 +108,27 @@ class StudyGoalViewController: UIViewController {
         addGoalButton.imageView?.contentMode = .scaleAspectFill
 
         addGoalButton.layer.cornerRadius = addGoalButton.frame.width / 2
+        
+    }
+    
+    func fetchUserData() {
+        
+        userManager.fetchData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success(let user):
+                
+                strongSelf.user = user
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
         
     }
 
@@ -141,6 +168,8 @@ class StudyGoalViewController: UIViewController {
         guard let viewController = viewController as? PlanStudyGoalViewController else { return }
         
         viewController.studyGoal = studyGoal
+        
+        viewController.user = user
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -315,6 +344,42 @@ extension StudyGoalViewController: UITableViewDataSource {
             }
             
             studyGoalManager.updateData(studyGoal: studyGoals[indexPath.section])
+            
+            guard var user = user else { return }
+            
+            if studyGoals[indexPath.section].studyItems.allSatisfy({ $0.isCompleted == true}) {
+                
+                if user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).count == 0 {
+                    
+                    user.achievement.completionGoals.append(studyGoals[indexPath.section].id)
+                    
+                    userManager.updateData(user: user)
+                    
+                }
+                
+            } else {
+                
+                if user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).count != 0 {
+                    
+                    var deleteIndex = Int()
+                    
+                    for index in 0..<user.achievement.completionGoals.count {
+
+                        if user.achievement.completionGoals[index] == studyGoals[indexPath.section].id {
+
+                            deleteIndex = index
+                            
+                        }
+
+                    }
+                    
+                    user.achievement.completionGoals.remove(at: deleteIndex)
+
+                    userManager.updateData(user: user)
+                    
+                }
+                
+            }
             
         }
         
