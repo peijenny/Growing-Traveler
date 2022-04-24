@@ -82,6 +82,7 @@
                 <outlet property="labelBottomConstraint" destination="mnF-fn-MMm" id="pUQ-kl-78B"/>
                 <outlet property="labelHeightConstraint" destination="GPn-qK-Urj" id="6K2-c9-BJ9"/>
                 <outlet property="labelTopConstraint" destination="kfI-Pt-odq" id="NJc-Zp-e0I"/>
+                <outlet property="receiveBackgroundView" destination="HLF-vV-zWP" id="10e-Cx-0Pa"/>
                 <outlet property="receiveImageView" destination="OXJ-8w-EEd" id="oGa-SO-rDc"/>
                 <outlet property="receiveMessageLabel" destination="8pT-kn-rpc" id="58f-2n-xry"/>
                 <outlet property="receiveTimeLabel" destination="pYM-kc-Bq6" id="ODx-h7-YZh"/>

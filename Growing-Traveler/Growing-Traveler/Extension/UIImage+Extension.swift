@@ -26,6 +26,9 @@ enum ImageAsset: String {
     case userSelect
     
     case timetable
+    case telephoneCall
+    case videoCamera
+    
     case coworkersDoingMeeting
     case handedManSitting
     case teamMembersWorking

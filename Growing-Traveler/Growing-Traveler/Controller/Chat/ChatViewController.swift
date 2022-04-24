@@ -74,6 +74,57 @@ class ChatViewController: BaseViewController {
             forCellReuseIdentifier: String(describing: SendMessageTableViewCell.self)
         )
         
+        setNavigationItems()
+        
+    }
+    
+    func setNavigationItems() {
+        
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage.asset(.telephoneCall),
+                style: .plain, target: self, action: #selector(callAudioPhone)),
+            UIBarButtonItem(image: UIImage.asset(.videoCamera),
+                style: .plain, target: self, action: #selector(callVideoPhone))
+        ]
+        
+    }
+    
+    @objc func callAudioPhone(sender: UIButton) {
+        
+        guard let phoneEmail = friendInfo?.userEmail else { return }
+        
+        // 語音通話
+        if let facetimeURL: NSURL = NSURL(string: "facetime-audio://\(phoneEmail)") {
+            
+            let application: UIApplication = UIApplication.shared
+            
+            if application.canOpenURL(facetimeURL as URL) {
+
+                application.open(facetimeURL as URL)
+                
+            }
+            
+        }
+        
+    }
+    
+    @objc func callVideoPhone(sender: UIButton) {
+        
+        guard let phoneEmail = friendInfo?.userEmail else { return }
+        
+        // 視訊通話
+        if let facetimeURL: NSURL = NSURL(string: "facetime://\(phoneEmail)") {
+            
+            let application: UIApplication = UIApplication.shared
+            
+            if application.canOpenURL(facetimeURL as URL) {
+
+                application.open(facetimeURL as URL)
+                
+            }
+            
+        }
+        
     }
     
     override var hidesBottomBarWhenPushed: Bool {
