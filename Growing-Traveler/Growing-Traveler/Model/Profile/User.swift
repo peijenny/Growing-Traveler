@@ -25,4 +25,6 @@ struct Achievement: Codable {
     
     var completionGoals: [String] // 存取 StudyGoals ID
     
+    var loginDates: [String]
+    
 }

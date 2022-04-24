@@ -121,6 +121,24 @@ class StudyGoalViewController: UIViewController {
             case .success(let user):
                 
                 strongSelf.user = user
+
+                let date = Date()
+
+                let dateFormatter = DateFormatter()
+
+                dateFormatter.dateFormat = "yyyy.MM.dd"
+
+                let today = dateFormatter.string(from: date)
+
+                guard var user = strongSelf.user else { return }
+                
+                if user.achievement.loginDates.filter({ $0 == today }).count == 0 {
+                    
+                    user.achievement.loginDates.append(today)
+                    
+                    strongSelf.userManager.updateData(user: user)
+                    
+                }
                 
             case .failure(let error):
                 
@@ -324,6 +342,8 @@ extension StudyGoalViewController: UITableViewDataSource {
         if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
             
             guard var studyGoals = studyGoals else { return }
+            
+            guard var user = user else { return }
 
             if sender.backgroundColor?.cgColor == UIColor.systemGray5.cgColor {
 
@@ -332,6 +352,8 @@ extension StudyGoalViewController: UITableViewDataSource {
                 sender.tintColor = UIColor.white
                 
                 studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = true
+                
+                user.achievement.experienceValue += 50
 
             } else {
 
@@ -340,20 +362,18 @@ extension StudyGoalViewController: UITableViewDataSource {
                 sender.tintColor = UIColor.clear
                 
                 studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = false
+                
+                user.achievement.experienceValue -= 50
 
             }
             
             studyGoalManager.updateData(studyGoal: studyGoals[indexPath.section])
-            
-            guard var user = user else { return }
             
             if studyGoals[indexPath.section].studyItems.allSatisfy({ $0.isCompleted == true}) {
                 
                 if user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).count == 0 {
                     
                     user.achievement.completionGoals.append(studyGoals[indexPath.section].id)
-                    
-                    userManager.updateData(user: user)
                     
                 }
                 
@@ -374,12 +394,12 @@ extension StudyGoalViewController: UITableViewDataSource {
                     }
                     
                     user.achievement.completionGoals.remove(at: deleteIndex)
-
-                    userManager.updateData(user: user)
                     
                 }
                 
             }
+            
+            userManager.updateData(user: user)
             
         }
         
