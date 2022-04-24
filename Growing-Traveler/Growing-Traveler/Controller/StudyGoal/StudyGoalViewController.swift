@@ -86,8 +86,8 @@ class StudyGoalViewController: UIViewController {
         
         // MARK: - 右上角的 成長日曆 Button
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .search,
-            target: self,
+            image: UIImage.asset(.timetable),
+            style: .plain, target: self,
             action: #selector(pushToCalenderPage)
         )
         
