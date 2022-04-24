@@ -27,6 +27,6 @@ struct MandateItem: Codable {
     
     var upperLimit: Int
     
-    var pogress: Double
+    var pogress: Int
     
 }

@@ -81,7 +81,7 @@ class MandateManager {
     func fetchOwnerData(completion: @escaping (Result<[Mandate]>) -> Void) {
         
         database.collection("user").document(userID)
-            .collection("madate").addSnapshotListener { snapshot, error in
+            .collection("mandate").addSnapshotListener { snapshot, error in
             
             var mandates: [Mandate] = []
             
