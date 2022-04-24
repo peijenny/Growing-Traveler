@@ -26,6 +26,11 @@ enum ImageAsset: String {
     case userSelect
     
     case timetable
+    case coworkersDoingMeeting
+    case handedManSitting
+    case teamMembersWorking
+    case womanHoldingGuidebook
+    case womanSittingInFlowerBed
 
 }
 

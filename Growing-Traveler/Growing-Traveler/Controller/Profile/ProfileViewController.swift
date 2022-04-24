@@ -49,6 +49,10 @@ class ProfileViewController: UIViewController {
     
     let featureList: [FeatureType] = [.mandate, .rank, .note, .release, .license]
     
+    let featureImage: [ImageAsset] = [
+        .womanHoldingGuidebook, .teamMembersWorking,
+        .handedManSitting, .coworkersDoingMeeting, .womanSittingInFlowerBed]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -71,6 +75,8 @@ class ProfileViewController: UIViewController {
             guard let cell = cell as? FeatureCollectionViewCell else { return cell }
                 
             cell.featureItemLabel.text = self.featureList[indexPath.item].title
+            
+            cell.featureImageView.image = UIImage.asset(self.featureImage[indexPath.item])
             
             return cell
             
