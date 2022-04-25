@@ -85,6 +85,8 @@
 		28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6F40280A919C002B0458 /* ArticleDetailTableViewCell.xib */; };
 		28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6F43280AA722002B0458 /* ArticleMessageViewController.swift */; };
 		28BC2C1A2815603C00E69BE0 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BC2C192815603C00E69BE0 /* UIImage+Extension.swift */; };
+		28BC2C1D2816860000E69BE0 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BC2C1C2816860000E69BE0 /* Authentication.storyboard */; };
+		28BC2C202816864600E69BE0 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BC2C1F2816864600E69BE0 /* AuthenticationViewController.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -190,6 +192,9 @@
 		28BB6F40280A919C002B0458 /* ArticleDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleDetailTableViewCell.xib; sourceTree = "<group>"; };
 		28BB6F43280AA722002B0458 /* ArticleMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleMessageViewController.swift; sourceTree = "<group>"; };
 		28BC2C192815603C00E69BE0 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		28BC2C1C2816860000E69BE0 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		28BC2C1F2816864600E69BE0 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		28BC2C212816867F00E69BE0 /* Growing-Traveler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Growing-Traveler.entitlements"; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -344,6 +349,7 @@
 		288367A22801250F0010CEAD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				28BC2C1E2816861600E69BE0 /* Authentication */,
 				28DA8329281272240081CB14 /* Profile */,
 				2808C910280FEC6800DC1EC5 /* Analysis */,
 				280C1AFA280D5D3C0091B9DC /* Chat */,
@@ -370,6 +376,7 @@
 				280C1AFB280D5D7C0091B9DC /* Chat.storyboard */,
 				2808C911280FEC7600DC1EC5 /* Analysis.storyboard */,
 				28DA832C281272560081CB14 /* Profile.storyboard */,
+				28BC2C1C2816860000E69BE0 /* Authentication.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -507,6 +514,14 @@
 			path = ArticleDetail;
 			sourceTree = "<group>";
 		};
+		28BC2C1E2816861600E69BE0 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				28BC2C1F2816864600E69BE0 /* AuthenticationViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		28CE2D3227FECBF400ACA813 = {
 			isa = PBXGroup;
 			children = (
@@ -528,6 +543,7 @@
 		28CE2D3D27FECBF400ACA813 /* Growing-Traveler */ = {
 			isa = PBXGroup;
 			children = (
+				28BC2C212816867F00E69BE0 /* Growing-Traveler.entitlements */,
 				28DA83412812AF7A0081CB14 /* LottieFiles */,
 				288367A5280125750010CEAD /* Extension */,
 				288367A4280125230010CEAD /* Model */,
@@ -672,6 +688,7 @@
 				28A6F466280AED1600EFCC2C /* ArticleMessageTableViewCell.xib in Resources */,
 				28BB6EE628066441002B0458 /* Forum.storyboard in Resources */,
 				28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */,
+				28BC2C1D2816860000E69BE0 /* Authentication.storyboard in Resources */,
 				28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */,
 				2808C92B281131C700DC1EC5 /* AnalysisPieChartTableViewCell.xib in Resources */,
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
@@ -823,6 +840,7 @@
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
 				28FF433F2813D12200C58E6B /* MandateManager.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
+				28BC2C202816864600E69BE0 /* AuthenticationViewController.swift in Sources */,
 				28BB6F3828098CC1002B0458 /* ArticleDetailHeaderView.swift in Sources */,
 				28BB6F41280A919C002B0458 /* ArticleDetailTableViewCell.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
@@ -986,6 +1004,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Growing-Traveler/Growing-Traveler.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C4JD5546YM;
@@ -1016,6 +1035,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Growing-Traveler/Growing-Traveler.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C4JD5546YM;

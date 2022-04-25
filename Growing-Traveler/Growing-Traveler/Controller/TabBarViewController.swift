@@ -11,13 +11,15 @@ private enum Tab {
     
     case studyGoal
     
-    case forum
+//    case forum
     
     case chat
     
     case analysis
     
     case profile
+    
+    case auth
     
     func controller() -> UIViewController {
         
@@ -27,8 +29,8 @@ private enum Tab {
             
         case .studyGoal: controller = UIStoryboard.studyGoal.instantiateInitialViewController() ?? UIViewController()
             
-        case .forum: controller = UIStoryboard.forum.instantiateInitialViewController() ??
-            UIViewController()
+//        case .forum: controller = UIStoryboard.forum.instantiateInitialViewController() ??
+//            UIViewController()
             
         case .chat: controller = UIStoryboard.chat.instantiateInitialViewController() ??
             UIViewController()
@@ -37,6 +39,9 @@ private enum Tab {
             UIViewController()
             
         case .profile: controller = UIStoryboard.profile.instantiateInitialViewController() ??
+            UIViewController()
+            
+        case .auth: controller = UIStoryboard.auth.instantiateInitialViewController() ??
             UIViewController()
             
         }
@@ -61,13 +66,13 @@ private enum Tab {
                 selectedImage: UIImage.asset(.targetSelect)
             )
             
-        case .forum:
-            
-            return UITabBarItem(
-                title: nil,
-                image: UIImage.asset(.loudspeakerOrigin),
-                selectedImage: UIImage.asset(.loudspeakerSelect)
-            )
+//        case .forum:
+//
+//            return UITabBarItem(
+//                title: nil,
+//                image: UIImage.asset(.loudspeakerOrigin),
+//                selectedImage: UIImage.asset(.loudspeakerSelect)
+//            )
             
         case .chat:
             
@@ -93,6 +98,10 @@ private enum Tab {
                 selectedImage: UIImage.asset(.userSelect)
             )
             
+        case .auth:
+            
+            return UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+            
         }
          
     }
@@ -101,7 +110,9 @@ private enum Tab {
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
-    private let tabs: [Tab] = [.studyGoal, .forum, .chat, .analysis, .profile]
+//    private let tabs: [Tab] = [.studyGoal, .forum, .chat, .analysis, .profile, .auth]
+    
+    private let tabs: [Tab] = [.studyGoal, .chat, .analysis, .profile, .auth]
 
     override func viewDidLoad() {
         super.viewDidLoad()
