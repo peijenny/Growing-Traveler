@@ -72,6 +72,7 @@
                 <outlet property="labelBottomConstraint" destination="rR8-eB-NaY" id="SAt-e9-XPh"/>
                 <outlet property="labelHeightConstraint" destination="M7U-dR-HG1" id="D1a-WF-FbH"/>
                 <outlet property="labelTopConstraint" destination="Al3-Bl-yUa" id="fgP-AL-04n"/>
+                <outlet property="sendBackgroundView" destination="Mvk-cW-UAn" id="1ih-74-ynh"/>
                 <outlet property="sendIamgeView" destination="CEE-vA-SDc" id="Pea-4S-s82"/>
                 <outlet property="sendMessageLabel" destination="tXe-HL-wZw" id="5RX-FV-dtO"/>
                 <outlet property="sendMessageView" destination="Mvk-cW-UAn" id="JlP-bf-WEv"/>

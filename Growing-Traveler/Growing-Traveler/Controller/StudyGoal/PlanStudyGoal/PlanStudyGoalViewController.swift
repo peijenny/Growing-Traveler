@@ -126,6 +126,8 @@ class PlanStudyGoalViewController: BaseViewController {
     let studyGoalManager = StudyGoalManager()
     
     var isOpenEdited = false
+    
+    var user: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -385,6 +387,29 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         )
         
         if let studyGoal = studyGoal {
+            
+            guard var user = user else { return }
+            
+            var deleteIndex: Int?
+            
+            for index in 0..<user.achievement.completionGoals.count {
+                
+                if studyGoal.id == user.achievement.completionGoals[index] {
+                    
+                    deleteIndex = index
+                    
+                }
+            }
+            
+            if deleteIndex != nil {
+                
+                user.achievement.completionGoals.remove(at: deleteIndex ?? 0)
+                
+                let userManager = UserManager()
+                
+                userManager.updateData(user: user)
+                
+            }
             
             studyGoalManager.addData(studyGoal: studyGoal)
             

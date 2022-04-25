@@ -15,4 +15,16 @@ struct User: Codable {
     
     var userEmail: String
     
+    var achievement: Achievement
+    
+}
+
+struct Achievement: Codable {
+    
+    var experienceValue: Int
+    
+    var completionGoals: [String] // 存取 StudyGoals ID
+    
+    var loginDates: [String]
+    
 }

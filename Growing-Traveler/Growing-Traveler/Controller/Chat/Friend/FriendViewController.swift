@@ -137,6 +137,8 @@ class FriendViewController: UIViewController {
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(applyFriendButton))
         ]
         
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
     }
     
     @objc func applyFriendButton(sender: UIButton) {

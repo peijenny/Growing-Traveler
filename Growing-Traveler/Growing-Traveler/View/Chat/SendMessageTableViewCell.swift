@@ -27,6 +27,8 @@ class SendMessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var viewConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var sendBackgroundView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -35,7 +37,8 @@ class SendMessageTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        sendBackgroundView.layer.cornerRadius = 10
+        
     }
     
     func showMessage(sendMessage: MessageContent) {

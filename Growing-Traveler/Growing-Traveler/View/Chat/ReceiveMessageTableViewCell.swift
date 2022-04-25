@@ -27,6 +27,8 @@ class ReceiveMessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var receiveBackgroundView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,8 +36,9 @@ class ReceiveMessageTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        receiveBackgroundView.layer.cornerRadius = 10
+        
     }
     
     func showMessage(receiveMessage: MessageContent) {
