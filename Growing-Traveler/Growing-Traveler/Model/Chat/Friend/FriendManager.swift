@@ -59,38 +59,42 @@ class FriendManager {
     // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
     func fetchFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
         
-        database.collection("friend")
-        .whereField("userID", isEqualTo: fetchUserID)
-        .getDocuments { snapshot, error in
-        
-            guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
-                
-                completion(Result.failure(error!))
-                
-                return
-                
-            }
+        if fetchUserID != "" {
+         
+            database.collection("friend")
+            .whereField("userID", isEqualTo: fetchUserID)
+            .getDocuments { snapshot, error in
             
-            let document = snapshot.documents[0]
-                
-            do {
-                
-                if let friend = try document.data(as: Friend.self, decoder: Firestore.Decoder()) {
+                guard let snapshot = snapshot else {
                     
-                    completion(Result.success(friend))
+                    print("Error fetching document: \(error!)")
+                    
+                    completion(Result.failure(error!))
+                    
+                    return
                     
                 }
                 
-            } catch {
-                
-                print(error)
-                
-                completion(Result.failure(error))
-                
+                let document = snapshot.documents[0]
+                    
+                do {
+                    
+                    if let friend = try document.data(as: Friend.self, decoder: Firestore.Decoder()) {
+                        
+                        completion(Result.success(friend))
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
+                    
             }
-                
+            
         }
         
     }

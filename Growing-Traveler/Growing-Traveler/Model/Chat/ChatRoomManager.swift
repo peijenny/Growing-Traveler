@@ -16,35 +16,39 @@ class ChatRoomManager {
 
     func fetchData(friendID: String, completion: @escaping (Result<Chat>) -> Void) {
         
-        database.document(userID).collection("message")
-        .whereField("friendID", isEqualTo: friendID)
-        .addSnapshotListener { snapshot, error in
+        if userID != "" {
             
-            guard let snapshot = snapshot else {
+            database.document(userID).collection("message")
+            .whereField("friendID", isEqualTo: friendID)
+            .addSnapshotListener { snapshot, error in
                 
-                print("Error fetching document: \(error!)")
-                
-                completion(Result.failure(error!))
-                
-                return
-                
-            }
-            
-            do {
-                
-                let document = snapshot.documents[0]
-                
-                if let chatMessage = try document.data(as: Chat.self, decoder: Firestore.Decoder()) {
+                guard let snapshot = snapshot else {
                     
-                    completion(Result.success(chatMessage))
+                    print("Error fetching document: \(error!)")
+                    
+                    completion(Result.failure(error!))
+                    
+                    return
                     
                 }
                 
-            } catch {
-                
-                print(error)
-                
-                completion(Result.failure(error))
+                do {
+                    
+                    let document = snapshot.documents[0]
+                    
+                    if let chatMessage = try document.data(as: Chat.self, decoder: Firestore.Decoder()) {
+                        
+                        completion(Result.success(chatMessage))
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
                 
             }
             
@@ -59,14 +63,18 @@ class ChatRoomManager {
         friendChat.friendID = userID
         
         do {
-
-            // 修改自己的 Document
-            try database.document(userID).collection("message")
-                .document(chat.friendID).setData(from: chat, merge: true)
             
-            // 修改朋友的 Document
-            try database.document(chat.friendID).collection("message")
-                .document(userID).setData(from: friendChat, merge: true)
+            if userID != "" {
+                
+                // 修改自己的 Document
+                try database.document(userID).collection("message")
+                    .document(chat.friendID).setData(from: chat, merge: true)
+                
+                // 修改朋友的 Document
+                try database.document(chat.friendID).collection("message")
+                    .document(userID).setData(from: friendChat, merge: true)
+                
+            }
 
         } catch {
 

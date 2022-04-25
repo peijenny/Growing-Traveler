@@ -16,46 +16,55 @@ class UserManager {
     
     func fetchData(completion: @escaping (Result<User>) -> Void) {
         
-        database.whereField("userID", isEqualTo: userID).addSnapshotListener { snapshot, error in
+        if userID != "" {
             
-            guard let snapshot = snapshot else {
+            database.whereField("userID", isEqualTo: userID).addSnapshotListener { snapshot, error in
                 
-                print("Error fetching document: \(error!)")
-                
-                completion(Result.failure(error!))
-                
-                return
-                
-            }
-            
-            let document = snapshot.documents[0]
-                
-            do {
-                
-                if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                guard let snapshot = snapshot else {
                     
-                    completion(Result.success(user))
+                    print("Error fetching document: \(error!)")
+                    
+                    completion(Result.failure(error!))
+                    
+                    return
                     
                 }
                 
-            } catch {
-                
-                print(error)
-                
-                completion(Result.failure(error))
+                let document = snapshot.documents[0]
+                    
+                do {
+                    
+                    if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                        
+                        completion(Result.success(user))
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
                 
             }
             
         }
+        
         
     }
     
     func updateData(user: User) {
         
         do {
-
-            // 修改 成就數值
-            try database.document(userID).setData(from: user, merge: true)
+            
+            if userID != "" {
+                
+                // 修改 成就數值
+                try database.document(userID).setData(from: user, merge: true)
+                
+            }
             
         } catch {
 
