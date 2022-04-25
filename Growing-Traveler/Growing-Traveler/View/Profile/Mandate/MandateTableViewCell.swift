@@ -42,8 +42,8 @@ class MandateTableViewCell: UITableViewCell {
         var progress = 1.0
         
         if Int(mandateItem.pogress) < mandateItem.upperLimit {
-            
-            progress = 1.0 / Double(mandateItem.upperLimit) * mandateItem.pogress
+
+            progress = (1.0 / Double(mandateItem.upperLimit)) * Double(mandateItem.pogress)
             
             mandateCompletionLabel.text = "\(Int(mandateItem.pogress)) / \(mandateItem.upperLimit)"
             

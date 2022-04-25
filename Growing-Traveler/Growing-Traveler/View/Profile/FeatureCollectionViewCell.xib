@@ -37,7 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.92542312259302051" blue="0.83776885995812123" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="3SX-C7-Opd" firstAttribute="leading" secondItem="FgI-f6-xtZ" secondAttribute="leading" constant="30" id="FRu-CM-sMu"/>
                             <constraint firstItem="3SX-C7-Opd" firstAttribute="top" secondItem="FgI-f6-xtZ" secondAttribute="top" constant="20" id="MNF-dK-74B"/>
@@ -60,6 +60,8 @@
                 <constraint firstItem="FgI-f6-xtZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zhY-xM-0ri"/>
             </constraints>
             <connections>
+                <outlet property="featureBackgroundView" destination="FgI-f6-xtZ" id="Y9O-9s-Rfl"/>
+                <outlet property="featureImageView" destination="3SX-C7-Opd" id="tJJ-Cd-yPT"/>
                 <outlet property="featureItemLabel" destination="MYW-qv-8Eg" id="98b-Tz-fOr"/>
             </connections>
             <point key="canvasLocation" x="132" y="109"/>

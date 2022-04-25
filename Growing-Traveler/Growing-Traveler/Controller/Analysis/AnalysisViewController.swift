@@ -389,13 +389,15 @@ class AnalysisViewController: UIViewController {
         
         sevenDaysArray = []
         
+        let sevenDaysAgo = Date().addingTimeInterval(-Double((day * 7))).addingTimeInterval(Double(day / 3))
+        
         for index in 0..<7 {
             
             let formatter = DateFormatter()
             
             formatter.dateFormat = "MM.dd"
             
-            let displayDay = formatter.string(from: yesterday.addingTimeInterval(Double(day * index)))
+            let displayDay = formatter.string(from: sevenDaysAgo.addingTimeInterval(Double(day * index)))
             
             sevenDaysArray.append(displayDay)
             
@@ -481,7 +483,7 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
 
                 cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
-                
+
                 return cell
                 
             } else {

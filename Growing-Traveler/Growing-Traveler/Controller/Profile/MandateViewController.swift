@@ -6,7 +6,30 @@
 //
 
 import UIKit
-import Lottie
+
+enum MandateType {
+    
+    case login
+    
+    case friends
+    
+    case completion
+    
+    var title: String {
+        
+        switch self {
+            
+        case .login: return "login"
+            
+        case .friends: return "friends"
+            
+        case .completion: return "completion"
+            
+        }
+        
+    }
+    
+}
 
 class MandateViewController: UIViewController {
     
@@ -34,6 +57,14 @@ class MandateViewController: UIViewController {
         
     }
     
+    var userManager = UserManager()
+    
+    var user: User?
+    
+    var friendManager = FriendManager()
+    
+    var friend: Friend?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +75,107 @@ class MandateViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         fetchData()
+        
+    }
+    
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
+    func fetchUserData() {
+        
+        userManager.fetchData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let user):
+                
+                strongSelf.user = user
+                
+                strongSelf.handleMandateData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+    }
+    
+    func fetchFriendData() {
+        
+        friendManager.fetchFriendListData(
+        fetchUserID: userID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let friend):
+                
+                strongSelf.friend = friend
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+    }
+    
+    func handleMandateData() {
+        
+        guard let user = user else { return }
+        
+        guard let friend = friend else { return }
+        
+        for mandatesIndex in 0..<ownMandates.count {
+            
+            if ownMandates[mandatesIndex].mandateTitle == MandateType.login.title {
+                
+                for index in 0..<ownMandates[mandatesIndex].mandate.count {
+                    
+                    ownMandates[mandatesIndex].mandate[index].pogress = user.achievement.loginDates.count
+                    
+                }
+                
+            } else if ownMandates[mandatesIndex].mandateTitle == MandateType.friends.title {
+                
+                for index in 0..<ownMandates[mandatesIndex].mandate.count {
+                    
+                    ownMandates[mandatesIndex].mandate[index].pogress = friend.friendList.count
+                    
+                }
+                
+            } else if ownMandates[mandatesIndex].mandateTitle == MandateType.completion.title {
+                
+                for index in 0..<ownMandates[mandatesIndex].mandate.count {
+                    
+                    ownMandates[mandatesIndex].mandate[index].pogress = user.achievement.completionGoals.count
+                    
+                }
+                
+            }
+            
+        }
+        
+        mandateManager.addData(mandates: ownMandates)
         
     }
     
@@ -68,6 +200,10 @@ class MandateViewController: UIViewController {
                     strongSelf.ownMandates = mandates
 
                 }
+                
+                strongSelf.fetchFriendData()
+                
+                strongSelf.fetchUserData()
 
             case .failure(let error):
                 

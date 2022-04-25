@@ -55,23 +55,43 @@ private enum Tab {
             
         case .studyGoal:
 
-            return UITabBarItem(tabBarSystemItem: .mostViewed, tag: 0)
+            return UITabBarItem(
+                title: nil,
+                image: UIImage.asset(.targetOrigin),
+                selectedImage: UIImage.asset(.targetSelect)
+            )
             
         case .forum:
             
-            return UITabBarItem(tabBarSystemItem: .featured, tag: 0)
+            return UITabBarItem(
+                title: nil,
+                image: UIImage.asset(.loudspeakerOrigin),
+                selectedImage: UIImage.asset(.loudspeakerSelect)
+            )
             
         case .chat:
             
-            return UITabBarItem(tabBarSystemItem: .history, tag: 0)
+            return UITabBarItem(
+                title: nil,
+                image: UIImage.asset(.chatBoxOrigin),
+                selectedImage: UIImage.asset(.chatBoxSelect)
+            )
             
         case .analysis:
             
-            return UITabBarItem(tabBarSystemItem: .recents, tag: 0)
+            return UITabBarItem(
+                title: nil,
+                image: UIImage.asset(.statisticsOrigin),
+                selectedImage: UIImage.asset(.statisticsSelect)
+            )
             
         case .profile:
             
-            return UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+            return UITabBarItem(
+                title: nil,
+                image: UIImage.asset(.userOrigin),
+                selectedImage: UIImage.asset(.userSelect)
+            )
             
         }
          

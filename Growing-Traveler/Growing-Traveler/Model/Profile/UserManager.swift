@@ -50,4 +50,19 @@ class UserManager {
         
     }
     
+    func updateData(user: User) {
+        
+        do {
+
+            // 修改 成就數值
+            try database.document(userID).setData(from: user, merge: true)
+            
+        } catch {
+
+            print(error)
+
+        }
+        
+    }
+    
 }
