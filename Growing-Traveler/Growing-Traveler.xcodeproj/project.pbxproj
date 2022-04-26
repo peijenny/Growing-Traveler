@@ -34,9 +34,9 @@
 		282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */; };
 		282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */; };
 		282522CC280F02B50008B916 /* ConfirmApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */; };
-		282522D9280FE54C0008B916 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 282522D8280FE54C0008B916 /* GoogleService-Info.plist */; };
 		282522DB280FE5520008B916 /* KeyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522DA280FE5520008B916 /* KeyToken.swift */; };
 		283D2C3E2803E63C004D19E4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2C3D2803E63C004D19E4 /* BaseViewController.swift */; };
+		283E6583281797F300F1033F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 283E6582281797F300F1033F /* GoogleService-Info.plist */; };
 		2857035A2811856A00849FAA /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285703592811856A00849FAA /* UserManager.swift */; };
 		2857035C28118F8D00849FAA /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2857035B28118F8D00849FAA /* Feedback.swift */; };
 		2857035E281197FC00849FAA /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2857035D281197FC00849FAA /* Double+Extension.swift */; };
@@ -141,9 +141,9 @@
 		282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyFriendViewController.swift; sourceTree = "<group>"; };
 		282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockadeFriendViewController.swift; sourceTree = "<group>"; };
 		282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmApplyViewController.swift; sourceTree = "<group>"; };
-		282522D8280FE54C0008B916 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		282522DA280FE5520008B916 /* KeyToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyToken.swift; sourceTree = "<group>"; };
 		283D2C3D2803E63C004D19E4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		283E6582281797F300F1033F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		285703592811856A00849FAA /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		2857035B28118F8D00849FAA /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		2857035D281197FC00849FAA /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -552,8 +552,8 @@
 				28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */,
 				28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */,
 				28CE2D4727FECBF500ACA813 /* Assets.xcassets */,
+				283E6582281797F300F1033F /* GoogleService-Info.plist */,
 				28CE2D4C27FECBF500ACA813 /* Info.plist */,
-				282522D8280FE54C0008B916 /* GoogleService-Info.plist */,
 			);
 			path = "Growing-Traveler";
 			sourceTree = "<group>";
@@ -704,6 +704,7 @@
 				280C1B16280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib in Resources */,
 				2808C92228103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.xib in Resources */,
 				2808C912280FEC7600DC1EC5 /* Analysis.storyboard in Resources */,
+				283E6583281797F300F1033F /* GoogleService-Info.plist in Resources */,
 				28BB6F3028096C40002B0458 /* MoreArticlesTableViewCell.xib in Resources */,
 				28DA83312812744F0081CB14 /* ProfileView.xib in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
@@ -711,7 +712,6 @@
 				280C1B0B280D78B90091B9DC /* FriendListTableViewCell.xib in Resources */,
 				2808C927281131A400DC1EC5 /* AnalysisContentTableViewCell.xib in Resources */,
 				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
-				282522D9280FE54C0008B916 /* GoogleService-Info.plist in Resources */,
 				28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */,
 				28DA83402812AB940081CB14 /* MandateTableViewCell.xib in Resources */,
 				280C1AFC280D5D7C0091B9DC /* Chat.storyboard in Resources */,

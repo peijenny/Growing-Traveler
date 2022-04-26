@@ -15,11 +15,47 @@ class AuthenticationViewController: UIViewController {
     @IBOutlet weak var signInWithAppleButtonView: UIView!
     
     fileprivate var currentNonce: String?
+    
+    var friendManager = FriendManager()
+    
+    var userManager = UserManager()
+    
+    var users: [UserInfo] = [] {
+        
+        didSet {
+            
+            setupProviderLoginView()
+            
+        }
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupProviderLoginView()
+        
+        fetchUserData()
+        
+    }
+    
+    func fetchUserData() {
+        
+        friendManager.listenFriendInfoData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                strongSelf.users = usersInfo
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
         
     }
     
@@ -126,18 +162,29 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                         photo = "\(String(describing: user.photoURL))"
                         
                     }
-                    
-                    let userInfo = UserInfo(
-                        userID: user.uid,
-                        userName: "\(givenName) \(familyName)",
-                        userEmail: user.email ?? "",
-                        userPhoto: "\(photo)",
-                        userPhone: user.phoneNumber ?? "",
-                        achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [])
-                    )
-                    
-                    UserManager().addData(user: userInfo)
 
+                    if self.users.filter({ $0.userID == user.uid }).count == 0 {
+                        
+                        let userInfo = UserInfo(
+                            userID: user.uid,
+                            userName: "\(givenName) \(familyName)",
+                            userEmail: user.email ?? "",
+                            userPhoto: "\(photo)",
+                            userPhone: user.phoneNumber ?? "",
+                            achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [])
+                        )
+                        
+                        self.userManager.addData(user: userInfo)
+                        
+                        let friend = Friend(
+                            userID: user.uid, friendList: [], blockadeList: [],
+                            applyList: [], deliveryList: []
+                        )
+                        
+                        self.friendManager.addData(friend: friend)
+                        
+                    }
+                    
                 } else {
 
                     print(error as Any)

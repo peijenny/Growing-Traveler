@@ -14,7 +14,7 @@ class FriendManager {
     
     let database = Firestore.firestore()
     
-    func fetchFriendEmailData(completion: @escaping (Result<[UserInfo]>) -> Void) {
+    func listenFriendInfoData(completion: @escaping (Result<[UserInfo]>) -> Void) {
         
         database.collection("user").addSnapshotListener { snapshot, error in
             
@@ -176,6 +176,22 @@ class FriendManager {
                     .document(bothSides.owner.userID).setData(from: otherChat, merge: true)
                 
             }
+            
+        } catch {
+
+            print(error)
+
+        }
+        
+    }
+    
+    func addData(friend: Friend) {
+        
+        do {
+            
+            // 新增使用者帳號
+            try database.collection("friend")
+                .document(friend.userID).setData(from: friend, merge: true)
             
         } catch {
 

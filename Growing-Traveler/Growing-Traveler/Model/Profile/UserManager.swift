@@ -60,7 +60,7 @@ class UserManager {
             
             if userID != "" {
                 
-                // 修改 成就數值
+                // 修改 使用者資料
                 try database.document(userID).setData(from: user, merge: true)
                 
             }
@@ -77,12 +77,8 @@ class UserManager {
         
         do {
             
-            if userID != "" {
-                
-                // 修改 成就數值
-                try database.document(user.userID).setData(from: user, merge: true)
-                
-            }
+            // 新增使用者帳號
+            try database.document(user.userID).setData(from: user, merge: true)
             
         } catch {
 

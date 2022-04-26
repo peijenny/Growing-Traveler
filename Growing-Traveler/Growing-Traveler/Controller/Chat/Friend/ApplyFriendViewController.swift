@@ -247,7 +247,7 @@ class ApplyFriendViewController: BaseViewController {
     
     func fetchUserData() {
         
-        friendManager.fetchFriendEmailData { [weak self] result in
+        friendManager.listenFriendInfoData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
