@@ -155,9 +155,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 userID = user.uid
                 
-                self.dismiss(animated: true, completion: nil)
-                
-                self.removeFromParent()
+                self.view.window?.rootViewController?.dismiss(animated: true , completion: nil)
                 
             }
             
@@ -202,9 +200,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 userID = user.uid
                 
-                self.dismiss(animated: true, completion: nil)
-                
-                self.removeFromParent()
+                self.view.window?.rootViewController?.dismiss(animated: true , completion: nil)
 
             }
             

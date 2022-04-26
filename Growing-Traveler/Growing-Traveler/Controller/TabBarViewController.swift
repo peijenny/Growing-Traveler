@@ -144,11 +144,11 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
                 
                 guard userID != "" else {
 
-                    if let authVC = UIStoryboard.auth.instantiateInitialViewController() {
+                    if let authViewController = UIStoryboard.auth.instantiateInitialViewController() {
 
-                        authVC.modalPresentationStyle = .overCurrentContext
+                        authViewController.modalPresentationStyle = .popover
 
-                        present(authVC, animated: false, completion: nil)
+                        present(authViewController, animated: true, completion: nil)
                     }
 
                     return false

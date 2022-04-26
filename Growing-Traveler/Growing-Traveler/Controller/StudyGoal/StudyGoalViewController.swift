@@ -173,16 +173,14 @@ class StudyGoalViewController: UIViewController {
         
         guard userID != "" else {
             
-            guard let authVC = UIStoryboard.auth.instantiateViewController(
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
                     withIdentifier: String(describing: AuthenticationViewController.self)
                     ) as? AuthenticationViewController else { return }
             
-            authVC.modalPresentationStyle = .overCurrentContext
+            authViewController.modalPresentationStyle = .popover
 
-            addChild(authVC)
+            present(authViewController, animated: true, completion: nil)
             
-            view.addSubview(authVC.view)
-
             return
         }
         

@@ -134,8 +134,6 @@ class AuthenticationViewController: UIViewController {
     @IBAction func closeButton(_ sender: UIButton) {
         
         dismiss(animated: true, completion: nil)
-        
-        self.view.removeFromSuperview()
 
     }
     
@@ -242,8 +240,6 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                     }
                     
                     self.dismiss(animated: true, completion: nil)
-                    
-                    self.view.removeFromSuperview()
                     
                 } else {
 
