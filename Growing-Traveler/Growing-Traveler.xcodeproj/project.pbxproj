@@ -37,6 +37,13 @@
 		282522DB280FE5520008B916 /* KeyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522DA280FE5520008B916 /* KeyToken.swift */; };
 		283D2C3E2803E63C004D19E4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2C3D2803E63C004D19E4 /* BaseViewController.swift */; };
 		283E6583281797F300F1033F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 283E6582281797F300F1033F /* GoogleService-Info.plist */; };
+		283E65852817CD6300F1033F /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E65842817CD6300F1033F /* ProfileSettingViewController.swift */; };
+		283E65892817D19C00F1033F /* SettingImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E65872817D19C00F1033F /* SettingImageTableViewCell.swift */; };
+		283E658A2817D19C00F1033F /* SettingImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E65882817D19C00F1033F /* SettingImageTableViewCell.xib */; };
+		283E658D2817D8A700F1033F /* SettingContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E658B2817D8A700F1033F /* SettingContentTableViewCell.swift */; };
+		283E658E2817D8A700F1033F /* SettingContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E658C2817D8A700F1033F /* SettingContentTableViewCell.xib */; };
+		283E65912817DF2300F1033F /* SettingSignTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E658F2817DF2300F1033F /* SettingSignTableViewCell.swift */; };
+		283E65922817DF2300F1033F /* SettingSignTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E65902817DF2300F1033F /* SettingSignTableViewCell.xib */; };
 		2857035A2811856A00849FAA /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285703592811856A00849FAA /* UserManager.swift */; };
 		2857035C28118F8D00849FAA /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2857035B28118F8D00849FAA /* Feedback.swift */; };
 		2857035E281197FC00849FAA /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2857035D281197FC00849FAA /* Double+Extension.swift */; };
@@ -144,6 +151,13 @@
 		282522DA280FE5520008B916 /* KeyToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyToken.swift; sourceTree = "<group>"; };
 		283D2C3D2803E63C004D19E4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		283E6582281797F300F1033F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		283E65842817CD6300F1033F /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
+		283E65872817D19C00F1033F /* SettingImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingImageTableViewCell.swift; sourceTree = "<group>"; };
+		283E65882817D19C00F1033F /* SettingImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingImageTableViewCell.xib; sourceTree = "<group>"; };
+		283E658B2817D8A700F1033F /* SettingContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingContentTableViewCell.swift; sourceTree = "<group>"; };
+		283E658C2817D8A700F1033F /* SettingContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingContentTableViewCell.xib; sourceTree = "<group>"; };
+		283E658F2817DF2300F1033F /* SettingSignTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSignTableViewCell.swift; sourceTree = "<group>"; };
+		283E65902817DF2300F1033F /* SettingSignTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingSignTableViewCell.xib; sourceTree = "<group>"; };
 		285703592811856A00849FAA /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		2857035B28118F8D00849FAA /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		2857035D281197FC00849FAA /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -344,6 +358,19 @@
 				280C1B09280D78B90091B9DC /* FriendListTableViewCell.xib */,
 			);
 			path = Friend;
+			sourceTree = "<group>";
+		};
+		283E65862817D17700F1033F /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				283E65872817D19C00F1033F /* SettingImageTableViewCell.swift */,
+				283E65882817D19C00F1033F /* SettingImageTableViewCell.xib */,
+				283E658B2817D8A700F1033F /* SettingContentTableViewCell.swift */,
+				283E658C2817D8A700F1033F /* SettingContentTableViewCell.xib */,
+				283E658F2817DF2300F1033F /* SettingSignTableViewCell.swift */,
+				283E65902817DF2300F1033F /* SettingSignTableViewCell.xib */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		288367A22801250F0010CEAD /* Controller */ = {
@@ -574,6 +601,7 @@
 			children = (
 				28DA832E281272770081CB14 /* ProfileViewController.swift */,
 				28DA833A28129CFF0081CB14 /* MandateViewController.swift */,
+				283E65842817CD6300F1033F /* ProfileSettingViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -581,6 +609,7 @@
 		28DA832A281272390081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				283E65862817D17700F1033F /* Setting */,
 				28DA833C2812AB420081CB14 /* Mandate */,
 				28DA83302812744F0081CB14 /* ProfileView.xib */,
 				28DA8334281274E30081CB14 /* ProfileView.swift */,
@@ -693,6 +722,7 @@
 				2808C92B281131C700DC1EC5 /* AnalysisPieChartTableViewCell.xib in Resources */,
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
 				28BB6EEF28066FC1002B0458 /* PublishArticleTableViewCell.xib in Resources */,
+				283E658A2817D19C00F1033F /* SettingImageTableViewCell.xib in Resources */,
 				28DA83432812AF950081CB14 /* 93125-progress-bar.json in Resources */,
 				28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
@@ -714,6 +744,8 @@
 				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
 				28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */,
 				28DA83402812AB940081CB14 /* MandateTableViewCell.xib in Resources */,
+				283E658E2817D8A700F1033F /* SettingContentTableViewCell.xib in Resources */,
+				283E65922817DF2300F1033F /* SettingSignTableViewCell.xib in Resources */,
 				280C1AFC280D5D7C0091B9DC /* Chat.storyboard in Resources */,
 				28DA832D281272560081CB14 /* Profile.storyboard in Resources */,
 				288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */,
@@ -793,6 +825,7 @@
 				28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */,
 				28BB6EEE28066FC1002B0458 /* PublishArticleTableViewCell.swift in Sources */,
 				282522CC280F02B50008B916 /* ConfirmApplyViewController.swift in Sources */,
+				283E658D2817D8A700F1033F /* SettingContentTableViewCell.swift in Sources */,
 				28BB6F3228098BC6002B0458 /* ArticleDetailViewController.swift in Sources */,
 				282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
@@ -802,6 +835,7 @@
 				28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */,
 				282522DB280FE5520008B916 /* KeyToken.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
+				283E65892817D19C00F1033F /* SettingImageTableViewCell.swift in Sources */,
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				2808C91A28100F6000DC1EC5 /* CalculateBar.swift in Sources */,
 				28BB6EF828069112002B0458 /* ForumArticle.swift in Sources */,
@@ -820,8 +854,10 @@
 				28DA8333281274BF0081CB14 /* NibOwnerLoadable.swift in Sources */,
 				28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */,
 				28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */,
+				283E65852817CD6300F1033F /* ProfileSettingViewController.swift in Sources */,
 				282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */,
 				2808C92A281131C700DC1EC5 /* AnalysisPieChartTableViewCell.swift in Sources */,
+				283E65912817DF2300F1033F /* SettingSignTableViewCell.swift in Sources */,
 				283D2C3E2803E63C004D19E4 /* BaseViewController.swift in Sources */,
 				285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */,
 				280C1B0A280D78B90091B9DC /* FriendListTableViewCell.swift in Sources */,

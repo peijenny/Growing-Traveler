@@ -59,7 +59,7 @@ class ProfileViewController: UIViewController {
         configureDataSource()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done,
+            barButtonSystemItem: .rewind,
             target: self,
             action: #selector(setProfileButton))
         
@@ -68,6 +68,10 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func setProfileButton(sender: UIButton) {
+        
+        let viewController = ProfileSettingViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
     

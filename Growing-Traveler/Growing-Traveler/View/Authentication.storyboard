@@ -28,6 +28,8 @@
                                         <color key="backgroundColor" systemColor="systemTealColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="6YG-aw-gtu"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="aWd-0f-eIm"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="382" id="kgG-Y6-G7A"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eq1-Cp-a92">

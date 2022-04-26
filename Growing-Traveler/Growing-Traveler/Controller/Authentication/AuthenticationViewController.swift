@@ -213,6 +213,10 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                         
                     }
                     
+                    self.dismiss(animated: true, completion: nil)
+                    
+                    self.view.removeFromSuperview()
+                    
                 } else {
 
                     print(error as Any)
