@@ -49,7 +49,7 @@ class FriendViewController: UIViewController {
     
     var friend: Friend?
     
-    var friendsInfo: [User] = [] {
+    var friendsInfo: [UserInfo] = [] {
         
         didSet {
             

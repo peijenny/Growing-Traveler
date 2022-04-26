@@ -59,7 +59,7 @@ class MandateViewController: UIViewController {
     
     var userManager = UserManager()
     
-    var user: User?
+    var user: UserInfo?
     
     var friendManager = FriendManager()
     

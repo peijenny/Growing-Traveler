@@ -25,7 +25,7 @@ class ChatViewController: BaseViewController {
     
     var chatRoomManager = ChatRoomManager()
     
-    var friendInfo: User? {
+    var friendInfo: UserInfo? {
         
         didSet {
             

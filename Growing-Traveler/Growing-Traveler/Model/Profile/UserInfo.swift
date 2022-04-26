@@ -7,13 +7,17 @@
 
 import Foundation
 
-struct User: Codable {
+struct UserInfo: Codable {
     
     var userID: String
     
     var userName: String
     
     var userEmail: String
+    
+    var userPhoto: String
+    
+    var userPhone: String
     
     var achievement: Achievement
     

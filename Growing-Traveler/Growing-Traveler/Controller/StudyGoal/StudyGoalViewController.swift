@@ -51,7 +51,7 @@ class StudyGoalViewController: UIViewController {
     
     var userManager = UserManager()
     
-    var user: User?
+    var user: UserInfo?
     
     var studyGoals: [StudyGoal]? {
         
@@ -98,6 +98,8 @@ class StudyGoalViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
         fetchUserData()
+        
+        print("TEST \(userID)")
         
     }
     

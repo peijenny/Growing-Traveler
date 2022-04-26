@@ -14,11 +14,11 @@ class FriendManager {
     
     let database = Firestore.firestore()
     
-    func fetchFriendEmailData(completion: @escaping (Result<[User]>) -> Void) {
+    func fetchFriendEmailData(completion: @escaping (Result<[UserInfo]>) -> Void) {
         
         database.collection("user").addSnapshotListener { snapshot, error in
             
-            var users: [User] = []
+            var users: [UserInfo] = []
             
             guard let snapshot = snapshot else {
                 
@@ -34,7 +34,7 @@ class FriendManager {
                 
                 do {
                     
-                    if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                    if let user = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                         
                         users.append(user)
                         
@@ -100,9 +100,9 @@ class FriendManager {
     }
     
     // 取得好友姓名
-    func fetchFriendInfoData(friendList: [String], completion: @escaping (Result<[User]>) -> Void) {
+    func fetchFriendInfoData(friendList: [String], completion: @escaping (Result<[UserInfo]>) -> Void) {
         
-        var friendsInfo: [User] = []
+        var friendsInfo: [UserInfo] = []
         
         for index in 0..<friendList.count {
             
@@ -125,7 +125,7 @@ class FriendManager {
                     
                 do {
                     
-                    if let friendInfo = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                    if let friendInfo = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                         
                         friendsInfo.append(friendInfo)
                         

@@ -14,7 +14,7 @@ class UserManager {
     
     let database = Firestore.firestore().collection("user")
     
-    func fetchData(completion: @escaping (Result<User>) -> Void) {
+    func fetchData(completion: @escaping (Result<UserInfo>) -> Void) {
         
         if userID != "" {
             
@@ -34,7 +34,7 @@ class UserManager {
                     
                 do {
                     
-                    if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                    if let user = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                         
                         completion(Result.success(user))
                         
@@ -52,10 +52,9 @@ class UserManager {
             
         }
         
-        
     }
     
-    func updateData(user: User) {
+    func updateData(user: UserInfo) {
         
         do {
             
@@ -63,6 +62,25 @@ class UserManager {
                 
                 // 修改 成就數值
                 try database.document(userID).setData(from: user, merge: true)
+                
+            }
+            
+        } catch {
+
+            print(error)
+
+        }
+        
+    }
+    
+    func addData(user: UserInfo) {
+        
+        do {
+            
+            if userID != "" {
+                
+                // 修改 成就數值
+                try database.document(user.userID).setData(from: user, merge: true)
                 
             }
             

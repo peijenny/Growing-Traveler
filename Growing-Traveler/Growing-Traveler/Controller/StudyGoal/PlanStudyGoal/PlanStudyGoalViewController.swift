@@ -127,7 +127,7 @@ class PlanStudyGoalViewController: BaseViewController {
     
     var isOpenEdited = false
     
-    var user: User?
+    var user: UserInfo?
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -25,7 +25,7 @@
 		280C1B0A280D78B90091B9DC /* FriendListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B08280D78B90091B9DC /* FriendListTableViewCell.swift */; };
 		280C1B0B280D78B90091B9DC /* FriendListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280C1B09280D78B90091B9DC /* FriendListTableViewCell.xib */; };
 		280C1B0E280E424C0091B9DC /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B0D280E424C0091B9DC /* Friend.swift */; };
-		280C1B10280E42780091B9DC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B0F280E42780091B9DC /* User.swift */; };
+		280C1B10280E42780091B9DC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B0F280E42780091B9DC /* UserInfo.swift */; };
 		280C1B12280E42FC0091B9DC /* FriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B11280E42FC0091B9DC /* FriendManager.swift */; };
 		280C1B15280E58BB0091B9DC /* ReceiveMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B13280E58BB0091B9DC /* ReceiveMessageTableViewCell.swift */; };
 		280C1B16280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280C1B14280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib */; };
@@ -132,7 +132,7 @@
 		280C1B08280D78B90091B9DC /* FriendListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListTableViewCell.swift; sourceTree = "<group>"; };
 		280C1B09280D78B90091B9DC /* FriendListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendListTableViewCell.xib; sourceTree = "<group>"; };
 		280C1B0D280E424C0091B9DC /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
-		280C1B0F280E42780091B9DC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		280C1B0F280E42780091B9DC /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		280C1B11280E42FC0091B9DC /* FriendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendManager.swift; sourceTree = "<group>"; };
 		280C1B13280E58BB0091B9DC /* ReceiveMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveMessageTableViewCell.swift; sourceTree = "<group>"; };
 		280C1B14280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiveMessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -311,7 +311,7 @@
 		280C1B0C280E42230091B9DC /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				280C1B0F280E42780091B9DC /* User.swift */,
+				280C1B0F280E42780091B9DC /* UserInfo.swift */,
 				285703592811856A00849FAA /* UserManager.swift */,
 			);
 			path = Profile;
@@ -825,7 +825,7 @@
 				283D2C3E2803E63C004D19E4 /* BaseViewController.swift in Sources */,
 				285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */,
 				280C1B0A280D78B90091B9DC /* FriendListTableViewCell.swift in Sources */,
-				280C1B10280E42780091B9DC /* User.swift in Sources */,
+				280C1B10280E42780091B9DC /* UserInfo.swift in Sources */,
 				28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */,
 				28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */,
 				2808C918280FF2B700DC1EC5 /* AnalysisManager.swift in Sources */,
