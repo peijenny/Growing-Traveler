@@ -115,12 +115,15 @@ class ForumViewController: BaseViewController {
         
         guard userID != "" else {
 
-            if let authVC = UIStoryboard.auth.instantiateInitialViewController() {
+            guard let authVC = UIStoryboard.auth.instantiateViewController(
+                    withIdentifier: String(describing: AuthenticationViewController.self)
+                    ) as? AuthenticationViewController else { return }
+            
+            authVC.modalPresentationStyle = .overCurrentContext
 
-                authVC.modalPresentationStyle = .overCurrentContext
-
-                present(authVC, animated: false, completion: nil)
-            }
+            addChild(authVC)
+            
+            view.addSubview(authVC.view)
 
             return
         }
