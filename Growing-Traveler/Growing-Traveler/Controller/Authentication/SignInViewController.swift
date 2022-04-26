@@ -145,7 +145,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     if let error = error as? NSError {
                         
                         print(error)
-                        
+
                     }
                     
                     // 帳戶不存在?? -> 顯示動畫

@@ -78,6 +78,23 @@ class SignUpTableViewCell: UITableViewCell {
             hintLabel.text = "密碼與檢查碼不一致！"
             
             return nil
+            
+        }
+        
+        guard accountEmail.range(of: "@") != nil else {
+            
+            hintLabel.text = "帳號格式錯誤！"
+            
+            return nil
+            
+        }
+        
+        guard accountPassword.count < 6 else {
+            
+            hintLabel.text = "密碼格式錯誤！"
+            
+            return nil
+            
         }
 
         return SignUp(userName: accountName, userPhotoLink: userPhotoLink,
