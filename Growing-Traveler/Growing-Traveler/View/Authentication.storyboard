@@ -158,11 +158,11 @@
                                     <constraint firstAttribute="height" constant="200" id="ZPB-bx-XMt"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xsI-KC-8FE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xsI-KC-8FE">
                                 <rect key="frame" x="16" y="276" width="382" height="400"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="zvR-PS-aDn"/>
+                                    <constraint firstAttribute="height" constant="400" id="0LJ-vo-BMD"/>
                                 </constraints>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXW-Ot-vmY">
@@ -192,7 +192,7 @@
                             <constraint firstItem="xsI-KC-8FE" firstAttribute="top" secondItem="GL5-ZN-ZGQ" secondAttribute="bottom" constant="16" id="aqr-7D-a3E"/>
                             <constraint firstItem="132-BO-2g7" firstAttribute="trailing" secondItem="GL5-ZN-ZGQ" secondAttribute="trailing" constant="107" id="d56-Zq-Egy"/>
                             <constraint firstItem="KXW-Ot-vmY" firstAttribute="top" secondItem="132-BO-2g7" secondAttribute="top" constant="16" id="gd7-oP-Xyt"/>
-                            <constraint firstItem="132-BO-2g7" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="xsI-KC-8FE" secondAttribute="bottom" constant="186" id="h6W-Wp-nX8"/>
+                            <constraint firstItem="132-BO-2g7" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="xsI-KC-8FE" secondAttribute="bottom" constant="186" id="k4J-NG-US7"/>
                         </constraints>
                     </view>
                     <connections>
