@@ -10,6 +10,26 @@ import AuthenticationServices
 import CryptoKit
 import FirebaseAuth
 
+enum SignType {
+    
+    case signIn
+    
+    case signUp
+    
+    var title: String {
+        
+        switch self {
+            
+        case .signIn: return "登入"
+            
+        case .signUp: return "註冊"
+            
+        }
+        
+    }
+    
+}
+
 class AuthenticationViewController: UIViewController {
 
     @IBOutlet weak var signInWithAppleButtonView: UIView!
@@ -111,30 +131,38 @@ class AuthenticationViewController: UIViewController {
         
     }
     
-    @IBAction func signOutButton(_ sender: UIButton) {
-        
-        let firebaseAuth = Auth.auth()
-        
-        do {
-            
-            try firebaseAuth.signOut()
-            
-            userID = ""
-            
-        } catch let signOutError as NSError {
-            
-            print("Error signing out: %@", signOutError)
-            
-        }
-        
-    }
-    
     @IBAction func closeButton(_ sender: UIButton) {
         
         dismiss(animated: true, completion: nil)
         
         self.view.removeFromSuperview()
 
+    }
+    
+    @IBAction func signInWithEmail(_ sender: UIButton) {
+        
+        presentToSignPage(signType: SignType.signIn.title)
+        
+    }
+    
+    @IBAction func signUpWithEmail(_ sender: UIButton) {
+        
+        presentToSignPage(signType: SignType.signUp.title)
+        
+    }
+    
+    func presentToSignPage(signType: String) {
+        
+        guard let viewController = UIStoryboard.auth.instantiateViewController(
+                withIdentifier: String(describing: SignInViewController.self)
+                ) as? SignInViewController else { return }
+        
+        viewController.modalPresentationStyle = .fullScreen
+        
+        viewController.signType = signType
+
+        present(viewController, animated: true, completion: nil)
+        
     }
     
 }

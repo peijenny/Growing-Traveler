@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2803AD222817F30F00AF3AD3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803AD212817F30F00AF3AD3 /* SignInViewController.swift */; };
 		2808C912280FEC7600DC1EC5 /* Analysis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2808C911280FEC7600DC1EC5 /* Analysis.storyboard */; };
 		2808C914280FECA800DC1EC5 /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C913280FECA800DC1EC5 /* AnalysisViewController.swift */; };
 		2808C918280FF2B700DC1EC5 /* AnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */; };
@@ -103,6 +104,10 @@
 		28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702BC28019D0C00FE9AEA /* CategoryManager.swift */; };
 		28D702BF28019E0300FE9AEA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702BE28019E0300FE9AEA /* Category.swift */; };
 		28D702C12802B41B00FE9AEA /* SelectStudyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */; };
+		28D79FDC2817F53D00505B5B /* SignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D79FDA2817F53D00505B5B /* SignInTableViewCell.swift */; };
+		28D79FDD2817F53D00505B5B /* SignInTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D79FDB2817F53D00505B5B /* SignInTableViewCell.xib */; };
+		28D79FE02817F56100505B5B /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D79FDE2817F56100505B5B /* SignUpTableViewCell.swift */; };
+		28D79FE12817F56100505B5B /* SignUpTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D79FDF2817F56100505B5B /* SignUpTableViewCell.xib */; };
 		28DA832D281272560081CB14 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28DA832C281272560081CB14 /* Profile.storyboard */; };
 		28DA832F281272770081CB14 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA832E281272770081CB14 /* ProfileViewController.swift */; };
 		28DA83312812744F0081CB14 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DA83302812744F0081CB14 /* ProfileView.xib */; };
@@ -121,6 +126,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2803AD212817F30F00AF3AD3 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		2808C911280FEC7600DC1EC5 /* Analysis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Analysis.storyboard; sourceTree = "<group>"; };
 		2808C913280FECA800DC1EC5 /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisManager.swift; sourceTree = "<group>"; };
@@ -220,6 +226,10 @@
 		28D702BC28019D0C00FE9AEA /* CategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManager.swift; sourceTree = "<group>"; };
 		28D702BE28019E0300FE9AEA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		28D702C02802B41B00FE9AEA /* SelectStudyItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStudyItemViewController.swift; sourceTree = "<group>"; };
+		28D79FDA2817F53D00505B5B /* SignInTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTableViewCell.swift; sourceTree = "<group>"; };
+		28D79FDB2817F53D00505B5B /* SignInTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInTableViewCell.xib; sourceTree = "<group>"; };
+		28D79FDE2817F56100505B5B /* SignUpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewCell.swift; sourceTree = "<group>"; };
+		28D79FDF2817F56100505B5B /* SignUpTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpTableViewCell.xib; sourceTree = "<group>"; };
 		28DA832C281272560081CB14 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		28DA832E281272770081CB14 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		28DA83302812744F0081CB14 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
@@ -258,6 +268,17 @@
 				59D1AA67F7C7E82E240245D2 /* Pods-Growing-Traveler.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		2803AD232817F42C00AF3AD3 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				28D79FDA2817F53D00505B5B /* SignInTableViewCell.swift */,
+				28D79FDB2817F53D00505B5B /* SignInTableViewCell.xib */,
+				28D79FDE2817F56100505B5B /* SignUpTableViewCell.swift */,
+				28D79FDF2817F56100505B5B /* SignUpTableViewCell.xib */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		2808C90E280FEC2B00DC1EC5 /* Analysis */ = {
@@ -391,6 +412,7 @@
 		288367A32801251C0010CEAD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2803AD232817F42C00AF3AD3 /* Authentication */,
 				28DA832A281272390081CB14 /* Profile */,
 				2808C90E280FEC2B00DC1EC5 /* Analysis */,
 				280C1B07280D77AC0091B9DC /* Chat */,
@@ -545,6 +567,7 @@
 			isa = PBXGroup;
 			children = (
 				28BC2C1F2816864600E69BE0 /* AuthenticationViewController.swift */,
+				2803AD212817F30F00AF3AD3 /* SignInViewController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -724,6 +747,7 @@
 				28BB6EEF28066FC1002B0458 /* PublishArticleTableViewCell.xib in Resources */,
 				283E658A2817D19C00F1033F /* SettingImageTableViewCell.xib in Resources */,
 				28DA83432812AF950081CB14 /* 93125-progress-bar.json in Resources */,
+				28D79FDD2817F53D00505B5B /* SignInTableViewCell.xib in Resources */,
 				28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
@@ -738,6 +762,7 @@
 				28BB6F3028096C40002B0458 /* MoreArticlesTableViewCell.xib in Resources */,
 				28DA83312812744F0081CB14 /* ProfileView.xib in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
+				28D79FE12817F56100505B5B /* SignUpTableViewCell.xib in Resources */,
 				280C1B1A280E58C70091B9DC /* SendMessageTableViewCell.xib in Resources */,
 				280C1B0B280D78B90091B9DC /* FriendListTableViewCell.xib in Resources */,
 				2808C927281131A400DC1EC5 /* AnalysisContentTableViewCell.xib in Resources */,
@@ -828,12 +853,14 @@
 				283E658D2817D8A700F1033F /* SettingContentTableViewCell.swift in Sources */,
 				28BB6F3228098BC6002B0458 /* ArticleDetailViewController.swift in Sources */,
 				282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */,
+				2803AD222817F30F00AF3AD3 /* SignInViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
 				28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */,
 				28BC2C1A2815603C00E69BE0 /* UIImage+Extension.swift in Sources */,
 				2857035E281197FC00849FAA /* Double+Extension.swift in Sources */,
 				28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */,
 				282522DB280FE5520008B916 /* KeyToken.swift in Sources */,
+				28D79FDC2817F53D00505B5B /* SignInTableViewCell.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
 				283E65892817D19C00F1033F /* SettingImageTableViewCell.swift in Sources */,
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
@@ -849,6 +876,7 @@
 				28DA832F281272770081CB14 /* ProfileViewController.swift in Sources */,
 				28DA833B28129CFF0081CB14 /* MandateViewController.swift in Sources */,
 				28AF15B128040948004E97B8 /* StudyGoalHeaderView.swift in Sources */,
+				28D79FE02817F56100505B5B /* SignUpTableViewCell.swift in Sources */,
 				288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */,
 				280C1B01280D772E0091B9DC /* ChatRoomManager.swift in Sources */,
 				28DA8333281274BF0081CB14 /* NibOwnerLoadable.swift in Sources */,
