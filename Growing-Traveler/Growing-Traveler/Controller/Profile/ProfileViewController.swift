@@ -58,6 +58,17 @@ class ProfileViewController: UIViewController {
 
         configureDataSource()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(setProfileButton))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func setProfileButton(sender: UIButton) {
+        
     }
     
     func configureDataSource() {

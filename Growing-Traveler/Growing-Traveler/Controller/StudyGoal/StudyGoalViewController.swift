@@ -171,6 +171,18 @@ class StudyGoalViewController: UIViewController {
     // MARK: - 新增個人學習計劃 Button
     @IBAction func addStudyGoalButton(_ sender: UIButton) {
         
+        guard userID != "" else {
+
+            if let authVC = UIStoryboard.auth.instantiateInitialViewController() {
+
+                authVC.modalPresentationStyle = .overCurrentContext
+
+                present(authVC, animated: false, completion: nil)
+            }
+
+            return
+        }
+        
         pushToPlanStudyGoalPage(studyGoal: nil)
         
     }

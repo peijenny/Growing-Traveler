@@ -79,6 +79,18 @@ class ArticleDetailViewController: UIViewController {
     
     @objc func sendMessageButton(sender: UIButton) {
         
+        guard userID != "" else {
+
+            if let authVC = UIStoryboard.auth.instantiateInitialViewController() {
+
+                authVC.modalPresentationStyle = .overCurrentContext
+
+                present(authVC, animated: false, completion: nil)
+            }
+
+            return
+        }
+        
         guard let viewController = UIStoryboard
             .forum
             .instantiateViewController(

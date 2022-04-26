@@ -112,6 +112,18 @@ class ForumViewController: BaseViewController {
     }
     
     @IBAction func addArticleButton(_ sender: UIButton) {
+        
+        guard userID != "" else {
+
+            if let authVC = UIStoryboard.auth.instantiateInitialViewController() {
+
+                authVC.modalPresentationStyle = .overCurrentContext
+
+                present(authVC, animated: false, completion: nil)
+            }
+
+            return
+        }
 
         let viewController = PublishForumArticleViewController()
         
