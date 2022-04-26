@@ -111,6 +111,24 @@ class AuthenticationViewController: UIViewController {
         
     }
     
+    @IBAction func signOutButton(_ sender: UIButton) {
+        
+        let firebaseAuth = Auth.auth()
+        
+        do {
+            
+            try firebaseAuth.signOut()
+            
+            userID = ""
+            
+        } catch let signOutError as NSError {
+            
+            print("Error signing out: %@", signOutError)
+            
+        }
+        
+    }
+    
 }
 
 extension AuthenticationViewController: ASAuthorizationControllerDelegate {
@@ -121,9 +139,9 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
-            guard let givenName = appleIDCredential.fullName?.givenName else { return }
+            let givenName = appleIDCredential.fullName?.givenName ?? ""
             
-            guard let familyName = appleIDCredential.fullName?.familyName else { return }
+            let familyName = appleIDCredential.fullName?.familyName ?? ""
             
             guard let nonce = currentNonce else {
                 
@@ -162,7 +180,9 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                         photo = "\(String(describing: user.photoURL))"
                         
                     }
-
+                    
+                    userID = "\(Auth.auth().currentUser?.uid ?? "")"
+                    
                     if self.users.filter({ $0.userID == user.uid }).count == 0 {
                         
                         let userInfo = UserInfo(

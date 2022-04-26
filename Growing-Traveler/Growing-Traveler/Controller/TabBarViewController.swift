@@ -11,7 +11,7 @@ private enum Tab {
     
     case studyGoal
     
-//    case forum
+    case forum
     
     case chat
     
@@ -19,7 +19,7 @@ private enum Tab {
     
     case profile
     
-    case auth
+//    case auth
     
     func controller() -> UIViewController {
         
@@ -29,8 +29,8 @@ private enum Tab {
             
         case .studyGoal: controller = UIStoryboard.studyGoal.instantiateInitialViewController() ?? UIViewController()
             
-//        case .forum: controller = UIStoryboard.forum.instantiateInitialViewController() ??
-//            UIViewController()
+        case .forum: controller = UIStoryboard.forum.instantiateInitialViewController() ??
+            UIViewController()
             
         case .chat: controller = UIStoryboard.chat.instantiateInitialViewController() ??
             UIViewController()
@@ -41,9 +41,9 @@ private enum Tab {
         case .profile: controller = UIStoryboard.profile.instantiateInitialViewController() ??
             UIViewController()
             
-        case .auth: controller = UIStoryboard.auth.instantiateInitialViewController() ??
-            UIViewController()
-            
+//        case .auth: controller = UIStoryboard.auth.instantiateInitialViewController() ??
+//            UIViewController()
+//
         }
         
         controller.tabBarItem = tabBarItem()
@@ -66,13 +66,13 @@ private enum Tab {
                 selectedImage: UIImage.asset(.targetSelect)
             )
             
-//        case .forum:
-//
-//            return UITabBarItem(
-//                title: nil,
-//                image: UIImage.asset(.loudspeakerOrigin),
-//                selectedImage: UIImage.asset(.loudspeakerSelect)
-//            )
+        case .forum:
+
+            return UITabBarItem(
+                title: nil,
+                image: UIImage.asset(.loudspeakerOrigin),
+                selectedImage: UIImage.asset(.loudspeakerSelect)
+            )
             
         case .chat:
             
@@ -98,10 +98,10 @@ private enum Tab {
                 selectedImage: UIImage.asset(.userSelect)
             )
             
-        case .auth:
-            
-            return UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
-            
+//        case .auth:
+//
+//            return UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+//
         }
          
     }
@@ -110,9 +110,9 @@ private enum Tab {
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
-//    private let tabs: [Tab] = [.studyGoal, .forum, .chat, .analysis, .profile, .auth]
+    private let tabs: [Tab] = [.studyGoal, .forum, .chat, .analysis, .profile]
     
-    private let tabs: [Tab] = [.studyGoal, .chat, .analysis, .profile, .auth]
+//    private let tabs: [Tab] = [.studyGoal, .chat, .analysis, .profile, .auth]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +120,46 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         viewControllers = tabs.map({ $0.controller() })
         
         delegate = self
+        
+    }
+    
+    // MARK: - UITabBarControllerDelegate
+
+    func tabBarController(
+        _ tabBarController: UITabBarController,
+        shouldSelect viewController: UIViewController
+    ) -> Bool {
+
+//        guard let navVC = viewController as? UINavigationController,
+//              navVC.viewControllers.first is StudyGoalViewController
+//        else { return true }
+
+//        guard let navVC = viewController as? UINavigationController,
+//              navVC.viewControllers.first is ForumViewController
+//        else { return true }
+
+        if let viewControllers = tabBarController.viewControllers {
+            
+            if viewController != viewControllers[0] || viewController != viewControllers[1] {
+                
+                guard userID != "" else {
+
+                    if let authVC = UIStoryboard.auth.instantiateInitialViewController() {
+
+                        authVC.modalPresentationStyle = .overCurrentContext
+
+                        present(authVC, animated: false, completion: nil)
+                    }
+
+                    return false
+                }
+                
+            }
+            
+        }
+
+        return true
+        
     }
     
 }

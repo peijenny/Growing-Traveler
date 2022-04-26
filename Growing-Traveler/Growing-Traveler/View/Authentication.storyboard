@@ -20,14 +20,29 @@
                                 <rect key="frame" x="87" y="389" width="240" height="128"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GqC-Qp-JVg">
+                                <rect key="frame" x="20" y="194" width="374" height="50"/>
+                                <color key="backgroundColor" red="0.94740110639999997" green="0.86725709259999995" blue="0.85955464920000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="qo1-nb-E9y"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="SignOut"/>
+                                <connections>
+                                    <action selector="signOutButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ka5-YR-ysy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="GqC-Qp-JVg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="150" id="QkB-li-B3D"/>
                             <constraint firstItem="r90-d9-dAg" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.57971" id="RNY-VO-kk7"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="GqC-Qp-JVg" secondAttribute="trailing" constant="20" id="fzG-DS-YH3"/>
                             <constraint firstItem="r90-d9-dAg" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="hB3-fg-iU2"/>
                             <constraint firstItem="r90-d9-dAg" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.142857" id="idE-cc-A79"/>
                             <constraint firstItem="r90-d9-dAg" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="pMK-JR-Ndz"/>
+                            <constraint firstItem="GqC-Qp-JVg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="u89-i1-xAr"/>
                         </constraints>
                     </view>
                     <connections>

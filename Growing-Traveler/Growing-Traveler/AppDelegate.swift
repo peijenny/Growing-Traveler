@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let user = Auth.auth().currentUser {
 
             print("You're sign in as \(user.uid), email: \(user.email ?? "")")
+            
+            userID = "\(Auth.auth().currentUser?.uid ?? "")"
 
         }
 
