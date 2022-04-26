@@ -32,3 +32,25 @@ struct Achievement: Codable {
     var loginDates: [String]
     
 }
+
+
+struct SignIn: Codable {
+    
+    var email: String
+    
+    var password: String
+    
+}
+
+
+struct SignUp: Codable {
+
+    var userName: String
+    
+    var userPhotoLink: String
+    
+    var email: String
+    
+    var password: String
+    
+}

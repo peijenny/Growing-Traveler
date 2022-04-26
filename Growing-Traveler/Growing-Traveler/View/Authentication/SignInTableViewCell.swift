@@ -28,4 +28,26 @@ class SignInTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func getSignInData() -> SignIn? {
+        
+        guard let accountEmail = userAccountTextField.text, userAccountTextField.text != "" else {
+            
+            hintLabel.text = "請輸入帳號！"
+            
+            return nil
+            
+        }
+        
+        guard let accountPassword = userPasswordTextField.text, userPasswordTextField.text != "" else {
+            
+            hintLabel.text = "請輸入密碼！"
+            
+            return nil
+            
+        }
+        
+        return SignIn(email: accountEmail, password: accountPassword)
+        
+    }
+    
 }

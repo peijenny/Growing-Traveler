@@ -38,4 +38,51 @@ class SignUpTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func getSignUpData() -> SignUp? {
+        
+        let userPhotoLink = userPhotoLinkLabel.text ?? ""
+        
+        guard let accountName = userNameTextField.text, userNameTextField.text != ""  else {
+            
+            hintLabel.text = "請輸入姓名！"
+            
+            return nil
+        }
+        
+        guard let accountEmail = userAccountTextField.text, userAccountTextField.text != ""  else {
+            
+            hintLabel.text = "請輸入帳號！"
+            
+            return nil
+            
+        }
+        
+        guard let accountPassword = userPasswordTextField.text, userPasswordTextField.text != "" else {
+            
+            hintLabel.text = "請輸入密碼！"
+            
+            return nil
+            
+        }
+        
+        guard userCheckPasswordTextField.text != "" else {
+            
+            hintLabel.text = "請輸入檢查碼！"
+            
+            return nil
+            
+        }
+        
+        guard userPasswordTextField.text == userCheckPasswordTextField.text else {
+            
+            hintLabel.text = "密碼與檢查碼不一致！"
+            
+            return nil
+        }
+
+        return SignUp(userName: accountName, userPhotoLink: userPhotoLink,
+                      email: accountEmail, password: accountPassword)
+        
+    }
+    
 }
