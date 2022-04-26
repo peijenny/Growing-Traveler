@@ -38,6 +38,14 @@ class SignUpTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setUserPhoto(userPhotoLink: String) {
+        
+        userPhotoLinkLabel.text = userPhotoLink
+        
+        userPhotoImageView.loadImage(userPhotoLink)
+        
+    }
+    
     func getSignUpData() -> SignUp? {
         
         let userPhotoLink = userPhotoLinkLabel.text ?? ""
@@ -89,14 +97,6 @@ class SignUpTableViewCell: UITableViewCell {
             
         }
         
-        guard accountPassword.count < 6 else {
-            
-            hintLabel.text = "密碼格式錯誤！"
-            
-            return nil
-            
-        }
-
         return SignUp(userName: accountName, userPhotoLink: userPhotoLink,
                       email: accountEmail, password: accountPassword)
         

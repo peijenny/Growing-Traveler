@@ -30,6 +30,8 @@ class SignInViewController: BaseViewController {
     
     var isCheck = false
     
+    var userImageLink: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -104,6 +106,12 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let signUpContent = cell.getSignUpData() else { return cell }
                 
                 sendSignUpData(signUpContent: signUpContent)
+                
+            }
+            
+            if userImageLink != nil {
+             
+                cell.setUserPhoto(userPhotoLink: userImageLink ?? "")
                 
             }
             
@@ -210,6 +218,48 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func uploadUserPhoto(sender: UIButton) {
         
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        
+        present(picker, animated: true)
+        
+    }
+    
+}
+
+extension SignInViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[.originalImage] as? UIImage {
+
+            let uploadImageManager = UploadImageManager()
+
+            uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
+
+                guard let strongSelf = self else { return }
+
+                switch result {
+
+                case.success(let imageLink):
+                    
+                    strongSelf.userImageLink = "\(imageLink)"
+
+                    strongSelf.signTableView.reloadData()
+                    
+                case .failure(let error):
+
+                    print(error)
+
+                }
+
+            })
+
+        }
+
+        dismiss(animated: true)
+
     }
     
 }

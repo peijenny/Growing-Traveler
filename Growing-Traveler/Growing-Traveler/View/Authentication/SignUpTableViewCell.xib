@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="380"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hint Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwr-yj-CKd">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwr-yj-CKd">
                         <rect key="frame" x="32" y="288" width="350" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="dZ6-av-bYk"/>
@@ -32,7 +32,7 @@
                             <constraint firstAttribute="height" constant="50" id="Ft4-ys-4Oq"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5o1-Vv-cw8">
@@ -45,7 +45,7 @@
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="確認"/>
                     </button>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userOrigin" translatesAutoresizingMaskIntoConstraints="NO" id="5IM-ar-7HW">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userOrigin" translatesAutoresizingMaskIntoConstraints="NO" id="5IM-ar-7HW">
                         <rect key="frame" x="32" y="16" width="50" height="50"/>
                         <color key="backgroundColor" red="1" green="0.72156862749999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>

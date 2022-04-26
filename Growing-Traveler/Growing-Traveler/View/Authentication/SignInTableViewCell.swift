@@ -54,14 +54,6 @@ class SignInTableViewCell: UITableViewCell {
             
         }
         
-        guard accountPassword.count < 6 else {
-            
-            hintLabel.text = "密碼格式錯誤！"
-            
-            return nil
-            
-        }
-        
         return SignIn(email: accountEmail, password: accountPassword)
         
     }
