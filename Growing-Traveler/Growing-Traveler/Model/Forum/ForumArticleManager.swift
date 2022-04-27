@@ -267,7 +267,7 @@ extension ForumArticleManager {
             try database
                 .document(articleMessage.articleID)
                 .collection("message")
-                .document("\(articleMessage.createTime)")
+                .document("\(Int(articleMessage.createTime))")
                 .setData(from: articleMessage)
             
         } catch {

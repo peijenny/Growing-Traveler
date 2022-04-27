@@ -129,6 +129,8 @@ class MandateViewController: UIViewController {
                 
                 strongSelf.friend = friend
                 
+                strongSelf.handleMandateData()
+                
             case .failure(let error):
                 
                 print(error)
