@@ -51,7 +51,7 @@ class StudyGoalViewController: UIViewController {
     
     var userManager = UserManager()
     
-    var user: User?
+    var user: UserInfo?
     
     var studyGoals: [StudyGoal]? {
         
@@ -99,6 +99,8 @@ class StudyGoalViewController: UIViewController {
         
         fetchUserData()
         
+        print("TEST \(userID)")
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,7 +115,7 @@ class StudyGoalViewController: UIViewController {
     
     func fetchUserData() {
         
-        userManager.fetchData { [weak self] result in
+        userManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -168,6 +170,19 @@ class StudyGoalViewController: UIViewController {
     
     // MARK: - 新增個人學習計劃 Button
     @IBAction func addStudyGoalButton(_ sender: UIButton) {
+        
+        guard userID != "" else {
+            
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                    withIdentifier: String(describing: AuthenticationViewController.self)
+                    ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .popover
+
+            present(authViewController, animated: true, completion: nil)
+            
+            return
+        }
         
         pushToPlanStudyGoalPage(studyGoal: nil)
         

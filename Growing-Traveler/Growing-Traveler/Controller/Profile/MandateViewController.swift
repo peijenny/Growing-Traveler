@@ -59,7 +59,7 @@ class MandateViewController: UIViewController {
     
     var userManager = UserManager()
     
-    var user: User?
+    var user: UserInfo?
     
     var friendManager = FriendManager()
     
@@ -94,7 +94,7 @@ class MandateViewController: UIViewController {
     
     func fetchUserData() {
         
-        userManager.fetchData { [weak self] result in
+        userManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -128,6 +128,8 @@ class MandateViewController: UIViewController {
             case .success(let friend):
                 
                 strongSelf.friend = friend
+                
+                strongSelf.handleMandateData()
                 
             case .failure(let error):
                 

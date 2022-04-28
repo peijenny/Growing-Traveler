@@ -16,41 +16,47 @@ class AnalysisManager {
     
     func fetchStudyData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
-        database.collection("studyGoal").getDocuments { snapshot, error in
+        if userID != "" {
             
-            var studyGoals: [StudyGoal] = []
-            
-            guard let snapshot = snapshot else {
+            database.collection("studyGoal")
+                .whereField("userID", isEqualTo: userID)
+                .getDocuments { snapshot, error in
                 
-                print("Error fetching document: \(error!)")
+                var studyGoals: [StudyGoal] = []
                 
-                completion(Result.failure(error!))
-                
-                return
-                
-            }
-            
-            for document in snapshot.documents {
-                
-                do {
+                guard let snapshot = snapshot else {
                     
-                    if let studyGoal = try document.data(as: StudyGoal.self, decoder: Firestore.Decoder()) {
-                        
-                        studyGoals.append(studyGoal)
-                        
-                    }
+                    print("Error fetching document: \(error!)")
                     
-                } catch {
+                    completion(Result.failure(error!))
                     
-                    print(error)
-                    
-                    completion(Result.failure(error))
+                    return
                     
                 }
                 
+                for document in snapshot.documents {
+                    
+                    do {
+                        
+                        if let studyGoal = try document.data(as: StudyGoal.self, decoder: Firestore.Decoder()) {
+                            
+                            studyGoals.append(studyGoal)
+                            
+                        }
+                        
+                    } catch {
+                        
+                        print(error)
+                        
+                        completion(Result.failure(error))
+                        
+                    }
+                    
+                }
+                
+                completion(Result.success(studyGoals))
+                
             }
-            
-            completion(Result.success(studyGoals))
             
         }
         

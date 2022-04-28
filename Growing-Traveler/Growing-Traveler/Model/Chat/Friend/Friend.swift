@@ -19,6 +19,8 @@ struct Friend: Codable {
     
     var userID: String
     
+    var userName: String
+    
     var friendList: [String]
     
     var blockadeList: [String]

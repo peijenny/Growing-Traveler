@@ -14,9 +14,9 @@ class UserManager {
     
     let database = Firestore.firestore().collection("user")
     
-    func fetchData(completion: @escaping (Result<User>) -> Void) {
+    func fetchData(fetchUserID: String, completion: @escaping (Result<UserInfo>) -> Void) {
         
-        database.whereField("userID", isEqualTo: userID).addSnapshotListener { snapshot, error in
+        database.document(fetchUserID).getDocument { snapshot, error in
             
             guard let snapshot = snapshot else {
                 
@@ -27,12 +27,10 @@ class UserManager {
                 return
                 
             }
-            
-            let document = snapshot.documents[0]
-                
+
             do {
                 
-                if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                if let user = try snapshot.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                     
                     completion(Result.success(user))
                     
@@ -50,12 +48,69 @@ class UserManager {
         
     }
     
-    func updateData(user: User) {
+    func listenData(completion: @escaping (Result<UserInfo>) -> Void) {
+        
+        if userID != "" {
+            
+            database.document(userID).addSnapshotListener { snapshot, error in
+                
+                guard let snapshot = snapshot else {
+                    
+                    print("Error fetching document: \(error!)")
+                    
+                    completion(Result.failure(error!))
+                    
+                    return
+                    
+                }
+  
+                do {
+                    
+                    if let user = try snapshot.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
+                        
+                        completion(Result.success(user))
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func updateData(user: UserInfo) {
         
         do {
+            
+            if userID != "" {
+                
+                // 修改 使用者資料
+                try database.document(userID).setData(from: user, merge: true)
+                
+            }
+            
+        } catch {
 
-            // 修改 成就數值
-            try database.document(userID).setData(from: user, merge: true)
+            print(error)
+
+        }
+        
+    }
+    
+    func addData(user: UserInfo) {
+        
+        do {
+            
+            // 新增使用者帳號
+            try database.document(user.userID).setData(from: user, merge: true)
             
         } catch {
 

@@ -20,11 +20,15 @@ class MandateManager {
         
         do {
             
-            for index in 0..<mandates.count {
+            if userID != "" {
                 
-                try database.collection("user").document(userID)
-                    .collection("mandate").document(mandates[index].mandateTitle)
-                    .setData(from: mandates[index], merge: true)
+                for index in 0..<mandates.count {
+                    
+                    try database.collection("user").document(userID)
+                        .collection("mandate").document(mandates[index].mandateTitle)
+                        .setData(from: mandates[index], merge: true)
+                    
+                }
                 
             }
             
@@ -80,42 +84,46 @@ class MandateManager {
     
     func fetchOwnerData(completion: @escaping (Result<[Mandate]>) -> Void) {
         
-        database.collection("user").document(userID)
-            .collection("mandate").addSnapshotListener { snapshot, error in
+        if userID != "" {
             
-            var mandates: [Mandate] = []
-            
-            guard let snapshot = snapshot else {
+            database.collection("user").document(userID)
+                .collection("mandate").addSnapshotListener { snapshot, error in
                 
-                print("Error fetching document: \(error!)")
+                var mandates: [Mandate] = []
                 
-                completion(Result.failure(error!))
-                
-                return
-                
-            }
-            
-            for document in snapshot.documents {
-                
-                do {
+                guard let snapshot = snapshot else {
                     
-                    if let mandate = try document.data(as: Mandate.self, decoder: Firestore.Decoder()) {
-                        
-                        mandates.append(mandate)
-                        
-                    }
+                    print("Error fetching document: \(error!)")
                     
-                } catch {
+                    completion(Result.failure(error!))
                     
-                    print(error)
-                    
-                    completion(Result.failure(error))
+                    return
                     
                 }
                 
+                for document in snapshot.documents {
+                    
+                    do {
+                        
+                        if let mandate = try document.data(as: Mandate.self, decoder: Firestore.Decoder()) {
+                            
+                            mandates.append(mandate)
+                            
+                        }
+                        
+                    } catch {
+                        
+                        print(error)
+                        
+                        completion(Result.failure(error))
+                        
+                    }
+                    
+                }
+                
+                completion(Result.success(mandates))
+                
             }
-            
-            completion(Result.success(mandates))
             
         }
         

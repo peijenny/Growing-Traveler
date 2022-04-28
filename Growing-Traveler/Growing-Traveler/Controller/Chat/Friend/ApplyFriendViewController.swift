@@ -69,7 +69,7 @@ class ApplyFriendViewController: BaseViewController {
     
     @IBOutlet weak var userInfoView: UIView!
     
-    var friendsInfo: [User] = [] {
+    var friendsInfo: [UserInfo] = [] {
         
         didSet {
             
@@ -94,11 +94,11 @@ class ApplyFriendViewController: BaseViewController {
     
     var otherFriend: Friend?
     
-    var allUsers: [User] = []
+    var allUsers: [UserInfo] = []
     
     var friendManager = FriendManager()
     
-    var searchUser: User?
+    var searchUser: UserInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -247,7 +247,7 @@ class ApplyFriendViewController: BaseViewController {
     
     func fetchUserData() {
         
-        friendManager.fetchFriendEmailData { [weak self] result in
+        friendManager.listenFriendInfoData { [weak self] result in
             
             guard let strongSelf = self else { return }
             

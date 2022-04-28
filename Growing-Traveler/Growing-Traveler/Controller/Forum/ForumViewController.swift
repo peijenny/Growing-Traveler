@@ -112,6 +112,19 @@ class ForumViewController: BaseViewController {
     }
     
     @IBAction func addArticleButton(_ sender: UIButton) {
+        
+        guard userID != "" else {
+
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                    withIdentifier: String(describing: AuthenticationViewController.self)
+                    ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .popover
+
+            present(authViewController, animated: true, completion: nil)
+            
+            return
+        }
 
         let viewController = PublishForumArticleViewController()
         

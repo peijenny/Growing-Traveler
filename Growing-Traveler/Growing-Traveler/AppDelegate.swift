@@ -18,6 +18,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+//        do {
+//
+//           try  Auth.auth().signOut()
+//
+//        } catch {
+//
+//        }
+             
+        if let user = Auth.auth().currentUser {
+
+            print("You're sign in as \(user.uid), email: \(user.email ?? "")")
+            
+            userID = "\(Auth.auth().currentUser?.uid ?? "")"
+
+        }
+
         return true
     }
 
