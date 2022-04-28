@@ -108,6 +108,7 @@
 		28D79FDD2817F53D00505B5B /* SignInTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D79FDB2817F53D00505B5B /* SignInTableViewCell.xib */; };
 		28D79FE02817F56100505B5B /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D79FDE2817F56100505B5B /* SignUpTableViewCell.swift */; };
 		28D79FE12817F56100505B5B /* SignUpTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D79FDF2817F56100505B5B /* SignUpTableViewCell.xib */; };
+		28D79FE328182C3100505B5B /* DeleteUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D79FE228182C3100505B5B /* DeleteUserManager.swift */; };
 		28DA832D281272560081CB14 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28DA832C281272560081CB14 /* Profile.storyboard */; };
 		28DA832F281272770081CB14 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA832E281272770081CB14 /* ProfileViewController.swift */; };
 		28DA83312812744F0081CB14 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DA83302812744F0081CB14 /* ProfileView.xib */; };
@@ -230,6 +231,7 @@
 		28D79FDB2817F53D00505B5B /* SignInTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInTableViewCell.xib; sourceTree = "<group>"; };
 		28D79FDE2817F56100505B5B /* SignUpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewCell.swift; sourceTree = "<group>"; };
 		28D79FDF2817F56100505B5B /* SignUpTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpTableViewCell.xib; sourceTree = "<group>"; };
+		28D79FE228182C3100505B5B /* DeleteUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserManager.swift; sourceTree = "<group>"; };
 		28DA832C281272560081CB14 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		28DA832E281272770081CB14 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		28DA83302812744F0081CB14 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 			children = (
 				280C1B0F280E42780091B9DC /* UserInfo.swift */,
 				285703592811856A00849FAA /* UserManager.swift */,
+				28D79FE228182C3100505B5B /* DeleteUserManager.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -902,6 +905,7 @@
 				28BB6EFC2807C25C002B0458 /* UploadImageManager.swift in Sources */,
 				28DA833828127AEE0081CB14 /* FeatureCollectionViewCell.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
+				28D79FE328182C3100505B5B /* DeleteUserManager.swift in Sources */,
 				28FF433F2813D12200C58E6B /* MandateManager.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
 				28BC2C202816864600E69BE0 /* AuthenticationViewController.swift in Sources */,

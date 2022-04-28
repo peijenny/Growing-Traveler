@@ -18,7 +18,7 @@ class UserManager {
         
         if userID != "" {
             
-            database.whereField("userID", isEqualTo: userID).addSnapshotListener { snapshot, error in
+            database.document(userID).addSnapshotListener { snapshot, error in
                 
                 guard let snapshot = snapshot else {
                     
@@ -29,12 +29,10 @@ class UserManager {
                     return
                     
                 }
-                
-                let document = snapshot.documents[0]
-                    
+  
                 do {
                     
-                    if let user = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
+                    if let user = try snapshot.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                         
                         completion(Result.success(user))
                         

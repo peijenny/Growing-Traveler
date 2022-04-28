@@ -14,7 +14,27 @@ class ProfileSettingViewController: BaseViewController {
     
     var userManger = UserManager()
     
-    var userInfo: UserInfo? {
+    var deleteUserManager = DeleteUserManager()
+    
+    var studyGoals: [StudyGoal] = []  // 使用者建立的學習目標 (多筆)
+    
+    var friendList: Friend? // 使用者的 Friend 資料 (1筆)
+    
+    var forumArticles: [ForumArticle] = [] // 使用者發布的 Forum 文章 (多筆)
+//
+//    var deleteArticleMessages: [DeleteArticle] = [] // 使用者於 Forum 文章下的留言 (多筆)
+//
+//    var allForumArticles: [ForumArticle] = [] {   // 所有使用者發佈的文章
+//
+//        didSet {
+//
+//            fetchArticleMessageData(allForumArticles: allForumArticles)
+//
+//        }
+//
+//    }
+    
+    var userInfo: UserInfo? {  // 使用者資料 (1筆)
         
         didSet {
             
@@ -34,6 +54,8 @@ class ProfileSettingViewController: BaseViewController {
         setTableView()
         
         fetchData()
+        
+        fetchAllData()
         
     }
     
@@ -200,7 +222,172 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     
     @objc func deleteAccount(sender: UIButton) {
         
+        let alertController = UIAlertController(
+            title: "刪除使用者帳號確認",
+            message: "請問確定刪除此使用者帳號？\n 刪除行為不可逆，資料將一併刪除！",
+            preferredStyle: .alert)
+        
+        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+
+            let user = Auth.auth().currentUser
+
+            user?.delete { error in
+
+                if let error = error {
+
+                    print(error)
+
+                } else {
+                    
+                    print("TEST success")
+                    
+                    self.deleteAllData()
+
+                }
+
+            }
+            
+            self.navigationController?.popViewController(animated: true)
+            
+            self.tabBarController?.selectedIndex = 0
+            
+            print("帳號已刪除！")
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        
+        alertController.addAction(agreeAction)
+        
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
     }
+    
+    func deleteAllData() {
+        
+        deleteUserManager.deleteUserInfoData(deleteUserID: userID)
+        
+        deleteUserManager.deleteStudyGoalsData(studyGoals: studyGoals)
+        
+        deleteUserManager.deleteForumArticlesData(forumArticles: forumArticles)
+        
+        deleteUserManager.deleteFriendListData(deleteUserID: userID)
+        
+//        deleteUserManager.deleteAllArticleMessagesData(deleteArticleMessages: deleteArticleMessages)
+        
+        userID = ""
+        
+    }
+    
+    func fetchAllData() {
+        
+        deleteUserManager.fetchStudyGoalsData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let studyGoals):
+                
+                strongSelf.studyGoals = studyGoals
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+        deleteUserManager.fetchForumArticlesData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let forumArticles):
+                
+                strongSelf.forumArticles = forumArticles
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+//        deleteUserManager.fetchAllForumArticlesData { [weak self] result in
+//
+//            guard let strongSelf = self else { return }
+//
+//            switch result {
+//
+//            case .success(let allForumArticles):
+//
+//                strongSelf.allForumArticles = allForumArticles
+//
+//            case .failure(let error):
+//
+//                print(error)
+//
+//            }
+//
+//        }
+        
+        deleteUserManager.fetchFriendListData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let friendList):
+                
+                strongSelf.friendList = friendList
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+    }
+    
+//    func fetchArticleMessageData(allForumArticles: [ForumArticle]) {
+//
+//        deleteUserManager.fetchArticleMessagesData(
+//        allForumArticles: allForumArticles) { [weak self] result in
+//
+//            guard let strongSelf = self else { return }
+//
+//            switch result {
+//
+//            case .success(let deleteArticleMessages):
+//
+//                for index in 0..<deleteArticleMessages.count {
+//
+//                    let filterDeleteArticles = deleteArticleMessages[index].articleMessage.filter({ $0.userID == userID })
+//
+//                    let deleteArticles = DeleteArticle(articleID: deleteArticleMessages[index].articleID, articleMessage: filterDeleteArticles)
+//
+//                    strongSelf.deleteArticleMessages.append(deleteArticles)
+//                }
+//
+////                strongSelf.deleteArticleMessages = deleteArticleMessages
+//
+//            case .failure(let error):
+//
+//                print(error)
+//
+//            }
+//
+//        }
+//
+//    }
     
     @objc func modifyUserPhoto(sender: UIButton) {
         
