@@ -138,4 +138,29 @@ class PublishArticleTableViewCell: UITableViewCell {
         
     }
     
+    func modifyForumArticle(modifyForumArticle: ForumArticle) {
+        
+        categoryTextField.text = modifyForumArticle.category.title
+
+        titleTextField.text = modifyForumArticle.title
+        
+        var contentText = ""
+        
+        for index in 0..<modifyForumArticle.content.count {
+            
+            if modifyForumArticle.content[index].contentType == "image" {
+                
+                contentText += "\0\(modifyForumArticle.content[index].contentText)\0"
+                
+            } else {
+                
+                contentText += modifyForumArticle.content[index].contentText
+            }
+            
+        }
+        
+        contentTextView.text = contentText
+        
+    }
+    
 }

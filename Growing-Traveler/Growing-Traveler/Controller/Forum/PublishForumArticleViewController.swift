@@ -42,14 +42,34 @@ class PublishForumArticleViewController: BaseViewController {
     
     var forumType: String?
     
-    var modifyForumArticle: ForumArticle?
+    var isModify = false
+    
+    var modifyForumArticle: ForumArticle? {
+        
+        didSet {
+        
+            publishArticleTableView.reloadData()
+            
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
         
-        title = "新增發佈"
+        if modifyForumArticle == nil {
+            
+            title = "新增發佈"
+            
+        } else {
+            
+            title = "修改發佈"
+            
+            selectCategoryItem = modifyForumArticle?.category
+            
+        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .done,
@@ -119,17 +139,36 @@ class PublishForumArticleViewController: BaseViewController {
             
             guard let forumType = forumType else { return }
             
-            let forumArticle = ForumArticle(
-                id: forumArticleManager.database.document().documentID,
-                userID: userID,
-                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-                title: inputTitle,
-                category: selectCategoryItem,
-                content: articleContents,
-                forumType: forumType
-            )
-
-            forumArticleManager.addData(forumArticle: forumArticle)
+            if modifyForumArticle == nil {
+                
+                let forumArticle = ForumArticle(
+                    id: forumArticleManager.database.document().documentID,
+                    userID: userID,
+                    createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
+                    title: inputTitle,
+                    category: selectCategoryItem,
+                    content: articleContents,
+                    forumType: forumType
+                )
+                
+                forumArticleManager.addData(forumArticle: forumArticle)
+                
+            } else {
+                
+                guard var modifyForumArticle = modifyForumArticle else { return }
+                
+                modifyForumArticle.category = selectCategoryItem
+                
+                modifyForumArticle.title = inputTitle
+                
+                modifyForumArticle.content = articleContents
+                
+                modifyForumArticle.forumType = forumType
+                
+                forumArticleManager.updateArticleData(
+                forumArticle: modifyForumArticle)
+                
+            }
             
             navigationController?.popViewController(animated: true)
 
@@ -201,6 +240,24 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         
         cell.addImageButton.addTarget(
             self, action: #selector(insertImage), for: .touchUpInside)
+        
+        if modifyForumArticle != nil && !isModify {
+            
+            isModify = true
+            
+            if let modifyForumArticle = modifyForumArticle {
+                
+                cell.modifyForumArticle(modifyForumArticle: modifyForumArticle)
+                
+                for index in 0..<modifyForumArticle.content.count {
+                    
+                    contentArray.append(modifyForumArticle.content[index].contentText)
+                    
+                }
+
+            }
+            
+        }
         
         if let imageLink = self.imageLink {
             
