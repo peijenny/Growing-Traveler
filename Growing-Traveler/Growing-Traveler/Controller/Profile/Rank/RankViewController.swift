@@ -9,9 +9,29 @@ import UIKit
 
 class RankViewController: UIViewController {
 
+    @IBOutlet weak var rankTableView: UITableView! {
+        
+        didSet {
+            
+            rankTableView.delegate = self
+            
+            rankTableView.dataSource = self
+            
+        }
+        
+    }
+    
     var friendManager = FriendManager()
     
-    var usersInfo: [UserInfo] = []
+    var usersInfo: [UserInfo] = [] {
+        
+        didSet {
+            
+            rankTableView.reloadData()
+            
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +39,11 @@ class RankViewController: UIViewController {
         self.title = "成長排行榜"
         
         listenUsersInfoData()
+        
+        rankTableView.register(
+            UINib(nibName: String(describing: RankTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: RankTableViewCell.self)
+        )
         
     }
     
@@ -32,9 +57,13 @@ class RankViewController: UIViewController {
                 
             case .success(let usersInfo):
                 
-                strongSelf.usersInfo = usersInfo
+                let sortUserInfo = usersInfo.sorted { (lhs, rhs) in
+                    
+                    return lhs.achievement.experienceValue > rhs.achievement.experienceValue
+                    
+                }
                 
-                print("TEST \(strongSelf.usersInfo)")
+                strongSelf.usersInfo = sortUserInfo
                 
             case .failure(let error):
                 
@@ -43,6 +72,36 @@ class RankViewController: UIViewController {
             }
             
         }
+        
+    }
+    
+}
+
+extension RankViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return usersInfo.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: RankTableViewCell.self), for: indexPath)
+        
+        guard let cell = cell as? RankTableViewCell else { return cell }
+        
+        cell.showRankData(
+        rankNumber: indexPath.row + 1, userInfo: usersInfo[indexPath.row])
+        
+        return cell
         
     }
     

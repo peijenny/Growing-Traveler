@@ -76,13 +76,59 @@
                     <view key="view" contentMode="scaleToFill" id="IB1-ig-HHe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vgY-Vk-jag">
+                                <rect key="frame" x="16" y="176" width="382" height="702"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="B9l-0x-MuU">
+                                <rect key="frame" x="79" y="60" width="256" height="100"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Iey-4q-FZA">
+                                        <rect key="frame" x="0.0" y="39.5" width="60" height="60"/>
+                                        <color key="tintColor" red="1" green="0.38446089039999998" blue="0.13701684180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="43g-QR-Aks"/>
+                                            <constraint firstAttribute="height" constant="60" id="ecj-5j-IJP"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PCf-7v-X8N">
+                                        <rect key="frame" x="78" y="-0.5" width="100" height="100"/>
+                                        <color key="tintColor" systemColor="systemPinkColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="6tH-X1-XQB"/>
+                                            <constraint firstAttribute="height" constant="100" id="9Kh-2Q-Ual"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="KFq-bL-M17">
+                                        <rect key="frame" x="196" y="39.5" width="60" height="60"/>
+                                        <color key="tintColor" red="1" green="0.38446089039999998" blue="0.13701684180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="Hk1-P9-Kib"/>
+                                            <constraint firstAttribute="height" constant="60" id="mr0-e9-yuX"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="VuD-bu-IVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vgY-Vk-jag" firstAttribute="top" secondItem="B9l-0x-MuU" secondAttribute="bottom" constant="16" id="Cwh-qO-GvI"/>
+                            <constraint firstItem="vgY-Vk-jag" firstAttribute="bottom" secondItem="VuD-bu-IVf" secondAttribute="bottom" constant="16" id="L40-YR-5SU"/>
+                            <constraint firstItem="vgY-Vk-jag" firstAttribute="leading" secondItem="VuD-bu-IVf" secondAttribute="leading" constant="16" id="Ss3-Uo-23D"/>
+                            <constraint firstItem="VuD-bu-IVf" firstAttribute="trailing" secondItem="vgY-Vk-jag" secondAttribute="trailing" constant="16" id="o6H-Fa-eun"/>
+                            <constraint firstItem="B9l-0x-MuU" firstAttribute="top" secondItem="VuD-bu-IVf" secondAttribute="top" constant="16" id="pWj-6A-Gpv"/>
+                            <constraint firstItem="B9l-0x-MuU" firstAttribute="centerX" secondItem="VuD-bu-IVf" secondAttribute="centerX" id="qu8-13-iuJ"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="rankTableView" destination="vgY-Vk-jag" id="j5j-Lr-1b1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aMn-uS-xoQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="954" y="94"/>
+            <point key="canvasLocation" x="953.62318840579712" y="93.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hLe-kG-EbI">
@@ -102,8 +148,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

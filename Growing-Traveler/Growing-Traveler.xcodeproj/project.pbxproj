@@ -110,6 +110,8 @@
 		28D79FE12817F56100505B5B /* SignUpTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D79FDF2817F56100505B5B /* SignUpTableViewCell.xib */; };
 		28D79FE328182C3100505B5B /* DeleteUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D79FE228182C3100505B5B /* DeleteUserManager.swift */; };
 		28D79FEB281A869D00505B5B /* RankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D79FEA281A869D00505B5B /* RankViewController.swift */; };
+		28D79FF2281A8BDE00505B5B /* RankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D79FF0281A8BDE00505B5B /* RankTableViewCell.swift */; };
+		28D79FF3281A8BDE00505B5B /* RankTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D79FF1281A8BDE00505B5B /* RankTableViewCell.xib */; };
 		28DA832D281272560081CB14 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28DA832C281272560081CB14 /* Profile.storyboard */; };
 		28DA832F281272770081CB14 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA832E281272770081CB14 /* ProfileViewController.swift */; };
 		28DA83312812744F0081CB14 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DA83302812744F0081CB14 /* ProfileView.xib */; };
@@ -234,6 +236,8 @@
 		28D79FDF2817F56100505B5B /* SignUpTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpTableViewCell.xib; sourceTree = "<group>"; };
 		28D79FE228182C3100505B5B /* DeleteUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserManager.swift; sourceTree = "<group>"; };
 		28D79FEA281A869D00505B5B /* RankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankViewController.swift; sourceTree = "<group>"; };
+		28D79FF0281A8BDE00505B5B /* RankTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankTableViewCell.swift; sourceTree = "<group>"; };
+		28D79FF1281A8BDE00505B5B /* RankTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RankTableViewCell.xib; sourceTree = "<group>"; };
 		28DA832C281272560081CB14 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		28DA832E281272770081CB14 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		28DA83302812744F0081CB14 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
@@ -635,6 +639,8 @@
 		28D79FE5281A85B900505B5B /* Rank */ = {
 			isa = PBXGroup;
 			children = (
+				28D79FF0281A8BDE00505B5B /* RankTableViewCell.swift */,
+				28D79FF1281A8BDE00505B5B /* RankTableViewCell.xib */,
 			);
 			path = Rank;
 			sourceTree = "<group>";
@@ -802,6 +808,7 @@
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
 				28D79FE12817F56100505B5B /* SignUpTableViewCell.xib in Resources */,
 				280C1B1A280E58C70091B9DC /* SendMessageTableViewCell.xib in Resources */,
+				28D79FF3281A8BDE00505B5B /* RankTableViewCell.xib in Resources */,
 				280C1B0B280D78B90091B9DC /* FriendListTableViewCell.xib in Resources */,
 				2808C927281131A400DC1EC5 /* AnalysisContentTableViewCell.xib in Resources */,
 				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
@@ -887,6 +894,7 @@
 				28D702C12802B41B00FE9AEA /* SelectStudyItemViewController.swift in Sources */,
 				28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */,
 				28BB6EEE28066FC1002B0458 /* PublishArticleTableViewCell.swift in Sources */,
+				28D79FF2281A8BDE00505B5B /* RankTableViewCell.swift in Sources */,
 				282522CC280F02B50008B916 /* ConfirmApplyViewController.swift in Sources */,
 				283E658D2817D8A700F1033F /* SettingContentTableViewCell.swift in Sources */,
 				28BB6F3228098BC6002B0458 /* ArticleDetailViewController.swift in Sources */,
