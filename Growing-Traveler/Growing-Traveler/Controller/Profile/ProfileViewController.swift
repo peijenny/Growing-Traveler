@@ -160,7 +160,13 @@ extension ProfileViewController: UICollectionViewDelegate {
             
             navigationController?.pushViewController(viewController, animated: true)
             
-        case 1: break
+        case 1:
+            let viewController = UIStoryboard.profile
+                .instantiateViewController(withIdentifier: String(describing: RankViewController.self))
+            
+            guard let viewController = viewController as? RankViewController else { return }
+            
+            navigationController?.pushViewController(viewController, animated: true)
 
         case 2: break
 
