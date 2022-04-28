@@ -32,6 +32,7 @@
 		280C1B16280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280C1B14280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib */; };
 		280C1B19280E58C70091B9DC /* SendMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B17280E58C70091B9DC /* SendMessageTableViewCell.swift */; };
 		280C1B1A280E58C70091B9DC /* SendMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280C1B18280E58C70091B9DC /* SendMessageTableViewCell.xib */; };
+		281358D2281AC24A000B0CAE /* ReleaseRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358D1281AC24A000B0CAE /* ReleaseRecordViewController.swift */; };
 		282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */; };
 		282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */; };
 		282522CC280F02B50008B916 /* ConfirmApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */; };
@@ -155,6 +156,7 @@
 		280C1B14280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiveMessageTableViewCell.xib; sourceTree = "<group>"; };
 		280C1B17280E58C70091B9DC /* SendMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageTableViewCell.swift; sourceTree = "<group>"; };
 		280C1B18280E58C70091B9DC /* SendMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMessageTableViewCell.xib; sourceTree = "<group>"; };
+		281358D1281AC24A000B0CAE /* ReleaseRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseRecordViewController.swift; sourceTree = "<group>"; };
 		282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyFriendViewController.swift; sourceTree = "<group>"; };
 		282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockadeFriendViewController.swift; sourceTree = "<group>"; };
 		282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmApplyViewController.swift; sourceTree = "<group>"; };
@@ -661,9 +663,18 @@
 			path = Mandate;
 			sourceTree = "<group>";
 		};
+		28D79FF4281AC0C600505B5B /* ReleaseRecord */ = {
+			isa = PBXGroup;
+			children = (
+				281358D1281AC24A000B0CAE /* ReleaseRecordViewController.swift */,
+			);
+			path = ReleaseRecord;
+			sourceTree = "<group>";
+		};
 		28DA8329281272240081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				28D79FF4281AC0C600505B5B /* ReleaseRecord */,
 				28D79FE9281A867600505B5B /* Mandate */,
 				28D79FE8281A865700505B5B /* Setting */,
 				28D79FE4281A85A600505B5B /* Rank */,
@@ -954,6 +965,7 @@
 				28BC2C202816864600E69BE0 /* AuthenticationViewController.swift in Sources */,
 				28BB6F3828098CC1002B0458 /* ArticleDetailHeaderView.swift in Sources */,
 				28BB6F41280A919C002B0458 /* ArticleDetailTableViewCell.swift in Sources */,
+				281358D2281AC24A000B0CAE /* ReleaseRecordViewController.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
 				28FF433D2813D08E00C58E6B /* Mandate.swift in Sources */,
 				28BB6F042807EC75002B0458 /* UIImageView+Extension.swift in Sources */,

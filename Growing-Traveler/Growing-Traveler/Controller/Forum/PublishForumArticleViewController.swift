@@ -42,6 +42,8 @@ class PublishForumArticleViewController: BaseViewController {
     
     var forumType: String?
     
+    var modifyForumArticle: ForumArticle?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -170,7 +170,11 @@ extension ProfileViewController: UICollectionViewDelegate {
 
         case 2: break
 
-        case 3: break
+        case 3:
+            
+            let viewController = ReleaseRecordViewController()
+            
+            navigationController?.pushViewController(viewController, animated: true)
 
         case 4: break
 
