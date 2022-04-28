@@ -31,6 +31,10 @@ class ProfileSettingViewController: BaseViewController {
         }
         
     }
+    
+    var userImageLink: String?
+    
+    var isCheck = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +45,24 @@ class ProfileSettingViewController: BaseViewController {
 
         setTableView()
         
-        fetchData()
+        fetchUserInfoData()
         
         fetchAllData()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(submitButton))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func submitButton(sender: UIButton) {
+        
+        isCheck = true
+        
+        profileSettingTableView.reloadData()
         
     }
     
@@ -99,9 +118,9 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
-    func fetchData() {
+    func fetchUserInfoData() {
         
-        userManger.fetchData { [weak self] result in
+        userManger.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -146,7 +165,15 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             
             guard let cell = cell as? SettingImageTableViewCell else { return cell }
             
-            cell.userPhotoImageView.loadImage(userInfo?.userPhoto)
+            if userInfo?.userPhoto != "" {
+                
+                cell.setUserPhoto(userPhotoLink: userInfo?.userPhoto ?? "")
+                
+            } else if userImageLink != nil {
+             
+                cell.setUserPhoto(userPhotoLink: userImageLink ?? "")
+                
+            }
             
             cell.modifyUserPhotoButton.addTarget(self, action: #selector(modifyUserPhoto), for: .touchUpInside)
             
@@ -159,13 +186,33 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             
             guard let cell = cell as? SettingContentTableViewCell else { return cell }
             
-            cell.userIDTextField.text = userInfo?.userID
+            guard let userInfo = self.userInfo else { return cell }
             
-            cell.userNameTextField.text = userInfo?.userName
+            if isCheck {
+                
+                if cell.checkFullIn(userInfo: userInfo) != nil {
+                    
+                    self.userInfo = cell.checkFullIn(userInfo: userInfo)
+                    
+                    if userImageLink != nil {
+                        
+                        self.userInfo?.userPhoto = userImageLink ?? ""
+                        
+                    }
+                    
+                    if let updateUserInfo = self.userInfo {
+                        
+                        userManger.updateData(user: updateUserInfo)
+                        
+                    }
+                    
+                }
+                
+                isCheck = false
+                
+            }
             
-            cell.userEmailTextField.text = userInfo?.userEmail
-            
-            cell.userPhoneTextField.text = userInfo?.userPhone
+            cell.showUserContent(userInfo: userInfo)
             
             return cell
             
@@ -327,6 +374,48 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
     @objc func modifyUserPhoto(sender: UIButton) {
         
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        
+        present(picker, animated: true)
+        
+    }
+    
+}
+
+extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[.originalImage] as? UIImage {
+
+            let uploadImageManager = UploadImageManager()
+
+            uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
+
+                guard let strongSelf = self else { return }
+
+                switch result {
+
+                case.success(let imageLink):
+                    
+                    strongSelf.userImageLink = "\(imageLink)"
+
+                    strongSelf.profileSettingTableView.reloadData()
+                    
+                case .failure(let error):
+
+                    print(error)
+
+                }
+
+            })
+
+        }
+
+        dismiss(animated: true)
+
     }
     
 }

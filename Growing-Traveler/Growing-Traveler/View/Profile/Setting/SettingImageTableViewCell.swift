@@ -25,4 +25,10 @@ class SettingImageTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setUserPhoto(userPhotoLink: String) {
+        
+        userPhotoImageView.loadImage(userPhotoLink)
+        
+    }
+    
 }

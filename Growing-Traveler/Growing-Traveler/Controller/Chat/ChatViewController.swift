@@ -25,21 +25,39 @@ class ChatViewController: BaseViewController {
     
     var chatRoomManager = ChatRoomManager()
     
+    var userManager = UserManager()
+    
     var friendInfo: UserInfo? {
         
         didSet {
             
-            fetchData()
+            snedInputTextView.isUserInteractionEnabled = true
+            
+            snedInputTextView.text = ""
+            
+            snedInputTextView.textColor = UIColor.black
             
         }
         
     }
     
+    var friendID = String() {
+        
+        didSet {
+            
+            fetchChatRoomData()
+            
+        }
+        
+    }
+    
+    var userName = String()
+    
     var chatMessage: Chat? {
         
         didSet {
             
-            self.title = "\(friendInfo?.userName ?? "")"
+            self.title = "\(chatMessage?.friendName ?? "")"
             
             chatTableView.reloadData()
             
@@ -64,6 +82,10 @@ class ChatViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        setNavigationItems()
+        
+        fetchFriendInfoData()
+        
         chatTableView.register(
             UINib(nibName: String(describing: ReceiveMessageTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: ReceiveMessageTableViewCell.self)
@@ -74,57 +96,61 @@ class ChatViewController: BaseViewController {
             forCellReuseIdentifier: String(describing: SendMessageTableViewCell.self)
         )
         
-        setNavigationItems()
+        snedInputTextView.isUserInteractionEnabled = false
+        
+        snedInputTextView.text = "此帳號已刪除，無法發送訊息！"
+        
+        snedInputTextView.textColor = UIColor.red
         
     }
-    
+
     func setNavigationItems() {
-        
+
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(image: UIImage.asset(.telephoneCall),
                 style: .plain, target: self, action: #selector(callAudioPhone)),
             UIBarButtonItem(image: UIImage.asset(.videoCamera),
                 style: .plain, target: self, action: #selector(callVideoPhone))
         ]
-        
+
     }
-    
+
     @objc func callAudioPhone(sender: UIButton) {
-        
+
         guard let phoneEmail = friendInfo?.userEmail else { return }
-        
+
         // 語音通話
         if let facetimeURL: NSURL = NSURL(string: "facetime-audio://\(phoneEmail)") {
-            
+
             let application: UIApplication = UIApplication.shared
-            
+
             if application.canOpenURL(facetimeURL as URL) {
 
                 application.open(facetimeURL as URL)
-                
+
             }
-            
+
         }
-        
+
     }
-    
+
     @objc func callVideoPhone(sender: UIButton) {
-        
+
         guard let phoneEmail = friendInfo?.userEmail else { return }
-        
+
         // 視訊通話
         if let facetimeURL: NSURL = NSURL(string: "facetime://\(phoneEmail)") {
-            
+
             let application: UIApplication = UIApplication.shared
-            
+
             if application.canOpenURL(facetimeURL as URL) {
 
                 application.open(facetimeURL as URL)
-                
+
             }
-            
+
         }
-        
+
     }
     
     override var hidesBottomBarWhenPushed: Bool {
@@ -141,26 +167,48 @@ class ChatViewController: BaseViewController {
         
     }
     
-    func fetchData() {
+    func fetchFriendInfoData() {
         
-        chatRoomManager.fetchData(friendID: friendInfo?.userID ?? "", completion: { [weak self] result in
+        userManager.fetchData(fetchUserID: friendID) { [weak self] result in
             
             guard let strongSelf = self else { return }
-            
+
             switch result {
-                
-            case .success(let chatMessage):
-                
-                strongSelf.chatMessage = chatMessage
-                
+
+            case .success(let friendInfo):
+
+                strongSelf.friendInfo = friendInfo
+
             case .failure(let error):
-                
+
                 print(error)
-                
+
             }
-            
-        })
+
+        }
         
+    }
+    
+    func fetchChatRoomData() {
+
+        chatRoomManager.fetchData(friendID: friendID, completion: { [weak self] result in
+
+            guard let strongSelf = self else { return }
+
+            switch result {
+
+            case .success(let chatMessage):
+
+                strongSelf.chatMessage = chatMessage
+
+            case .failure(let error):
+
+                print(error)
+
+            }
+
+        })
+
     }
     
     @IBAction func sendInputMessageButton(_ sender: UIButton) {
@@ -198,7 +246,7 @@ class ChatViewController: BaseViewController {
             
             guard let chatMessage = chatMessage else { return }
 
-            chatRoomManager.addData(chat: chatMessage)
+            chatRoomManager.addData(userName: userName, chat: chatMessage)
             
             print("TEST \(chatMessage)")
             
@@ -235,7 +283,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if chatMessage?.messageContent[indexPath.row].sendUserID == friendInfo?.userID {
+        if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: ReceiveMessageTableViewCell.self),

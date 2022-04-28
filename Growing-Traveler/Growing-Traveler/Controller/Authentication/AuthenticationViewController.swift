@@ -225,13 +225,16 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                             userEmail: user.email ?? "",
                             userPhoto: "\(photo)",
                             userPhone: user.phoneNumber ?? "",
+                            signInType: "appleID",
                             achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [])
                         )
                         
                         self.userManager.addData(user: userInfo)
                         
                         let friend = Friend(
-                            userID: user.uid, friendList: [], blockadeList: [],
+                            userID: user.uid,
+                            userName: "\(givenName) \(familyName)",
+                            friendList: [], blockadeList: [],
                             applyList: [], deliveryList: []
                         )
                         

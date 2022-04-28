@@ -163,7 +163,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 userID = user.uid
                 
-                self.view.window?.rootViewController?.dismiss(animated: true , completion: nil)
+                self.view.window?.rootViewController?
+                .dismiss(animated: true, completion: nil)
                 
             }
             
@@ -192,15 +193,22 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 let userInfo = UserInfo(
-                    userID: user.uid, userName: signUpContent.userName, userEmail: signUpContent.email,
-                    userPhoto: signUpContent.userPhotoLink, userPhone: "",
-                    achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [])
+                    userID: user.uid,
+                    userName: signUpContent.userName,
+                    userEmail: signUpContent.email,
+                    userPhoto: signUpContent.userPhotoLink,
+                    userPhone: "",
+                    signInType: "email",
+                    achievement: Achievement(
+                    experienceValue: 0, completionGoals: [], loginDates: [])
                 )
                 
                 self.userManager.addData(user: userInfo)
                 
                 let friend = Friend(
-                    userID: user.uid, friendList: [], blockadeList: [],
+                    userID: user.uid,
+                    userName: signUpContent.userName,
+                    friendList: [], blockadeList: [],
                     applyList: [], deliveryList: []
                 )
                 
@@ -208,7 +216,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 userID = user.uid
                 
-                self.view.window?.rootViewController?.dismiss(animated: true , completion: nil)
+                self.view.window?.rootViewController?
+                .dismiss(animated: true, completion: nil)
 
             }
             

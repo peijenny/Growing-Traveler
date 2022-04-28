@@ -13,6 +13,53 @@ import FirebaseFirestoreSwift
 class ChatRoomManager {
     
     let database = Firestore.firestore().collection("friend")
+    
+    func fetchFriendsChatData(completion: @escaping (Result<[Chat]>) -> Void) {
+        
+        var friendsChat: [Chat] = []
+        
+        if userID != "" {
+            
+            database.document(userID).collection("message")
+            .getDocuments { snapshot, error in
+                
+                guard let snapshot = snapshot else {
+                    
+                    print("Error fetching document: \(error!)")
+                    
+                    completion(Result.failure(error!))
+                    
+                    return
+                    
+                }
+                
+                for document in snapshot.documents {
+                    
+                    do {
+                        
+                        if let friendChat = try document.data(as: Chat.self, decoder: Firestore.Decoder()) {
+                            
+                            friendsChat.append(friendChat)
+                            
+                        }
+                        
+                    } catch {
+                        
+                        print(error)
+                        
+                        completion(Result.failure(error))
+                        
+                    }
+                    
+                }
+                
+                completion(Result.success(friendsChat))
+                
+            }
+            
+        }
+        
+    }
 
     func fetchData(friendID: String, completion: @escaping (Result<Chat>) -> Void) {
         
@@ -56,11 +103,13 @@ class ChatRoomManager {
         
     }
     
-    func addData(chat: Chat) {
+    func addData(userName: String, chat: Chat) {
         
         var friendChat = chat
         
         friendChat.friendID = userID
+        
+        friendChat.friendName = userName
         
         do {
             

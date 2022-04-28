@@ -115,7 +115,7 @@ class StudyGoalViewController: UIViewController {
     
     func fetchUserData() {
         
-        userManager.fetchData { [weak self] result in
+        userManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             

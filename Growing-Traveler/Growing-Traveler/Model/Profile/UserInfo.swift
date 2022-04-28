@@ -19,6 +19,8 @@ struct UserInfo: Codable {
     
     var userPhone: String
     
+    var signInType: String
+    
     var achievement: Achievement
     
 }
@@ -33,7 +35,6 @@ struct Achievement: Codable {
     
 }
 
-
 struct SignIn: Codable {
     
     var email: String
@@ -41,7 +42,6 @@ struct SignIn: Codable {
     var password: String
     
 }
-
 
 struct SignUp: Codable {
 

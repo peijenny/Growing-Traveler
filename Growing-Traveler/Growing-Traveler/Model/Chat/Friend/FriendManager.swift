@@ -107,9 +107,8 @@ class FriendManager {
         for index in 0..<friendList.count {
             
             database
-            .collection("user")
-            .whereField("userID", isEqualTo: friendList[index])
-            .getDocuments { snapshot, error in
+            .collection("user").document(friendList[index])
+            .getDocument { snapshot, error in
                 
                 guard let snapshot = snapshot else {
                     
@@ -121,11 +120,9 @@ class FriendManager {
                     
                 }
                 
-                let document = snapshot.documents[0]
-                    
                 do {
                     
-                    if let friendInfo = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
+                    if let friendInfo = try snapshot.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                         
                         friendsInfo.append(friendInfo)
                         
@@ -149,9 +146,9 @@ class FriendManager {
     
     func addFriendData(bothSides: BothSides, confirmType: String) {
         
-        let ownChat = Chat(friendID: bothSides.other.userID, messageContent: [])
+        let ownChat = Chat(friendID: bothSides.other.userID, friendName: bothSides.other.userName, messageContent: [])
 
-        let otherChat = Chat(friendID: bothSides.owner.userID, messageContent: [])
+        let otherChat = Chat(friendID: bothSides.owner.userID, friendName: bothSides.owner.userName, messageContent: [])
         
         do {
             

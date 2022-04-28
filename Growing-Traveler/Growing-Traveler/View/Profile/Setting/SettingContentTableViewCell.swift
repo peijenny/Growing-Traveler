@@ -28,4 +28,52 @@ class SettingContentTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func showUserContent(userInfo: UserInfo) {
+        
+        userIDTextField.text = userInfo.userID
+        
+        userNameTextField.text = userInfo.userName
+        
+        userEmailTextField.text = userInfo.userEmail
+        
+        userPhoneTextField.text = userInfo.userPhone
+        
+    }
+    
+    func checkFullIn(userInfo: UserInfo) -> UserInfo? {
+        
+        var updateUserInfo = userInfo
+        
+        guard let userName = userNameTextField.text,
+              userNameTextField.text != nil else {
+            
+            print("姓名欄位不可為空！")
+            
+            return nil
+            
+        }
+        
+        guard let userEmail = userEmailTextField.text,
+                userEmailTextField.text != nil else {
+            
+            print("Email 欄位不可為空！")
+            
+            return nil
+            
+        }
+        
+        if let userPhone = userPhoneTextField.text {
+            
+            updateUserInfo.userPhone = userPhone
+            
+        }
+        
+        updateUserInfo.userName = userName
+        
+        updateUserInfo.userEmail = userEmail
+        
+        return updateUserInfo
+        
+    }
+    
 }
