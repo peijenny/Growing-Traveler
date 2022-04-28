@@ -16,25 +16,13 @@ class ProfileSettingViewController: BaseViewController {
     
     var deleteUserManager = DeleteUserManager()
     
-    var studyGoals: [StudyGoal] = []  // 使用者建立的學習目標 (多筆)
+    var studyGoals: [StudyGoal] = []
     
-    var friendList: Friend? // 使用者的 Friend 資料 (1筆)
+    var friendList: Friend?
     
-    var forumArticles: [ForumArticle] = [] // 使用者發布的 Forum 文章 (多筆)
-//
-//    var deleteArticleMessages: [DeleteArticle] = [] // 使用者於 Forum 文章下的留言 (多筆)
-//
-//    var allForumArticles: [ForumArticle] = [] {   // 所有使用者發佈的文章
-//
-//        didSet {
-//
-//            fetchArticleMessageData(allForumArticles: allForumArticles)
-//
-//        }
-//
-//    }
+    var forumArticles: [ForumArticle] = []
     
-    var userInfo: UserInfo? {  // 使用者資料 (1筆)
+    var userInfo: UserInfo? {
         
         didSet {
             
@@ -274,9 +262,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         deleteUserManager.deleteForumArticlesData(forumArticles: forumArticles)
         
         deleteUserManager.deleteFriendListData(deleteUserID: userID)
-        
-//        deleteUserManager.deleteAllArticleMessagesData(deleteArticleMessages: deleteArticleMessages)
-        
+
         userID = ""
         
     }
@@ -319,24 +305,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             
         }
         
-//        deleteUserManager.fetchAllForumArticlesData { [weak self] result in
-//
-//            guard let strongSelf = self else { return }
-//
-//            switch result {
-//
-//            case .success(let allForumArticles):
-//
-//                strongSelf.allForumArticles = allForumArticles
-//
-//            case .failure(let error):
-//
-//                print(error)
-//
-//            }
-//
-//        }
-        
         deleteUserManager.fetchFriendListData { [weak self] result in
             
             guard let strongSelf = self else { return }
@@ -356,39 +324,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         }
         
     }
-    
-//    func fetchArticleMessageData(allForumArticles: [ForumArticle]) {
-//
-//        deleteUserManager.fetchArticleMessagesData(
-//        allForumArticles: allForumArticles) { [weak self] result in
-//
-//            guard let strongSelf = self else { return }
-//
-//            switch result {
-//
-//            case .success(let deleteArticleMessages):
-//
-//                for index in 0..<deleteArticleMessages.count {
-//
-//                    let filterDeleteArticles = deleteArticleMessages[index].articleMessage.filter({ $0.userID == userID })
-//
-//                    let deleteArticles = DeleteArticle(articleID: deleteArticleMessages[index].articleID, articleMessage: filterDeleteArticles)
-//
-//                    strongSelf.deleteArticleMessages.append(deleteArticles)
-//                }
-//
-////                strongSelf.deleteArticleMessages = deleteArticleMessages
-//
-//            case .failure(let error):
-//
-//                print(error)
-//
-//            }
-//
-//        }
-//
-//    }
-    
+
     @objc func modifyUserPhoto(sender: UIButton) {
         
     }
