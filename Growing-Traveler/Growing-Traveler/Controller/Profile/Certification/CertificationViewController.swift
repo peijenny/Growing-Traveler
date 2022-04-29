@@ -11,7 +11,19 @@ class CertificationViewController: UIViewController {
 
     var certificationTableView = UITableView()
     
-    var certifications: [Certification] = []
+//    var certifications: [Certification] = []
+    
+    var userManager = UserManager()
+    
+    var userInfo: UserInfo? {
+        
+        didSet {
+            
+            certificationTableView.reloadData()
+            
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +36,38 @@ class CertificationViewController: UIViewController {
         
         setNavigationItems()
         
+        fetchUserInfoData()
+        
+    }
+    
+    func fetchUserInfoData() {
+        
+        userManager.listenData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let userInfo):
+                
+                strongSelf.userInfo = userInfo
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
     }
     
     func setNavigationItems() {
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCertification))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self,
+            action: #selector(addCertification)
+        )
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
@@ -39,6 +78,8 @@ class CertificationViewController: UIViewController {
         guard let viewController = UIStoryboard.profile.instantiateViewController(
                 withIdentifier: String(describing: PublishCertificationViewController.self)
                 ) as? PublishCertificationViewController else { return }
+        
+        viewController.userInfo = userInfo
         
         self.view.addSubview(viewController.view)
 
@@ -98,7 +139,7 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return certifications.count
+        return userInfo?.certification.count ?? 0
         
     }
     
@@ -109,7 +150,11 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
         
         guard let cell = cell as? CertificationTableViewCell else { return cell }
         
-        cell.showCertificationData(certification: certifications[indexPath.row])
+        if let certification = userInfo?.certification[indexPath.row] {
+            
+            cell.showCertificationData(certification: certification)
+            
+        }
         
         return cell
         

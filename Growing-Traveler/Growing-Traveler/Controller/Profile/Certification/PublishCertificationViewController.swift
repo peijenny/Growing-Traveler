@@ -16,6 +16,10 @@ class PublishCertificationViewController: BaseViewController {
     
     @IBOutlet weak var certificationContentTextView: UITextView!
     
+    var userManager = UserManager()
+    
+    var userInfo: UserInfo?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,6 +67,22 @@ class PublishCertificationViewController: BaseViewController {
             HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
             
             return
+            
+        }
+        
+        if var userInfo = self.userInfo {
+            
+            userInfo.certification.append(
+            Certification(
+                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
+                title: certificationTitle,
+                imageLink: certificationImage,
+                content: certificationContent)
+            )
+
+            userManager.updateData(user: userInfo)
+            
+            self.view.removeFromSuperview()
             
         }
         
