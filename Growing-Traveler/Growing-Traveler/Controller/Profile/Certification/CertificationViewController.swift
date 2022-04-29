@@ -11,8 +11,6 @@ class CertificationViewController: UIViewController {
 
     var certificationTableView = UITableView()
     
-//    var certifications: [Certification] = []
-    
     var userManager = UserManager()
     
     var userInfo: UserInfo? {
@@ -157,6 +155,22 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
         }
         
         return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let viewController = UIStoryboard.profile.instantiateViewController(
+                withIdentifier: String(describing: PublishCertificationViewController.self)
+                ) as? PublishCertificationViewController else { return }
+        
+        viewController.userInfo = userInfo
+        
+        viewController.modifyCertificationIndex = indexPath.row
+        
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
         
     }
     

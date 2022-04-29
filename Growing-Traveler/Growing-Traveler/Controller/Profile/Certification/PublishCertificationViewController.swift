@@ -20,8 +20,32 @@ class PublishCertificationViewController: BaseViewController {
     
     var userInfo: UserInfo?
     
+    var modifyCertificationIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if modifyCertificationIndex != nil {
+
+            modifyCertification(index: modifyCertificationIndex ?? 0)
+            
+        }
+
+    }
+    
+    func modifyCertification(index: Int) {
+        
+        guard let certification = userInfo?.certification[index] else {
+            
+            return
+            
+        }
+        
+        certificationTitleTextField.text = certification.title
+        
+        certificationImageTextField.text = certification.imageLink
+        
+        certificationContentTextView.text = certification.content
 
     }
 
@@ -72,13 +96,27 @@ class PublishCertificationViewController: BaseViewController {
         
         if var userInfo = self.userInfo {
             
-            userInfo.certification.append(
-            Certification(
-                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-                title: certificationTitle,
-                imageLink: certificationImage,
-                content: certificationContent)
-            )
+            if modifyCertificationIndex == nil {
+                
+                userInfo.certification.append(
+                Certification(
+                    createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
+                    title: certificationTitle,
+                    imageLink: certificationImage,
+                    content: certificationContent)
+                )
+                
+            } else {
+                
+                let index = modifyCertificationIndex ?? 0
+                
+                userInfo.certification[index].title = certificationTitle
+                
+                userInfo.certification[index].imageLink = certificationImage
+                
+                userInfo.certification[index].content = certificationContent
+                
+            }
 
             userManager.updateData(user: userInfo)
             
