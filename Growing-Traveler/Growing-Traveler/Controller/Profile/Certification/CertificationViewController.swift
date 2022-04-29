@@ -22,6 +22,28 @@ class CertificationViewController: UIViewController {
         
         setTableView()
         
+        setNavigationItems()
+        
+    }
+    
+    func setNavigationItems() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCertification))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func addCertification(sender: UIButton) {
+        
+        guard let viewController = UIStoryboard.profile.instantiateViewController(
+                withIdentifier: String(describing: PublishCertificationViewController.self)
+                ) as? PublishCertificationViewController else { return }
+        
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
+        
     }
     
     override var hidesBottomBarWhenPushed: Bool {

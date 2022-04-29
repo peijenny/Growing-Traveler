@@ -17,7 +17,7 @@ class UploadImageManager {
     
     func uploadImage(uiImage: UIImage, completion: @escaping (Result<String>) -> Void) {
         
-        HUD.show(.labeledProgress(title: "請等待圖片上傳中....", subtitle: nil))
+        HUD.show(.labeledProgress(title: "圖片上傳中...", subtitle: nil))
         
         AF.upload(multipartFormData: { data in
             

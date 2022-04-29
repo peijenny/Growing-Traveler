@@ -130,20 +130,177 @@
             </objects>
             <point key="canvasLocation" x="925" y="94"/>
         </scene>
-        <!--View Controller-->
+        <!--Publish Certification View Controller-->
         <scene sceneID="Zuh-2Y-Asm">
             <objects>
-                <viewController id="O0I-kJ-Gct" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PublishCertificationViewController" id="O0I-kJ-Gct" customClass="PublishCertificationViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FUS-MV-JlZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rLi-Mr-TQI">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D9W-NE-GYL">
+                                <rect key="frame" x="20" y="244" width="374" height="418"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hBg-C8-H0p">
+                                        <rect key="frame" x="16" y="72" width="342" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="認證名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-Pg-bf1">
+                                                <rect key="frame" x="0.0" y="0.0" width="64" height="40"/>
+                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入證照名稱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lF6-fA-0hY">
+                                                <rect key="frame" x="74" y="0.0" width="268" height="40"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="QrP-9O-9qN"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上傳認證" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qu7-DZ-4nJ">
+                                        <rect key="frame" x="100" y="16" width="174" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="0ks-Ss-TK4"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pSm-zP-qf1">
+                                        <rect key="frame" x="16" y="128" width="342" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="認證圖片" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSR-u7-Ryh">
+                                                <rect key="frame" x="0.0" y="0.0" width="64" height="40"/>
+                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇認證圖片" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oja-xZ-W9p">
+                                                <rect key="frame" x="74" y="0.0" width="218" height="40"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iE-Jc-wvj">
+                                                <rect key="frame" x="302" y="0.0" width="40" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="KxP-yq-el1"/>
+                                                    <constraint firstAttribute="width" constant="40" id="ucH-ib-6PK"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="folder.badge.plus" catalog="system"/>
+                                                <connections>
+                                                    <action selector="uploadImageButton:" destination="O0I-kJ-Gct" eventType="touchUpInside" id="3wT-PY-TlG"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="pPo-YQ-Tdf"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="認證描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Xt-Ra-bdT">
+                                        <rect key="frame" x="16" y="184" width="64" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="86v-5G-fde"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aGZ-iE-NAd">
+                                        <rect key="frame" x="90" y="184" width="268" height="162"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzC-4p-RLu">
+                                        <rect key="frame" x="318" y="16" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="PF2-vL-Qpf"/>
+                                            <constraint firstAttribute="width" constant="40" id="YRh-C9-DDn"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                                        <connections>
+                                            <action selector="closeButton:" destination="O0I-kJ-Gct" eventType="touchUpInside" id="U9O-aF-YVA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRS-7K-29Y">
+                                        <rect key="frame" x="16" y="362" width="342" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="YQl-Z3-yal"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="確認">
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="confirm:" destination="O0I-kJ-Gct" eventType="touchUpInside" id="zG4-Jb-Cv2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="9Xt-Ra-bdT" firstAttribute="leading" secondItem="D9W-NE-GYL" secondAttribute="leading" constant="16" id="1Jf-Xp-sIG"/>
+                                    <constraint firstItem="pSm-zP-qf1" firstAttribute="leading" secondItem="D9W-NE-GYL" secondAttribute="leading" constant="16" id="7eh-a3-dwJ"/>
+                                    <constraint firstAttribute="height" constant="418" id="8C4-bp-6mr"/>
+                                    <constraint firstAttribute="trailing" secondItem="hBg-C8-H0p" secondAttribute="trailing" constant="16" id="9ps-PD-0px"/>
+                                    <constraint firstAttribute="trailing" secondItem="pSm-zP-qf1" secondAttribute="trailing" constant="16" id="Aay-Vz-YAW"/>
+                                    <constraint firstAttribute="bottom" secondItem="PRS-7K-29Y" secondAttribute="bottom" constant="16" id="JC6-5B-49B"/>
+                                    <constraint firstItem="pSm-zP-qf1" firstAttribute="top" secondItem="hBg-C8-H0p" secondAttribute="bottom" constant="16" id="JFe-Fl-CvJ"/>
+                                    <constraint firstItem="9Xt-Ra-bdT" firstAttribute="top" secondItem="pSm-zP-qf1" secondAttribute="bottom" constant="16" id="JmQ-S7-6fB"/>
+                                    <constraint firstItem="Qu7-DZ-4nJ" firstAttribute="top" secondItem="D9W-NE-GYL" secondAttribute="top" constant="16" id="Kzo-vp-SsP"/>
+                                    <constraint firstAttribute="trailing" secondItem="PRS-7K-29Y" secondAttribute="trailing" constant="16" id="Qa7-iG-JZF"/>
+                                    <constraint firstItem="PRS-7K-29Y" firstAttribute="top" secondItem="aGZ-iE-NAd" secondAttribute="bottom" constant="16" id="R2A-Yt-wMK"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qu7-DZ-4nJ" secondAttribute="trailing" constant="100" id="aYr-RM-0jO"/>
+                                    <constraint firstItem="aGZ-iE-NAd" firstAttribute="leading" secondItem="9Xt-Ra-bdT" secondAttribute="trailing" constant="10" id="c5O-xE-p1X"/>
+                                    <constraint firstItem="rzC-4p-RLu" firstAttribute="top" secondItem="D9W-NE-GYL" secondAttribute="top" constant="16" id="e9p-Tr-5Zt"/>
+                                    <constraint firstItem="hBg-C8-H0p" firstAttribute="leading" secondItem="D9W-NE-GYL" secondAttribute="leading" constant="16" id="g1W-tl-9Yz"/>
+                                    <constraint firstItem="Qu7-DZ-4nJ" firstAttribute="leading" secondItem="D9W-NE-GYL" secondAttribute="leading" constant="100" id="jga-Ic-Ysw"/>
+                                    <constraint firstItem="hBg-C8-H0p" firstAttribute="top" secondItem="Qu7-DZ-4nJ" secondAttribute="bottom" constant="16" id="jgf-rG-5Uf"/>
+                                    <constraint firstItem="aGZ-iE-NAd" firstAttribute="top" secondItem="pSm-zP-qf1" secondAttribute="bottom" constant="16" id="kcr-lL-lbK"/>
+                                    <constraint firstItem="PRS-7K-29Y" firstAttribute="leading" secondItem="D9W-NE-GYL" secondAttribute="leading" constant="16" id="oLM-sH-dw4"/>
+                                    <constraint firstAttribute="trailing" secondItem="aGZ-iE-NAd" secondAttribute="trailing" constant="16" id="q8Q-1z-wZX"/>
+                                    <constraint firstAttribute="trailing" secondItem="rzC-4p-RLu" secondAttribute="trailing" constant="16" id="sHr-6k-M2C"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="GBr-bK-zhV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rLi-Mr-TQI" firstAttribute="top" secondItem="GBr-bK-zhV" secondAttribute="top" id="0BF-03-lHl"/>
+                            <constraint firstItem="D9W-NE-GYL" firstAttribute="top" secondItem="GBr-bK-zhV" secondAttribute="top" constant="200" id="8Iq-K8-sbR"/>
+                            <constraint firstItem="GBr-bK-zhV" firstAttribute="bottom" secondItem="rLi-Mr-TQI" secondAttribute="bottom" id="9vH-uT-7f1"/>
+                            <constraint firstItem="GBr-bK-zhV" firstAttribute="trailing" secondItem="rLi-Mr-TQI" secondAttribute="trailing" id="MLF-tG-AI7"/>
+                            <constraint firstItem="D9W-NE-GYL" firstAttribute="leading" secondItem="GBr-bK-zhV" secondAttribute="leading" constant="20" id="PK4-GX-3ag"/>
+                            <constraint firstItem="GBr-bK-zhV" firstAttribute="bottom" secondItem="D9W-NE-GYL" secondAttribute="bottom" constant="200" id="bXZ-Wn-Z29"/>
+                            <constraint firstItem="rLi-Mr-TQI" firstAttribute="leading" secondItem="GBr-bK-zhV" secondAttribute="leading" id="dgi-7H-tsq"/>
+                            <constraint firstItem="GBr-bK-zhV" firstAttribute="trailing" secondItem="D9W-NE-GYL" secondAttribute="trailing" constant="20" id="g3p-oV-eFR"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="certificationContentTextView" destination="aGZ-iE-NAd" id="WNi-yO-8YT"/>
+                        <outlet property="certificationImageTextField" destination="Oja-xZ-W9p" id="Zpt-Dv-w9d"/>
+                        <outlet property="certificationTitleTextField" destination="lF6-fA-0hY" id="yyy-zO-yEG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QAt-Zb-qil" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1720" y="94"/>
+            <point key="canvasLocation" x="1718.840579710145" y="93.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hLe-kG-EbI">
@@ -163,9 +320,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
