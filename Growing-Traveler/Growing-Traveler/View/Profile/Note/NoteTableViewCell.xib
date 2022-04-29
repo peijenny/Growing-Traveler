@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="NoteTableViewCell" customModule="Growing_Traveler" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sx6-nN-5RL">
+                        <rect key="frame" x="5" y="5" width="404" height="50"/>
+                        <color key="backgroundColor" red="1" green="0.78851571769999995" blue="0.65643102409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="個人學習筆記 標題" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwk-L7-KKq">
+                        <rect key="frame" x="16" y="10" width="276" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="bbE-0G-ShA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022.04.22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0U-Rh-gXG">
+                        <rect key="frame" x="308" y="10" width="90" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="9c8-Sl-F5i"/>
+                            <constraint firstAttribute="height" constant="40" id="Y98-jn-RZm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Z0U-Rh-gXG" firstAttribute="leading" secondItem="Uwk-L7-KKq" secondAttribute="trailing" constant="16" id="6Ni-46-k0z"/>
+                    <constraint firstItem="Sx6-nN-5RL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="6h6-FS-UcA"/>
+                    <constraint firstItem="Z0U-Rh-gXG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="85D-nV-LVj"/>
+                    <constraint firstAttribute="bottom" secondItem="Uwk-L7-KKq" secondAttribute="bottom" constant="10" id="CMB-S8-DPR"/>
+                    <constraint firstAttribute="trailing" secondItem="Sx6-nN-5RL" secondAttribute="trailing" constant="5" id="FcL-gt-Yj2"/>
+                    <constraint firstItem="Uwk-L7-KKq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Gx8-HS-fRV"/>
+                    <constraint firstAttribute="trailing" secondItem="Z0U-Rh-gXG" secondAttribute="trailing" constant="16" id="HQw-Mt-i0q"/>
+                    <constraint firstAttribute="bottom" secondItem="Z0U-Rh-gXG" secondAttribute="bottom" constant="10" id="MOy-E6-PcX"/>
+                    <constraint firstItem="Uwk-L7-KKq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="UZD-Kd-0aG"/>
+                    <constraint firstAttribute="bottom" secondItem="Sx6-nN-5RL" secondAttribute="bottom" constant="5" id="nZh-GV-ccN"/>
+                    <constraint firstItem="Sx6-nN-5RL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="nlg-Ct-n2z"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="noteBackgroundView" destination="Sx6-nN-5RL" id="T4i-70-vvs"/>
+                <outlet property="noteModifyDateLabel" destination="Z0U-Rh-gXG" id="U5I-AH-T5d"/>
+                <outlet property="noteTitleLabel" destination="Uwk-L7-KKq" id="Orn-vP-qPY"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="67.633928571428569"/>
+        </tableViewCell>
+    </objects>
+</document>

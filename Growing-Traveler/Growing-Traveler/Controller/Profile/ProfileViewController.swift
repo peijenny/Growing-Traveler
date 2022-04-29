@@ -192,8 +192,6 @@ extension ProfileViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        print("TEST \(indexPath.item)")
-        
         switch indexPath.item {
 
         case 0:
@@ -210,7 +208,14 @@ extension ProfileViewController: UICollectionViewDelegate {
             
             navigationController?.pushViewController(viewController, animated: true)
 
-        case 2: break
+        case 2:
+            
+            let viewController = UIStoryboard.profile
+                .instantiateViewController(withIdentifier: String(describing: NoteViewController.self))
+            
+            guard let viewController = viewController as? NoteViewController else { return }
+            
+            navigationController?.pushViewController(viewController, animated: true)
 
         case 3:
             

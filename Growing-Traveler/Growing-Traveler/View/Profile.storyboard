@@ -309,6 +309,140 @@
             </objects>
             <point key="canvasLocation" x="1718.840579710145" y="93.75"/>
         </scene>
+        <!--Note View Controller-->
+        <scene sceneID="JKK-yj-lqk">
+            <objects>
+                <viewController storyboardIdentifier="NoteViewController" id="27f-cB-jDB" customClass="NoteViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P4o-ty-o3b">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fLx-Ym-eKe">
+                                <rect key="frame" x="16" y="60" width="382" height="40"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="搜尋筆記關鍵字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JQA-tg-XFi">
+                                        <rect key="frame" x="0.0" y="0.0" width="332" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dc-kL-N6L">
+                                        <rect key="frame" x="342" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="01T-OI-ja5"/>
+                                            <constraint firstAttribute="height" constant="40" id="tJK-mb-Aiq"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
+                                        <connections>
+                                            <action selector="searchButton:" destination="27f-cB-jDB" eventType="touchUpInside" id="NV4-zd-6Js"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6ew-tr-NzM"/>
+                                </constraints>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UvU-4C-UNO">
+                                <rect key="frame" x="0.0" y="116" width="414" height="746"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hHm-6a-SsA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fLx-Ym-eKe" firstAttribute="top" secondItem="hHm-6a-SsA" secondAttribute="top" constant="16" id="75B-gw-KTd"/>
+                            <constraint firstItem="hHm-6a-SsA" firstAttribute="bottom" secondItem="UvU-4C-UNO" secondAttribute="bottom" id="PCO-6E-AcY"/>
+                            <constraint firstItem="hHm-6a-SsA" firstAttribute="trailing" secondItem="UvU-4C-UNO" secondAttribute="trailing" id="UCf-ns-MMA"/>
+                            <constraint firstItem="UvU-4C-UNO" firstAttribute="leading" secondItem="hHm-6a-SsA" secondAttribute="leading" id="VY6-ed-30K"/>
+                            <constraint firstItem="UvU-4C-UNO" firstAttribute="top" secondItem="fLx-Ym-eKe" secondAttribute="bottom" constant="16" id="iaf-kl-qeN"/>
+                            <constraint firstItem="fLx-Ym-eKe" firstAttribute="leading" secondItem="hHm-6a-SsA" secondAttribute="leading" constant="16" id="nCS-kX-6gV"/>
+                            <constraint firstItem="hHm-6a-SsA" firstAttribute="trailing" secondItem="fLx-Ym-eKe" secondAttribute="trailing" constant="16" id="uS0-SX-cVP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="noteTableView" destination="UvU-4C-UNO" id="ddG-VS-whu"/>
+                        <outlet property="searchNoteTextField" destination="JQA-tg-XFi" id="xP0-Yv-GRm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NA2-IK-dvA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2562" y="94"/>
+        </scene>
+        <!--Publish Note View Controller-->
+        <scene sceneID="WJL-RR-2eu">
+            <objects>
+                <viewController storyboardIdentifier="PublishNoteViewController" id="aK9-iK-UfE" customClass="PublishNoteViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xkh-ec-RJ2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022.04.21 10:21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihK-Ys-TUi">
+                                <rect key="frame" x="16" y="60" width="336" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5uX-B1-hiq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cBg-No-SZh">
+                                <rect key="frame" x="16" y="100" width="382" height="746"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0h-fQ-xrK">
+                                <rect key="frame" x="368" y="60" width="30" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="eki-Ea-QIF"/>
+                                    <constraint firstAttribute="height" constant="30" id="nfy-gf-4q7"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="folder.badge.plus" catalog="system"/>
+                                <connections>
+                                    <action selector="uploadImageButton:" destination="aK9-iK-UfE" eventType="touchUpInside" id="9ub-eo-55a"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RZt-Cs-BjX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RZt-Cs-BjX" firstAttribute="trailing" secondItem="h0h-fQ-xrK" secondAttribute="trailing" constant="16" id="50G-Rp-Pbn"/>
+                            <constraint firstItem="RZt-Cs-BjX" firstAttribute="bottom" secondItem="cBg-No-SZh" secondAttribute="bottom" constant="16" id="64u-jn-jQo"/>
+                            <constraint firstItem="RZt-Cs-BjX" firstAttribute="trailing" secondItem="cBg-No-SZh" secondAttribute="trailing" constant="16" id="7eB-Yi-Aim"/>
+                            <constraint firstItem="ihK-Ys-TUi" firstAttribute="top" secondItem="RZt-Cs-BjX" secondAttribute="top" constant="16" id="8SL-7i-TEK"/>
+                            <constraint firstItem="cBg-No-SZh" firstAttribute="leading" secondItem="RZt-Cs-BjX" secondAttribute="leading" constant="16" id="EEh-X5-XCV"/>
+                            <constraint firstItem="h0h-fQ-xrK" firstAttribute="leading" secondItem="ihK-Ys-TUi" secondAttribute="trailing" constant="16" id="IpK-gb-xNa"/>
+                            <constraint firstItem="cBg-No-SZh" firstAttribute="top" secondItem="h0h-fQ-xrK" secondAttribute="bottom" constant="10" id="JOF-LM-C0J"/>
+                            <constraint firstItem="h0h-fQ-xrK" firstAttribute="top" secondItem="RZt-Cs-BjX" secondAttribute="top" constant="16" id="NPD-CG-Vo4"/>
+                            <constraint firstItem="cBg-No-SZh" firstAttribute="top" secondItem="ihK-Ys-TUi" secondAttribute="bottom" constant="10" id="ftj-5h-CG6"/>
+                            <constraint firstItem="ihK-Ys-TUi" firstAttribute="leading" secondItem="RZt-Cs-BjX" secondAttribute="leading" constant="16" id="hqV-5o-7Yc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="jhK-2X-lyK">
+                        <nil key="title"/>
+                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入筆記標題" textAlignment="center" minimumFontSize="17" id="hmt-UN-y0T">
+                            <rect key="frame" x="144" y="8.5" width="126" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="modifyTimeLabel" destination="ihK-Ys-TUi" id="DL0-Uf-agF"/>
+                        <outlet property="noteTextView" destination="cBg-No-SZh" id="1gZ-o0-4CM"/>
+                        <outlet property="noteTitleTextField" destination="hmt-UN-y0T" id="Gme-I2-Cda"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ShQ-ZB-GLX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3380" y="94"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="hLe-kG-EbI">
             <objects>
@@ -328,6 +462,7 @@
     </scenes>
     <resources>
         <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">

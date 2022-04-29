@@ -37,6 +37,10 @@
 		281358DA281BC8F6000B0CAE /* CertificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358D8281BC8F6000B0CAE /* CertificationTableViewCell.swift */; };
 		281358DB281BC8F6000B0CAE /* CertificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281358D9281BC8F6000B0CAE /* CertificationTableViewCell.xib */; };
 		281358DD281BD0D5000B0CAE /* PublishCertificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358DC281BD0D5000B0CAE /* PublishCertificationViewController.swift */; };
+		281358E2281C2C53000B0CAE /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358E1281C2C53000B0CAE /* NoteViewController.swift */; };
+		281358E5281C2D2A000B0CAE /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358E3281C2D2A000B0CAE /* NoteTableViewCell.swift */; };
+		281358E6281C2D2A000B0CAE /* NoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281358E4281C2D2A000B0CAE /* NoteTableViewCell.xib */; };
+		281358E8281C31AB000B0CAE /* PublishNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */; };
 		282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */; };
 		282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */; };
 		282522CC280F02B50008B916 /* ConfirmApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */; };
@@ -165,6 +169,10 @@
 		281358D8281BC8F6000B0CAE /* CertificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationTableViewCell.swift; sourceTree = "<group>"; };
 		281358D9281BC8F6000B0CAE /* CertificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificationTableViewCell.xib; sourceTree = "<group>"; };
 		281358DC281BD0D5000B0CAE /* PublishCertificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishCertificationViewController.swift; sourceTree = "<group>"; };
+		281358E1281C2C53000B0CAE /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		281358E3281C2D2A000B0CAE /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		281358E4281C2D2A000B0CAE /* NoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteTableViewCell.xib; sourceTree = "<group>"; };
+		281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoteViewController.swift; sourceTree = "<group>"; };
 		282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyFriendViewController.swift; sourceTree = "<group>"; };
 		282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockadeFriendViewController.swift; sourceTree = "<group>"; };
 		282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmApplyViewController.swift; sourceTree = "<group>"; };
@@ -387,6 +395,24 @@
 				281358D9281BC8F6000B0CAE /* CertificationTableViewCell.xib */,
 			);
 			path = Certification;
+			sourceTree = "<group>";
+		};
+		281358DE281C2AB2000B0CAE /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				281358E1281C2C53000B0CAE /* NoteViewController.swift */,
+				281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		281358DF281C2C01000B0CAE /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				281358E3281C2D2A000B0CAE /* NoteTableViewCell.swift */,
+				281358E4281C2D2A000B0CAE /* NoteTableViewCell.xib */,
+			);
+			path = Note;
 			sourceTree = "<group>";
 		};
 		282522C1280ED5430008B916 /* Friend */ = {
@@ -700,6 +726,7 @@
 		28DA8329281272240081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				281358DE281C2AB2000B0CAE /* Note */,
 				281358D4281BBCF7000B0CAE /* Certification */,
 				28D79FF4281AC0C600505B5B /* ReleaseRecord */,
 				28D79FE9281A867600505B5B /* Mandate */,
@@ -713,6 +740,7 @@
 		28DA832A281272390081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				281358DF281C2C01000B0CAE /* Note */,
 				281358D7281BC8D3000B0CAE /* Certification */,
 				28D79FE5281A85B900505B5B /* Rank */,
 				283E65862817D17700F1033F /* Setting */,
@@ -835,6 +863,7 @@
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
 				281358DB281BC8F6000B0CAE /* CertificationTableViewCell.xib in Resources */,
+				281358E6281C2D2A000B0CAE /* NoteTableViewCell.xib in Resources */,
 				28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */,
 				28A6F45E280ADAC900EFCC2C /* ArticleMessageHeaderView.xib in Resources */,
 				285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */,
@@ -957,7 +986,9 @@
 				280C1B06280D77900091B9DC /* ChatViewController.swift in Sources */,
 				28BB6EF6280690EB002B0458 /* ForumArticleManager.swift in Sources */,
 				28BB6F2C28096AAA002B0458 /* MoreArticlesViewController.swift in Sources */,
+				281358E5281C2D2A000B0CAE /* NoteTableViewCell.swift in Sources */,
 				2808C92128103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.swift in Sources */,
+				281358E8281C31AB000B0CAE /* PublishNoteViewController.swift in Sources */,
 				28DA8335281274E30081CB14 /* ProfileView.swift in Sources */,
 				281358D6281BBD4B000B0CAE /* CertificationViewController.swift in Sources */,
 				28AF15AD2804033B004E97B8 /* StudyGoalTableViewCell.swift in Sources */,
@@ -973,6 +1004,7 @@
 				28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */,
 				283E65852817CD6300F1033F /* ProfileSettingViewController.swift in Sources */,
 				282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */,
+				281358E2281C2C53000B0CAE /* NoteViewController.swift in Sources */,
 				2808C92A281131C700DC1EC5 /* AnalysisPieChartTableViewCell.swift in Sources */,
 				283E65912817DF2300F1033F /* SettingSignTableViewCell.swift in Sources */,
 				283D2C3E2803E63C004D19E4 /* BaseViewController.swift in Sources */,
