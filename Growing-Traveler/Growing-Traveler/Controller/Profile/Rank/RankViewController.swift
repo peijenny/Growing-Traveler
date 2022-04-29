@@ -47,6 +47,20 @@ class RankViewController: UIViewController {
         
     }
     
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
     func listenUsersInfoData() {
         
         friendManager.listenFriendInfoData { [weak self] result in

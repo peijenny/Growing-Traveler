@@ -67,20 +67,6 @@ class ProfileViewController: UIViewController {
         
     }
     
-    override var hidesBottomBarWhenPushed: Bool {
-        
-        get {
-            
-            return navigationController?.topViewController == self
-            
-        } set {
-            
-            super.hidesBottomBarWhenPushed = newValue
-            
-        }
-        
-    }
-    
     @objc func setProfileButton(sender: UIButton) {
         
         let viewController = ProfileSettingViewController()
