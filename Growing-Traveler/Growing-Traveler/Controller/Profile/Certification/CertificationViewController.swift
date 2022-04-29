@@ -53,10 +53,10 @@ class CertificationViewController: UIViewController {
             certificationTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
         ])
         
-//        certificationTableView.register(
-//            UINib(nibName: String(describing: MoreArticlesTableViewCell.self), bundle: nil),
-//            forCellReuseIdentifier: String(describing: MoreArticlesTableViewCell.self)
-//        )
+        certificationTableView.register(
+            UINib(nibName: String(describing: CertificationTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: CertificationTableViewCell.self)
+        )
 
         certificationTableView.delegate = self
         
@@ -77,11 +77,19 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return certifications.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: CertificationTableViewCell.self), for: indexPath)
+        
+        guard let cell = cell as? CertificationTableViewCell else { return cell }
+        
+        cell.showCertificationData(certification: certifications[indexPath.row])
+        
+        return cell
         
     }
     

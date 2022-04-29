@@ -34,6 +34,8 @@
 		280C1B1A280E58C70091B9DC /* SendMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280C1B18280E58C70091B9DC /* SendMessageTableViewCell.xib */; };
 		281358D2281AC24A000B0CAE /* ReleaseRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358D1281AC24A000B0CAE /* ReleaseRecordViewController.swift */; };
 		281358D6281BBD4B000B0CAE /* CertificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358D5281BBD4B000B0CAE /* CertificationViewController.swift */; };
+		281358DA281BC8F6000B0CAE /* CertificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358D8281BC8F6000B0CAE /* CertificationTableViewCell.swift */; };
+		281358DB281BC8F6000B0CAE /* CertificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281358D9281BC8F6000B0CAE /* CertificationTableViewCell.xib */; };
 		282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */; };
 		282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */; };
 		282522CC280F02B50008B916 /* ConfirmApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */; };
@@ -159,6 +161,8 @@
 		280C1B18280E58C70091B9DC /* SendMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMessageTableViewCell.xib; sourceTree = "<group>"; };
 		281358D1281AC24A000B0CAE /* ReleaseRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseRecordViewController.swift; sourceTree = "<group>"; };
 		281358D5281BBD4B000B0CAE /* CertificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationViewController.swift; sourceTree = "<group>"; };
+		281358D8281BC8F6000B0CAE /* CertificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationTableViewCell.swift; sourceTree = "<group>"; };
+		281358D9281BC8F6000B0CAE /* CertificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificationTableViewCell.xib; sourceTree = "<group>"; };
 		282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyFriendViewController.swift; sourceTree = "<group>"; };
 		282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockadeFriendViewController.swift; sourceTree = "<group>"; };
 		282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmApplyViewController.swift; sourceTree = "<group>"; };
@@ -369,6 +373,15 @@
 			isa = PBXGroup;
 			children = (
 				281358D5281BBD4B000B0CAE /* CertificationViewController.swift */,
+			);
+			path = Certification;
+			sourceTree = "<group>";
+		};
+		281358D7281BC8D3000B0CAE /* Certification */ = {
+			isa = PBXGroup;
+			children = (
+				281358D8281BC8F6000B0CAE /* CertificationTableViewCell.swift */,
+				281358D9281BC8F6000B0CAE /* CertificationTableViewCell.xib */,
 			);
 			path = Certification;
 			sourceTree = "<group>";
@@ -697,6 +710,7 @@
 		28DA832A281272390081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				281358D7281BC8D3000B0CAE /* Certification */,
 				28D79FE5281A85B900505B5B /* Rank */,
 				283E65862817D17700F1033F /* Setting */,
 				28DA833C2812AB420081CB14 /* Mandate */,
@@ -817,6 +831,7 @@
 				28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
+				281358DB281BC8F6000B0CAE /* CertificationTableViewCell.xib in Resources */,
 				28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */,
 				28A6F45E280ADAC900EFCC2C /* ArticleMessageHeaderView.xib in Resources */,
 				285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */,
@@ -923,6 +938,7 @@
 				282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */,
 				2803AD222817F30F00AF3AD3 /* SignInViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
+				281358DA281BC8F6000B0CAE /* CertificationTableViewCell.swift in Sources */,
 				28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */,
 				28BC2C1A2815603C00E69BE0 /* UIImage+Extension.swift in Sources */,
 				2857035E281197FC00849FAA /* Double+Extension.swift in Sources */,
