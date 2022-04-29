@@ -33,6 +33,7 @@
 		280C1B19280E58C70091B9DC /* SendMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C1B17280E58C70091B9DC /* SendMessageTableViewCell.swift */; };
 		280C1B1A280E58C70091B9DC /* SendMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280C1B18280E58C70091B9DC /* SendMessageTableViewCell.xib */; };
 		281358D2281AC24A000B0CAE /* ReleaseRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358D1281AC24A000B0CAE /* ReleaseRecordViewController.swift */; };
+		281358D6281BBD4B000B0CAE /* CertificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358D5281BBD4B000B0CAE /* CertificationViewController.swift */; };
 		282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */; };
 		282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */; };
 		282522CC280F02B50008B916 /* ConfirmApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */; };
@@ -157,6 +158,7 @@
 		280C1B17280E58C70091B9DC /* SendMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageTableViewCell.swift; sourceTree = "<group>"; };
 		280C1B18280E58C70091B9DC /* SendMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMessageTableViewCell.xib; sourceTree = "<group>"; };
 		281358D1281AC24A000B0CAE /* ReleaseRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseRecordViewController.swift; sourceTree = "<group>"; };
+		281358D5281BBD4B000B0CAE /* CertificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificationViewController.swift; sourceTree = "<group>"; };
 		282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyFriendViewController.swift; sourceTree = "<group>"; };
 		282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockadeFriendViewController.swift; sourceTree = "<group>"; };
 		282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmApplyViewController.swift; sourceTree = "<group>"; };
@@ -361,6 +363,14 @@
 				28D79FE228182C3100505B5B /* DeleteUserManager.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		281358D4281BBCF7000B0CAE /* Certification */ = {
+			isa = PBXGroup;
+			children = (
+				281358D5281BBD4B000B0CAE /* CertificationViewController.swift */,
+			);
+			path = Certification;
 			sourceTree = "<group>";
 		};
 		282522C1280ED5430008B916 /* Friend */ = {
@@ -674,6 +684,7 @@
 		28DA8329281272240081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				281358D4281BBCF7000B0CAE /* Certification */,
 				28D79FF4281AC0C600505B5B /* ReleaseRecord */,
 				28D79FE9281A867600505B5B /* Mandate */,
 				28D79FE8281A865700505B5B /* Setting */,
@@ -928,6 +939,7 @@
 				28BB6F2C28096AAA002B0458 /* MoreArticlesViewController.swift in Sources */,
 				2808C92128103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.swift in Sources */,
 				28DA8335281274E30081CB14 /* ProfileView.swift in Sources */,
+				281358D6281BBD4B000B0CAE /* CertificationViewController.swift in Sources */,
 				28AF15AD2804033B004E97B8 /* StudyGoalTableViewCell.swift in Sources */,
 				280C1AFF280D680A0091B9DC /* Chat.swift in Sources */,
 				28DA832F281272770081CB14 /* ProfileViewController.swift in Sources */,

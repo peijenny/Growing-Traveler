@@ -218,8 +218,12 @@ extension ProfileViewController: UICollectionViewDelegate {
             
             navigationController?.pushViewController(viewController, animated: true)
 
-        case 4: break
-
+        case 4:
+            
+            let viewController = CertificationViewController()
+            
+            navigationController?.pushViewController(viewController, animated: true)
+            
         default: break
             
         }
