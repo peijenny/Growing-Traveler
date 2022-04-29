@@ -222,6 +222,12 @@ extension ProfileViewController: UICollectionViewDelegate {
             
             let viewController = CertificationViewController()
             
+            if let certifications = userInfo?.certification {
+                
+                viewController.certifications = certifications
+                
+            }
+            
             navigationController?.pushViewController(viewController, animated: true)
             
         default: break

@@ -11,6 +11,8 @@ class CertificationViewController: UIViewController {
 
     var certificationTableView = UITableView()
     
+    var certifications: [Certification] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -74,7 +76,7 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 1
+        return certifications.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -23,6 +23,20 @@ struct UserInfo: Codable {
     
     var achievement: Achievement
     
+    var certification: [Certification]
+    
+}
+
+struct Certification: Codable {
+    
+    var createTime: TimeInterval
+    
+    var title: String
+    
+    var imageLink: String
+    
+    var content: String
+    
 }
 
 struct Achievement: Codable {
