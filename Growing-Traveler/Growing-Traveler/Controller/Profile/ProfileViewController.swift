@@ -53,10 +53,16 @@ class ProfileViewController: UIViewController {
         .womanHoldingGuidebook, .teamMembersWorking,
         .handedManSitting, .coworkersDoingMeeting, .womanSittingInFlowerBed]
     
+    var userManager = UserManager()
+    
+    var userInfo: UserInfo?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureDataSource()
+        
+        fetchUserInfoData()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .rewind,
@@ -72,6 +78,42 @@ class ProfileViewController: UIViewController {
         let viewController = ProfileSettingViewController()
         
         navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    func fetchUserInfoData() {
+        
+        userManager.listenData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let userInfo):
+                
+                strongSelf.userInfo = userInfo
+                
+                strongSelf.setProfileView()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+    }
+    
+    func setProfileView() {
+        
+        guard let userInfo = userInfo else { return }
+        
+        profileView.userNameLabel.text = userInfo.userName
+        
+        profileView.userPhotoImageView.loadImage(userInfo.userPhoto)
+        
+        profileView.experienceValueLabel.text = "Ex. \(userInfo.achievement.experienceValue)"
         
     }
     
@@ -170,7 +212,11 @@ extension ProfileViewController: UICollectionViewDelegate {
 
         case 2: break
 
-        case 3: break
+        case 3:
+            
+            let viewController = ReleaseRecordViewController()
+            
+            navigationController?.pushViewController(viewController, animated: true)
 
         case 4: break
 

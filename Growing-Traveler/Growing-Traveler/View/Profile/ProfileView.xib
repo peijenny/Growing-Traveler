@@ -9,7 +9,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileView" customModule="Growing_Traveler" customModuleProvider="target">
             <connections>
+                <outlet property="experienceValueLabel" destination="hL1-CF-LtX" id="3AV-3F-LHZ"/>
                 <outlet property="profileBackgroundView" destination="Uhv-lm-2gX" id="xpw-zz-KtZ"/>
+                <outlet property="userNameLabel" destination="wGZ-mx-axA" id="FLZ-LU-pjs"/>
+                <outlet property="userPhotoImageView" destination="5qW-23-sxH" id="Fo8-9h-LXo"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

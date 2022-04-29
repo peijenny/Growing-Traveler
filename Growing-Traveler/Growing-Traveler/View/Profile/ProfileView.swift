@@ -11,6 +11,12 @@ class ProfileView: UIView, NibOwnerLoadable {
 
     @IBOutlet weak var profileBackgroundView: UIView!
     
+    @IBOutlet weak var userPhotoImageView: UIImageView!
+    
+    @IBOutlet weak var userNameLabel: UILabel!
+    
+    @IBOutlet weak var experienceValueLabel: UILabel!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

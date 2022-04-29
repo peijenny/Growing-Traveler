@@ -30,6 +30,7 @@
                         <rect key="frame" x="16" y="67" width="64" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="4da-5P-erZ"/>
+                            <constraint firstAttribute="width" constant="64" id="bUi-eq-rmt"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <nil key="textColor"/>
@@ -39,6 +40,7 @@
                         <rect key="frame" x="16" y="118" width="64" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="SjW-nv-rJF"/>
+                            <constraint firstAttribute="width" constant="64" id="jdm-Ch-KOk"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <nil key="textColor"/>
@@ -85,6 +87,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="描述內容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ar-dX-hAV">
                         <rect key="frame" x="16" y="163" width="64" height="35"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="64" id="DsJ-a5-zle"/>
                             <constraint firstAttribute="height" constant="35" id="YXH-7Q-LNl"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
