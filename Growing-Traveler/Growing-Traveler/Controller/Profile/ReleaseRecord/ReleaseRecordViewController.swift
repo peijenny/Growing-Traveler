@@ -133,4 +133,42 @@ extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSourc
         
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+            return true
+        
+        }
+    
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            let alertController = UIAlertController(
+                title: "刪除討論區發文",
+                message: "請問確定刪除此篇文章嗎？\n 刪除行為不可逆，將無法在此瀏覽文章！",
+                preferredStyle: .alert)
+            
+            let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+
+                self.forumArticleManager.deleteData(forumArticle: self.forumArticles[indexPath.row])
+                
+                self.fetchReleaseData()
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+            
+            alertController.addAction(agreeAction)
+            
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        }
+            
+    }
+    
 }
