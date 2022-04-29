@@ -13,15 +13,7 @@ class CertificationViewController: UIViewController {
     
     var userManager = UserManager()
     
-    var userInfo: UserInfo? {
-        
-        didSet {
-            
-            certificationTableView.reloadData()
-            
-        }
-        
-    }
+    var userInfo: UserInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +32,7 @@ class CertificationViewController: UIViewController {
     
     func fetchUserInfoData() {
         
-        userManager.listenData { [weak self] result in
+        userManager.fetchData(fetchUserID: userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -49,6 +41,8 @@ class CertificationViewController: UIViewController {
             case .success(let userInfo):
                 
                 strongSelf.userInfo = userInfo
+                
+                strongSelf.certificationTableView.reloadData()
                 
             case .failure(let error):
                 
@@ -172,6 +166,54 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
 
         self.addChild(viewController)
         
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+            return true
+        
+        }
+    
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            let alertController = UIAlertController(
+                title: "刪除個人認證",
+                message: "請問確定刪除個人認證嗎？\n 刪除行為不可逆，將無法在瀏覽！",
+                preferredStyle: .alert)
+            
+            let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+
+                self.userInfo?.certification.remove(at: indexPath.row)
+                
+                self.certificationTableView.beginUpdates()
+
+                self.certificationTableView.deleteRows(at: [indexPath], with: .left)
+
+                self.certificationTableView.endUpdates()
+                
+                if let userInfo = self.userInfo {
+                 
+                    self.userManager.updateData(user: userInfo)
+                    
+                }
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+            
+            alertController.addAction(agreeAction)
+            
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        }
+            
     }
     
 }
