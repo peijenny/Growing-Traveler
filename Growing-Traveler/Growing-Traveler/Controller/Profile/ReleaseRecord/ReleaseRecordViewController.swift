@@ -13,15 +13,7 @@ class ReleaseRecordViewController: UIViewController {
     
     var forumArticleManager = ForumArticleManager()
     
-    var forumArticles: [ForumArticle] = [] {
-        
-        didSet {
-            
-            releaseRecordTableView.reloadData()
-            
-        }
-        
-    }
+    var forumArticles: [ForumArticle] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +60,8 @@ class ReleaseRecordViewController: UIViewController {
                 let filterArticles = forumArticles.filter({ $0.userID == userID })
                 
                 strongSelf.forumArticles = filterArticles
+                
+                strongSelf.releaseRecordTableView.reloadData()
                 
             case .failure(let error):
                 
@@ -166,11 +160,17 @@ extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSourc
                 preferredStyle: .alert)
             
             let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
-
+                
                 self.forumArticleManager.deleteData(forumArticle: self.forumArticles[indexPath.row])
                 
-                self.fetchReleaseData()
+                self.forumArticles.remove(at: indexPath.row)
                 
+                self.releaseRecordTableView.beginUpdates()
+
+                self.releaseRecordTableView.deleteRows(at: [indexPath], with: .left)
+
+                self.releaseRecordTableView.endUpdates()
+
             }
             
             let cancelAction = UIAlertAction(title: "取消", style: .cancel)

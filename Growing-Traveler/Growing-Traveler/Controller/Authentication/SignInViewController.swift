@@ -191,7 +191,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     return
                     
                 }
-                
+
                 let userInfo = UserInfo(
                     userID: user.uid,
                     userName: signUpContent.userName,
@@ -200,7 +200,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     userPhone: "",
                     signInType: "email",
                     achievement: Achievement(
-                    experienceValue: 0, completionGoals: [], loginDates: [])
+                    experienceValue: 0, completionGoals: [], loginDates: []),
+                    certification: []
                 )
                 
                 self.userManager.addData(user: userInfo)

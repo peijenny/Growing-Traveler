@@ -226,7 +226,9 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                             userPhoto: "\(photo)",
                             userPhone: user.phoneNumber ?? "",
                             signInType: "appleID",
-                            achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [])
+                            achievement: Achievement(
+                                experienceValue: 0, completionGoals: [], loginDates: []),
+                            certification: []
                         )
                         
                         self.userManager.addData(user: userInfo)
