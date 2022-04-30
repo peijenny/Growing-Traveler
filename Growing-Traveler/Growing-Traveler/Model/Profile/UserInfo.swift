@@ -68,3 +68,17 @@ struct SignUp: Codable {
     var password: String
     
 }
+
+struct Note: Codable {
+    
+    var userID: String
+    
+    var noteID: String
+    
+    var createTime: TimeInterval
+    
+    var noteTitle: String
+    
+    var content: [ArticleContent]
+    
+}

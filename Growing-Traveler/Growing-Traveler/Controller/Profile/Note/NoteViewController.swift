@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class NoteViewController: BaseViewController {
 
@@ -23,6 +24,18 @@ class NoteViewController: BaseViewController {
         
     }
     
+    var userManager = UserManager()
+    
+    var notes: [Note] = [] {
+        
+        didSet {
+            
+            noteTableView.reloadData()
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +47,37 @@ class NoteViewController: BaseViewController {
             UINib(nibName: String(describing: NoteTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: NoteTableViewCell.self)
         )
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchNoteData()
+        
+    }
+    
+    func fetchNoteData() {
+        
+        userManager.fetchUserNoteData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let notes):
+                
+                strongSelf.notes = notes
+                
+            case .failure(let error):
+                
+                print(error)
+                
+                HUD.flash(.label("資料獲取失敗！"), delay: 0.5)
+                
+            }
+            
+        }
         
     }
     
@@ -62,7 +106,13 @@ class NoteViewController: BaseViewController {
         
         guard let searchText = searchNoteTextField.text else { return }
         
+        notes = notes.filter({ $0.noteTitle.range(of: searchText) != nil })
         
+        if searchText == "" {
+            
+            fetchNoteData()
+            
+        }
     }
     
 }
@@ -77,7 +127,7 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 1
+        return notes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,6 +136,8 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: String(describing: NoteTableViewCell.self), for: indexPath)
         
         guard let cell = cell as? NoteTableViewCell else { return cell }
+        
+        cell.showNoteData(note: notes[indexPath.row])
 
         return cell
         

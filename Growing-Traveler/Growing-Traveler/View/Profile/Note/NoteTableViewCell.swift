@@ -26,4 +26,18 @@ class NoteTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func showNoteData(note: Note) {
+
+        noteTitleLabel.text = note.noteTitle
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        let createTime = Date(timeIntervalSince1970: note.createTime)
+        
+        noteModifyDateLabel.text = formatter.string(from: createTime)
+
+    }
+    
 }

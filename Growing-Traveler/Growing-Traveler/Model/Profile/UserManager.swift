@@ -120,4 +120,60 @@ class UserManager {
         
     }
     
+    func fetchUserNoteData(completion: @escaping (Result<[Note]>) -> Void) {
+        
+        database.document(userID).collection("note")
+            .getDocuments { snapshot, error in
+            
+            var notes: [Note] = []
+            
+            guard let snapshot = snapshot else {
+                
+                print("Error fetching document: \(error!)")
+                
+                return
+                
+            }
+            
+            for document in snapshot.documents {
+                
+                do {
+                    
+                    if let note = try document.data(as: Note.self, decoder: Firestore.Decoder()) {
+                        
+                        notes.append(note)
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+
+                }
+                
+            }
+            
+            completion(Result.success(notes))
+            
+        }
+        
+    }
+    
+    func updateUserNoteData(note: Note) {
+     
+        do {
+            
+            try database.document(userID).collection("note")
+                .document(note.noteID).setData(from: note, merge: true)
+            
+        } catch {
+
+            print(error)
+
+        }
+        
+    }
+    
 }
