@@ -40,6 +40,8 @@ class AuthenticationViewController: UIViewController {
     
     var userManager = UserManager()
     
+    var errorManager = ErrorManager()
+    
     var users: [UserInfo] = [] {
         
         didSet {
@@ -205,6 +207,22 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
             
             Auth.auth().signIn(with: credential) { authDataResult, error in
 
+                if let error = error as? NSError {
+                    
+                    print(error)
+                    
+                    guard let errorCode = AuthErrorCode(rawValue: error.code) else {
+                        
+                        print("登入錯誤，於 firebase 無法找到配對的帳號！")
+                        
+                        return
+                        
+                    }
+                    
+                    self.errorManager.handleAuthError(errorCode: errorCode)
+
+                }
+                
                 if let user = authDataResult?.user {
                     
                     var photo = ""
@@ -246,9 +264,6 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                     
                     self.dismiss(animated: true, completion: nil)
                     
-                } else {
-
-                    print(error as Any)
                 }
                 
             }

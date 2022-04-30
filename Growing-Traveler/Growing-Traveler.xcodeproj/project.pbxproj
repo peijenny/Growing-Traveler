@@ -42,6 +42,7 @@
 		281358E6281C2D2A000B0CAE /* NoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281358E4281C2D2A000B0CAE /* NoteTableViewCell.xib */; };
 		281358E8281C31AB000B0CAE /* PublishNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */; };
 		281358EA281D11BA000B0CAE /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358E9281D11BA000B0CAE /* NoteDetailViewController.swift */; };
+		281358EC281D4DEF000B0CAE /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358EB281D4DEF000B0CAE /* ErrorManager.swift */; };
 		282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */; };
 		282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */; };
 		282522CC280F02B50008B916 /* ConfirmApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */; };
@@ -175,6 +176,7 @@
 		281358E4281C2D2A000B0CAE /* NoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteTableViewCell.xib; sourceTree = "<group>"; };
 		281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoteViewController.swift; sourceTree = "<group>"; };
 		281358E9281D11BA000B0CAE /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
+		281358EB281D4DEF000B0CAE /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyFriendViewController.swift; sourceTree = "<group>"; };
 		282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockadeFriendViewController.swift; sourceTree = "<group>"; };
 		282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmApplyViewController.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				280C1B0F280E42780091B9DC /* UserInfo.swift */,
 				285703592811856A00849FAA /* UserManager.swift */,
 				28D79FE228182C3100505B5B /* DeleteUserManager.swift */,
+				281358EB281D4DEF000B0CAE /* ErrorManager.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1005,6 +1008,7 @@
 				280C1B01280D772E0091B9DC /* ChatRoomManager.swift in Sources */,
 				28DA8333281274BF0081CB14 /* NibOwnerLoadable.swift in Sources */,
 				28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */,
+				281358EC281D4DEF000B0CAE /* ErrorManager.swift in Sources */,
 				28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */,
 				283E65852817CD6300F1033F /* ProfileSettingViewController.swift in Sources */,
 				282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */,
