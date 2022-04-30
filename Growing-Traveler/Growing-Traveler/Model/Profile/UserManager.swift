@@ -176,4 +176,21 @@ class UserManager {
         
     }
     
+    func deleteUserNoteData(note: Note) {
+        
+        database.document(userID).collection("note")
+        .document(note.noteID).delete { error in
+            
+            if let error = error {
+                
+                print(error)
+                
+            } else {
+                
+                print("Success")
+            }
+            
+        }
+    }
+    
 }

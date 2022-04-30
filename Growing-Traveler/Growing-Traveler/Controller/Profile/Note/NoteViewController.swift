@@ -26,15 +26,7 @@ class NoteViewController: BaseViewController {
     
     var userManager = UserManager()
     
-    var notes: [Note] = [] {
-        
-        didSet {
-            
-            noteTableView.reloadData()
-            
-        }
-        
-    }
+    var notes: [Note] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +74,8 @@ class NoteViewController: BaseViewController {
             case .success(let notes):
                 
                 strongSelf.notes = notes
+                
+                strongSelf.noteTableView.reloadData()
                 
             case .failure(let error):
                 
@@ -167,6 +161,52 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
         
         navigationController?.pushViewController(viewController, animated: true)
         
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+            return true
+        
+        }
+    
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            let alertController = UIAlertController(
+                title: "刪除學習筆記",
+                message: "請問確定刪除個人筆記嗎？\n 刪除行為不可逆，將無法瀏覽！",
+                preferredStyle: .alert)
+            
+            let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+
+                let note = self.notes[indexPath.row]
+                
+                self.userManager.deleteUserNoteData(note: note)
+                
+                self.notes.remove(at: indexPath.row)
+                
+                self.noteTableView.beginUpdates()
+
+                self.noteTableView.deleteRows(at: [indexPath], with: .left)
+
+                self.noteTableView.endUpdates()
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+            
+            alertController.addAction(agreeAction)
+            
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        }
+            
     }
     
 }
