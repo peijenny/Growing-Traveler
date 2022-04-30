@@ -49,6 +49,20 @@ class PublishNoteViewController: BaseViewController {
 
     }
     
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
     func setNavigationItems() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -169,8 +183,6 @@ class PublishNoteViewController: BaseViewController {
                 animated: true)
             
         }
-        
-        
         
     }
     

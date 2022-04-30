@@ -48,6 +48,20 @@ class NoteDetailViewController: UIViewController {
         
     }
     
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
     func setNavigationItems() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
