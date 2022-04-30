@@ -443,6 +443,49 @@
             </objects>
             <point key="canvasLocation" x="3380" y="94"/>
         </scene>
+        <!--Note Detail View Controller-->
+        <scene sceneID="Qnt-Ag-0AC">
+            <objects>
+                <viewController storyboardIdentifier="NoteDetailViewController" id="Nvi-d6-R83" customClass="NoteDetailViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y3i-By-sNJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022.04.21 10:21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vf-Pt-t7Q">
+                                <rect key="frame" x="16" y="60" width="382" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="UZt-4E-vbu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ju2-wa-oqc">
+                                <rect key="frame" x="0.0" y="106" width="414" height="756"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZZ2-e1-Lf9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ju2-wa-oqc" firstAttribute="leading" secondItem="ZZ2-e1-Lf9" secondAttribute="leading" id="4TA-kQ-smL"/>
+                            <constraint firstItem="ju2-wa-oqc" firstAttribute="top" secondItem="8Vf-Pt-t7Q" secondAttribute="bottom" constant="16" id="8YW-yo-4KN"/>
+                            <constraint firstItem="8Vf-Pt-t7Q" firstAttribute="leading" secondItem="ZZ2-e1-Lf9" secondAttribute="leading" constant="16" id="8p5-0b-6VR"/>
+                            <constraint firstItem="ZZ2-e1-Lf9" firstAttribute="trailing" secondItem="8Vf-Pt-t7Q" secondAttribute="trailing" constant="16" id="IYY-rh-nLq"/>
+                            <constraint firstItem="ZZ2-e1-Lf9" firstAttribute="trailing" secondItem="ju2-wa-oqc" secondAttribute="trailing" id="LJs-B0-7a1"/>
+                            <constraint firstItem="ZZ2-e1-Lf9" firstAttribute="bottom" secondItem="ju2-wa-oqc" secondAttribute="bottom" id="YPU-pj-7CK"/>
+                            <constraint firstItem="8Vf-Pt-t7Q" firstAttribute="top" secondItem="ZZ2-e1-Lf9" secondAttribute="top" constant="16" id="tCE-AB-Fdc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="noteCreateTimeLabel" destination="8Vf-Pt-t7Q" id="AWv-BS-biP"/>
+                        <outlet property="noteDatailTableView" destination="ju2-wa-oqc" id="ZC7-uJ-BWs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="063-56-Sbd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4214" y="88"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="hLe-kG-EbI">
             <objects>

@@ -150,6 +150,8 @@ class PublishNoteViewController: BaseViewController {
             
             userManager.updateUserNoteData(note: note)
             
+            navigationController?.popViewController(animated: true)
+            
         } else {
             
             guard var modifyNote = modifyNote else { return }
@@ -162,9 +164,13 @@ class PublishNoteViewController: BaseViewController {
             
             userManager.updateUserNoteData(note: modifyNote)
             
+            navigationController?.popToViewController(
+                navigationController?.viewControllers[1] ?? UIViewController(),
+                animated: true)
+            
         }
         
-        navigationController?.popViewController(animated: true)
+        
         
     }
     

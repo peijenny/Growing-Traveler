@@ -146,8 +146,8 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let viewController = UIStoryboard.profile.instantiateViewController(
-                withIdentifier: String(describing: PublishNoteViewController.self)
-                ) as? PublishNoteViewController else { return }
+                withIdentifier: String(describing: NoteDetailViewController.self)
+                ) as? NoteDetailViewController else { return }
         
         viewController.modifyNote = notes[indexPath.row]
         

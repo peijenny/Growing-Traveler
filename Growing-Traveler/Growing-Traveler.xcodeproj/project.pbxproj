@@ -41,6 +41,7 @@
 		281358E5281C2D2A000B0CAE /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358E3281C2D2A000B0CAE /* NoteTableViewCell.swift */; };
 		281358E6281C2D2A000B0CAE /* NoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281358E4281C2D2A000B0CAE /* NoteTableViewCell.xib */; };
 		281358E8281C31AB000B0CAE /* PublishNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */; };
+		281358EA281D11BA000B0CAE /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358E9281D11BA000B0CAE /* NoteDetailViewController.swift */; };
 		282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */; };
 		282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */; };
 		282522CC280F02B50008B916 /* ConfirmApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */; };
@@ -173,6 +174,7 @@
 		281358E3281C2D2A000B0CAE /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		281358E4281C2D2A000B0CAE /* NoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteTableViewCell.xib; sourceTree = "<group>"; };
 		281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoteViewController.swift; sourceTree = "<group>"; };
+		281358E9281D11BA000B0CAE /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
 		282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyFriendViewController.swift; sourceTree = "<group>"; };
 		282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockadeFriendViewController.swift; sourceTree = "<group>"; };
 		282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmApplyViewController.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			children = (
 				281358E1281C2C53000B0CAE /* NoteViewController.swift */,
 				281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */,
+				281358E9281D11BA000B0CAE /* NoteDetailViewController.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -976,6 +979,7 @@
 				2857035E281197FC00849FAA /* Double+Extension.swift in Sources */,
 				28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */,
 				282522DB280FE5520008B916 /* KeyToken.swift in Sources */,
+				281358EA281D11BA000B0CAE /* NoteDetailViewController.swift in Sources */,
 				28D79FDC2817F53D00505B5B /* SignInTableViewCell.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
 				283E65892817D19C00F1033F /* SettingImageTableViewCell.swift in Sources */,
