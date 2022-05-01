@@ -7,6 +7,7 @@
 
 import UIKit
 import PKHUD
+import Lottie
 
 enum StatusType {
     
@@ -66,6 +67,10 @@ class StudyGoalViewController: UIViewController {
     
     var selectLineView = UIView()
     
+    @IBOutlet weak var headerAnimationView: UIView!
+    
+    @IBOutlet weak var studyGoalBackgroundView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -100,6 +105,8 @@ class StudyGoalViewController: UIViewController {
         
         fetchUserData()
         
+        setHeaserLottieView()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -115,15 +122,39 @@ class StudyGoalViewController: UIViewController {
     func setSelectLineView() {
         
         selectLineView.frame = CGRect(
-            x: 0, y: 0,
+            x: statusButton[0].frame.width, y: 0,
             width: underlineView.frame.width / CGFloat(3.0),
             height: underlineView.frame.height
         )
         
-        selectLineView.backgroundColor = UIColor.blue
+        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: "676476")
         
         underlineView.addSubview(selectLineView)
         
+    }
+    
+    func setHeaserLottieView() {
+        
+        var lottieAnimation = AnimationView()
+        
+        lottieAnimation = AnimationView(name: "Growth-Animation")
+        
+        lottieAnimation.contentMode = .scaleAspectFit
+        
+        lottieAnimation.frame = CGRect(
+            x: 100, y: 0,
+            width: headerAnimationView.frame.width,
+            height: headerAnimationView.frame.height - 100
+        )
+        
+        lottieAnimation.center = headerAnimationView.center
+        
+        headerAnimationView.addSubview(lottieAnimation)
+        
+        lottieAnimation.loopMode = .loop
+        
+        lottieAnimation.play()
+
     }
     
     func fetchUserData() {
@@ -292,6 +323,16 @@ class StudyGoalViewController: UIViewController {
                 
                 strongSelf.studyGoals = resultData
                 
+                if resultData.count == 0 {
+                    
+                    strongSelf.studyGoalBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    strongSelf.studyGoalBackgroundView.isHidden = true
+                    
+                }
+                
                 strongSelf.studyGoalTableView.reloadData()
                 
             case .failure(let error):
@@ -316,9 +357,9 @@ class StudyGoalViewController: UIViewController {
             
         })
         
-        _ = statusButton.map({ $0.backgroundColor = UIColor.lightGray })
+        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: "EB9772") })
         
-        sender.backgroundColor = UIColor.black
+        sender.tintColor = UIColor.hexStringToUIColor(hex: "676476")
         
         guard let titleText = sender.titleLabel?.text else { return }
         

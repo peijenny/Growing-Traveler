@@ -43,6 +43,9 @@
 		281358E8281C31AB000B0CAE /* PublishNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */; };
 		281358EA281D11BA000B0CAE /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358E9281D11BA000B0CAE /* NoteDetailViewController.swift */; };
 		281358EC281D4DEF000B0CAE /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358EB281D4DEF000B0CAE /* ErrorManager.swift */; };
+		281358EE281E6B72000B0CAE /* Vision.json in Resources */ = {isa = PBXBuildFile; fileRef = 281358ED281E6B72000B0CAE /* Vision.json */; };
+		281358F2281E790E000B0CAE /* Growth-Animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 281358F1281E790E000B0CAE /* Growth-Animation.json */; };
+		281358F5281E7BE2000B0CAE /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281358F4281E7BE2000B0CAE /* UIColor+Extension.swift */; };
 		282522C0280ED53A0008B916 /* ApplyFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */; };
 		282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */; };
 		282522CC280F02B50008B916 /* ConfirmApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */; };
@@ -177,6 +180,9 @@
 		281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoteViewController.swift; sourceTree = "<group>"; };
 		281358E9281D11BA000B0CAE /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
 		281358EB281D4DEF000B0CAE /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
+		281358ED281E6B72000B0CAE /* Vision.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Vision.json; sourceTree = "<group>"; };
+		281358F1281E790E000B0CAE /* Growth-Animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Growth-Animation.json"; sourceTree = "<group>"; };
+		281358F4281E7BE2000B0CAE /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		282522BF280ED53A0008B916 /* ApplyFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyFriendViewController.swift; sourceTree = "<group>"; };
 		282522C4280ED6590008B916 /* BlockadeFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockadeFriendViewController.swift; sourceTree = "<group>"; };
 		282522CB280F02B50008B916 /* ConfirmApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmApplyViewController.swift; sourceTree = "<group>"; };
@@ -521,6 +527,7 @@
 				28BB6F032807EC75002B0458 /* UIImageView+Extension.swift */,
 				2857035D281197FC00849FAA /* Double+Extension.swift */,
 				28BC2C192815603C00E69BE0 /* UIImage+Extension.swift */,
+				281358F4281E7BE2000B0CAE /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -771,6 +778,8 @@
 		28DA83412812AF7A0081CB14 /* LottieFiles */ = {
 			isa = PBXGroup;
 			children = (
+				281358F1281E790E000B0CAE /* Growth-Animation.json */,
+				281358ED281E6B72000B0CAE /* Vision.json */,
 				28DA83422812AF950081CB14 /* 93125-progress-bar.json */,
 			);
 			path = LottieFiles;
@@ -865,6 +874,7 @@
 				283E658A2817D19C00F1033F /* SettingImageTableViewCell.xib in Resources */,
 				28DA83432812AF950081CB14 /* 93125-progress-bar.json in Resources */,
 				28D79FDD2817F53D00505B5B /* SignInTableViewCell.xib in Resources */,
+				281358EE281E6B72000B0CAE /* Vision.json in Resources */,
 				28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
@@ -885,6 +895,7 @@
 				280C1B1A280E58C70091B9DC /* SendMessageTableViewCell.xib in Resources */,
 				28D79FF3281A8BDE00505B5B /* RankTableViewCell.xib in Resources */,
 				280C1B0B280D78B90091B9DC /* FriendListTableViewCell.xib in Resources */,
+				281358F2281E790E000B0CAE /* Growth-Animation.json in Resources */,
 				2808C927281131A400DC1EC5 /* AnalysisContentTableViewCell.xib in Resources */,
 				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
 				28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */,
@@ -1004,6 +1015,7 @@
 				28DA833B28129CFF0081CB14 /* MandateViewController.swift in Sources */,
 				28AF15B128040948004E97B8 /* StudyGoalHeaderView.swift in Sources */,
 				28D79FE02817F56100505B5B /* SignUpTableViewCell.swift in Sources */,
+				281358F5281E7BE2000B0CAE /* UIColor+Extension.swift in Sources */,
 				288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */,
 				280C1B01280D772E0091B9DC /* ChatRoomManager.swift in Sources */,
 				28DA8333281274BF0081CB14 /* NibOwnerLoadable.swift in Sources */,

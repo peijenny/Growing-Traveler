@@ -27,7 +27,7 @@
             </objects>
             <point key="canvasLocation" x="-662" y="96"/>
         </scene>
-        <!--成長旅客-->
+        <!--Study Goal View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="StudyGoalViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
@@ -36,39 +36,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4j2-rB-qVK">
-                                <rect key="frame" x="0.0" y="88" width="414" height="36.5"/>
+                                <rect key="frame" x="0.0" y="279.5" width="414" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Nz-We-I3v">
-                                        <rect key="frame" x="0.0" y="0.0" width="138" height="36.5"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="138" height="45"/>
+                                        <color key="backgroundColor" red="0.90980392156862744" green="0.7803921568627451" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.87450981139999995" green="0.61176472900000001" blue="0.47450977560000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="待處理">
-                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="handleStatusButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="P6W-oK-izq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azx-6w-Wlk">
-                                        <rect key="frame" x="138" y="0.0" width="138" height="36.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="138" y="0.0" width="138" height="45"/>
+                                        <color key="backgroundColor" red="0.90980392156862744" green="0.7803921568627451" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.40392160420000001" green="0.39215683940000001" blue="0.46274507050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="處理中">
-                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="handleStatusButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sKf-cW-vcF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9f-0F-UcN">
-                                        <rect key="frame" x="276" y="0.0" width="138" height="36.5"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="276" y="0.0" width="138" height="45"/>
+                                        <color key="backgroundColor" red="0.90980392156862744" green="0.7803921568627451" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.87450981139999995" green="0.61176472900000001" blue="0.47450977560000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="已處理">
-                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="handleStatusButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ls7-dS-768"/>
@@ -76,13 +76,19 @@
                                     </button>
                                 </subviews>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="n7C-4u-2JC"/>
+                                </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s7B-ph-YYk">
-                                <rect key="frame" x="0.0" y="144.5" width="414" height="717.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="16" y="328.5" width="382" height="517.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="517.5" id="BA2-A1-krM"/>
+                                </constraints>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1D-fh-S7D" userLabel="addStudyGoalButton">
-                                <rect key="frame" x="344" y="792" width="50" height="50"/>
+                                <rect key="frame" x="344" y="776" width="50" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="D9e-28-Tgn"/>
@@ -96,35 +102,75 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yw1-6K-0DR">
-                                <rect key="frame" x="0.0" y="124.5" width="414" height="4"/>
-                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                <rect key="frame" x="0.0" y="324.5" width="414" height="4"/>
+                                <color key="backgroundColor" red="0.87450980392156863" green="0.61176470588235299" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="DWp-lo-bjl"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0E-VG-B8O">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="279.5"/>
+                                <color key="backgroundColor" red="0.90980392156862744" green="0.7803921568627451" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFk-re-Iup">
+                                <rect key="frame" x="0.0" y="328.5" width="414" height="517.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="seo" translatesAutoresizingMaskIntoConstraints="NO" id="rBb-21-8Fu">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="400" id="Aj7-M2-oDh"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此區暫無學習項目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F82-7Y-oE1">
+                                        <rect key="frame" x="0.0" y="416" width="414" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                                        <color key="textColor" red="0.92156862745098034" green="0.59215686274509804" blue="0.44705882352941173" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.4039215686" green="0.39215683940000001" blue="0.46274507050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="F82-7Y-oE1" firstAttribute="leading" secondItem="VFk-re-Iup" secondAttribute="leading" id="1gq-66-ynU"/>
+                                    <constraint firstAttribute="trailing" secondItem="rBb-21-8Fu" secondAttribute="trailing" id="5Sw-2P-MKg"/>
+                                    <constraint firstItem="rBb-21-8Fu" firstAttribute="top" secondItem="VFk-re-Iup" secondAttribute="top" id="6bh-dO-Qzw"/>
+                                    <constraint firstItem="rBb-21-8Fu" firstAttribute="leading" secondItem="VFk-re-Iup" secondAttribute="leading" id="Aa0-Xq-fe6"/>
+                                    <constraint firstAttribute="trailing" secondItem="F82-7Y-oE1" secondAttribute="trailing" id="bac-U2-gUm"/>
+                                    <constraint firstItem="F82-7Y-oE1" firstAttribute="top" secondItem="rBb-21-8Fu" secondAttribute="bottom" constant="16" id="rAa-Fg-Q0G"/>
+                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="F82-7Y-oE1" secondAttribute="bottom" constant="100" id="wmA-QD-1zR"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="I0E-VG-B8O" secondAttribute="trailing" id="0aQ-cc-w0g"/>
                             <constraint firstItem="yw1-6K-0DR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="KZ1-c9-0kW"/>
+                            <constraint firstItem="VFk-re-Iup" firstAttribute="top" secondItem="yw1-6K-0DR" secondAttribute="bottom" id="L9r-zM-RE2"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4j2-rB-qVK" secondAttribute="trailing" id="MJC-tD-mQZ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="VFk-re-Iup" secondAttribute="trailing" id="OJs-qs-Hwy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="t1D-fh-S7D" secondAttribute="trailing" constant="20" id="Txz-Qh-shs"/>
                             <constraint firstItem="s7B-ph-YYk" firstAttribute="bottom" secondItem="t1D-fh-S7D" secondAttribute="bottom" constant="20" id="UjL-zA-il7"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="s7B-ph-YYk" secondAttribute="bottom" id="UwY-un-CMC"/>
-                            <constraint firstItem="s7B-ph-YYk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="WHe-aF-GXg"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="s7B-ph-YYk" secondAttribute="bottom" constant="16" id="UwY-un-CMC"/>
+                            <constraint firstItem="s7B-ph-YYk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="WHe-aF-GXg"/>
+                            <constraint firstItem="I0E-VG-B8O" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="djw-fk-LGc"/>
+                            <constraint firstItem="I0E-VG-B8O" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="gOk-zH-mFX"/>
                             <constraint firstItem="yw1-6K-0DR" firstAttribute="top" secondItem="4j2-rB-qVK" secondAttribute="bottom" id="lyL-Wv-qxT"/>
                             <constraint firstItem="yw1-6K-0DR" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="me9-QT-i04"/>
-                            <constraint firstItem="s7B-ph-YYk" firstAttribute="top" secondItem="yw1-6K-0DR" secondAttribute="bottom" constant="16" id="oNJ-Rx-mE1"/>
+                            <constraint firstItem="s7B-ph-YYk" firstAttribute="top" secondItem="yw1-6K-0DR" secondAttribute="bottom" id="oNJ-Rx-mE1"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="VFk-re-Iup" secondAttribute="bottom" constant="16" id="oNo-DE-pBO"/>
                             <constraint firstItem="4j2-rB-qVK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tYs-Oh-2ri"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="s7B-ph-YYk" secondAttribute="trailing" id="toa-Zn-pAr"/>
-                            <constraint firstItem="4j2-rB-qVK" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="wfY-eU-9WX"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="s7B-ph-YYk" secondAttribute="trailing" constant="16" id="toa-Zn-pAr"/>
+                            <constraint firstItem="VFk-re-Iup" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="veQ-Ah-Xeh"/>
+                            <constraint firstItem="4j2-rB-qVK" firstAttribute="top" secondItem="I0E-VG-B8O" secondAttribute="bottom" id="zR0-8n-oYl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="成長旅客" id="2yK-Wb-cqv">
+                    <navigationItem key="navigationItem" id="2yK-Wb-cqv">
                         <barButtonItem key="backBarButtonItem" title=" " id="G0r-9i-rdH"/>
                     </navigationItem>
                     <connections>
                         <outlet property="addGoalButton" destination="t1D-fh-S7D" id="VSr-sw-hdW"/>
+                        <outlet property="headerAnimationView" destination="I0E-VG-B8O" id="oCF-u2-6lS"/>
+                        <outlet property="studyGoalBackgroundView" destination="VFk-re-Iup" id="lkj-sd-Vmv"/>
                         <outlet property="studyGoalTableView" destination="s7B-ph-YYk" id="6FP-c5-7Eg"/>
                         <outlet property="underlineView" destination="yw1-6K-0DR" id="rtV-WF-B7k"/>
                         <outletCollection property="statusButton" destination="5Nz-We-I3v" collectionClass="NSMutableArray" id="M4A-uG-aIL"/>
@@ -386,6 +432,7 @@
     </scenes>
     <resources>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="seo" width="533.33331298828125" height="400"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -395,9 +442,6 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
