@@ -90,8 +90,6 @@ class AnalysisViewController: UIViewController {
         selectSegmentedControl.addTarget(
             self, action: #selector(selectIndexChanged(_:)), for: .valueChanged)
         
-        fetchStudyGoalData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -332,7 +330,7 @@ class AnalysisViewController: UIViewController {
                     
                 }
                 
-            } else {
+            } else if  endDate >= sevenDaysAgo && startDate <= yesterday {
 
                 includedDays = 7
                 
