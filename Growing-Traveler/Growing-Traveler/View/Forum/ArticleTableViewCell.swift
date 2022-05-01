@@ -38,7 +38,7 @@ class ArticleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func showForumArticle(forumArticle: ForumArticle) {
+    func showForumArticle(forumArticle: ForumArticle, userName: String) {
         
         let formatter = DateFormatter()
         
@@ -56,7 +56,7 @@ class ArticleTableViewCell: UITableViewCell {
 
         categoryLabel.text = forumArticle.category.title
 
-        userIDLabel.text = forumArticle.userID
+        userIDLabel.text = userName
         
     }
     

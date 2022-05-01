@@ -15,6 +15,10 @@ class ReleaseRecordViewController: UIViewController {
     
     var forumArticles: [ForumArticle] = []
     
+    var userManager = UserManager()
+    
+    var usersInfo: [UserInfo] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +27,15 @@ class ReleaseRecordViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
 
         setTableView()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchUserInfoData()
+        
+        fetchReleaseData()
         
     }
     
@@ -39,11 +52,28 @@ class ReleaseRecordViewController: UIViewController {
         }
         
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+
+    func fetchUserInfoData() {
         
-        fetchReleaseData()
+        userManager.fetchUsersData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                strongSelf.usersInfo = usersInfo
+                
+                strongSelf.releaseRecordTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
         
     }
     
@@ -125,7 +155,18 @@ extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSourc
         
         cell.selectionStyle = .none
         
-        cell.showMoreArticles(forumArticle: forumArticles[indexPath.row])
+        let userInfo = usersInfo.filter({ $0.userID == forumArticles[indexPath.row].userID })
+        
+        if userInfo.count != 0 {
+            
+            let userName = userInfo[0].userName
+            
+            cell.showMoreArticles(
+                forumArticle: forumArticles[indexPath.row],
+                userName: userName
+            )
+            
+        }
         
         return cell
         

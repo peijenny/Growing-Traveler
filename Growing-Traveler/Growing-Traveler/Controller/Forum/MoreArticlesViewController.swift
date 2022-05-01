@@ -15,6 +15,10 @@ class MoreArticlesViewController: UIViewController {
     
     var forumArticleManager = ForumArticleManager()
     
+    var userManager = UserManager()
+    
+    var usersInfo: [UserInfo] = []
+    
     var forumArticles: [ForumArticle] = [] {
         
         didSet {
@@ -42,6 +46,13 @@ class MoreArticlesViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchUserInfoData()
+        
+    }
+    
     override var hidesBottomBarWhenPushed: Bool {
         
         get {
@@ -51,6 +62,30 @@ class MoreArticlesViewController: UIViewController {
         } set {
             
             super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
+    func fetchUserInfoData() {
+        
+        userManager.fetchUsersData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                strongSelf.usersInfo = usersInfo
+                
+                strongSelf.moreArticlesTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
             
         }
         
@@ -133,7 +168,18 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
         
         cell.selectionStyle = .none
         
-        cell.showMoreArticles(forumArticle: forumArticles[indexPath.row])
+        let userInfo = usersInfo.filter({ $0.userID == forumArticles[indexPath.row].userID })
+        
+        if userInfo.count != 0 {
+            
+            let userName = userInfo[0].userName
+            
+            cell.showMoreArticles(
+                forumArticle: forumArticles[indexPath.row],
+                userName: userName
+            )
+            
+        }
         
         return cell
         

@@ -14,6 +14,48 @@ class UserManager {
     
     let database = Firestore.firestore().collection("user")
     
+    func fetchUsersData(completion: @escaping (Result<[UserInfo]>) -> Void) {
+        
+        var usersInfo: [UserInfo] = []
+        
+        database.getDocuments { snapshot, error in
+            
+            guard let snapshot = snapshot else {
+                
+                print("Error fetching document: \(error!)")
+                
+                completion(Result.failure(error!))
+                
+                return
+                
+            }
+            
+            for document in snapshot.documents {
+                
+                do {
+                    
+                    if let userInfo = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
+                        
+                        usersInfo.append(userInfo)
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+
+                }
+                
+            }
+            
+            completion(Result.success(usersInfo))
+            
+        }
+        
+    }
+    
     func fetchData(fetchUserID: String, completion: @escaping (Result<UserInfo>) -> Void) {
         
         database.document(fetchUserID).getDocument { snapshot, error in
