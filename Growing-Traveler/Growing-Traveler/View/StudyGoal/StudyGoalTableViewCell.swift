@@ -28,13 +28,9 @@ class StudyGoalTableViewCell: UITableViewCell {
         
         if isCompleted {
             
-            checkButton.backgroundColor = UIColor.black
-            
-            checkButton.tintColor = UIColor.white
+            checkButton.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
             
         } else {
-            
-            checkButton.backgroundColor = UIColor.systemGray5
             
             checkButton.tintColor = UIColor.clear
             

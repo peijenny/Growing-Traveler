@@ -75,8 +75,6 @@ class StudyGoalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setSelectLineView()
 
         // MARK: - 註冊 TableView header / footer / cell
         studyGoalTableView.register(
@@ -109,6 +107,8 @@ class StudyGoalViewController: UIViewController {
         
         setHeaserLottieView()
         
+        setSelectLineView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,13 +130,15 @@ class StudyGoalViewController: UIViewController {
     
     func setSelectLineView() {
         
+        let viewWidth = UIScreen.main.bounds.width / CGFloat(3.0)
+        
         selectLineView.frame = CGRect(
-            x: statusButton[0].frame.width, y: 0,
-            width: underlineView.frame.width / CGFloat(3.0),
+            x: viewWidth, y: 0,
+            width: viewWidth,
             height: underlineView.frame.height
         )
         
-        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: "676476")
+        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: "0384BD")
         
         underlineView.addSubview(selectLineView)
         
@@ -364,9 +366,9 @@ class StudyGoalViewController: UIViewController {
             
         })
         
-        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: "EB9772") })
+        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: "69B6CA") })
         
-        sender.tintColor = UIColor.hexStringToUIColor(hex: "676476")
+        sender.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
         
         guard let titleText = sender.titleLabel?.text else { return }
         
@@ -427,23 +429,15 @@ extension StudyGoalViewController: UITableViewDataSource {
             
             guard var user = user else { return }
 
-            if sender.backgroundColor?.cgColor == UIColor.systemGray5.cgColor {
-
-                HUD.flash(.label("項目完成！"), delay: 0.5)
+            if sender.tintColor?.cgColor == UIColor.clear.cgColor {
                 
-                sender.backgroundColor = UIColor.black
-                
-                sender.tintColor = UIColor.white
+                sender.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
                 
                 studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = true
                 
                 user.achievement.experienceValue += 50
 
             } else {
-                
-                HUD.flash(.label("項目未完成！"), delay: 0.5)
-
-                sender.backgroundColor = UIColor.systemGray5
                 
                 sender.tintColor = UIColor.clear
                 
