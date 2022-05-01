@@ -139,16 +139,16 @@ class SelectStudyItemViewController: BaseViewController {
     @IBAction func confirmButton(_ sender: UIButton) {
         
         if itemTextField?.text == "" {
-            
-            hintLabel.text = InputError.titleEmpty.title
+
+            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
         } else if selectStudyTime == nil {
             
-            hintLabel.text = InputError.studyTimeEmpty.title
+            HUD.flash(.label(InputError.studyTimeEmpty.title), delay: 0.5)
             
         } else if contentTextView.text == "請描述內容......." {
             
-            hintLabel.text = InputError.contentEmpty.title
+            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
             
         } else {
             

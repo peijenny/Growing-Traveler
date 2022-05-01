@@ -48,11 +48,16 @@ class CalendarViewController: UIViewController {
             forHeaderFooterViewReuseIdentifier: String(describing: StudyGoalHeaderView.self)
         )
         
-        fetchData(date: Date())
-        
         calendarView.appearance.titleWeekendColor = UIColor.lightGray
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchData(date: Date())
         
     }
     
