@@ -112,8 +112,6 @@ class StudyGoalManager {
                             
                             studyGoals.append(studyGoal)
                             
-                            completion(Result.success(studyGoals))
-                            
                         }
                         
                     } catch {
@@ -125,6 +123,8 @@ class StudyGoalManager {
                     }
                     
                 }
+                    
+                completion(Result.success(studyGoals))
                     
             }
             

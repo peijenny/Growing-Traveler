@@ -274,8 +274,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
                 } else {
                     
-                    print("TEST success")
-                    
                     self.deleteAllData()
 
                 }

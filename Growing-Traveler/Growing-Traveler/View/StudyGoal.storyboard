@@ -78,7 +78,7 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s7B-ph-YYk">
-                                <rect key="frame" x="0.0" y="124.5" width="414" height="737.5"/>
+                                <rect key="frame" x="0.0" y="144.5" width="414" height="717.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1D-fh-S7D" userLabel="addStudyGoalButton">
@@ -95,16 +95,26 @@
                                     <action selector="addStudyGoalButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9Hf-Xj-p0p"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yw1-6K-0DR">
+                                <rect key="frame" x="0.0" y="124.5" width="414" height="4"/>
+                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="DWp-lo-bjl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="s7B-ph-YYk" firstAttribute="top" secondItem="4j2-rB-qVK" secondAttribute="bottom" id="J5o-bQ-mmm"/>
+                            <constraint firstItem="yw1-6K-0DR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="KZ1-c9-0kW"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4j2-rB-qVK" secondAttribute="trailing" id="MJC-tD-mQZ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="t1D-fh-S7D" secondAttribute="trailing" constant="20" id="Txz-Qh-shs"/>
                             <constraint firstItem="s7B-ph-YYk" firstAttribute="bottom" secondItem="t1D-fh-S7D" secondAttribute="bottom" constant="20" id="UjL-zA-il7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="s7B-ph-YYk" secondAttribute="bottom" id="UwY-un-CMC"/>
                             <constraint firstItem="s7B-ph-YYk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="WHe-aF-GXg"/>
+                            <constraint firstItem="yw1-6K-0DR" firstAttribute="top" secondItem="4j2-rB-qVK" secondAttribute="bottom" id="lyL-Wv-qxT"/>
+                            <constraint firstItem="yw1-6K-0DR" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="me9-QT-i04"/>
+                            <constraint firstItem="s7B-ph-YYk" firstAttribute="top" secondItem="yw1-6K-0DR" secondAttribute="bottom" constant="16" id="oNJ-Rx-mE1"/>
                             <constraint firstItem="4j2-rB-qVK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tYs-Oh-2ri"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="s7B-ph-YYk" secondAttribute="trailing" id="toa-Zn-pAr"/>
                             <constraint firstItem="4j2-rB-qVK" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="wfY-eU-9WX"/>
@@ -116,6 +126,7 @@
                     <connections>
                         <outlet property="addGoalButton" destination="t1D-fh-S7D" id="VSr-sw-hdW"/>
                         <outlet property="studyGoalTableView" destination="s7B-ph-YYk" id="6FP-c5-7Eg"/>
+                        <outlet property="underlineView" destination="yw1-6K-0DR" id="rtV-WF-B7k"/>
                         <outletCollection property="statusButton" destination="5Nz-We-I3v" collectionClass="NSMutableArray" id="M4A-uG-aIL"/>
                         <outletCollection property="statusButton" destination="azx-6w-Wlk" collectionClass="NSMutableArray" id="py3-pL-kz1"/>
                         <outletCollection property="statusButton" destination="M9f-0F-UcN" collectionClass="NSMutableArray" id="XgY-Vh-uVc"/>
@@ -384,6 +395,9 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

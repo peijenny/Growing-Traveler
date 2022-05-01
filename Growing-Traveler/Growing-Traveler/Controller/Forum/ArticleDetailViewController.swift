@@ -335,9 +335,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             if userInfo.count != 0 {
              
                 let userName = userInfo[0].userName
-                
-                print("TEST \(userName)")
-                
+
                 headerView.showArticleDetail(forumArticle: forumArticle, userName: userName)
                 
             }

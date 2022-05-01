@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 enum StatusType {
     
@@ -53,22 +54,22 @@ class StudyGoalViewController: UIViewController {
     
     var user: UserInfo?
     
-    var studyGoals: [StudyGoal]? {
-        
-        didSet {
-            
-            studyGoalTableView.reloadData()
-            
-        }
-        
-    }
+    var studyGoals: [StudyGoal] = []
+    
+    var titleText = StatusType.running.title
     
     var topCGFloat = CGFloat()
     
     var bottomCGFloat = CGFloat()
-
+    
+    @IBOutlet weak var underlineView: UIView!
+    
+    var selectLineView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setSelectLineView()
 
         // MARK: - 註冊 TableView header / footer / cell
         studyGoalTableView.register(
@@ -99,8 +100,6 @@ class StudyGoalViewController: UIViewController {
         
         fetchUserData()
         
-        print("TEST \(userID)")
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -110,6 +109,20 @@ class StudyGoalViewController: UIViewController {
         addGoalButton.imageView?.contentMode = .scaleAspectFill
 
         addGoalButton.layer.cornerRadius = addGoalButton.frame.width / 2
+        
+    }
+    
+    func setSelectLineView() {
+        
+        selectLineView.frame = CGRect(
+            x: 0, y: 0,
+            width: underlineView.frame.width / CGFloat(3.0),
+            height: underlineView.frame.height
+        )
+        
+        selectLineView.backgroundColor = UIColor.blue
+        
+        underlineView.addSubview(selectLineView)
         
     }
     
@@ -211,7 +224,7 @@ class StudyGoalViewController: UIViewController {
     // MARK: - 即時監聽 Firestore 的個人學習計畫
     func listenData(status: String) {
         
-        studyGoalManager.listenData(completion: { [weak self] result in
+        studyGoalManager.fetchData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -279,18 +292,29 @@ class StudyGoalViewController: UIViewController {
                 
                 strongSelf.studyGoals = resultData
                 
+                strongSelf.studyGoalTableView.reloadData()
+                
             case .failure(let error):
                 
                 print(error)
                 
             }
             
-        })
+        }
         
     }
     
     // MARK: - NavBar 下方的 (待處理 / 處理中 / 已處理) Button
     @IBAction func handleStatusButton(_ sender: UIButton) {
+        
+        // 動畫
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+
+            guard let strongSelf = self else { return }
+            
+            strongSelf.selectLineView.frame.origin.x = sender.frame.origin.x
+            
+        })
         
         _ = statusButton.map({ $0.backgroundColor = UIColor.lightGray })
         
@@ -299,6 +323,8 @@ class StudyGoalViewController: UIViewController {
         guard let titleText = sender.titleLabel?.text else { return }
         
         listenData(status: "\(titleText)")
+        
+        self.titleText = titleText
         
     }
     
@@ -309,13 +335,13 @@ extension StudyGoalViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return studyGoals?.count ?? 0
+        return studyGoals.count
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return studyGoals?[section].studyItems.count ?? 0
+        return studyGoals[section].studyItems.count
         
     }
     
@@ -333,18 +359,13 @@ extension StudyGoalViewController: UITableViewDataSource {
         cell.checkButton.addTarget(
             self, action: #selector(checkItemButton), for: .touchUpInside)
         
-        if let isCompleted = studyGoals?[indexPath.section]
-            .studyItems[indexPath.row].isCompleted {
-            
-            cell.checkIsCompleted(isCompleted: isCompleted)
-            
-        }
+        let isCompleted = studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted
         
-        if let studyItem = studyGoals?[indexPath.section]
-            .studyItems[indexPath.row] {
-            
-            cell.showStudyItem(studyItem: studyItem)
-        }
+        cell.checkIsCompleted(isCompleted: isCompleted)
+        
+        let studyItem = studyGoals[indexPath.section].studyItems[indexPath.row]
+        
+        cell.showStudyItem(studyItem: studyItem)
         
         return cell
         
@@ -356,12 +377,12 @@ extension StudyGoalViewController: UITableViewDataSource {
 
         if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
             
-            guard var studyGoals = studyGoals else { return }
-            
             guard var user = user else { return }
 
             if sender.backgroundColor?.cgColor == UIColor.systemGray5.cgColor {
 
+                HUD.flash(.label("項目完成！"), delay: 0.5)
+                
                 sender.backgroundColor = UIColor.black
                 
                 sender.tintColor = UIColor.white
@@ -371,6 +392,8 @@ extension StudyGoalViewController: UITableViewDataSource {
                 user.achievement.experienceValue += 50
 
             } else {
+                
+                HUD.flash(.label("項目未完成！"), delay: 0.5)
 
                 sender.backgroundColor = UIColor.systemGray5
                 
@@ -385,6 +408,8 @@ extension StudyGoalViewController: UITableViewDataSource {
             studyGoalManager.updateData(studyGoal: studyGoals[indexPath.section])
             
             if studyGoals[indexPath.section].studyItems.allSatisfy({ $0.isCompleted == true}) {
+                
+                HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
                 
                 if user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).count == 0 {
                     
@@ -414,6 +439,8 @@ extension StudyGoalViewController: UITableViewDataSource {
                 
             }
             
+            listenData(status: titleText)
+            
             userManager.updateData(user: user)
             
         }
@@ -422,11 +449,7 @@ extension StudyGoalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let studyGoal = studyGoals?[indexPath.section] {
-            
-            pushToPlanStudyGoalPage(studyGoal: studyGoal)
-            
-        }
+//        pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
         
     }
     
@@ -442,11 +465,7 @@ extension StudyGoalViewController: UITableViewDelegate {
 
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
         
-        if let studyGoal = studyGoals?[section] {
-            
-            headerView.showStudyGoalHeader(studyGoal: studyGoal)
-            
-        }
+        headerView.showStudyGoalHeader(studyGoal: studyGoals[section])
 
         tableView.tableHeaderView = UIView.init(frame: CGRect.init(
             x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height))
@@ -470,11 +489,7 @@ extension StudyGoalViewController: UITableViewDelegate {
 
         guard let footerView = footerView as? StudyGoalFooterView else { return footerView }
         
-        if let studyGoal = studyGoals?[section] {
-            
-            footerView.showStudyGoalFooter(studyGoal: studyGoal)
-            
-        }
+        footerView.showStudyGoalFooter(studyGoal: studyGoals[section])
         
         tableView.tableFooterView = UIView.init(frame: CGRect.init(
             x: 0, y: 0, width: footerView.frame.width, height: footerView.frame.height))
@@ -509,19 +524,19 @@ extension StudyGoalViewController: UITableViewDelegate {
         
         let footerView = sender.view as? StudyGoalFooterView
         
-        for index in 0..<(studyGoals?.count ?? 0) {
+        for index in 0..<studyGoals.count {
             
             if sender.view == headerView &&
-                headerView?.hideRecordLabel.text == studyGoals?[index].id {
+                headerView?.hideRecordLabel.text == studyGoals[index].id {
                 
-                pushToPlanStudyGoalPage(studyGoal: studyGoals?[index])
+                pushToPlanStudyGoalPage(studyGoal: studyGoals[index])
                 
             }
             
             if sender.view == footerView &&
-                footerView?.hideRecordLabel.text == studyGoals?[index].id {
+                footerView?.hideRecordLabel.text == studyGoals[index].id {
                 
-                pushToPlanStudyGoalPage(studyGoal: studyGoals?[index])
+                pushToPlanStudyGoalPage(studyGoal: studyGoals[index])
                 
             }
             
@@ -531,13 +546,9 @@ extension StudyGoalViewController: UITableViewDelegate {
     
     @objc func deleteRowButton(_ sender: UIButton) {
 
-        if let studyGoal = studyGoals?[sender.tag] {
+        studyGoalManager.deleteData(studyGoal: studyGoals[sender.tag])
 
-            studyGoalManager.deleteData(studyGoal: studyGoal)
-
-        }
-
-        studyGoals?.remove(at: sender.tag)
+        studyGoals.remove(at: sender.tag)
 
         studyGoalTableView.reloadData()
 

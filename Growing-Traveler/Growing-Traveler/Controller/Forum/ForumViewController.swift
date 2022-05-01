@@ -256,9 +256,7 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         if userInfo.count != 0 {
             
             let userName = userInfo[0].userName
-            
-            print("TEST \(userName)")
-            
+
             cell.showForumArticle(
                 forumArticle: articles[indexPath.row],
                 userName: userName
