@@ -71,6 +71,8 @@ class StudyGoalViewController: UIViewController {
     
     @IBOutlet weak var studyGoalBackgroundView: UIView!
     
+    var lottieAnimation = AnimationView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,6 +111,13 @@ class StudyGoalViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        lottieAnimation.play()
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -135,8 +144,6 @@ class StudyGoalViewController: UIViewController {
     
     func setHeaserLottieView() {
         
-        var lottieAnimation = AnimationView()
-        
         lottieAnimation = AnimationView(name: "Growth-Animation")
         
         lottieAnimation.contentMode = .scaleAspectFit
@@ -153,7 +160,7 @@ class StudyGoalViewController: UIViewController {
         
         lottieAnimation.loopMode = .loop
         
-        lottieAnimation.play()
+//        lottieAnimation.play()
 
     }
     
