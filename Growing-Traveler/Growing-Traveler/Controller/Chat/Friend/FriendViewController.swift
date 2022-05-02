@@ -61,15 +61,11 @@ class FriendViewController: UIViewController {
     
     var chatRoomManager = ChatRoomManager()
     
-//    var friendsInfo: [UserInfo] = [] {
-//
-//        didSet {
-//
-//            friendListTableView.reloadData()
-//
-//        }
-//
-//    }
+    @IBOutlet weak var friendBackgroundView: UIView!
+    
+    var userManager = UserManager()
+    
+    var usersInfo: [UserInfo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +86,30 @@ class FriendViewController: UIViewController {
         
         fetchFriendsChatData()
         
+        fetchUserInfo()
+        
+    }
+    
+    func fetchUserInfo() {
+        
+        userManager.fetchUsersData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                strongSelf.usersInfo = usersInfo
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
     }
     
     func fetchFriendListData() {
@@ -103,8 +123,6 @@ class FriendViewController: UIViewController {
             case .success(let friend):
 
                 strongSelf.friend = friend
-
-//                strongSelf.fetchFriendInfoData(friendList: friend.friendList)
 
             case .failure(let error):
 
@@ -128,6 +146,16 @@ class FriendViewController: UIViewController {
                 
                 strongSelf.friendsChat = friendsChat
                 
+                if friendsChat.count == 0 {
+                    
+                    strongSelf.friendBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    strongSelf.friendBackgroundView.isHidden = true
+                    
+                }
+
             case .failure(let error):
                 
                 print(error)
@@ -135,34 +163,6 @@ class FriendViewController: UIViewController {
             }
         }
     }
-    
-//    func fetchFriendInfoData(friendList: [String]) {
-//
-//        friendManager.fetchFriendInfoData(
-//            friendList: friendList,
-//            completion: { [weak self] result in
-//
-//                guard let strongSelf = self else { return }
-//
-//                switch result {
-//
-//                case .success(let friendsInfo):
-//
-//                    if friendsInfo.count == friendList.count {
-//
-//                        strongSelf.friendsInfo = friendsInfo
-//
-//                    }
-//
-//                case .failure(let error):
-//
-//                    print(error)
-//
-//                }
-//
-//        })
-//
-//    }
     
     func setNavigationItems() {
         
@@ -220,9 +220,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-//        return friendsInfo.count
-        
+
         return friendsChat.count
         
     }
@@ -236,7 +234,10 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = cell as? FriendListTableViewCell else { return cell }
 
-        cell.showFriendInfo(friendName: friendsChat[indexPath.row].friendName)
+        let userInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID })
+        
+        cell.showFriendInfo(friendName: userInfo[0].userName,
+                             friendPhotoLink: userInfo[0].userPhoto)
         
         return cell
         
