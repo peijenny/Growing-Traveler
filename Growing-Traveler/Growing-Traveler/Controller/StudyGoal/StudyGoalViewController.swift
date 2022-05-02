@@ -75,6 +75,10 @@ class StudyGoalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setHeaserLottieView()
+        
+        setSelectLineView()
 
         // MARK: - 註冊 TableView header / footer / cell
         studyGoalTableView.register(
@@ -92,8 +96,6 @@ class StudyGoalViewController: UIViewController {
             forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
         )
         
-        listenData(status: StatusType.running.title)
-        
         // MARK: - 右上角的 成長日曆 Button
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage.asset(.timetable),
@@ -103,11 +105,18 @@ class StudyGoalViewController: UIViewController {
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
-        fetchUserData()
-        
-        setHeaserLottieView()
-        
-        setSelectLineView()
+        if userID != "" {
+            
+            studyGoalBackgroundView.isHidden = true
+            
+            fetchUserData()
+            
+            listenData(status: StatusType.running.title)
+            
+        } else {
+            
+            studyGoalBackgroundView.isHidden = false
+        }
         
     }
  
@@ -115,6 +124,16 @@ class StudyGoalViewController: UIViewController {
         super.viewWillAppear(animated)
         
         lottieAnimation.play()
+        
+        if userID == "" {
+            
+            studyGoals.removeAll()
+            
+            studyGoalTableView.reloadData()
+            
+            studyGoalTableView.isHidden = false
+            
+        }
         
         tabBarController?.tabBar.isHidden = true
         
@@ -365,6 +384,16 @@ class StudyGoalViewController: UIViewController {
     
     // MARK: - NavBar 下方的 (待處理 / 處理中 / 已處理) Button
     @IBAction func handleStatusButton(_ sender: UIButton) {
+        
+        if userID == "" {
+            
+            studyGoals.removeAll()
+            
+            studyGoalTableView.reloadData()
+            
+            studyGoalTableView.isHidden = false
+            
+        }
         
         // 動畫
         UIView.animate(withDuration: 0.5, animations: { [weak self] in

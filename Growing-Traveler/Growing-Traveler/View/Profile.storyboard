@@ -32,8 +32,8 @@
                                     <constraint firstAttribute="height" constant="200" id="knT-Mg-MM1"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jYY-xN-o6w">
-                                <rect key="frame" x="8" y="312" width="398" height="542"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jYY-xN-o6w">
+                                <rect key="frame" x="8" y="312" width="398" height="486"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fVV-Tt-Qa0">
                                     <size key="itemSize" width="128" height="128"/>
@@ -56,7 +56,6 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jYY-xN-o6w" secondAttribute="bottom" constant="8" id="0Xg-wN-tMu"/>
                             <constraint firstItem="QUz-4x-s82" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="3Hy-Sf-1de"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0zd-r5-jvf" secondAttribute="trailing" id="6kE-bo-oUI"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jYY-xN-o6w" secondAttribute="trailing" constant="8" id="9Zc-Ry-Cgb"/>
@@ -68,6 +67,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="QUz-4x-s82" secondAttribute="trailing" constant="8" id="S3Q-8f-7rA"/>
                             <constraint firstItem="jYY-xN-o6w" firstAttribute="top" secondItem="3Zo-HV-7AS" secondAttribute="bottom" constant="8" id="a3Z-6N-4Mo"/>
                             <constraint firstAttribute="bottom" secondItem="0zd-r5-jvf" secondAttribute="bottom" id="lT6-dl-oaW"/>
+                            <constraint firstItem="0zd-r5-jvf" firstAttribute="top" secondItem="jYY-xN-o6w" secondAttribute="bottom" constant="-494" id="mbh-zr-GVD"/>
                             <constraint firstItem="0zd-r5-jvf" firstAttribute="top" secondItem="3Zo-HV-7AS" secondAttribute="bottom" id="nEe-Xz-tPu"/>
                             <constraint firstItem="3Zo-HV-7AS" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="o3I-he-U8s"/>
                             <constraint firstItem="jYY-xN-o6w" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="rzi-J6-4lX"/>
