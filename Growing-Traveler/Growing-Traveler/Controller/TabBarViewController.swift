@@ -62,32 +62,32 @@ private enum Tab {
 
             return UITabBarItem(
                 title: nil,
-                image: UIImage.asset(.targetOrigin),
-                selectedImage: UIImage.asset(.targetSelect)
+                image: UIImage.asset(.checklistOrigin),
+                selectedImage: UIImage.asset(.checklistSelect)
             )
             
         case .forum:
 
             return UITabBarItem(
                 title: nil,
-                image: UIImage.asset(.loudspeakerOrigin),
-                selectedImage: UIImage.asset(.loudspeakerSelect)
+                image: UIImage.asset(.askOrigin),
+                selectedImage: UIImage.asset(.askSelect)
             )
             
         case .chat:
             
             return UITabBarItem(
                 title: nil,
-                image: UIImage.asset(.chatBoxOrigin),
-                selectedImage: UIImage.asset(.chatBoxSelect)
+                image: UIImage.asset(.commentsOrigin),
+                selectedImage: UIImage.asset(.commentsSelect)
             )
             
         case .analysis:
             
             return UITabBarItem(
                 title: nil,
-                image: UIImage.asset(.statisticsOrigin),
-                selectedImage: UIImage.asset(.statisticsSelect)
+                image: UIImage.asset(.chartOrigin),
+                selectedImage: UIImage.asset(.chartSelect)
             )
             
         case .profile:
