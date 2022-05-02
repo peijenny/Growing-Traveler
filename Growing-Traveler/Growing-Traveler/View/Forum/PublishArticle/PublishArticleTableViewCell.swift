@@ -22,8 +22,6 @@ class PublishArticleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var contentTextView: UITextView!
     
-    @IBOutlet weak var hintLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -124,7 +122,7 @@ class PublishArticleTableViewCell: UITableViewCell {
                 
             } else {
                 
-                hintLabel.text = InputError.contentEmpty.title
+                HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
                 
             }
             

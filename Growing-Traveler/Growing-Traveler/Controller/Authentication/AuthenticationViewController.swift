@@ -9,6 +9,7 @@ import UIKit
 import AuthenticationServices
 import CryptoKit
 import FirebaseAuth
+import PKHUD
 
 enum SignType {
     
@@ -175,6 +176,8 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
+            HUD.show(.labeledProgress(title: "登入中...", subtitle: ""))
+            
             let givenName = appleIDCredential.fullName?.givenName ?? ""
             
             let familyName = appleIDCredential.fullName?.familyName ?? ""
@@ -224,6 +227,8 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                 }
                 
                 if let user = authDataResult?.user {
+                    
+                    HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil))
                     
                     var photo = ""
                     

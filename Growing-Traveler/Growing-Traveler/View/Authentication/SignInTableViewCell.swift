@@ -6,14 +6,13 @@
 //
 
 import UIKit
+import PKHUD
 
 class SignInTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userAccountTextField: UITextField!
     
     @IBOutlet weak var userPasswordTextField: UITextField!
-    
-    @IBOutlet weak var hintLabel: UILabel!
     
     @IBOutlet weak var signInButton: UIButton!
     
@@ -32,7 +31,7 @@ class SignInTableViewCell: UITableViewCell {
         
         guard let accountEmail = userAccountTextField.text, userAccountTextField.text != "" else {
             
-            hintLabel.text = "請輸入帳號！"
+            HUD.flash(.label("請輸入帳號！"), delay: 0.5)
             
             return nil
             
@@ -40,7 +39,7 @@ class SignInTableViewCell: UITableViewCell {
         
         guard let accountPassword = userPasswordTextField.text, userPasswordTextField.text != "" else {
             
-            hintLabel.text = "請輸入密碼！"
+            HUD.flash(.label("請輸入密碼！"), delay: 0.5)
             
             return nil
             
@@ -48,7 +47,7 @@ class SignInTableViewCell: UITableViewCell {
         
         guard accountEmail.range(of: "@") != nil else {
             
-            hintLabel.text = "帳號格式錯誤！"
+            HUD.flash(.label("帳號格式錯誤！"), delay: 0.5)
             
             return nil
             

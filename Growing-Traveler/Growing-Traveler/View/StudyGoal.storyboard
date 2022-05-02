@@ -268,9 +268,9 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="請描述內容......." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="z9g-MW-1UT">
-                                        <rect key="frame" x="100" y="184" width="258" height="170"/>
+                                        <rect key="frame" x="100" y="184" width="258" height="185"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="170" id="azs-X2-pf1"/>
+                                            <constraint firstAttribute="height" constant="185" id="azs-X2-pf1"/>
                                         </constraints>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
@@ -309,15 +309,6 @@
                                             <action selector="closeButton:" destination="I2E-Nz-5xc" eventType="touchUpInside" id="ubP-gn-er1"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVA-Vx-KGx">
-                                        <rect key="frame" x="16" y="370" width="342" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="24" id="7Jp-ZL-qIa"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
-                                        <color key="textColor" systemColor="systemRedColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -330,21 +321,17 @@
                                     <constraint firstItem="z9g-MW-1UT" firstAttribute="leading" secondItem="WKx-MT-4HI" secondAttribute="trailing" constant="20" id="RFQ-G6-3GF"/>
                                     <constraint firstAttribute="trailing" secondItem="z9g-MW-1UT" secondAttribute="trailing" constant="16" id="Rba-2a-Hh8"/>
                                     <constraint firstItem="Uxo-U7-9gw" firstAttribute="top" secondItem="gSY-ab-LS6" secondAttribute="bottom" constant="16" id="Ufa-D3-MHb"/>
-                                    <constraint firstAttribute="trailing" secondItem="cVA-Vx-KGx" secondAttribute="trailing" constant="16" id="V08-Z2-IXq"/>
                                     <constraint firstItem="Uxo-U7-9gw" firstAttribute="top" secondItem="mCN-Ji-5mt" secondAttribute="bottom" constant="16" id="Y71-lf-nMl"/>
                                     <constraint firstItem="mCN-Ji-5mt" firstAttribute="leading" secondItem="3Uo-1y-qBd" secondAttribute="leading" constant="60" id="ZW3-Sf-uwe"/>
                                     <constraint firstAttribute="trailing" secondItem="Uxo-U7-9gw" secondAttribute="trailing" constant="16" id="Zbh-Rj-daE"/>
-                                    <constraint firstItem="cVA-Vx-KGx" firstAttribute="top" secondItem="z9g-MW-1UT" secondAttribute="bottom" constant="16" id="ZeV-Co-6RL"/>
                                     <constraint firstItem="z9g-MW-1UT" firstAttribute="top" secondItem="m9y-OW-uFQ" secondAttribute="bottom" constant="16" id="bEn-lz-BQl"/>
+                                    <constraint firstItem="FHi-4x-pLk" firstAttribute="top" secondItem="z9g-MW-1UT" secondAttribute="bottom" constant="41" id="diM-UY-XAn"/>
                                     <constraint firstItem="WKx-MT-4HI" firstAttribute="top" secondItem="6WC-L7-gPm" secondAttribute="bottom" constant="16" id="e5B-Rn-hbs"/>
-                                    <constraint firstItem="FHi-4x-pLk" firstAttribute="top" secondItem="cVA-Vx-KGx" secondAttribute="bottom" constant="16" id="eUQ-8v-ji5"/>
-                                    <constraint firstItem="FHi-4x-pLk" firstAttribute="top" secondItem="z9g-MW-1UT" secondAttribute="bottom" constant="56" id="eY9-9d-KZg"/>
                                     <constraint firstAttribute="trailing" secondItem="FHi-4x-pLk" secondAttribute="trailing" constant="16" id="gOq-Nw-vuM"/>
                                     <constraint firstAttribute="trailing" secondItem="gSY-ab-LS6" secondAttribute="trailing" constant="16" id="h1x-zm-tTD"/>
                                     <constraint firstItem="m9y-OW-uFQ" firstAttribute="top" secondItem="Uxo-U7-9gw" secondAttribute="bottom" constant="16" id="i1G-xX-9gB"/>
                                     <constraint firstItem="Uxo-U7-9gw" firstAttribute="leading" secondItem="g53-PE-vwA" secondAttribute="trailing" constant="20" id="qfV-IL-7JF"/>
                                     <constraint firstItem="mCN-Ji-5mt" firstAttribute="top" secondItem="3Uo-1y-qBd" secondAttribute="top" constant="16" id="qtg-ky-PXU"/>
-                                    <constraint firstItem="cVA-Vx-KGx" firstAttribute="leading" secondItem="3Uo-1y-qBd" secondAttribute="leading" constant="16" id="qto-ze-jJp"/>
                                     <constraint firstItem="g53-PE-vwA" firstAttribute="top" secondItem="mCN-Ji-5mt" secondAttribute="bottom" constant="16" id="tN0-F9-E0J"/>
                                     <constraint firstItem="6WC-L7-gPm" firstAttribute="top" secondItem="g53-PE-vwA" secondAttribute="bottom" constant="16" id="vfe-AN-0Y9"/>
                                     <constraint firstItem="g53-PE-vwA" firstAttribute="leading" secondItem="3Uo-1y-qBd" secondAttribute="leading" constant="16" id="vvD-dy-Xgn"/>
@@ -369,7 +356,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="contentTextView" destination="z9g-MW-1UT" id="eSI-AU-P66"/>
-                        <outlet property="hintLabel" destination="cVA-Vx-KGx" id="p6R-44-SYM"/>
                         <outlet property="itemTextField" destination="Uxo-U7-9gw" id="Ess-4p-bzc"/>
                         <outlet property="studyTimeStackView" destination="m9y-OW-uFQ" id="LeR-72-Sdl"/>
                     </connections>
@@ -424,9 +410,6 @@
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

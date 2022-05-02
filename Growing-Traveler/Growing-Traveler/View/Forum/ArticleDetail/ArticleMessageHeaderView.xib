@@ -30,7 +30,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.87843137979999997" green="0.89803922179999995" blue="0.94117647410000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="BQT-ky-A8M" firstAttribute="leading" secondItem="Irq-hb-dIh" secondAttribute="leading" constant="16" id="3Dd-ZY-vEJ"/>
                         <constraint firstItem="BQT-ky-A8M" firstAttribute="top" secondItem="Irq-hb-dIh" secondAttribute="top" constant="16" id="5cJ-Pi-nuv"/>

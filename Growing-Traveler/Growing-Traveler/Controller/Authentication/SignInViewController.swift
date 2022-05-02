@@ -148,6 +148,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
         if signInContent.email != "" &&  signInContent.password != "" {
             
+            HUD.show(.labeledProgress(title: "登入中...", subtitle: nil))
+            
             Auth.auth().signIn(
             withEmail: signInContent.email, password: signInContent.password) { result, error in
                 
@@ -169,10 +171,11 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
                     }
                     
-                    // 帳戶不存在?? -> 顯示動畫
                     return
                     
                 }
+                
+                HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil))
                 
                 userID = user.uid
                 
@@ -188,6 +191,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
     func sendSignUpData(signUpContent: SignUp) {
 
         if signUpContent.email != "" &&  signUpContent.password != "" {
+            
+            HUD.show(.labeledProgress(title: "註冊中...", subtitle: nil))
             
             Auth.auth().createUser(
             withEmail: signUpContent.email, password: signUpContent.password) { result, error in
@@ -210,10 +215,11 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                         
                     }
                     
-                    // 註冊失敗?? -> 顯示動畫
                     return
                     
                 }
+                
+                HUD.flash(.labeledSuccess(title: "註冊成功！", subtitle: nil))
                 
                 let userInfo = UserInfo(
                     userID: user.uid,

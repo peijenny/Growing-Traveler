@@ -15,9 +15,7 @@ class SelectStudyItemViewController: BaseViewController {
     @IBOutlet weak var studyTimeStackView: UIStackView!
     
     @IBOutlet weak var contentTextView: UITextView!
-    
-    @IBOutlet weak var hintLabel: UILabel!
-    
+
     var studyTime = [30, 60, 90, 120, 150]
     
     var timeButtons: [UIButton] = []
