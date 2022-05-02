@@ -231,7 +231,7 @@ extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSourc
             
             let alertController = UIAlertController(
                 title: "刪除討論區發文",
-                message: "請問確定刪除此篇文章嗎？\n 刪除行為不可逆，將無法在此瀏覽文章！",
+                message: "請問確定刪除此篇文章嗎？\n 刪除行為不可逆，將無法瀏覽此文章！",
                 preferredStyle: .alert)
             
             let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in

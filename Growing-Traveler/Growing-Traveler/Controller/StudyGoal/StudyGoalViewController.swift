@@ -625,12 +625,31 @@ extension StudyGoalViewController: UITableViewDelegate {
     }
     
     @objc func deleteRowButton(_ sender: UIButton) {
+        
+        let alertController = UIAlertController(
+            title: "刪除個人學習計劃",
+            message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
+            preferredStyle: .alert)
+        
+        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+            
+            self.studyGoalManager.deleteData(
+                studyGoal: self.studyGoals[sender.tag])
 
-        studyGoalManager.deleteData(studyGoal: studyGoals[sender.tag])
+            self.studyGoals.remove(at: sender.tag)
 
-        studyGoals.remove(at: sender.tag)
+            self.studyGoalTableView.reloadData()
 
-        studyGoalTableView.reloadData()
+
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        
+        alertController.addAction(agreeAction)
+        
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
 
     }
     

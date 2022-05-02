@@ -185,7 +185,7 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
             
             let alertController = UIAlertController(
                 title: "刪除個人認證",
-                message: "請問確定刪除個人認證嗎？\n 刪除行為不可逆，將無法瀏覽！",
+                message: "請問確定刪除個人認證嗎？\n 刪除行為不可逆，將無法瀏覽此認證！",
                 preferredStyle: .alert)
             
             let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
