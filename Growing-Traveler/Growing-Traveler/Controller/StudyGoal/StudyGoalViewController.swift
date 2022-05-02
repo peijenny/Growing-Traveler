@@ -110,11 +110,20 @@ class StudyGoalViewController: UIViewController {
         setSelectLineView()
         
     }
-    
+ 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         lottieAnimation.play()
+        
+        tabBarController?.tabBar.isHidden = true
+        
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.tabBar.isHidden = false
         
     }
     

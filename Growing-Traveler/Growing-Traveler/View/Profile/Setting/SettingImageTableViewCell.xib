@@ -17,8 +17,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gg7-2L-0sr">
-                        <rect key="frame" x="257" y="76" width="40" height="40"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="frame" x="267" y="76" width="40" height="40"/>
+                        <color key="backgroundColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="7VD-3d-N21"/>
                             <constraint firstAttribute="width" constant="40" id="lOa-ZF-ZJo"/>
@@ -30,23 +30,24 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1a7-iL-Hef">
                         <rect key="frame" x="157" y="16" width="100" height="100"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userOrigin" translatesAutoresizingMaskIntoConstraints="NO" id="SR4-Vy-IAh">
-                                <rect key="frame" x="16" y="16" width="68" height="68"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="SR4-Vy-IAh">
+                                <rect key="frame" x="0.0" y="0.5" width="100" height="99"/>
+                                <color key="tintColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.72156862749999995" blue="0.52941176469999995" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="SR4-Vy-IAh" firstAttribute="leading" secondItem="1a7-iL-Hef" secondAttribute="leading" constant="16" id="0eQ-J3-oPW"/>
+                            <constraint firstItem="SR4-Vy-IAh" firstAttribute="leading" secondItem="1a7-iL-Hef" secondAttribute="leading" id="0eQ-J3-oPW"/>
                             <constraint firstAttribute="width" constant="100" id="HvY-ea-xeD"/>
                             <constraint firstAttribute="height" constant="100" id="J1i-LJ-VFO"/>
-                            <constraint firstItem="SR4-Vy-IAh" firstAttribute="top" secondItem="1a7-iL-Hef" secondAttribute="top" constant="16" id="Jiu-aS-7ey"/>
-                            <constraint firstAttribute="bottom" secondItem="SR4-Vy-IAh" secondAttribute="bottom" constant="16" id="jra-zb-N4j"/>
-                            <constraint firstAttribute="trailing" secondItem="SR4-Vy-IAh" secondAttribute="trailing" constant="16" id="ldH-Ct-te2"/>
+                            <constraint firstItem="SR4-Vy-IAh" firstAttribute="top" secondItem="1a7-iL-Hef" secondAttribute="top" id="Jiu-aS-7ey"/>
+                            <constraint firstAttribute="bottom" secondItem="SR4-Vy-IAh" secondAttribute="bottom" id="jra-zb-N4j"/>
+                            <constraint firstAttribute="trailing" secondItem="SR4-Vy-IAh" secondAttribute="trailing" id="ldH-Ct-te2"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="gg7-2L-0sr" firstAttribute="leading" secondItem="1a7-iL-Hef" secondAttribute="trailing" id="27A-PE-8zg"/>
+                    <constraint firstItem="gg7-2L-0sr" firstAttribute="leading" secondItem="1a7-iL-Hef" secondAttribute="trailing" constant="10" id="27A-PE-8zg"/>
                     <constraint firstAttribute="bottom" secondItem="1a7-iL-Hef" secondAttribute="bottom" constant="16" id="Mlz-zq-1v2"/>
                     <constraint firstItem="1a7-iL-Hef" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Xn8-tL-Sfy"/>
                     <constraint firstItem="SR4-Vy-IAh" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="a8t-RC-Q2e"/>
@@ -55,6 +56,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="modifyUserPhotoButton" destination="gg7-2L-0sr" id="BE4-Ob-1Md"/>
                 <outlet property="userPhotoImageView" destination="SR4-Vy-IAh" id="Rh9-KF-BgS"/>
@@ -64,6 +66,6 @@
     </objects>
     <resources>
         <image name="pencil" catalog="system" width="128" height="113"/>
-        <image name="userOrigin" width="42.666667938232422" height="42.666667938232422"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>

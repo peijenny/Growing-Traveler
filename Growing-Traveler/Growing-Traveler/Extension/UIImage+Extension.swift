@@ -34,6 +34,12 @@ enum ImageAsset: String {
     case teamMembersWorking
     case womanHoldingGuidebook
     case womanSittingInFlowerBed
+    
+    case specialDeals
+    case vision
+    case idea
+    case blogging
+    case meditation
 
 }
 
