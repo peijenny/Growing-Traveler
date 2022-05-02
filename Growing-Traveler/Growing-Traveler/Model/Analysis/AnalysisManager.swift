@@ -20,7 +20,7 @@ class AnalysisManager {
             
             database.collection("studyGoal")
                 .whereField("userID", isEqualTo: userID)
-                .getDocuments { snapshot, error in
+                .addSnapshotListener { snapshot, error in
                 
                 var studyGoals: [StudyGoal] = []
                 
@@ -64,7 +64,7 @@ class AnalysisManager {
     
     func fetchFeedbackData(completion: @escaping (Result<[Feedback]>) -> Void) {
         
-        database.collection("feedback").getDocuments { snapshot, error in
+        database.collection("feedback").addSnapshotListener { snapshot, error in
             
             var feedbacks: [Feedback] = []
             

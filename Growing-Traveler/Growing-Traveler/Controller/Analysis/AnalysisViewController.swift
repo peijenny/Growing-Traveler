@@ -57,9 +57,20 @@ class AnalysisViewController: UIViewController {
     
     var finishedCalculates: [CalculatePie] = []
     
-    var feedbacks: [Feedback] = []
+    var feedbacks: [Feedback] = [] {
+        
+        didSet {
+            
+            analysisTableView.reloadData()
+            
+        }
+        
+    }
     
-    var feedback: Feedback?
+    var feedback = Feedback(
+        title: "",
+        timeLimit: TimeLimit(lower: 0, upper: 0),
+        comment: "")
     
     let day = 24 * 60 * 60
     
@@ -90,18 +101,20 @@ class AnalysisViewController: UIViewController {
         selectSegmentedControl.addTarget(
             self, action: #selector(selectIndexChanged(_:)), for: .valueChanged)
         
+        fetchFeedbackData()
+        
         fetchStudyGoalData()
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        fetchStudyGoalData()
-
-        fetchFeedbackData()
-
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        fetchFeedbackData()
+//
+//        fetchStudyGoalData()
+//
+//    }
     
     @objc func selectIndexChanged(_ send: UISegmentedControl) {
         
@@ -332,7 +345,7 @@ class AnalysisViewController: UIViewController {
                     
                 }
                 
-            } else if  endDate >= sevenDaysAgo && startDate <= yesterday {
+            } else if endDate >= sevenDaysAgo && startDate <= yesterday {
 
                 includedDays = 7
                 
@@ -510,11 +523,7 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
             
             if select == "近七天學習時間" {
                 
-                if let feedback = feedback {
-                    
-                    cell.showBarText(feedback: feedback, experienceValue: experienceValue)
-                    
-                }
+                cell.showBarText(feedback: feedback, experienceValue: experienceValue)
                 
             } else {
                 
