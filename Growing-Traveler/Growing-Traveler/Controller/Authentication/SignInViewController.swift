@@ -220,6 +220,12 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 HUD.flash(.labeledSuccess(title: "註冊成功！", subtitle: nil))
+
+                let dateFormatter = DateFormatter()
+
+                dateFormatter.dateFormat = "yyyy.MM.dd"
+
+                let today = dateFormatter.string(from: Date())
                 
                 let userInfo = UserInfo(
                     userID: user.uid,
@@ -229,7 +235,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     userPhone: "",
                     signInType: "email",
                     achievement: Achievement(
-                    experienceValue: 0, completionGoals: [], loginDates: []),
+                    experienceValue: 0, completionGoals: [], loginDates: [today]),
                     certification: []
                 )
                 

@@ -242,6 +242,12 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                     
                     if self.users.filter({ $0.userID == user.uid }).count == 0 {
                         
+                        let dateFormatter = DateFormatter()
+
+                        dateFormatter.dateFormat = "yyyy.MM.dd"
+
+                        let today = dateFormatter.string(from: Date())
+                        
                         let userInfo = UserInfo(
                             userID: user.uid,
                             userName: "\(givenName) \(familyName)",
@@ -250,7 +256,7 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                             userPhone: user.phoneNumber ?? "",
                             signInType: "appleID",
                             achievement: Achievement(
-                                experienceValue: 0, completionGoals: [], loginDates: []),
+                                experienceValue: 0, completionGoals: [], loginDates: [today]),
                             certification: []
                         )
                         
