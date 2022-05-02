@@ -19,7 +19,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMq-zz-Bwc">
                         <rect key="frame" x="8" y="8" width="398" height="64"/>
-                        <color key="backgroundColor" red="0.23137254901960785" green="0.50980392156862742" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="項目名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dk-YZ-bj7">
                         <rect key="frame" x="32" y="16" width="366" height="26"/>

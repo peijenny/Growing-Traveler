@@ -109,11 +109,11 @@ class SelectStudyItemViewController: BaseViewController {
             
             myButton.setTitle("\(studyTime[index])", for: .normal)
             
-            myButton.setTitleColor(UIColor.hexStringToUIColor(hex: "69B6CA"), for: .normal)
+            myButton.setTitleColor(UIColor.white, for: .normal)
             
             myButton.isEnabled = true
             
-            myButton.backgroundColor = UIColor.hexStringToUIColor(hex: "E5EDF8")
+            myButton.backgroundColor = UIColor.hexStringToUIColor(hex: "A6C2CE")
             
             myButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
             
@@ -127,9 +127,9 @@ class SelectStudyItemViewController: BaseViewController {
 
     @objc func clickButton(sender: UIButton) {
         
-        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: "E5EDF8") })
+        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: "A6C2CE") })
         
-        sender.backgroundColor = UIColor.hexStringToUIColor(hex: "0384BD")
+        sender.backgroundColor = UIColor.hexStringToUIColor(hex: "6E799A")
         
         guard let selectSender = sender.titleLabel?.text else { return }
         

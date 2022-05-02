@@ -103,7 +103,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1D-fh-S7D" userLabel="addStudyGoalButton">
                                 <rect key="frame" x="344" y="209.5" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.70980393890000004" green="0.52941179279999995" blue="0.4941176176" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.70980392156862748" green="0.52941176470588236" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="D9e-28-Tgn"/>
                                     <constraint firstAttribute="height" constant="50" id="yXR-K7-ZY8"/>
@@ -278,7 +278,7 @@
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHi-4x-pLk">
                                         <rect key="frame" x="16" y="410" width="342" height="40"/>
-                                        <color key="backgroundColor" red="0.231372565" green="0.50980395079999996" blue="0.72156864399999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.43137254901960786" green="0.47450980392156861" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="nlg-fd-2fQ"/>
                                         </constraints>

@@ -151,12 +151,12 @@ class StudyGoalViewController: UIViewController {
         lottieAnimation.contentMode = .scaleAspectFit
         
         lottieAnimation.frame = CGRect(
-            x: 100, y: 0,
+            x: 0, y: 30,
             width: headerAnimationView.frame.width,
-            height: headerAnimationView.frame.height - 100
+            height: headerAnimationView.frame.height
         )
         
-        lottieAnimation.center = headerAnimationView.center
+//        lottieAnimation.center = headerAnimationView.center
         
         headerAnimationView.addSubview(lottieAnimation)
         

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class PublishArticleTableViewCell: UITableViewCell {
 
@@ -33,7 +34,7 @@ class PublishArticleTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
         
-        contentTextView.layer.borderColor = UIColor.systemGray5.cgColor
+        contentTextView.layer.borderColor = UIColor.hexStringToUIColor(hex: "9C8F96").cgColor
         
         contentTextView.layer.borderWidth = 1
         
@@ -41,11 +42,11 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         if contentTextView.text == "請描述內容......" {
             
-            contentTextView.textColor = UIColor.systemGray3
+            contentTextView.textColor = UIColor.lightGray
             
         } else {
             
-            contentTextView.textColor = UIColor.black
+            contentTextView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
             
         }
         
@@ -54,16 +55,16 @@ class PublishArticleTableViewCell: UITableViewCell {
     func checkInputType() -> Bool {
         
         if titleTextField.text == "" {
-            
-            hintLabel.text = InputError.titleEmpty.title
+
+            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
         } else if categoryTextField.text == "" {
             
-            hintLabel.text = InputError.categoryEmpty.title
+            HUD.flash(.label(InputError.categoryEmpty.title), delay: 0.5)
             
         } else if contentTextView.text == "請描述內容......" {
-            
-            hintLabel.text = InputError.contentEmpty.title
+
+            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
             
         } else {
             
