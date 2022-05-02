@@ -37,8 +37,6 @@ class ForumViewController: BaseViewController {
     
     @IBOutlet weak var searchButton: UIButton!
     
-    @IBOutlet weak var addArticleButton: UIButton!
-    
     @IBOutlet weak var articleTableView: UITableView! {
         
         didSet {
@@ -79,6 +77,10 @@ class ForumViewController: BaseViewController {
         ForumType.chat.title
     ]
     
+    var userManager = UserManager()
+    
+    var usersInfo: [UserInfo] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -88,6 +90,8 @@ class ForumViewController: BaseViewController {
         )
 
         searchTextField.delegate = self
+        
+        setNavigationItem()
         
     }
     
@@ -100,18 +104,20 @@ class ForumViewController: BaseViewController {
         
         searchTextField.text = nil
         
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        addArticleButton.imageView?.contentMode = .scaleAspectFill
-
-        addArticleButton.layer.cornerRadius = addArticleButton.frame.width / 2
+        fetchUserInfoData()
         
     }
     
-    @IBAction func addArticleButton(_ sender: UIButton) {
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(addForumArticle))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func addForumArticle(sender: UIButton) {
         
         guard userID != "" else {
 
@@ -132,6 +138,30 @@ class ForumViewController: BaseViewController {
         
     }
     
+    func fetchUserInfoData() {
+        
+        userManager.fetchUsersData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                strongSelf.usersInfo = usersInfo
+                
+                strongSelf.articleTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+    }
+
     func fetchData() {
         
         forumArticleManager.listenData(completion: { [weak self] result in
@@ -221,8 +251,19 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = cell as? ArticleTableViewCell else { return cell }
         
-        cell.showForumArticle(forumArticle: articles[indexPath.row])
+        let userInfo = usersInfo.filter({ $0.userID == articles[indexPath.row].userID })
         
+        if userInfo.count != 0 {
+            
+            let userName = userInfo[0].userName
+
+            cell.showForumArticle(
+                forumArticle: articles[indexPath.row],
+                userName: userName
+            )
+            
+        }
+
         let amountOver: Bool = (searchArticels.count > articles.count)
         
         let isSearch: Bool = (searchTextField.text != "")

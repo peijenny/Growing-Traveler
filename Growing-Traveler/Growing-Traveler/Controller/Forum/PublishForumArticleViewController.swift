@@ -57,7 +57,7 @@ class PublishForumArticleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
         
         if modifyForumArticle == nil {
             
@@ -361,11 +361,11 @@ extension PublishForumArticleViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
-        if textView.textColor == UIColor.systemGray3 {
+        if textView.textColor == UIColor.lightGray {
             
             textView.text = nil
             
-            textView.textColor = UIColor.black
+            textView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
             
         }
         
@@ -377,8 +377,10 @@ extension PublishForumArticleViewController: UITextViewDelegate {
             
             textView.text = "請描述內容......"
             
-            textView.textColor = UIColor.systemGray3
+            textView.textColor = UIColor.lightGray
             
         }
+        
     }
+    
 }

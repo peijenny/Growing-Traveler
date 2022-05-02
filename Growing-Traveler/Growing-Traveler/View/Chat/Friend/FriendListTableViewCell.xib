@@ -16,6 +16,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lh1-ku-vdE">
+                        <rect key="frame" x="8" y="8" width="398" height="46"/>
+                        <color key="backgroundColor" red="0.231372565" green="0.50980395079999996" blue="0.72156864399999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRE-Zx-8K6">
                         <rect key="frame" x="62" y="16" width="342" height="30"/>
                         <constraints>
@@ -23,29 +27,34 @@
                             <constraint firstAttribute="height" constant="30" id="aYi-TJ-wCf"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="C6z-d1-sTJ">
                         <rect key="frame" x="16" y="16.5" width="30" height="29"/>
-                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="BbN-pS-Bxv"/>
                             <constraint firstAttribute="width" constant="30" id="o7i-li-ycZ"/>
                         </constraints>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="tRE-Zx-8K6" firstAttribute="leading" secondItem="C6z-d1-sTJ" secondAttribute="trailing" constant="16" id="10z-Op-dIT"/>
                     <constraint firstAttribute="bottom" secondItem="tRE-Zx-8K6" secondAttribute="bottom" constant="16" id="7l4-Nz-o0C"/>
-                    <constraint firstAttribute="trailing" secondItem="tRE-Zx-8K6" secondAttribute="trailing" constant="16" id="B5w-aR-OTC"/>
+                    <constraint firstItem="lh1-ku-vdE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="BKY-Cd-sbO"/>
                     <constraint firstItem="C6z-d1-sTJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="QeJ-9B-sOB"/>
                     <constraint firstItem="C6z-d1-sTJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="b8j-Ds-UKa"/>
+                    <constraint firstItem="lh1-ku-vdE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="hEv-Wx-r4y"/>
                     <constraint firstAttribute="bottom" secondItem="C6z-d1-sTJ" secondAttribute="bottom" constant="16" id="nBz-t9-845"/>
+                    <constraint firstAttribute="bottom" secondItem="lh1-ku-vdE" secondAttribute="bottom" constant="8" id="sOL-tU-9gS"/>
                     <constraint firstItem="tRE-Zx-8K6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="typ-gp-YZ0"/>
+                    <constraint firstAttribute="trailing" secondItem="lh1-ku-vdE" secondAttribute="trailing" constant="8" id="wBN-oT-YHn"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="friendIconImageView" destination="C6z-d1-sTJ" id="KBg-Xb-ggQ"/>
                 <outlet property="friendNameLabel" destination="tRE-Zx-8K6" id="4dQ-hC-SBw"/>

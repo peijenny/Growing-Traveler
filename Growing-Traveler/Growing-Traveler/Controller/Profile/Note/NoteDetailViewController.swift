@@ -28,7 +28,7 @@ class NoteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = modifyNote?.noteID ?? ""
+        title = modifyNote?.noteTitle ?? ""
         
         let formatter = DateFormatter()
         

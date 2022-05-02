@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class SelectStudyItemViewController: BaseViewController {
 
@@ -14,9 +15,7 @@ class SelectStudyItemViewController: BaseViewController {
     @IBOutlet weak var studyTimeStackView: UIStackView!
     
     @IBOutlet weak var contentTextView: UITextView!
-    
-    @IBOutlet weak var hintLabel: UILabel!
-    
+
     var studyTime = [30, 60, 90, 120, 150]
     
     var timeButtons: [UIButton] = []
@@ -112,7 +111,7 @@ class SelectStudyItemViewController: BaseViewController {
             
             myButton.isEnabled = true
             
-            myButton.backgroundColor = UIColor.lightGray
+            myButton.backgroundColor = UIColor.hexStringToUIColor(hex: "A6C2CE")
             
             myButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
             
@@ -126,9 +125,9 @@ class SelectStudyItemViewController: BaseViewController {
 
     @objc func clickButton(sender: UIButton) {
         
-        _ = timeButtons.map({ $0.backgroundColor = UIColor.lightGray })
+        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: "A6C2CE") })
         
-        sender.backgroundColor = UIColor.black
+        sender.backgroundColor = UIColor.hexStringToUIColor(hex: "6E799A")
         
         guard let selectSender = sender.titleLabel?.text else { return }
         
@@ -139,16 +138,16 @@ class SelectStudyItemViewController: BaseViewController {
     @IBAction func confirmButton(_ sender: UIButton) {
         
         if itemTextField?.text == "" {
-            
-            hintLabel.text = InputError.titleEmpty.title
+
+            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
         } else if selectStudyTime == nil {
             
-            hintLabel.text = InputError.studyTimeEmpty.title
+            HUD.flash(.label(InputError.studyTimeEmpty.title), delay: 0.5)
             
         } else if contentTextView.text == "請描述內容......." {
             
-            hintLabel.text = InputError.contentEmpty.title
+            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
             
         } else {
             
@@ -205,5 +204,7 @@ extension SelectStudyItemViewController: UITextViewDelegate {
             textView.textColor = UIColor.systemGray3
             
         }
+        
     }
+    
 }

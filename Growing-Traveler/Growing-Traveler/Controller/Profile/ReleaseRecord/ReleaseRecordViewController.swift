@@ -15,14 +15,29 @@ class ReleaseRecordViewController: UIViewController {
     
     var forumArticles: [ForumArticle] = []
     
+    var userManager = UserManager()
+    
+    var usersInfo: [UserInfo] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "發佈文章紀錄"
         
-        self.view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
 
         setTableView()
+        
+        setNavigationItem()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchUserInfoData()
+        
+        fetchReleaseData()
         
     }
     
@@ -40,10 +55,57 @@ class ReleaseRecordViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func setNavigationItem() {
         
-        fetchReleaseData()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(addForumArticle))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func addForumArticle(sender: UIButton) {
+        
+        guard userID != "" else {
+
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                    withIdentifier: String(describing: AuthenticationViewController.self)
+                    ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .popover
+
+            present(authViewController, animated: true, completion: nil)
+            
+            return
+        }
+
+        let viewController = PublishForumArticleViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+
+    func fetchUserInfoData() {
+        
+        userManager.fetchUsersData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                strongSelf.usersInfo = usersInfo
+                
+                strongSelf.releaseRecordTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
         
     }
     
@@ -76,14 +138,16 @@ class ReleaseRecordViewController: UIViewController {
         
         releaseRecordTableView.backgroundColor = UIColor.clear
         
+        releaseRecordTableView.separatorStyle = .none
+        
         view.addSubview(releaseRecordTableView)
         
         releaseRecordTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             releaseRecordTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            releaseRecordTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            releaseRecordTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            releaseRecordTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            releaseRecordTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             releaseRecordTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
         ])
         
@@ -125,7 +189,18 @@ extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSourc
         
         cell.selectionStyle = .none
         
-        cell.showMoreArticles(forumArticle: forumArticles[indexPath.row])
+        let userInfo = usersInfo.filter({ $0.userID == forumArticles[indexPath.row].userID })
+        
+        if userInfo.count != 0 {
+            
+            let userName = userInfo[0].userName
+            
+            cell.showMoreArticles(
+                forumArticle: forumArticles[indexPath.row],
+                userName: userName
+            )
+            
+        }
         
         return cell
         
@@ -156,7 +231,7 @@ extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSourc
             
             let alertController = UIAlertController(
                 title: "刪除討論區發文",
-                message: "請問確定刪除此篇文章嗎？\n 刪除行為不可逆，將無法在此瀏覽文章！",
+                message: "請問確定刪除此篇文章嗎？\n 刪除行為不可逆，將無法瀏覽此文章！",
                 preferredStyle: .alert)
             
             let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in

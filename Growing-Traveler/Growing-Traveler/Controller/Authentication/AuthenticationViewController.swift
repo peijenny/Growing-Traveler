@@ -9,6 +9,7 @@ import UIKit
 import AuthenticationServices
 import CryptoKit
 import FirebaseAuth
+import PKHUD
 
 enum SignType {
     
@@ -40,20 +41,29 @@ class AuthenticationViewController: UIViewController {
     
     var userManager = UserManager()
     
-    var users: [UserInfo] = [] {
-        
-        didSet {
-            
-            setupProviderLoginView()
-            
-        }
-        
-    }
+    var errorManager = ErrorManager()
+    
+    var users: [UserInfo] = []
 
+    @IBOutlet weak var signInButton: UIButton!
+    
+    @IBOutlet weak var signUpButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         fetchUserData()
+        
+        setupProviderLoginView()
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        signInButton.layer.cornerRadius = 5
+        
+        signUpButton.layer.cornerRadius = 5
         
     }
     
@@ -87,7 +97,7 @@ class AuthenticationViewController: UIViewController {
             self, action: #selector(handleAuthorizationAppleIDButtonPress),
             for: .touchUpInside)
         
-        authorizationButton.frame = self.signInWithAppleButtonView.bounds
+        authorizationButton.frame = signInWithAppleButtonView.bounds
         
         self.signInWithAppleButtonView.addSubview(authorizationButton)
         
@@ -173,6 +183,8 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
+            HUD.show(.labeledProgress(title: "登入中...", subtitle: ""))
+            
             let givenName = appleIDCredential.fullName?.givenName ?? ""
             
             let familyName = appleIDCredential.fullName?.familyName ?? ""
@@ -205,7 +217,25 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
             
             Auth.auth().signIn(with: credential) { authDataResult, error in
 
+                if let error = error as? NSError {
+                    
+                    print(error)
+                    
+                    guard let errorCode = AuthErrorCode(rawValue: error.code) else {
+                        
+                        print("登入錯誤，於 firebase 無法找到配對的帳號！")
+                        
+                        return
+                        
+                    }
+                    
+                    self.errorManager.handleAuthError(errorCode: errorCode)
+
+                }
+                
                 if let user = authDataResult?.user {
+                    
+                    HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil))
                     
                     var photo = ""
                     
@@ -219,6 +249,12 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                     
                     if self.users.filter({ $0.userID == user.uid }).count == 0 {
                         
+                        let dateFormatter = DateFormatter()
+
+                        dateFormatter.dateFormat = "yyyy.MM.dd"
+
+                        let today = dateFormatter.string(from: Date())
+                        
                         let userInfo = UserInfo(
                             userID: user.uid,
                             userName: "\(givenName) \(familyName)",
@@ -227,7 +263,7 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                             userPhone: user.phoneNumber ?? "",
                             signInType: "appleID",
                             achievement: Achievement(
-                                experienceValue: 0, completionGoals: [], loginDates: []),
+                                experienceValue: 0, completionGoals: [], loginDates: [today]),
                             certification: []
                         )
                         
@@ -246,9 +282,6 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                     
                     self.dismiss(animated: true, completion: nil)
                     
-                } else {
-
-                    print(error as Any)
                 }
                 
             }

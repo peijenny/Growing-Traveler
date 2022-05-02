@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import PKHUD
 
 class SignInViewController: BaseViewController {
 
@@ -27,6 +28,8 @@ class SignInViewController: BaseViewController {
     var userManager = UserManager()
     
     var friendManager = FriendManager()
+    
+    var errorManager = ErrorManager()
     
     var isCheck = false
     
@@ -145,6 +148,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
         if signInContent.email != "" &&  signInContent.password != "" {
             
+            HUD.show(.labeledProgress(title: "登入中...", subtitle: nil))
+            
             Auth.auth().signIn(
             withEmail: signInContent.email, password: signInContent.password) { result, error in
                 
@@ -153,13 +158,24 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     if let error = error as? NSError {
                         
                         print(error)
+                        
+                        guard let errorCode = AuthErrorCode(rawValue: error.code) else {
+                            
+                            print("登入錯誤，於 firebase 無法找到配對的帳號！")
+                            
+                            return
+                            
+                        }
+                        
+                        self.errorManager.handleAuthError(errorCode: errorCode)
 
                     }
                     
-                    // 帳戶不存在?? -> 顯示動畫
                     return
                     
                 }
+                
+                HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil))
                 
                 userID = user.uid
                 
@@ -176,6 +192,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
         if signUpContent.email != "" &&  signUpContent.password != "" {
             
+            HUD.show(.labeledProgress(title: "註冊中...", subtitle: nil))
+            
             Auth.auth().createUser(
             withEmail: signUpContent.email, password: signUpContent.password) { result, error in
                         
@@ -185,13 +203,30 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                         
                         print(error)
                         
+                        guard let errorCode = AuthErrorCode(rawValue: error.code) else {
+                            
+                            print("註冊錯誤，於 firebase 無法找到配對的帳號！")
+                            
+                            return
+                            
+                        }
+                        
+                        self.errorManager.handleAuthError(errorCode: errorCode)
+                        
                     }
                     
-                    // 註冊失敗?? -> 顯示動畫
                     return
                     
                 }
+                
+                HUD.flash(.labeledSuccess(title: "註冊成功！", subtitle: nil))
 
+                let dateFormatter = DateFormatter()
+
+                dateFormatter.dateFormat = "yyyy.MM.dd"
+
+                let today = dateFormatter.string(from: Date())
+                
                 let userInfo = UserInfo(
                     userID: user.uid,
                     userName: signUpContent.userName,
@@ -200,7 +235,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     userPhone: "",
                     signInType: "email",
                     achievement: Achievement(
-                    experienceValue: 0, completionGoals: [], loginDates: []),
+                    experienceValue: 0, completionGoals: [], loginDates: [today]),
                     certification: []
                 )
                 

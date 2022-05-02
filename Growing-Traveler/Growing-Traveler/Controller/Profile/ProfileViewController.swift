@@ -49,9 +49,7 @@ class ProfileViewController: UIViewController {
     
     let featureList: [FeatureType] = [.mandate, .rank, .note, .release, .license]
     
-    let featureImage: [ImageAsset] = [
-        .womanHoldingGuidebook, .teamMembersWorking,
-        .handedManSitting, .coworkersDoingMeeting, .womanSittingInFlowerBed]
+    let featureImage: [ImageAsset] = [.specialDeals, .vision, .idea, .blogging, .meditation]
     
     var userManager = UserManager()
     
@@ -65,13 +63,27 @@ class ProfileViewController: UIViewController {
         fetchUserInfoData()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .rewind,
+            barButtonSystemItem: .edit,
             target: self,
             action: #selector(setProfileButton))
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tabBarController?.tabBar.isHidden = true
+//
+//    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tabBarController?.tabBar.isHidden = false
+//
+//    }
     
     @objc func setProfileButton(sender: UIButton) {
         

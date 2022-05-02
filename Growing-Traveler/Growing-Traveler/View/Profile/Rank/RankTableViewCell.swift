@@ -27,7 +27,10 @@ class RankTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        userPhotoImageView.contentMode = .scaleAspectFill
+
+        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
+        
     }
     
     func showRankData(rankNumber: Int, userInfo: UserInfo) {
@@ -38,7 +41,7 @@ class RankTableViewCell: UITableViewCell {
             
         } else if rankNumber == 2 {
             
-            rankNumberBackgroundView.tintColor = UIColor.systemGray
+            rankNumberBackgroundView.tintColor = UIColor.lightGray
             
         } else if rankNumber == 3 {
             

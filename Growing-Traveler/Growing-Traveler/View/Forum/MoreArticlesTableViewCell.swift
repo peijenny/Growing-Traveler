@@ -36,7 +36,7 @@ class MoreArticlesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func showMoreArticles(forumArticle: ForumArticle) {
+    func showMoreArticles(forumArticle: ForumArticle, userName: String) {
         
         let formatter = DateFormatter()
         
@@ -54,7 +54,9 @@ class MoreArticlesTableViewCell: UITableViewCell {
         
         createTimeLabel.text = formatter.string(from: createTime)
 
-        userIDLabel.text = forumArticle.userID
+//        userIDLabel.text = forumArticle.userID
+        
+        userIDLabel.text = userName
         
     }
     

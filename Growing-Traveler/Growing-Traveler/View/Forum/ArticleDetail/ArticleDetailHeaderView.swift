@@ -28,7 +28,7 @@ class ArticleDetailHeaderView: UITableViewHeaderFooterView {
         // Initialization code
     }
     
-    func showArticleDetail(forumArticle: ForumArticle) {
+    func showArticleDetail(forumArticle: ForumArticle, userName: String) {
         
         let formatter = DateFormatter()
         
@@ -44,7 +44,9 @@ class ArticleDetailHeaderView: UITableViewHeaderFooterView {
         
         forumTypeLabel.text = forumArticle.forumType
         
-        userIDLabel.text = forumArticle.userID
+//        userIDLabel.text = forumArticle.userID
+        
+        userIDLabel.text = userName
         
     }
     

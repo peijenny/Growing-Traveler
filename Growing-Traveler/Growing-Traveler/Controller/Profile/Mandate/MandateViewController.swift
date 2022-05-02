@@ -72,7 +72,7 @@ class MandateViewController: UIViewController {
 
         title = "成長任務"
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
         
         fetchData()
         

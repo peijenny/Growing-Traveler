@@ -321,10 +321,7 @@ class ApplyFriendViewController: BaseViewController {
     }
     
     @IBAction func sendApplyButton(_ sender: UIButton) {
-        
-        // 發送好友邀請給對方
-//        searchUser
-        
+
         if var ownFriend = ownFriend, var otherFriend = otherFriend {
             
             ownFriend.deliveryList.append(otherFriend.userID)
@@ -332,9 +329,7 @@ class ApplyFriendViewController: BaseViewController {
             otherFriend.applyList.append(ownFriend.userID)
             
             let bothSides = BothSides(owner: ownFriend, other: otherFriend)
-            
-            print("TEST \(bothSides)")
-            
+
             hintTextLabel.text = SearchFriendStatus.invitaion.title
             
             userInfoView.isHidden = true
@@ -374,7 +369,9 @@ extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource 
         
         guard let cell = cell as? FriendListTableViewCell else { return cell }
         
-        cell.showFriendInfo(friendName: friendsInfo[indexPath.row].userName)
+        cell.showFriendInfo(
+            friendName: friendsInfo[indexPath.row].userName,
+            friendPhotoLink: friendsInfo[indexPath.row].userPhoto)
         
         return cell
         

@@ -247,9 +247,7 @@ class ChatViewController: BaseViewController {
             guard let chatMessage = chatMessage else { return }
 
             chatRoomManager.addData(userName: userName, chat: chatMessage)
-            
-            print("TEST \(chatMessage)")
-            
+
             snedInputTextView.text = nil
             
         }

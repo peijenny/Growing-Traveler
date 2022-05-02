@@ -41,7 +41,7 @@ class ProfileSettingViewController: BaseViewController {
         
         title = "個人設定"
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
 
         setTableView()
         
@@ -104,19 +104,19 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tabBarController?.tabBar.isHidden = true
-        
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tabBarController?.tabBar.isHidden = false
-        
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tabBarController?.tabBar.isHidden = false
+//
+//    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tabBarController?.tabBar.isHidden = true
+//
+//    }
     
     func fetchUserInfoData() {
         
@@ -273,8 +273,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                     print(error)
 
                 } else {
-                    
-                    print("TEST success")
                     
                     self.deleteAllData()
 

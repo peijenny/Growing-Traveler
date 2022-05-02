@@ -26,19 +26,49 @@ class StudyGoalTableViewCell: UITableViewCell {
     
     func checkIsCompleted(isCompleted: Bool) {
         
+        let attributedString = NSMutableAttributedString(string: studyItemLabel.text ?? "")
+        
         if isCompleted {
             
-            checkButton.backgroundColor = UIColor.black
+            checkButton.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
             
-            checkButton.tintColor = UIColor.white
+            studyItemLabel.textColor = UIColor.lightGray
+                   
+            // 刪除線
+            attributedString.addAttribute(
+                .strikethroughStyle,
+                value: 1,
+                range: NSRange(location: 0, length: attributedString.length)
+            )
+            
+            attributedString.addAttribute(
+                .strikethroughColor,
+                value: UIColor.hexStringToUIColor(hex: "0384BD"),
+                range: NSRange(location: 0, length: attributedString.length)
+            )
             
         } else {
             
-            checkButton.backgroundColor = UIColor.systemGray5
-            
             checkButton.tintColor = UIColor.clear
             
+            studyItemLabel.textColor = UIColor.black
+            
+            // 刪除線
+            attributedString.addAttribute(
+                .strikethroughStyle,
+                value: 0,
+                range: NSRange(location: 0, length: attributedString.length)
+            )
+
+            attributedString.addAttribute(
+                .strikethroughColor,
+                value: UIColor.clear,
+                range: NSRange(location: 0, length: attributedString.length)
+            )
+            
         }
+        
+        studyItemLabel.attributedText = attributedString
         
     }
     

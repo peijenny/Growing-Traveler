@@ -20,7 +20,7 @@ class CertificationViewController: UIViewController {
 
         title = "個人認證"
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
         
         setTableView()
         
@@ -97,14 +97,16 @@ class CertificationViewController: UIViewController {
         
         certificationTableView.backgroundColor = UIColor.clear
         
+        certificationTableView.separatorStyle = .none
+        
         view.addSubview(certificationTableView)
         
         certificationTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             certificationTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            certificationTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            certificationTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            certificationTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            certificationTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             certificationTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
         ])
         
@@ -183,7 +185,7 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
             
             let alertController = UIAlertController(
                 title: "刪除個人認證",
-                message: "請問確定刪除個人認證嗎？\n 刪除行為不可逆，將無法瀏覽！",
+                message: "請問確定刪除個人認證嗎？\n 刪除行為不可逆，將無法瀏覽此認證！",
                 preferredStyle: .alert)
             
             let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in

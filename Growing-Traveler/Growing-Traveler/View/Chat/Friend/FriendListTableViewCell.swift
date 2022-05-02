@@ -21,12 +21,21 @@ class FriendListTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        friendIconImageView.contentMode = .scaleAspectFill
+
+        friendIconImageView.layer.cornerRadius = friendIconImageView.frame.width / 2
+        
     }
     
-    func showFriendInfo(friendName: String) {
+    func showFriendInfo(friendName: String, friendPhotoLink: String) {
         
         friendNameLabel.text = friendName
+        
+        if friendPhotoLink != "" {
+            
+            friendIconImageView.loadImage(friendPhotoLink)
+            
+        }
         
     }
     

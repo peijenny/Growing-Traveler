@@ -17,11 +17,8 @@ class FeatureCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-        featureBackgroundView.layer.borderWidth = 0.5
-        
-        featureBackgroundView.layer.borderColor = UIColor.lightGray.cgColor
+
+        featureBackgroundView.layer.cornerRadius = 10
         
     }
 
