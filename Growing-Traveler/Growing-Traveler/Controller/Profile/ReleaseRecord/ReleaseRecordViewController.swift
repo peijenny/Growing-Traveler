@@ -28,6 +28,8 @@ class ReleaseRecordViewController: UIViewController {
 
         setTableView()
         
+        setNavigationItem()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +52,36 @@ class ReleaseRecordViewController: UIViewController {
             super.hidesBottomBarWhenPushed = newValue
             
         }
+        
+    }
+    
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(addForumArticle))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func addForumArticle(sender: UIButton) {
+        
+        guard userID != "" else {
+
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                    withIdentifier: String(describing: AuthenticationViewController.self)
+                    ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .popover
+
+            present(authViewController, animated: true, completion: nil)
+            
+            return
+        }
+
+        let viewController = PublishForumArticleViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
 

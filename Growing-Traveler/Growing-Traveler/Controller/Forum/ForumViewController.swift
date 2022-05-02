@@ -37,8 +37,6 @@ class ForumViewController: BaseViewController {
     
     @IBOutlet weak var searchButton: UIButton!
     
-    @IBOutlet weak var addArticleButton: UIButton!
-    
     @IBOutlet weak var articleTableView: UITableView! {
         
         didSet {
@@ -93,6 +91,8 @@ class ForumViewController: BaseViewController {
 
         searchTextField.delegate = self
         
+        setNavigationItem()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,12 +108,33 @@ class ForumViewController: BaseViewController {
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(addForumArticle))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func addForumArticle(sender: UIButton) {
+        
+        guard userID != "" else {
 
-        addArticleButton.imageView?.contentMode = .scaleAspectFill
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                    withIdentifier: String(describing: AuthenticationViewController.self)
+                    ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .popover
 
-        addArticleButton.layer.cornerRadius = addArticleButton.frame.width / 2
+            present(authViewController, animated: true, completion: nil)
+            
+            return
+        }
+
+        let viewController = PublishForumArticleViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
     
@@ -140,28 +161,7 @@ class ForumViewController: BaseViewController {
         }
         
     }
-    
-    @IBAction func addArticleButton(_ sender: UIButton) {
-        
-        guard userID != "" else {
 
-            guard let authViewController = UIStoryboard.auth.instantiateViewController(
-                    withIdentifier: String(describing: AuthenticationViewController.self)
-                    ) as? AuthenticationViewController else { return }
-            
-            authViewController.modalPresentationStyle = .popover
-
-            present(authViewController, animated: true, completion: nil)
-            
-            return
-        }
-
-        let viewController = PublishForumArticleViewController()
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
     func fetchData() {
         
         forumArticleManager.listenData(completion: { [weak self] result in

@@ -68,20 +68,6 @@
                                 <color key="backgroundColor" red="0.89803922179999995" green="0.74509805439999999" blue="0.50980395079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWO-8Y-0I2">
-                                <rect key="frame" x="344" y="780" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.70980392156862748" green="0.52941176470588236" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="Fu7-0Z-hao"/>
-                                    <constraint firstAttribute="height" constant="50" id="pph-mz-gxG"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
-                                <connections>
-                                    <action selector="addArticleButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="CU1-vv-hLW"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -92,7 +78,6 @@
                             <constraint firstItem="x11-Ym-M6h" firstAttribute="top" secondItem="iM4-Ah-KgY" secondAttribute="bottom" id="KL3-9I-qVy"/>
                             <constraint firstItem="eEy-Fd-zt4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="MWc-BL-QKp"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eEy-Fd-zt4" secondAttribute="bottom" constant="16" id="PpD-Kg-lK8"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TWO-8Y-0I2" secondAttribute="trailing" constant="20" id="QGj-ZB-G7o"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eEy-Fd-zt4" secondAttribute="trailing" id="Qa4-kY-dxB"/>
                             <constraint firstItem="gK1-Su-8Lg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="fOo-lL-4l7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="gK1-Su-8Lg" secondAttribute="trailing" constant="20" id="la8-xw-J9h"/>
@@ -102,14 +87,12 @@
                             <constraint firstItem="eEy-Fd-zt4" firstAttribute="top" secondItem="iM4-Ah-KgY" secondAttribute="bottom" constant="6" id="wTH-MQ-vVG"/>
                             <constraint firstItem="x11-Ym-M6h" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="wdJ-iu-zvp"/>
                             <constraint firstItem="iM4-Ah-KgY" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="zXH-ES-11W"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="TWO-8Y-0I2" secondAttribute="bottom" constant="32" id="zmh-Gf-UbB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="討論區" id="CLd-5v-9Wr">
                         <barButtonItem key="backBarButtonItem" title=" " id="Iro-N9-qRT"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="addArticleButton" destination="TWO-8Y-0I2" id="7LB-HC-Gop"/>
                         <outlet property="articleTableView" destination="eEy-Fd-zt4" id="5Bs-N7-Mc1"/>
                         <outlet property="searchButton" destination="Y1y-fa-3Ah" id="W1p-ki-JyK"/>
                         <outlet property="searchTextField" destination="QZh-N3-uFJ" id="tt7-DE-1ai"/>
@@ -238,7 +221,6 @@
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="photo" catalog="system" width="128" height="93"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
