@@ -135,16 +135,16 @@ class StudyGoalViewController: UIViewController {
             
         }
         
-        tabBarController?.tabBar.isHidden = true
+//        tabBarController?.tabBar.isHidden = true
         
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tabBarController?.tabBar.isHidden = false
-        
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tabBarController?.tabBar.isHidden = false
+//
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

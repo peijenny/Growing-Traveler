@@ -43,20 +43,27 @@ class AuthenticationViewController: UIViewController {
     
     var errorManager = ErrorManager()
     
-    var users: [UserInfo] = [] {
-        
-        didSet {
-            
-            setupProviderLoginView()
-            
-        }
-        
-    }
+    var users: [UserInfo] = []
 
+    @IBOutlet weak var signInButton: UIButton!
+    
+    @IBOutlet weak var signUpButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         fetchUserData()
+        
+        setupProviderLoginView()
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        signInButton.layer.cornerRadius = 5
+        
+        signUpButton.layer.cornerRadius = 5
         
     }
     
@@ -90,7 +97,7 @@ class AuthenticationViewController: UIViewController {
             self, action: #selector(handleAuthorizationAppleIDButtonPress),
             for: .touchUpInside)
         
-        authorizationButton.frame = self.signInWithAppleButtonView.bounds
+        authorizationButton.frame = signInWithAppleButtonView.bounds
         
         self.signInWithAppleButtonView.addSubview(authorizationButton)
         
