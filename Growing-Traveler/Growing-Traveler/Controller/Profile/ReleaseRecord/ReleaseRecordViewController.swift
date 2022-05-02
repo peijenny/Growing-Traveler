@@ -24,7 +24,7 @@ class ReleaseRecordViewController: UIViewController {
         
         self.title = "發佈文章紀錄"
         
-        self.view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
 
         setTableView()
         
@@ -106,14 +106,16 @@ class ReleaseRecordViewController: UIViewController {
         
         releaseRecordTableView.backgroundColor = UIColor.clear
         
+        releaseRecordTableView.separatorStyle = .none
+        
         view.addSubview(releaseRecordTableView)
         
         releaseRecordTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             releaseRecordTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            releaseRecordTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            releaseRecordTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            releaseRecordTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            releaseRecordTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             releaseRecordTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
         ])
         

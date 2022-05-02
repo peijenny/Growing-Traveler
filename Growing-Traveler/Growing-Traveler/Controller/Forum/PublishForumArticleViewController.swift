@@ -380,5 +380,7 @@ extension PublishForumArticleViewController: UITextViewDelegate {
             textView.textColor = UIColor.lightGray
             
         }
+        
     }
+    
 }

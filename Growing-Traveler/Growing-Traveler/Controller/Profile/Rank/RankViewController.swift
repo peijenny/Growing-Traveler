@@ -33,6 +33,10 @@ class RankViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var rankBackgroundView: UIView!
+    
+    @IBOutlet weak var rankCircleView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,6 +48,15 @@ class RankViewController: UIViewController {
             UINib(nibName: String(describing: RankTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: RankTableViewCell.self)
         )
+        
+        rankBackgroundView.layer.cornerRadius = 20
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        rankCircleView.layer.cornerRadius = rankCircleView.frame.width / 2
         
     }
     

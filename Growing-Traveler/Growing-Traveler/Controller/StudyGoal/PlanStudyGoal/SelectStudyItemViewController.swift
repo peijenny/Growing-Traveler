@@ -204,5 +204,7 @@ extension SelectStudyItemViewController: UITextViewDelegate {
             textView.textColor = UIColor.systemGray3
             
         }
+        
     }
+    
 }

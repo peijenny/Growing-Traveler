@@ -32,7 +32,7 @@ class MoreArticlesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
         
         if let forumType = forumType {
             
@@ -125,8 +125,8 @@ class MoreArticlesViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             moreArticlesTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            moreArticlesTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            moreArticlesTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            moreArticlesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            moreArticlesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             moreArticlesTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
         ])
         

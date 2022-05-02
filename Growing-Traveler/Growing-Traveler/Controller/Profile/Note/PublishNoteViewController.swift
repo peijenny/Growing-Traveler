@@ -46,6 +46,24 @@ class PublishNoteViewController: BaseViewController {
         modifyTimeLabel.text = formatter.string(from: createTime)
         
         setNavigationItems()
+        
+        noteTextView.layer.borderColor = UIColor.hexStringToUIColor(hex: "9C8F96").cgColor
+        
+        noteTextView.layer.borderWidth = 1
+        
+        noteTextView.layer.cornerRadius = 5
+        
+        if noteTextView.text == "請描述內容......" {
+            
+            noteTextView.textColor = UIColor.lightGray
+            
+        } else {
+            
+            noteTextView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
+            
+        }
+
+        noteTextView.delegate = self
 
     }
     
@@ -283,6 +301,34 @@ extension PublishNoteViewController: UIImagePickerControllerDelegate, UINavigati
 
         dismiss(animated: true)
 
+    }
+    
+}
+
+extension PublishNoteViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        if textView.textColor == UIColor.lightGray {
+            
+            textView.text = nil
+            
+            textView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
+            
+        }
+        
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        if textView.text.isEmpty {
+            
+            textView.text = "請描述內容......"
+            
+            textView.textColor = UIColor.lightGray
+            
+        }
+        
     }
     
 }
