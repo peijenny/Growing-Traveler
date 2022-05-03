@@ -112,7 +112,7 @@ class ForumViewController: BaseViewController {
         
         fetchFriendBlockadeListData()
         
-        fetchSearchData()
+//        fetchSearchData()
         
         fetchUserInfoData()
         
@@ -162,6 +162,8 @@ class ForumViewController: BaseViewController {
                 strongSelf.blockadeList = userFriend.blockadeList
                 
                 strongSelf.fetchData()
+                
+                strongSelf.fetchSearchData()
                 
                 strongSelf.articleTableView.reloadData()
                 
@@ -268,8 +270,20 @@ class ForumViewController: BaseViewController {
             switch result {
                 
             case .success(let data):
+
+                var filterData = data
                 
-                strongSelf.forumArticles = data
+                if strongSelf.blockadeList != [] {
+                    
+                    for index in 0..<strongSelf.blockadeList.count {
+                        
+                        filterData = data.filter({ $0.userID != strongSelf.blockadeList[index] })
+                        
+                    }
+                    
+                }
+                
+                strongSelf.forumArticles = filterData
                 
             case .failure(let error):
                 
@@ -330,11 +344,9 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let forumArticleType = forumArticleType else { return cell }
         
-        var amountOver = Bool()
+        var isLastOne = false
         
-        var isLastOne = Bool()
-        
-        let isSearch = inputText != nil
+        var amountOver = forumArticles.filter({ $0.forumType == forumType[indexPath.section] }).count > 5
         
         if indexPath.section == 0 && inputText == nil {
             
@@ -351,16 +363,7 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
                 
             }
             
-            amountOver = searchArticels.count > forumArticleType.essay.count
-            
             isLastOne = forumArticleType.essay.count - 1 == indexPath.row
-            
-            cell.showLoadMoreButton(
-                amountOver: amountOver,
-                isSearch: isSearch,
-                isLastOne: isLastOne,
-                indexPathCount: forumArticleType.essay.count
-            )
             
         } else if indexPath.section == 1 && inputText == nil {
             
@@ -377,16 +380,7 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
                 
             }
             
-            amountOver = searchArticels.count > forumArticleType.question.count
-            
             isLastOne = forumArticleType.question.count - 1 == indexPath.row
-            
-            cell.showLoadMoreButton(
-                amountOver: amountOver,
-                isSearch: isSearch,
-                isLastOne: isLastOne,
-                indexPathCount: forumArticleType.question.count
-            )
             
         } else if indexPath.section == 2 && inputText == nil {
             
@@ -403,20 +397,15 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
                 
             }
             
-            amountOver = searchArticels.count > forumArticleType.chat.count
-            
             isLastOne = forumArticleType.chat.count - 1 == indexPath.row
-            
-            cell.showLoadMoreButton(
-                amountOver: amountOver,
-                isSearch: isSearch,
-                isLastOne: isLastOne,
-                indexPathCount: forumArticleType.chat.count
-            )
             
         }
         
         if inputText != nil {
+            
+            amountOver = searchArticels.count > 5
+            
+            isLastOne = false
 
             let userInfo = usersInfo.filter({ $0.userID == searchArticels[indexPath.row].userID })
 
@@ -431,14 +420,9 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
 
             }
             
-            cell.showLoadMoreButton(
-                amountOver: amountOver,
-                isSearch: isSearch,
-                isLastOne: isLastOne,
-                indexPathCount: searchArticels.count
-            )
-
         }
+        
+        cell.showLoadMoreButton(amountOver: amountOver, isLastOne: isLastOne)
         
         cell.loadMoreButton.addTarget(self, action: #selector(loadMoreButton), for: .touchUpInside)
         
