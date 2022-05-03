@@ -28,6 +28,10 @@ class MoreArticlesViewController: UIViewController {
         }
         
     }
+    
+    var friendManager = FriendManager()
+    
+    var blockadeList: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +44,6 @@ class MoreArticlesViewController: UIViewController {
             
         }
         
-        fetchData()
-        
         setTableView()
         
     }
@@ -50,6 +52,8 @@ class MoreArticlesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         fetchUserInfoData()
+        
+        fetchFriendBlockadeListData()
         
     }
     
@@ -91,17 +95,56 @@ class MoreArticlesViewController: UIViewController {
         
     }
     
+    func fetchFriendBlockadeListData() {
+        
+        friendManager.fetchFriendListData(
+        fetchUserID: userID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let userFriend):
+                
+                strongSelf.blockadeList = userFriend.blockadeList
+                
+                strongSelf.fetchData()
+                
+                strongSelf.moreArticlesTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+                
+        }
+        
+    }
+    
     func fetchData() {
         
-        forumArticleManager.fetchData(forumType: forumType ?? "", completion: { [weak self] result in
+        forumArticleManager.fetchData(forumType: forumType ?? "") { [weak self] result in
             
             guard let strongSelf = self else { return }
             
             switch result {
                 
             case .success(let data):
+                
+                var filterData = data
+                
+                if strongSelf.blockadeList != [] {
+                    
+                    for index in 0..<strongSelf.blockadeList.count {
+                        
+                        filterData = filterData.filter({ $0.userID != strongSelf.blockadeList[index] })
+                        
+                    }
+                    
+                }
 
-                strongSelf.forumArticles = data
+                strongSelf.forumArticles = filterData
                 
             case .failure(let error):
                 
@@ -109,7 +152,7 @@ class MoreArticlesViewController: UIViewController {
                 
             }
             
-        })
+        }
         
     }
     

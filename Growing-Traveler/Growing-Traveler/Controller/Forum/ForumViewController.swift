@@ -217,7 +217,7 @@ class ForumViewController: BaseViewController {
                     
                     for index in 0..<strongSelf.blockadeList.count {
                         
-                        filterData = data.filter({ $0.userID != strongSelf.blockadeList[index] })
+                        filterData = filterData.filter({ $0.userID != strongSelf.blockadeList[index] })
                         
                     }
                     
@@ -277,7 +277,7 @@ class ForumViewController: BaseViewController {
                     
                     for index in 0..<strongSelf.blockadeList.count {
                         
-                        filterData = data.filter({ $0.userID != strongSelf.blockadeList[index] })
+                        filterData = filterData.filter({ $0.userID != strongSelf.blockadeList[index] })
                         
                     }
                     
