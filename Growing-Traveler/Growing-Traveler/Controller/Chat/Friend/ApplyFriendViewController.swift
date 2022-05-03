@@ -370,8 +370,9 @@ extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource 
         guard let cell = cell as? FriendListTableViewCell else { return cell }
         
         cell.showFriendInfo(
-            friendName: friendsInfo[indexPath.row].userName,
-            friendPhotoLink: friendsInfo[indexPath.row].userPhoto)
+            friendInfo: friendsInfo[indexPath.row],
+            blockadeList: ownFriend?.blockadeList ?? [],
+            deleteAccount: false)
         
         return cell
         

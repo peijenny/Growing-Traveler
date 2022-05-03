@@ -102,6 +102,8 @@ class FriendViewController: UIViewController {
                 
                 strongSelf.usersInfo = usersInfo
                 
+                strongSelf.friendListTableView.reloadData()
+                
             case .failure(let error):
                 
                 print(error)
@@ -123,6 +125,8 @@ class FriendViewController: UIViewController {
             case .success(let friend):
 
                 strongSelf.friend = friend
+                
+                strongSelf.friendListTableView.reloadData()
 
             case .failure(let error):
 
@@ -155,6 +159,8 @@ class FriendViewController: UIViewController {
                     strongSelf.friendBackgroundView.isHidden = true
                     
                 }
+                
+                strongSelf.friendListTableView.reloadData()
 
             case .failure(let error):
                 
@@ -236,8 +242,28 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
 
         let userInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID })
         
-        cell.showFriendInfo(friendName: userInfo[0].userName,
-                             friendPhotoLink: userInfo[0].userPhoto)
+        if userInfo.count != 0 {
+            
+            cell.showFriendInfo(
+                friendInfo: userInfo[0],
+                blockadeList: friend?.blockadeList ?? [],
+                deleteAccount: false)
+            
+        } else {
+            
+            let blockUserInfo = UserInfo(
+                userID: friendsChat[indexPath.row].friendID,
+                userName: friendsChat[indexPath.row].friendName,
+                userEmail: "", userPhoto: "", userPhone: "", signInType: "",
+                achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: []),
+                certification: [])
+            
+            cell.showFriendInfo(
+                friendInfo: blockUserInfo,
+                blockadeList: friend?.blockadeList ?? [],
+                deleteAccount: true)
+            
+        }
         
         return cell
         
@@ -245,16 +271,20 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let viewController = UIStoryboard(name: "Chat", bundle: nil)
-            .instantiateViewController(withIdentifier: String(describing: ChatViewController.self))
-        
-        guard let viewController = viewController as? ChatViewController else { return }
-        
-        viewController.friendID = friendsChat[indexPath.row].friendID
-        
-        viewController.userName = friend?.userName ?? ""
-        
-        navigationController?.pushViewController(viewController, animated: true)
+        if friend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).count == 0 {
+            
+            let viewController = UIStoryboard(name: "Chat", bundle: nil)
+                .instantiateViewController(withIdentifier: String(describing: ChatViewController.self))
+            
+            guard let viewController = viewController as? ChatViewController else { return }
+            
+            viewController.friendID = friendsChat[indexPath.row].friendID
+            
+            viewController.userName = friend?.userName ?? ""
+            
+            navigationController?.pushViewController(viewController, animated: true)
+            
+        }
         
     }
     

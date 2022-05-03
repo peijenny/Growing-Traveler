@@ -27,13 +27,25 @@ class FriendListTableViewCell: UITableViewCell {
         
     }
     
-    func showFriendInfo(friendName: String, friendPhotoLink: String) {
+    func showFriendInfo(friendInfo: UserInfo, blockadeList: [String], deleteAccount: Bool) {
         
-        friendNameLabel.text = friendName
-        
-        if friendPhotoLink != "" {
+        if blockadeList.filter({ $0 == friendInfo.userID }).count != 0 {
             
-            friendIconImageView.loadImage(friendPhotoLink)
+            friendNameLabel.text = "\(friendInfo.userName) (帳號已封鎖)"
+            
+        }  else if deleteAccount {
+            
+            friendNameLabel.text = "\(friendInfo.userName) (帳號已刪除)"
+            
+        } else {
+            
+            friendNameLabel.text = friendInfo.userName
+            
+        }
+        
+        if friendInfo.userPhoto != "" {
+            
+            friendIconImageView.loadImage(friendInfo.userPhoto)
             
         }
         
