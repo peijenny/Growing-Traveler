@@ -24,7 +24,7 @@
             </objects>
             <point key="canvasLocation" x="-774" y="54"/>
         </scene>
-        <!--好友列表-->
+        <!--聊天室-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="FriendViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
@@ -84,7 +84,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Zxj-yt-UX8" secondAttribute="trailing" constant="8" id="w68-jd-gDW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="好友列表" id="idY-Gf-ohl">
+                    <navigationItem key="navigationItem" title="聊天室" id="idY-Gf-ohl">
                         <barButtonItem key="backBarButtonItem" title=" " id="QoK-9A-qP3"/>
                     </navigationItem>
                     <connections>
@@ -105,7 +105,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="n3K-HG-jVn">
-                                <rect key="frame" x="16" y="60" width="382" height="730"/>
+                                <rect key="frame" x="0.0" y="60" width="414" height="730"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxb-Ts-Lr8">
@@ -149,13 +149,13 @@
                             <constraint firstItem="Pcf-eM-Fi9" firstAttribute="leading" secondItem="1e9-pP-Hbq" secondAttribute="trailing" constant="10" id="PHy-Nz-xSC"/>
                             <constraint firstItem="Kxb-Ts-Lr8" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="VUf-Vb-Mq7"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="1e9-pP-Hbq" secondAttribute="bottom" constant="16" id="aSg-PE-PcA"/>
-                            <constraint firstItem="AH4-fn-PXL" firstAttribute="trailing" secondItem="n3K-HG-jVn" secondAttribute="trailing" constant="16" id="aUy-7E-zWb"/>
+                            <constraint firstItem="AH4-fn-PXL" firstAttribute="trailing" secondItem="n3K-HG-jVn" secondAttribute="trailing" id="aUy-7E-zWb"/>
                             <constraint firstItem="1e9-pP-Hbq" firstAttribute="leading" secondItem="AH4-fn-PXL" secondAttribute="leading" constant="16" id="eGe-oT-aGV"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="trailing" secondItem="Kxb-Ts-Lr8" secondAttribute="trailing" constant="16" id="k9A-uy-G2q"/>
                             <constraint firstItem="Kxb-Ts-Lr8" firstAttribute="leading" secondItem="Pcf-eM-Fi9" secondAttribute="trailing" constant="10" id="lX7-Xf-xfV"/>
                             <constraint firstItem="1e9-pP-Hbq" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="nK5-RF-wa0"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="Kxb-Ts-Lr8" secondAttribute="bottom" constant="16" id="wRb-VU-RHv"/>
-                            <constraint firstItem="n3K-HG-jVn" firstAttribute="leading" secondItem="AH4-fn-PXL" secondAttribute="leading" constant="16" id="yCD-7R-qg1"/>
+                            <constraint firstItem="n3K-HG-jVn" firstAttribute="leading" secondItem="AH4-fn-PXL" secondAttribute="leading" id="yCD-7R-qg1"/>
                         </constraints>
                     </view>
                     <connections>
