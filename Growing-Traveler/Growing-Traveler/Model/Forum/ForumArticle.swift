@@ -57,3 +57,11 @@ struct UploadImageResult: Decodable {
     
     let data: Data
 }
+
+struct DeleteArticle: Codable {
+    
+    var articleID: String
+    
+    var articleMessage: [ArticleMessage]
+    
+}

@@ -1,0 +1,107 @@
+//
+//  SignOutTableViewCell.swift
+//  Growing-Traveler
+//
+//  Created by Jenny Hung on 2022/4/26.
+//
+
+import UIKit
+import PKHUD
+
+class SignUpTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var userPhotoImageView: UIImageView!
+    
+    @IBOutlet weak var userPhotoLinkLabel: UILabel!
+    
+    @IBOutlet weak var uploadUserPhotoButton: UIButton!
+    
+    @IBOutlet weak var userNameTextField: UITextField!
+    
+    @IBOutlet weak var userAccountTextField: UITextField!
+    
+    @IBOutlet weak var userPasswordTextField: UITextField!
+    
+    @IBOutlet weak var userCheckPasswordTextField: UITextField!
+    
+    @IBOutlet weak var signUpButton: UIButton!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        userPhotoImageView.contentMode = .scaleAspectFill
+
+        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
+        
+    }
+    
+    func setUserPhoto(userPhotoLink: String) {
+        
+        userPhotoLinkLabel.text = userPhotoLink
+        
+        userPhotoImageView.loadImage(userPhotoLink)
+        
+    }
+    
+    func getSignUpData() -> SignUp? {
+        
+        let userPhotoLink = userPhotoLinkLabel.text ?? ""
+        
+        guard let accountName = userNameTextField.text, userNameTextField.text != ""  else {
+            
+            HUD.flash(.label("請輸入姓名！"), delay: 0.5)
+            
+            return nil
+        }
+        
+        guard let accountEmail = userAccountTextField.text, userAccountTextField.text != ""  else {
+
+            HUD.flash(.label("請輸入帳號！"), delay: 0.5)
+            
+            return nil
+            
+        }
+        
+        guard let accountPassword = userPasswordTextField.text, userPasswordTextField.text != "" else {
+
+            HUD.flash(.label("請輸入密碼！"), delay: 0.5)
+            
+            return nil
+            
+        }
+        
+        guard userCheckPasswordTextField.text != "" else {
+            
+            HUD.flash(.label("請輸入檢查碼！"), delay: 0.5)
+            
+            return nil
+            
+        }
+        
+        guard userPasswordTextField.text == userCheckPasswordTextField.text else {
+            
+            HUD.flash(.label("密碼與檢查碼不一致！"), delay: 0.5)
+            
+            return nil
+            
+        }
+        
+        guard accountEmail.range(of: "@") != nil else {
+
+            HUD.flash(.label("帳號格式錯誤！"), delay: 0.5)
+            
+            return nil
+            
+        }
+        
+        return SignUp(userName: accountName, userPhotoLink: userPhotoLink,
+                      email: accountEmail, password: accountPassword)
+        
+    }
+    
+}

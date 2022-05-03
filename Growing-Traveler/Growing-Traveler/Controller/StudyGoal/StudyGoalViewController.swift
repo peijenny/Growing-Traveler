@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import PKHUD
+import Lottie
 
 enum StatusType {
     
@@ -51,24 +53,32 @@ class StudyGoalViewController: UIViewController {
     
     var userManager = UserManager()
     
-    var user: User?
+    var user: UserInfo?
     
-    var studyGoals: [StudyGoal]? {
-        
-        didSet {
-            
-            studyGoalTableView.reloadData()
-            
-        }
-        
-    }
+    var studyGoals: [StudyGoal] = []
+    
+    var titleText = StatusType.running.title
     
     var topCGFloat = CGFloat()
     
     var bottomCGFloat = CGFloat()
-
+    
+    @IBOutlet weak var underlineView: UIView!
+    
+    var selectLineView = UIView()
+    
+    @IBOutlet weak var headerAnimationView: UIView!
+    
+    @IBOutlet weak var studyGoalBackgroundView: UIView!
+    
+    var lottieAnimation = AnimationView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setHeaserLottieView()
+        
+        setSelectLineView()
 
         // MARK: - 註冊 TableView header / footer / cell
         studyGoalTableView.register(
@@ -86,20 +96,55 @@ class StudyGoalViewController: UIViewController {
             forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
         )
         
-        listenData(status: StatusType.running.title)
-        
         // MARK: - 右上角的 成長日曆 Button
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage.asset(.timetable),
+            image: UIImage.asset(.calendar),
             style: .plain, target: self,
             action: #selector(pushToCalenderPage)
         )
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
-        fetchUserData()
+        if userID != "" {
+            
+            studyGoalBackgroundView.isHidden = true
+            
+            fetchUserData()
+            
+            listenData(status: StatusType.running.title)
+            
+        } else {
+            
+            studyGoalBackgroundView.isHidden = false
+        }
         
     }
+ 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        lottieAnimation.play()
+        
+        if userID == "" {
+            
+            studyGoals.removeAll()
+            
+            studyGoalTableView.reloadData()
+            
+            studyGoalTableView.isHidden = false
+            
+        }
+        
+//        tabBarController?.tabBar.isHidden = true
+        
+    }
+
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tabBarController?.tabBar.isHidden = false
+//
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -111,9 +156,47 @@ class StudyGoalViewController: UIViewController {
         
     }
     
+    func setSelectLineView() {
+        
+        let viewWidth = UIScreen.main.bounds.width / CGFloat(3.0)
+        
+        selectLineView.frame = CGRect(
+            x: viewWidth, y: 0,
+            width: viewWidth,
+            height: underlineView.frame.height
+        )
+        
+        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: "0384BD")
+        
+        underlineView.addSubview(selectLineView)
+        
+    }
+    
+    func setHeaserLottieView() {
+        
+        lottieAnimation = AnimationView(name: "Growth-Animation")
+        
+        lottieAnimation.contentMode = .scaleAspectFit
+        
+        lottieAnimation.frame = CGRect(
+            x: 0, y: 30,
+            width: headerAnimationView.frame.width,
+            height: headerAnimationView.frame.height
+        )
+        
+//        lottieAnimation.center = headerAnimationView.center
+        
+        headerAnimationView.addSubview(lottieAnimation)
+        
+        lottieAnimation.loopMode = .loop
+        
+//        lottieAnimation.play()
+
+    }
+    
     func fetchUserData() {
         
-        userManager.fetchData { [weak self] result in
+        userManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -169,6 +252,19 @@ class StudyGoalViewController: UIViewController {
     // MARK: - 新增個人學習計劃 Button
     @IBAction func addStudyGoalButton(_ sender: UIButton) {
         
+        guard userID != "" else {
+            
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                    withIdentifier: String(describing: AuthenticationViewController.self)
+                    ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .popover
+
+            present(authViewController, animated: true, completion: nil)
+            
+            return
+        }
+        
         pushToPlanStudyGoalPage(studyGoal: nil)
         
     }
@@ -187,7 +283,7 @@ class StudyGoalViewController: UIViewController {
         
         viewController.studyGoal = studyGoal
         
-        viewController.user = user
+//        viewController.user = user
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -196,7 +292,7 @@ class StudyGoalViewController: UIViewController {
     // MARK: - 即時監聽 Firestore 的個人學習計畫
     func listenData(status: String) {
         
-        studyGoalManager.listenData(completion: { [weak self] result in
+        studyGoalManager.fetchData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -264,26 +360,59 @@ class StudyGoalViewController: UIViewController {
                 
                 strongSelf.studyGoals = resultData
                 
+                if resultData.count == 0 {
+                    
+                    strongSelf.studyGoalBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    strongSelf.studyGoalBackgroundView.isHidden = true
+                    
+                }
+                
+                strongSelf.studyGoalTableView.reloadData()
+                
             case .failure(let error):
                 
                 print(error)
                 
             }
             
-        })
+        }
         
     }
     
     // MARK: - NavBar 下方的 (待處理 / 處理中 / 已處理) Button
     @IBAction func handleStatusButton(_ sender: UIButton) {
         
-        _ = statusButton.map({ $0.backgroundColor = UIColor.lightGray })
+        if userID == "" {
+            
+            studyGoals.removeAll()
+            
+            studyGoalTableView.reloadData()
+            
+            studyGoalTableView.isHidden = false
+            
+        }
         
-        sender.backgroundColor = UIColor.black
+        // 動畫
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+
+            guard let strongSelf = self else { return }
+            
+            strongSelf.selectLineView.frame.origin.x = sender.frame.origin.x
+            
+        })
+        
+        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: "69B6CA") })
+        
+        sender.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
         
         guard let titleText = sender.titleLabel?.text else { return }
         
         listenData(status: "\(titleText)")
+        
+        self.titleText = titleText
         
     }
     
@@ -294,13 +423,13 @@ extension StudyGoalViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return studyGoals?.count ?? 0
+        return studyGoals.count
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return studyGoals?[section].studyItems.count ?? 0
+        return studyGoals[section].studyItems.count
         
     }
     
@@ -318,18 +447,13 @@ extension StudyGoalViewController: UITableViewDataSource {
         cell.checkButton.addTarget(
             self, action: #selector(checkItemButton), for: .touchUpInside)
         
-        if let isCompleted = studyGoals?[indexPath.section]
-            .studyItems[indexPath.row].isCompleted {
-            
-            cell.checkIsCompleted(isCompleted: isCompleted)
-            
-        }
+        let isCompleted = studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted
         
-        if let studyItem = studyGoals?[indexPath.section]
-            .studyItems[indexPath.row] {
-            
-            cell.showStudyItem(studyItem: studyItem)
-        }
+        cell.checkIsCompleted(isCompleted: isCompleted)
+        
+        let studyItem = studyGoals[indexPath.section].studyItems[indexPath.row]
+        
+        cell.showStudyItem(studyItem: studyItem)
         
         return cell
         
@@ -341,23 +465,17 @@ extension StudyGoalViewController: UITableViewDataSource {
 
         if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
             
-            guard var studyGoals = studyGoals else { return }
-            
             guard var user = user else { return }
 
-            if sender.backgroundColor?.cgColor == UIColor.systemGray5.cgColor {
-
-                sender.backgroundColor = UIColor.black
+            if sender.tintColor?.cgColor == UIColor.clear.cgColor {
                 
-                sender.tintColor = UIColor.white
+                sender.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
                 
                 studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = true
                 
                 user.achievement.experienceValue += 50
 
             } else {
-
-                sender.backgroundColor = UIColor.systemGray5
                 
                 sender.tintColor = UIColor.clear
                 
@@ -370,6 +488,8 @@ extension StudyGoalViewController: UITableViewDataSource {
             studyGoalManager.updateData(studyGoal: studyGoals[indexPath.section])
             
             if studyGoals[indexPath.section].studyItems.allSatisfy({ $0.isCompleted == true}) {
+                
+                HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
                 
                 if user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).count == 0 {
                     
@@ -399,6 +519,8 @@ extension StudyGoalViewController: UITableViewDataSource {
                 
             }
             
+            listenData(status: titleText)
+            
             userManager.updateData(user: user)
             
         }
@@ -407,11 +529,7 @@ extension StudyGoalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let studyGoal = studyGoals?[indexPath.section] {
-            
-            pushToPlanStudyGoalPage(studyGoal: studyGoal)
-            
-        }
+//        pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
         
     }
     
@@ -427,11 +545,7 @@ extension StudyGoalViewController: UITableViewDelegate {
 
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
         
-        if let studyGoal = studyGoals?[section] {
-            
-            headerView.showStudyGoalHeader(studyGoal: studyGoal)
-            
-        }
+        headerView.showStudyGoalHeader(studyGoal: studyGoals[section])
 
         tableView.tableHeaderView = UIView.init(frame: CGRect.init(
             x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height))
@@ -455,11 +569,7 @@ extension StudyGoalViewController: UITableViewDelegate {
 
         guard let footerView = footerView as? StudyGoalFooterView else { return footerView }
         
-        if let studyGoal = studyGoals?[section] {
-            
-            footerView.showStudyGoalFooter(studyGoal: studyGoal)
-            
-        }
+        footerView.showStudyGoalFooter(studyGoal: studyGoals[section])
         
         tableView.tableFooterView = UIView.init(frame: CGRect.init(
             x: 0, y: 0, width: footerView.frame.width, height: footerView.frame.height))
@@ -494,19 +604,19 @@ extension StudyGoalViewController: UITableViewDelegate {
         
         let footerView = sender.view as? StudyGoalFooterView
         
-        for index in 0..<(studyGoals?.count ?? 0) {
+        for index in 0..<studyGoals.count {
             
             if sender.view == headerView &&
-                headerView?.hideRecordLabel.text == studyGoals?[index].id {
+                headerView?.hideRecordLabel.text == studyGoals[index].id {
                 
-                pushToPlanStudyGoalPage(studyGoal: studyGoals?[index])
+                pushToPlanStudyGoalPage(studyGoal: studyGoals[index])
                 
             }
             
             if sender.view == footerView &&
-                footerView?.hideRecordLabel.text == studyGoals?[index].id {
+                footerView?.hideRecordLabel.text == studyGoals[index].id {
                 
-                pushToPlanStudyGoalPage(studyGoal: studyGoals?[index])
+                pushToPlanStudyGoalPage(studyGoal: studyGoals[index])
                 
             }
             
@@ -515,16 +625,31 @@ extension StudyGoalViewController: UITableViewDelegate {
     }
     
     @objc func deleteRowButton(_ sender: UIButton) {
+        
+        let alertController = UIAlertController(
+            title: "刪除個人學習計劃",
+            message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
+            preferredStyle: .alert)
+        
+        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+            
+            self.studyGoalManager.deleteData(
+                studyGoal: self.studyGoals[sender.tag])
 
-        if let studyGoal = studyGoals?[sender.tag] {
+            self.studyGoals.remove(at: sender.tag)
 
-            studyGoalManager.deleteData(studyGoal: studyGoal)
+            self.studyGoalTableView.reloadData()
+
 
         }
-
-        studyGoals?.remove(at: sender.tag)
-
-        studyGoalTableView.reloadData()
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        
+        alertController.addAction(agreeAction)
+        
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
 
     }
     

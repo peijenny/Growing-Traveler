@@ -11,6 +11,8 @@ struct Chat: Codable {
     
     var friendID: String
     
+    var friendName: String
+    
     var messageContent: [MessageContent]
     
 }

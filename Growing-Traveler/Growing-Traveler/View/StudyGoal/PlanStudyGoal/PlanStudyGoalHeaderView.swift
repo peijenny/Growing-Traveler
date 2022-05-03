@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
   
@@ -24,8 +25,6 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
     @IBOutlet weak var categoryTagButton: UIButton!
     
     @IBOutlet weak var addStudyItemButton: UIButton!
-    
-    @IBOutlet weak var hintLabel: UILabel!
     
     @IBOutlet weak var openEditButton: UIButton!
     
@@ -79,28 +78,28 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
     func checkFullIn(itemCount: Int, startDate: Date, endDate: Date) -> Bool {
         
         if studyGoalTitleTextField.text == "" {
-
-            hintLabel.text = InputError.titleEmpty.title
+            
+            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
 
         } else if startDateTextField.text == "" {
-
-            hintLabel.text = InputError.startDateEmpty.title
+            
+            HUD.flash(.label(InputError.startDateEmpty.title), delay: 0.5)
 
         } else if endDateTextField.text == "" {
-
-            hintLabel.text = InputError.endDateEmpty.title
+            
+            HUD.flash(.label(InputError.endDateEmpty.title), delay: 0.5)
 
         } else if categoryTextField.text == "" {
-
-            hintLabel.text = InputError.categoryEmpty.title
+            
+            HUD.flash(.label(InputError.categoryEmpty.title), delay: 0.5)
 
         } else if itemCount == 0 {
-
-            hintLabel.text = InputError.studyItemEmpty.title
+            
+            HUD.flash(.label(InputError.studyItemEmpty.title), delay: 0.5)
 
         } else if startDate > endDate {
             
-            hintLabel.text = InputError.startDatereLativelyLate.title
+            HUD.flash(.label(InputError.startDatereLativelyLate.title), delay: 0.5)
             
         } else {
             

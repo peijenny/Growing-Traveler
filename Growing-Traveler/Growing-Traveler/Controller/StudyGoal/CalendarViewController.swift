@@ -38,8 +38,6 @@ class CalendarViewController: UIViewController {
     
     var studyGoals: [StudyGoal] = []
     
-    let formatter = DateFormatter()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,11 +48,16 @@ class CalendarViewController: UIViewController {
             forHeaderFooterViewReuseIdentifier: String(describing: StudyGoalHeaderView.self)
         )
         
-        fetchData(date: Date())
-        
         calendarView.appearance.titleWeekendColor = UIColor.lightGray
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchData(date: Date())
         
     }
     
@@ -76,27 +79,21 @@ class CalendarViewController: UIViewController {
         
         studyGoals.removeAll()
         
-        studyGoalManager.fetchData(completion: { [weak self] result in
+        studyGoalManager.fetchData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
             switch result {
                 
             case .success(let data):
-                
-                strongSelf.formatter.dateFormat = "yyyy.MM.dd"
-                
+
                 strongSelf.studyGoals = data.filter({
                     
-                    let startDate = Date(
-                        timeIntervalSince1970: $0.studyPeriod.startDate
-                    ).formatted()
+                    let startDate = $0.studyPeriod.startDate
 
-                    let selectDate = date.formatted()
+                    let selectDate = date.timeIntervalSince1970
 
-                    let endDate = Date(
-                        timeIntervalSince1970: $0.studyPeriod.endDate
-                    ).formatted()
+                    let endDate = $0.studyPeriod.endDate
                     
                     if startDate <= selectDate && endDate >= selectDate {
                         
@@ -107,7 +104,7 @@ class CalendarViewController: UIViewController {
                     return false
                     
                 })
-
+                
                 strongSelf.displayTableView.reloadData()
                 
             case .failure(let error):
@@ -115,7 +112,7 @@ class CalendarViewController: UIViewController {
                 print(error)
             }
             
-        })
+        }
         
     }
 

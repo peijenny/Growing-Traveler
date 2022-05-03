@@ -49,14 +49,83 @@ class ProfileViewController: UIViewController {
     
     let featureList: [FeatureType] = [.mandate, .rank, .note, .release, .license]
     
-    let featureImage: [ImageAsset] = [
-        .womanHoldingGuidebook, .teamMembersWorking,
-        .handedManSitting, .coworkersDoingMeeting, .womanSittingInFlowerBed]
+    let featureImage: [ImageAsset] = [.specialDeals, .vision, .idea, .blogging, .meditation]
+    
+    var userManager = UserManager()
+    
+    var userInfo: UserInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureDataSource()
+        
+        fetchUserInfoData()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .edit,
+            target: self,
+            action: #selector(setProfileButton))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tabBarController?.tabBar.isHidden = true
+//
+//    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tabBarController?.tabBar.isHidden = false
+//
+//    }
+    
+    @objc func setProfileButton(sender: UIButton) {
+        
+        let viewController = ProfileSettingViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    func fetchUserInfoData() {
+        
+        userManager.listenData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let userInfo):
+                
+                strongSelf.userInfo = userInfo
+                
+                strongSelf.setProfileView()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+    }
+    
+    func setProfileView() {
+        
+        guard let userInfo = userInfo else { return }
+        
+        profileView.userNameLabel.text = userInfo.userName
+        
+        profileView.userPhotoImageView.loadImage(userInfo.userPhoto)
+        
+        profileView.experienceValueLabel.text = "Ex. \(userInfo.achievement.experienceValue)"
         
     }
     
@@ -135,8 +204,6 @@ extension ProfileViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        print("TEST \(indexPath.item)")
-        
         switch indexPath.item {
 
         case 0:
@@ -145,14 +212,35 @@ extension ProfileViewController: UICollectionViewDelegate {
             
             navigationController?.pushViewController(viewController, animated: true)
             
-        case 1: break
+        case 1:
+            let viewController = UIStoryboard.profile
+                .instantiateViewController(withIdentifier: String(describing: RankViewController.self))
+            
+            guard let viewController = viewController as? RankViewController else { return }
+            
+            navigationController?.pushViewController(viewController, animated: true)
 
-        case 2: break
+        case 2:
+            
+            let viewController = UIStoryboard.profile
+                .instantiateViewController(withIdentifier: String(describing: NoteViewController.self))
+            
+            guard let viewController = viewController as? NoteViewController else { return }
+            
+            navigationController?.pushViewController(viewController, animated: true)
 
-        case 3: break
+        case 3:
+            
+            let viewController = ReleaseRecordViewController()
+            
+            navigationController?.pushViewController(viewController, animated: true)
 
-        case 4: break
-
+        case 4:
+            
+            let viewController = CertificationViewController()
+            
+            navigationController?.pushViewController(viewController, animated: true)
+            
         default: break
             
         }

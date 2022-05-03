@@ -19,6 +19,8 @@ private enum Tab {
     
     case profile
     
+//    case auth
+    
     func controller() -> UIViewController {
         
         var controller: UIViewController
@@ -39,6 +41,9 @@ private enum Tab {
         case .profile: controller = UIStoryboard.profile.instantiateInitialViewController() ??
             UIViewController()
             
+//        case .auth: controller = UIStoryboard.auth.instantiateInitialViewController() ??
+//            UIViewController()
+//
         }
         
         controller.tabBarItem = tabBarItem()
@@ -57,32 +62,32 @@ private enum Tab {
 
             return UITabBarItem(
                 title: nil,
-                image: UIImage.asset(.targetOrigin),
-                selectedImage: UIImage.asset(.targetSelect)
+                image: UIImage.asset(.checklistOrigin),
+                selectedImage: UIImage.asset(.checklistSelect)
             )
             
         case .forum:
-            
+
             return UITabBarItem(
                 title: nil,
-                image: UIImage.asset(.loudspeakerOrigin),
-                selectedImage: UIImage.asset(.loudspeakerSelect)
+                image: UIImage.asset(.askOrigin),
+                selectedImage: UIImage.asset(.askSelect)
             )
             
         case .chat:
             
             return UITabBarItem(
                 title: nil,
-                image: UIImage.asset(.chatBoxOrigin),
-                selectedImage: UIImage.asset(.chatBoxSelect)
+                image: UIImage.asset(.commentsOrigin),
+                selectedImage: UIImage.asset(.commentsSelect)
             )
             
         case .analysis:
             
             return UITabBarItem(
                 title: nil,
-                image: UIImage.asset(.statisticsOrigin),
-                selectedImage: UIImage.asset(.statisticsSelect)
+                image: UIImage.asset(.chartOrigin),
+                selectedImage: UIImage.asset(.chartSelect)
             )
             
         case .profile:
@@ -93,6 +98,10 @@ private enum Tab {
                 selectedImage: UIImage.asset(.userSelect)
             )
             
+//        case .auth:
+//
+//            return UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+//
         }
          
     }
@@ -102,6 +111,8 @@ private enum Tab {
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     private let tabs: [Tab] = [.studyGoal, .forum, .chat, .analysis, .profile]
+    
+//    private let tabs: [Tab] = [.studyGoal, .chat, .analysis, .profile, .auth]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +120,46 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         viewControllers = tabs.map({ $0.controller() })
         
         delegate = self
+        
+    }
+    
+    // MARK: - UITabBarControllerDelegate
+
+    func tabBarController(
+        _ tabBarController: UITabBarController,
+        shouldSelect viewController: UIViewController
+    ) -> Bool {
+
+//        guard let navVC = viewController as? UINavigationController,
+//              navVC.viewControllers.first is StudyGoalViewController
+//        else { return true }
+
+//        guard let navVC = viewController as? UINavigationController,
+//              navVC.viewControllers.first is ForumViewController
+//        else { return true }
+
+        if let viewControllers = tabBarController.viewControllers {
+            
+            if viewController != viewControllers[0] && viewController != viewControllers[1] {
+                
+                guard userID != "" else {
+
+                    if let authViewController = UIStoryboard.auth.instantiateInitialViewController() {
+
+                        authViewController.modalPresentationStyle = .popover
+
+                        present(authViewController, animated: true, completion: nil)
+                    }
+
+                    return false
+                }
+                
+            }
+            
+        }
+
+        return true
+        
     }
     
 }

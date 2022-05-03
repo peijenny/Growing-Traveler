@@ -17,50 +17,55 @@ class StudyGoalManager {
     // 監聽 即時修改的學習計劃 至 Firebase Firestore
     func listenData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
-        database.whereField("userID", isEqualTo: userID)
-            .addSnapshotListener { snapshot, error in
-            
-            var studyGoals: [StudyGoal] = []
-            
-            guard let snapshot = snapshot else {
+        if userID != "" {
+         
+            database.whereField("userID", isEqualTo: userID)
+                .addSnapshotListener { snapshot, error in
                 
-                print("Error fetching document: \(error!)")
+                var studyGoals: [StudyGoal] = []
                 
-                completion(Result.failure(error!))
-                
-                return
-                
-            }
-            
-            for document in snapshot.documents {
-                
-                do {
+                guard let snapshot = snapshot else {
                     
-                    if let studyGoal = try document.data(as: StudyGoal.self, decoder: Firestore.Decoder()) {
-                        
-                        studyGoals.append(studyGoal)
-                        
-                    }
+                    print("Error fetching document: \(error!)")
                     
-                } catch {
+                    completion(Result.failure(error!))
                     
-                    print(error)
-                    
-                    completion(Result.failure(error))
+                    return
                     
                 }
                 
-            }
-            
-            studyGoals = studyGoals.sorted { (lhs, rhs) in
+                for document in snapshot.documents {
+                    
+                    do {
+                        
+                        if let studyGoal = try document.data(as: StudyGoal.self, decoder: Firestore.Decoder()) {
+                            
+                            studyGoals.append(studyGoal)
+                            
+                        }
+                        
+                    } catch {
+                        
+                        print(error)
+                        
+                        completion(Result.failure(error))
+                        
+                    }
+                    
+                }
                 
-                return lhs.studyPeriod.endDate < rhs.studyPeriod.endDate
+                studyGoals = studyGoals.sorted { (lhs, rhs) in
+                    
+                    return lhs.studyPeriod.endDate < rhs.studyPeriod.endDate
+                    
+                }
+                
+                completion(Result.success(studyGoals))
                 
             }
-            
-            completion(Result.success(studyGoals))
             
         }
+        
     }
     
     // 上傳 新建的學習計劃 至 Firebase Firestore
@@ -81,44 +86,48 @@ class StudyGoalManager {
     // 取得 所有的學習計劃 至 StudyFoalViewController
     func fetchData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
-        database
-            .whereField("userID", isEqualTo: userID)
-            .getDocuments { snapshot, error in
+        if userID != "" {
             
-            var studyGoals: [StudyGoal] = []
-            
-            guard let snapshot = snapshot else {
+            database
+                .whereField("userID", isEqualTo: userID)
+                .getDocuments { snapshot, error in
                 
-                print("Error fetching document: \(error!)")
+                var studyGoals: [StudyGoal] = []
                 
-                completion(Result.failure(error!))
-                
-                return
-                
-            }
-            
-            for document in snapshot.documents {
-                
-                do {
+                guard let snapshot = snapshot else {
                     
-                    if let studyGoal = try document.data(as: StudyGoal.self, decoder: Firestore.Decoder()) {
-                        
-                        studyGoals.append(studyGoal)
-                        
-                        completion(Result.success(studyGoals))
-                        
-                    }
+                    print("Error fetching document: \(error!)")
                     
-                } catch {
+                    completion(Result.failure(error!))
                     
-                    print(error)
-                    
-                    completion(Result.failure(error))
+                    return
                     
                 }
                 
+                for document in snapshot.documents {
+                    
+                    do {
+                        
+                        if let studyGoal = try document.data(as: StudyGoal.self, decoder: Firestore.Decoder()) {
+                            
+                            studyGoals.append(studyGoal)
+                            
+                        }
+                        
+                    } catch {
+                        
+                        print(error)
+                        
+                        completion(Result.failure(error))
+                        
+                    }
+                    
+                }
+                    
+                completion(Result.success(studyGoals))
+                    
             }
-                
+            
         }
         
     }

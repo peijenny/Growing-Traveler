@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class PublishArticleTableViewCell: UITableViewCell {
 
@@ -21,8 +22,6 @@ class PublishArticleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var contentTextView: UITextView!
     
-    @IBOutlet weak var hintLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -33,7 +32,7 @@ class PublishArticleTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
         
-        contentTextView.layer.borderColor = UIColor.systemGray5.cgColor
+        contentTextView.layer.borderColor = UIColor.hexStringToUIColor(hex: "9C8F96").cgColor
         
         contentTextView.layer.borderWidth = 1
         
@@ -41,11 +40,11 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         if contentTextView.text == "請描述內容......" {
             
-            contentTextView.textColor = UIColor.systemGray3
+            contentTextView.textColor = UIColor.lightGray
             
         } else {
             
-            contentTextView.textColor = UIColor.black
+            contentTextView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
             
         }
         
@@ -54,16 +53,16 @@ class PublishArticleTableViewCell: UITableViewCell {
     func checkInputType() -> Bool {
         
         if titleTextField.text == "" {
-            
-            hintLabel.text = InputError.titleEmpty.title
+
+            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
         } else if categoryTextField.text == "" {
             
-            hintLabel.text = InputError.categoryEmpty.title
+            HUD.flash(.label(InputError.categoryEmpty.title), delay: 0.5)
             
         } else if contentTextView.text == "請描述內容......" {
-            
-            hintLabel.text = InputError.contentEmpty.title
+
+            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
             
         } else {
             
@@ -123,7 +122,7 @@ class PublishArticleTableViewCell: UITableViewCell {
                 
             } else {
                 
-                hintLabel.text = InputError.contentEmpty.title
+                HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
                 
             }
             
@@ -135,6 +134,31 @@ class PublishArticleTableViewCell: UITableViewCell {
         }
         
         return contentArray
+        
+    }
+    
+    func modifyForumArticle(modifyForumArticle: ForumArticle) {
+        
+        categoryTextField.text = modifyForumArticle.category.title
+
+        titleTextField.text = modifyForumArticle.title
+        
+        var contentText = ""
+        
+        for index in 0..<modifyForumArticle.content.count {
+            
+            if modifyForumArticle.content[index].contentType == "image" {
+                
+                contentText += "\0\(modifyForumArticle.content[index].contentText)\0"
+                
+            } else {
+                
+                contentText += modifyForumArticle.content[index].contentText
+            }
+            
+        }
+        
+        contentTextView.text = contentText
         
     }
     

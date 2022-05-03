@@ -11,6 +11,12 @@ class ProfileView: UIView, NibOwnerLoadable {
 
     @IBOutlet weak var profileBackgroundView: UIView!
     
+    @IBOutlet weak var userPhotoImageView: UIImageView!
+    
+    @IBOutlet weak var userNameLabel: UILabel!
+    
+    @IBOutlet weak var experienceValueLabel: UILabel!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -33,9 +39,9 @@ class ProfileView: UIView, NibOwnerLoadable {
     override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
         
-        profileBackgroundView.layer.borderWidth = 0.5
-        
-        profileBackgroundView.layer.borderColor = UIColor.lightGray.cgColor
+        userPhotoImageView.contentMode = .scaleAspectFill
+
+        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
         
     }
 

@@ -14,11 +14,11 @@ class FriendManager {
     
     let database = Firestore.firestore()
     
-    func fetchFriendEmailData(completion: @escaping (Result<[User]>) -> Void) {
+    func listenFriendInfoData(completion: @escaping (Result<[UserInfo]>) -> Void) {
         
         database.collection("user").addSnapshotListener { snapshot, error in
             
-            var users: [User] = []
+            var users: [UserInfo] = []
             
             guard let snapshot = snapshot else {
                 
@@ -34,7 +34,7 @@ class FriendManager {
                 
                 do {
                     
-                    if let user = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                    if let user = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                         
                         users.append(user)
                         
@@ -59,54 +59,12 @@ class FriendManager {
     // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
     func fetchFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
         
-        database.collection("friend")
-        .whereField("userID", isEqualTo: fetchUserID)
-        .getDocuments { snapshot, error in
-        
-            guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
-                
-                completion(Result.failure(error!))
-                
-                return
-                
-            }
-            
-            let document = snapshot.documents[0]
-                
-            do {
-                
-                if let friend = try document.data(as: Friend.self, decoder: Firestore.Decoder()) {
-                    
-                    completion(Result.success(friend))
-                    
-                }
-                
-            } catch {
-                
-                print(error)
-                
-                completion(Result.failure(error))
-                
-            }
-                
-        }
-        
-    }
-    
-    // 取得好友姓名
-    func fetchFriendInfoData(friendList: [String], completion: @escaping (Result<[User]>) -> Void) {
-        
-        var friendsInfo: [User] = []
-        
-        for index in 0..<friendList.count {
-            
-            database
-            .collection("user")
-            .whereField("userID", isEqualTo: friendList[index])
+        if fetchUserID != "" {
+         
+            database.collection("friend")
+            .whereField("userID", isEqualTo: fetchUserID)
             .getDocuments { snapshot, error in
-                
+            
                 guard let snapshot = snapshot else {
                     
                     print("Error fetching document: \(error!)")
@@ -121,7 +79,50 @@ class FriendManager {
                     
                 do {
                     
-                    if let friendInfo = try document.data(as: User.self, decoder: Firestore.Decoder()) {
+                    if let friend = try document.data(as: Friend.self, decoder: Firestore.Decoder()) {
+                        
+                        completion(Result.success(friend))
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
+                    
+            }
+            
+        }
+        
+    }
+    
+    // 取得好友姓名
+    func fetchFriendInfoData(friendList: [String], completion: @escaping (Result<[UserInfo]>) -> Void) {
+        
+        var friendsInfo: [UserInfo] = []
+        
+        for index in 0..<friendList.count {
+            
+            database
+            .collection("user").document(friendList[index])
+            .getDocument { snapshot, error in
+                
+                guard let snapshot = snapshot else {
+                    
+                    print("Error fetching document: \(error!)")
+                    
+                    completion(Result.failure(error!))
+                    
+                    return
+                    
+                }
+                
+                do {
+                    
+                    if let friendInfo = try snapshot.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                         
                         friendsInfo.append(friendInfo)
                         
@@ -145,9 +146,9 @@ class FriendManager {
     
     func addFriendData(bothSides: BothSides, confirmType: String) {
         
-        let ownChat = Chat(friendID: bothSides.other.userID, messageContent: [])
+        let ownChat = Chat(friendID: bothSides.other.userID, friendName: bothSides.other.userName, messageContent: [])
 
-        let otherChat = Chat(friendID: bothSides.owner.userID, messageContent: [])
+        let otherChat = Chat(friendID: bothSides.owner.userID, friendName: bothSides.owner.userName, messageContent: [])
         
         do {
             
@@ -172,6 +173,22 @@ class FriendManager {
                     .document(bothSides.owner.userID).setData(from: otherChat, merge: true)
                 
             }
+            
+        } catch {
+
+            print(error)
+
+        }
+        
+    }
+    
+    func addData(friend: Friend) {
+        
+        do {
+            
+            // 新增使用者帳號
+            try database.collection("friend")
+                .document(friend.userID).setData(from: friend, merge: true)
             
         } catch {
 

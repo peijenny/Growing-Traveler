@@ -49,7 +49,7 @@ class FriendViewController: UIViewController {
     
     var friend: Friend?
     
-    var friendsInfo: [User] = [] {
+    var friendsChat: [Chat] = [] {
         
         didSet {
             
@@ -58,6 +58,14 @@ class FriendViewController: UIViewController {
         }
         
     }
+    
+    var chatRoomManager = ChatRoomManager()
+    
+    @IBOutlet weak var friendBackgroundView: UIView!
+    
+    var userManager = UserManager()
+    
+    var usersInfo: [UserInfo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,21 +84,23 @@ class FriendViewController: UIViewController {
         
         fetchFriendListData()
         
+        fetchFriendsChatData()
+        
+        fetchUserInfo()
+        
     }
     
-    func fetchFriendListData() {
+    func fetchUserInfo() {
         
-        friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
+        userManager.fetchUsersData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
             switch result {
                 
-            case .success(let friend):
+            case .success(let usersInfo):
                 
-                strongSelf.friend = friend
-                
-                strongSelf.fetchFriendInfoData(friendList: friend.friendList)
+                strongSelf.usersInfo = usersInfo
                 
             case .failure(let error):
                 
@@ -102,32 +112,56 @@ class FriendViewController: UIViewController {
         
     }
     
-    func fetchFriendInfoData(friendList: [String]) {
+    func fetchFriendListData() {
+
+        friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
+
+            guard let strongSelf = self else { return }
+
+            switch result {
+
+            case .success(let friend):
+
+                strongSelf.friend = friend
+
+            case .failure(let error):
+
+                print(error)
+
+            }
+
+        }
+
+    }
+    
+    func fetchFriendsChatData() {
         
-        friendManager.fetchFriendInfoData(
-            friendList: friendList,
-            completion: { [weak self] result in
+        chatRoomManager.fetchFriendsChatData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
                 
-                guard let strongSelf = self else { return }
+            case .success(let friendsChat):
                 
-                switch result {
+                strongSelf.friendsChat = friendsChat
+                
+                if friendsChat.count == 0 {
                     
-                case .success(let friendsInfo):
+                    strongSelf.friendBackgroundView.isHidden = false
                     
-                    if friendsInfo.count == friendList.count {
-                        
-                        strongSelf.friendsInfo = friendsInfo
-                        
-                    }
+                } else {
                     
-                case .failure(let error):
-                    
-                    print(error)
+                    strongSelf.friendBackgroundView.isHidden = true
                     
                 }
-            
-        })
-        
+
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+        }
     }
     
     func setNavigationItems() {
@@ -186,8 +220,8 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return friendsInfo.count
+
+        return friendsChat.count
         
     }
     
@@ -199,8 +233,11 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         )
         
         guard let cell = cell as? FriendListTableViewCell else { return cell }
+
+        let userInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID })
         
-        cell.showFriendInfo(friendName: friendsInfo[indexPath.row].userName)
+        cell.showFriendInfo(friendName: userInfo[0].userName,
+                             friendPhotoLink: userInfo[0].userPhoto)
         
         return cell
         
@@ -213,7 +250,9 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let viewController = viewController as? ChatViewController else { return }
         
-        viewController.friendInfo = friendsInfo[indexPath.row]
+        viewController.friendID = friendsChat[indexPath.row].friendID
+        
+        viewController.userName = friend?.userName ?? ""
         
         navigationController?.pushViewController(viewController, animated: true)
         

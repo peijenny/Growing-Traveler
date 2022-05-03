@@ -15,6 +15,10 @@ class MoreArticlesViewController: UIViewController {
     
     var forumArticleManager = ForumArticleManager()
     
+    var userManager = UserManager()
+    
+    var usersInfo: [UserInfo] = []
+    
     var forumArticles: [ForumArticle] = [] {
         
         didSet {
@@ -28,7 +32,7 @@ class MoreArticlesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
         
         if let forumType = forumType {
             
@@ -42,6 +46,13 @@ class MoreArticlesViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchUserInfoData()
+        
+    }
+    
     override var hidesBottomBarWhenPushed: Bool {
         
         get {
@@ -51,6 +62,30 @@ class MoreArticlesViewController: UIViewController {
         } set {
             
             super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
+    func fetchUserInfoData() {
+        
+        userManager.fetchUsersData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                strongSelf.usersInfo = usersInfo
+                
+                strongSelf.moreArticlesTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
             
         }
         
@@ -90,8 +125,8 @@ class MoreArticlesViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             moreArticlesTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            moreArticlesTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            moreArticlesTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            moreArticlesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            moreArticlesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             moreArticlesTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
         ])
         
@@ -133,7 +168,18 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
         
         cell.selectionStyle = .none
         
-        cell.showMoreArticles(forumArticle: forumArticles[indexPath.row])
+        let userInfo = usersInfo.filter({ $0.userID == forumArticles[indexPath.row].userID })
+        
+        if userInfo.count != 0 {
+            
+            let userName = userInfo[0].userName
+            
+            cell.showMoreArticles(
+                forumArticle: forumArticles[indexPath.row],
+                userName: userName
+            )
+            
+        }
         
         return cell
         

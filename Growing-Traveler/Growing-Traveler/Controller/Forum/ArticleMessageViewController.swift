@@ -6,12 +6,11 @@
 //
 
 import UIKit
+import PKHUD
 
 class ArticleMessageViewController: BaseViewController {
 
     @IBOutlet weak var messageTextField: UITextField!
-    
-    @IBOutlet weak var hintLabel: UILabel!
     
     var forumArticleManager = ForumArticleManager()
     
@@ -61,8 +60,7 @@ class ArticleMessageViewController: BaseViewController {
         
         if contentText == "" {
             
-            hintLabel.text = "留言不可為空！"
-//            print("留言不可為空！")
+            HUD.flash(.label("留言不可為空！"), delay: 0.5)
             
         } else {
 

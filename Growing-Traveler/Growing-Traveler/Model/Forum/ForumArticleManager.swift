@@ -85,6 +85,21 @@ class ForumArticleManager {
         
     }
     
+    // 更新 論壇文章 至 Firebase Firestore
+    func updateArticleData(forumArticle: ForumArticle) {
+        
+        do {
+            
+            try database.document(forumArticle.id).setData(from: forumArticle, merge: true)
+            
+        } catch {
+            
+            print(error)
+            
+        }
+        
+    }
+    
     // 取得 屬於論壇的所有文章 至 ArticleViewController
     func fetchData(forumType: String, completion: @escaping (Result<[ForumArticle]>) -> Void) {
         
@@ -267,7 +282,7 @@ extension ForumArticleManager {
             try database
                 .document(articleMessage.articleID)
                 .collection("message")
-                .document("\(articleMessage.createTime)")
+                .document("\(Int(articleMessage.createTime))")
                 .setData(from: articleMessage)
             
         } catch {

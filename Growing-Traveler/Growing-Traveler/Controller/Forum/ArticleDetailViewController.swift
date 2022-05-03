@@ -29,10 +29,14 @@ class ArticleDetailViewController: UIViewController {
     
     let myImageView = UIImageView()
     
+    var userManager = UserManager()
+    
+    var usersInfo: [UserInfo] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
         
         title = forumArticle?.forumType
         
@@ -48,6 +52,37 @@ class ArticleDetailViewController: UIViewController {
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchUserInfoData()
+        
+    }
+    
+    func fetchUserInfoData() {
+        
+        userManager.fetchUsersData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                strongSelf.usersInfo = usersInfo
+                
+                strongSelf.articleDetailTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
     }
     
     func listenMessageData() {
@@ -78,6 +113,19 @@ class ArticleDetailViewController: UIViewController {
     }
     
     @objc func sendMessageButton(sender: UIButton) {
+        
+        guard userID != "" else {
+
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                    withIdentifier: String(describing: AuthenticationViewController.self)
+                    ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .popover
+
+            present(authViewController, animated: true, completion: nil)
+
+            return
+        }
         
         guard let viewController = UIStoryboard
             .forum
@@ -208,7 +256,21 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             guard let cell = cell as? ArticleMessageTableViewCell else { return cell }
             
-            cell.showMessages(articleMessage: articleMessages[indexPath.row], articleUserID: forumArticle?.userID ?? "")
+            let userInfo = usersInfo.filter({ $0.userID == articleMessages[indexPath.row].userID })
+            
+            var userName = "帳號已刪除"
+            
+            if userInfo.count != 0 {
+                
+                userName = userInfo[0].userName
+                
+            }
+            
+            cell.showMessages(
+                articleMessage: articleMessages[indexPath.row],
+                articleUserID: forumArticle?.userID ?? "",
+                userName: userName
+            )
             
             cell.selectionStyle = .none
             
@@ -268,7 +330,15 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             guard let forumArticle = forumArticle else { return headerView }
             
-            headerView.showArticleDetail(forumArticle: forumArticle)
+            let userInfo = usersInfo.filter({ $0.userID == forumArticle.userID })
+            
+            if userInfo.count != 0 {
+             
+                let userName = userInfo[0].userName
+
+                headerView.showArticleDetail(forumArticle: forumArticle, userName: userName)
+                
+            }
             
             return headerView
             

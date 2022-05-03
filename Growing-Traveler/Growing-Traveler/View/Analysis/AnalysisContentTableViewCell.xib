@@ -21,14 +21,14 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Bfj-ah-D6g"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="17"/>
+                        <color key="textColor" red="0.23137254901960785" green="0.50980392156862742" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ＴＥＳＴＳＴＥＴＳＴＪＴＥＯＳＳＩＪＴＯＥＩＳＩＯＪＳＴＯＳＩＥＪＴＯＳＩＥＴＪＳＯＩＥＴＪＯＩＥＴＪＩＳＯＴＥＪＯＳＥＩ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-mf-adK">
                         <rect key="frame" x="16" y="51" width="382" height="59"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.43137254901960786" green="0.47450980392156861" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可以考取的證照：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpn-JS-b1l">
@@ -36,14 +36,14 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="op8-QP-Ejt"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="17"/>
+                        <color key="textColor" red="0.231372565" green="0.50980395079999996" blue="0.72156864399999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ＴＥＳＴＳＴＥＴＳＴＪＴＥＯＳＳＩＪＴＯＥＩＳＩＯＪＳＴＯＳＩＥＪＴＯＳＩＥＴＪＳＯＩＥＴＪＯＩＥＴＪＩＳＯＴＥＪＯＳＥＩ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWn-Xn-R35">
                         <rect key="frame" x="16" y="161" width="382" height="59"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.43137252329999998" green="0.47450977560000002" blue="0.60392159219999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -64,6 +64,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="bottomContentLabel" destination="BWn-Xn-R35" id="asF-pu-bcB"/>
                 <outlet property="bottomTitleLabel" destination="cpn-JS-b1l" id="Pgi-Pz-5wM"/>
