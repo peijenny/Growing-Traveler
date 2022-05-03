@@ -88,7 +88,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s7B-ph-YYk">
-                                <rect key="frame" x="16" y="328.5" width="382" height="469.5"/>
+                                <rect key="frame" x="16" y="328.5" width="382" height="517.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yw1-6K-0DR">
@@ -113,7 +113,7 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFk-re-Iup">
-                                <rect key="frame" x="0.0" y="328.5" width="414" height="469.5"/>
+                                <rect key="frame" x="0.0" y="328.5" width="414" height="517.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="seo" translatesAutoresizingMaskIntoConstraints="NO" id="rBb-21-8Fu">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="313.5"/>
@@ -152,11 +152,11 @@
                             <constraint firstItem="s7B-ph-YYk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="WHe-aF-GXg"/>
                             <constraint firstItem="I0E-VG-B8O" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="djw-fk-LGc"/>
                             <constraint firstItem="I0E-VG-B8O" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="gOk-zH-mFX"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="s7B-ph-YYk" secondAttribute="bottom" constant="64" id="hbX-JN-YnV"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="s7B-ph-YYk" secondAttribute="bottom" constant="16" id="hbX-JN-YnV"/>
                             <constraint firstItem="yw1-6K-0DR" firstAttribute="top" secondItem="4j2-rB-qVK" secondAttribute="bottom" id="lyL-Wv-qxT"/>
                             <constraint firstItem="yw1-6K-0DR" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="me9-QT-i04"/>
                             <constraint firstItem="s7B-ph-YYk" firstAttribute="top" secondItem="yw1-6K-0DR" secondAttribute="bottom" id="oNJ-Rx-mE1"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="VFk-re-Iup" secondAttribute="bottom" constant="64" id="oNo-DE-pBO"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="VFk-re-Iup" secondAttribute="bottom" constant="16" id="oNo-DE-pBO"/>
                             <constraint firstItem="4j2-rB-qVK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tYs-Oh-2ri"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="s7B-ph-YYk" secondAttribute="trailing" constant="16" id="toa-Zn-pAr"/>
                             <constraint firstItem="VFk-re-Iup" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="veQ-Ah-Xeh"/>
