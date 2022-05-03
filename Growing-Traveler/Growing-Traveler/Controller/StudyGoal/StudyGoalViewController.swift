@@ -283,7 +283,7 @@ class StudyGoalViewController: UIViewController {
         
         viewController.studyGoal = studyGoal
         
-        viewController.user = user
+//        viewController.user = user
         
         navigationController?.pushViewController(viewController, animated: true)
         

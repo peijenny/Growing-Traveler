@@ -39,9 +39,11 @@ class ReceiveMessageTableViewCell: UITableViewCell {
         
         receiveBackgroundView.layer.cornerRadius = 10
         
+        friendImageView.layer.cornerRadius = friendImageView.frame.width / 2
+        
     }
     
-    func showMessage(receiveMessage: MessageContent) {
+    func showMessage(receiveMessage: MessageContent, friendPhoto: String?) {
         
         let formatter = DateFormatter()
         
@@ -52,6 +54,8 @@ class ReceiveMessageTableViewCell: UITableViewCell {
         receiveTimeLabel.text = formatter.string(from: createTime)
 
         setMessageContent(message: receiveMessage.sendMessage, type: receiveMessage.sendType)
+        
+        friendImageView.loadImage(friendPhoto)
         
     }
     
