@@ -23,15 +23,9 @@ class RankViewController: UIViewController {
     
     var friendManager = FriendManager()
     
-    var usersInfo: [UserInfo] = [] {
-        
-        didSet {
-            
-            rankTableView.reloadData()
-            
-        }
-        
-    }
+    var usersInfo: [UserInfo] = []
+    
+    var blockadeList: [String] = []
     
     @IBOutlet weak var rankBackgroundView: UIView!
     
@@ -52,6 +46,13 @@ class RankViewController: UIViewController {
         rankBackgroundView.layer.cornerRadius = 20
         
     }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//
+//        fetchUserFriendData()
+//
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -74,6 +75,46 @@ class RankViewController: UIViewController {
         
     }
     
+    func fetchUserFriendData() {
+        
+        friendManager.fetchFriendListData(
+        fetchUserID: userID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let userFriend):
+                
+                strongSelf.blockadeList = userFriend.blockadeList
+                
+                var filterUsersInfo = strongSelf.usersInfo
+                
+                for index in 0..<strongSelf.usersInfo.count {
+                 
+                    if strongSelf.blockadeList.filter({
+                        $0 == strongSelf.usersInfo[index].userID }).count != 0 {
+                        
+                        filterUsersInfo.remove(at: index)
+                        
+                    }
+                    
+                }
+                
+                strongSelf.usersInfo = filterUsersInfo
+                
+                strongSelf.rankTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+                
+        }
+        
+    }
+    
     func listenUsersInfoData() {
         
         friendManager.listenFriendInfoData { [weak self] result in
@@ -91,6 +132,8 @@ class RankViewController: UIViewController {
                 }
                 
                 strongSelf.usersInfo = sortUserInfo
+                
+                strongSelf.fetchUserFriendData()
                 
             case .failure(let error):
                 
@@ -126,7 +169,7 @@ extension RankViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = cell as? RankTableViewCell else { return cell }
         
         cell.showRankData(
-        rankNumber: indexPath.row + 1, userInfo: usersInfo[indexPath.row])
+            rankNumber: indexPath.row + 1, userInfo: usersInfo[indexPath.row], blockadeList: blockadeList)
         
         return cell
         

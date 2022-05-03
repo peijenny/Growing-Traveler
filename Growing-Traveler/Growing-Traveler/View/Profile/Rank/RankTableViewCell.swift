@@ -33,7 +33,7 @@ class RankTableViewCell: UITableViewCell {
         
     }
     
-    func showRankData(rankNumber: Int, userInfo: UserInfo) {
+    func showRankData(rankNumber: Int, userInfo: UserInfo, blockadeList: [String]) {
         
         if rankNumber == 1 {
             
@@ -64,6 +64,26 @@ class RankTableViewCell: UITableViewCell {
         userNameLabel.text = userInfo.userName
         
         experienceValueLabel.text = "\(userInfo.achievement.experienceValue)"
+        
+//        if blockadeList.filter({ $0 == userInfo.userID }).count == 0 {
+//
+//            if userInfo.userPhoto != "" {
+//
+//                userPhotoImageView.loadImage(userInfo.userPhoto)
+//
+//            }
+//
+//            userNameLabel.text = userInfo.userName
+//
+//            experienceValueLabel.text = "\(userInfo.achievement.experienceValue)"
+//
+//        } else {
+//
+//            userNameLabel.text = "該用戶已封鎖"
+//
+//            experienceValueLabel.text = ""
+//
+//        }
         
     }
     
