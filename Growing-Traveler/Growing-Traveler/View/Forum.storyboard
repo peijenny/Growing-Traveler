@@ -36,56 +36,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iM4-Ah-KgY">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="136"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="139"/>
                                 <color key="backgroundColor" red="0.90196073060000004" green="0.92156863209999995" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x11-Ym-M6h">
-                                <rect key="frame" x="0.0" y="136" width="414" height="760"/>
+                                <rect key="frame" x="0.0" y="139" width="414" height="757"/>
                                 <color key="backgroundColor" red="0.89803922179999995" green="0.74509805439999999" blue="0.50980395079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gK1-Su-8Lg">
-                                <rect key="frame" x="20" y="88" width="374" height="34"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入標題關鍵字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZh-N3-uFJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="318.5" height="34"/>
-                                        <color key="textColor" red="0.61176470588235299" green="0.5607843137254902" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1y-fa-3Ah">
-                                        <rect key="frame" x="328.5" y="0.0" width="45.5" height="34"/>
-                                        <color key="tintColor" red="0.23137254901960785" green="0.50980395079999996" blue="0.72156864399999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
-                                        <connections>
-                                            <action selector="searchArticleButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="EIO-he-V6C"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" separatorInsetReference="fromAutomaticInsets" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eEy-Fd-zt4">
-                                <rect key="frame" x="0.0" y="142" width="414" height="704"/>
-                                <color key="backgroundColor" red="0.89803922179999995" green="0.74509805439999999" blue="0.50980395079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="0.0" y="145" width="414" height="701"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="uYC-OY-N2Q">
+                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="iM4-Ah-KgY" secondAttribute="trailing" id="596-0d-qQq"/>
-                            <constraint firstItem="eEy-Fd-zt4" firstAttribute="top" secondItem="gK1-Su-8Lg" secondAttribute="bottom" constant="20" id="D04-8N-qXL"/>
+                            <constraint firstItem="uYC-OY-N2Q" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="93q-FY-JM4"/>
+                            <constraint firstItem="uYC-OY-N2Q" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="EEs-vE-Oe2"/>
                             <constraint firstAttribute="bottom" secondItem="x11-Ym-M6h" secondAttribute="bottom" id="EN6-g1-5M8"/>
                             <constraint firstItem="x11-Ym-M6h" firstAttribute="top" secondItem="iM4-Ah-KgY" secondAttribute="bottom" id="KL3-9I-qVy"/>
                             <constraint firstItem="eEy-Fd-zt4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="MWc-BL-QKp"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eEy-Fd-zt4" secondAttribute="bottom" constant="16" id="PpD-Kg-lK8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eEy-Fd-zt4" secondAttribute="trailing" id="Qa4-kY-dxB"/>
-                            <constraint firstItem="gK1-Su-8Lg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="fOo-lL-4l7"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="gK1-Su-8Lg" secondAttribute="trailing" constant="20" id="la8-xw-J9h"/>
+                            <constraint firstItem="uYC-OY-N2Q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cK5-aY-7Ww"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="x11-Ym-M6h" secondAttribute="trailing" id="nU3-We-McZ"/>
-                            <constraint firstItem="gK1-Su-8Lg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="syU-yY-JHV"/>
                             <constraint firstItem="iM4-Ah-KgY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="vLs-FW-cX8"/>
                             <constraint firstItem="eEy-Fd-zt4" firstAttribute="top" secondItem="iM4-Ah-KgY" secondAttribute="bottom" constant="6" id="wTH-MQ-vVG"/>
                             <constraint firstItem="x11-Ym-M6h" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="wdJ-iu-zvp"/>
+                            <constraint firstItem="x11-Ym-M6h" firstAttribute="top" secondItem="uYC-OY-N2Q" secondAttribute="bottom" id="xBL-FV-ddA"/>
                             <constraint firstItem="iM4-Ah-KgY" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="zXH-ES-11W"/>
                         </constraints>
                     </view>
@@ -94,8 +78,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="articleTableView" destination="eEy-Fd-zt4" id="5Bs-N7-Mc1"/>
-                        <outlet property="searchButton" destination="Y1y-fa-3Ah" id="W1p-ki-JyK"/>
-                        <outlet property="searchTextField" destination="QZh-N3-uFJ" id="tt7-DE-1ai"/>
+                        <outlet property="searchBar" destination="uYC-OY-N2Q" id="G9Y-a8-BtF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -219,7 +202,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">

@@ -47,10 +47,6 @@ enum ForumType {
 
 class ForumViewController: BaseViewController {
 
-    @IBOutlet weak var searchTextField: UITextField!
-    
-    @IBOutlet weak var searchButton: UIButton!
-    
     @IBOutlet weak var articleTableView: UITableView! {
         
         didSet {
@@ -93,6 +89,10 @@ class ForumViewController: BaseViewController {
     
     var blockadeList: [String] = []
     
+    var inputText: String?
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -101,9 +101,9 @@ class ForumViewController: BaseViewController {
             forCellReuseIdentifier: String(describing: ArticleTableViewCell.self)
         )
 
-        searchTextField.delegate = self
-        
         setNavigationItem()
+        
+        searchBar.delegate = self
         
     }
     
@@ -112,11 +112,7 @@ class ForumViewController: BaseViewController {
         
         fetchFriendBlockadeListData()
         
-//        fetchData()
-        
         fetchSearchData()
-        
-        searchTextField.text = nil
         
         fetchUserInfoData()
         
@@ -212,9 +208,7 @@ class ForumViewController: BaseViewController {
             switch result {
                 
             case .success(let data):
-                
-                strongSelf.forumArticles = data
-                
+
                 var filterData = data
                 
                 if strongSelf.blockadeList != [] {
@@ -226,8 +220,6 @@ class ForumViewController: BaseViewController {
                     }
                     
                 }
-                
-                print("TEST \(filterData) \(strongSelf.blockadeList)")
                 
                 var essay = filterData.filter({ $0.forumType == ForumType.essay.title })
                 
@@ -277,27 +269,13 @@ class ForumViewController: BaseViewController {
                 
             case .success(let data):
                 
-                strongSelf.searchForumArticles = data
+                strongSelf.forumArticles = data
                 
             case .failure(let error):
                 
                 print(error)
                 
             }
-            
-        }
-        
-    }
-    
-    @IBAction func searchArticleButton(_ sender: UIButton) {
-        
-        guard let inputText = searchTextField.text else { return }
-
-        forumArticles = searchForumArticles.filter({ $0.title.range(of: inputText) != nil })
-        
-        if inputText == "" {
-            
-            fetchData()
             
         }
         
@@ -315,17 +293,25 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
+        if inputText == nil {
             
-            return forumArticleType?.essay.count ?? 0
-            
-        } else if section == 1 {
-            
-            return forumArticleType?.question.count ?? 0
+            if section == 0 {
+                
+                return forumArticleType?.essay.count ?? 0
+                
+            } else if section == 1 {
+                
+                return forumArticleType?.question.count ?? 0
+                
+            } else {
+                
+                return forumArticleType?.chat.count ?? 0
+                
+            }
             
         } else {
             
-            return forumArticleType?.chat.count ?? 0
+            return searchForumArticles.filter({ $0.forumType == forumType[section] }).count
             
         }
         
@@ -348,9 +334,9 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         
         var isLastOne = Bool()
         
-        let isSearch = searchTextField.text != ""
+        let isSearch = inputText != nil
         
-        if indexPath.section == 0 {
+        if indexPath.section == 0 && inputText == nil {
             
             let userInfo = usersInfo.filter({ $0.userID == forumArticleType.essay[indexPath.row].userID })
             
@@ -376,7 +362,7 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
                 indexPathCount: forumArticleType.essay.count
             )
             
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 1 && inputText == nil {
             
             let userInfo = usersInfo.filter({ $0.userID == forumArticleType.question[indexPath.row].userID })
             
@@ -402,7 +388,7 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
                 indexPathCount: forumArticleType.question.count
             )
             
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 2 && inputText == nil {
             
             let userInfo = usersInfo.filter({ $0.userID == forumArticleType.chat[indexPath.row].userID })
             
@@ -428,6 +414,30 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
                 indexPathCount: forumArticleType.chat.count
             )
             
+        }
+        
+        if inputText != nil {
+
+            let userInfo = usersInfo.filter({ $0.userID == searchArticels[indexPath.row].userID })
+
+            if userInfo.count != 0 {
+
+                let userName = userInfo[0].userName
+
+                cell.showForumArticle(
+                    forumArticle: searchArticels[indexPath.row],
+                    userName: userName
+                )
+
+            }
+            
+            cell.showLoadMoreButton(
+                amountOver: amountOver,
+                isSearch: isSearch,
+                isLastOne: isLastOne,
+                indexPathCount: searchArticels.count
+            )
+
         }
         
         cell.loadMoreButton.addTarget(self, action: #selector(loadMoreButton), for: .touchUpInside)
@@ -484,6 +494,26 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         
         return 40.0
         
+    }
+    
+}
+
+extension ForumViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText == "" {
+            
+            inputText = nil
+            
+        } else {
+            
+            inputText = searchText
+            
+        }
+        
+        searchForumArticles = forumArticles.filter({ $0.title.range(of: searchText) != nil })
+
     }
     
 }
