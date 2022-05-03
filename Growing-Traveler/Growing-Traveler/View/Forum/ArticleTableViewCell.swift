@@ -77,9 +77,9 @@ class ArticleTableViewCell: UITableViewCell {
         
     }
     
-    func showLoadMoreButton(amountOver: Bool, isSearch: Bool, isLastOne: Bool) {
+    func showLoadMoreButton(amountOver: Bool, isSearch: Bool, isLastOne: Bool, indexPathCount: Int) {
         
-        if amountOver && !isSearch && isLastOne {
+        if amountOver && !isSearch && isLastOne && indexPathCount >= 5 {
             
             buttonHeightConstraint.constant = 40.0
             

@@ -47,13 +47,6 @@ class RankViewController: UIViewController {
         
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//
-//        fetchUserFriendData()
-//
-//    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -87,21 +80,6 @@ class RankViewController: UIViewController {
             case .success(let userFriend):
                 
                 strongSelf.blockadeList = userFriend.blockadeList
-                
-                var filterUsersInfo = strongSelf.usersInfo
-                
-                for index in 0..<strongSelf.usersInfo.count {
-                 
-                    if strongSelf.blockadeList.filter({
-                        $0 == strongSelf.usersInfo[index].userID }).count != 0 {
-                        
-                        filterUsersInfo.remove(at: index)
-                        
-                    }
-                    
-                }
-                
-                strongSelf.usersInfo = filterUsersInfo
                 
                 strongSelf.rankTableView.reloadData()
                 

@@ -60,30 +60,18 @@ class RankTableViewCell: UITableViewCell {
             userPhotoImageView.loadImage(userInfo.userPhoto)
             
         }
-        
-        userNameLabel.text = userInfo.userName
-        
+
         experienceValueLabel.text = "\(userInfo.achievement.experienceValue)"
         
-//        if blockadeList.filter({ $0 == userInfo.userID }).count == 0 {
-//
-//            if userInfo.userPhoto != "" {
-//
-//                userPhotoImageView.loadImage(userInfo.userPhoto)
-//
-//            }
-//
-//            userNameLabel.text = userInfo.userName
-//
-//            experienceValueLabel.text = "\(userInfo.achievement.experienceValue)"
-//
-//        } else {
-//
-//            userNameLabel.text = "該用戶已封鎖"
-//
-//            experienceValueLabel.text = ""
-//
-//        }
+        if blockadeList.filter({ $0 == userInfo.userID }).count == 0 {
+
+            userNameLabel.text = userInfo.userName
+
+        } else {
+
+            userNameLabel.text = "\(userInfo.userName) (該帳號已封鎖)"
+
+        }
         
     }
     
