@@ -127,6 +127,8 @@ class PlanStudyGoalViewController: BaseViewController {
     
     var isOpenEdited = false
     
+    var userManager = UserManager()
+    
     var user: UserInfo?
 
     override func viewDidLoad() {
@@ -160,6 +162,8 @@ class PlanStudyGoalViewController: BaseViewController {
         
         modifyPlanStudyGoalSetting()
         
+        fetchUserData()
+        
     }
     
     override var hidesBottomBarWhenPushed: Bool {
@@ -175,6 +179,30 @@ class PlanStudyGoalViewController: BaseViewController {
         }
         
     }
+    
+    func fetchUserData() {
+        
+        userManager.listenData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success(let user):
+                
+                strongSelf.user = user
+                
+                strongSelf.planStudyGoalTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
+    }
+
     
     // MARK: - 修改個人學習計劃設定
     func modifyPlanStudyGoalSetting() {
