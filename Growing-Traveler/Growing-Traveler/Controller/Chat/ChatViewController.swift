@@ -178,6 +178,8 @@ class ChatViewController: BaseViewController {
             case .success(let friendInfo):
 
                 strongSelf.friendInfo = friendInfo
+                
+                strongSelf.chatTableView.reloadData()
 
             case .failure(let error):
 
@@ -292,7 +294,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let receiveMessage = chatMessage?.messageContent[indexPath.row] {
                 
-                cell.showMessage(receiveMessage: receiveMessage)
+                cell.showMessage(receiveMessage: receiveMessage, friendPhoto: friendInfo?.userPhoto)
                 
             }
             
