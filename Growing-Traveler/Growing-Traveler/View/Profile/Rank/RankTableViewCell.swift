@@ -69,7 +69,7 @@ class RankTableViewCell: UITableViewCell {
 
         } else {
 
-            userNameLabel.text = "\(userInfo.userName) (該帳號已封鎖)"
+            userNameLabel.text = "\(userInfo.userName) [帳號已封鎖]"
 
         }
         

@@ -139,20 +139,31 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MoY-ap-Cda">
+                                <rect key="frame" x="0.0" y="798" width="414" height="54"/>
+                                <color key="backgroundColor" red="0.90196073060000004" green="0.92156863209999995" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                <color key="textColor" red="0.43137254899999999" green="0.47450980390000003" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AH4-fn-PXL"/>
                         <color key="backgroundColor" red="0.90196073060000004" green="0.92156863209999995" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="n3K-HG-jVn" firstAttribute="top" secondItem="AH4-fn-PXL" secondAttribute="top" constant="16" id="0bf-hh-89s"/>
+                            <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="MoY-ap-Cda" secondAttribute="bottom" constant="10" id="6yk-vY-L5a"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="Pcf-eM-Fi9" secondAttribute="bottom" constant="10" id="70X-OI-h3R"/>
+                            <constraint firstItem="MoY-ap-Cda" firstAttribute="trailing" secondItem="AH4-fn-PXL" secondAttribute="trailing" id="8Um-q1-00P"/>
                             <constraint firstItem="Pcf-eM-Fi9" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="10" id="PHo-NM-Y6e"/>
                             <constraint firstItem="Pcf-eM-Fi9" firstAttribute="leading" secondItem="1e9-pP-Hbq" secondAttribute="trailing" constant="10" id="PHy-Nz-xSC"/>
                             <constraint firstItem="Kxb-Ts-Lr8" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="VUf-Vb-Mq7"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="1e9-pP-Hbq" secondAttribute="bottom" constant="16" id="aSg-PE-PcA"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="trailing" secondItem="n3K-HG-jVn" secondAttribute="trailing" id="aUy-7E-zWb"/>
                             <constraint firstItem="1e9-pP-Hbq" firstAttribute="leading" secondItem="AH4-fn-PXL" secondAttribute="leading" constant="16" id="eGe-oT-aGV"/>
+                            <constraint firstItem="MoY-ap-Cda" firstAttribute="leading" secondItem="AH4-fn-PXL" secondAttribute="leading" id="j4l-Zc-NOT"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="trailing" secondItem="Kxb-Ts-Lr8" secondAttribute="trailing" constant="16" id="k9A-uy-G2q"/>
                             <constraint firstItem="Kxb-Ts-Lr8" firstAttribute="leading" secondItem="Pcf-eM-Fi9" secondAttribute="trailing" constant="10" id="lX7-Xf-xfV"/>
+                            <constraint firstItem="MoY-ap-Cda" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="8" symbolic="YES" id="mVg-fy-68U"/>
                             <constraint firstItem="1e9-pP-Hbq" firstAttribute="top" secondItem="n3K-HG-jVn" secondAttribute="bottom" constant="16" id="nK5-RF-wa0"/>
                             <constraint firstItem="AH4-fn-PXL" firstAttribute="bottom" secondItem="Kxb-Ts-Lr8" secondAttribute="bottom" constant="16" id="wRb-VU-RHv"/>
                             <constraint firstItem="n3K-HG-jVn" firstAttribute="leading" secondItem="AH4-fn-PXL" secondAttribute="leading" id="yCD-7R-qg1"/>
@@ -160,6 +171,7 @@
                     </view>
                     <connections>
                         <outlet property="chatTableView" destination="n3K-HG-jVn" id="fgt-ti-pLy"/>
+                        <outlet property="friendStatusLabel" destination="MoY-ap-Cda" id="Dse-4E-4xR"/>
                         <outlet property="snedInputTextView" destination="Pcf-eM-Fi9" id="om9-P4-R2e"/>
                     </connections>
                 </viewController>

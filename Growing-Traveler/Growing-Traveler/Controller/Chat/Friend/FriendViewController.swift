@@ -271,20 +271,38 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let viewController = UIStoryboard(name: "Chat", bundle: nil)
+            .instantiateViewController(withIdentifier: String(describing: ChatViewController.self))
+        
+        guard let viewController = viewController as? ChatViewController else { return }
+        
+        viewController.friendID = friendsChat[indexPath.row].friendID
+        
+        viewController.userName = friend?.userName ?? ""
+        
         if friend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).count == 0 {
             
-            let viewController = UIStoryboard(name: "Chat", bundle: nil)
-                .instantiateViewController(withIdentifier: String(describing: ChatViewController.self))
+            viewController.isBlock = false
             
-            guard let viewController = viewController as? ChatViewController else { return }
+        } else {
             
-            viewController.friendID = friendsChat[indexPath.row].friendID
-            
-            viewController.userName = friend?.userName ?? ""
-            
-            navigationController?.pushViewController(viewController, animated: true)
+            viewController.isBlock = true
             
         }
+        
+        let userInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID })
+        
+        if userInfo.count == 0 {
+            
+            viewController.deleteAccount = true
+            
+        } else {
+            
+            viewController.deleteAccount = false
+            
+        }
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
     

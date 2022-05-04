@@ -12,14 +12,7 @@ class ArticleDetailViewController: UIViewController {
     
     var articleDetailTableView = UITableView(frame: .zero, style: .grouped)
     
-    var forumArticle: ForumArticle? {
-        
-        didSet {
-            
-          articleDetailTableView.reloadData()
-            
-        }
-    }
+    var forumArticle: ForumArticle?
     
     var formatter = DateFormatter()
     
@@ -33,6 +26,10 @@ class ArticleDetailViewController: UIViewController {
     
     var usersInfo: [UserInfo] = []
     
+    var friendManager = FriendManager()
+    
+    var blockadeList: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,8 +38,6 @@ class ArticleDetailViewController: UIViewController {
         title = forumArticle?.forumType
         
         setTableView()
-        
-        listenMessageData()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .compose,
@@ -57,7 +52,36 @@ class ArticleDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchUserInfoData()
+        fetchFriendBlockadeListData()
+        
+    }
+    
+    func fetchFriendBlockadeListData() {
+        
+        friendManager.fetchFriendListData(
+        fetchUserID: userID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let userFriend):
+                
+                strongSelf.blockadeList = userFriend.blockadeList
+                
+                strongSelf.listenMessageData()
+                
+                strongSelf.fetchUserInfoData()
+                
+                strongSelf.articleDetailTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+                
+        }
         
     }
     
@@ -258,18 +282,27 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             let userInfo = usersInfo.filter({ $0.userID == articleMessages[indexPath.row].userID })
             
-            var userName = "帳號已刪除"
+            var userName = "[帳號已刪除]"
+            
+            var isBlock = false
             
             if userInfo.count != 0 {
                 
                 userName = userInfo[0].userName
+                
+                if blockadeList.filter({ $0 == userInfo[0].userID }).count != 0 {
+                    
+                    isBlock = true
+                    
+                }
                 
             }
             
             cell.showMessages(
                 articleMessage: articleMessages[indexPath.row],
                 articleUserID: forumArticle?.userID ?? "",
-                userName: userName
+                userName: userName,
+                isBlock: isBlock
             )
             
             cell.selectionStyle = .none

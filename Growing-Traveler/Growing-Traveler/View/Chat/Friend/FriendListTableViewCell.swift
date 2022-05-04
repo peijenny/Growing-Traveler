@@ -13,6 +13,8 @@ class FriendListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var friendNameLabel: UILabel!
     
+    @IBOutlet weak var friendStatusLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,17 +31,23 @@ class FriendListTableViewCell: UITableViewCell {
     
     func showFriendInfo(friendInfo: UserInfo, blockadeList: [String], deleteAccount: Bool) {
         
+        friendNameLabel.text = friendInfo.userName
+        
+        friendStatusLabel.text = ""
+        
         if blockadeList.filter({ $0 == friendInfo.userID }).count != 0 {
             
-            friendNameLabel.text = "\(friendInfo.userName) (帳號已封鎖)"
+            friendNameLabel.text = "\(friendInfo.userName)"
             
-        }  else if deleteAccount {
+            friendStatusLabel.text = "[帳號已封鎖]"
             
-            friendNameLabel.text = "\(friendInfo.userName) (帳號已刪除)"
+        } 
+        
+        if deleteAccount {
             
-        } else {
+            friendNameLabel.text = "\(friendInfo.userName)"
             
-            friendNameLabel.text = friendInfo.userName
+            friendStatusLabel.text = "[帳號已刪除]"
             
         }
         

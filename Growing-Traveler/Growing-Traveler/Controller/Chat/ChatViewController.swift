@@ -78,7 +78,13 @@ class ChatViewController: BaseViewController {
     }
     
     var myImageView = UIImageView()
+    
+    var isBlock = Bool()
+    
+    var deleteAccount = Bool()
 
+    @IBOutlet weak var friendStatusLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,11 +102,13 @@ class ChatViewController: BaseViewController {
             forCellReuseIdentifier: String(describing: SendMessageTableViewCell.self)
         )
         
-        snedInputTextView.isUserInteractionEnabled = false
-        
-        snedInputTextView.text = "此帳號已刪除，無法發送訊息！"
-        
-        snedInputTextView.textColor = UIColor.red
+        if deleteAccount {
+            
+            friendStatusLabel.text = "此帳號已刪除，無法發送訊息！"
+            
+            friendStatusLabel.isHidden = false
+            
+        }
         
     }
 
@@ -202,7 +210,7 @@ class ChatViewController: BaseViewController {
             case .success(let chatMessage):
 
                 strongSelf.chatMessage = chatMessage
-
+                
             case .failure(let error):
 
                 print(error)
@@ -291,6 +299,14 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             )
             
             guard let cell = cell as? ReceiveMessageTableViewCell else { return cell }
+            
+            if isBlock {
+                
+                friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
+                
+                friendStatusLabel.isHidden = false
+                
+            }
             
             if let receiveMessage = chatMessage?.messageContent[indexPath.row] {
                 
