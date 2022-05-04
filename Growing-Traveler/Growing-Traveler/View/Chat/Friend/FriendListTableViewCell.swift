@@ -15,6 +15,8 @@ class FriendListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var friendStatusLabel: UILabel!
     
+    @IBOutlet weak var unblockButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -50,6 +52,22 @@ class FriendListTableViewCell: UITableViewCell {
             friendStatusLabel.text = "[帳號已刪除]"
             
         }
+        
+        if friendInfo.userPhoto != "" {
+            
+            friendIconImageView.loadImage(friendInfo.userPhoto)
+            
+        }
+        
+    }
+    
+    func showBlockadeUserInfo(friendInfo: UserInfo) {
+        
+        unblockButton.isHidden = false
+        
+        friendNameLabel.text = friendInfo.userName
+        
+        friendStatusLabel.text = ""
         
         if friendInfo.userPhoto != "" {
             

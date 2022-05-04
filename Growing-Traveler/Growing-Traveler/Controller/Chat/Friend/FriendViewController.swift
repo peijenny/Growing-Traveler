@@ -179,7 +179,7 @@ class FriendViewController: UIViewController {
     func setNavigationItems() {
         
         navigationItem.rightBarButtonItems = [
-//            UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriendButton)),
+            UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriendButton)),
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(applyFriendButton))
         ]
         
@@ -206,16 +206,7 @@ class FriendViewController: UIViewController {
     
     @objc func blockadeFriendButton(sender: UIButton) {
         
-        let viewController = UIStoryboard(name: "Chat", bundle: nil)
-            .instantiateViewController(withIdentifier: String(describing: BlockadeFriendViewController.self))
-        
-        guard let viewController = viewController as? BlockadeFriendViewController else { return }
-        
-        if let blockadeList = ownerfriend?.blockadeList {
-            
-            viewController.blockadeList = blockadeList
-            
-        }
+        let viewController = BlockadeFriendViewController()
         
         navigationController?.pushViewController(viewController, animated: true)
         
