@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class UserInfoViewController: UIViewController {
 
@@ -34,6 +35,8 @@ class UserInfoViewController: UIViewController {
     @IBOutlet weak var blockUserButton: UIButton!
     
     @IBOutlet weak var addUserButton: UIButton!
+    
+    var getFriendStatus: ((_ isBlock: Bool) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -201,16 +204,35 @@ class UserInfoViewController: UIViewController {
     }
     
     @IBAction func blockUserButton(_ sender: UIButton) {
+        
+        let alertController = UIAlertController(
+            title: "封鎖帳號",
+            message: "請問確定封鎖此帳號嗎？\n 將不再看到此帳號的相關文章及訊息！",
+            preferredStyle: .alert)
+        
+        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+            
+            if var ownerFriend = self.ownerFriend {
+                
+                ownerFriend.blockadeList.append(self.selectUserID ?? "")
+                
+                self.friendManager.addData(friend: ownerFriend)
+                
+                self.view.removeFromSuperview()
+                
+                self.getFriendStatus?(true)
+                
+            }
 
-        if var ownerFriend = ownerFriend {
-            
-            ownerFriend.blockadeList.append(selectUserID ?? "")
-            
-            friendManager.addData(friend: ownerFriend)
-            
-            self.view.removeFromSuperview()
-            
         }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        
+        alertController.addAction(agreeAction)
+        
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
         
     }
     
@@ -223,6 +245,8 @@ class UserInfoViewController: UIViewController {
             bothSides.other.applyList.append(userID)
             
             friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
+            
+            HUD.flash(.labeledSuccess(title: "已發送好友邀請!", subtitle: "請等待對方的回覆"), delay: 0.5)
             
             self.view.removeFromSuperview()
             

@@ -92,7 +92,7 @@ class ChatViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setNavigationItems()
+        setNavigationItems()
         
         chatTableView.register(
             UINib(nibName: String(describing: ReceiveMessageTableViewCell.self), bundle: nil),
@@ -116,13 +116,49 @@ class ChatViewController: BaseViewController {
 
     func setNavigationItems() {
 
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage.asset(.telephoneCall),
-                style: .plain, target: self, action: #selector(callAudioPhone)),
-            UIBarButtonItem(image: UIImage.asset(.videoCamera),
-                style: .plain, target: self, action: #selector(callVideoPhone))
-        ]
+//        navigationItem.rightBarButtonItems = [
+//            UIBarButtonItem(image: UIImage.asset(.telephoneCall),
+//                style: .plain, target: self, action: #selector(callAudioPhone)),
+//            UIBarButtonItem(image: UIImage.asset(.videoCamera),
+//                style: .plain, target: self, action: #selector(callVideoPhone))
+//        ]
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriend))
 
+    }
+    
+    @objc func blockadeFriend() {
+        
+        // 彈跳出 User 視窗
+        guard let viewController = UIStoryboard
+            .chat
+            .instantiateViewController(
+            withIdentifier: String(describing: UserInfoViewController.self)
+            ) as? UserInfoViewController else { return }
+        
+        viewController.deleteAccount = false
+        
+        viewController.selectUserID = friendID
+        
+        viewController.getFriendStatus = { [weak self] isBlock in
+            
+            guard let strongSelf = self else { return }
+            
+            if isBlock {
+                
+                strongSelf.friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
+                
+                strongSelf.friendStatusLabel.isHidden = false
+                
+            }
+            
+        }
+        
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
+        
     }
 
     @objc func callAudioPhone(sender: UIButton) {
