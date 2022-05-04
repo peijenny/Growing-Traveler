@@ -80,6 +80,8 @@ class StudyGoalViewController: UIViewController {
         setHeaserLottieView()
         
         setSelectLineView()
+        
+        setNavigationBar()
 
         // MARK: - 註冊 TableView header / footer / cell
         studyGoalTableView.register(
@@ -95,13 +97,6 @@ class StudyGoalViewController: UIViewController {
         studyGoalTableView.register(
             UINib(nibName: String(describing: StudyGoalTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
-        )
-        
-        // MARK: - 右上角的 成長日曆 Button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage.asset(.calendar),
-            style: .plain, target: self,
-            action: #selector(pushToCalenderPage)
         )
 
     }
@@ -160,9 +155,10 @@ class StudyGoalViewController: UIViewController {
         lottieAnimation.contentMode = .scaleAspectFit
         
         lottieAnimation.frame = CGRect(
-            x: 0, y: 30,
-            width: headerAnimationView.frame.width,
-            height: headerAnimationView.frame.height
+            x: headerAnimationView.frame.width * CGFloat(0.1),
+            y: headerAnimationView.frame.height * CGFloat(0.2) + 30,
+            width: headerAnimationView.frame.width * CGFloat(0.8),
+            height: headerAnimationView.frame.height * CGFloat(0.8)
         )
 
         headerAnimationView.addSubview(lottieAnimation)
@@ -207,6 +203,33 @@ class StudyGoalViewController: UIViewController {
             }
             
         }
+        
+    }
+    
+    func setNavigationBar() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.calendar),
+            style: .plain, target: self,
+            action: #selector(pushToCalenderPage)
+        )
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.award),
+            style: .plain, target: self,
+            action: #selector(pushToRankPage)
+        )
+
+    }
+    
+    @objc func pushToRankPage(sender: UIButton) {
+        
+        let viewController = UIStoryboard.studyGoal
+            .instantiateViewController(withIdentifier: String(describing: RankViewController.self))
+        
+        guard let viewController = viewController as? RankViewController else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
 

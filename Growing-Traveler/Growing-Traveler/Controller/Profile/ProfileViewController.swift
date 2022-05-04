@@ -11,9 +11,7 @@ enum FeatureType {
     
     case mandate
     
-    case rank
-    
-    case note
+    case analysis
     
     case release
     
@@ -23,11 +21,9 @@ enum FeatureType {
         
         switch self {
             
-        case .mandate: return "成長任務"
+        case .mandate: return "學習成就"
             
-        case .rank: return "學習排行榜"
-            
-        case .note: return "學習筆記"
+        case .analysis: return "學習分析"
             
         case .release: return "發布紀錄"
             
@@ -47,9 +43,9 @@ class ProfileViewController: UIViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Int, FeatureType>?
     
-    let featureList: [FeatureType] = [.mandate, .rank, .note, .release, .license]
+    let featureList: [FeatureType] = [.mandate, .analysis, .release, .license]
     
-    let featureImage: [ImageAsset] = [.specialDeals, .vision, .idea, .blogging, .meditation]
+    let featureImage: [ImageAsset] = [.specialDeals, .vision, .blogging, .meditation]
     
     var userManager = UserManager()
     
@@ -220,30 +216,30 @@ extension ProfileViewController: UICollectionViewDelegate {
             
             navigationController?.pushViewController(viewController, animated: true)
             
+//        case 1:
+//            let viewController = UIStoryboard.profile
+//                .instantiateViewController(withIdentifier: String(describing: RankViewController.self))
+//
+//            guard let viewController = viewController as? RankViewController else { return }
+//
+//            navigationController?.pushViewController(viewController, animated: true)
+
         case 1:
-            let viewController = UIStoryboard.profile
-                .instantiateViewController(withIdentifier: String(describing: RankViewController.self))
             
-            guard let viewController = viewController as? RankViewController else { return }
+            let viewController = UIStoryboard.profile
+                .instantiateViewController(withIdentifier: String(describing: AnalysisViewController.self))
+            
+            guard let viewController = viewController as? AnalysisViewController else { return }
             
             navigationController?.pushViewController(viewController, animated: true)
 
         case 2:
             
-            let viewController = UIStoryboard.profile
-                .instantiateViewController(withIdentifier: String(describing: NoteViewController.self))
-            
-            guard let viewController = viewController as? NoteViewController else { return }
-            
-            navigationController?.pushViewController(viewController, animated: true)
-
-        case 3:
-            
             let viewController = ReleaseRecordViewController()
             
             navigationController?.pushViewController(viewController, animated: true)
 
-        case 4:
+        case 3:
             
             let viewController = CertificationViewController()
             

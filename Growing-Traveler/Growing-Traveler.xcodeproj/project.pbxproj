@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2803AD222817F30F00AF3AD3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803AD212817F30F00AF3AD3 /* SignInViewController.swift */; };
-		2808C912280FEC7600DC1EC5 /* Analysis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2808C911280FEC7600DC1EC5 /* Analysis.storyboard */; };
+		2808C912280FEC7600DC1EC5 /* Note.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2808C911280FEC7600DC1EC5 /* Note.storyboard */; };
 		2808C914280FECA800DC1EC5 /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C913280FECA800DC1EC5 /* AnalysisViewController.swift */; };
 		2808C918280FF2B700DC1EC5 /* AnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */; };
 		2808C91A28100F6000DC1EC5 /* CalculateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C91928100F6000DC1EC5 /* CalculateBar.swift */; };
@@ -146,7 +146,7 @@
 
 /* Begin PBXFileReference section */
 		2803AD212817F30F00AF3AD3 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		2808C911280FEC7600DC1EC5 /* Analysis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Analysis.storyboard; sourceTree = "<group>"; };
+		2808C911280FEC7600DC1EC5 /* Note.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Note.storyboard; sourceTree = "<group>"; };
 		2808C913280FECA800DC1EC5 /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisManager.swift; sourceTree = "<group>"; };
 		2808C91928100F6000DC1EC5 /* CalculateBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateBar.swift; sourceTree = "<group>"; };
@@ -475,9 +475,9 @@
 		288367A22801250F0010CEAD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				281358DE281C2AB2000B0CAE /* Note */,
 				28BC2C1E2816861600E69BE0 /* Authentication */,
 				28DA8329281272240081CB14 /* Profile */,
-				2808C910280FEC6800DC1EC5 /* Analysis */,
 				280C1AFA280D5D3C0091B9DC /* Chat */,
 				28BB6EE72806661F002B0458 /* Forum */,
 				288367AC28012A450010CEAD /* StudyGoal */,
@@ -490,9 +490,9 @@
 		288367A32801251C0010CEAD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				281358DF281C2C01000B0CAE /* Note */,
 				2803AD232817F42C00AF3AD3 /* Authentication */,
 				28DA832A281272390081CB14 /* Profile */,
-				2808C90E280FEC2B00DC1EC5 /* Analysis */,
 				280C1B07280D77AC0091B9DC /* Chat */,
 				28BB6EE428066418002B0458 /* Forum */,
 				288367AF2801396D0010CEAD /* StudyGoal */,
@@ -501,7 +501,7 @@
 				288367A8280129F30010CEAD /* StudyGoal.storyboard */,
 				28BB6EE528066441002B0458 /* Forum.storyboard */,
 				280C1AFB280D5D7C0091B9DC /* Chat.storyboard */,
-				2808C911280FEC7600DC1EC5 /* Analysis.storyboard */,
+				2808C911280FEC7600DC1EC5 /* Note.storyboard */,
 				28DA832C281272560081CB14 /* Profile.storyboard */,
 				28BC2C1C2816860000E69BE0 /* Authentication.storyboard */,
 			);
@@ -538,6 +538,7 @@
 		288367AC28012A450010CEAD /* StudyGoal */ = {
 			isa = PBXGroup;
 			children = (
+				28D79FE4281A85A600505B5B /* Rank */,
 				28AF15B828040E3C004E97B8 /* PlanStudyGoal */,
 				288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */,
 				28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */,
@@ -742,12 +743,11 @@
 		28DA8329281272240081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				281358DE281C2AB2000B0CAE /* Note */,
+				2808C910280FEC6800DC1EC5 /* Analysis */,
 				281358D4281BBCF7000B0CAE /* Certification */,
 				28D79FF4281AC0C600505B5B /* ReleaseRecord */,
 				28D79FE9281A867600505B5B /* Mandate */,
 				28D79FE8281A865700505B5B /* Setting */,
-				28D79FE4281A85A600505B5B /* Rank */,
 				28DA832E281272770081CB14 /* ProfileViewController.swift */,
 			);
 			path = Profile;
@@ -756,7 +756,7 @@
 		28DA832A281272390081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				281358DF281C2C01000B0CAE /* Note */,
+				2808C90E280FEC2B00DC1EC5 /* Analysis */,
 				281358D7281BC8D3000B0CAE /* Certification */,
 				28D79FE5281A85B900505B5B /* Rank */,
 				283E65862817D17700F1033F /* Setting */,
@@ -889,7 +889,7 @@
 				28BB6F002807C86C002B0458 /* ArticleTableViewCell.xib in Resources */,
 				280C1B16280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib in Resources */,
 				2808C92228103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.xib in Resources */,
-				2808C912280FEC7600DC1EC5 /* Analysis.storyboard in Resources */,
+				2808C912280FEC7600DC1EC5 /* Note.storyboard in Resources */,
 				283E6583281797F300F1033F /* GoogleService-Info.plist in Resources */,
 				28BB6F3028096C40002B0458 /* MoreArticlesTableViewCell.xib in Resources */,
 				28DA83312812744F0081CB14 /* ProfileView.xib in Resources */,

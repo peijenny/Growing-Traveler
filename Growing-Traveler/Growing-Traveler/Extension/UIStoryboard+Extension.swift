@@ -17,7 +17,7 @@ private struct StoryboardCategory {
     
     static let chat = "Chat"
     
-    static let analysis = "Analysis"
+    static let note = "Note"
     
     static let profile = "Profile"
     
@@ -31,11 +31,11 @@ extension UIStoryboard {
     
     static var studyGoal: UIStoryboard { return storyboard(name: StoryboardCategory.studyGoal) }
     
-    static var forum: UIStoryboard { return storyboard(name: StoryboardCategory.forum) }
-    
+    static var note: UIStoryboard { return storyboard(name: StoryboardCategory.note) }
+
     static var chat: UIStoryboard { return storyboard(name: StoryboardCategory.chat) }
     
-    static var analysis: UIStoryboard { return storyboard(name: StoryboardCategory.analysis) }
+    static var forum: UIStoryboard { return storyboard(name: StoryboardCategory.forum) }
     
     static var profile: UIStoryboard { return storyboard(name: StoryboardCategory.profile) }
     
