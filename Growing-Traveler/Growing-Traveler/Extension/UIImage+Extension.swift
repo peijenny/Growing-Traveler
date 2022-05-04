@@ -25,6 +25,9 @@ enum ImageAsset: String {
     case speechBubbleOrigin
     case speechBubbleSelect
     
+    case bookOrigin
+    case bookSelect
+    
     case calendar
     case award
     

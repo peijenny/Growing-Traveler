@@ -30,7 +30,7 @@
                             </label>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QP9-ip-DNU">
                                 <rect key="frame" x="75" y="0.0" width="307" height="40"/>
-                                <color key="textColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -53,7 +53,7 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入 Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j5U-YO-MPh">
                                 <rect key="frame" x="75" y="0.0" width="307" height="40"/>
-                                <color key="textColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -76,7 +76,7 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入電話" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KEq-Km-P2d">
                                 <rect key="frame" x="75" y="0.0" width="307" height="40"/>
-                                <color key="textColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -99,7 +99,7 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VD7-m9-9R1">
                                 <rect key="frame" x="75" y="0.0" width="307" height="40"/>
-                                <color key="textColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -110,28 +110,28 @@
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z8W-jF-2t8">
                         <rect key="frame" x="91" y="56" width="307" height="1"/>
-                        <color key="backgroundColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="jZX-tE-dfo"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5w-8T-FZy">
                         <rect key="frame" x="91" y="168" width="307" height="1"/>
-                        <color key="backgroundColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="tJv-GD-mgd"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0m5-oH-E1B">
                         <rect key="frame" x="91" y="224" width="307" height="1"/>
-                        <color key="backgroundColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="yEp-pn-uFg"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gqn-R4-ZnZ">
                         <rect key="frame" x="91" y="112" width="307" height="1"/>
-                        <color key="backgroundColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="3Et-XW-gcb"/>
                         </constraints>

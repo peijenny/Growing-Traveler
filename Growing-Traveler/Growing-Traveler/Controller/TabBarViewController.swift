@@ -67,8 +67,8 @@ private enum Tab {
             
             return UITabBarItem(
                 title: "筆記",
-                image: UIImage.asset(.notepadSelect),
-                selectedImage: UIImage.asset(.notepadSelect)
+                image: UIImage.asset(.bookSelect),
+                selectedImage: UIImage.asset(.bookSelect)
             )
         
         case .chat:

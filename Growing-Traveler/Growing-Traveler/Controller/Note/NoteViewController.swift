@@ -86,7 +86,7 @@ class NoteViewController: BaseViewController {
     
     @objc func addNewNote() {
         
-        guard let viewController = UIStoryboard.profile.instantiateViewController(
+        guard let viewController = UIStoryboard.note.instantiateViewController(
                 withIdentifier: String(describing: PublishNoteViewController.self)
                 ) as? PublishNoteViewController else { return }
         
@@ -137,7 +137,7 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let viewController = UIStoryboard.profile.instantiateViewController(
+        guard let viewController = UIStoryboard.note.instantiateViewController(
                 withIdentifier: String(describing: NoteDetailViewController.self)
                 ) as? NoteDetailViewController else { return }
         

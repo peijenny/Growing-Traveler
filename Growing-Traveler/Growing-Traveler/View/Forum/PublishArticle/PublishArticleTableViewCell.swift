@@ -32,7 +32,7 @@ class PublishArticleTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
         
-        contentTextView.layer.borderColor = UIColor.hexStringToUIColor(hex: "9C8F96").cgColor
+        contentTextView.layer.borderColor = UIColor.darkGray.cgColor
         
         contentTextView.layer.borderWidth = 1
         
@@ -44,7 +44,7 @@ class PublishArticleTableViewCell: UITableViewCell {
             
         } else {
             
-            contentTextView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
+            contentTextView.textColor = UIColor.black
             
         }
         

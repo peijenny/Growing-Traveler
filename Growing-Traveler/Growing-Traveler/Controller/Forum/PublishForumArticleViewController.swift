@@ -365,7 +365,7 @@ extension PublishForumArticleViewController: UITextViewDelegate {
             
             textView.text = nil
             
-            textView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
+            textView.textColor = UIColor.black
             
         }
         

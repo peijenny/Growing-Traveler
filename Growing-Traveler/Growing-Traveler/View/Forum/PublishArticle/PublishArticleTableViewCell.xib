@@ -12,7 +12,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PublishArticleTableViewCell" customModule="Growing_Traveler" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -63,7 +63,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="YFY-YR-Dr9"/>
                         </constraints>
-                        <color key="textColor" red="0.61176470588235299" green="0.5607843137254902" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
@@ -72,7 +72,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="k4J-GG-oqj"/>
                         </constraints>
-                        <color key="textColor" red="0.61176470588235299" green="0.5607843137254902" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
@@ -109,25 +109,22 @@
                         <buttonConfiguration key="configuration" style="plain" image="folder.badge.plus" catalog="system"/>
                     </button>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="請描述內容......" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vrw-Jr-Wng">
-                        <rect key="frame" x="16" y="214" width="382" height="400"/>
+                        <rect key="frame" x="16" y="214" width="382" height="410"/>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.92156862745098034" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="400" id="myn-8l-9dJ"/>
-                        </constraints>
-                        <color key="textColor" red="0.61176470588235299" green="0.5607843137254902" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftq-UI-131">
                         <rect key="frame" x="96" y="102" width="250" height="1"/>
-                        <color key="backgroundColor" red="0.61176470588235299" green="0.5607843137254902" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="miI-qK-mTZ"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VVr-2m-EwV">
                         <rect key="frame" x="96" y="153" width="298" height="1"/>
-                        <color key="backgroundColor" red="0.61176470589999998" green="0.56078431370000004" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="sEX-Rd-wiX"/>
                         </constraints>
