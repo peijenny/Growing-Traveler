@@ -75,6 +75,7 @@
 		288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AD280134280010CEAD /* PlanStudyGoalViewController.swift */; };
 		288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288367B428013E800010CEAD /* PlanStudyGoalHeaderView.xib */; };
 		288367B728013E900010CEAD /* PlanStudyGoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367B628013E900010CEAD /* PlanStudyGoalHeaderView.swift */; };
+		289679F6282226F6008A15F0 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289679F5282226F6008A15F0 /* UserInfoViewController.swift */; };
 		28A6F45B280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A6F45A280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift */; };
 		28A6F45E280ADAC900EFCC2C /* ArticleMessageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A6F45D280ADAC900EFCC2C /* ArticleMessageHeaderView.xib */; };
 		28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */; };
@@ -212,6 +213,7 @@
 		288367AD280134280010CEAD /* PlanStudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanStudyGoalViewController.swift; sourceTree = "<group>"; };
 		288367B428013E800010CEAD /* PlanStudyGoalHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanStudyGoalHeaderView.xib; sourceTree = "<group>"; };
 		288367B628013E900010CEAD /* PlanStudyGoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanStudyGoalHeaderView.swift; sourceTree = "<group>"; };
+		289679F5282226F6008A15F0 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		28A6F45A280ADAAF00EFCC2C /* ArticleMessageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleMessageHeaderView.swift; sourceTree = "<group>"; };
 		28A6F45D280ADAC900EFCC2C /* ArticleMessageHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleMessageHeaderView.xib; sourceTree = "<group>"; };
 		28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			children = (
 				282522C2280ED5520008B916 /* Friend */,
 				280C1B05280D77900091B9DC /* ChatViewController.swift */,
+				289679F5282226F6008A15F0 /* UserInfoViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1047,6 +1050,7 @@
 				28FF433F2813D12200C58E6B /* MandateManager.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,
 				28BC2C202816864600E69BE0 /* AuthenticationViewController.swift in Sources */,
+				289679F6282226F6008A15F0 /* UserInfoViewController.swift in Sources */,
 				28BB6F3828098CC1002B0458 /* ArticleDetailHeaderView.swift in Sources */,
 				28BB6F41280A919C002B0458 /* ArticleDetailTableViewCell.swift in Sources */,
 				281358D2281AC24A000B0CAE /* ReleaseRecordViewController.swift in Sources */,

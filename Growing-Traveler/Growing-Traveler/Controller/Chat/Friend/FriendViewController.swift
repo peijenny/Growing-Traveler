@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Charts
 
 enum FriendType {
     
@@ -40,6 +41,11 @@ class FriendViewController: UIViewController {
             friendListTableView.delegate = self
             
             friendListTableView.dataSource = self
+            
+            let longPressRecognizer = UILongPressGestureRecognizer(
+                target: self, action: #selector(longPressed(sender:)))
+            
+            friendListTableView.addGestureRecognizer(longPressRecognizer)
             
         }
         
@@ -266,6 +272,34 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell
+        
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.friendListTableView)
+            
+            if let indexPath = friendListTableView.indexPathForRow(at: touchPoint) {
+                
+                // 彈跳出 User 視窗
+                
+                guard let viewController = UIStoryboard
+                    .chat
+                    .instantiateViewController(
+                    withIdentifier: String(describing: UserInfoViewController.self)
+                    ) as? UserInfoViewController else { return }
+                
+                viewController.selectUserID = friendsChat[indexPath.row].friendID
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
+                
+            }
+            
+        }
         
     }
     
