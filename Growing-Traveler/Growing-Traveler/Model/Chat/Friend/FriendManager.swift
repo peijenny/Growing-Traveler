@@ -57,6 +57,49 @@ class FriendManager {
     }
     
     // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
+    func listenFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
+        
+        if fetchUserID != "" {
+         
+            database.collection("friend")
+            .whereField("userID", isEqualTo: fetchUserID)
+            .addSnapshotListener { snapshot, error in
+            
+                guard let snapshot = snapshot else {
+                    
+                    print("Error fetching document: \(error!)")
+                    
+                    completion(Result.failure(error!))
+                    
+                    return
+                    
+                }
+                
+                let document = snapshot.documents[0]
+                    
+                do {
+                    
+                    if let friend = try document.data(as: Friend.self, decoder: Firestore.Decoder()) {
+                        
+                        completion(Result.success(friend))
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
+                    
+            }
+            
+        }
+        
+    }
+    
+    // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
     func fetchFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
         
         if fetchUserID != "" {

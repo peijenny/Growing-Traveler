@@ -21,8 +21,6 @@ class UserInfoViewController: UIViewController {
     
     var bothSides: BothSides?
     
-    var isBlock = Bool()
-    
     var deleteAccount = Bool()
     
     var friendManager = FriendManager()
@@ -52,14 +50,27 @@ class UserInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchFriendListData(userID: userID)
+        if !deleteAccount {
+            
+            fetchFriendListData(userID: userID)
+            
+            fetchFriendListData(userID: selectUserID ?? "")
+            
+            fetchUserInfoData(userID: selectUserID ?? "")
+            
+        } else {
+            
+            userNameLabel.text = "已刪除帳號的使用者"
+            
+            friendStatusLabel.text = SearchFriendStatus.deleteAccount.title
+            
+            blockUserButton.isEnabled = false
+            
+            addUserButton.isEnabled = false
+            
+        }
         
-        fetchFriendListData(userID: selectUserID ?? "")
-        
-        fetchUserInfoData(userID: selectUserID ?? "")
-
     }
-    
     func fetchFriendListData(userID: String) {
         
         friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
@@ -158,10 +169,6 @@ class UserInfoViewController: UIViewController {
             
             blockUserButton.isEnabled = true
             
-        } else if userInfo == nil {
-            
-            friendStatusLabel.text = SearchFriendStatus.deleteAccount.title
-            
         } else {
             
             blockUserButton.isEnabled = false
@@ -169,9 +176,9 @@ class UserInfoViewController: UIViewController {
             addUserButton.isEnabled = false
             
             if let ownerFriend = ownerFriend, let otherFriend = otherFriend {
-                
+
                 bothSides = BothSides(owner: ownerFriend, other: otherFriend)
-                
+
             }
             
         }
@@ -185,40 +192,30 @@ class UserInfoViewController: UIViewController {
     }
     
     @IBAction func blockUserButton(_ sender: UIButton) {
-        
-        // 加到 blockade list
-        
-        if var bothSides = bothSides {
+
+        if var ownerFriend = ownerFriend {
             
-            bothSides.owner.deliveryList.append(selectUserID ?? "")
+            ownerFriend.blockadeList.append(selectUserID ?? "")
             
-            bothSides.other.applyList.append(userID)
+            friendManager.addData(friend: ownerFriend)
             
-            print("TEST 自己的申請 \(bothSides.owner.deliveryList)")
-            
-            print("TEST 對方的申請 \(bothSides.other.applyList)")
-            
-//            friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
+            self.view.removeFromSuperview()
             
         }
         
     }
     
     @IBAction func addUserButton(_ sender: UIButton) {
-        
-        // 加到兩個 list 中
-        
+
         if var bothSides = bothSides {
             
             bothSides.owner.deliveryList.append(selectUserID ?? "")
             
             bothSides.other.applyList.append(userID)
             
-            print("TEST 自己的申請 \(bothSides.owner.deliveryList)")
+            friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
             
-            print("TEST 對方的申請 \(bothSides.other.applyList)")
-            
-//            friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
+            self.view.removeFromSuperview()
             
         }
         
