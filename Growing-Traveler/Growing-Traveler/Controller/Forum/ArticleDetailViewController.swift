@@ -226,6 +226,57 @@ class ArticleDetailViewController: UIViewController {
         
         articleDetailTableView.dataSource = self
         
+        let longPressRecognizer = UILongPressGestureRecognizer(
+            target: self, action: #selector(longPressed(sender:)))
+        
+        articleDetailTableView.addGestureRecognizer(longPressRecognizer)
+        
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.articleDetailTableView)
+            
+            if let indexPath = articleDetailTableView.indexPathForRow(at: touchPoint) {
+                
+                // 彈跳出 User 視窗
+                
+                guard let viewController = UIStoryboard
+                    .chat
+                    .instantiateViewController(
+                    withIdentifier: String(describing: UserInfoViewController.self)
+                    ) as? UserInfoViewController else { return }
+                
+                viewController.deleteAccount = false
+                
+                if indexPath.section == 0 {
+                    
+                    guard let forumArticle = forumArticle else { return }
+                    
+                    viewController.selectUserID = forumArticle.userID
+                    
+                } else {
+                    
+                    viewController.selectUserID = articleMessages[indexPath.row].userID
+                    
+                    if usersInfo.filter({ $0.userID == articleMessages[indexPath.row].userID }).count == 0 {
+                        
+                        viewController.deleteAccount = true
+                        
+                    }
+                    
+                }
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
+                
+            }
+            
+        }
+        
     }
 
 }
@@ -282,7 +333,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             let userInfo = usersInfo.filter({ $0.userID == articleMessages[indexPath.row].userID })
             
-            var userName = "[帳號已刪除]"
+            var userName = String()
             
             var isBlock = false
             
@@ -296,6 +347,10 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
                     
                 }
                 
+            } else {
+                
+                userName = "[帳號已刪除]"
+
             }
             
             cell.showMessages(

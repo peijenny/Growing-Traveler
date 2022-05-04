@@ -9,6 +9,8 @@ import UIKit
 
 enum SearchFriendStatus {
     
+    case yourInfo
+    
     case yourself
     
     case blocked
@@ -28,6 +30,8 @@ enum SearchFriendStatus {
     var title: String {
         
         switch self {
+            
+        case .yourInfo: return "你自己的帳號"
             
         case .yourself: return "不可加入自己！"
             

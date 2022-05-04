@@ -72,6 +72,8 @@ class ArticleMessageTableViewCell: UITableViewCell {
         
         userIDLabel.text = userName
         
+        friendStatusLabel.text = nil
+        
         if articleMessage.userID == articleUserID {
       
             userIDLabel.text = "\(userName) (原Po)"
@@ -84,9 +86,7 @@ class ArticleMessageTableViewCell: UITableViewCell {
             
             friendStatusLabel.text = "[帳號已刪除]"
             
-        }
-        
-        if isBlock {
+        } else if isBlock {
             
             friendStatusLabel.text = "[帳號已封鎖]"
             

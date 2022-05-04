@@ -50,6 +50,12 @@ class UserInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if selectUserID == userID {
+            
+            friendStatusLabel.text = SearchFriendStatus.yourInfo.title
+            
+        }
+        
         if !deleteAccount {
             
             fetchFriendListData(userID: userID)
@@ -71,6 +77,7 @@ class UserInfoViewController: UIViewController {
         }
         
     }
+    
     func fetchFriendListData(userID: String) {
         
         friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
@@ -146,7 +153,7 @@ class UserInfoViewController: UIViewController {
         addUserButton.isEnabled = false
 
         guard let friendList = ownerFriend else { return }
-        
+
         if friendList.blockadeList.filter({ $0 == selectUserID }).count > 0 {
             
             friendStatusLabel.text = SearchFriendStatus.blocked.title
@@ -171,9 +178,11 @@ class UserInfoViewController: UIViewController {
             
         } else {
             
-            blockUserButton.isEnabled = false
+            blockUserButton.isEnabled = true
             
-            addUserButton.isEnabled = false
+            addUserButton.isEnabled = true
+            
+            friendStatusLabel.text = SearchFriendStatus.noRelation.title
             
             if let ownerFriend = ownerFriend, let otherFriend = otherFriend {
 
