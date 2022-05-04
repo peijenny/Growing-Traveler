@@ -251,13 +251,7 @@ class ArticleDetailViewController: UIViewController {
                 
                 viewController.deleteAccount = false
                 
-                if indexPath.section == 0 {
-                    
-                    guard let forumArticle = forumArticle else { return }
-                    
-                    viewController.selectUserID = forumArticle.userID
-                    
-                } else {
+                if indexPath.section == 1 {
                     
                     viewController.selectUserID = articleMessages[indexPath.row].userID
                     
@@ -428,6 +422,10 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
                 
             }
             
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+            
+            headerView.addGestureRecognizer(tapGestureRecognizer)
+            
             return headerView
             
         } else {
@@ -439,6 +437,24 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             return headerView
         }
+        
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+
+        guard let viewController = UIStoryboard
+            .chat
+            .instantiateViewController(
+            withIdentifier: String(describing: UserInfoViewController.self)
+            ) as? UserInfoViewController else { return }
+        
+        viewController.deleteAccount = false
+        
+        viewController.selectUserID = forumArticle?.userID ?? ""
+        
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
         
     }
     

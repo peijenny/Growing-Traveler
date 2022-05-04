@@ -55,6 +55,11 @@ class ForumViewController: BaseViewController {
             
             articleTableView.dataSource = self
             
+            let longPressRecognizer = UILongPressGestureRecognizer(
+                target: self, action: #selector(longPressed(sender:)))
+            
+            articleTableView.addGestureRecognizer(longPressRecognizer)
+            
         }
         
     }
@@ -288,6 +293,45 @@ class ForumViewController: BaseViewController {
             case .failure(let error):
                 
                 print(error)
+                
+            }
+            
+        }
+        
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.articleTableView)
+            
+            if let indexPath = articleTableView.indexPathForRow(at: touchPoint) {
+                
+                // 彈跳出 User 視窗
+                guard let viewController = UIStoryboard
+                    .chat
+                    .instantiateViewController(
+                    withIdentifier: String(describing: UserInfoViewController.self)
+                    ) as? UserInfoViewController else { return }
+                
+                viewController.deleteAccount = false
+                
+                if inputText != nil {
+                    
+                    let searchArticle = searchForumArticles.filter({ $0.forumType == forumType[indexPath.section] })
+                    
+                    viewController.selectUserID = searchArticle[indexPath.row].userID
+                    
+                } else {
+                    
+                    viewController.selectUserID = allForumArticles[indexPath.section][indexPath.row].userID
+                    
+                }
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
                 
             }
             

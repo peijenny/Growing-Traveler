@@ -182,6 +182,40 @@ class MoreArticlesViewController: UIViewController {
         
         moreArticlesTableView.dataSource = self
         
+        let longPressRecognizer = UILongPressGestureRecognizer(
+            target: self, action: #selector(longPressed(sender:)))
+        
+        moreArticlesTableView.addGestureRecognizer(longPressRecognizer)
+        
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.moreArticlesTableView)
+            
+            if let indexPath = moreArticlesTableView.indexPathForRow(at: touchPoint) {
+                
+                // 彈跳出 User 視窗
+                guard let viewController = UIStoryboard
+                    .chat
+                    .instantiateViewController(
+                    withIdentifier: String(describing: UserInfoViewController.self)
+                    ) as? UserInfoViewController else { return }
+                
+                viewController.deleteAccount = false
+                
+                viewController.selectUserID = forumArticles[indexPath.row].userID
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
+                
+            }
+            
+        }
+        
     }
 
 }
@@ -237,4 +271,5 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
         navigationController?.pushViewController(viewController, animated: true)
         
     }
+    
 }
