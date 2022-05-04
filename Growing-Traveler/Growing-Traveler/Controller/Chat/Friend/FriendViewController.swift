@@ -53,7 +53,7 @@ class FriendViewController: UIViewController {
     
     var friendManager = FriendManager()
     
-    var friend: Friend?
+    var ownerfriend: Friend?
     
     var friendsChat: [Chat] = [] {
         
@@ -130,7 +130,7 @@ class FriendViewController: UIViewController {
 
             case .success(let friend):
 
-                strongSelf.friend = friend
+                strongSelf.ownerfriend = friend
                 
                 strongSelf.friendListTableView.reloadData()
 
@@ -194,7 +194,7 @@ class FriendViewController: UIViewController {
         
         guard let viewController = viewController as? ApplyFriendViewController else { return }
         
-        if let friend = friend {
+        if let friend = ownerfriend {
 
             viewController.ownFriend = friend
             
@@ -211,7 +211,7 @@ class FriendViewController: UIViewController {
         
         guard let viewController = viewController as? BlockadeFriendViewController else { return }
         
-        if let blockadeList = friend?.blockadeList {
+        if let blockadeList = ownerfriend?.blockadeList {
             
             viewController.blockadeList = blockadeList
             
@@ -252,7 +252,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.showFriendInfo(
                 friendInfo: userInfo[0],
-                blockadeList: friend?.blockadeList ?? [],
+                blockadeList: ownerfriend?.blockadeList ?? [],
                 deleteAccount: false)
             
         } else {
@@ -266,7 +266,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.showFriendInfo(
                 friendInfo: blockUserInfo,
-                blockadeList: friend?.blockadeList ?? [],
+                blockadeList: ownerfriend?.blockadeList ?? [],
                 deleteAccount: true)
             
         }
@@ -293,7 +293,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 viewController.selectUserID = friendsChat[indexPath.row].friendID
                 
-                if friend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).count == 0 {
+                if ownerfriend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).count == 0 {
                     
                     viewController.isBlock = false
                     
@@ -334,9 +334,9 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         
         viewController.friendID = friendsChat[indexPath.row].friendID
         
-        viewController.userName = friend?.userName ?? ""
+        viewController.userName = ownerfriend?.userName ?? ""
         
-        if friend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).count == 0 {
+        if ownerfriend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).count == 0 {
             
             viewController.isBlock = false
             

@@ -85,12 +85,14 @@ class ChatViewController: BaseViewController {
 
     @IBOutlet weak var friendStatusLabel: UILabel!
     
+    var friendManager = FriendManager()
+    
+    var otherFriendList: Friend?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 //        setNavigationItems()
-        
-        fetchFriendInfoData()
         
         chatTableView.register(
             UINib(nibName: String(describing: ReceiveMessageTableViewCell.self), bundle: nil),
@@ -175,6 +177,13 @@ class ChatViewController: BaseViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchFriendInfoData()
+        
+    }
+    
     func fetchFriendInfoData() {
         
         userManager.fetchData(fetchUserID: friendID) { [weak self] result in
@@ -186,6 +195,12 @@ class ChatViewController: BaseViewController {
             case .success(let friendInfo):
 
                 strongSelf.friendInfo = friendInfo
+                
+                if strongSelf.friendInfo != nil {
+                    
+                    strongSelf.fetchOtherFriendListData()
+                    
+                }
                 
                 strongSelf.chatTableView.reloadData()
 
@@ -199,9 +214,30 @@ class ChatViewController: BaseViewController {
         
     }
     
+    func fetchOtherFriendListData() {
+        
+        friendManager.fetchFriendListData(fetchUserID: friendID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+
+            case .success(let friendList):
+
+                strongSelf.otherFriendList = friendList
+                
+            case .failure(let error):
+
+                print(error)
+
+            }
+
+        }
+    }
+    
     func fetchChatRoomData() {
 
-        chatRoomManager.fetchData(friendID: friendID, completion: { [weak self] result in
+        chatRoomManager.fetchData(friendID: friendID) { [weak self] result in
 
             guard let strongSelf = self else { return }
 
@@ -217,7 +253,7 @@ class ChatViewController: BaseViewController {
 
             }
 
-        })
+        }
 
     }
     
@@ -299,6 +335,14 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             )
             
             guard let cell = cell as? ReceiveMessageTableViewCell else { return cell }
+            
+            if otherFriendList?.blockadeList.filter({ $0 == userID }).count != 0 {
+                
+                friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
+                
+                friendStatusLabel.isHidden = false
+                
+            }
             
             if isBlock {
                 

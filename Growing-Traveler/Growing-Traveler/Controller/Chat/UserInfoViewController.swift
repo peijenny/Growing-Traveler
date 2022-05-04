@@ -27,7 +27,9 @@ class UserInfoViewController: UIViewController {
     
     var friendManager = FriendManager()
     
-    var friendList: Friend?
+    var ownerFriend: Friend?
+    
+    var otherFriend: Friend?
 
     @IBOutlet weak var friendStatusLabel: UILabel!
     
@@ -50,13 +52,15 @@ class UserInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchFriendListData()
+        fetchFriendListData(userID: userID)
         
-        fetchUserInfoData(userInfo: selectUserID ?? "")
+        fetchFriendListData(userID: selectUserID ?? "")
         
+        fetchUserInfoData(userID: selectUserID ?? "")
+
     }
     
-    func fetchFriendListData() {
+    func fetchFriendListData(userID: String) {
         
         friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
             
@@ -66,7 +70,15 @@ class UserInfoViewController: UIViewController {
                 
             case .success(let friendList):
                 
-                strongSelf.friendList = friendList
+                if userID == strongSelf.selectUserID {
+                    
+                    strongSelf.otherFriend = friendList
+                    
+                } else {
+                    
+                    strongSelf.ownerFriend = friendList
+                    
+                }
                 
                 strongSelf.handleFriendStatus()
                 
@@ -80,9 +92,9 @@ class UserInfoViewController: UIViewController {
         
     }
     
-    func fetchUserInfoData(userInfo: String) {
+    func fetchUserInfoData(userID: String) {
         
-        userManager.fetchData(fetchUserID: userInfo) { [weak self] result in
+        userManager.fetchData(fetchUserID: userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -122,7 +134,7 @@ class UserInfoViewController: UIViewController {
         
         addUserButton.isEnabled = false
 
-        guard let friendList = friendList else { return }
+        guard let friendList = ownerFriend else { return }
         
         if friendList.blockadeList.filter({ $0 == selectUserID }).count > 0 {
             
@@ -156,6 +168,12 @@ class UserInfoViewController: UIViewController {
             
             addUserButton.isEnabled = false
             
+            if let ownerFriend = ownerFriend, let otherFriend = otherFriend {
+                
+                bothSides = BothSides(owner: ownerFriend, other: otherFriend)
+                
+            }
+            
         }
         
     }
@@ -169,11 +187,40 @@ class UserInfoViewController: UIViewController {
     @IBAction func blockUserButton(_ sender: UIButton) {
         
         // 加到 blockade list
+        
+        if var bothSides = bothSides {
+            
+            bothSides.owner.deliveryList.append(selectUserID ?? "")
+            
+            bothSides.other.applyList.append(userID)
+            
+            print("TEST 自己的申請 \(bothSides.owner.deliveryList)")
+            
+            print("TEST 對方的申請 \(bothSides.other.applyList)")
+            
+//            friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
+            
+        }
+        
     }
     
     @IBAction func addUserButton(_ sender: UIButton) {
         
         // 加到兩個 list 中
+        
+        if var bothSides = bothSides {
+            
+            bothSides.owner.deliveryList.append(selectUserID ?? "")
+            
+            bothSides.other.applyList.append(userID)
+            
+            print("TEST 自己的申請 \(bothSides.owner.deliveryList)")
+            
+            print("TEST 對方的申請 \(bothSides.other.applyList)")
+            
+//            friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
+            
+        }
         
     }
     
