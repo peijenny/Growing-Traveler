@@ -83,7 +83,7 @@ class ForumViewController: BaseViewController {
     
     var usersInfo: [UserInfo] = []
     
-    var forumArticleType: ForumArticleType?
+    var allForumArticles: [[ForumArticle]] = []
     
     var friendManager = FriendManager()
     
@@ -247,7 +247,7 @@ class ForumViewController: BaseViewController {
                     
                 }
                 
-                strongSelf.forumArticleType = ForumArticleType(essay: essay, question: question, chat: chat)
+                strongSelf.allForumArticles = [essay, question, chat]
                 
                 strongSelf.articleTableView.reloadData()
                 
@@ -307,21 +307,13 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if inputText == nil {
+        if inputText == nil && allForumArticles.count != 0 {
             
-            if section == 0 {
-                
-                return forumArticleType?.essay.count ?? 0
-                
-            } else if section == 1 {
-                
-                return forumArticleType?.question.count ?? 0
-                
-            } else {
-                
-                return forumArticleType?.chat.count ?? 0
-                
-            }
+            return allForumArticles[section].count
+            
+        } else if inputText == nil && allForumArticles.count != 0 {
+            
+            return 0
             
         } else {
             
@@ -342,66 +334,28 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = cell as? ArticleTableViewCell else { return cell }
         
-        guard let forumArticleType = forumArticleType else { return cell }
-        
         var isLastOne = false
         
         var amountOver = forumArticles.filter({ $0.forumType == forumType[indexPath.section] }).count > 5
         
-        if indexPath.section == 0 && inputText == nil {
+        if inputText == nil {
             
-            let userInfo = usersInfo.filter({ $0.userID == forumArticleType.essay[indexPath.row].userID })
-            
-            if userInfo.count != 0 {
-                
-                let userName = userInfo[0].userName
-                
-                cell.showForumArticle(
-                    forumArticle: forumArticleType.essay[indexPath.row],
-                    userName: userName
-                )
-                
-            }
-            
-            isLastOne = forumArticleType.essay.count - 1 == indexPath.row
-            
-        } else if indexPath.section == 1 && inputText == nil {
-            
-            let userInfo = usersInfo.filter({ $0.userID == forumArticleType.question[indexPath.row].userID })
+            let userInfo = usersInfo.filter({ $0.userID == allForumArticles[indexPath.section][indexPath.row].userID })
             
             if userInfo.count != 0 {
                 
                 let userName = userInfo[0].userName
                 
                 cell.showForumArticle(
-                    forumArticle: forumArticleType.question[indexPath.row],
+                    forumArticle: allForumArticles[indexPath.section][indexPath.row],
                     userName: userName
                 )
                 
             }
             
-            isLastOne = forumArticleType.question.count - 1 == indexPath.row
+            isLastOne = allForumArticles[indexPath.section].count - 1 == indexPath.row
             
-        } else if indexPath.section == 2 && inputText == nil {
-            
-            let userInfo = usersInfo.filter({ $0.userID == forumArticleType.chat[indexPath.row].userID })
-            
-            if userInfo.count != 0 {
-                
-                let userName = userInfo[0].userName
-                
-                cell.showForumArticle(
-                    forumArticle: forumArticleType.chat[indexPath.row],
-                    userName: userName
-                )
-                
-            }
-            
-            isLastOne = forumArticleType.chat.count - 1 == indexPath.row
-            
-        }
-        
-        if inputText != nil {
+        } else {
             
             amountOver = searchArticels.count > 5
             
@@ -450,19 +404,7 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
 
         let viewController = ArticleDetailViewController()
         
-        if indexPath.section == 0 {
-            
-            viewController.forumArticle = forumArticleType?.essay[indexPath.row]
-            
-        } else if indexPath.section == 1 {
-            
-            viewController.forumArticle = forumArticleType?.question[indexPath.row]
-            
-        } else if indexPath.section == 2 {
-            
-            viewController.forumArticle = forumArticleType?.chat[indexPath.row]
-            
-        }
+        viewController.forumArticle = allForumArticles[indexPath.section][indexPath.row]
 
         navigationController?.pushViewController(viewController, animated: true)
         
