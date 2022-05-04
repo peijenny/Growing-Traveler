@@ -335,12 +335,16 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             )
             
             guard let cell = cell as? ReceiveMessageTableViewCell else { return cell }
-            
-            if otherFriendList?.blockadeList.filter({ $0 == userID }).count != 0 {
+
+            if let blockadeList = otherFriendList?.blockadeList {
                 
-                friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
-                
-                friendStatusLabel.isHidden = false
+                if blockadeList.filter({ $0 == userID }).count != 0 {
+                    
+                    friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
+                    
+                    friendStatusLabel.isHidden = false
+                    
+                }
                 
             }
             
