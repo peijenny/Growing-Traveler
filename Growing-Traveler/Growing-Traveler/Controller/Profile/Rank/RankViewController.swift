@@ -17,6 +17,11 @@ class RankViewController: UIViewController {
             
             rankTableView.dataSource = self
             
+            let longPressRecognizer = UILongPressGestureRecognizer(
+                target: self, action: #selector(longPressed(sender:)))
+            
+            rankTableView.addGestureRecognizer(longPressRecognizer)
+            
         }
         
     }
@@ -116,6 +121,35 @@ class RankViewController: UIViewController {
             case .failure(let error):
                 
                 print(error)
+                
+            }
+            
+        }
+        
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.rankTableView)
+            
+            if let indexPath = rankTableView.indexPathForRow(at: touchPoint) {
+                
+                // 彈跳出 User 視窗
+                guard let viewController = UIStoryboard
+                    .chat
+                    .instantiateViewController(
+                    withIdentifier: String(describing: UserInfoViewController.self)
+                    ) as? UserInfoViewController else { return }
+                
+                viewController.deleteAccount = false
+                
+                viewController.selectUserID = usersInfo[indexPath.row].userID
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
                 
             }
             
