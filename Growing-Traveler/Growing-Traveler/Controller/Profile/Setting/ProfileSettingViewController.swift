@@ -235,10 +235,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     
     @objc func signOutAccount(sender: UIButton) {
         
-        navigationController?.popViewController(animated: true)
-        
-        tabBarController?.selectedIndex = 0
-        
         let firebaseAuth = Auth.auth()
 
         do {
@@ -246,6 +242,10 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             try firebaseAuth.signOut()
 
             userID = ""
+            
+            navigationController?.popViewController(animated: true)
+            
+            tabBarController?.selectedIndex = 0
 
         } catch let signOutError as NSError {
 
@@ -280,12 +280,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
             }
             
-            self.navigationController?.popViewController(animated: true)
-            
-            self.tabBarController?.selectedIndex = 0
-            
-            print("帳號已刪除！")
-            
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
@@ -309,6 +303,12 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         deleteUserManager.deleteFriendListData(deleteUserID: userID)
 
         userID = ""
+        
+        self.navigationController?.popViewController(animated: true)
+        
+        self.tabBarController?.selectedIndex = 0
+        
+        print("帳號已刪除！")
         
     }
     

@@ -60,8 +60,6 @@ class ProfileViewController: UIViewController {
 
         configureDataSource()
         
-        fetchUserInfoData()
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .edit,
             target: self,
@@ -71,12 +69,22 @@ class ProfileViewController: UIViewController {
         
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
 //        tabBarController?.tabBar.isHidden = true
-//
-//    }
+        
+        fetchUserInfoData()
+        
+        if userID == "" {
+            
+            tabBarController?.selectedIndex = 0
+            
+            print("TEST 1")
+            
+        }
+        
+    }
 //
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)

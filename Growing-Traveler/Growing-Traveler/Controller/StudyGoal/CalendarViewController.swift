@@ -38,6 +38,8 @@ class CalendarViewController: UIViewController {
     
     var studyGoals: [StudyGoal] = []
     
+    var selectedDate = Date()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,7 +59,7 @@ class CalendarViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchData(date: Date())
+        fetchData(date: selectedDate)
         
     }
     
@@ -200,6 +202,16 @@ extension CalendarViewController: UITableViewDelegate {
                 guard let viewController = viewController as? PlanStudyGoalViewController else { return }
                 
                 viewController.studyGoal = studyGoals[index]
+                
+                viewController.selectedDate = selectedDate
+                
+                viewController.getSelectedDate = { selectedDate in
+                    
+                    self.fetchData(date: selectedDate)
+                    
+                    self.selectedDate = selectedDate
+                    
+                }
                 
                 navigationController?.pushViewController(viewController, animated: true)
                 

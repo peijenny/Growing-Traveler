@@ -280,6 +280,8 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                         
                     }
                     
+                    self.view.window?.rootViewController?.viewWillAppear(true)
+                    
                     self.dismiss(animated: true, completion: nil)
                     
                 }

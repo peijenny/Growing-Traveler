@@ -117,9 +117,15 @@ class ForumViewController: BaseViewController {
         
         fetchFriendBlockadeListData()
         
-//        fetchSearchData()
-        
         fetchUserInfoData()
+        
+        if userID == "" {
+            
+            fetchData()
+            
+            fetchSearchData()
+            
+        }
         
     }
     

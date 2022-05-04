@@ -179,6 +179,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 userID = user.uid
                 
+                self.view.window?.rootViewController?.viewWillAppear(true)
+                
                 self.view.window?.rootViewController?
                 .dismiss(animated: true, completion: nil)
                 
@@ -251,6 +253,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 self.friendManager.addData(friend: friend)
                 
                 userID = user.uid
+
+                self.view.window?.rootViewController?.viewWillAppear(true)
                 
                 self.view.window?.rootViewController?
                 .dismiss(animated: true, completion: nil)

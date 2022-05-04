@@ -57,6 +57,10 @@ class UserInfoViewController: UIViewController {
             
             friendStatusLabel.text = SearchFriendStatus.yourInfo.title
             
+        } else if userID == "" {
+            
+            friendStatusLabel.text = "請先登入會員才能加入或封鎖帳號！"
+            
         }
         
         if !deleteAccount {

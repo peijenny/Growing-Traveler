@@ -8,6 +8,7 @@
 import UIKit
 import PKHUD
 import Lottie
+import Firebase
 
 enum StatusType {
     
@@ -102,22 +103,7 @@ class StudyGoalViewController: UIViewController {
             style: .plain, target: self,
             action: #selector(pushToCalenderPage)
         )
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
-        if userID != "" {
-            
-            studyGoalBackgroundView.isHidden = true
-            
-            fetchUserData()
-            
-            listenData(status: StatusType.running.title)
-            
-        } else {
-            
-            studyGoalBackgroundView.isHidden = false
-        }
-        
+
     }
  
     override func viewWillAppear(_ animated: Bool) {
@@ -125,26 +111,21 @@ class StudyGoalViewController: UIViewController {
         
         lottieAnimation.play()
         
+        fetchUserData()
+        
+        listenData(status: titleText)
+        
         if userID == "" {
             
-            studyGoals.removeAll()
+            studyGoalBackgroundView.isHidden = false
+            
+            studyGoals = []
             
             studyGoalTableView.reloadData()
             
-            studyGoalTableView.isHidden = false
-            
         }
         
-//        tabBarController?.tabBar.isHidden = true
-        
     }
-
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        tabBarController?.tabBar.isHidden = false
-//
-//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -183,14 +164,10 @@ class StudyGoalViewController: UIViewController {
             width: headerAnimationView.frame.width,
             height: headerAnimationView.frame.height
         )
-        
-//        lottieAnimation.center = headerAnimationView.center
-        
+
         headerAnimationView.addSubview(lottieAnimation)
         
         lottieAnimation.loopMode = .loop
-        
-//        lottieAnimation.play()
 
     }
     
@@ -292,7 +269,7 @@ class StudyGoalViewController: UIViewController {
     // MARK: - 即時監聽 Firestore 的個人學習計畫
     func listenData(status: String) {
         
-        studyGoalManager.fetchData { [weak self] result in
+        studyGoalManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -302,17 +279,13 @@ class StudyGoalViewController: UIViewController {
                 
                 var resultData: [StudyGoal] = []
                 
-                let formatter = DateFormatter()
-                
-                formatter.dateFormat = "yyyy.MM.dd"
-                
                 if status == StatusType.pending.title {
 
                     resultData = data.filter({
                         
-                        let startDate = Date(timeIntervalSince1970: $0.studyPeriod.startDate).formatted()
+                        let startDate = $0.studyPeriod.startDate
                         
-                        let nowDate = Date().formatted()
+                        let nowDate = Date().timeIntervalSince1970
                         
                         if $0.studyItems.allSatisfy({ $0.isCompleted == false }) == true &&
                             startDate > nowDate {
@@ -329,9 +302,9 @@ class StudyGoalViewController: UIViewController {
                     
                     resultData = data.filter({
                         
-                        let startDate = Date(timeIntervalSince1970: $0.studyPeriod.startDate).formatted()
+                        let startDate = $0.studyPeriod.startDate
                         
-                        let nowDate = Date().formatted()
+                        let nowDate = Date().timeIntervalSince1970
                         
                         if $0.studyItems.allSatisfy({ $0.isCompleted == true }) == true {
                             
@@ -396,7 +369,7 @@ class StudyGoalViewController: UIViewController {
         }
         
         // 動畫
-        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
 
             guard let strongSelf = self else { return }
             
@@ -549,7 +522,7 @@ extension StudyGoalViewController: UITableViewDelegate {
 
         tableView.tableHeaderView = UIView.init(frame: CGRect.init(
             x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height))
-        
+
         topCGFloat = headerView.frame.height
         
         setContentInset()
@@ -639,7 +612,7 @@ extension StudyGoalViewController: UITableViewDelegate {
             self.studyGoals.remove(at: sender.tag)
 
             self.studyGoalTableView.reloadData()
-
+            
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)

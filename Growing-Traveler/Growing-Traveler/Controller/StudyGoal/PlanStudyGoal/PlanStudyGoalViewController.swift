@@ -130,6 +130,10 @@ class PlanStudyGoalViewController: BaseViewController {
     var userManager = UserManager()
     
     var user: UserInfo?
+    
+    var selectedDate: Date?
+    
+    var getSelectedDate: ((_ selectedDate: Date) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,6 +145,12 @@ class PlanStudyGoalViewController: BaseViewController {
         } else {
             
             title = "編輯個人學習計劃"
+            
+        }
+        
+        if selectedDate != nil {
+            
+            getSelectedDate?(selectedDate ?? Date())
             
         }
         
@@ -202,7 +212,6 @@ class PlanStudyGoalViewController: BaseViewController {
         }
         
     }
-
     
     // MARK: - 修改個人學習計劃設定
     func modifyPlanStudyGoalSetting() {

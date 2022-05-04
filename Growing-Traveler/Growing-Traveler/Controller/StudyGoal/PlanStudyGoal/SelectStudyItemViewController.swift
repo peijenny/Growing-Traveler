@@ -77,7 +77,7 @@ class SelectStudyItemViewController: BaseViewController {
             
             if "\(studyTime)" == timeButtons[index].titleLabel?.text {
                 
-                timeButtons[index].backgroundColor = UIColor.black
+                timeButtons[index].backgroundColor = UIColor.hexStringToUIColor(hex: "6E799A")
                 
             }
                 
