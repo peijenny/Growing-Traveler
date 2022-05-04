@@ -19,6 +19,8 @@ class RankTableViewCell: UITableViewCell {
     
     @IBOutlet weak var experienceValueLabel: UILabel!
     
+    @IBOutlet weak var friendStatusLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -63,13 +65,15 @@ class RankTableViewCell: UITableViewCell {
 
         experienceValueLabel.text = "\(userInfo.achievement.experienceValue)"
         
+        userNameLabel.text = userInfo.userName
+        
         if blockadeList.filter({ $0 == userInfo.userID }).count == 0 {
 
-            userNameLabel.text = userInfo.userName
+            friendStatusLabel.text = nil
 
         } else {
 
-            userNameLabel.text = "\(userInfo.userName) [帳號已封鎖]"
+            friendStatusLabel.text = "[帳號已封鎖]"
 
         }
         
