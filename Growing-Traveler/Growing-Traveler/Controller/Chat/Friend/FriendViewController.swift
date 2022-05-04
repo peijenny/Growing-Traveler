@@ -293,6 +293,28 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 viewController.selectUserID = friendsChat[indexPath.row].friendID
                 
+                if friend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).count == 0 {
+                    
+                    viewController.isBlock = false
+                    
+                } else {
+                    
+                    viewController.isBlock = true
+                    
+                }
+                
+                let userInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID })
+                
+                if userInfo.count == 0 {
+                    
+                    viewController.deleteAccount = true
+                    
+                } else {
+                    
+                    viewController.deleteAccount = false
+                    
+                }
+                
                 self.view.addSubview(viewController.view)
 
                 self.addChild(viewController)

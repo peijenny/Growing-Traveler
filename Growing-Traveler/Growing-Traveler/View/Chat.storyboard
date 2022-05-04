@@ -358,7 +358,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gc-OT-XL4">
-                                <rect key="frame" x="20" y="254.5" width="374" height="397.5"/>
+                                <rect key="frame" x="20" y="254.5" width="374" height="397"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc5-eb-7GL">
                                         <rect key="frame" x="318" y="16" width="40" height="40"/>
@@ -388,7 +388,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKC-h4-xqD">
-                                        <rect key="frame" x="16" y="292.5" width="342" height="36.5"/>
+                                        <rect key="frame" x="16" y="292" width="342" height="36.5"/>
                                         <color key="backgroundColor" red="0.23137254901960785" green="0.50980392156862742" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" red="0.90196073060000004" green="0.92156863209999995" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
@@ -408,14 +408,14 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXR-5a-NV9">
-                                        <rect key="frame" x="16" y="253.5" width="342" height="23"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXR-5a-NV9">
+                                        <rect key="frame" x="16" y="253.5" width="342" height="22.5"/>
                                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                         <color key="textColor" red="0.84705877299999999" green="0.63137257099999999" blue="0.58823531870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtE-T3-geD">
-                                        <rect key="frame" x="16" y="345" width="342" height="36.5"/>
+                                        <rect key="frame" x="16" y="344.5" width="342" height="36.5"/>
                                         <color key="backgroundColor" red="0.67450982329999998" green="0.75294119120000003" blue="0.79607844350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" red="0.90196073060000004" green="0.92156863209999995" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
@@ -464,6 +464,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addUserButton" destination="wKC-h4-xqD" id="drU-Zr-CsV"/>
+                        <outlet property="blockUserButton" destination="vtE-T3-geD" id="c07-G2-Szp"/>
                         <outlet property="friendStatusLabel" destination="xXR-5a-NV9" id="xKW-n2-mRa"/>
                         <outlet property="userNameLabel" destination="1Wq-eR-hj5" id="ciP-Ly-rJJ"/>
                         <outlet property="userPhotoImageView" destination="fFg-B8-XSk" id="K6R-y7-QFE"/>

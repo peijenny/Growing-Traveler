@@ -23,13 +23,15 @@ enum SearchFriendStatus {
     
     case noRelation
     
+    case deleteAccount
+    
     var title: String {
         
         switch self {
             
         case .yourself: return "不可加入自己！"
             
-        case .blocked: return "你已封鎖對方，如需申請為好友，請先解除封鎖！"
+        case .blocked: return "你已封鎖該使用者！"
             
         case .friendship: return "你們已經是好友了！"
             
@@ -40,6 +42,8 @@ enum SearchFriendStatus {
         case .noSearch: return "沒有該使用者的資料！請重新搜尋！"
             
         case .noRelation: return "你們還不是朋友，點擊按鈕發送好友邀請！"
+            
+        case .deleteAccount: return "此帳戶已刪除，無法加為好友！"
             
         }
         
@@ -300,6 +304,10 @@ class ApplyFriendViewController: BaseViewController {
                 } else if ownFriend.applyList.filter({ $0 == searchUser.userID }).count > 0 {
                     
                     hintTextLabel.text = SearchFriendStatus.applied.title
+                    
+                } else if allUsers.filter({ $0.userID == searchUser.userID }).count == 0 {
+                    
+                    hintTextLabel.text = SearchFriendStatus.deleteAccount.title
                     
                 } else {
                     
