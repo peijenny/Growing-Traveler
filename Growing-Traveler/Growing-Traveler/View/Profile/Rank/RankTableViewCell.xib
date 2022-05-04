@@ -52,42 +52,42 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jenny Hung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVT-Wu-mTd">
-                        <rect key="frame" x="150" y="20" width="101.5" height="25"/>
+                        <rect key="frame" x="150" y="20" width="248" height="22.5"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
                         <color key="textColor" red="0.43137252329999998" green="0.47450977560000002" blue="0.60392159219999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwB-rh-fz5">
-                        <rect key="frame" x="150" y="50" width="248" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="wyJ-5d-aVQ"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="16"/>
-                        <color key="textColor" red="0.231372565" green="0.50980395079999996" blue="0.72156864399999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[帳號已封鎖]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bbk-px-mOH">
-                        <rect key="frame" x="307" y="20" width="91" height="25"/>
-                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
-                        <color key="textColor" red="0.0" green="0.92156862750000001" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lKa-fh-hrJ">
+                        <rect key="frame" x="150" y="47.5" width="248" height="22.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwB-rh-fz5">
+                                <rect key="frame" x="0.0" y="0.0" width="119" height="22.5"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="16"/>
+                                <color key="textColor" red="0.231372565" green="0.50980395079999996" blue="0.72156864399999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[帳號已封鎖]" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bbk-px-mOH">
+                                <rect key="frame" x="129" y="0.0" width="119" height="22.5"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                <color key="textColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="BwB-rh-fz5" secondAttribute="trailing" constant="16" id="5Sa-2n-ciq"/>
                     <constraint firstItem="eVT-Wu-mTd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Bxt-I3-3I7"/>
                     <constraint firstItem="RoR-AT-oxL" firstAttribute="leading" secondItem="W9A-fP-4SF" secondAttribute="trailing" constant="16" id="Ca4-To-kUO"/>
                     <constraint firstAttribute="bottom" secondItem="RoR-AT-oxL" secondAttribute="bottom" constant="16" id="Ct1-Ah-oqU"/>
                     <constraint firstItem="W9A-fP-4SF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Erl-Fm-zum"/>
-                    <constraint firstAttribute="trailing" secondItem="Bbk-px-mOH" secondAttribute="trailing" constant="16" id="GNm-3L-LSJ"/>
-                    <constraint firstItem="Bbk-px-mOH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="GfJ-5R-c9q"/>
-                    <constraint firstItem="BwB-rh-fz5" firstAttribute="top" secondItem="eVT-Wu-mTd" secondAttribute="bottom" constant="5" id="IOY-eT-pf4"/>
+                    <constraint firstAttribute="trailing" secondItem="eVT-Wu-mTd" secondAttribute="trailing" constant="16" id="HC3-h9-Aaj"/>
                     <constraint firstItem="eVT-Wu-mTd" firstAttribute="leading" secondItem="RoR-AT-oxL" secondAttribute="trailing" constant="10" id="JMK-t8-XvB"/>
-                    <constraint firstItem="BwB-rh-fz5" firstAttribute="leading" secondItem="RoR-AT-oxL" secondAttribute="trailing" constant="10" id="Rvs-bb-We2"/>
+                    <constraint firstItem="lKa-fh-hrJ" firstAttribute="top" secondItem="eVT-Wu-mTd" secondAttribute="bottom" constant="5" id="Mq0-OB-WmG"/>
+                    <constraint firstAttribute="trailing" secondItem="lKa-fh-hrJ" secondAttribute="trailing" constant="16" id="T3l-6g-tbd"/>
                     <constraint firstItem="RoR-AT-oxL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="T4n-rb-HsS"/>
                     <constraint firstItem="W9A-fP-4SF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Wy7-Bf-Oxw"/>
-                    <constraint firstAttribute="bottom" secondItem="BwB-rh-fz5" secondAttribute="bottom" constant="20" id="hAm-yI-uVr"/>
-                    <constraint firstItem="BwB-rh-fz5" firstAttribute="top" secondItem="Bbk-px-mOH" secondAttribute="bottom" constant="5" id="oh6-kO-OpR"/>
+                    <constraint firstItem="lKa-fh-hrJ" firstAttribute="leading" secondItem="RoR-AT-oxL" secondAttribute="trailing" constant="10" id="afz-l0-8eR"/>
+                    <constraint firstAttribute="bottom" secondItem="lKa-fh-hrJ" secondAttribute="bottom" constant="20" id="oYo-bf-5ig"/>
                     <constraint firstAttribute="bottom" secondItem="W9A-fP-4SF" secondAttribute="bottom" constant="16" id="wS1-pA-oTQ"/>
                 </constraints>
             </tableViewCellContentView>
