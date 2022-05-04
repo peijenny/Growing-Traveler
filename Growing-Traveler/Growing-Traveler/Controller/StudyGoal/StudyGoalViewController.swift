@@ -640,7 +640,6 @@ extension StudyGoalViewController: UITableViewDelegate {
 
             self.studyGoalTableView.reloadData()
 
-
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)

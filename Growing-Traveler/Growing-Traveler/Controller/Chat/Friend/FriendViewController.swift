@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Charts
 
 enum FriendType {
     
@@ -41,13 +42,18 @@ class FriendViewController: UIViewController {
             
             friendListTableView.dataSource = self
             
+            let longPressRecognizer = UILongPressGestureRecognizer(
+                target: self, action: #selector(longPressed(sender:)))
+            
+            friendListTableView.addGestureRecognizer(longPressRecognizer)
+            
         }
         
     }
     
     var friendManager = FriendManager()
     
-    var friend: Friend?
+    var ownerfriend: Friend?
     
     var friendsChat: [Chat] = [] {
         
@@ -82,7 +88,7 @@ class FriendViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchFriendListData()
+        listenFriendListData()
         
         fetchFriendsChatData()
         
@@ -102,6 +108,8 @@ class FriendViewController: UIViewController {
                 
                 strongSelf.usersInfo = usersInfo
                 
+                strongSelf.friendListTableView.reloadData()
+                
             case .failure(let error):
                 
                 print(error)
@@ -112,9 +120,9 @@ class FriendViewController: UIViewController {
         
     }
     
-    func fetchFriendListData() {
+    func listenFriendListData() {
 
-        friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
+        friendManager.listenFriendListData(fetchUserID: userID) { [weak self] result in
 
             guard let strongSelf = self else { return }
 
@@ -122,7 +130,9 @@ class FriendViewController: UIViewController {
 
             case .success(let friend):
 
-                strongSelf.friend = friend
+                strongSelf.ownerfriend = friend
+                
+                strongSelf.friendListTableView.reloadData()
 
             case .failure(let error):
 
@@ -155,6 +165,8 @@ class FriendViewController: UIViewController {
                     strongSelf.friendBackgroundView.isHidden = true
                     
                 }
+                
+                strongSelf.friendListTableView.reloadData()
 
             case .failure(let error):
                 
@@ -167,7 +179,7 @@ class FriendViewController: UIViewController {
     func setNavigationItems() {
         
         navigationItem.rightBarButtonItems = [
-//            UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriendButton)),
+            UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriendButton)),
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(applyFriendButton))
         ]
         
@@ -182,7 +194,7 @@ class FriendViewController: UIViewController {
         
         guard let viewController = viewController as? ApplyFriendViewController else { return }
         
-        if let friend = friend {
+        if let friend = ownerfriend {
 
             viewController.ownFriend = friend
             
@@ -194,16 +206,7 @@ class FriendViewController: UIViewController {
     
     @objc func blockadeFriendButton(sender: UIButton) {
         
-        let viewController = UIStoryboard(name: "Chat", bundle: nil)
-            .instantiateViewController(withIdentifier: String(describing: BlockadeFriendViewController.self))
-        
-        guard let viewController = viewController as? BlockadeFriendViewController else { return }
-        
-        if let blockadeList = friend?.blockadeList {
-            
-            viewController.blockadeList = blockadeList
-            
-        }
+        let viewController = BlockadeFriendViewController()
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -236,10 +239,68 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
 
         let userInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID })
         
-        cell.showFriendInfo(friendName: userInfo[0].userName,
-                             friendPhotoLink: userInfo[0].userPhoto)
+        if userInfo.count != 0 {
+            
+            cell.showFriendInfo(
+                friendInfo: userInfo[0],
+                blockadeList: ownerfriend?.blockadeList ?? [],
+                deleteAccount: false)
+            
+        } else {
+            
+            let blockUserInfo = UserInfo(
+                userID: friendsChat[indexPath.row].friendID,
+                userName: friendsChat[indexPath.row].friendName,
+                userEmail: "", userPhoto: "", userPhone: "", signInType: "",
+                achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: []),
+                certification: [])
+            
+            cell.showFriendInfo(
+                friendInfo: blockUserInfo,
+                blockadeList: ownerfriend?.blockadeList ?? [],
+                deleteAccount: true)
+            
+        }
         
         return cell
+        
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.friendListTableView)
+            
+            if let indexPath = friendListTableView.indexPathForRow(at: touchPoint) {
+                
+                // 彈跳出 User 視窗
+                
+                guard let viewController = UIStoryboard
+                    .chat
+                    .instantiateViewController(
+                    withIdentifier: String(describing: UserInfoViewController.self)
+                    ) as? UserInfoViewController else { return }
+                
+                viewController.selectUserID = friendsChat[indexPath.row].friendID
+
+                if usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID }).count == 0 {
+                    
+                    viewController.deleteAccount = true
+                    
+                } else {
+                    
+                    viewController.deleteAccount = false
+                    
+                }
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
+                
+            }
+            
+        }
         
     }
     
@@ -252,7 +313,29 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         
         viewController.friendID = friendsChat[indexPath.row].friendID
         
-        viewController.userName = friend?.userName ?? ""
+        viewController.userName = ownerfriend?.userName ?? ""
+        
+        if ownerfriend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).count == 0 {
+            
+            viewController.isBlock = false
+            
+        } else {
+            
+            viewController.isBlock = true
+            
+        }
+        
+        let userInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID })
+        
+        if userInfo.count == 0 {
+            
+            viewController.deleteAccount = true
+            
+        } else {
+            
+            viewController.deleteAccount = false
+            
+        }
         
         navigationController?.pushViewController(viewController, animated: true)
         

@@ -9,6 +9,8 @@ import UIKit
 
 enum SearchFriendStatus {
     
+    case yourInfo
+    
     case yourself
     
     case blocked
@@ -23,13 +25,17 @@ enum SearchFriendStatus {
     
     case noRelation
     
+    case deleteAccount
+    
     var title: String {
         
         switch self {
             
+        case .yourInfo: return "你自己的帳號"
+            
         case .yourself: return "不可加入自己！"
             
-        case .blocked: return "你已封鎖對方，如需申請為好友，請先解除封鎖！"
+        case .blocked: return "你已封鎖該使用者！"
             
         case .friendship: return "你們已經是好友了！"
             
@@ -40,6 +46,8 @@ enum SearchFriendStatus {
         case .noSearch: return "沒有該使用者的資料！請重新搜尋！"
             
         case .noRelation: return "你們還不是朋友，點擊按鈕發送好友邀請！"
+            
+        case .deleteAccount: return "此帳戶已刪除，無法加為好友！"
             
         }
         
@@ -184,6 +192,12 @@ class ApplyFriendViewController: BaseViewController {
                         
                     }
                     
+                    if friend.blockadeList.filter({ $0 == userID }).count > 0 {
+                        
+                        strongSelf.hintTextLabel.text = SearchFriendStatus.noSearch.title
+                        
+                    }
+                    
                 }
                 
             case .failure(let error):
@@ -277,47 +291,58 @@ class ApplyFriendViewController: BaseViewController {
             
             searchUser = allUsers.filter({ $0.userEmail == inputEmail })[0]
             
-            if let searchUser = searchUser, let ownFriend = ownFriend {
+            fetchData(friendID: searchUser?.userID ?? "")
+            
+            handleFriendStatus(searchUser: searchUser)
+            
+        } else {
+            
+            hintTextLabel.text = SearchFriendStatus.noSearch.title
+            
+        }
+        
+    }
+    
+    func handleFriendStatus(searchUser: UserInfo?) {
+        
+        if let searchUser = searchUser, let ownFriend = ownFriend {
+            
+            if searchUser.userID == userID {
                 
-                fetchData(friendID: searchUser.userID)
+                hintTextLabel.text = SearchFriendStatus.yourself.title
                 
-                if searchUser.userID == userID {
-                    
-                    hintTextLabel.text = SearchFriendStatus.yourself.title
-                    
-                } else if ownFriend.blockadeList.filter({ $0 == searchUser.userID }).count > 0 {
-                    
-                    hintTextLabel.text = SearchFriendStatus.blocked.title
-                    
-                } else if ownFriend.friendList.filter({ $0 == searchUser.userID }).count > 0 {
-                    
-                    hintTextLabel.text = SearchFriendStatus.friendship.title
-                    
-                } else if ownFriend.deliveryList.filter({ $0 == searchUser.userID }).count > 0 {
-                    
-                    hintTextLabel.text = SearchFriendStatus.invitaion.title
-                    
-                } else if ownFriend.applyList.filter({ $0 == searchUser.userID }).count > 0 {
-                    
-                    hintTextLabel.text = SearchFriendStatus.applied.title
-                    
-                } else {
-                    
-                    userInfoView.isHidden = false
-                    
-                    hintTextLabel.text = SearchFriendStatus.noRelation.title
-
-                    userInfoLabel.text = "\(searchUser.userName)（\(searchUser.userID)）"
-                    
-                }
+            } else if ownFriend.blockadeList.filter({ $0 == searchUser.userID }).count > 0 {
+                
+                hintTextLabel.text = SearchFriendStatus.blocked.title
+                
+            } else if ownFriend.friendList.filter({ $0 == searchUser.userID }).count > 0 {
+                
+                hintTextLabel.text = SearchFriendStatus.friendship.title
+                
+            } else if ownFriend.deliveryList.filter({ $0 == searchUser.userID }).count > 0 {
+                
+                hintTextLabel.text = SearchFriendStatus.invitaion.title
+                
+            } else if ownFriend.applyList.filter({ $0 == searchUser.userID }).count > 0 {
+                
+                hintTextLabel.text = SearchFriendStatus.applied.title
+                
+            } else {
+                
+                userInfoView.isHidden = false
+                
+                hintTextLabel.text = SearchFriendStatus.noRelation.title
+                
+                userInfoLabel.text = "\(searchUser.userName)（\(searchUser.userID)）"
                 
             }
             
         } else {
             
             hintTextLabel.text = SearchFriendStatus.noSearch.title
+            
         }
-        
+            
     }
     
     @IBAction func sendApplyButton(_ sender: UIButton) {
@@ -370,8 +395,9 @@ extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource 
         guard let cell = cell as? FriendListTableViewCell else { return cell }
         
         cell.showFriendInfo(
-            friendName: friendsInfo[indexPath.row].userName,
-            friendPhotoLink: friendsInfo[indexPath.row].userPhoto)
+            friendInfo: friendsInfo[indexPath.row],
+            blockadeList: ownFriend?.blockadeList ?? [],
+            deleteAccount: false)
         
         return cell
         

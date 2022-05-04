@@ -7,6 +7,16 @@
 
 import Foundation
 
+struct ForumArticleType: Codable {
+    
+    var essay: [ForumArticle]
+    
+    var question: [ForumArticle]
+    
+    var chat: [ForumArticle]
+    
+}
+
 struct ForumArticle: Codable {
     
     var id: String

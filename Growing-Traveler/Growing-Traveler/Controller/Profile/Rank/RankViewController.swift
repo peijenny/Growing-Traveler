@@ -17,21 +17,20 @@ class RankViewController: UIViewController {
             
             rankTableView.dataSource = self
             
+            let longPressRecognizer = UILongPressGestureRecognizer(
+                target: self, action: #selector(longPressed(sender:)))
+            
+            rankTableView.addGestureRecognizer(longPressRecognizer)
+            
         }
         
     }
     
     var friendManager = FriendManager()
     
-    var usersInfo: [UserInfo] = [] {
-        
-        didSet {
-            
-            rankTableView.reloadData()
-            
-        }
-        
-    }
+    var usersInfo: [UserInfo] = []
+    
+    var blockadeList: [String] = []
     
     @IBOutlet weak var rankBackgroundView: UIView!
     
@@ -74,6 +73,31 @@ class RankViewController: UIViewController {
         
     }
     
+    func fetchUserFriendData() {
+        
+        friendManager.fetchFriendListData(
+        fetchUserID: userID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let userFriend):
+                
+                strongSelf.blockadeList = userFriend.blockadeList
+                
+                strongSelf.rankTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+                
+        }
+        
+    }
+    
     func listenUsersInfoData() {
         
         friendManager.listenFriendInfoData { [weak self] result in
@@ -92,9 +116,40 @@ class RankViewController: UIViewController {
                 
                 strongSelf.usersInfo = sortUserInfo
                 
+                strongSelf.fetchUserFriendData()
+                
             case .failure(let error):
                 
                 print(error)
+                
+            }
+            
+        }
+        
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.rankTableView)
+            
+            if let indexPath = rankTableView.indexPathForRow(at: touchPoint) {
+                
+                // 彈跳出 User 視窗
+                guard let viewController = UIStoryboard
+                    .chat
+                    .instantiateViewController(
+                    withIdentifier: String(describing: UserInfoViewController.self)
+                    ) as? UserInfoViewController else { return }
+                
+                viewController.deleteAccount = false
+                
+                viewController.selectUserID = usersInfo[indexPath.row].userID
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
                 
             }
             
@@ -126,7 +181,7 @@ extension RankViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = cell as? RankTableViewCell else { return cell }
         
         cell.showRankData(
-        rankNumber: indexPath.row + 1, userInfo: usersInfo[indexPath.row])
+            rankNumber: indexPath.row + 1, userInfo: usersInfo[indexPath.row], blockadeList: blockadeList)
         
         return cell
         

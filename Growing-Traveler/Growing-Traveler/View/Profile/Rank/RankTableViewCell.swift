@@ -19,6 +19,8 @@ class RankTableViewCell: UITableViewCell {
     
     @IBOutlet weak var experienceValueLabel: UILabel!
     
+    @IBOutlet weak var friendStatusLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -33,7 +35,7 @@ class RankTableViewCell: UITableViewCell {
         
     }
     
-    func showRankData(rankNumber: Int, userInfo: UserInfo) {
+    func showRankData(rankNumber: Int, userInfo: UserInfo, blockadeList: [String]) {
         
         if rankNumber == 1 {
             
@@ -60,10 +62,20 @@ class RankTableViewCell: UITableViewCell {
             userPhotoImageView.loadImage(userInfo.userPhoto)
             
         }
+
+        experienceValueLabel.text = "\(userInfo.achievement.experienceValue)"
         
         userNameLabel.text = userInfo.userName
         
-        experienceValueLabel.text = "\(userInfo.achievement.experienceValue)"
+        if blockadeList.filter({ $0 == userInfo.userID }).count == 0 {
+
+            friendStatusLabel.text = nil
+
+        } else {
+
+            friendStatusLabel.text = "[帳號已封鎖]"
+
+        }
         
     }
     

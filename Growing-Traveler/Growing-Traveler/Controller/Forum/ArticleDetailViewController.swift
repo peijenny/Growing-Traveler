@@ -12,14 +12,7 @@ class ArticleDetailViewController: UIViewController {
     
     var articleDetailTableView = UITableView(frame: .zero, style: .grouped)
     
-    var forumArticle: ForumArticle? {
-        
-        didSet {
-            
-          articleDetailTableView.reloadData()
-            
-        }
-    }
+    var forumArticle: ForumArticle?
     
     var formatter = DateFormatter()
     
@@ -33,6 +26,10 @@ class ArticleDetailViewController: UIViewController {
     
     var usersInfo: [UserInfo] = []
     
+    var friendManager = FriendManager()
+    
+    var blockadeList: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,8 +38,6 @@ class ArticleDetailViewController: UIViewController {
         title = forumArticle?.forumType
         
         setTableView()
-        
-        listenMessageData()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .compose,
@@ -57,7 +52,36 @@ class ArticleDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchUserInfoData()
+        fetchFriendBlockadeListData()
+        
+    }
+    
+    func fetchFriendBlockadeListData() {
+        
+        friendManager.fetchFriendListData(
+        fetchUserID: userID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let userFriend):
+                
+                strongSelf.blockadeList = userFriend.blockadeList
+                
+                strongSelf.listenMessageData()
+                
+                strongSelf.fetchUserInfoData()
+                
+                strongSelf.articleDetailTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+                
+        }
         
     }
     
@@ -202,6 +226,51 @@ class ArticleDetailViewController: UIViewController {
         
         articleDetailTableView.dataSource = self
         
+        let longPressRecognizer = UILongPressGestureRecognizer(
+            target: self, action: #selector(longPressed(sender:)))
+        
+        articleDetailTableView.addGestureRecognizer(longPressRecognizer)
+        
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.articleDetailTableView)
+            
+            if let indexPath = articleDetailTableView.indexPathForRow(at: touchPoint) {
+                
+                // 彈跳出 User 視窗
+                
+                guard let viewController = UIStoryboard
+                    .chat
+                    .instantiateViewController(
+                    withIdentifier: String(describing: UserInfoViewController.self)
+                    ) as? UserInfoViewController else { return }
+                
+                viewController.deleteAccount = false
+                
+                if indexPath.section == 1 {
+                    
+                    viewController.selectUserID = articleMessages[indexPath.row].userID
+                    
+                    if usersInfo.filter({ $0.userID == articleMessages[indexPath.row].userID }).count == 0 {
+                        
+                        viewController.deleteAccount = true
+                        
+                    }
+                    
+                }
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
+                
+            }
+            
+        }
+        
     }
 
 }
@@ -258,18 +327,31 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             let userInfo = usersInfo.filter({ $0.userID == articleMessages[indexPath.row].userID })
             
-            var userName = "帳號已刪除"
+            var userName = String()
+            
+            var isBlock = false
             
             if userInfo.count != 0 {
                 
                 userName = userInfo[0].userName
                 
+                if blockadeList.filter({ $0 == userInfo[0].userID }).count != 0 {
+                    
+                    isBlock = true
+                    
+                }
+                
+            } else {
+                
+                userName = "[帳號已刪除]"
+
             }
             
             cell.showMessages(
                 articleMessage: articleMessages[indexPath.row],
                 articleUserID: forumArticle?.userID ?? "",
-                userName: userName
+                userName: userName,
+                isBlock: isBlock
             )
             
             cell.selectionStyle = .none
@@ -340,6 +422,10 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
                 
             }
             
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+            
+            headerView.addGestureRecognizer(tapGestureRecognizer)
+            
             return headerView
             
         } else {
@@ -351,6 +437,24 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             return headerView
         }
+        
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+
+        guard let viewController = UIStoryboard
+            .chat
+            .instantiateViewController(
+            withIdentifier: String(describing: UserInfoViewController.self)
+            ) as? UserInfoViewController else { return }
+        
+        viewController.deleteAccount = false
+        
+        viewController.selectUserID = forumArticle?.userID ?? ""
+        
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
         
     }
     

@@ -28,8 +28,10 @@ class ForumArticleManager {
         for index in 0..<forumTypes.count {
             
             database
-                .whereField("forumType", isEqualTo: forumTypes[index]).limit(to: 5)
+                .whereField("forumType", isEqualTo: forumTypes[index])
+//                .whereField("userID", isNotEqualTo: "ve40GsMc8bVA7u99neqM3wxR7ev2")
                 .order(by: "createTime", descending: true)
+//                .limit(to: 5)
                 .addSnapshotListener { snapshot, error in
                 
                 guard let snapshot = snapshot else {

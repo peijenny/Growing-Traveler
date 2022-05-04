@@ -23,6 +23,8 @@ class ArticleMessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var friendStatusLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -58,7 +60,7 @@ class ArticleMessageTableViewCell: UITableViewCell {
         
     }
     
-    func showMessages(articleMessage: ArticleMessage, articleUserID: String, userName: String) {
+    func showMessages(articleMessage: ArticleMessage, articleUserID: String, userName: String, isBlock: Bool) {
         
         let formatter = DateFormatter()
         
@@ -68,17 +70,25 @@ class ArticleMessageTableViewCell: UITableViewCell {
 
         setArticleContent(content: articleMessage.message)
         
+        userIDLabel.text = userName
+        
+        friendStatusLabel.text = nil
+        
         if articleMessage.userID == articleUserID {
-            
-//            userIDLabel.text = "\(articleMessage.userID) (原Po)"
-            
+      
             userIDLabel.text = "\(userName) (原Po)"
             
-        } else {
+        }
+        
+        if userName == "[帳號已刪除]" {
             
-//            userIDLabel.text = articleMessage.userID
+            userIDLabel.text = "已刪除的使用者"
             
-            userIDLabel.text = userName
+            friendStatusLabel.text = "[帳號已刪除]"
+            
+        } else if isBlock {
+            
+            friendStatusLabel.text = "[帳號已封鎖]"
             
         }
                 
