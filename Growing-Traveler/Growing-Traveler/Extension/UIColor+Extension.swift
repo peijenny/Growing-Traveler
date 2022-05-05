@@ -25,7 +25,7 @@ enum ColorChart {
             
         case .lightGary: return "EBEBE3"
             
-        case .gray: return "C7D6DB"
+        case .gray: return "C1BFCE"
             
         case .lightBlue: return "B2D1E4"
             
