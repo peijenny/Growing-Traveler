@@ -77,7 +77,7 @@ class SelectStudyItemViewController: BaseViewController {
             
             if "\(studyTime)" == timeButtons[index].titleLabel?.text {
                 
-                timeButtons[index].backgroundColor = UIColor.hexStringToUIColor(hex: "6E799A")
+                timeButtons[index].backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
                 
             }
                 
@@ -111,7 +111,7 @@ class SelectStudyItemViewController: BaseViewController {
             
             myButton.isEnabled = true
             
-            myButton.backgroundColor = UIColor.hexStringToUIColor(hex: "A6C2CE")
+            myButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
             
             myButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
             
@@ -125,9 +125,9 @@ class SelectStudyItemViewController: BaseViewController {
 
     @objc func clickButton(sender: UIButton) {
         
-        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: "A6C2CE") })
+        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText) })
         
-        sender.backgroundColor = UIColor.hexStringToUIColor(hex: "6E799A")
+        sender.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
         guard let selectSender = sender.titleLabel?.text else { return }
         

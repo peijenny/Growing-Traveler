@@ -27,6 +27,8 @@ class NoteDetailViewController: UIViewController {
     
     var noteID: String?
     
+    var noteUserID: String?
+    
     var userManager = UserManager()
     
     var note: Note?
@@ -34,7 +36,7 @@ class NoteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setNavigationItems()
+//        setNavigationItems()
         
         noteDatailTableView.register(
             UINib(nibName: String(describing: ArticleDetailTableViewCell.self), bundle: nil),
@@ -67,7 +69,7 @@ class NoteDetailViewController: UIViewController {
     func fetchNoteData() {
         
         userManager.fetchshareNoteData(
-        shareUserID: userID, noteID: noteID ?? "") { [weak self] result in
+        shareUserID: noteUserID ?? "", noteID: noteID ?? "") { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -76,6 +78,12 @@ class NoteDetailViewController: UIViewController {
             case .success(let note):
                 
                 strongSelf.note = note
+                
+                if userID == strongSelf.note?.userID {
+                    
+                    strongSelf.setNavigationItems()
+                    
+                }
                 
                 strongSelf.title = note.noteTitle
                 

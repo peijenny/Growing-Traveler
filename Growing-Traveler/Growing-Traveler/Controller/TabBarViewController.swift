@@ -110,9 +110,9 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         viewControllers = tabs.map({ $0.controller() })
         
-        tabBar.tintColor = UIColor.hexStringToUIColor(hex: "827173")
+        tabBar.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
-        tabBar.barTintColor = UIColor.hexStringToUIColor(hex: "BFAB9C")
+        tabBar.barTintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 15)
         

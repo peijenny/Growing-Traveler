@@ -18,8 +18,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMq-zz-Bwc">
-                        <rect key="frame" x="8" y="8" width="398" height="64"/>
-                        <color key="backgroundColor" red="0.60000002379999995" green="0.56078433989999998" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <rect key="frame" x="8" y="5" width="398" height="70"/>
+                        <color key="backgroundColor" red="0.54117647058823526" green="0.73333333333333328" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="項目名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dk-YZ-bj7">
                         <rect key="frame" x="32" y="16" width="366" height="26"/>
@@ -47,9 +47,9 @@
                     <constraint firstItem="2dk-YZ-bj7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="LcI-hg-d3j"/>
                     <constraint firstAttribute="trailing" secondItem="bcb-pe-hEA" secondAttribute="trailing" constant="16" id="LyI-Un-53a"/>
                     <constraint firstItem="FMq-zz-Bwc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Suk-ih-JnE"/>
-                    <constraint firstItem="FMq-zz-Bwc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="nHP-Fh-6nt"/>
+                    <constraint firstItem="FMq-zz-Bwc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="nHP-Fh-6nt"/>
                     <constraint firstItem="bcb-pe-hEA" firstAttribute="top" secondItem="2dk-YZ-bj7" secondAttribute="bottom" constant="5" id="rc2-W1-PFX"/>
-                    <constraint firstAttribute="bottom" secondItem="FMq-zz-Bwc" secondAttribute="bottom" constant="8" id="x0z-h6-iJV"/>
+                    <constraint firstAttribute="bottom" secondItem="FMq-zz-Bwc" secondAttribute="bottom" constant="5" id="x0z-h6-iJV"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

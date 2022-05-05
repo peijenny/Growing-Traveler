@@ -259,10 +259,10 @@ class ChatViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        notes = []
-        
-        forumArticles = []
-        
+//        notes = []
+//
+//        forumArticles = []
+//
         if isBlock {
             
             friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
@@ -611,6 +611,30 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             myImageView.loadImage(sendMessage.sendMessage)
             
             myImageView.showPhoto(imageView: myImageView)
+            
+        }
+        
+        if sendMessage.sendType == SendType.noteID.title {
+            
+            guard let viewController = UIStoryboard.note.instantiateViewController(
+                    withIdentifier: String(describing: NoteDetailViewController.self)
+                    ) as? NoteDetailViewController else { return }
+            
+            viewController.noteID = sendMessage.sendMessage
+            
+            viewController.noteUserID = sendMessage.sendUserID
+            
+            navigationController?.pushViewController(viewController, animated: true)
+            
+        }
+        
+        if sendMessage.sendType == SendType.articleID.title {
+            
+            let viewController = ArticleDetailViewController()
+            
+            viewController.forumArticle = forumArticles.filter({ $0.id == sendMessage.sendMessage })[0]
+            
+            navigationController?.pushViewController(viewController, animated: true)
             
         }
         

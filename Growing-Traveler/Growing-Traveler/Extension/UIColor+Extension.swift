@@ -7,6 +7,122 @@
 
 import UIKit
 
+enum ColorChart {
+    
+    case lightGary
+    
+    case gray
+    
+    case lightBlue
+    
+    case blue
+    
+    case darkBlue
+    
+    var hexText: String {
+        
+        switch self {
+            
+        case .lightGary: return "EBEBE3"
+            
+        case .gray: return "C7D6DB"
+            
+        case .lightBlue: return "B2D1E4"
+            
+        case .blue: return "8ABBE0"
+            
+        case .darkBlue: return "49A1D8"
+            
+        }
+        
+    }
+    
+}
+
+//enum ColorChart {
+//
+//    case grayGreen
+//
+//    case lightGreen
+//
+//    case tealGreen
+//
+//    case darkGreen
+//
+//    case blueGreen
+//
+//    var hexText: String {
+//
+//        switch self {
+//
+//        case .grayGreen: return "ECF4F3"
+//
+//        case .lightGreen: return "C8F4DE"
+//
+//        case .tealGreen: return "A4E5D9"
+//
+//        case .darkGreen: return "66C6BA"
+//
+//        case .blueGreen: return "649DAD"
+//
+//        }
+//
+//    }
+//
+//}
+
+//enum ColorChart {
+//
+//    // 淺橘
+//    case lightBeige
+//
+//    // 淺黃
+//    case lightYellow
+//
+//    // 橘色
+//    case beige
+//
+//    // 黃色
+//    case yellow
+//
+//    // 淺綠
+//    case lightGreen
+//
+//    // 淺藍
+//    case lightBlue
+//
+//    // 草綠
+//    case teal
+//
+//    // 深綠
+//    case green
+//
+//    var hexText: String {
+//
+//        switch self {
+//
+//        case .lightBeige: return "F9EBC8"
+//
+//        case .lightYellow: return "FEFBE7"
+//
+//        case .beige: return "E5CB9F"
+//
+//        case .yellow: return "EEE4AB"
+//
+//        case .lightGreen: return "DAE5D0"
+//
+//        case .lightBlue: return "A0BCC2"
+//
+//        case .teal: return "99C4C8"
+//
+//        case .green: return "68A7AD"
+//
+//        }
+//
+//    }
+//
+//}
+
 extension UIColor {
 
     static func hexStringToUIColor(hex: String) -> UIColor {
@@ -25,9 +141,9 @@ extension UIColor {
             
         }
 
-        var rgbValue: UInt32 = 0
+        var rgbValue: UInt64 = 0
         
-        Scanner(string: cString).scanHexInt32(&rgbValue)
+        Scanner(string: cString).scanHexInt64(&rgbValue)
 
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,

@@ -142,7 +142,7 @@ class StudyGoalViewController: UIViewController {
             height: underlineView.frame.height
         )
         
-        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: "BFAB9C")
+        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
         underlineView.addSubview(selectLineView)
         
@@ -400,9 +400,9 @@ class StudyGoalViewController: UIViewController {
             
         })
         
-        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: "827173") })
+        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText) })
         
-        sender.tintColor = UIColor.hexStringToUIColor(hex: "BFAB9C")
+        sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
         guard let titleText = sender.titleLabel?.text else { return }
         
@@ -465,7 +465,7 @@ extension StudyGoalViewController: UITableViewDataSource {
 
             if sender.tintColor?.cgColor == UIColor.clear.cgColor {
                 
-                sender.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
+                sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
                 
                 studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = true
                 

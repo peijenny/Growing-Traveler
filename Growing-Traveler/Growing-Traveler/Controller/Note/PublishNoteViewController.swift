@@ -59,7 +59,7 @@ class PublishNoteViewController: BaseViewController {
             
         } else {
             
-            noteTextView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
+            noteTextView.textColor = UIColor.black
             
         }
 
@@ -314,7 +314,7 @@ extension PublishNoteViewController: UITextViewDelegate {
             
             textView.text = nil
             
-            textView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
+            textView.textColor = UIColor.black
             
         }
         
