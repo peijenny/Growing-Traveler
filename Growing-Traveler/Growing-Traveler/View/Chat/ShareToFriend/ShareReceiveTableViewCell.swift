@@ -30,4 +30,32 @@ class ShareReceiveTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func showShareNote(note: Note, userPhoto: String?) {
+        
+        if userPhoto != nil {
+            
+            friendImageView.loadImage(userPhoto)
+            
+        }
+        
+        let fistImage = note.content.filter({ $0.contentType == SendType.image.title })
+        
+        if fistImage.count != 0 {
+            
+            shareImageView.loadImage(fistImage[0].contentText)
+            
+            imageViewConstraint.constant = 150.0
+            
+        } else {
+            
+            shareImageView.image = nil
+            
+            imageViewConstraint.constant = 0.0
+            
+        }
+        
+        shareTitleLabel.text = "[筆記分享] \(note.noteTitle)"
+        
+    }
+    
 }

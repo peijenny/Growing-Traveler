@@ -355,7 +355,6 @@ class ChatViewController: BaseViewController {
                         
                     } else if chatMessage.messageContent[index].sendType == SendType.articleID.title {
                         
-                        
                     }
                     
                 }
@@ -384,9 +383,7 @@ class ChatViewController: BaseViewController {
                 
                 strongSelf.notes.append(note)
                 
-//                strongSelf.chatTableView.reloadData()
-                
-                print("TEST \(strongSelf.notes)")
+                strongSelf.chatTableView.reloadData()
                 
             case .failure(let error):
 
@@ -519,6 +516,22 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 guard let cell = cell as? ShareReceiveTableViewCell else { return cell }
                 
+                let note = notes.filter({ $0.noteID == chatMessage?.messageContent[indexPath.row].sendMessage })
+                
+                let artilce = forumArtilces.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
+                
+                if note.count != 0 {
+                    
+                    // 顯示 Note
+                    cell.showShareNote(note: note[0], userPhoto: friendInfo?.userPhoto)
+                    
+                }
+                
+                if artilce.count != 0 {
+                    
+                    // 顯示 文章
+                }
+                
                 return cell
                 
             } else {
@@ -530,6 +543,22 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 )
                 
                 guard let cell = cell as? ShareSendTableViewCell else { return cell }
+                
+                let note = notes.filter({ $0.noteID == chatMessage?.messageContent[indexPath.row].sendMessage })
+                
+                let artilce = forumArtilces.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
+                
+                if note.count != 0 {
+                    
+                    // 顯示 Note
+                    cell.showShareNote(note: note[0])
+                    
+                }
+                
+                if artilce.count != 0 {
+                    
+                    // 顯示 文章
+                }
 
                 return cell
                 
