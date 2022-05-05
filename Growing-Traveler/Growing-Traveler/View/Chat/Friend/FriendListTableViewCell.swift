@@ -77,4 +77,21 @@ class FriendListTableViewCell: UITableViewCell {
         
     }
     
+    func showFriendListInfo(friendInfo: UserInfo) {
+        
+        unblockButton.isHidden = false
+        
+        unblockButton.setTitle("確認傳送", for: .normal)
+
+        friendStatusLabel.isHidden = true
+        
+        friendNameLabel.text = friendInfo.userName
+        
+        if friendInfo.userPhoto != "" {
+            
+            friendIconImageView.loadImage(friendInfo.userPhoto)
+            
+        }
+    }
+    
 }

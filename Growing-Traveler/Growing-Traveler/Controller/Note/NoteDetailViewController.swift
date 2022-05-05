@@ -64,12 +64,28 @@ class NoteDetailViewController: UIViewController {
     
     func setNavigationItems() {
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .edit, target: self,
-            action: #selector(modifyNoteData)
-        )
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(modifyNoteData)),
+            UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(shareToFriendButton))
+        ]
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func shareToFriendButton(sender: UIButton) {
+        
+        let viewController = ShareToFriendViewController()
+        
+        let navController = UINavigationController(rootViewController: viewController)
+        
+        if let sheetPresentationController = navController.sheetPresentationController {
+            
+            sheetPresentationController.detents = [.medium()]
+            
+        }
+        
+        present(navController, animated: true)
         
     }
     

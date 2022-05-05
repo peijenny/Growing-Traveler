@@ -110,6 +110,7 @@
 		28BC2C1A2815603C00E69BE0 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BC2C192815603C00E69BE0 /* UIImage+Extension.swift */; };
 		28BC2C1D2816860000E69BE0 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BC2C1C2816860000E69BE0 /* Authentication.storyboard */; };
 		28BC2C202816864600E69BE0 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BC2C1F2816864600E69BE0 /* AuthenticationViewController.swift */; };
+		28C9985B28236C8500E3B4C0 /* ShareToFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C9985A28236C8500E3B4C0 /* ShareToFriendViewController.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -249,6 +250,7 @@
 		28BC2C1C2816860000E69BE0 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		28BC2C1F2816864600E69BE0 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		28BC2C212816867F00E69BE0 /* Growing-Traveler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Growing-Traveler.entitlements"; sourceTree = "<group>"; };
+		28C9985A28236C8500E3B4C0 /* ShareToFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToFriendViewController.swift; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				281358E1281C2C53000B0CAE /* NoteViewController.swift */,
 				281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */,
 				281358E9281D11BA000B0CAE /* NoteDetailViewController.swift */,
+				28C9985A28236C8500E3B4C0 /* ShareToFriendViewController.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -1066,6 +1069,7 @@
 				2808C926281131A400DC1EC5 /* AnalysisContentTableViewCell.swift in Sources */,
 				28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */,
 				28D702BF28019E0300FE9AEA /* Category.swift in Sources */,
+				28C9985B28236C8500E3B4C0 /* ShareToFriendViewController.swift in Sources */,
 				280C1B0E280E424C0091B9DC /* Friend.swift in Sources */,
 				28D79FEB281A869D00505B5B /* RankViewController.swift in Sources */,
 				2857035C28118F8D00849FAA /* Feedback.swift in Sources */,
