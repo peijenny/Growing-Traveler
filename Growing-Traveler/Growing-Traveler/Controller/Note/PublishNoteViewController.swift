@@ -118,13 +118,14 @@ class PublishNoteViewController: BaseViewController {
 
         for index in 0..<modifyNote.content.count {
             
-            if modifyNote.content[index].contentType == "image" {
+            if modifyNote.content[index].contentType == SendType.image.title {
                 
                 contentText += "\0\(modifyNote.content[index].contentText)\0"
                  
-            } else {
+            } else if modifyNote.content[index].contentType == SendType.string.title {
                 
                 contentText += modifyNote.content[index].contentText
+                
             }
             
         }
@@ -153,11 +154,11 @@ class PublishNoteViewController: BaseViewController {
             
             if inputContentArray[index].range(of: "https://i.imgur.com") != nil {
                 
-                noteType = "image"
+                noteType = SendType.image.title
                 
             } else {
                 
-                noteType = "string"
+                noteType = SendType.string.title
                 
             }
             

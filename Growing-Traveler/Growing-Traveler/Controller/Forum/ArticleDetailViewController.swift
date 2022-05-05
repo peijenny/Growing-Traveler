@@ -366,13 +366,13 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         
         guard let forumArticle = forumArticle else { return }
         
-        if indexPath.section == 0 && forumArticle.content[indexPath.row].contentType == "image" {
+        if indexPath.section == 0 && forumArticle.content[indexPath.row].contentType == SendType.image.title {
             
             myImageView.loadImage(forumArticle.content[indexPath.row].contentText)
             
             showPhoto()
             
-        } else if indexPath.section == 1 && articleMessages[indexPath.row].message.contentType == "image" {
+        } else if indexPath.section == 1 && articleMessages[indexPath.row].message.contentType == SendType.image.title {
             
             myImageView.loadImage(articleMessages[indexPath.row].message.contentText)
             

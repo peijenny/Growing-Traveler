@@ -7,6 +7,34 @@
 
 import UIKit
 
+enum SendType {
+    
+    case image
+    
+    case string
+    
+    case articleID
+    
+    case noteID
+    
+    var title: String {
+        
+        switch self {
+            
+        case .image: return "image"
+            
+        case .string: return "string"
+            
+        case .articleID: return "articleID"
+            
+        case .noteID: return "noteID"
+            
+        }
+        
+    }
+    
+}
+
 class ChatViewController: BaseViewController {
     
     @IBOutlet weak var chatTableView: UITableView! {
@@ -120,8 +148,7 @@ class ChatViewController: BaseViewController {
 //            UIBarButtonItem(image: UIImage.asset(.telephoneCall),
 //                style: .plain, target: self, action: #selector(callAudioPhone)),
 //            UIBarButtonItem(image: UIImage.asset(.videoCamera),
-//                style: .plain, target: self, action: #selector(callVideoPhone))
-//        ]
+//                style: .plain, target: self, action: #selector(callVideoPhone))]
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriend))
@@ -309,11 +336,11 @@ class ChatViewController: BaseViewController {
             
             if inputContent.range(of: "https://i.imgur.com") != nil {
 
-                sendType = "image"
+                sendType = SendType.image.title
 
             } else {
 
-                sendType = "string"
+                sendType = SendType.string.title
 
             }
             
@@ -372,12 +399,12 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard let cell = cell as? ReceiveMessageTableViewCell else { return cell }
 
-            if let blockadeList = otherFriendList?.blockadeList {
+            if let friendBlockadeList = otherFriendList?.blockadeList {
                 
-                if blockadeList.filter({ $0 == userID }).count != 0 {
+                if friendBlockadeList.filter({ $0 == userID }).count != 0 {
                     
                     friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
-                    
+
                     friendStatusLabel.isHidden = false
                     
                 }
@@ -425,7 +452,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let sendMessage = chatMessage?.messageContent[indexPath.row] else { return }
         
-        if sendMessage.sendType == "image" {
+        if sendMessage.sendType == SendType.image.title {
             
             myImageView.loadImage(sendMessage.sendMessage)
             

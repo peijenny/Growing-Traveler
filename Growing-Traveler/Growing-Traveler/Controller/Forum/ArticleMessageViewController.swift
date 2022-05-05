@@ -68,11 +68,11 @@ class ArticleMessageViewController: BaseViewController {
 
             if contentText.range(of: "https://i.imgur.com") != nil {
 
-                contentType = "image"
+                contentType = SendType.image.title
 
             } else {
 
-                contentType = "string"
+                contentType = SendType.string.title
 
             }
 

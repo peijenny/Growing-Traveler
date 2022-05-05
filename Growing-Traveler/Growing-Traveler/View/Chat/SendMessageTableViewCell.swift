@@ -57,7 +57,7 @@ class SendMessageTableViewCell: UITableViewCell {
     
     func setMessageContent(message: String, type: String) {
         
-        if type == "string" {
+        if type == SendType.string.title {
             
             sendIamgeView.image = nil
             
@@ -73,7 +73,7 @@ class SendMessageTableViewCell: UITableViewCell {
             
             sendMessageLabel.text = message
             
-        } else if type == "image" {
+        } else if type == SendType.image.title {
 
             sendMessageLabel.text = nil
             

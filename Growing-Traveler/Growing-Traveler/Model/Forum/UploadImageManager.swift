@@ -23,7 +23,7 @@ class UploadImageManager {
             
             if let imageData = uiImage.jpegData(compressionQuality: 0.9) {
                 
-                data.append(imageData, withName: "image")
+                data.append(imageData, withName: SendType.image.title)
                 
             }
             

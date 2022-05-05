@@ -117,11 +117,11 @@ class PublishForumArticleViewController: BaseViewController {
                 
                 if contentArray[index].range(of: "https://i.imgur.com") != nil {
                     
-                    articleType = "image"
+                    articleType = SendType.image.title
                     
                 } else {
                     
-                    articleType = "string"
+                    articleType = SendType.string.title
                     
                 }
                 

@@ -147,11 +147,11 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         for index in 0..<modifyForumArticle.content.count {
             
-            if modifyForumArticle.content[index].contentType == "image" {
+            if modifyForumArticle.content[index].contentType == SendType.image.title {
                 
                 contentText += "\0\(modifyForumArticle.content[index].contentText)\0"
                 
-            } else {
+            } else if modifyForumArticle.content[index].contentType == SendType.string.title {
                 
                 contentText += modifyForumArticle.content[index].contentText
             }

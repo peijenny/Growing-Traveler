@@ -30,7 +30,7 @@ class ArticleDetailTableViewCell: UITableViewCell {
     
     func setArticleContent(content: ArticleContent) {
         
-        if content.contentType == "string" {
+        if content.contentType == SendType.string.title {
             
             contentTextLabel.text = content.contentText
             
@@ -38,7 +38,7 @@ class ArticleDetailTableViewCell: UITableViewCell {
             
             imageViewHeightConstraint.constant = 0.0
             
-        } else if content.contentType == "image" {
+        } else if content.contentType == SendType.image.title {
             
             contentTextLabel.text = nil
             

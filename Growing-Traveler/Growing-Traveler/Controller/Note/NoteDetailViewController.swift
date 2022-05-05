@@ -130,7 +130,7 @@ extension NoteDetailViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = cell as? ArticleDetailTableViewCell else { return }
         
-        if modifyNote?.content[indexPath.row].contentType ?? "" == "image" {
+        if modifyNote?.content[indexPath.row].contentType ?? "" == SendType.image.title {
             
             cell.contentImageView.loadImage(
                 modifyNote?.content[indexPath.row].contentText)
