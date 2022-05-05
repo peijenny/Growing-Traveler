@@ -190,8 +190,8 @@ class PublishForumArticleViewController: BaseViewController {
         
         NSLayoutConstraint.activate([
             publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            publishArticleTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            publishArticleTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            publishArticleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            publishArticleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
         ])
         

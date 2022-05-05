@@ -17,8 +17,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sx6-nN-5RL">
-                        <rect key="frame" x="5" y="5" width="404" height="50"/>
-                        <color key="backgroundColor" red="0.43137252329999998" green="0.47450977560000002" blue="0.60392159219999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <rect key="frame" x="8" y="8" width="398" height="44"/>
+                        <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="個人學習筆記 標題" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwk-L7-KKq">
                         <rect key="frame" x="16" y="10" width="276" height="40"/>
@@ -42,16 +42,16 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Z0U-Rh-gXG" firstAttribute="leading" secondItem="Uwk-L7-KKq" secondAttribute="trailing" constant="16" id="6Ni-46-k0z"/>
-                    <constraint firstItem="Sx6-nN-5RL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="6h6-FS-UcA"/>
+                    <constraint firstItem="Sx6-nN-5RL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="6h6-FS-UcA"/>
                     <constraint firstItem="Z0U-Rh-gXG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="85D-nV-LVj"/>
                     <constraint firstAttribute="bottom" secondItem="Uwk-L7-KKq" secondAttribute="bottom" constant="10" id="CMB-S8-DPR"/>
-                    <constraint firstAttribute="trailing" secondItem="Sx6-nN-5RL" secondAttribute="trailing" constant="5" id="FcL-gt-Yj2"/>
+                    <constraint firstAttribute="trailing" secondItem="Sx6-nN-5RL" secondAttribute="trailing" constant="8" id="FcL-gt-Yj2"/>
                     <constraint firstItem="Uwk-L7-KKq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Gx8-HS-fRV"/>
                     <constraint firstAttribute="trailing" secondItem="Z0U-Rh-gXG" secondAttribute="trailing" constant="16" id="HQw-Mt-i0q"/>
                     <constraint firstAttribute="bottom" secondItem="Z0U-Rh-gXG" secondAttribute="bottom" constant="10" id="MOy-E6-PcX"/>
                     <constraint firstItem="Uwk-L7-KKq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="UZD-Kd-0aG"/>
-                    <constraint firstAttribute="bottom" secondItem="Sx6-nN-5RL" secondAttribute="bottom" constant="5" id="nZh-GV-ccN"/>
-                    <constraint firstItem="Sx6-nN-5RL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="nlg-Ct-n2z"/>
+                    <constraint firstAttribute="bottom" secondItem="Sx6-nN-5RL" secondAttribute="bottom" constant="8" id="nZh-GV-ccN"/>
+                    <constraint firstItem="Sx6-nN-5RL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="nlg-Ct-n2z"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

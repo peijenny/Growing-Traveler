@@ -10,10 +10,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PublishArticleTableViewCell" customModule="Growing_Traveler" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="KPo-tq-8r9">
@@ -26,7 +26,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1bS-Yl-K8M">
-                                <rect key="frame" x="80" y="0.0" width="318" height="41"/>
+                                <rect key="frame" x="80" y="4" width="318" height="32"/>
                                 <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <segments>
                                     <segment title="文章"/>
@@ -37,7 +37,9 @@
                             </segmentedControl>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="1bS-Yl-K8M" secondAttribute="bottom" constant="5" id="9IN-Iz-OK7"/>
                             <constraint firstAttribute="height" constant="40" id="GHf-4v-ex4"/>
+                            <constraint firstItem="1bS-Yl-K8M" firstAttribute="top" secondItem="KPo-tq-8r9" secondAttribute="top" constant="5" id="iSD-fY-ddL"/>
                         </constraints>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="UmS-pd-aGZ">
@@ -92,11 +94,11 @@
                             <constraint firstAttribute="height" constant="40" id="to0-ZL-bCa"/>
                         </constraints>
                     </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="283" translatesAutoresizingMaskIntoConstraints="NO" id="NEO-fx-m8o">
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NEO-fx-m8o">
                         <rect key="frame" x="8" y="176" width="398" height="40"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="描述內容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ar-dX-hAV">
-                                <rect key="frame" x="0.0" y="0.0" width="75" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="338" height="40"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -117,7 +119,10 @@
                         </constraints>
                     </stackView>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="請描述內容......" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vrw-Jr-Wng">
-                        <rect key="frame" x="8" y="224" width="398" height="408"/>
+                        <rect key="frame" x="8" y="224" width="398" height="368"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="368" id="5yS-Cm-wBP"/>
+                        </constraints>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

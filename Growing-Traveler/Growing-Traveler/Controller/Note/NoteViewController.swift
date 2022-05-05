@@ -24,6 +24,8 @@ class NoteViewController: BaseViewController {
         
     }
     
+    @IBOutlet weak var noteSearchBar: UISearchBar!
+    
     var userManager = UserManager()
     
     var notes: [Note] = []
@@ -37,6 +39,8 @@ class NoteViewController: BaseViewController {
             UINib(nibName: String(describing: NoteTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: NoteTableViewCell.self)
         )
+        
+        noteSearchBar.delegate = self
         
     }
     
@@ -193,6 +197,26 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
             
+    }
+    
+}
+
+extension NoteViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText == "" {
+            
+            fetchNoteData()
+            
+        } else {
+            
+            notes = notes.filter({ $0.noteTitle.range(of: searchText) != nil })
+            
+            noteTableView.reloadData()
+            
+        }
+
     }
     
 }
