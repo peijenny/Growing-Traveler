@@ -17,6 +17,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                            <color key="textColor" red="0.74901962280000001" green="0.67058825489999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
@@ -37,7 +38,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0E-VG-B8O">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="279.5"/>
-                                <color key="backgroundColor" red="0.90196073060000004" green="0.92156863209999995" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.23137254901960785" green="0.19607843137254902" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="279.5" id="qn2-ky-l8K"/>
                                 </constraints>
@@ -47,8 +48,8 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Nz-We-I3v">
                                         <rect key="frame" x="0.0" y="0.0" width="138" height="45"/>
-                                        <color key="backgroundColor" red="0.89803922179999995" green="0.91764706370000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <color key="tintColor" red="0.41176470588235292" green="0.71372549019607845" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.231372565" green="0.19607841970000001" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" red="0.50980392156862742" green="0.44313725490196076" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="待處理">
                                             <fontDescription key="titleFontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
@@ -59,8 +60,8 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azx-6w-Wlk">
                                         <rect key="frame" x="138" y="0.0" width="138" height="45"/>
-                                        <color key="backgroundColor" red="0.89803922179999995" green="0.91764706370000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <color key="tintColor" red="0.23137254901960785" green="0.50980392156862742" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.231372565" green="0.19607841970000001" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" red="0.74901962280000001" green="0.67058825489999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="處理中">
                                             <fontDescription key="titleFontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
@@ -71,8 +72,8 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9f-0F-UcN">
                                         <rect key="frame" x="276" y="0.0" width="138" height="45"/>
-                                        <color key="backgroundColor" red="0.89803922179999995" green="0.91764706370000004" blue="0.96078431610000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <color key="tintColor" red="0.41176474089999998" green="0.71372550729999995" blue="0.79215681550000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.231372565" green="0.19607841970000001" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" red="0.50980395079999996" green="0.44313728810000003" blue="0.45098042490000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="已處理">
                                             <fontDescription key="titleFontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
@@ -93,17 +94,17 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yw1-6K-0DR">
                                 <rect key="frame" x="0.0" y="324.5" width="414" height="4"/>
-                                <color key="backgroundColor" red="0.90196073060000004" green="0.92156863209999995" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.23137254901960785" green="0.19607843137254902" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="DWp-lo-bjl"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1D-fh-S7D" userLabel="addStudyGoalButton">
-                                <rect key="frame" x="354" y="219.5" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.70980392156862748" green="0.52941176470588236" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="348" y="209.5" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.74901962280000001" green="0.67058825489999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="D9e-28-Tgn"/>
-                                    <constraint firstAttribute="height" constant="40" id="yXR-K7-ZY8"/>
+                                    <constraint firstAttribute="width" constant="50" id="D9e-28-Tgn"/>
+                                    <constraint firstAttribute="height" constant="50" id="yXR-K7-ZY8"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
@@ -125,7 +126,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.89803922179999995" green="0.74509805439999999" blue="0.50980395079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.84313726430000002" green="0.75686275960000005" blue="0.69019609689999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="F82-7Y-oE1" firstAttribute="leading" secondItem="VFk-re-Iup" secondAttribute="leading" id="1gq-66-ynU"/>
                                     <constraint firstAttribute="trailing" secondItem="rBb-21-8Fu" secondAttribute="trailing" id="5Sw-2P-MKg"/>
@@ -138,17 +139,16 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="0.89803922179999995" green="0.74509805439999999" blue="0.50980395079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.84313726430000002" green="0.75686275960000005" blue="0.69019609689999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="I0E-VG-B8O" secondAttribute="trailing" id="0aQ-cc-w0g"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="t1D-fh-S7D" secondAttribute="trailing" constant="20" id="76N-EQ-69z"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="t1D-fh-S7D" secondAttribute="trailing" constant="16" id="76N-EQ-69z"/>
                             <constraint firstItem="rBb-21-8Fu" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.35" id="C1x-vD-uBN"/>
                             <constraint firstItem="4j2-rB-qVK" firstAttribute="top" secondItem="t1D-fh-S7D" secondAttribute="bottom" constant="20" id="FDG-ho-c77"/>
                             <constraint firstItem="yw1-6K-0DR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="KZ1-c9-0kW"/>
                             <constraint firstItem="VFk-re-Iup" firstAttribute="top" secondItem="yw1-6K-0DR" secondAttribute="bottom" id="L9r-zM-RE2"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4j2-rB-qVK" secondAttribute="trailing" id="MJC-tD-mQZ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="VFk-re-Iup" secondAttribute="trailing" id="OJs-qs-Hwy"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="t1D-fh-S7D" secondAttribute="trailing" constant="20" id="Txz-Qh-shs"/>
                             <constraint firstItem="s7B-ph-YYk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="WHe-aF-GXg"/>
                             <constraint firstItem="I0E-VG-B8O" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="djw-fk-LGc"/>
                             <constraint firstItem="I0E-VG-B8O" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="gOk-zH-mFX"/>

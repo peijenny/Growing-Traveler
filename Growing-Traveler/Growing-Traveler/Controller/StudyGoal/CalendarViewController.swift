@@ -81,6 +81,8 @@ class CalendarViewController: UIViewController {
         
         studyGoals.removeAll()
         
+        print("TEST \(date)")
+        
         studyGoalManager.fetchData { [weak self] result in
             
             guard let strongSelf = self else { return }
@@ -205,6 +207,8 @@ extension CalendarViewController: UITableViewDelegate {
                 
                 viewController.selectedDate = selectedDate
                 
+                navigationController?.pushViewController(viewController, animated: true)
+                
                 viewController.getSelectedDate = { selectedDate in
                     
                     self.fetchData(date: selectedDate)
@@ -212,8 +216,6 @@ extension CalendarViewController: UITableViewDelegate {
                     self.selectedDate = selectedDate
                     
                 }
-                
-                navigationController?.pushViewController(viewController, animated: true)
                 
             }
             

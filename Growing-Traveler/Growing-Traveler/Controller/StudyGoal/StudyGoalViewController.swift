@@ -142,7 +142,7 @@ class StudyGoalViewController: UIViewController {
             height: underlineView.frame.height
         )
         
-        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: "0384BD")
+        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: "BFAB9C")
         
         underlineView.addSubview(selectLineView)
         
@@ -400,9 +400,9 @@ class StudyGoalViewController: UIViewController {
             
         })
         
-        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: "69B6CA") })
+        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: "827173") })
         
-        sender.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
+        sender.tintColor = UIColor.hexStringToUIColor(hex: "BFAB9C")
         
         guard let titleText = sender.titleLabel?.text else { return }
         

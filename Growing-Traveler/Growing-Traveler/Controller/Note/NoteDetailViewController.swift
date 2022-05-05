@@ -75,7 +75,7 @@ class NoteDetailViewController: UIViewController {
     
     @objc func modifyNoteData(sender: UIButton) {
         
-        guard let viewController = UIStoryboard.profile.instantiateViewController(
+        guard let viewController = UIStoryboard.note.instantiateViewController(
                 withIdentifier: String(describing: PublishNoteViewController.self)
                 ) as? PublishNoteViewController else { return }
         
