@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class ShareToFriendViewController: UIViewController {
     
@@ -24,6 +25,12 @@ class ShareToFriendViewController: UIViewController {
     var userManager = UserManager()
     
     var usersInfo: [UserInfo] = []
+    
+    var shareType: String?
+    
+    var shareID: String?
+    
+    var userName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +111,8 @@ class ShareToFriendViewController: UIViewController {
             switch result {
 
             case .success(let usersInfo):
+                
+                strongSelf.userName = usersInfo.filter({ $0.userID == userID })[0].userName
                 
                 let usersInfo = usersInfo
                 
@@ -211,9 +220,22 @@ extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSourc
 
         if let indexPath = shareToFriendTableView.indexPathForRow(at: point) {
             
-            print("TEST \(indexPath.row)")
+            var selectChat = chats.filter({ $0.friendID == usersInfo[indexPath.row].userID })[0]
+            
+            selectChat.messageContent.append(MessageContent(
+                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
+                sendMessage: shareID ?? "",
+                sendType: shareType ?? "",
+                sendUserID: userID
+            ))
+            
+            chatRoomManager.addData(userName: userName ?? "", chat: selectChat)
+            
+            HUD.flash(.labeledSuccess(title: "傳送成功", subtitle: nil), delay: 0.5)
             
         }
+        
+        dismiss(animated: true, completion: nil)
         
     }
     

@@ -117,6 +117,10 @@ class ChatViewController: BaseViewController {
     
     var otherFriendList: Friend?
     
+    var notes: [Note] = []
+    
+    var forumArtilces: [ForumArticle] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -130,6 +134,16 @@ class ChatViewController: BaseViewController {
         chatTableView.register(
             UINib(nibName: String(describing: SendMessageTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: SendMessageTableViewCell.self)
+        )
+        
+        chatTableView.register(
+            UINib(nibName: String(describing: ShareReceiveTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: ShareReceiveTableViewCell.self)
+        )
+        
+        chatTableView.register(
+            UINib(nibName: String(describing: ShareSendTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: ShareSendTableViewCell.self)
         )
         
         if deleteAccount {
@@ -243,6 +257,10 @@ class ChatViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        notes = []
+        
+        forumArtilces = []
+        
         if isBlock {
             
             friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
@@ -326,6 +344,22 @@ class ChatViewController: BaseViewController {
 
                 strongSelf.chatMessage = chatMessage
                 
+                for index in 0..<chatMessage.messageContent.count {
+                    
+                    if chatMessage.messageContent[index].sendType == SendType.noteID.title {
+                        
+                        strongSelf.fetchshareNoteData(
+                            shareUserID: chatMessage.messageContent[index].sendUserID,
+                            noteID: chatMessage.messageContent[index].sendMessage
+                        )
+                        
+                    } else if chatMessage.messageContent[index].sendType == SendType.articleID.title {
+                        
+                        
+                    }
+                    
+                }
+                
             case .failure(let error):
 
                 print(error)
@@ -334,6 +368,33 @@ class ChatViewController: BaseViewController {
 
         }
 
+    }
+    
+    func fetchshareNoteData(shareUserID: String, noteID: String) {
+        
+        userManager.fetchshareNoteData(shareUserID: shareUserID, noteID: noteID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+
+            switch result {
+
+            case .success(let note):
+                
+                let note = note
+                
+                strongSelf.notes.append(note)
+                
+//                strongSelf.chatTableView.reloadData()
+                
+                print("TEST \(strongSelf.notes)")
+                
+            case .failure(let error):
+
+                print(error)
+
+            }
+            
+        }
     }
     
     @IBAction func sendInputMessageButton(_ sender: UIButton) {
@@ -457,7 +518,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 )
                 
                 guard let cell = cell as? ShareReceiveTableViewCell else { return cell }
-
+                
                 return cell
                 
             } else {

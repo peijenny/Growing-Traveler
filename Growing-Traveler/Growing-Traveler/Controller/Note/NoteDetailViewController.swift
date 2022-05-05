@@ -77,6 +77,10 @@ class NoteDetailViewController: UIViewController {
         
         let viewController = ShareToFriendViewController()
         
+        viewController.shareType = SendType.noteID.title
+        
+        viewController.shareID = modifyNote?.noteID
+        
         let navController = UINavigationController(rootViewController: viewController)
         
         if let sheetPresentationController = navController.sheetPresentationController {

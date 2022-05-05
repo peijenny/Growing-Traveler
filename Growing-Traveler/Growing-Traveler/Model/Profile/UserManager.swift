@@ -162,6 +162,42 @@ class UserManager {
         
     }
     
+    func fetchshareNoteData(shareUserID: String, noteID: String, completion: @escaping (Result<Note>) -> Void) {
+        
+        database.document(shareUserID).collection("note")
+            .whereField("noteID", isEqualTo: noteID)
+            .getDocuments { snapshot, error in
+            
+            guard let snapshot = snapshot else {
+                
+                print("Error fetching document: \(error!)")
+                
+                completion(Result.failure(error!))
+                
+                return
+                
+            }
+
+            do {
+                
+                if let note = try snapshot.documents[0].data(as: Note.self, decoder: Firestore.Decoder()) {
+                    
+                    completion(Result.success(note))
+                    
+                }
+                
+            } catch {
+                
+                print(error)
+                
+                completion(Result.failure(error))
+                
+            }
+            
+        }
+        
+    }
+    
     func fetchUserNoteData(completion: @escaping (Result<[Note]>) -> Void) {
         
         database.document(userID).collection("note")
