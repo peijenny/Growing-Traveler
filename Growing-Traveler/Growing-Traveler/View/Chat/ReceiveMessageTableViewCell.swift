@@ -37,7 +37,9 @@ class ReceiveMessageTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        receiveBackgroundView.layer.cornerRadius = 10
+        receiveBackgroundView.layer.cornerRadius = 15
+        
+        receiveImageView.layer.cornerRadius = 15
         
         friendImageView.layer.cornerRadius = friendImageView.frame.width / 2
         

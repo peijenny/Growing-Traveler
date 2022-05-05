@@ -37,7 +37,9 @@ class SendMessageTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        sendBackgroundView.layer.cornerRadius = 10
+        sendBackgroundView.layer.cornerRadius = 15
+        
+        sendIamgeView.layer.cornerRadius = 15
         
     }
     

@@ -19,6 +19,8 @@ class ShareReceiveTableViewCell: UITableViewCell {
     
     @IBOutlet weak var shareView: UIView!
     
+    @IBOutlet weak var shareTypeLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,7 +29,12 @@ class ShareReceiveTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        shareView.layer.cornerRadius = 15
+        
+        friendImageView.layer.cornerRadius = friendImageView.frame.width / 2
+        
+        shareImageView.layer.cornerRadius = 15
+        
     }
     
     func showShareNote(note: Note, userPhoto: String?) {
@@ -54,7 +61,9 @@ class ShareReceiveTableViewCell: UITableViewCell {
             
         }
         
-        shareTitleLabel.text = "[筆記分享] \(note.noteTitle)"
+        shareTitleLabel.text = note.noteTitle
+        
+        shareTypeLabel.text = "[筆記分享]"
         
     }
     
@@ -82,7 +91,9 @@ class ShareReceiveTableViewCell: UITableViewCell {
             
         }
         
-        shareTitleLabel.text = "[討論區分享] \(forumArticle.title)"
+        shareTitleLabel.text = forumArticle.title
+        
+        shareTypeLabel.text = "[討論區分享]"
         
     }
     
