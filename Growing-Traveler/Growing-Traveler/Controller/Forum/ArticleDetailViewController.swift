@@ -261,11 +261,11 @@ class ArticleDetailViewController: UIViewController {
                         
                     }
                     
-                }
-                
-                self.view.addSubview(viewController.view)
+                    self.view.addSubview(viewController.view)
 
-                self.addChild(viewController)
+                    self.addChild(viewController)
+                    
+                }
                 
             }
             
