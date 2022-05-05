@@ -91,7 +91,7 @@ class AuthenticationViewController: UIViewController {
     
     func setupProviderLoginView() {
 
-        let authorizationButton = ASAuthorizationAppleIDButton()
+        let authorizationButton = ASAuthorizationAppleIDButton(type: .default, style: .black)
         
         authorizationButton.addTarget(
             self, action: #selector(handleAuthorizationAppleIDButtonPress),
