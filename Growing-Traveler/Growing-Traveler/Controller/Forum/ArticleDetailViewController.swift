@@ -39,13 +39,7 @@ class ArticleDetailViewController: UIViewController {
         
         setTableView()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .compose,
-            target: self,
-            action: #selector(sendMessageButton)
-        )
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        setNavigationItems()
 
     }
     
@@ -53,6 +47,17 @@ class ArticleDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         fetchFriendBlockadeListData()
+        
+    }
+    
+    func setNavigationItems() {
+        
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(sendMessageButton)),
+            UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(shareToFriendButton))
+        ]
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
     }
     
@@ -168,6 +173,26 @@ class ArticleDetailViewController: UIViewController {
         self.view.addSubview(viewController.view)
 
         self.addChild(viewController)
+        
+    }
+    
+    @objc func shareToFriendButton(sender: UIButton) {
+        
+        let viewController = ShareToFriendViewController()
+        
+        viewController.shareType = SendType.articleID.title
+        
+        viewController.shareID = forumArticle?.id
+        
+        let navController = UINavigationController(rootViewController: viewController)
+        
+        if let sheetPresentationController = navController.sheetPresentationController {
+            
+            sheetPresentationController.detents = [.medium()]
+            
+        }
+        
+        present(navController, animated: true)
         
     }
     

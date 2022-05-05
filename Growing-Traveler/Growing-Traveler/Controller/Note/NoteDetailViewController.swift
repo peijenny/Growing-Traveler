@@ -101,7 +101,7 @@ class NoteDetailViewController: UIViewController {
     func setNavigationItems() {
         
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(modifyNoteData)),
+            UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(modifyNoteData)),
             UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(shareToFriendButton))
         ]
         
