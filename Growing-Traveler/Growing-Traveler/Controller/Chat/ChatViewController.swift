@@ -119,7 +119,9 @@ class ChatViewController: BaseViewController {
     
     var notes: [Note] = []
     
-    var forumArtilces: [ForumArticle] = []
+    var forumArticles: [ForumArticle] = []
+    
+    var forumArticleManager = ForumArticleManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -259,7 +261,7 @@ class ChatViewController: BaseViewController {
         
         notes = []
         
-        forumArtilces = []
+        forumArticles = []
         
         if isBlock {
             
@@ -355,6 +357,8 @@ class ChatViewController: BaseViewController {
                         
                     } else if chatMessage.messageContent[index].sendType == SendType.articleID.title {
                         
+                        strongSelf.fetchShareArticleData(articleID: chatMessage.messageContent[index].sendMessage)
+                        
                     }
                     
                 }
@@ -392,6 +396,33 @@ class ChatViewController: BaseViewController {
             }
             
         }
+        
+    }
+    
+    func fetchShareArticleData(articleID: String) {
+        
+        forumArticleManager.fetchForumArticleData(articleID: articleID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let forumArticle):
+                
+                let forumArticle = forumArticle
+                
+                strongSelf.forumArticles.append(forumArticle)
+                
+                strongSelf.chatTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
+        
     }
     
     @IBAction func sendInputMessageButton(_ sender: UIButton) {
@@ -518,7 +549,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let note = notes.filter({ $0.noteID == chatMessage?.messageContent[indexPath.row].sendMessage })
                 
-                let artilce = forumArtilces.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
+                let article = forumArticles.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
                 
                 if note.count != 0 {
                     
@@ -527,7 +558,9 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 
-                if artilce.count != 0 {
+                if article.count != 0 {
+                    
+                    cell.showShareArticle(forumArticle: article[0], userPhoto: friendInfo?.userPhoto)
                     
                     // 顯示 文章
                 }
@@ -546,7 +579,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let note = notes.filter({ $0.noteID == chatMessage?.messageContent[indexPath.row].sendMessage })
                 
-                let artilce = forumArtilces.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
+                let article = forumArticles.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
                 
                 if note.count != 0 {
                     
@@ -555,9 +588,10 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 
-                if artilce.count != 0 {
+                if article.count != 0 {
                     
                     // 顯示 文章
+                    cell.showShareArticle(forumArticle: article[0])
                 }
 
                 return cell
@@ -584,7 +618,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension ChatViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         

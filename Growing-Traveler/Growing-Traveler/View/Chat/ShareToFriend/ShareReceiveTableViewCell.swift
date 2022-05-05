@@ -58,4 +58,32 @@ class ShareReceiveTableViewCell: UITableViewCell {
         
     }
     
+    func showShareArticle(forumArticle: ForumArticle, userPhoto: String?) {
+        
+        if userPhoto != nil {
+            
+            friendImageView.loadImage(userPhoto)
+            
+        }
+        
+        let fistImage = forumArticle.content.filter({ $0.contentType == SendType.image.title })
+        
+        if fistImage.count != 0 {
+            
+            shareImageView.loadImage(fistImage[0].contentText)
+            
+            imageViewConstraint.constant = 150.0
+            
+        } else {
+            
+            shareImageView.image = nil
+            
+            imageViewConstraint.constant = 0.0
+            
+        }
+        
+        shareTitleLabel.text = "[討論區分享] \(forumArticle.title)"
+        
+    }
+    
 }

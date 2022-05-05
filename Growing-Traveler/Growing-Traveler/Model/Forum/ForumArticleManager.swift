@@ -196,6 +196,40 @@ class ForumArticleManager {
         
     }
     
+    func fetchForumArticleData(articleID: String, completion: @escaping (Result<ForumArticle>) -> Void) {
+        
+        database.document(articleID).getDocument { snapshot, error in
+            
+            guard let snapshot = snapshot else {
+                
+                print("Error fetching document: \(error!)")
+                
+                completion(Result.failure(error!))
+                
+                return
+                
+            }
+            
+            do {
+                
+                if let forumArticle = try snapshot.data(as: ForumArticle.self, decoder: Firestore.Decoder()) {
+                    
+                    completion(Result.success(forumArticle))
+                    
+                }
+                
+            } catch {
+                
+                print(error)
+                
+                completion(Result.failure(error))
+                
+            }
+            
+        }
+        
+    }
+    
     // 修改 論壇區的文章 至 Firebase Firestore
     func updateData(forumArticle: ForumArticle) {
         
