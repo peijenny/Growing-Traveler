@@ -141,7 +141,7 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
                 withIdentifier: String(describing: NoteDetailViewController.self)
                 ) as? NoteDetailViewController else { return }
         
-        viewController.modifyNote = notes[indexPath.row]
+        viewController.noteID = notes[indexPath.row].noteID
         
         navigationController?.pushViewController(viewController, animated: true)
         

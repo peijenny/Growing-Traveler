@@ -23,21 +23,16 @@ class NoteDetailViewController: UIViewController {
         
     }
     
-    var modifyNote: Note?
+//    var modifyNote: Note?
+    
+    var noteID: String?
+    
+    var userManager = UserManager()
+    
+    var note: Note?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = modifyNote?.noteTitle ?? ""
-        
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "yyyy.MM.dd HH:mm"
-        
-        let createTime = Date(
-            timeIntervalSince1970: modifyNote?.createTime ?? TimeInterval())
-        
-        noteCreateTimeLabel.text = formatter.string(from: createTime)
 
         setNavigationItems()
         
@@ -45,6 +40,13 @@ class NoteDetailViewController: UIViewController {
             UINib(nibName: String(describing: ArticleDetailTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self)
         )
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchNoteData()
         
     }
     
@@ -60,6 +62,40 @@ class NoteDetailViewController: UIViewController {
             
         }
         
+    }
+    
+    func fetchNoteData() {
+        
+        userManager.fetchshareNoteData(
+        shareUserID: userID, noteID: noteID ?? "") { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let note):
+                
+                strongSelf.note = note
+                
+                strongSelf.title = note.noteTitle
+                
+                let formatter = DateFormatter()
+                
+                formatter.dateFormat = "yyyy.MM.dd HH:mm"
+                
+                let createTime = Date(timeIntervalSince1970: note.createTime)
+                
+                strongSelf.noteCreateTimeLabel.text = formatter.string(from: createTime)
+                
+                strongSelf.noteDatailTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+            }
+            
+        }
     }
     
     func setNavigationItems() {
@@ -79,7 +115,7 @@ class NoteDetailViewController: UIViewController {
         
         viewController.shareType = SendType.noteID.title
         
-        viewController.shareID = modifyNote?.noteID
+        viewController.shareID = note?.noteID
         
         let navController = UINavigationController(rootViewController: viewController)
         
@@ -99,7 +135,7 @@ class NoteDetailViewController: UIViewController {
                 withIdentifier: String(describing: PublishNoteViewController.self)
                 ) as? PublishNoteViewController else { return }
         
-        viewController.modifyNote = modifyNote
+        viewController.modifyNote = note
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -117,7 +153,7 @@ extension NoteDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return modifyNote?.content.count ?? 0
+        return note?.content.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -131,7 +167,7 @@ extension NoteDetailViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        if let content = modifyNote?.content {
+        if let content = note?.content {
             
             cell.setArticleContent(content: content[indexPath.row])
             
@@ -150,10 +186,10 @@ extension NoteDetailViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = cell as? ArticleDetailTableViewCell else { return }
         
-        if modifyNote?.content[indexPath.row].contentType ?? "" == SendType.image.title {
+        if note?.content[indexPath.row].contentType ?? "" == SendType.image.title {
             
             cell.contentImageView.loadImage(
-                modifyNote?.content[indexPath.row].contentText)
+                note?.content[indexPath.row].contentText)
             
             cell.contentImageView.showPhoto(imageView: cell.contentImageView)
             
