@@ -111,6 +111,10 @@
 		28BC2C1D2816860000E69BE0 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BC2C1C2816860000E69BE0 /* Authentication.storyboard */; };
 		28BC2C202816864600E69BE0 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BC2C1F2816864600E69BE0 /* AuthenticationViewController.swift */; };
 		28C9985B28236C8500E3B4C0 /* ShareToFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C9985A28236C8500E3B4C0 /* ShareToFriendViewController.swift */; };
+		28C9985F2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C9985D2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift */; };
+		28C998602823839A00E3B4C0 /* ShareReceiveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C9985E2823839A00E3B4C0 /* ShareReceiveTableViewCell.xib */; };
+		28C99863282383A900E3B4C0 /* ShareSendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99861282383A900E3B4C0 /* ShareSendTableViewCell.swift */; };
+		28C99864282383A900E3B4C0 /* ShareSendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C99862282383A900E3B4C0 /* ShareSendTableViewCell.xib */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -251,6 +255,10 @@
 		28BC2C1F2816864600E69BE0 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		28BC2C212816867F00E69BE0 /* Growing-Traveler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Growing-Traveler.entitlements"; sourceTree = "<group>"; };
 		28C9985A28236C8500E3B4C0 /* ShareToFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToFriendViewController.swift; sourceTree = "<group>"; };
+		28C9985D2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReceiveTableViewCell.swift; sourceTree = "<group>"; };
+		28C9985E2823839A00E3B4C0 /* ShareReceiveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareReceiveTableViewCell.xib; sourceTree = "<group>"; };
+		28C99861282383A900E3B4C0 /* ShareSendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSendTableViewCell.swift; sourceTree = "<group>"; };
+		28C99862282383A900E3B4C0 /* ShareSendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareSendTableViewCell.xib; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -375,6 +383,7 @@
 		280C1B07280D77AC0091B9DC /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				28C9985C2823835000E3B4C0 /* ShareToFriend */,
 				282522C6280EDCD90008B916 /* Friend */,
 				280C1B13280E58BB0091B9DC /* ReceiveMessageTableViewCell.swift */,
 				280C1B14280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib */,
@@ -655,6 +664,17 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		28C9985C2823835000E3B4C0 /* ShareToFriend */ = {
+			isa = PBXGroup;
+			children = (
+				28C9985D2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift */,
+				28C9985E2823839A00E3B4C0 /* ShareReceiveTableViewCell.xib */,
+				28C99861282383A900E3B4C0 /* ShareSendTableViewCell.swift */,
+				28C99862282383A900E3B4C0 /* ShareSendTableViewCell.xib */,
+			);
+			path = ShareToFriend;
+			sourceTree = "<group>";
+		};
 		28CE2D3227FECBF400ACA813 = {
 			isa = PBXGroup;
 			children = (
@@ -884,6 +904,7 @@
 				28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
+				28C998602823839A00E3B4C0 /* ShareReceiveTableViewCell.xib in Resources */,
 				281358DB281BC8F6000B0CAE /* CertificationTableViewCell.xib in Resources */,
 				281358E6281C2D2A000B0CAE /* NoteTableViewCell.xib in Resources */,
 				28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */,
@@ -894,6 +915,7 @@
 				2808C92228103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.xib in Resources */,
 				2808C912280FEC7600DC1EC5 /* Note.storyboard in Resources */,
 				283E6583281797F300F1033F /* GoogleService-Info.plist in Resources */,
+				28C99864282383A900E3B4C0 /* ShareSendTableViewCell.xib in Resources */,
 				28BB6F3028096C40002B0458 /* MoreArticlesTableViewCell.xib in Resources */,
 				28DA83312812744F0081CB14 /* ProfileView.xib in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
@@ -994,6 +1016,7 @@
 				2803AD222817F30F00AF3AD3 /* SignInViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
 				281358DA281BC8F6000B0CAE /* CertificationTableViewCell.swift in Sources */,
+				28C9985F2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift in Sources */,
 				28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */,
 				28BC2C1A2815603C00E69BE0 /* UIImage+Extension.swift in Sources */,
 				2857035E281197FC00849FAA /* Double+Extension.swift in Sources */,
@@ -1058,6 +1081,7 @@
 				28BB6F41280A919C002B0458 /* ArticleDetailTableViewCell.swift in Sources */,
 				281358D2281AC24A000B0CAE /* ReleaseRecordViewController.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
+				28C99863282383A900E3B4C0 /* ShareSendTableViewCell.swift in Sources */,
 				28FF433D2813D08E00C58E6B /* Mandate.swift in Sources */,
 				28BB6F042807EC75002B0458 /* UIImageView+Extension.swift in Sources */,
 				280C1B04280D77770091B9DC /* FriendViewController.swift in Sources */,

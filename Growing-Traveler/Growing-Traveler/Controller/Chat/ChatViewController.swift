@@ -243,6 +243,14 @@ class ChatViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if isBlock {
+            
+            friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
+            
+            friendStatusLabel.isHidden = false
+            
+        }
+        
         fetchFriendInfoData()
         
     }
@@ -288,6 +296,14 @@ class ChatViewController: BaseViewController {
             case .success(let friendList):
 
                 strongSelf.otherFriendList = friendList
+                
+                if friendList.blockadeList.filter({ $0 == userID }).count != 0 {
+                    
+                    strongSelf.friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
+
+                    strongSelf.friendStatusLabel.isHidden = false
+                    
+                }
                 
             case .failure(let error):
 
@@ -390,59 +406,73 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
+        // MARK: - 傳送 SendType 為 Image / String 的
+        if chatMessage?.messageContent[indexPath.row].sendType == SendType.image.title ||
+            chatMessage?.messageContent[indexPath.row].sendType == SendType.string.title {
             
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: ReceiveMessageTableViewCell.self),
-                for: indexPath
-            )
-            
-            guard let cell = cell as? ReceiveMessageTableViewCell else { return cell }
-
-            if let friendBlockadeList = otherFriendList?.blockadeList {
+            if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
                 
-                if friendBlockadeList.filter({ $0 == userID }).count != 0 {
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ReceiveMessageTableViewCell.self),
+                    for: indexPath
+                )
+                
+                guard let cell = cell as? ReceiveMessageTableViewCell else { return cell }
+                
+                if let receiveMessage = chatMessage?.messageContent[indexPath.row] {
                     
-                    friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
-
-                    friendStatusLabel.isHidden = false
+                    cell.showMessage(receiveMessage: receiveMessage, friendPhoto: friendInfo?.userPhoto)
                     
                 }
                 
+                return cell
+                
+            } else {
+                
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: SendMessageTableViewCell.self),
+                    for: indexPath
+                )
+                
+                guard let cell = cell as? SendMessageTableViewCell else { return cell }
+                
+                if let sendMessage = chatMessage?.messageContent[indexPath.row] {
+                    
+                    cell.showMessage(sendMessage: sendMessage)
+                    
+                }
+
+                return cell
+                
             }
-            
-            if isBlock {
-                
-                friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
-                
-                friendStatusLabel.isHidden = false
-                
-            }
-            
-            if let receiveMessage = chatMessage?.messageContent[indexPath.row] {
-                
-                cell.showMessage(receiveMessage: receiveMessage, friendPhoto: friendInfo?.userPhoto)
-                
-            }
-            
-            return cell
             
         } else {
             
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: SendMessageTableViewCell.self),
-                for: indexPath
-            )
-            
-            guard let cell = cell as? SendMessageTableViewCell else { return cell }
-            
-            if let sendMessage = chatMessage?.messageContent[indexPath.row] {
+            if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
                 
-                cell.showMessage(sendMessage: sendMessage)
+                // 對方
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ShareReceiveTableViewCell.self),
+                    for: indexPath
+                )
+                
+                guard let cell = cell as? ShareReceiveTableViewCell else { return cell }
+
+                return cell
+                
+            } else {
+                
+                // 自己
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ShareSendTableViewCell.self),
+                    for: indexPath
+                )
+                
+                guard let cell = cell as? ShareSendTableViewCell else { return cell }
+
+                return cell
                 
             }
-
-            return cell
             
         }
         
