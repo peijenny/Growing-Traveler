@@ -25,8 +25,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入 Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BNP-Mj-eSZ">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入 Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BNP-Mj-eSZ">
                                 <rect key="frame" x="55" y="0.0" width="295" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
@@ -45,8 +46,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ghV-RQ-hSj">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ghV-RQ-hSj">
                                 <rect key="frame" x="55" y="0.0" width="295" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -58,7 +60,7 @@
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5W-bE-ncw">
                         <rect key="frame" x="32" y="152" width="350" height="40"/>
-                        <color key="backgroundColor" red="0.43137254901960786" green="0.47450980392156861" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="0Ft-Bw-EBh"/>
                         </constraints>
@@ -66,40 +68,18 @@
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="確認"/>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgL-tY-yxm">
-                        <rect key="frame" x="87" y="72" width="291" height="1"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="mH7-ne-Pkt"/>
-                        </constraints>
-                    </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zgl-fm-a7a">
-                        <rect key="frame" x="87" y="128" width="291" height="1"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="f9O-yF-phj"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Zgl-fm-a7a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="67" id="14e-6H-jcy"/>
                     <constraint firstAttribute="trailing" secondItem="Biy-JF-iQM" secondAttribute="trailing" constant="32" id="2xO-uk-d1L"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="bgL-tY-yxm" secondAttribute="trailing" constant="16" id="8dD-qo-lF1"/>
                     <constraint firstItem="Biy-JF-iQM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="9uZ-uZ-eVR"/>
                     <constraint firstAttribute="trailing" secondItem="t5W-bE-ncw" secondAttribute="trailing" constant="32" id="Atm-s9-BqQ"/>
                     <constraint firstItem="Teg-BG-Qgy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="Cqa-dO-ABv"/>
                     <constraint firstItem="t5W-bE-ncw" firstAttribute="top" secondItem="Biy-JF-iQM" secondAttribute="bottom" constant="24" id="Lhf-8a-AvJ"/>
-                    <constraint firstItem="t5W-bE-ncw" firstAttribute="top" secondItem="Zgl-fm-a7a" secondAttribute="bottom" constant="23" id="OB4-z8-0qc"/>
-                    <constraint firstItem="Biy-JF-iQM" firstAttribute="top" secondItem="bgL-tY-yxm" secondAttribute="bottom" constant="15" id="P0T-b5-J7t"/>
                     <constraint firstItem="Teg-BG-Qgy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="32" id="SiM-uz-HKH"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Zgl-fm-a7a" secondAttribute="trailing" constant="16" id="Ufh-YX-xPy"/>
                     <constraint firstItem="Biy-JF-iQM" firstAttribute="top" secondItem="Teg-BG-Qgy" secondAttribute="bottom" constant="16" id="V9X-s0-DKj"/>
-                    <constraint firstItem="bgL-tY-yxm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="67" id="WRt-fn-Ldw"/>
                     <constraint firstAttribute="trailing" secondItem="Teg-BG-Qgy" secondAttribute="trailing" constant="32" id="enF-hD-pSj"/>
-                    <constraint firstItem="bgL-tY-yxm" firstAttribute="top" secondItem="Teg-BG-Qgy" secondAttribute="bottom" id="h4X-gG-qBg"/>
                     <constraint firstItem="t5W-bE-ncw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="hoP-yS-EE8"/>
                     <constraint firstAttribute="bottom" secondItem="t5W-bE-ncw" secondAttribute="bottom" constant="32" id="tJ6-HV-7UZ"/>
-                    <constraint firstItem="Zgl-fm-a7a" firstAttribute="top" secondItem="Biy-JF-iQM" secondAttribute="bottom" id="xyZ-Zt-uko"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
