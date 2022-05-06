@@ -163,6 +163,11 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="folder.badge.plus" catalog="system"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="uploadImageButton:" destination="O0I-kJ-Gct" eventType="touchUpInside" id="3wT-PY-TlG"/>
                                                 </connections>
@@ -213,6 +218,11 @@
                                         <buttonConfiguration key="configuration" style="plain" title="確認">
                                             <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                         </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="confirm:" destination="O0I-kJ-Gct" eventType="touchUpInside" id="zG4-Jb-Cv2"/>
                                         </connections>
@@ -242,6 +252,11 @@
                                     <constraint firstAttribute="trailing" secondItem="aGZ-iE-NAd" secondAttribute="trailing" constant="16" id="q8Q-1z-wZX"/>
                                     <constraint firstAttribute="trailing" secondItem="rzC-4p-RLu" secondAttribute="trailing" constant="16" id="sHr-6k-M2C"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GBr-bK-zhV"/>

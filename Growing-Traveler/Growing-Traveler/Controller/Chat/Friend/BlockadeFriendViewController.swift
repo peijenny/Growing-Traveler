@@ -25,7 +25,9 @@ class BlockadeFriendViewController: UIViewController {
         
         self.title = "封鎖列表"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        setBackgroundView()
         
         setTableView()
         
@@ -84,6 +86,26 @@ class BlockadeFriendViewController: UIViewController {
             }
             
         }
+        
+    }
+    
+    func setBackgroundView() {
+        
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+        
     }
     
     func setTableView() {

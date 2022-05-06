@@ -184,8 +184,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgz-yt-Oor">
-                                <rect key="frame" x="10" y="54" width="394" height="798"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gn6-hQ-aS8">
                                 <rect key="frame" x="10" y="54" width="394" height="179"/>
@@ -252,6 +252,11 @@
                                             <constraint firstAttribute="bottom" secondItem="Nfh-EP-778" secondAttribute="bottom" constant="16" id="uHD-SM-e7F"/>
                                             <constraint firstItem="Nfh-EP-778" firstAttribute="leading" secondItem="F4D-vy-ekj" secondAttribute="trailing" constant="10" id="wyE-sa-QDy"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngl-K9-dzr">
                                         <rect key="frame" x="16" y="66" width="362" height="25"/>
@@ -263,7 +268,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="f96-5a-by7" secondAttribute="trailing" constant="16" id="3v5-2b-wYd"/>
                                     <constraint firstAttribute="bottom" secondItem="TaO-LH-Y5j" secondAttribute="bottom" constant="16" id="EiP-LV-8x9"/>
@@ -291,7 +296,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="kUE-So-3bk" secondAttribute="bottom" id="34t-qD-wDt"/>
                                     <constraint firstItem="kUE-So-3bk" firstAttribute="top" secondItem="D5Y-ec-9ID" secondAttribute="bottom" constant="10" id="6X1-sb-Xc0"/>
@@ -306,11 +311,11 @@
                         <viewLayoutGuide key="safeArea" id="76H-af-BAN"/>
                         <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="Sgz-yt-Oor" firstAttribute="leading" secondItem="76H-af-BAN" secondAttribute="leading" constant="10" id="6z6-Rc-b2Z"/>
+                            <constraint firstItem="Sgz-yt-Oor" firstAttribute="leading" secondItem="76H-af-BAN" secondAttribute="leading" id="6z6-Rc-b2Z"/>
                             <constraint firstItem="Jys-4A-yvy" firstAttribute="top" secondItem="Gn6-hQ-aS8" secondAttribute="bottom" constant="16" id="AwX-WS-Mn9"/>
-                            <constraint firstItem="Sgz-yt-Oor" firstAttribute="top" secondItem="76H-af-BAN" secondAttribute="top" constant="10" id="CKa-1J-cpQ"/>
-                            <constraint firstItem="76H-af-BAN" firstAttribute="bottom" secondItem="Sgz-yt-Oor" secondAttribute="bottom" constant="10" id="EGZ-zu-W0m"/>
-                            <constraint firstItem="76H-af-BAN" firstAttribute="trailing" secondItem="Sgz-yt-Oor" secondAttribute="trailing" constant="10" id="fKr-zs-ybZ"/>
+                            <constraint firstItem="Sgz-yt-Oor" firstAttribute="top" secondItem="76H-af-BAN" secondAttribute="top" id="CKa-1J-cpQ"/>
+                            <constraint firstAttribute="bottom" secondItem="Sgz-yt-Oor" secondAttribute="bottom" id="Kds-7s-BkO"/>
+                            <constraint firstItem="76H-af-BAN" firstAttribute="trailing" secondItem="Sgz-yt-Oor" secondAttribute="trailing" id="fKr-zs-ybZ"/>
                             <constraint firstItem="76H-af-BAN" firstAttribute="trailing" secondItem="Gn6-hQ-aS8" secondAttribute="trailing" constant="10" id="iCc-HH-ygg"/>
                             <constraint firstItem="76H-af-BAN" firstAttribute="bottom" secondItem="Jys-4A-yvy" secondAttribute="bottom" constant="10" id="iiB-5V-kS4"/>
                             <constraint firstItem="Gn6-hQ-aS8" firstAttribute="leading" secondItem="76H-af-BAN" secondAttribute="leading" constant="10" id="pME-0Q-LJ4"/>
@@ -381,6 +386,11 @@
                                         <buttonConfiguration key="configuration" style="plain" title="加入好友">
                                             <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                         </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="addUserButton:" destination="Ajc-IU-atk" eventType="touchUpInside" id="KAP-5Q-DiP"/>
                                         </connections>
@@ -408,6 +418,11 @@
                                         <buttonConfiguration key="configuration" style="plain" title="封鎖使用者">
                                             <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                         </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="blockUserButton:" destination="Ajc-IU-atk" eventType="touchUpInside" id="Ium-Bc-R7p"/>
                                         </connections>
@@ -435,6 +450,11 @@
                                     <constraint firstItem="fFg-B8-XSk" firstAttribute="centerX" secondItem="0gc-OT-XL4" secondAttribute="centerX" id="mzy-kV-jr5"/>
                                     <constraint firstAttribute="trailing" secondItem="wKC-h4-xqD" secondAttribute="trailing" constant="16" id="qnf-jW-Ln2"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="M6i-vB-Kjk"/>
@@ -504,6 +524,11 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="拒絕"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="refuseApplyButton:" destination="BU2-ag-va2" eventType="touchUpInside" id="2bS-SH-121"/>
                                                 </connections>
@@ -514,6 +539,11 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="同意"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="agreeApplyButton:" destination="BU2-ag-va2" eventType="touchUpInside" id="iTm-Sm-ITU"/>
                                                 </connections>
@@ -549,6 +579,11 @@
                                     <constraint firstItem="DpK-AD-J9e" firstAttribute="leading" secondItem="PZv-vV-YgR" secondAttribute="leading" constant="16" id="vEg-5L-ZiY"/>
                                     <constraint firstItem="91g-uD-m2P" firstAttribute="leading" secondItem="PZv-vV-YgR" secondAttribute="leading" constant="50" id="vxl-O6-LpB"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FIK-h2-cVa"/>

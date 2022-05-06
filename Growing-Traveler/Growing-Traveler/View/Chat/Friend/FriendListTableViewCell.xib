@@ -19,6 +19,11 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lh1-ku-vdE">
                         <rect key="frame" x="8" y="8" width="398" height="46"/>
                         <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ERk-0m-Aln">
                         <rect key="frame" x="62" y="16" width="336" height="30"/>
@@ -63,6 +68,11 @@
                         <buttonConfiguration key="configuration" style="plain" title="解除封鎖">
                             <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         </buttonConfiguration>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

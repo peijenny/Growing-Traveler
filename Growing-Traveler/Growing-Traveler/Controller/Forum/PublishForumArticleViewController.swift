@@ -57,7 +57,7 @@ class PublishForumArticleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
         if modifyForumArticle == nil {
             

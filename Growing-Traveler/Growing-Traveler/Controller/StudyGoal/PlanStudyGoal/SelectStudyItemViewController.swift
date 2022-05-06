@@ -105,6 +105,8 @@ class SelectStudyItemViewController: BaseViewController {
                     height: studyTimeStackView.frame.height)
             )
             
+            myButton.cornerRadius = 5
+            
             myButton.setTitle("\(studyTime[index])", for: .normal)
             
             myButton.setTitleColor(UIColor.white, for: .normal)
