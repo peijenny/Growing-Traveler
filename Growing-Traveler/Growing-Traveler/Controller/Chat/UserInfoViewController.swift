@@ -214,7 +214,7 @@ class UserInfoViewController: UIViewController {
             message: "請問確定封鎖此帳號嗎？\n 將不再看到此帳號的相關文章及訊息！",
             preferredStyle: .alert)
         
-        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
             
             if var ownerFriend = self.ownerFriend {
                 

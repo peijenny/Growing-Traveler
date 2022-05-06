@@ -209,7 +209,7 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
                 message: "請問確定刪除個人認證嗎？\n 刪除行為不可逆，將無法瀏覽此認證！",
                 preferredStyle: .alert)
             
-            let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+            let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
 
                 self.userInfo?.certification.remove(at: indexPath.row)
                 

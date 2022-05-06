@@ -627,7 +627,7 @@ extension StudyGoalViewController: UITableViewDelegate {
             message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
             preferredStyle: .alert)
         
-        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
             
             self.studyGoalManager.deleteData(
                 studyGoal: self.studyGoals[sender.tag])

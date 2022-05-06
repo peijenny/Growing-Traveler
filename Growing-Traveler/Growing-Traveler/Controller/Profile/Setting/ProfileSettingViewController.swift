@@ -283,7 +283,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             message: "請問確定刪除此使用者帳號？\n 刪除行為不可逆，資料將一併刪除！",
             preferredStyle: .alert)
         
-        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
 
             let user = Auth.auth().currentUser
 
