@@ -84,6 +84,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="backgroundBottomView" destination="242-cb-9r4" id="0bs-mY-bWh"/>
                 <outlet property="endDateLabel" destination="PLx-Mq-Rsl" id="cUE-VT-BgR"/>
                 <outlet property="hideRecordLabel" destination="iuj-Xj-uYV" id="8Xx-Ci-lyO"/>
                 <outlet property="studyGoalTitleLabel" destination="oX2-DH-Yk7" id="hjt-xk-ORx"/>

@@ -55,11 +55,17 @@ class ArticleDetailViewController: UIViewController {
     func setNavigationItems() {
         
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(sendMessageButton)),
-            UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(shareToFriendButton))
+            UIBarButtonItem(
+                image: UIImage.asset(.edit), style: .plain, target: self, action: #selector(sendMessageButton)),
+            UIBarButtonItem(
+                image: UIImage.asset(.share), style: .plain, target: self, action: #selector(shareToFriendButton))
         ]
         
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        navigationItem.rightBarButtonItems?[0].tintColor = UIColor.black
+
+        navigationItem.rightBarButtonItems?[1].tintColor = UIColor.black
+        
+        navigationItem.backBarButtonItem?.tintColor = UIColor.black
         
     }
     

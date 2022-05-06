@@ -30,6 +30,12 @@ enum ImageAsset: String {
     
     case calendar
     case award
+    case share
+    case add
+    case block
+    
+    case create
+    case edit
     
     case telephoneCall
     case videoCamera

@@ -56,12 +56,7 @@ class ProfileViewController: UIViewController {
 
         configureDataSource()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .edit,
-            target: self,
-            action: #selector(setProfileButton))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        setNavigationBar()
         
     }
     
@@ -81,13 +76,29 @@ class ProfileViewController: UIViewController {
         }
         
     }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        tabBarController?.tabBar.isHidden = false
-//
-//    }
+    
+    func setNavigationBar() {
+        
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.edit), style: .plain, target: self, action: #selector(setProfileButton))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.block), style: .plain, target: self, action: #selector(blockadeFriendButton))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func blockadeFriendButton(sender: UIButton) {
+        
+        let viewController = BlockadeFriendViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
     
     @objc func setProfileButton(sender: UIButton) {
         

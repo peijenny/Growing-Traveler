@@ -15,7 +15,9 @@ class StudyGoalHeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var hideRecordLabel: UILabel!
     
-    func showStudyGoalHeader(studyGoal: StudyGoal) {
+    @IBOutlet weak var backgroundBottomView: UIView!
+    
+    func showStudyGoalHeader(studyGoal: StudyGoal, isCalendar: Bool) {
         
         let formatter = DateFormatter()
         
@@ -28,6 +30,12 @@ class StudyGoalHeaderView: UITableViewHeaderFooterView {
         studyGoalTitleLabel.text = studyGoal.title
 
         hideRecordLabel.text = "\(studyGoal.id)"
+        
+        if isCalendar {
+            
+            backgroundBottomView.isHidden = true
+            
+        }
         
     }
     

@@ -178,10 +178,8 @@ class FriendViewController: UIViewController {
     
     func setNavigationItems() {
         
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriendButton)),
-            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(applyFriendButton))
-        ]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.add), style: .plain, target: self, action: #selector(applyFriendButton))
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
@@ -199,14 +197,6 @@ class FriendViewController: UIViewController {
             viewController.ownFriend = friend
             
         }
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
-    @objc func blockadeFriendButton(sender: UIButton) {
-        
-        let viewController = BlockadeFriendViewController()
         
         navigationController?.pushViewController(viewController, animated: true)
         

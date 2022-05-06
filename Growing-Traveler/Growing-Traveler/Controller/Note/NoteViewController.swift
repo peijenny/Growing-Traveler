@@ -80,15 +80,13 @@ class NoteViewController: BaseViewController {
     func setNavigationItems() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self,
-            action: #selector(addNewNote)
-        )
+            image: UIImage.asset(.create), style: .plain, target: self, action: #selector(addNewNote))
         
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
     }
     
-    @objc func addNewNote() {
+    @objc func addNewNote(sender: UIButton) {
         
         guard let viewController = UIStoryboard.note.instantiateViewController(
                 withIdentifier: String(describing: PublishNoteViewController.self)

@@ -219,6 +219,10 @@ class StudyGoalViewController: UIViewController {
             style: .plain, target: self,
             action: #selector(pushToRankPage)
         )
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.black
 
     }
     
@@ -541,7 +545,7 @@ extension StudyGoalViewController: UITableViewDelegate {
 
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
         
-        headerView.showStudyGoalHeader(studyGoal: studyGoals[section])
+        headerView.showStudyGoalHeader(studyGoal: studyGoals[section], isCalendar: false)
 
         tableView.tableHeaderView = UIView.init(frame: CGRect.init(
             x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height))

@@ -175,7 +175,7 @@ extension CalendarViewController: UITableViewDelegate {
 
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
         
-        headerView.showStudyGoalHeader(studyGoal: studyGoals[section])
+        headerView.showStudyGoalHeader(studyGoal: studyGoals[section], isCalendar: true)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         
