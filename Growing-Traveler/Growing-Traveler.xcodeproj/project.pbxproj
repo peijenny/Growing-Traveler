@@ -115,6 +115,7 @@
 		28C998602823839A00E3B4C0 /* ShareReceiveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C9985E2823839A00E3B4C0 /* ShareReceiveTableViewCell.xib */; };
 		28C99863282383A900E3B4C0 /* ShareSendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99861282383A900E3B4C0 /* ShareSendTableViewCell.swift */; };
 		28C99864282383A900E3B4C0 /* ShareSendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C99862282383A900E3B4C0 /* ShareSendTableViewCell.xib */; };
+		28C998662824A93C00E3B4C0 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C998652824A93C00E3B4C0 /* UIView+Extension.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -259,6 +260,7 @@
 		28C9985E2823839A00E3B4C0 /* ShareReceiveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareReceiveTableViewCell.xib; sourceTree = "<group>"; };
 		28C99861282383A900E3B4C0 /* ShareSendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSendTableViewCell.swift; sourceTree = "<group>"; };
 		28C99862282383A900E3B4C0 /* ShareSendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareSendTableViewCell.xib; sourceTree = "<group>"; };
+		28C998652824A93C00E3B4C0 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 				2857035D281197FC00849FAA /* Double+Extension.swift */,
 				28BC2C192815603C00E69BE0 /* UIImage+Extension.swift */,
 				281358F4281E7BE2000B0CAE /* UIColor+Extension.swift */,
+				28C998652824A93C00E3B4C0 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1092,6 +1095,7 @@
 				28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */,
 				2808C926281131A400DC1EC5 /* AnalysisContentTableViewCell.swift in Sources */,
 				28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */,
+				28C998662824A93C00E3B4C0 /* UIView+Extension.swift in Sources */,
 				28D702BF28019E0300FE9AEA /* Category.swift in Sources */,
 				28C9985B28236C8500E3B4C0 /* ShareToFriendViewController.swift in Sources */,
 				280C1B0E280E424C0091B9DC /* Friend.swift in Sources */,

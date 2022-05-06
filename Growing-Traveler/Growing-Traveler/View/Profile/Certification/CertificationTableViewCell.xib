@@ -18,14 +18,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOE-H8-84Y">
-                        <rect key="frame" x="5" y="5" width="404" height="190"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C5z-0F-Xlg">
-                        <rect key="frame" x="5" y="5" width="404" height="45.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="50.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="證照名稱" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7p-T3-WbJ">
-                                <rect key="frame" x="10" y="10" width="384" height="25.5"/>
+                                <rect key="frame" x="10" y="10" width="394" height="30.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="Npu-V7-e54"/>
                                 </constraints>
@@ -64,17 +64,17 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="9SP-hi-zU4" secondAttribute="bottom" constant="16" id="8Nt-QY-3nL"/>
                     <constraint firstItem="hbi-sC-xib" firstAttribute="leading" secondItem="9SP-hi-zU4" secondAttribute="trailing" constant="16" id="GHT-KG-6lp"/>
-                    <constraint firstItem="C5z-0F-Xlg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="HHp-Oq-KP7"/>
+                    <constraint firstItem="C5z-0F-Xlg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="HHp-Oq-KP7"/>
                     <constraint firstItem="9SP-hi-zU4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="NDr-4c-wST"/>
-                    <constraint firstAttribute="trailing" secondItem="C5z-0F-Xlg" secondAttribute="trailing" constant="5" id="OrZ-il-8jp"/>
-                    <constraint firstItem="SOE-H8-84Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="P0Q-or-SMb"/>
+                    <constraint firstAttribute="trailing" secondItem="C5z-0F-Xlg" secondAttribute="trailing" id="OrZ-il-8jp"/>
+                    <constraint firstItem="SOE-H8-84Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="P0Q-or-SMb"/>
                     <constraint firstItem="9SP-hi-zU4" firstAttribute="top" secondItem="C5z-0F-Xlg" secondAttribute="bottom" constant="5.5" id="QpG-LI-hXC"/>
                     <constraint firstAttribute="trailing" secondItem="hbi-sC-xib" secondAttribute="trailing" constant="16" id="XRf-9g-ffx"/>
-                    <constraint firstAttribute="bottom" secondItem="SOE-H8-84Y" secondAttribute="bottom" constant="5" id="dj7-3B-R46"/>
+                    <constraint firstAttribute="bottom" secondItem="SOE-H8-84Y" secondAttribute="bottom" id="dj7-3B-R46"/>
                     <constraint firstAttribute="bottom" secondItem="hbi-sC-xib" secondAttribute="bottom" constant="16" id="g0u-XK-bgY"/>
-                    <constraint firstItem="SOE-H8-84Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="gk2-Wy-PIT"/>
-                    <constraint firstAttribute="trailing" secondItem="SOE-H8-84Y" secondAttribute="trailing" constant="5" id="kzl-Xf-YIZ"/>
-                    <constraint firstItem="C5z-0F-Xlg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="loc-gL-9iu"/>
+                    <constraint firstItem="SOE-H8-84Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="gk2-Wy-PIT"/>
+                    <constraint firstAttribute="trailing" secondItem="SOE-H8-84Y" secondAttribute="trailing" id="kzl-Xf-YIZ"/>
+                    <constraint firstItem="C5z-0F-Xlg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="loc-gL-9iu"/>
                     <constraint firstItem="hbi-sC-xib" firstAttribute="top" secondItem="C5z-0F-Xlg" secondAttribute="bottom" constant="5.5" id="vae-iZ-WO0"/>
                 </constraints>
             </tableViewCellContentView>

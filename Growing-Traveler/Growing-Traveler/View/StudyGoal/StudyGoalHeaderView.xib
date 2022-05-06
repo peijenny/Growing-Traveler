@@ -14,6 +14,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="242-cb-9r4">
+                    <rect key="frame" x="0.0" y="30" width="414" height="15"/>
+                    <color key="backgroundColor" red="0.28627450980000002" green="0.63137254899999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqY-t7-bZd">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                     <subviews>
@@ -59,15 +63,24 @@
                         <constraint firstItem="iuj-Xj-uYV" firstAttribute="leading" secondItem="tqY-t7-bZd" secondAttribute="leading" constant="10" id="pL5-s2-68I"/>
                         <constraint firstItem="iuj-Xj-uYV" firstAttribute="top" secondItem="tqY-t7-bZd" secondAttribute="top" constant="10" id="rA7-sy-I4K"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="242-cb-9r4" secondAttribute="trailing" id="BYo-0V-c1I"/>
                 <constraint firstAttribute="trailing" secondItem="tqY-t7-bZd" secondAttribute="trailing" id="Bbx-bz-xdz"/>
+                <constraint firstAttribute="bottom" secondItem="242-cb-9r4" secondAttribute="bottom" id="KSO-Bc-iVV"/>
+                <constraint firstItem="242-cb-9r4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PsF-Zc-vib"/>
                 <constraint firstAttribute="bottom" secondItem="tqY-t7-bZd" secondAttribute="bottom" id="Rta-kq-pRl"/>
                 <constraint firstItem="tqY-t7-bZd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gYg-k3-Vse"/>
                 <constraint firstItem="tqY-t7-bZd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hPX-Qp-z3d"/>
+                <constraint firstItem="242-cb-9r4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="uj8-GV-tXx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

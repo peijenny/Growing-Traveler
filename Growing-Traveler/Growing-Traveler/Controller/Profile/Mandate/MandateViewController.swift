@@ -68,11 +68,13 @@ class MandateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBackgroundView()
+        
         setTableView()
 
         title = "成長任務"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
         fetchData()
         
@@ -236,6 +238,25 @@ class MandateViewController: UIViewController {
             }
             
         }
+        
+    }
+    
+    func setBackgroundView() {
+        
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
         
     }
     
