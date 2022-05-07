@@ -169,6 +169,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="So8-xn-Y7q">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022.04.21 10:21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHK-Nr-S9c">
                                 <rect key="frame" x="16" y="60" width="382" height="30"/>
                                 <constraints>
@@ -179,20 +183,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ty7-TA-rPg">
-                                <rect key="frame" x="8" y="98" width="398" height="756"/>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="10" y="100" width="394" height="752"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o2A-A6-y3M"/>
                         <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="So8-xn-Y7q" firstAttribute="top" secondItem="o2A-A6-y3M" secondAttribute="top" id="0P2-Zt-ASZ"/>
                             <constraint firstItem="QHK-Nr-S9c" firstAttribute="leading" secondItem="o2A-A6-y3M" secondAttribute="leading" constant="16" id="26K-Nz-Ayg"/>
                             <constraint firstItem="QHK-Nr-S9c" firstAttribute="top" secondItem="o2A-A6-y3M" secondAttribute="top" constant="16" id="6fX-Uc-Hex"/>
-                            <constraint firstItem="ty7-TA-rPg" firstAttribute="leading" secondItem="o2A-A6-y3M" secondAttribute="leading" constant="8" id="9Tc-6z-T5n"/>
+                            <constraint firstItem="ty7-TA-rPg" firstAttribute="leading" secondItem="o2A-A6-y3M" secondAttribute="leading" constant="10" id="9Tc-6z-T5n"/>
                             <constraint firstItem="o2A-A6-y3M" firstAttribute="trailing" secondItem="QHK-Nr-S9c" secondAttribute="trailing" constant="16" id="ApT-sW-yKJ"/>
-                            <constraint firstItem="ty7-TA-rPg" firstAttribute="top" secondItem="QHK-Nr-S9c" secondAttribute="bottom" constant="8" id="HM4-Mm-jhy"/>
-                            <constraint firstItem="o2A-A6-y3M" firstAttribute="bottom" secondItem="ty7-TA-rPg" secondAttribute="bottom" constant="8" id="OjT-iT-VZ9"/>
-                            <constraint firstItem="o2A-A6-y3M" firstAttribute="trailing" secondItem="ty7-TA-rPg" secondAttribute="trailing" constant="8" id="xLg-mr-H1L"/>
+                            <constraint firstItem="ty7-TA-rPg" firstAttribute="top" secondItem="QHK-Nr-S9c" secondAttribute="bottom" constant="10" id="HM4-Mm-jhy"/>
+                            <constraint firstItem="So8-xn-Y7q" firstAttribute="leading" secondItem="o2A-A6-y3M" secondAttribute="leading" id="M7a-9y-acq"/>
+                            <constraint firstItem="o2A-A6-y3M" firstAttribute="bottom" secondItem="ty7-TA-rPg" secondAttribute="bottom" constant="10" id="OjT-iT-VZ9"/>
+                            <constraint firstItem="o2A-A6-y3M" firstAttribute="trailing" secondItem="So8-xn-Y7q" secondAttribute="trailing" id="YlC-SM-ES7"/>
+                            <constraint firstAttribute="bottom" secondItem="So8-xn-Y7q" secondAttribute="bottom" id="ofp-32-ZBj"/>
+                            <constraint firstItem="o2A-A6-y3M" firstAttribute="trailing" secondItem="ty7-TA-rPg" secondAttribute="trailing" constant="10" id="xLg-mr-H1L"/>
                         </constraints>
                     </view>
                     <connections>
@@ -202,7 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gWd-2c-csE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1848" y="74"/>
+            <point key="canvasLocation" x="1847.826086956522" y="73.660714285714278"/>
         </scene>
     </scenes>
     <resources>

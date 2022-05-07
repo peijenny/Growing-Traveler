@@ -178,7 +178,7 @@ class PublishForumArticleViewController: BaseViewController {
     
     func setTableView() {
         
-        publishArticleTableView.backgroundColor = UIColor.clear
+        publishArticleTableView.backgroundColor = UIColor.white
         
         publishArticleTableView.separatorStyle = .none
         

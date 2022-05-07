@@ -177,7 +177,7 @@ extension NoteDetailViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let content = note?.content {
             
-            cell.setArticleContent(content: content[indexPath.row])
+            cell.setArticleContent(content: content[indexPath.row], isNote: true)
             
         }
         

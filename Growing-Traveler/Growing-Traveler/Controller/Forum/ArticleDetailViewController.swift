@@ -288,7 +288,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             guard let forumArticle = forumArticle else { return cell }
             
-            cell.setArticleContent(content: forumArticle.content[indexPath.row])
+            cell.setArticleContent(content: forumArticle.content[indexPath.row], isNote: false)
             
             cell.selectionStyle = .none
             
