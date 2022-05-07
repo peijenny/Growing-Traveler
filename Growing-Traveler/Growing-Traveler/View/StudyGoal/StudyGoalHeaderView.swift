@@ -17,6 +17,8 @@ class StudyGoalHeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var backgroundBottomView: UIView!
     
+    @IBOutlet weak var finishItemCountLabel: UILabel!
+    
     func showStudyGoalHeader(studyGoal: StudyGoal, isCalendar: Bool) {
         
         let formatter = DateFormatter()
@@ -25,7 +27,7 @@ class StudyGoalHeaderView: UITableViewHeaderFooterView {
         
         let endDate = Date(timeIntervalSince1970: studyGoal.studyPeriod.endDate)
         
-        endDateLabel.text = formatter.string(from: endDate)
+        endDateLabel.text = "\(formatter.string(from: endDate)) 止"
         
         studyGoalTitleLabel.text = studyGoal.title
 
@@ -36,6 +38,12 @@ class StudyGoalHeaderView: UITableViewHeaderFooterView {
             backgroundBottomView.isHidden = true
             
         }
+        
+        let finishItems = studyGoal.studyItems.filter({ $0.isCompleted == true }).count
+        
+        let totalItems = studyGoal.studyItems.count
+        
+        finishItemCountLabel.text = "\(finishItems) / \(totalItems)"
         
     }
     

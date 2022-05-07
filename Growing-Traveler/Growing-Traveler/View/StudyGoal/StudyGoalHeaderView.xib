@@ -22,19 +22,19 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="學習目標" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oX2-DH-Yk7">
-                            <rect key="frame" x="16" y="10" width="277" height="25"/>
+                            <rect key="frame" x="16" y="10" width="68" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="6z2-Zu-yit"/>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" id="NwA-B0-GyT"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="180" id="NwA-B0-GyT"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022.04.11" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLx-Mq-Rsl">
-                            <rect key="frame" x="298" y="10" width="100" height="25"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022.04.11 止" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLx-Mq-Rsl">
+                            <rect key="frame" x="308" y="10" width="90" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="100" id="83g-Yb-L41"/>
+                                <constraint firstAttribute="width" constant="90" id="83g-Yb-L41"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
                             <color key="textColor" systemColor="systemGray6Color"/>
@@ -49,10 +49,41 @@
                             <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2V7-Gf-7Ea">
+                            <rect key="frame" x="89" y="10" width="69" height="25"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="checkmark.square" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NSb-yc-g9j">
+                                    <rect key="frame" x="0.0" y="1" width="25" height="22.5"/>
+                                    <color key="tintColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="Eed-qU-dVG"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 / 10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1so-Xi-5ud">
+                                    <rect key="frame" x="25" y="0.0" width="44" height="25"/>
+                                    <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="13"/>
+                                    <color key="textColor" red="0.69803921570000005" green="0.81960784310000001" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.068879739391836753" green="0.5" blue="0.80010410411224486" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="9PN-Hb-F4c"/>
+                                <constraint firstAttribute="width" constant="69" id="DLe-Sy-UOh"/>
+                                <constraint firstItem="1so-Xi-5ud" firstAttribute="leading" secondItem="NSb-yc-g9j" secondAttribute="trailing" id="N2N-rZ-RGf"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstItem="PLx-Mq-Rsl" firstAttribute="leading" secondItem="oX2-DH-Yk7" secondAttribute="trailing" constant="5" id="CJG-L5-uDt"/>
+                        <constraint firstItem="PLx-Mq-Rsl" firstAttribute="leading" relation="lessThanOrEqual" secondItem="2V7-Gf-7Ea" secondAttribute="trailing" constant="150" id="42D-BU-ymn"/>
+                        <constraint firstItem="2V7-Gf-7Ea" firstAttribute="leading" secondItem="oX2-DH-Yk7" secondAttribute="trailing" constant="5" id="A9Z-FQ-GDU"/>
+                        <constraint firstItem="2V7-Gf-7Ea" firstAttribute="centerY" secondItem="tqY-t7-bZd" secondAttribute="centerY" id="Ea0-YP-CSt"/>
                         <constraint firstAttribute="bottom" secondItem="oX2-DH-Yk7" secondAttribute="bottom" constant="10" id="KAt-DH-mR2"/>
                         <constraint firstItem="oX2-DH-Yk7" firstAttribute="top" secondItem="tqY-t7-bZd" secondAttribute="top" constant="10" id="MdQ-Fm-K9U"/>
                         <constraint firstItem="oX2-DH-Yk7" firstAttribute="leading" secondItem="tqY-t7-bZd" secondAttribute="leading" constant="16" id="QXR-VM-1V6"/>
@@ -86,6 +117,7 @@
             <connections>
                 <outlet property="backgroundBottomView" destination="242-cb-9r4" id="0bs-mY-bWh"/>
                 <outlet property="endDateLabel" destination="PLx-Mq-Rsl" id="cUE-VT-BgR"/>
+                <outlet property="finishItemCountLabel" destination="1so-Xi-5ud" id="hzB-MM-c4D"/>
                 <outlet property="hideRecordLabel" destination="iuj-Xj-uYV" id="8Xx-Ci-lyO"/>
                 <outlet property="studyGoalTitleLabel" destination="oX2-DH-Yk7" id="hjt-xk-ORx"/>
             </connections>
@@ -93,6 +125,7 @@
         </view>
     </objects>
     <resources>
+        <image name="checkmark.square" catalog="system" width="128" height="114"/>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
