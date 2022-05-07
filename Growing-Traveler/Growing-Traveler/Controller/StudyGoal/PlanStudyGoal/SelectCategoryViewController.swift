@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class SelectCategoryViewController: UIViewController {
     
@@ -23,6 +24,8 @@ class SelectCategoryViewController: UIViewController {
         
     }
     
+    var selectItem: CategoryItem?
+    
     var getSelectCategoryItem: ((_ item: CategoryItem) -> Void)?
 
     override func viewDidLoad() {
@@ -34,19 +37,47 @@ class SelectCategoryViewController: UIViewController {
 
         view.backgroundColor = UIColor.white
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .close,
-            target: self,
-            action: #selector(setClosePageButton)
-        )
+        setNavigationBar()
         
         setTableView()
         
     }
     
-    @objc func setClosePageButton() {
+    func setNavigationBar() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(selectCategoryButton)
+        )
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(setClosePageButton)
+        )
+        
+    }
+    
+    @objc func setClosePageButton(sender: UIButton) {
         
         dismiss(animated: true, completion: .none)
+        
+    }
+    
+    @objc func selectCategoryButton(sender: UIButton) {
+        
+        if let selectItem = selectItem {
+            
+            getSelectCategoryItem?(selectItem)
+            
+            dismiss(animated: true, completion: .none)
+            
+        } else {
+            
+            HUD.flash(.label("請選擇標籤！"), delay: 0.5)
+            
+        }
         
     }
     
@@ -134,11 +165,9 @@ extension SelectCategoryViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let item = category?[indexPath.section].items[indexPath.row] else { return }
+        guard let selectItem = category?[indexPath.section].items[indexPath.row] else { return }
         
-        getSelectCategoryItem?(item)
-        
-        dismiss(animated: true, completion: .none)
+        self.selectItem = selectItem
         
     }
     
