@@ -115,10 +115,6 @@ class NoteDetailViewController: UIViewController {
                 image: UIImage.asset(.share), style: .plain, target: self, action: #selector(shareToFriendButton))
         ]
         
-        navigationItem.rightBarButtonItems?[0].tintColor = UIColor.black
-        
-        navigationItem.rightBarButtonItems?[1].tintColor = UIColor.black
-        
     }
     
     @objc func shareToFriendButton(sender: UIButton) {

@@ -40,8 +40,6 @@ class SelectCategoryViewController: UIViewController {
             action: #selector(setClosePageButton)
         )
         
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
         setTableView()
         
     }

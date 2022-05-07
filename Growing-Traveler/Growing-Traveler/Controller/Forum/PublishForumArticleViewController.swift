@@ -77,8 +77,6 @@ class PublishForumArticleViewController: BaseViewController {
             action: #selector(submitButton)
         )
         
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
         setTableView()
 
     }

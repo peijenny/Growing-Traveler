@@ -62,8 +62,6 @@ class ReleaseRecordViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add, target: self, action: #selector(addForumArticle))
         
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
     }
     
     @objc func addForumArticle(sender: UIButton) {

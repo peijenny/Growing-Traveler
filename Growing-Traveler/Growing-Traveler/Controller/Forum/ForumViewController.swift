@@ -133,9 +133,7 @@ class ForumViewController: BaseViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage.asset(.create), style: .plain, target: self, action: #selector(addForumArticle))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+
     }
     
     @objc func addForumArticle(sender: UIButton) {

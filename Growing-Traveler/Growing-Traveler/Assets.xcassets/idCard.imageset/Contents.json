@@ -5,11 +5,11 @@
       "scale" : "1x"
     },
     {
+      "filename" : "idCard.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "speechBubbleOrigin.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

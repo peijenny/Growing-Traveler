@@ -36,9 +36,7 @@ class SelectCalendarViewController: UIViewController {
             target: self,
             action: #selector(setClosePageButton)
         )
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+
         setCalenderFrame()
         
         view.backgroundColor = UIColor.white

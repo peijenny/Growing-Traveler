@@ -60,13 +60,7 @@ class ArticleDetailViewController: UIViewController {
             UIBarButtonItem(
                 image: UIImage.asset(.share), style: .plain, target: self, action: #selector(shareToFriendButton))
         ]
-        
-        navigationItem.rightBarButtonItems?[0].tintColor = UIColor.black
 
-        navigationItem.rightBarButtonItems?[1].tintColor = UIColor.black
-        
-        navigationItem.backBarButtonItem?.tintColor = UIColor.black
-        
     }
     
     func fetchFriendBlockadeListData() {

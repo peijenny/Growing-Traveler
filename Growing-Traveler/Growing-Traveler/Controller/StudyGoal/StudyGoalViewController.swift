@@ -220,10 +220,6 @@ class StudyGoalViewController: UIViewController {
             action: #selector(pushToRankPage)
         )
         
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
-        navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-
     }
     
     @objc func pushToRankPage(sender: UIButton) {

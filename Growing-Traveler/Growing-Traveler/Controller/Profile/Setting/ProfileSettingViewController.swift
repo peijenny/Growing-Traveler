@@ -55,9 +55,7 @@ class ProfileSettingViewController: BaseViewController {
             barButtonSystemItem: .done,
             target: self,
             action: #selector(submitButton))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+
     }
     
     @objc func submitButton(sender: UIButton) {

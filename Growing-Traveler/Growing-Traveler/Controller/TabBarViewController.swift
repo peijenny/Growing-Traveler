@@ -45,7 +45,7 @@ private enum Tab {
         
         controller.tabBarItem = tabBarItem()
 
-        controller.tabBarItem.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: -6.0, right: 0.0)
+        controller.tabBarItem.imageInsets = UIEdgeInsets(top: -6.0, left: 0.0, bottom: 0.0, right: 0.0)
         
         return controller
         
@@ -59,40 +59,40 @@ private enum Tab {
 
             return UITabBarItem(
                 title: "目標",
-                image: UIImage.asset(.archerySelect),
-                selectedImage: UIImage.asset(.archerySelect)
+                image: UIImage.asset(.archery),
+                selectedImage: UIImage.asset(.archery)
             )
             
         case .note:
             
             return UITabBarItem(
                 title: "筆記",
-                image: UIImage.asset(.bookSelect),
-                selectedImage: UIImage.asset(.bookSelect)
+                image: UIImage.asset(.book),
+                selectedImage: UIImage.asset(.book)
             )
         
         case .chat:
             
             return UITabBarItem(
                 title: "聊天室",
-                image: UIImage.asset(.speechBubbleSelect),
-                selectedImage: UIImage.asset(.speechBubbleSelect)
+                image: UIImage.asset(.speechBubble),
+                selectedImage: UIImage.asset(.speechBubble)
             )
             
         case .forum:
 
             return UITabBarItem(
                 title: "討論區",
-                image: UIImage.asset(.speakerSelect),
-                selectedImage: UIImage.asset(.speakerSelect)
+                image: UIImage.asset(.speaker),
+                selectedImage: UIImage.asset(.speaker)
             )
             
         case .profile:
             
             return UITabBarItem(
                 title: "個人",
-                image: UIImage.asset(.idCardSelect),
-                selectedImage: UIImage.asset(.idCardSelect)
+                image: UIImage.asset(.idCard),
+                selectedImage: UIImage.asset(.idCard)
             )
             
         }
@@ -102,6 +102,8 @@ private enum Tab {
 }
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
+    
+    @IBOutlet weak var myTabBar: UITabBar!
     
     private let tabs: [Tab] = [.studyGoal, .note, .chat, .forum, .profile]
     
@@ -114,10 +116,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         tabBar.barTintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
-        UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 15)
-        
         delegate = self
-        
     }
     
     // MARK: - UITabBarControllerDelegate

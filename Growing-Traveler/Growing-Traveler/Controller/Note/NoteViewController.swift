@@ -82,8 +82,6 @@ class NoteViewController: BaseViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage.asset(.create), style: .plain, target: self, action: #selector(addNewNote))
         
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
     }
     
     @objc func addNewNote(sender: UIButton) {

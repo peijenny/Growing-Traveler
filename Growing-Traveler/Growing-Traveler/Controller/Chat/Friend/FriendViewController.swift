@@ -180,9 +180,7 @@ class FriendViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage.asset(.add), style: .plain, target: self, action: #selector(applyFriendButton))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+
     }
     
     @objc func applyFriendButton(sender: UIButton) {

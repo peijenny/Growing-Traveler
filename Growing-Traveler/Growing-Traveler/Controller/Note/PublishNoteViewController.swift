@@ -88,8 +88,6 @@ class PublishNoteViewController: BaseViewController {
             action: #selector(checkNote)
         )
         
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
     }
     
     @objc func checkNote() {

@@ -86,10 +86,6 @@ class ProfileViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage.asset(.block), style: .plain, target: self, action: #selector(blockadeFriendButton))
         
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
-        navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-        
     }
     
     @objc func blockadeFriendButton(sender: UIButton) {

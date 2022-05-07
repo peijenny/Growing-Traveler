@@ -63,8 +63,6 @@ class CertificationViewController: UIViewController {
             action: #selector(addCertification)
         )
         
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
     }
     
     @objc func addCertification(sender: UIButton) {

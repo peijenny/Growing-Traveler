@@ -170,8 +170,6 @@ class ShareToFriendViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .close, target: self, action: #selector(closeFriendListButton))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
 
     }
     
