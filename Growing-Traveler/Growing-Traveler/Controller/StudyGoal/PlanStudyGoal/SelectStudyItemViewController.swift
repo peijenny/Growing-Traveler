@@ -86,6 +86,8 @@ class SelectStudyItemViewController: BaseViewController {
     
     @IBAction func closeButton(_ sender: UIButton) {
         
+        self.navigationController?.isNavigationBarHidden = false
+        
         self.view.removeFromSuperview()
         
     }
@@ -174,6 +176,8 @@ class SelectStudyItemViewController: BaseViewController {
                 self.getStudyItem?(studyItem, false)
                 
             }
+            
+            self.navigationController?.isNavigationBarHidden = false
             
             self.view.removeFromSuperview()
             

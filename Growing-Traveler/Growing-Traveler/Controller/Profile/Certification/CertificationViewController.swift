@@ -73,6 +73,8 @@ class CertificationViewController: UIViewController {
         
         viewController.userInfo = userInfo
         
+        self.navigationController?.isNavigationBarHidden = true
+        
         self.view.addSubview(viewController.view)
 
         self.addChild(viewController)

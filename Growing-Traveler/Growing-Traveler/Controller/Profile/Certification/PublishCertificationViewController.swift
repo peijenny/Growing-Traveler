@@ -69,6 +69,8 @@ class PublishCertificationViewController: BaseViewController {
 
     @IBAction func closeButton(_ sender: UIButton) {
         
+        self.navigationController?.isNavigationBarHidden = false
+        
         self.view.removeFromSuperview()
         
     }
@@ -137,6 +139,8 @@ class PublishCertificationViewController: BaseViewController {
             }
 
             userManager.updateData(user: userInfo)
+            
+            self.navigationController?.isNavigationBarHidden = false
             
             self.view.removeFromSuperview()
             

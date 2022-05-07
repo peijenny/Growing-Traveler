@@ -580,6 +580,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
 
         self.addChild(selectStudyItemViewController)
         
+        self.navigationController?.isNavigationBarHidden = true
+        
         selectStudyItemViewController.getStudyItem = { [weak self] studyItem, whetherToUpdate in
             
             if whetherToUpdate == false {

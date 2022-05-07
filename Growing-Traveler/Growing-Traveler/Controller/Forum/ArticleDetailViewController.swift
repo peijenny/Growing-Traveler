@@ -452,6 +452,8 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         viewController.articleID = forumArticle?.id ?? ""
         
         viewController.orderID = articleMessages.count
+        
+        self.navigationController?.isNavigationBarHidden = true
 
         self.view.addSubview(viewController.view)
 

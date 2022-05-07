@@ -40,6 +40,8 @@ class ArticleMessageViewController: BaseViewController {
     
     @IBAction func closeButton(_ sender: UIButton) {
         
+        self.navigationController?.isNavigationBarHidden = false
+        
         self.view.removeFromSuperview()
         
     }
@@ -90,6 +92,8 @@ class ArticleMessageViewController: BaseViewController {
             )
 
             forumArticleManager.addMessageData(articleMessage: articleMessage)
+            
+            self.navigationController?.isNavigationBarHidden = false
 
             self.view.removeFromSuperview()
             

@@ -228,6 +228,8 @@ class ApplyFriendViewController: BaseViewController {
 
         viewController.bothSides = BothSides(owner: ownFriend, other: otherFriend)
         
+        self.navigationController?.isNavigationBarHidden = true
+        
         self.view.addSubview(viewController.view)
         
         viewController.getConfirmStatus = { [weak self] isConfirm in
