@@ -90,15 +90,15 @@ class ChatViewController: BaseViewController {
             chatTableView.reloadData()
             
             if let messageCount = chatMessage?.messageContent.count {
-                
+
                 if chatMessage?.messageContent.count != 0 {
-                    
+
                     let indexPath = IndexPath(row: messageCount - 1, section: 0)
-                    
+
                     chatTableView.scrollToRow(at: indexPath, at: .top, animated: false)
-                    
+
                 }
-                
+
             }
             
         }
@@ -494,8 +494,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // MARK: - 傳送 SendType 為 Image / String 的
+
         if chatMessage?.messageContent[indexPath.row].sendType == SendType.image.title ||
             chatMessage?.messageContent[indexPath.row].sendType == SendType.string.title {
             
@@ -539,7 +538,6 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
             if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
                 
-                // 對方
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: String(describing: ShareReceiveTableViewCell.self),
                     for: indexPath
@@ -553,7 +551,6 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 if note.count != 0 {
                     
-                    // 顯示 Note
                     cell.showShareNote(note: note[0], userPhoto: friendInfo?.userPhoto)
                     
                 }
@@ -561,15 +558,16 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 if article.count != 0 {
                     
                     cell.showShareArticle(forumArticle: article[0], userPhoto: friendInfo?.userPhoto)
-                    
-                    // 顯示 文章
+
                 }
+                
+                cell.setCreateTime(receiveCreateTime:
+                    chatMessage?.messageContent[indexPath.row].createTime ?? TimeInterval())
                 
                 return cell
                 
             } else {
-                
-                // 自己
+
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: String(describing: ShareSendTableViewCell.self),
                     for: indexPath
@@ -581,16 +579,17 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let article = forumArticles.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
                 
+                cell.setCreateTime(sendCreateTime:
+                    chatMessage?.messageContent[indexPath.row].createTime ?? TimeInterval())
+                
                 if note.count != 0 {
                     
-                    // 顯示 Note
                     cell.showShareNote(note: note[0])
                     
                 }
                 
                 if article.count != 0 {
                     
-                    // 顯示 文章
                     cell.showShareArticle(forumArticle: article[0])
                 }
 

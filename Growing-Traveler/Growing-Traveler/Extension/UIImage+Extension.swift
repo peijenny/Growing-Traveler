@@ -33,6 +33,8 @@ enum ImageAsset: String {
     case idea
     case blogging
     case meditation
+    
+    case undrawUpload
 
 }
 

@@ -12,12 +12,10 @@ class ShareSendTableViewCell: UITableViewCell {
     @IBOutlet weak var shareImageView: UIImageView!
     
     @IBOutlet weak var shareTitleLabel: UILabel!
-    
-    @IBOutlet weak var imageViewConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var shareView: UIView!
-    
+
     @IBOutlet weak var shareTypeLabel: UILabel!
+    
+    @IBOutlet weak var sendTimeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,10 +24,18 @@ class ShareSendTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        shareView.layer.cornerRadius = 15
         
-        shareImageView.layer.cornerRadius = 15
+    }
+    
+    func setCreateTime(sendCreateTime: TimeInterval) {
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd HH:mm:ss"
+        
+        let createTime = Date(timeIntervalSince1970: sendCreateTime)
+        
+        sendTimeLabel.text = formatter.string(from: createTime)
         
     }
     
@@ -40,14 +46,6 @@ class ShareSendTableViewCell: UITableViewCell {
         if fistImage.count != 0 {
             
             shareImageView.loadImage(fistImage[0].contentText)
-            
-            imageViewConstraint.constant = 150.0
-            
-        } else {
-            
-            shareImageView.image = nil
-            
-            imageViewConstraint.constant = 0.0
             
         }
         
@@ -64,15 +62,7 @@ class ShareSendTableViewCell: UITableViewCell {
         if fistImage.count != 0 {
             
             shareImageView.loadImage(fistImage[0].contentText)
-            
-            imageViewConstraint.constant = 150.0
-            
-        } else {
-            
-            shareImageView.image = nil
-            
-            imageViewConstraint.constant = 0.0
-            
+
         }
         
         shareTitleLabel.text = forumArticle.title
