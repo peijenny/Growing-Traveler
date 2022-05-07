@@ -381,7 +381,28 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             
         }
         
-        headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
+        headerView.categoryLabel.text = selectCategoryItem?.title ?? "請選擇分類標籤"
+        
+        if headerView.categoryLabel.text ?? "" != "請選擇分類標籤" {
+            
+            headerView.categoryLabel.textColor = UIColor.black
+            
+        }
+        
+        let categoryTapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(selectCategoryTagButton))
+        
+        headerView.categoryLabel.addGestureRecognizer(categoryTapGestureRecognizer)
+        
+        let startDateTapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(selectStartDateButton))
+        
+        headerView.startDateLabel.addGestureRecognizer(startDateTapGestureRecognizer)
+        
+        let endDateTapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(selectEndDateButton))
+        
+        headerView.endDateLabel.addGestureRecognizer(endDateTapGestureRecognizer)
         
         headerView.showSelectedDate(dateType: selectDateType,
             startDate: selectStartDate, endDate: selectEndDate)

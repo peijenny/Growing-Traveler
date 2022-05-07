@@ -12,7 +12,9 @@ class PublishArticleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
     
-    @IBOutlet weak var categoryTextField: UITextField!
+//    @IBOutlet weak var categoryTextField: UITextField!
+    
+    @IBOutlet weak var categoryLabel: UILabel!
     
     @IBOutlet weak var titleTextField: UITextField!
     
@@ -56,7 +58,7 @@ class PublishArticleTableViewCell: UITableViewCell {
 
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
-        } else if categoryTextField.text == "" {
+        } else if categoryLabel.text == "" {
             
             HUD.flash(.label(InputError.categoryEmpty.title), delay: 0.5)
             
@@ -139,7 +141,9 @@ class PublishArticleTableViewCell: UITableViewCell {
     
     func modifyForumArticle(modifyForumArticle: ForumArticle) {
         
-        categoryTextField.text = modifyForumArticle.category.title
+        categoryLabel.text = modifyForumArticle.category.title
+        
+        categoryLabel.textColor = UIColor.black
 
         titleTextField.text = modifyForumArticle.title
         

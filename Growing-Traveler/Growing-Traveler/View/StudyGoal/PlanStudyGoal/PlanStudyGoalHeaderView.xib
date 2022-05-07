@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,10 +15,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2c0-1L-xAC">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="266"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="eLX-tD-sYj">
-                            <rect key="frame" x="8" y="216" width="398" height="40"/>
+                            <rect key="frame" x="8" y="210" width="398" height="40"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="tp8-5d-uTy">
                                     <rect key="frame" x="0.0" y="0.0" width="338" height="40"/>
@@ -65,73 +66,118 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="sor-8n-x4i">
-                            <rect key="frame" x="8" y="166" width="398" height="40"/>
+                            <rect key="frame" x="8" y="160" width="398" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分類標籤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIg-jo-dlT">
                                     <rect key="frame" x="0.0" y="0.0" width="64" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="64" id="CEG-eD-nmV"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="0vl-AR-q3p">
-                                    <rect key="frame" x="80" y="0.0" width="318" height="40"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nnb-lF-bmz">
+                                    <rect key="frame" x="80" y="0.0" width="262" height="40"/>
                                     <subviews>
-                                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇分類標籤" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8X-OK-C79">
-                                            <rect key="frame" x="0.0" y="0.0" width="262" height="40"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Js-zV-rdu">
-                                            <rect key="frame" x="278" y="0.0" width="40" height="40"/>
-                                            <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="2Js-zV-rdu" secondAttribute="height" multiplier="1:1" id="ISZ-Sc-Dnp"/>
-                                            </constraints>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="tag" catalog="system"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="5"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </button>
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請選擇分類標籤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBv-HO-Jpd">
+                                            <rect key="frame" x="8" y="0.0" width="246" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" systemColor="systemGray3Color"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
-                                </stackView>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="aBv-HO-Jpd" firstAttribute="leading" secondItem="nnb-lF-bmz" secondAttribute="leading" constant="8" id="3Uw-Vi-AUE"/>
+                                        <constraint firstAttribute="trailing" secondItem="aBv-HO-Jpd" secondAttribute="trailing" constant="8" id="ggT-NI-2dG"/>
+                                        <constraint firstAttribute="bottom" secondItem="aBv-HO-Jpd" secondAttribute="bottom" id="jvz-mU-81J"/>
+                                        <constraint firstItem="aBv-HO-Jpd" firstAttribute="top" secondItem="nnb-lF-bmz" secondAttribute="top" id="zty-LI-HEW"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" systemColor="systemGray5Color"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Js-zV-rdu">
+                                    <rect key="frame" x="358" y="0.0" width="40" height="40"/>
+                                    <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="2Js-zV-rdu" secondAttribute="height" multiplier="1:1" id="ISZ-Sc-Dnp"/>
+                                    </constraints>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="tag" catalog="system"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="mwT-cT-LLy"/>
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="dEB-SO-qJg">
-                            <rect key="frame" x="8" y="60" width="398" height="96"/>
+                            <rect key="frame" x="8" y="60" width="398" height="90"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="M9h-O1-rcG">
-                                    <rect key="frame" x="0.0" y="0.0" width="398" height="96"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="398" height="90"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="99B-jg-Yav">
-                                            <rect key="frame" x="0.0" y="0.0" width="398" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="398" height="40"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="開始日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iws-J7-pml">
-                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="43"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="開始日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbv-o1-SYk">
+                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="64" id="3qq-am-pr8"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇開始日期" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JNr-92-086">
-                                                    <rect key="frame" x="80" y="0.0" width="259" height="43"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BEJ-Xf-dhs">
+                                                    <rect key="frame" x="80" y="0.0" width="262" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請選擇開始日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Gy-ll-UhB">
+                                                            <rect key="frame" x="8" y="0.0" width="249" height="40"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" systemColor="systemGray3Color"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="6Gy-ll-UhB" secondAttribute="bottom" id="2yC-AC-iDr"/>
+                                                        <constraint firstAttribute="trailing" secondItem="6Gy-ll-UhB" secondAttribute="trailing" constant="5" id="KE4-cm-T8T"/>
+                                                        <constraint firstItem="6Gy-ll-UhB" firstAttribute="leading" secondItem="BEJ-Xf-dhs" secondAttribute="leading" constant="8" id="ngG-j7-9gD"/>
+                                                        <constraint firstItem="6Gy-ll-UhB" firstAttribute="top" secondItem="BEJ-Xf-dhs" secondAttribute="top" id="qpG-B9-dUb"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" systemColor="systemGray5Color"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKQ-Ro-0GY">
-                                                    <rect key="frame" x="355" y="0.0" width="43" height="43"/>
+                                                    <rect key="frame" x="358" y="0.0" width="40" height="40"/>
                                                     <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="tKQ-Ro-0GY" secondAttribute="height" multiplier="1:1" id="XYV-B5-UqD"/>
+                                                        <constraint firstAttribute="width" secondItem="tKQ-Ro-0GY" secondAttribute="height" multiplier="1:1" id="Tyd-vF-wu1"/>
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>
@@ -145,24 +191,48 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="CKg-Yo-1z2">
-                                            <rect key="frame" x="0.0" y="53" width="398" height="43"/>
+                                            <rect key="frame" x="0.0" y="50" width="398" height="40"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="結束日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FF9-iw-Vqm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="結束日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qed-AP-4Rz">
+                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="64" id="hGB-XV-FaY"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇結束日期" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1dB-V7-sDS">
-                                                    <rect key="frame" x="80" y="0.0" width="259" height="43"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8Q-B1-AMT">
+                                                    <rect key="frame" x="80" y="0.0" width="262" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請選擇結束日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgv-4B-BKL">
+                                                            <rect key="frame" x="8" y="0.0" width="249" height="40"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" systemColor="systemGray3Color"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="Qgv-4B-BKL" secondAttribute="trailing" constant="5" id="5DV-wI-8EQ"/>
+                                                        <constraint firstItem="Qgv-4B-BKL" firstAttribute="top" secondItem="v8Q-B1-AMT" secondAttribute="top" id="FuF-sy-c9G"/>
+                                                        <constraint firstItem="Qgv-4B-BKL" firstAttribute="leading" secondItem="v8Q-B1-AMT" secondAttribute="leading" constant="8" id="RsE-zC-RbV"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Qgv-4B-BKL" secondAttribute="bottom" id="rp2-DL-UhX"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" systemColor="systemGray5Color"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khI-wM-Aqo">
-                                                    <rect key="frame" x="355" y="0.0" width="43" height="43"/>
+                                                    <rect key="frame" x="358" y="0.0" width="40" height="40"/>
                                                     <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="khI-wM-Aqo" secondAttribute="height" multiplier="1:1" id="a6e-Ry-Ug4"/>
@@ -179,10 +249,13 @@
                                             </subviews>
                                         </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="90" id="IA7-K1-fDW"/>
+                                    </constraints>
                                 </stackView>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="height" constant="96" id="iWl-uX-CIU"/>
+                                <constraint firstAttribute="trailing" secondItem="M9h-O1-rcG" secondAttribute="trailing" id="2qd-Xw-M4r"/>
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="CW4-78-J4r">
@@ -235,13 +308,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="addStudyItemButton" destination="lA3-BD-eIS" id="WZR-AS-ve2"/>
+                <outlet property="categoryLabel" destination="aBv-HO-Jpd" id="Yts-5V-quk"/>
                 <outlet property="categoryTagButton" destination="2Js-zV-rdu" id="9na-pG-xwB"/>
-                <outlet property="categoryTextField" destination="V8X-OK-C79" id="zFi-mH-A9e"/>
                 <outlet property="endDateCalenderButton" destination="khI-wM-Aqo" id="aQq-pc-pph"/>
-                <outlet property="endDateTextField" destination="1dB-V7-sDS" id="cbS-MZ-Gde"/>
+                <outlet property="endDateLabel" destination="Qgv-4B-BKL" id="X96-Ks-i2Z"/>
                 <outlet property="openEditButton" destination="68h-KJ-h9q" id="qhO-st-kCP"/>
                 <outlet property="startDateCalenderButton" destination="tKQ-Ro-0GY" id="SCh-Dx-6uj"/>
-                <outlet property="startDateTextField" destination="JNr-92-086" id="DdW-qf-uKW"/>
+                <outlet property="startDateLabel" destination="6Gy-ll-UhB" id="UV5-Eb-Uq6"/>
                 <outlet property="studyGoalTitleTextField" destination="C2k-C9-LBc" id="oLQ-Um-J7u"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="110.49107142857143"/>
@@ -252,5 +325,14 @@
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="tag" catalog="system" width="128" height="119"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

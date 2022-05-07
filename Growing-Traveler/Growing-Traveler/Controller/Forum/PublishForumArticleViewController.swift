@@ -231,7 +231,18 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         
         cell.contentTextView.delegate = self
         
-        cell.categoryTextField.text = selectCategoryItem?.title
+        cell.categoryLabel.text = selectCategoryItem?.title ?? "請選擇分類標籤"
+        
+        if cell.categoryLabel.text ?? "" != "請選擇分類標籤" {
+            
+            cell.categoryLabel.textColor = UIColor.black
+            
+        }
+        
+        let categoryTapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(selectCategoryTagButton))
+        
+        cell.categoryLabel.addGestureRecognizer(categoryTapGestureRecognizer)
         
         cell.selectCategoryButton.addTarget(
             self, action: #selector(selectCategoryTagButton), for: .touchUpInside)
