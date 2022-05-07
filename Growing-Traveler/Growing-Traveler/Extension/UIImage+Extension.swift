@@ -21,6 +21,7 @@ enum ImageAsset: String {
     case share
     case add
     case block
+    case user
     
     case create
     case edit

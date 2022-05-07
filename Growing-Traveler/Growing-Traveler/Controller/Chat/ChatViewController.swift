@@ -167,11 +167,11 @@ class ChatViewController: BaseViewController {
 //                style: .plain, target: self, action: #selector(callVideoPhone))]
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriend))
+            image: UIImage.asset(.user), style: .plain, target: self, action: #selector(friendInfoButton))
 
     }
     
-    @objc func blockadeFriend() {
+    @objc func friendInfoButton(sender: UIButton) {
         
         // 彈跳出 User 視窗
         guard let viewController = UIStoryboard
