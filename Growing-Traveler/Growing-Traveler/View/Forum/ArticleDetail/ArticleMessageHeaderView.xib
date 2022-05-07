@@ -16,29 +16,46 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Irq-hb-dIh">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="留言內容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8z-OA-o5X">
-                            <rect key="frame" x="16" y="27" width="382" height="17"/>
-                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQT-ky-A8M">
-                            <rect key="frame" x="16" y="16" width="382" height="1"/>
-                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="qHW-G2-8fJ"/>
-                            </constraints>
-                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="W8a-gt-DiY">
+                            <rect key="frame" x="16" y="10" width="382" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPr-JC-RZj">
+                                    <rect key="frame" x="0.0" y="0.0" width="181" height="40"/>
+                                    <color key="backgroundColor" red="0.74672118850000002" green="0.81960784310000001" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="share" title=" 分享給好友">
+                                        <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                    </buttonConfiguration>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ath-zU-rVa">
+                                    <rect key="frame" x="201" y="0.0" width="181" height="40"/>
+                                    <color key="backgroundColor" red="0.74672118850000002" green="0.81960784310000001" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="message.fill" catalog="system" title=" 留言">
+                                        <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                    </buttonConfiguration>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                        </stackView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="BQT-ky-A8M" firstAttribute="leading" secondItem="Irq-hb-dIh" secondAttribute="leading" constant="16" id="3Dd-ZY-vEJ"/>
-                        <constraint firstItem="BQT-ky-A8M" firstAttribute="top" secondItem="Irq-hb-dIh" secondAttribute="top" constant="16" id="5cJ-Pi-nuv"/>
-                        <constraint firstAttribute="trailing" secondItem="BQT-ky-A8M" secondAttribute="trailing" constant="16" id="GbS-Ny-krw"/>
-                        <constraint firstItem="K8z-OA-o5X" firstAttribute="top" secondItem="BQT-ky-A8M" secondAttribute="bottom" constant="10" id="SAT-wS-6UX"/>
-                        <constraint firstAttribute="bottom" secondItem="K8z-OA-o5X" secondAttribute="bottom" constant="16" id="d80-44-yS4"/>
-                        <constraint firstItem="K8z-OA-o5X" firstAttribute="leading" secondItem="Irq-hb-dIh" secondAttribute="leading" constant="16" id="hc9-lt-xeu"/>
-                        <constraint firstAttribute="trailing" secondItem="K8z-OA-o5X" secondAttribute="trailing" constant="16" id="mT8-lg-RAt"/>
+                        <constraint firstAttribute="trailing" secondItem="W8a-gt-DiY" secondAttribute="trailing" constant="16" id="2wF-zF-RGn"/>
+                        <constraint firstAttribute="bottom" secondItem="W8a-gt-DiY" secondAttribute="bottom" constant="10" id="Gbs-06-gvI"/>
+                        <constraint firstItem="W8a-gt-DiY" firstAttribute="top" secondItem="Irq-hb-dIh" secondAttribute="top" constant="10" id="SmQ-zA-vrm"/>
+                        <constraint firstItem="W8a-gt-DiY" firstAttribute="leading" secondItem="Irq-hb-dIh" secondAttribute="leading" constant="16" id="bPl-O4-8mz"/>
                     </constraints>
                 </view>
             </subviews>
@@ -51,7 +68,15 @@
                 <constraint firstItem="Irq-hb-dIh" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ues-Bn-rDe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="83" y="74"/>
+            <connections>
+                <outlet property="sendMessageButton" destination="Ath-zU-rVa" id="O2u-Py-gLX"/>
+                <outlet property="shareToFriendButton" destination="DPr-JC-RZj" id="tQ2-ud-xvx"/>
+            </connections>
+            <point key="canvasLocation" x="82.608695652173921" y="72.991071428571431"/>
         </view>
     </objects>
+    <resources>
+        <image name="message.fill" catalog="system" width="128" height="113"/>
+        <image name="share" width="21.333333969116211" height="21.333333969116211"/>
+    </resources>
 </document>

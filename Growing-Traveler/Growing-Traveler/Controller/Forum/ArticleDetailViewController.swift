@@ -41,8 +41,6 @@ class ArticleDetailViewController: UIViewController {
         
         setTableView()
         
-        setNavigationItems()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,17 +48,6 @@ class ArticleDetailViewController: UIViewController {
         
         fetchFriendBlockadeListData()
         
-    }
-    
-    func setNavigationItems() {
-        
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(
-                image: UIImage.asset(.edit), style: .plain, target: self, action: #selector(sendMessageButton)),
-            UIBarButtonItem(
-                image: UIImage.asset(.share), style: .plain, target: self, action: #selector(shareToFriendButton))
-        ]
-
     }
     
     func fetchFriendBlockadeListData() {
@@ -143,61 +130,6 @@ class ArticleDetailViewController: UIViewController {
         })
     }
     
-    @objc func sendMessageButton(sender: UIButton) {
-        
-        guard userID != "" else {
-
-            guard let authViewController = UIStoryboard.auth.instantiateViewController(
-                    withIdentifier: String(describing: AuthenticationViewController.self)
-                    ) as? AuthenticationViewController else { return }
-            
-            authViewController.modalPresentationStyle = .popover
-
-            present(authViewController, animated: true, completion: nil)
-
-            return
-        }
-        
-        guard let viewController = UIStoryboard
-            .forum
-            .instantiateViewController(
-                withIdentifier: String(describing: ArticleMessageViewController.self)
-                ) as? ArticleMessageViewController else {
-
-                    return
-
-                }
-        
-        viewController.articleID = forumArticle?.id ?? ""
-        
-        viewController.orderID = articleMessages.count
-
-        self.view.addSubview(viewController.view)
-
-        self.addChild(viewController)
-        
-    }
-    
-    @objc func shareToFriendButton(sender: UIButton) {
-        
-        let viewController = ShareToFriendViewController()
-        
-        viewController.shareType = SendType.articleID.title
-        
-        viewController.shareID = forumArticle?.id
-        
-        let navController = UINavigationController(rootViewController: viewController)
-        
-        if let sheetPresentationController = navController.sheetPresentationController {
-            
-            sheetPresentationController.detents = [.medium()]
-            
-        }
-        
-        present(navController, animated: true)
-        
-    }
-    
     override var hidesBottomBarWhenPushed: Bool {
         
         get {
@@ -233,7 +165,7 @@ class ArticleDetailViewController: UIViewController {
     
     func setTableView() {
         
-        articleDetailTableView.backgroundColor = UIColor.clear
+        articleDetailTableView.backgroundColor = UIColor.white
         
         articleDetailTableView.separatorStyle = .none
         
@@ -243,8 +175,8 @@ class ArticleDetailViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             articleDetailTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            articleDetailTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            articleDetailTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            articleDetailTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            articleDetailTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             articleDetailTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
         ])
         
@@ -481,8 +413,69 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
 
             guard let headerView = headerView as? ArticleMessageHeaderView else { return headerView }
             
+            headerView.shareToFriendButton.addTarget(
+                self, action: #selector(shareToFriendButton), for: .touchUpInside)
+            
+            headerView.sendMessageButton.addTarget(
+                self, action: #selector(sendMessageButton), for: .touchUpInside)
+            
             return headerView
         }
+        
+    }
+    
+    @objc func sendMessageButton(sender: UIButton) {
+        
+        guard userID != "" else {
+
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                    withIdentifier: String(describing: AuthenticationViewController.self)
+                    ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .popover
+
+            present(authViewController, animated: true, completion: nil)
+
+            return
+        }
+        
+        guard let viewController = UIStoryboard
+            .forum
+            .instantiateViewController(
+                withIdentifier: String(describing: ArticleMessageViewController.self)
+                ) as? ArticleMessageViewController else {
+
+                    return
+
+                }
+        
+        viewController.articleID = forumArticle?.id ?? ""
+        
+        viewController.orderID = articleMessages.count
+
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
+        
+    }
+    
+    @objc func shareToFriendButton(sender: UIButton) {
+        
+        let viewController = ShareToFriendViewController()
+        
+        viewController.shareType = SendType.articleID.title
+        
+        viewController.shareID = forumArticle?.id
+        
+        let navController = UINavigationController(rootViewController: viewController)
+        
+        if let sheetPresentationController = navController.sheetPresentationController {
+            
+            sheetPresentationController.detents = [.medium()]
+            
+        }
+        
+        present(navController, animated: true)
         
     }
     

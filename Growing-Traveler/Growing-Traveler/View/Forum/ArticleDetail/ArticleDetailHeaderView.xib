@@ -4,17 +4,18 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ArticleDetailHeaderView" customModule="Growing_Traveler" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="143"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yc6-74-Tsx">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="143"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="文章標題" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xB-Zl-yCk">
                             <rect key="frame" x="16" y="16" width="382" height="22.5"/>
@@ -23,19 +24,19 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TESTNAMEID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUc-ku-e6R">
-                            <rect key="frame" x="16" y="43.5" width="382" height="19"/>
+                            <rect key="frame" x="16" y="43.5" width="382" height="21"/>
                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="2022.04.11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfj-mo-CqU">
-                            <rect key="frame" x="16" y="67.5" width="382" height="18.5"/>
+                            <rect key="frame" x="16" y="69.5" width="382" height="18.5"/>
                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eht-MQ-opN">
-                            <rect key="frame" x="16" y="91" width="141" height="25"/>
+                            <rect key="frame" x="16" y="93" width="141" height="25"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發文" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXK-m5-6fR">
                                     <rect key="frame" x="0.0" y="0.0" width="41" height="25"/>
@@ -90,30 +91,30 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </stackView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBZ-UN-0g3">
-                            <rect key="frame" x="16" y="126" width="382" height="1"/>
-                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3V-3g-bdD">
+                            <rect key="frame" x="0.0" y="134" width="414" height="16"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="DIp-fa-DSi"/>
+                                <constraint firstAttribute="height" constant="16" id="kr6-h7-gnV"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.80975265107414973" green="0.91136485840612258" blue="0.96334064880068027" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="tBZ-UN-0g3" secondAttribute="trailing" constant="16" id="05o-FU-qv1"/>
                         <constraint firstItem="eht-MQ-opN" firstAttribute="top" secondItem="Dfj-mo-CqU" secondAttribute="bottom" constant="5" id="5xk-O9-i4G"/>
                         <constraint firstAttribute="trailing" secondItem="Dfj-mo-CqU" secondAttribute="trailing" constant="16" id="6Iv-7T-jsV"/>
                         <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="eht-MQ-opN" secondAttribute="trailing" constant="257" id="7sP-SJ-wbC"/>
                         <constraint firstItem="Dfj-mo-CqU" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="Dii-xO-IwU"/>
-                        <constraint firstAttribute="bottom" secondItem="tBZ-UN-0g3" secondAttribute="bottom" constant="16" id="IOw-7R-rhF"/>
+                        <constraint firstAttribute="bottom" secondItem="I3V-3g-bdD" secondAttribute="bottom" id="E0h-Oc-wqy"/>
                         <constraint firstItem="eht-MQ-opN" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="LkM-OS-Fqp"/>
                         <constraint firstAttribute="trailing" secondItem="0xB-Zl-yCk" secondAttribute="trailing" constant="16" id="Qhi-TY-lpS"/>
                         <constraint firstItem="0xB-Zl-yCk" firstAttribute="top" secondItem="Yc6-74-Tsx" secondAttribute="top" constant="16" id="S1V-Nx-JxN"/>
                         <constraint firstItem="bUc-ku-e6R" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="Sdq-wu-TuQ"/>
-                        <constraint firstItem="tBZ-UN-0g3" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="aIb-Db-Reb"/>
+                        <constraint firstItem="I3V-3g-bdD" firstAttribute="top" secondItem="eht-MQ-opN" secondAttribute="bottom" constant="16" id="dFe-O2-wZs"/>
+                        <constraint firstItem="I3V-3g-bdD" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" id="fog-BO-HEd"/>
+                        <constraint firstAttribute="trailing" secondItem="I3V-3g-bdD" secondAttribute="trailing" id="kSP-eI-qIE"/>
                         <constraint firstItem="bUc-ku-e6R" firstAttribute="top" secondItem="0xB-Zl-yCk" secondAttribute="bottom" constant="5" id="lFq-0U-KZw"/>
                         <constraint firstItem="Dfj-mo-CqU" firstAttribute="top" secondItem="bUc-ku-e6R" secondAttribute="bottom" constant="5" id="mqZ-mu-YRn"/>
-                        <constraint firstItem="tBZ-UN-0g3" firstAttribute="top" secondItem="eht-MQ-opN" secondAttribute="bottom" constant="10" id="oYX-Vl-mkx"/>
                         <constraint firstAttribute="trailing" secondItem="bUc-ku-e6R" secondAttribute="trailing" constant="16" id="pCa-E7-Dah"/>
                         <constraint firstItem="0xB-Zl-yCk" firstAttribute="leading" secondItem="Yc6-74-Tsx" secondAttribute="leading" constant="16" id="typ-xt-f5i"/>
                     </constraints>
@@ -138,4 +139,9 @@
             <point key="canvasLocation" x="131.8840579710145" y="103.79464285714285"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

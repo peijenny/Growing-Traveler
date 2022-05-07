@@ -48,8 +48,8 @@ class ArticleDetailTableViewCell: UITableViewCell {
             
             labelHeightConstraint.constant = 0.0
             
-        } 
-        
+        }
+
     }
     
 }
