@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2803AD222817F30F00AF3AD3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803AD212817F30F00AF3AD3 /* SignInViewController.swift */; };
-		2808C912280FEC7600DC1EC5 /* Analysis.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2808C911280FEC7600DC1EC5 /* Analysis.storyboard */; };
+		2808C912280FEC7600DC1EC5 /* Note.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2808C911280FEC7600DC1EC5 /* Note.storyboard */; };
 		2808C914280FECA800DC1EC5 /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C913280FECA800DC1EC5 /* AnalysisViewController.swift */; };
 		2808C918280FF2B700DC1EC5 /* AnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */; };
 		2808C91A28100F6000DC1EC5 /* CalculateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C91928100F6000DC1EC5 /* CalculateBar.swift */; };
@@ -69,6 +69,8 @@
 		28754AC7280305370079F430 /* StudyGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28754AC6280305370079F430 /* StudyGoal.swift */; };
 		28754ACA2803079A0079F430 /* StudyItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28754AC82803079A0079F430 /* StudyItemTableViewCell.swift */; };
 		28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28754AC92803079A0079F430 /* StudyItemTableViewCell.xib */; };
+		28828A5D2827D81100BA02EF /* 94021-startup.json in Resources */ = {isa = PBXBuildFile; fileRef = 28828A5C2827D81100BA02EF /* 94021-startup.json */; };
+		28828A5F2827DBD400BA02EF /* 101546-study-abroad.json in Resources */ = {isa = PBXBuildFile; fileRef = 28828A5E2827DBD400BA02EF /* 101546-study-abroad.json */; };
 		288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */; };
 		288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288367A8280129F30010CEAD /* StudyGoal.storyboard */; };
 		288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */; };
@@ -110,6 +112,12 @@
 		28BC2C1A2815603C00E69BE0 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BC2C192815603C00E69BE0 /* UIImage+Extension.swift */; };
 		28BC2C1D2816860000E69BE0 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BC2C1C2816860000E69BE0 /* Authentication.storyboard */; };
 		28BC2C202816864600E69BE0 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BC2C1F2816864600E69BE0 /* AuthenticationViewController.swift */; };
+		28C9985B28236C8500E3B4C0 /* ShareToFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C9985A28236C8500E3B4C0 /* ShareToFriendViewController.swift */; };
+		28C9985F2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C9985D2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift */; };
+		28C998602823839A00E3B4C0 /* ShareReceiveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C9985E2823839A00E3B4C0 /* ShareReceiveTableViewCell.xib */; };
+		28C99863282383A900E3B4C0 /* ShareSendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C99861282383A900E3B4C0 /* ShareSendTableViewCell.swift */; };
+		28C99864282383A900E3B4C0 /* ShareSendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C99862282383A900E3B4C0 /* ShareSendTableViewCell.xib */; };
+		28C998662824A93C00E3B4C0 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C998652824A93C00E3B4C0 /* UIView+Extension.swift */; };
 		28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */; };
 		28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */; };
 		28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE2D4227FECBF400ACA813 /* TabBarViewController.swift */; };
@@ -146,7 +154,7 @@
 
 /* Begin PBXFileReference section */
 		2803AD212817F30F00AF3AD3 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		2808C911280FEC7600DC1EC5 /* Analysis.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Analysis.storyboard; sourceTree = "<group>"; };
+		2808C911280FEC7600DC1EC5 /* Note.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Note.storyboard; sourceTree = "<group>"; };
 		2808C913280FECA800DC1EC5 /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisManager.swift; sourceTree = "<group>"; };
 		2808C91928100F6000DC1EC5 /* CalculateBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateBar.swift; sourceTree = "<group>"; };
@@ -207,6 +215,8 @@
 		28754AC6280305370079F430 /* StudyGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoal.swift; sourceTree = "<group>"; };
 		28754AC82803079A0079F430 /* StudyItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyItemTableViewCell.swift; sourceTree = "<group>"; };
 		28754AC92803079A0079F430 /* StudyItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyItemTableViewCell.xib; sourceTree = "<group>"; };
+		28828A5C2827D81100BA02EF /* 94021-startup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "94021-startup.json"; sourceTree = "<group>"; };
+		28828A5E2827DBD400BA02EF /* 101546-study-abroad.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "101546-study-abroad.json"; path = "../../../../../Downloads/101546-study-abroad.json"; sourceTree = "<group>"; };
 		288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		288367A8280129F30010CEAD /* StudyGoal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyGoal.storyboard; sourceTree = "<group>"; };
 		288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +259,12 @@
 		28BC2C1C2816860000E69BE0 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		28BC2C1F2816864600E69BE0 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		28BC2C212816867F00E69BE0 /* Growing-Traveler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Growing-Traveler.entitlements"; sourceTree = "<group>"; };
+		28C9985A28236C8500E3B4C0 /* ShareToFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToFriendViewController.swift; sourceTree = "<group>"; };
+		28C9985D2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReceiveTableViewCell.swift; sourceTree = "<group>"; };
+		28C9985E2823839A00E3B4C0 /* ShareReceiveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareReceiveTableViewCell.xib; sourceTree = "<group>"; };
+		28C99861282383A900E3B4C0 /* ShareSendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSendTableViewCell.swift; sourceTree = "<group>"; };
+		28C99862282383A900E3B4C0 /* ShareSendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareSendTableViewCell.xib; sourceTree = "<group>"; };
+		28C998652824A93C00E3B4C0 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Growing-Traveler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE2D3E27FECBF400ACA813 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28CE2D4027FECBF400ACA813 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -373,6 +389,7 @@
 		280C1B07280D77AC0091B9DC /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				28C9985C2823835000E3B4C0 /* ShareToFriend */,
 				282522C6280EDCD90008B916 /* Friend */,
 				280C1B13280E58BB0091B9DC /* ReceiveMessageTableViewCell.swift */,
 				280C1B14280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib */,
@@ -417,6 +434,7 @@
 				281358E1281C2C53000B0CAE /* NoteViewController.swift */,
 				281358E7281C31AB000B0CAE /* PublishNoteViewController.swift */,
 				281358E9281D11BA000B0CAE /* NoteDetailViewController.swift */,
+				28C9985A28236C8500E3B4C0 /* ShareToFriendViewController.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -475,9 +493,9 @@
 		288367A22801250F0010CEAD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				281358DE281C2AB2000B0CAE /* Note */,
 				28BC2C1E2816861600E69BE0 /* Authentication */,
 				28DA8329281272240081CB14 /* Profile */,
-				2808C910280FEC6800DC1EC5 /* Analysis */,
 				280C1AFA280D5D3C0091B9DC /* Chat */,
 				28BB6EE72806661F002B0458 /* Forum */,
 				288367AC28012A450010CEAD /* StudyGoal */,
@@ -490,9 +508,9 @@
 		288367A32801251C0010CEAD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				281358DF281C2C01000B0CAE /* Note */,
 				2803AD232817F42C00AF3AD3 /* Authentication */,
 				28DA832A281272390081CB14 /* Profile */,
-				2808C90E280FEC2B00DC1EC5 /* Analysis */,
 				280C1B07280D77AC0091B9DC /* Chat */,
 				28BB6EE428066418002B0458 /* Forum */,
 				288367AF2801396D0010CEAD /* StudyGoal */,
@@ -501,7 +519,7 @@
 				288367A8280129F30010CEAD /* StudyGoal.storyboard */,
 				28BB6EE528066441002B0458 /* Forum.storyboard */,
 				280C1AFB280D5D7C0091B9DC /* Chat.storyboard */,
-				2808C911280FEC7600DC1EC5 /* Analysis.storyboard */,
+				2808C911280FEC7600DC1EC5 /* Note.storyboard */,
 				28DA832C281272560081CB14 /* Profile.storyboard */,
 				28BC2C1C2816860000E69BE0 /* Authentication.storyboard */,
 			);
@@ -531,6 +549,7 @@
 				2857035D281197FC00849FAA /* Double+Extension.swift */,
 				28BC2C192815603C00E69BE0 /* UIImage+Extension.swift */,
 				281358F4281E7BE2000B0CAE /* UIColor+Extension.swift */,
+				28C998652824A93C00E3B4C0 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -538,6 +557,7 @@
 		288367AC28012A450010CEAD /* StudyGoal */ = {
 			isa = PBXGroup;
 			children = (
+				28D79FE4281A85A600505B5B /* Rank */,
 				28AF15B828040E3C004E97B8 /* PlanStudyGoal */,
 				288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */,
 				28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */,
@@ -548,6 +568,7 @@
 		288367AF2801396D0010CEAD /* StudyGoal */ = {
 			isa = PBXGroup;
 			children = (
+				28D79FE5281A85B900505B5B /* Rank */,
 				28AF15AF2804090D004E97B8 /* PlanStudyGoal */,
 				28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */,
 				28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */,
@@ -651,6 +672,17 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		28C9985C2823835000E3B4C0 /* ShareToFriend */ = {
+			isa = PBXGroup;
+			children = (
+				28C9985D2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift */,
+				28C9985E2823839A00E3B4C0 /* ShareReceiveTableViewCell.xib */,
+				28C99861282383A900E3B4C0 /* ShareSendTableViewCell.swift */,
+				28C99862282383A900E3B4C0 /* ShareSendTableViewCell.xib */,
+			);
+			path = ShareToFriend;
+			sourceTree = "<group>";
+		};
 		28CE2D3227FECBF400ACA813 = {
 			isa = PBXGroup;
 			children = (
@@ -742,12 +774,11 @@
 		28DA8329281272240081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				281358DE281C2AB2000B0CAE /* Note */,
+				2808C910280FEC6800DC1EC5 /* Analysis */,
 				281358D4281BBCF7000B0CAE /* Certification */,
 				28D79FF4281AC0C600505B5B /* ReleaseRecord */,
 				28D79FE9281A867600505B5B /* Mandate */,
 				28D79FE8281A865700505B5B /* Setting */,
-				28D79FE4281A85A600505B5B /* Rank */,
 				28DA832E281272770081CB14 /* ProfileViewController.swift */,
 			);
 			path = Profile;
@@ -756,9 +787,8 @@
 		28DA832A281272390081CB14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				281358DF281C2C01000B0CAE /* Note */,
+				2808C90E280FEC2B00DC1EC5 /* Analysis */,
 				281358D7281BC8D3000B0CAE /* Certification */,
-				28D79FE5281A85B900505B5B /* Rank */,
 				283E65862817D17700F1033F /* Setting */,
 				28DA833C2812AB420081CB14 /* Mandate */,
 				28DA83302812744F0081CB14 /* ProfileView.xib */,
@@ -784,6 +814,8 @@
 				281358F1281E790E000B0CAE /* Growth-Animation.json */,
 				281358ED281E6B72000B0CAE /* Vision.json */,
 				28DA83422812AF950081CB14 /* 93125-progress-bar.json */,
+				28828A5C2827D81100BA02EF /* 94021-startup.json */,
+				28828A5E2827DBD400BA02EF /* 101546-study-abroad.json */,
 			);
 			path = LottieFiles;
 			sourceTree = "<group>";
@@ -881,6 +913,7 @@
 				28BB6F42280A919C002B0458 /* ArticleDetailTableViewCell.xib in Resources */,
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
+				28C998602823839A00E3B4C0 /* ShareReceiveTableViewCell.xib in Resources */,
 				281358DB281BC8F6000B0CAE /* CertificationTableViewCell.xib in Resources */,
 				281358E6281C2D2A000B0CAE /* NoteTableViewCell.xib in Resources */,
 				28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */,
@@ -889,8 +922,9 @@
 				28BB6F002807C86C002B0458 /* ArticleTableViewCell.xib in Resources */,
 				280C1B16280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib in Resources */,
 				2808C92228103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.xib in Resources */,
-				2808C912280FEC7600DC1EC5 /* Analysis.storyboard in Resources */,
+				2808C912280FEC7600DC1EC5 /* Note.storyboard in Resources */,
 				283E6583281797F300F1033F /* GoogleService-Info.plist in Resources */,
+				28C99864282383A900E3B4C0 /* ShareSendTableViewCell.xib in Resources */,
 				28BB6F3028096C40002B0458 /* MoreArticlesTableViewCell.xib in Resources */,
 				28DA83312812744F0081CB14 /* ProfileView.xib in Resources */,
 				28CE2D4627FECBF400ACA813 /* Main.storyboard in Resources */,
@@ -899,11 +933,13 @@
 				28D79FF3281A8BDE00505B5B /* RankTableViewCell.xib in Resources */,
 				280C1B0B280D78B90091B9DC /* FriendListTableViewCell.xib in Resources */,
 				281358F2281E790E000B0CAE /* Growth-Animation.json in Resources */,
+				28828A5F2827DBD400BA02EF /* 101546-study-abroad.json in Resources */,
 				2808C927281131A400DC1EC5 /* AnalysisContentTableViewCell.xib in Resources */,
 				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
 				28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */,
 				28DA83402812AB940081CB14 /* MandateTableViewCell.xib in Resources */,
 				283E658E2817D8A700F1033F /* SettingContentTableViewCell.xib in Resources */,
+				28828A5D2827D81100BA02EF /* 94021-startup.json in Resources */,
 				283E65922817DF2300F1033F /* SettingSignTableViewCell.xib in Resources */,
 				280C1AFC280D5D7C0091B9DC /* Chat.storyboard in Resources */,
 				28DA832D281272560081CB14 /* Profile.storyboard in Resources */,
@@ -991,6 +1027,7 @@
 				2803AD222817F30F00AF3AD3 /* SignInViewController.swift in Sources */,
 				28CE2D3F27FECBF400ACA813 /* AppDelegate.swift in Sources */,
 				281358DA281BC8F6000B0CAE /* CertificationTableViewCell.swift in Sources */,
+				28C9985F2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift in Sources */,
 				28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */,
 				28BC2C1A2815603C00E69BE0 /* UIImage+Extension.swift in Sources */,
 				2857035E281197FC00849FAA /* Double+Extension.swift in Sources */,
@@ -1055,6 +1092,7 @@
 				28BB6F41280A919C002B0458 /* ArticleDetailTableViewCell.swift in Sources */,
 				281358D2281AC24A000B0CAE /* ReleaseRecordViewController.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
+				28C99863282383A900E3B4C0 /* ShareSendTableViewCell.swift in Sources */,
 				28FF433D2813D08E00C58E6B /* Mandate.swift in Sources */,
 				28BB6F042807EC75002B0458 /* UIImageView+Extension.swift in Sources */,
 				280C1B04280D77770091B9DC /* FriendViewController.swift in Sources */,
@@ -1065,7 +1103,9 @@
 				28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */,
 				2808C926281131A400DC1EC5 /* AnalysisContentTableViewCell.swift in Sources */,
 				28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */,
+				28C998662824A93C00E3B4C0 /* UIView+Extension.swift in Sources */,
 				28D702BF28019E0300FE9AEA /* Category.swift in Sources */,
+				28C9985B28236C8500E3B4C0 /* ShareToFriendViewController.swift in Sources */,
 				280C1B0E280E424C0091B9DC /* Friend.swift in Sources */,
 				28D79FEB281A869D00505B5B /* RankViewController.swift in Sources */,
 				2857035C28118F8D00849FAA /* Feedback.swift in Sources */,
@@ -1227,6 +1267,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1258,6 +1299,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

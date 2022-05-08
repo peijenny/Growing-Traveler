@@ -57,6 +57,10 @@ class UserInfoViewController: UIViewController {
             
             friendStatusLabel.text = SearchFriendStatus.yourInfo.title
             
+        } else if userID == "" {
+            
+            friendStatusLabel.text = "請先登入會員才能加入或封鎖帳號！"
+            
         }
         
         if !deleteAccount {
@@ -107,6 +111,8 @@ class UserInfoViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -130,6 +136,8 @@ class UserInfoViewController: UIViewController {
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -210,7 +218,7 @@ class UserInfoViewController: UIViewController {
             message: "請問確定封鎖此帳號嗎？\n 將不再看到此帳號的相關文章及訊息！",
             preferredStyle: .alert)
         
-        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
             
             if var ownerFriend = self.ownerFriend {
                 

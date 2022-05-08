@@ -40,6 +40,8 @@ class ArticleMessageViewController: BaseViewController {
     
     @IBAction func closeButton(_ sender: UIButton) {
         
+        self.navigationController?.isNavigationBarHidden = false
+        
         self.view.removeFromSuperview()
         
     }
@@ -68,11 +70,11 @@ class ArticleMessageViewController: BaseViewController {
 
             if contentText.range(of: "https://i.imgur.com") != nil {
 
-                contentType = "image"
+                contentType = SendType.image.title
 
             } else {
 
-                contentType = "string"
+                contentType = SendType.string.title
 
             }
 
@@ -90,6 +92,8 @@ class ArticleMessageViewController: BaseViewController {
             )
 
             forumArticleManager.addMessageData(articleMessage: articleMessage)
+            
+            self.navigationController?.isNavigationBarHidden = false
 
             self.view.removeFromSuperview()
             
@@ -120,6 +124,8 @@ extension ArticleMessageViewController: UIImagePickerControllerDelegate, UINavig
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

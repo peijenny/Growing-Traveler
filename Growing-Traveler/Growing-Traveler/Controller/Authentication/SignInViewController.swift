@@ -175,9 +175,11 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 
-                HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil))
+                HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil), delay: 0.5)
                 
                 userID = user.uid
+                
+                self.view.window?.rootViewController?.viewWillAppear(true)
                 
                 self.view.window?.rootViewController?
                 .dismiss(animated: true, completion: nil)
@@ -219,7 +221,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 
-                HUD.flash(.labeledSuccess(title: "註冊成功！", subtitle: nil))
+                HUD.flash(.labeledSuccess(title: "註冊成功！", subtitle: nil), delay: 0.5)
 
                 let dateFormatter = DateFormatter()
 
@@ -251,6 +253,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 self.friendManager.addData(friend: friend)
                 
                 userID = user.uid
+
+                self.view.window?.rootViewController?.viewWillAppear(true)
                 
                 self.view.window?.rootViewController?
                 .dismiss(animated: true, completion: nil)
@@ -296,6 +300,8 @@ extension SignInViewController: UIImagePickerControllerDelegate, UINavigationCon
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "上傳失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

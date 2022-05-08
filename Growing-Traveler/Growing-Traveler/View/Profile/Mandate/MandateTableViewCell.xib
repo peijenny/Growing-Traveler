@@ -16,58 +16,74 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Mr-iP-Ej0">
+                        <rect key="frame" x="10" y="10" width="394" height="100"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="常居旅客" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERH-or-fQK">
-                        <rect key="frame" x="101" y="20" width="297" height="23"/>
+                        <rect key="frame" x="101" y="20" width="297" height="22.5"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登入次數達 10 次" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wGl-dT-Xjp">
-                        <rect key="frame" x="101" y="48" width="297" height="20"/>
+                        <rect key="frame" x="101" y="47.5" width="297" height="20"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1d-Eh-uai">
-                        <rect key="frame" x="357" y="83" width="41" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="GZ3-uF-Frn"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="command.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tfe-uj-k7A">
                         <rect key="frame" x="16" y="17" width="75" height="85.5"/>
-                        <color key="backgroundColor" red="0.90196073060000004" green="0.92156863209999995" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <color key="tintColor" red="0.231372565" green="0.50980395079999996" blue="0.72156864399999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="75" id="QOP-ww-zGR"/>
                             <constraint firstAttribute="height" constant="88" id="a6f-bQ-Q8U"/>
                         </constraints>
                     </imageView>
-                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HkK-8I-2Um">
-                        <rect key="frame" x="101" y="83" width="240" height="17"/>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.92156862745098034" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FFl-LQ-6Zp">
+                        <rect key="frame" x="101" y="77.5" width="293" height="20"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HkK-8I-2Um">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="20"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HkK-8I-2Um" secondAttribute="height" multiplier="10:1" id="CFz-uW-bWt"/>
+                                </constraints>
+                                <color key="progressTintColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1d-Eh-uai">
+                                <rect key="frame" x="210" y="0.0" width="83" height="20"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="17" id="tGE-lT-g33"/>
+                            <constraint firstAttribute="height" constant="20" id="Jb0-U3-OHz"/>
                         </constraints>
-                        <color key="progressTintColor" red="0.43137252329999998" green="0.47450977560000002" blue="0.60392159219999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </progressView>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="HkK-8I-2Um" secondAttribute="bottom" constant="20" id="16R-lF-7Xo"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="FFl-LQ-6Zp" secondAttribute="bottom" constant="11.5" id="265-mo-ZkZ"/>
                     <constraint firstItem="tfe-uj-k7A" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="2Mr-hz-Qxj"/>
                     <constraint firstAttribute="bottom" secondItem="tfe-uj-k7A" secondAttribute="bottom" constant="16" id="82K-4f-wU8"/>
-                    <constraint firstAttribute="bottom" secondItem="x1d-Eh-uai" secondAttribute="bottom" constant="20" id="Cvo-Eq-4Rt"/>
+                    <constraint firstItem="FFl-LQ-6Zp" firstAttribute="top" secondItem="wGl-dT-Xjp" secondAttribute="bottom" constant="10" id="9gs-aw-WSd"/>
                     <constraint firstAttribute="trailing" secondItem="wGl-dT-Xjp" secondAttribute="trailing" constant="16" id="Hm2-aZ-83N"/>
                     <constraint firstAttribute="trailing" secondItem="ERH-or-fQK" secondAttribute="trailing" constant="16" id="IZp-jM-LGF"/>
-                    <constraint firstItem="x1d-Eh-uai" firstAttribute="leading" secondItem="HkK-8I-2Um" secondAttribute="trailing" constant="16" id="WDB-V2-dcg"/>
+                    <constraint firstAttribute="bottom" secondItem="6Mr-iP-Ej0" secondAttribute="bottom" constant="10" id="IbM-Yx-f8H"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FFl-LQ-6Zp" secondAttribute="trailing" id="Qio-4U-okb"/>
+                    <constraint firstItem="6Mr-iP-Ej0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="UeT-Gh-P7b"/>
                     <constraint firstItem="ERH-or-fQK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="a0N-IZ-egw"/>
-                    <constraint firstItem="HkK-8I-2Um" firstAttribute="top" secondItem="wGl-dT-Xjp" secondAttribute="bottom" constant="15" id="aZg-Vd-xj1"/>
+                    <constraint firstAttribute="trailing" secondItem="6Mr-iP-Ej0" secondAttribute="trailing" constant="10" id="bht-zy-x11"/>
                     <constraint firstItem="wGl-dT-Xjp" firstAttribute="leading" secondItem="tfe-uj-k7A" secondAttribute="trailing" constant="10" id="buA-Or-rxb"/>
-                    <constraint firstItem="HkK-8I-2Um" firstAttribute="leading" secondItem="tfe-uj-k7A" secondAttribute="trailing" constant="10" id="jkp-jH-CQo"/>
-                    <constraint firstAttribute="trailing" secondItem="x1d-Eh-uai" secondAttribute="trailing" constant="16" id="uJM-nB-NkW"/>
+                    <constraint firstItem="FFl-LQ-6Zp" firstAttribute="leading" secondItem="tfe-uj-k7A" secondAttribute="trailing" constant="10" id="dQA-Og-DbT"/>
+                    <constraint firstItem="6Mr-iP-Ej0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="iaa-PL-0VN"/>
                     <constraint firstItem="ERH-or-fQK" firstAttribute="leading" secondItem="tfe-uj-k7A" secondAttribute="trailing" constant="10" id="w3Q-UA-gEI"/>
                     <constraint firstItem="tfe-uj-k7A" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="xa3-nQ-3cu"/>
                     <constraint firstItem="wGl-dT-Xjp" firstAttribute="top" secondItem="ERH-or-fQK" secondAttribute="bottom" constant="5" id="yuq-B8-tN3"/>

@@ -28,7 +28,7 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUj-e7-LTS">
                         <rect key="frame" x="16" y="10" width="25" height="25"/>
-                        <color key="backgroundColor" red="0.90196073060000004" green="0.92156863209999995" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="qgq-8q-ElN"/>
                             <constraint firstAttribute="width" secondItem="mUj-e7-LTS" secondAttribute="height" multiplier="1:1" id="ydO-xP-G9z"/>

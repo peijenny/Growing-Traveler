@@ -10,6 +10,36 @@ import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var isForceLandscape: Bool = false
+    
+    var isForcePortrait: Bool = false
+    
+    var isForceAllDerictions: Bool = false //支援所有方向
+    
+    /// 設定螢幕支援的方向
+    func application(
+        _ application: UIApplication,
+        supportedInterfaceOrientationsFor window: UIWindow?)
+    -> UIInterfaceOrientationMask {
+        
+        if isForceAllDerictions == true {
+            
+            return .all
+            
+        } else if isForceLandscape == true {
+            
+            return .landscape
+            
+        } else if isForcePortrait == true {
+            
+            return .portrait
+            
+        }
+        
+        return .portrait
+        
+    }
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

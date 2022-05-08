@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import PKHUD
 
 class FriendManager {
     
@@ -220,6 +221,8 @@ class FriendManager {
         } catch {
 
             print(error)
+            
+            HUD.flash(.labeledError(title: "狀態修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
         }
         
@@ -236,6 +239,8 @@ class FriendManager {
         } catch {
 
             print(error)
+            
+            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
         }
         

@@ -7,6 +7,38 @@
 
 import UIKit
 
+enum ColorChart {
+    
+    case lightGary
+    
+    case gray
+    
+    case lightBlue
+    
+    case blue
+    
+    case darkBlue
+    
+    var hexText: String {
+        
+        switch self {
+            
+        case .lightGary: return "EBEBE3"
+            
+        case .gray: return "C1BFCE"
+            
+        case .lightBlue: return "B2D1E4"
+            
+        case .blue: return "8ABBE0"
+            
+        case .darkBlue: return "49A1D8"
+            
+        }
+        
+    }
+    
+}
+
 extension UIColor {
 
     static func hexStringToUIColor(hex: String) -> UIColor {
@@ -25,9 +57,9 @@ extension UIColor {
             
         }
 
-        var rgbValue: UInt32 = 0
+        var rgbValue: UInt64 = 0
         
-        Scanner(string: cString).scanHexInt32(&rgbValue)
+        Scanner(string: cString).scanHexInt64(&rgbValue)
 
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,

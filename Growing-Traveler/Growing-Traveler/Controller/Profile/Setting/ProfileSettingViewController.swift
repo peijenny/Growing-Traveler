@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import PKHUD
 
 class ProfileSettingViewController: BaseViewController {
     
@@ -41,8 +42,10 @@ class ProfileSettingViewController: BaseViewController {
         
         title = "個人設定"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
 
+        setBackgroundView()
+        
         setTableView()
         
         fetchUserInfoData()
@@ -53,9 +56,7 @@ class ProfileSettingViewController: BaseViewController {
             barButtonSystemItem: .done,
             target: self,
             action: #selector(submitButton))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+
     }
     
     @objc func submitButton(sender: UIButton) {
@@ -63,6 +64,25 @@ class ProfileSettingViewController: BaseViewController {
         isCheck = true
         
         profileSettingTableView.reloadData()
+        
+    }
+    
+    func setBackgroundView() {
+        
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
         
     }
     
@@ -134,6 +154,8 @@ class ProfileSettingViewController: BaseViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -204,6 +226,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                         
                         userManger.updateData(user: updateUserInfo)
                         
+                        HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                        
                     }
                     
                 }
@@ -235,10 +259,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     
     @objc func signOutAccount(sender: UIButton) {
         
-        navigationController?.popViewController(animated: true)
-        
-        tabBarController?.selectedIndex = 0
-        
         let firebaseAuth = Auth.auth()
 
         do {
@@ -246,6 +266,10 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             try firebaseAuth.signOut()
 
             userID = ""
+            
+            navigationController?.popViewController(animated: true)
+            
+            tabBarController?.selectedIndex = 0
 
         } catch let signOutError as NSError {
 
@@ -262,7 +286,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             message: "請問確定刪除此使用者帳號？\n 刪除行為不可逆，資料將一併刪除！",
             preferredStyle: .alert)
         
-        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
 
             let user = Auth.auth().currentUser
 
@@ -271,6 +295,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 if let error = error {
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 } else {
                     
@@ -279,12 +305,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 }
 
             }
-            
-            self.navigationController?.popViewController(animated: true)
-            
-            self.tabBarController?.selectedIndex = 0
-            
-            print("帳號已刪除！")
             
         }
         
@@ -310,6 +330,12 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
         userID = ""
         
+        self.navigationController?.popViewController(animated: true)
+        
+        self.tabBarController?.selectedIndex = 0
+        
+        print("帳號已刪除！")
+        
     }
     
     func fetchAllData() {
@@ -327,6 +353,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -346,6 +374,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -363,6 +393,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -405,6 +437,8 @@ extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavig
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

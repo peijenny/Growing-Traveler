@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import PKHUD
 
 class UserManager {
     
@@ -142,6 +143,8 @@ class UserManager {
         } catch {
 
             print(error)
+            
+            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
         }
         
@@ -157,7 +160,45 @@ class UserManager {
         } catch {
 
             print(error)
+            
+            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
+        }
+        
+    }
+    
+    func fetchshareNoteData(shareUserID: String, noteID: String, completion: @escaping (Result<Note>) -> Void) {
+        
+        database.document(shareUserID).collection("note")
+            .whereField("noteID", isEqualTo: noteID)
+            .getDocuments { snapshot, error in
+            
+            guard let snapshot = snapshot else {
+                
+                print("Error fetching document: \(error!)")
+                
+                completion(Result.failure(error!))
+                
+                return
+                
+            }
+
+            do {
+                
+                if let note = try snapshot.documents[0].data(as: Note.self, decoder: Firestore.Decoder()) {
+                    
+                    completion(Result.success(note))
+                    
+                }
+                
+            } catch {
+                
+                print(error)
+                
+                completion(Result.failure(error))
+                
+            }
+            
         }
         
     }
@@ -213,6 +254,8 @@ class UserManager {
         } catch {
 
             print(error)
+            
+            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
         }
         
@@ -226,6 +269,8 @@ class UserManager {
             if let error = error {
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             } else {
                 

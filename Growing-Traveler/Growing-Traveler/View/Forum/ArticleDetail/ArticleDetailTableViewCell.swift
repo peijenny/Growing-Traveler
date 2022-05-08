@@ -28,9 +28,9 @@ class ArticleDetailTableViewCell: UITableViewCell {
         
     }
     
-    func setArticleContent(content: ArticleContent) {
+    func setArticleContent(content: ArticleContent, isNote: Bool) {
         
-        if content.contentType == "string" {
+        if content.contentType == SendType.string.title {
             
             contentTextLabel.text = content.contentText
             
@@ -38,7 +38,7 @@ class ArticleDetailTableViewCell: UITableViewCell {
             
             imageViewHeightConstraint.constant = 0.0
             
-        } else if content.contentType == "image" {
+        } else if content.contentType == SendType.image.title {
             
             contentTextLabel.text = nil
             
@@ -48,8 +48,14 @@ class ArticleDetailTableViewCell: UITableViewCell {
             
             labelHeightConstraint.constant = 0.0
             
-        } 
+        }
         
+        if isNote {
+            
+            self.contentView.backgroundColor = UIColor.clear
+            
+        }
+
     }
     
 }

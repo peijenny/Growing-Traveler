@@ -10,31 +10,31 @@ import UIKit
 enum ImageAsset: String {
 
     // Profile tab - Tab Bar Icon
-    case checklistOrigin
-    case checklistSelect
-    
-    case askOrigin
-    case askSelect
-    
-    case commentsOrigin
-    case commentsSelect
-    
-    case chartOrigin
-    case chartSelect
-    
-    case userOrigin
-    case userSelect
+    case archery
+    case idCard
+    case speaker
+    case speechBubble
+    case book
     
     case calendar
+    case award
+    case share
+    case add
+    case block
+    case user
+    
+    case create
+    case edit
     
     case telephoneCall
     case videoCamera
     
-    case specialDeals
-    case vision
-    case idea
-    case blogging
-    case meditation
+    case undrawTask
+    case undrawChart
+    case undrawExperience
+    case undrawFAQ
+    case undrawImages
+    case undrawNotFound
 
 }
 

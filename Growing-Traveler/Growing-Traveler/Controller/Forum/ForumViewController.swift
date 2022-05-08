@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 enum ForumType {
     
@@ -117,19 +118,23 @@ class ForumViewController: BaseViewController {
         
         fetchFriendBlockadeListData()
         
-//        fetchSearchData()
-        
         fetchUserInfoData()
+        
+        if userID == "" {
+            
+            fetchData()
+            
+            fetchSearchData()
+            
+        }
         
     }
     
     func setNavigationItem() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self, action: #selector(addForumArticle))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+            image: UIImage.asset(.create), style: .plain, target: self, action: #selector(addForumArticle))
+
     }
     
     @objc func addForumArticle(sender: UIButton) {
@@ -176,6 +181,8 @@ class ForumViewController: BaseViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
                 
         }
@@ -199,6 +206,8 @@ class ForumViewController: BaseViewController {
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -260,6 +269,8 @@ class ForumViewController: BaseViewController {
                 
                 print(error)
                 
+//                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -293,6 +304,8 @@ class ForumViewController: BaseViewController {
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             

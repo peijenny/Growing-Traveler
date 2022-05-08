@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 enum SearchFriendStatus {
     
@@ -162,6 +163,8 @@ class ApplyFriendViewController: BaseViewController {
                     
                     print(error)
                     
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    
                 }
             
         })
@@ -204,6 +207,8 @@ class ApplyFriendViewController: BaseViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -227,6 +232,8 @@ class ApplyFriendViewController: BaseViewController {
         guard let otherFriend = otherFriend else { return }
 
         viewController.bothSides = BothSides(owner: ownFriend, other: otherFriend)
+        
+        self.navigationController?.isNavigationBarHidden = true
         
         self.view.addSubview(viewController.view)
         
@@ -274,6 +281,8 @@ class ApplyFriendViewController: BaseViewController {
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             

@@ -18,7 +18,7 @@ class FeatureCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        featureBackgroundView.layer.cornerRadius = 10
+        featureBackgroundView.layer.cornerRadius = 15
         
     }
 

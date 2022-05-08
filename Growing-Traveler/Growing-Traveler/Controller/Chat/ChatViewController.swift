@@ -6,6 +6,35 @@
 //
 
 import UIKit
+import PKHUD
+
+enum SendType {
+    
+    case image
+    
+    case string
+    
+    case articleID
+    
+    case noteID
+    
+    var title: String {
+        
+        switch self {
+            
+        case .image: return "image"
+            
+        case .string: return "string"
+            
+        case .articleID: return "articleID"
+            
+        case .noteID: return "noteID"
+            
+        }
+        
+    }
+    
+}
 
 class ChatViewController: BaseViewController {
     
@@ -62,15 +91,15 @@ class ChatViewController: BaseViewController {
             chatTableView.reloadData()
             
             if let messageCount = chatMessage?.messageContent.count {
-                
+
                 if chatMessage?.messageContent.count != 0 {
-                    
+
                     let indexPath = IndexPath(row: messageCount - 1, section: 0)
-                    
+
                     chatTableView.scrollToRow(at: indexPath, at: .top, animated: false)
-                    
+
                 }
-                
+
             }
             
         }
@@ -89,6 +118,12 @@ class ChatViewController: BaseViewController {
     
     var otherFriendList: Friend?
     
+    var notes: [Note] = []
+    
+    var forumArticles: [ForumArticle] = []
+    
+    var forumArticleManager = ForumArticleManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -102,6 +137,16 @@ class ChatViewController: BaseViewController {
         chatTableView.register(
             UINib(nibName: String(describing: SendMessageTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: SendMessageTableViewCell.self)
+        )
+        
+        chatTableView.register(
+            UINib(nibName: String(describing: ShareReceiveTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: ShareReceiveTableViewCell.self)
+        )
+        
+        chatTableView.register(
+            UINib(nibName: String(describing: ShareSendTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: ShareSendTableViewCell.self)
         )
         
         if deleteAccount {
@@ -120,15 +165,14 @@ class ChatViewController: BaseViewController {
 //            UIBarButtonItem(image: UIImage.asset(.telephoneCall),
 //                style: .plain, target: self, action: #selector(callAudioPhone)),
 //            UIBarButtonItem(image: UIImage.asset(.videoCamera),
-//                style: .plain, target: self, action: #selector(callVideoPhone))
-//        ]
+//                style: .plain, target: self, action: #selector(callVideoPhone))]
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriend))
+            image: UIImage.asset(.user), style: .plain, target: self, action: #selector(friendInfoButton))
 
     }
     
-    @objc func blockadeFriend() {
+    @objc func friendInfoButton(sender: UIButton) {
         
         // 彈跳出 User 視窗
         guard let viewController = UIStoryboard
@@ -216,6 +260,18 @@ class ChatViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+//        notes = []
+//
+//        forumArticles = []
+//
+        if isBlock {
+            
+            friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
+            
+            friendStatusLabel.isHidden = false
+            
+        }
+        
         fetchFriendInfoData()
         
     }
@@ -243,6 +299,8 @@ class ChatViewController: BaseViewController {
             case .failure(let error):
 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
             }
 
@@ -262,10 +320,20 @@ class ChatViewController: BaseViewController {
 
                 strongSelf.otherFriendList = friendList
                 
+                if friendList.blockadeList.filter({ $0 == userID }).count != 0 {
+                    
+                    strongSelf.friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
+
+                    strongSelf.friendStatusLabel.isHidden = false
+                    
+                }
+                
             case .failure(let error):
 
                 print(error)
 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
 
         }
@@ -283,14 +351,89 @@ class ChatViewController: BaseViewController {
 
                 strongSelf.chatMessage = chatMessage
                 
+                for index in 0..<chatMessage.messageContent.count {
+                    
+                    if chatMessage.messageContent[index].sendType == SendType.noteID.title {
+                        
+                        strongSelf.fetchshareNoteData(
+                            shareUserID: chatMessage.messageContent[index].sendUserID,
+                            noteID: chatMessage.messageContent[index].sendMessage
+                        )
+                        
+                    } else if chatMessage.messageContent[index].sendType == SendType.articleID.title {
+                        
+                        strongSelf.fetchShareArticleData(articleID: chatMessage.messageContent[index].sendMessage)
+                        
+                    }
+                    
+                }
+                
             case .failure(let error):
 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
             }
 
         }
 
+    }
+    
+    func fetchshareNoteData(shareUserID: String, noteID: String) {
+        
+        userManager.fetchshareNoteData(shareUserID: shareUserID, noteID: noteID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+
+            switch result {
+
+            case .success(let note):
+                
+                let note = note
+                
+                strongSelf.notes.append(note)
+                
+                strongSelf.chatTableView.reloadData()
+                
+            case .failure(let error):
+
+                print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+
+            }
+            
+        }
+        
+    }
+    
+    func fetchShareArticleData(articleID: String) {
+        
+        forumArticleManager.fetchForumArticleData(articleID: articleID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let forumArticle):
+                
+                let forumArticle = forumArticle
+                
+                strongSelf.forumArticles.append(forumArticle)
+                
+                strongSelf.chatTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
+            }
+            
+        }
+        
     }
     
     @IBAction func sendInputMessageButton(_ sender: UIButton) {
@@ -309,11 +452,11 @@ class ChatViewController: BaseViewController {
             
             if inputContent.range(of: "https://i.imgur.com") != nil {
 
-                sendType = "image"
+                sendType = SendType.image.title
 
             } else {
 
-                sendType = "string"
+                sendType = SendType.string.title
 
             }
             
@@ -362,60 +505,108 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
-            
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: ReceiveMessageTableViewCell.self),
-                for: indexPath
-            )
-            
-            guard let cell = cell as? ReceiveMessageTableViewCell else { return cell }
 
-            if let blockadeList = otherFriendList?.blockadeList {
+        if chatMessage?.messageContent[indexPath.row].sendType == SendType.image.title ||
+            chatMessage?.messageContent[indexPath.row].sendType == SendType.string.title {
+            
+            if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
                 
-                if blockadeList.filter({ $0 == userID }).count != 0 {
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ReceiveMessageTableViewCell.self),
+                    for: indexPath
+                )
+                
+                guard let cell = cell as? ReceiveMessageTableViewCell else { return cell }
+                
+                if let receiveMessage = chatMessage?.messageContent[indexPath.row] {
                     
-                    friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
-                    
-                    friendStatusLabel.isHidden = false
+                    cell.showMessage(receiveMessage: receiveMessage, friendPhoto: friendInfo?.userPhoto)
                     
                 }
                 
+                return cell
+                
+            } else {
+                
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: SendMessageTableViewCell.self),
+                    for: indexPath
+                )
+                
+                guard let cell = cell as? SendMessageTableViewCell else { return cell }
+                
+                if let sendMessage = chatMessage?.messageContent[indexPath.row] {
+                    
+                    cell.showMessage(sendMessage: sendMessage)
+                    
+                }
+
+                return cell
+                
             }
-            
-            if isBlock {
-                
-                friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
-                
-                friendStatusLabel.isHidden = false
-                
-            }
-            
-            if let receiveMessage = chatMessage?.messageContent[indexPath.row] {
-                
-                cell.showMessage(receiveMessage: receiveMessage, friendPhoto: friendInfo?.userPhoto)
-                
-            }
-            
-            return cell
             
         } else {
             
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: SendMessageTableViewCell.self),
-                for: indexPath
-            )
-            
-            guard let cell = cell as? SendMessageTableViewCell else { return cell }
-            
-            if let sendMessage = chatMessage?.messageContent[indexPath.row] {
+            if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
                 
-                cell.showMessage(sendMessage: sendMessage)
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ShareReceiveTableViewCell.self),
+                    for: indexPath
+                )
+                
+                guard let cell = cell as? ShareReceiveTableViewCell else { return cell }
+                
+                let note = notes.filter({ $0.noteID == chatMessage?.messageContent[indexPath.row].sendMessage })
+                
+                let article = forumArticles.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
+                
+                if note.count != 0 {
+                    
+                    cell.showShareNote(note: note[0], userPhoto: friendInfo?.userPhoto)
+                    
+                }
+                
+                if article.count != 0 {
+                    
+                    cell.showShareArticle(forumArticle: article[0], userPhoto: friendInfo?.userPhoto)
+
+                }
+                
+                cell.setCreateTime(receiveCreateTime:
+                    chatMessage?.messageContent[indexPath.row].createTime ?? TimeInterval())
+                
+                return cell
+                
+            } else {
+
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ShareSendTableViewCell.self),
+                    for: indexPath
+                )
+                
+                guard let cell = cell as? ShareSendTableViewCell else { return cell }
+                
+                let note = notes.filter({ $0.noteID == chatMessage?.messageContent[indexPath.row].sendMessage })
+                
+                let article = forumArticles.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
+                
+                cell.setCreateTime(sendCreateTime:
+                    chatMessage?.messageContent[indexPath.row].createTime ?? TimeInterval())
+                
+                if note.count != 0 {
+                    
+                    cell.showShareNote(note: note[0])
+                    
+                }
+                
+                if article.count != 0 {
+                    
+                    cell.showShareArticle(forumArticle: article[0])
+                }
+
+                return cell
                 
             }
-
-            return cell
             
         }
         
@@ -425,7 +616,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let sendMessage = chatMessage?.messageContent[indexPath.row] else { return }
         
-        if sendMessage.sendType == "image" {
+        if sendMessage.sendType == SendType.image.title {
             
             myImageView.loadImage(sendMessage.sendMessage)
             
@@ -433,11 +624,35 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
+        if sendMessage.sendType == SendType.noteID.title {
+            
+            guard let viewController = UIStoryboard.note.instantiateViewController(
+                    withIdentifier: String(describing: NoteDetailViewController.self)
+                    ) as? NoteDetailViewController else { return }
+            
+            viewController.noteID = sendMessage.sendMessage
+            
+            viewController.noteUserID = sendMessage.sendUserID
+            
+            navigationController?.pushViewController(viewController, animated: true)
+            
+        }
+        
+        if sendMessage.sendType == SendType.articleID.title {
+            
+            let viewController = ArticleDetailViewController()
+            
+            viewController.forumArticle = forumArticles.filter({ $0.id == sendMessage.sendMessage })[0]
+            
+            navigationController?.pushViewController(viewController, animated: true)
+            
+        }
+        
     }
     
 }
 
-extension ChatViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -458,6 +673,8 @@ extension ChatViewController: UIImagePickerControllerDelegate & UINavigationCont
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

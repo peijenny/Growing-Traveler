@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 enum SelectDateType {
     
@@ -130,6 +131,10 @@ class PlanStudyGoalViewController: BaseViewController {
     var userManager = UserManager()
     
     var user: UserInfo?
+    
+    var selectedDate: Date?
+    
+    var getSelectedDate: ((_ selectedDate: Date) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,6 +146,12 @@ class PlanStudyGoalViewController: BaseViewController {
         } else {
             
             title = "編輯個人學習計劃"
+            
+        }
+        
+        if selectedDate != nil {
+            
+            getSelectedDate?(selectedDate ?? Date())
             
         }
         
@@ -157,9 +168,7 @@ class PlanStudyGoalViewController: BaseViewController {
             barButtonSystemItem: .done,
             target: self,
             action: #selector(submitButton))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+
         modifyPlanStudyGoalSetting()
         
         fetchUserData()
@@ -197,12 +206,13 @@ class PlanStudyGoalViewController: BaseViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
         
     }
-
     
     // MARK: - 修改個人學習計劃設定
     func modifyPlanStudyGoalSetting() {
@@ -345,12 +355,16 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
                         title: headerView.studyGoalTitleTextField.text ?? ""
                     )
                     
+                    HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                    
                 } else {
                     
                     addStudyGoalToDatabase(
                         id: studyGoalManager.database.document().documentID,
                         title: headerView.studyGoalTitleTextField.text ?? ""
                     )
+                    
+                    HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
                     
                 }
                 
@@ -374,7 +388,28 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             
         }
         
-        headerView.categoryTextField.text = selectCategoryItem?.title ?? ""
+        headerView.categoryLabel.text = selectCategoryItem?.title ?? "請選擇分類標籤"
+        
+        if headerView.categoryLabel.text ?? "" != "請選擇分類標籤" {
+            
+            headerView.categoryLabel.textColor = UIColor.black
+            
+        }
+        
+        let categoryTapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(selectCategoryTagButton))
+        
+        headerView.categoryLabel.addGestureRecognizer(categoryTapGestureRecognizer)
+        
+        let startDateTapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(selectStartDateButton))
+        
+        headerView.startDateLabel.addGestureRecognizer(startDateTapGestureRecognizer)
+        
+        let endDateTapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(selectEndDateButton))
+        
+        headerView.endDateLabel.addGestureRecognizer(endDateTapGestureRecognizer)
         
         headerView.showSelectedDate(dateType: selectDateType,
             startDate: selectStartDate, endDate: selectEndDate)
@@ -572,6 +607,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         self.view.addSubview(selectStudyItemViewController.view)
 
         self.addChild(selectStudyItemViewController)
+        
+        self.navigationController?.isNavigationBarHidden = true
         
         selectStudyItemViewController.getStudyItem = { [weak self] studyItem, whetherToUpdate in
             

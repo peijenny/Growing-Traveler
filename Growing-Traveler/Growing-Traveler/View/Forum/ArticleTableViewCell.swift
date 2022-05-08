@@ -62,7 +62,7 @@ class ArticleTableViewCell: UITableViewCell {
     
     func checkImage(forumArticle: ForumArticle) {
         
-        let article = forumArticle.content.filter({ $0.contentType == "image" })
+        let article = forumArticle.content.filter({ $0.contentType == SendType.image.title })
         
         if article.count > 0 {
             

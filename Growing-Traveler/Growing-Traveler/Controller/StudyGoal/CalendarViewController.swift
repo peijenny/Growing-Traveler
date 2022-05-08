@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import PKHUD
 
 class CalendarViewController: UIViewController {
 
@@ -34,9 +35,13 @@ class CalendarViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var displayBackgroundView: UIView!
+    
     var studyGoalManager = StudyGoalManager()
     
     var studyGoals: [StudyGoal] = []
+    
+    var selectedDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +62,7 @@ class CalendarViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchData(date: Date())
+        fetchData(date: selectedDate)
         
     }
     
@@ -78,6 +83,8 @@ class CalendarViewController: UIViewController {
     func fetchData(date: Date) {
         
         studyGoals.removeAll()
+        
+        print("TEST \(date)")
         
         studyGoalManager.fetchData { [weak self] result in
             
@@ -105,11 +112,24 @@ class CalendarViewController: UIViewController {
                     
                 })
                 
+                if strongSelf.studyGoals.count == 0 {
+                    
+                    strongSelf.displayBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    strongSelf.displayBackgroundView.isHidden = true
+                    
+                }
+                
                 strongSelf.displayTableView.reloadData()
                 
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -171,7 +191,7 @@ extension CalendarViewController: UITableViewDelegate {
 
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
         
-        headerView.showStudyGoalHeader(studyGoal: studyGoals[section])
+        headerView.showStudyGoalHeader(studyGoal: studyGoals[section], isCalendar: true)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         
@@ -201,7 +221,17 @@ extension CalendarViewController: UITableViewDelegate {
                 
                 viewController.studyGoal = studyGoals[index]
                 
+                viewController.selectedDate = selectedDate
+                
                 navigationController?.pushViewController(viewController, animated: true)
+                
+                viewController.getSelectedDate = { selectedDate in
+                    
+                    self.fetchData(date: selectedDate)
+                    
+                    self.selectedDate = selectedDate
+                    
+                }
                 
             }
             

@@ -37,7 +37,9 @@ class ReceiveMessageTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        receiveBackgroundView.layer.cornerRadius = 10
+        receiveBackgroundView.layer.cornerRadius = 15
+        
+        receiveImageView.layer.cornerRadius = 15
         
         friendImageView.layer.cornerRadius = friendImageView.frame.width / 2
         
@@ -61,27 +63,27 @@ class ReceiveMessageTableViewCell: UITableViewCell {
     
     func setMessageContent(message: String, type: String) {
         
-        if type == "string" {
+        if type == SendType.string.title {
             
             receiveImageView.image = nil
             
             imageViewHeightConstraint.constant = 0.0
             
-            labelHeightConstraint.constant = 35.0
+            labelHeightConstraint.constant = 25.0
             
-            labelTopConstraint.constant = 10.0
+            labelTopConstraint.constant = 5.0
             
-            labelBottomConstraint.constant = 10.0
+            labelBottomConstraint.constant = 5.0
             
-            viewConstraint.constant = 55.0
+            viewConstraint.constant = 35.0
             
             receiveMessageLabel.text = message
             
-        } else if type == "image" {
+        } else if type == SendType.image.title {
             
             receiveMessageLabel.text = nil
             
-            imageViewHeightConstraint.constant = 100.0
+            imageViewHeightConstraint.constant = 120.0
             
             labelTopConstraint.constant = 0.0
             

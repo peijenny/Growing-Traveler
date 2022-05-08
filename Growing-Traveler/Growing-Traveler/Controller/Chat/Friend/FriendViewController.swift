@@ -7,6 +7,7 @@
 
 import UIKit
 import Charts
+import PKHUD
 
 enum FriendType {
     
@@ -114,6 +115,8 @@ class FriendViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -137,6 +140,8 @@ class FriendViewController: UIViewController {
             case .failure(let error):
 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
             }
 
@@ -172,19 +177,17 @@ class FriendViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
         }
     }
     
     func setNavigationItems() {
         
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(blockadeFriendButton)),
-            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(applyFriendButton))
-        ]
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.add), style: .plain, target: self, action: #selector(applyFriendButton))
+
     }
     
     @objc func applyFriendButton(sender: UIButton) {
@@ -199,14 +202,6 @@ class FriendViewController: UIViewController {
             viewController.ownFriend = friend
             
         }
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
-    @objc func blockadeFriendButton(sender: UIButton) {
-        
-        let viewController = BlockadeFriendViewController()
         
         navigationController?.pushViewController(viewController, animated: true)
         

@@ -12,7 +12,9 @@ class PublishArticleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
     
-    @IBOutlet weak var categoryTextField: UITextField!
+//    @IBOutlet weak var categoryTextField: UITextField!
+    
+    @IBOutlet weak var categoryLabel: UILabel!
     
     @IBOutlet weak var titleTextField: UITextField!
     
@@ -32,7 +34,7 @@ class PublishArticleTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
         
-        contentTextView.layer.borderColor = UIColor.hexStringToUIColor(hex: "9C8F96").cgColor
+        contentTextView.layer.borderColor = UIColor.darkGray.cgColor
         
         contentTextView.layer.borderWidth = 1
         
@@ -44,7 +46,7 @@ class PublishArticleTableViewCell: UITableViewCell {
             
         } else {
             
-            contentTextView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
+            contentTextView.textColor = UIColor.black
             
         }
         
@@ -56,7 +58,7 @@ class PublishArticleTableViewCell: UITableViewCell {
 
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
-        } else if categoryTextField.text == "" {
+        } else if categoryLabel.text == "" {
             
             HUD.flash(.label(InputError.categoryEmpty.title), delay: 0.5)
             
@@ -139,7 +141,9 @@ class PublishArticleTableViewCell: UITableViewCell {
     
     func modifyForumArticle(modifyForumArticle: ForumArticle) {
         
-        categoryTextField.text = modifyForumArticle.category.title
+        categoryLabel.text = modifyForumArticle.category.title
+        
+        categoryLabel.textColor = UIColor.black
 
         titleTextField.text = modifyForumArticle.title
         
@@ -147,11 +151,11 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         for index in 0..<modifyForumArticle.content.count {
             
-            if modifyForumArticle.content[index].contentType == "image" {
+            if modifyForumArticle.content[index].contentType == SendType.image.title {
                 
                 contentText += "\0\(modifyForumArticle.content[index].contentText)\0"
                 
-            } else {
+            } else if modifyForumArticle.content[index].contentType == SendType.string.title {
                 
                 contentText += modifyForumArticle.content[index].contentText
             }

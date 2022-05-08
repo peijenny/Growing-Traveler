@@ -7,6 +7,7 @@
 
 import UIKit
 import JXPhotoBrowser
+import PKHUD
 
 class ArticleDetailViewController: UIViewController {
     
@@ -33,20 +34,14 @@ class ArticleDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
-        
         title = forumArticle?.forumType
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        setBackgroundView()
         
         setTableView()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .compose,
-            target: self,
-            action: #selector(sendMessageButton)
-        )
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +74,8 @@ class ArticleDetailViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
                 
         }
@@ -102,6 +99,8 @@ class ArticleDetailViewController: UIViewController {
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -131,44 +130,11 @@ class ArticleDetailViewController: UIViewController {
                     
                     print(error)
                     
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    
                 }
             
         })
-    }
-    
-    @objc func sendMessageButton(sender: UIButton) {
-        
-        guard userID != "" else {
-
-            guard let authViewController = UIStoryboard.auth.instantiateViewController(
-                    withIdentifier: String(describing: AuthenticationViewController.self)
-                    ) as? AuthenticationViewController else { return }
-            
-            authViewController.modalPresentationStyle = .popover
-
-            present(authViewController, animated: true, completion: nil)
-
-            return
-        }
-        
-        guard let viewController = UIStoryboard
-            .forum
-            .instantiateViewController(
-                withIdentifier: String(describing: ArticleMessageViewController.self)
-                ) as? ArticleMessageViewController else {
-
-                    return
-
-                }
-        
-        viewController.articleID = forumArticle?.id ?? ""
-        
-        viewController.orderID = articleMessages.count
-
-        self.view.addSubview(viewController.view)
-
-        self.addChild(viewController)
-        
     }
     
     override var hidesBottomBarWhenPushed: Bool {
@@ -185,9 +151,28 @@ class ArticleDetailViewController: UIViewController {
         
     }
     
+    func setBackgroundView() {
+        
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+        
+    }
+    
     func setTableView() {
         
-        articleDetailTableView.backgroundColor = UIColor.clear
+        articleDetailTableView.backgroundColor = UIColor.white
         
         articleDetailTableView.separatorStyle = .none
         
@@ -197,8 +182,8 @@ class ArticleDetailViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             articleDetailTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            articleDetailTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            articleDetailTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            articleDetailTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            articleDetailTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             articleDetailTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
         ])
         
@@ -261,11 +246,11 @@ class ArticleDetailViewController: UIViewController {
                         
                     }
                     
-                }
-                
-                self.view.addSubview(viewController.view)
+                    self.view.addSubview(viewController.view)
 
-                self.addChild(viewController)
+                    self.addChild(viewController)
+                    
+                }
                 
             }
             
@@ -310,7 +295,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             guard let forumArticle = forumArticle else { return cell }
             
-            cell.setArticleContent(content: forumArticle.content[indexPath.row])
+            cell.setArticleContent(content: forumArticle.content[indexPath.row], isNote: false)
             
             cell.selectionStyle = .none
             
@@ -366,13 +351,13 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         
         guard let forumArticle = forumArticle else { return }
         
-        if indexPath.section == 0 && forumArticle.content[indexPath.row].contentType == "image" {
+        if indexPath.section == 0 && forumArticle.content[indexPath.row].contentType == SendType.image.title {
             
             myImageView.loadImage(forumArticle.content[indexPath.row].contentText)
             
             showPhoto()
             
-        } else if indexPath.section == 1 && articleMessages[indexPath.row].message.contentType == "image" {
+        } else if indexPath.section == 1 && articleMessages[indexPath.row].message.contentType == SendType.image.title {
             
             myImageView.loadImage(articleMessages[indexPath.row].message.contentText)
             
@@ -435,8 +420,71 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
 
             guard let headerView = headerView as? ArticleMessageHeaderView else { return headerView }
             
+            headerView.shareToFriendButton.addTarget(
+                self, action: #selector(shareToFriendButton), for: .touchUpInside)
+            
+            headerView.sendMessageButton.addTarget(
+                self, action: #selector(sendMessageButton), for: .touchUpInside)
+            
             return headerView
         }
+        
+    }
+    
+    @objc func sendMessageButton(sender: UIButton) {
+        
+        guard userID != "" else {
+
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                    withIdentifier: String(describing: AuthenticationViewController.self)
+                    ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .popover
+
+            present(authViewController, animated: true, completion: nil)
+
+            return
+        }
+        
+        guard let viewController = UIStoryboard
+            .forum
+            .instantiateViewController(
+                withIdentifier: String(describing: ArticleMessageViewController.self)
+                ) as? ArticleMessageViewController else {
+
+                    return
+
+                }
+        
+        viewController.articleID = forumArticle?.id ?? ""
+        
+        viewController.orderID = articleMessages.count
+        
+        self.navigationController?.isNavigationBarHidden = true
+
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
+        
+    }
+    
+    @objc func shareToFriendButton(sender: UIButton) {
+        
+        let viewController = ShareToFriendViewController()
+        
+        viewController.shareType = SendType.articleID.title
+        
+        viewController.shareID = forumArticle?.id
+        
+        let navController = UINavigationController(rootViewController: viewController)
+        
+        if let sheetPresentationController = navController.sheetPresentationController {
+            
+            sheetPresentationController.detents = [.medium()]
+            
+        }
+        
+        present(navController, animated: true)
         
     }
     
