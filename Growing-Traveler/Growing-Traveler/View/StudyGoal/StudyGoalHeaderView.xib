@@ -25,7 +25,7 @@
                             <rect key="frame" x="16" y="10" width="68" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="6z2-Zu-yit"/>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="180" id="NwA-B0-GyT"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="NwA-B0-GyT"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -50,7 +50,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2V7-Gf-7Ea">
-                            <rect key="frame" x="89" y="10" width="69" height="25"/>
+                            <rect key="frame" x="89" y="10" width="70" height="25"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="checkmark.square" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NSb-yc-g9j">
                                     <rect key="frame" x="0.0" y="1" width="25" height="22.5"/>
@@ -60,7 +60,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 / 10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1so-Xi-5ud">
-                                    <rect key="frame" x="25" y="0.0" width="44" height="25"/>
+                                    <rect key="frame" x="25" y="0.0" width="45" height="25"/>
                                     <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="13"/>
                                     <color key="textColor" red="0.69803921570000005" green="0.81960784310000001" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -69,7 +69,7 @@
                             <color key="backgroundColor" red="0.068879739391836753" green="0.5" blue="0.80010410411224486" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="9PN-Hb-F4c"/>
-                                <constraint firstAttribute="width" constant="69" id="DLe-Sy-UOh"/>
+                                <constraint firstAttribute="width" constant="70" id="DLe-Sy-UOh"/>
                                 <constraint firstItem="1so-Xi-5ud" firstAttribute="leading" secondItem="NSb-yc-g9j" secondAttribute="trailing" id="N2N-rZ-RGf"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
