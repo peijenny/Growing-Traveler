@@ -123,6 +123,20 @@ class AnalysisViewController: UIViewController {
         
     }
     
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
     func fetchStudyGoalData() {
         
         analysisManager.fetchStudyData { [weak self] result in
@@ -292,6 +306,8 @@ class AnalysisViewController: UIViewController {
         
         let sevenDaysAgo = Date().addingTimeInterval(-Double((day * 7))).addingTimeInterval(Double(day / 3))
         
+        var finishItem = 0
+        
         handleSevenDays(yesterday: yesterday)
         
         for goalIndex in 0..<studyGoals.count {
@@ -311,6 +327,8 @@ class AnalysisViewController: UIViewController {
             for index in 0..<studyGoals[goalIndex].studyItems.count {
                 
                 if studyGoals[goalIndex].studyItems[index].isCompleted == true {
+                    
+                    finishItem += 1
                     
                     totalMinutes += studyGoals[goalIndex].studyItems[index].studyTime
                     
@@ -374,11 +392,11 @@ class AnalysisViewController: UIViewController {
         
         calculateSevenDayStudyTime()
         
-        handleBarChatFeedbackText()
+        handleBarChatFeedbackText(finishItem: finishItem)
 
     }
     
-    func handleBarChatFeedbackText() {
+    func handleBarChatFeedbackText(finishItem: Int) {
         
         var totalStudyTime = 0.0
         
@@ -388,7 +406,9 @@ class AnalysisViewController: UIViewController {
             
         }
         
-        experienceValue = Int(totalStudyTime * 50)
+//        experienceValue = Int(totalStudyTime * 50)
+        
+        experienceValue = finishItem * 50
         
         for index in 0..<feedbacks.count {
             
