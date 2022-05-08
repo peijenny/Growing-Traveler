@@ -35,6 +35,7 @@ enum ImageAsset: String {
     case undrawFAQ
     case undrawImages
     case undrawNotFound
+    case undrawExplore
 
 }
 

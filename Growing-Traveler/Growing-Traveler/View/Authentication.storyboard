@@ -148,15 +148,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="GL5-ZN-ZGQ">
-                                <rect key="frame" x="107" y="60" width="200" height="200"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undrawExplore" translatesAutoresizingMaskIntoConstraints="NO" id="GL5-ZN-ZGQ">
+                                <rect key="frame" x="-259.5" y="60" width="933" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="KTb-nW-8Xx"/>
                                     <constraint firstAttribute="height" constant="200" id="ZPB-bx-XMt"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xsI-KC-8FE">
-                                <rect key="frame" x="16" y="276" width="382" height="400"/>
+                                <rect key="frame" x="16" y="305.5" width="382" height="400"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="0LJ-vo-BMD"/>
@@ -177,19 +176,26 @@
                                     <action selector="backAuthPage:" destination="TK2-Vy-aD9" eventType="touchUpInside" id="e0b-oc-XMd"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成長旅客" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60r-Id-0Sb">
+                                <rect key="frame" x="171" y="270" width="72" height="25.5"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="132-BO-2g7"/>
                         <color key="backgroundColor" red="0.67450982329999998" green="0.75294119120000003" blue="0.79607844350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="GL5-ZN-ZGQ" firstAttribute="top" secondItem="132-BO-2g7" secondAttribute="top" constant="16" id="8jQ-eY-QWl"/>
-                            <constraint firstItem="GL5-ZN-ZGQ" firstAttribute="leading" secondItem="132-BO-2g7" secondAttribute="leading" constant="107" id="Afn-Yy-m84"/>
                             <constraint firstItem="xsI-KC-8FE" firstAttribute="leading" secondItem="132-BO-2g7" secondAttribute="leading" constant="16" id="B9N-L3-gUx"/>
                             <constraint firstItem="KXW-Ot-vmY" firstAttribute="leading" secondItem="132-BO-2g7" secondAttribute="leading" constant="10" id="IWu-aI-wUH"/>
                             <constraint firstItem="132-BO-2g7" firstAttribute="trailing" secondItem="xsI-KC-8FE" secondAttribute="trailing" constant="16" id="TH1-th-SUD"/>
-                            <constraint firstItem="xsI-KC-8FE" firstAttribute="top" secondItem="GL5-ZN-ZGQ" secondAttribute="bottom" constant="16" id="aqr-7D-a3E"/>
-                            <constraint firstItem="132-BO-2g7" firstAttribute="trailing" secondItem="GL5-ZN-ZGQ" secondAttribute="trailing" constant="107" id="d56-Zq-Egy"/>
+                            <constraint firstItem="60r-Id-0Sb" firstAttribute="top" secondItem="GL5-ZN-ZGQ" secondAttribute="bottom" constant="10" id="aZt-od-BbG"/>
+                            <constraint firstItem="xsI-KC-8FE" firstAttribute="top" secondItem="60r-Id-0Sb" secondAttribute="bottom" constant="10" id="bwQ-IN-yqc"/>
+                            <constraint firstItem="GL5-ZN-ZGQ" firstAttribute="centerX" secondItem="132-BO-2g7" secondAttribute="centerX" id="dfy-aJ-zUI"/>
                             <constraint firstItem="KXW-Ot-vmY" firstAttribute="top" secondItem="132-BO-2g7" secondAttribute="top" constant="16" id="gd7-oP-Xyt"/>
                             <constraint firstItem="132-BO-2g7" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="xsI-KC-8FE" secondAttribute="bottom" constant="186" id="k4J-NG-US7"/>
+                            <constraint firstItem="60r-Id-0Sb" firstAttribute="centerX" secondItem="132-BO-2g7" secondAttribute="centerX" id="q97-IN-XTT"/>
                         </constraints>
                     </view>
                     <connections>
@@ -203,7 +209,7 @@
     </scenes>
     <resources>
         <image name="arrowshape.turn.up.left.2" catalog="system" width="128" height="86"/>
-        <image name="welcome" width="533.33331298828125" height="400"/>
+        <image name="undrawExplore" width="933.03875732421875" height="637.1102294921875"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>
