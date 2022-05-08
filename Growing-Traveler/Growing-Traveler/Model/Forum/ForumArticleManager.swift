@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import PKHUD
 
 class ForumArticleManager {
     
@@ -83,6 +84,8 @@ class ForumArticleManager {
             
             print(error)
             
+            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
+            
         }
         
     }
@@ -97,6 +100,8 @@ class ForumArticleManager {
         } catch {
             
             print(error)
+            
+            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
             
         }
         
@@ -240,6 +245,8 @@ class ForumArticleManager {
         } catch {
 
             print(error)
+            
+            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
         }
 
@@ -253,6 +260,8 @@ class ForumArticleManager {
             if let error = error {
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             } else {
                 
@@ -324,6 +333,8 @@ extension ForumArticleManager {
         } catch {
             
             print(error)
+            
+            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
             
         }
         

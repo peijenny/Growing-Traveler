@@ -124,6 +124,8 @@ extension ArticleMessageViewController: UIImagePickerControllerDelegate, UINavig
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

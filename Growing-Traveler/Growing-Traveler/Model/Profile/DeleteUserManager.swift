@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import PKHUD
 
 class DeleteUserManager {
     
@@ -23,6 +24,8 @@ class DeleteUserManager {
                 if let error = error {
                     
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
                     
                 } else {
                     
@@ -44,6 +47,8 @@ class DeleteUserManager {
                 if let error = error {
                     
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
                     
                 } else {
                     
@@ -70,6 +75,8 @@ class DeleteUserManager {
                         
                         print(error)
                         
+                        HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                        
                     } else {
                         
                         print("Success")
@@ -91,6 +98,8 @@ class DeleteUserManager {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             } else {
                 
                 print("Success")
@@ -107,6 +116,8 @@ class DeleteUserManager {
             if let error = error {
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             } else {
                 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 enum SelectDateType {
     
@@ -205,6 +206,8 @@ class PlanStudyGoalViewController: BaseViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -352,12 +355,16 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
                         title: headerView.studyGoalTitleTextField.text ?? ""
                     )
                     
+                    HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                    
                 } else {
                     
                     addStudyGoalToDatabase(
                         id: studyGoalManager.database.document().documentID,
                         title: headerView.studyGoalTitleTextField.text ?? ""
                     )
+                    
+                    HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
                     
                 }
                 

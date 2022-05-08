@@ -7,6 +7,7 @@
 
 import UIKit
 import Charts
+import PKHUD
 
 enum FriendType {
     
@@ -114,6 +115,8 @@ class FriendViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -137,6 +140,8 @@ class FriendViewController: UIViewController {
             case .failure(let error):
 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
             }
 
@@ -171,6 +176,8 @@ class FriendViewController: UIViewController {
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
         }

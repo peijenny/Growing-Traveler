@@ -69,7 +69,7 @@ class NoteViewController: BaseViewController {
                 
                 print(error)
                 
-                HUD.flash(.label("資料獲取失敗！"), delay: 0.5)
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             

@@ -83,6 +83,8 @@ class AuthenticationViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -235,7 +237,7 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                 
                 if let user = authDataResult?.user {
                     
-                    HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil))
+                    HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil), delay: 0.5)
                     
                     var photo = ""
                     

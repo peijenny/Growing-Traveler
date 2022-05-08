@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class RankViewController: UIViewController {
 
@@ -92,6 +93,8 @@ class RankViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
                 
         }
@@ -121,6 +124,8 @@ class RankViewController: UIViewController {
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             

@@ -90,7 +90,7 @@ class PublishNoteViewController: BaseViewController {
         
     }
     
-    @objc func checkNote() {
+    @objc func checkNote(sender: UIButton) {
         
         checkFullIn()
         
@@ -179,6 +179,8 @@ class PublishNoteViewController: BaseViewController {
                 content: noteContents
             )
             
+            HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+            
             userManager.updateUserNoteData(note: note)
             
             navigationController?.popViewController(animated: true)
@@ -192,6 +194,8 @@ class PublishNoteViewController: BaseViewController {
             modifyNote.createTime = TimeInterval(Int(Date().timeIntervalSince1970))
             
             modifyNote.content = noteContents
+            
+            HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
             
             userManager.updateUserNoteData(note: modifyNote)
             
@@ -291,6 +295,8 @@ extension PublishNoteViewController: UIImagePickerControllerDelegate, UINavigati
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

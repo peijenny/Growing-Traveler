@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import PKHUD
 
 class ProfileSettingViewController: BaseViewController {
     
@@ -153,6 +154,8 @@ class ProfileSettingViewController: BaseViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -223,6 +226,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                         
                         userManger.updateData(user: updateUserInfo)
                         
+                        HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                        
                     }
                     
                 }
@@ -290,6 +295,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 if let error = error {
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 } else {
                     
@@ -347,6 +354,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -365,6 +374,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -382,6 +393,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -424,6 +437,8 @@ extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavig
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import PKHUD
 
 class ChatRoomManager {
     
@@ -128,6 +129,8 @@ class ChatRoomManager {
         } catch {
 
             print(error)
+            
+            HUD.flash(.labeledError(title: "訊息傳送失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
         }
         

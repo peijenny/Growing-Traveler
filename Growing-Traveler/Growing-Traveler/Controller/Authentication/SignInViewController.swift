@@ -175,7 +175,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 
-                HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil))
+                HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil), delay: 0.5)
                 
                 userID = user.uid
                 
@@ -221,7 +221,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 
-                HUD.flash(.labeledSuccess(title: "註冊成功！", subtitle: nil))
+                HUD.flash(.labeledSuccess(title: "註冊成功！", subtitle: nil), delay: 0.5)
 
                 let dateFormatter = DateFormatter()
 
@@ -300,6 +300,8 @@ extension SignInViewController: UIImagePickerControllerDelegate, UINavigationCon
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "上傳失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

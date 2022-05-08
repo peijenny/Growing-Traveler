@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import PKHUD
 
 class MandateManager {
     
@@ -35,6 +36,8 @@ class MandateManager {
         } catch {
             
             print(error)
+            
+            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
             
         }
         

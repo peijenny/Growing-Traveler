@@ -7,6 +7,7 @@
 
 import UIKit
 import JXPhotoBrowser
+import PKHUD
 
 class PublishForumArticleViewController: BaseViewController {
 
@@ -151,6 +152,8 @@ class PublishForumArticleViewController: BaseViewController {
                 
                 forumArticleManager.addData(forumArticle: forumArticle)
                 
+                HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+                
             } else {
                 
                 guard var modifyForumArticle = modifyForumArticle else { return }
@@ -165,6 +168,8 @@ class PublishForumArticleViewController: BaseViewController {
                 
                 forumArticleManager.updateArticleData(
                 forumArticle: modifyForumArticle)
+                
+                HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
                 
             }
             
@@ -353,6 +358,8 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

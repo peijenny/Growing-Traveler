@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 enum SendType {
     
@@ -298,6 +299,8 @@ class ChatViewController: BaseViewController {
             case .failure(let error):
 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
             }
 
@@ -329,6 +332,8 @@ class ChatViewController: BaseViewController {
 
                 print(error)
 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
 
         }
@@ -366,6 +371,8 @@ class ChatViewController: BaseViewController {
             case .failure(let error):
 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
             }
 
@@ -392,6 +399,8 @@ class ChatViewController: BaseViewController {
             case .failure(let error):
 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
             }
             
@@ -418,6 +427,8 @@ class ChatViewController: BaseViewController {
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -662,6 +673,8 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

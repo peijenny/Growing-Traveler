@@ -126,6 +126,8 @@ class PublishCertificationViewController: BaseViewController {
                     content: certificationContent)
                 )
                 
+                HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+                
             } else {
                 
                 let index = modifyCertificationIndex ?? 0
@@ -135,6 +137,8 @@ class PublishCertificationViewController: BaseViewController {
                 userInfo.certification[index].imageLink = certificationImage
                 
                 userInfo.certification[index].content = certificationContent
+                
+                HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
                 
             }
 
@@ -171,6 +175,8 @@ extension PublishCertificationViewController: UIImagePickerControllerDelegate, U
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 
