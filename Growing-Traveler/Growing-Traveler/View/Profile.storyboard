@@ -298,7 +298,7 @@
             </objects>
             <point key="canvasLocation" x="-661" y="94"/>
         </scene>
-        <!--成長分析-->
+        <!--學習分析-->
         <scene sceneID="8xa-q3-o6H">
             <objects>
                 <viewController storyboardIdentifier="AnalysisViewController" id="DHo-pO-1Db" customClass="AnalysisViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
@@ -351,7 +351,7 @@
                             <constraint firstItem="5Fz-Uh-Kjh" firstAttribute="top" secondItem="t1V-u8-86M" secondAttribute="bottom" id="kCf-7N-Yj1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="成長分析" id="nMy-Q0-ZXA"/>
+                    <navigationItem key="navigationItem" title="學習分析" id="nMy-Q0-ZXA"/>
                     <connections>
                         <outlet property="analysisTableView" destination="5Fz-Uh-Kjh" id="qhY-zx-MYt"/>
                         <outlet property="selectSegmentedControl" destination="35w-pe-DBz" id="KcV-8Z-LoC"/>

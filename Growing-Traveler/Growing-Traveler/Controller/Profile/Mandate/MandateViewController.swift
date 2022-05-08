@@ -73,7 +73,7 @@ class MandateViewController: UIViewController {
         
         setTableView()
 
-        title = "成長任務"
+        title = "學習成就"
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
