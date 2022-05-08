@@ -57,12 +57,7 @@ class CalendarViewController: UIViewController {
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        fetchData(date: selectedDate)
+        listenData()
         
     }
     
@@ -80,13 +75,9 @@ class CalendarViewController: UIViewController {
         
     }
     
-    func fetchData(date: Date) {
-        
-        studyGoals.removeAll()
-        
-        print("TEST \(date)")
-        
-        studyGoalManager.fetchData { [weak self] result in
+    func listenData() {
+ 
+        studyGoalManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -98,7 +89,7 @@ class CalendarViewController: UIViewController {
                     
                     let startDate = $0.studyPeriod.startDate
 
-                    let selectDate = date.timeIntervalSince1970
+                    let selectDate = strongSelf.selectedDate.timeIntervalSince1970
 
                     let endDate = $0.studyPeriod.endDate
                     
@@ -111,15 +102,15 @@ class CalendarViewController: UIViewController {
                     return false
                     
                 })
-                
+
                 if strongSelf.studyGoals.count == 0 {
                     
                     strongSelf.displayBackgroundView.isHidden = false
-                    
+
                 } else {
-                    
+
                     strongSelf.displayBackgroundView.isHidden = true
-                    
+
                 }
                 
                 strongSelf.displayTableView.reloadData()
@@ -153,7 +144,9 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
-        fetchData(date: date)
+        selectedDate = date
+        
+        listenData()
         
     }
     
@@ -223,15 +216,15 @@ extension CalendarViewController: UITableViewDelegate {
                 
                 viewController.selectedDate = selectedDate
                 
-                navigationController?.pushViewController(viewController, animated: true)
-                
                 viewController.getSelectedDate = { selectedDate in
-                    
-                    self.fetchData(date: selectedDate)
                     
                     self.selectedDate = selectedDate
                     
+                    self.listenData()
+                       
                 }
+                
+                navigationController?.pushViewController(viewController, animated: true)
                 
             }
             
