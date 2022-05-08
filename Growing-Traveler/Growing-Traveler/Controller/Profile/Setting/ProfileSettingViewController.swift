@@ -17,6 +17,8 @@ class ProfileSettingViewController: BaseViewController {
     
     var deleteUserManager = DeleteUserManager()
     
+    var friendManager = FriendManager()
+    
     var studyGoals: [StudyGoal] = []
     
     var friendList: Friend?
@@ -191,8 +193,10 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
                 cell.setUserPhoto(userPhotoLink: userInfo?.userPhoto ?? "")
                 
-            } else if userImageLink != nil {
-             
+            }
+            
+            if userImageLink != nil {
+                
                 cell.setUserPhoto(userPhotoLink: userImageLink ?? "")
                 
             }
@@ -225,6 +229,14 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                     if let updateUserInfo = self.userInfo {
                         
                         userManger.updateData(user: updateUserInfo)
+                        
+                        friendList?.userName = cell.userNameTextField.text ?? ""
+                        
+                        if let friendList = friendList {
+                            
+                            friendManager.updateData(friend: friendList)
+                            
+                        }
                         
                         HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
                         

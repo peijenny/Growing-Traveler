@@ -228,7 +228,7 @@ class FriendManager {
         
     }
     
-    func addData(friend: Friend) {
+    func updateData(friend: Friend) {
         
         do {
             
@@ -240,7 +240,7 @@ class FriendManager {
 
             print(error)
             
-            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
+            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
         }
         

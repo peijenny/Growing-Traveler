@@ -250,7 +250,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     applyList: [], deliveryList: []
                 )
                 
-                self.friendManager.addData(friend: friend)
+                self.friendManager.updateData(friend: friend)
                 
                 userID = user.uid
 

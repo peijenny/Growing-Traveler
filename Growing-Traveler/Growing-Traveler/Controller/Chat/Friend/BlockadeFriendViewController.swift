@@ -186,7 +186,7 @@ extension BlockadeFriendViewController: UITableViewDelegate, UITableViewDataSour
             
             friend.blockadeList.remove(at: indexPath.row)
             
-            friendManager.addData(friend: friend)
+            friendManager.updateData(friend: friend)
             
             HUD.flash(.labeledSuccess(title: "已解除封鎖此帳號", subtitle: nil), delay: 0.5)
             

@@ -224,7 +224,7 @@ class UserInfoViewController: UIViewController {
                 
                 ownerFriend.blockadeList.append(self.selectUserID ?? "")
                 
-                self.friendManager.addData(friend: ownerFriend)
+                self.friendManager.updateData(friend: ownerFriend)
                 
                 self.view.removeFromSuperview()
                 
