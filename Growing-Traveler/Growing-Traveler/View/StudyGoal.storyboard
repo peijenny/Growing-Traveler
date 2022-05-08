@@ -233,7 +233,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Uo-1y-qBd">
-                                <rect key="frame" x="20" y="193.5" width="374" height="470"/>
+                                <rect key="frame" x="20" y="184" width="374" height="489"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="項目名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g53-PE-vwA">
                                         <rect key="frame" x="16" y="72" width="64" height="40"/>
@@ -283,7 +283,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHi-4x-pLk">
-                                        <rect key="frame" x="16" y="410" width="342" height="40"/>
+                                        <rect key="frame" x="16" y="429" width="342" height="40"/>
                                         <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="nlg-fd-2fQ"/>
@@ -320,10 +320,33 @@
                                             <action selector="closeButton:" destination="I2E-Nz-5xc" eventType="touchUpInside" id="ubP-gn-er1"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wze-Zx-qhE">
+                                        <rect key="frame" x="16" y="379" width="342" height="40"/>
+                                        <color key="backgroundColor" red="0.69803921570000005" green="0.81960784310000001" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Gyp-U1-49A"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="doc.on.doc.fill" catalog="system" title=" 複製項目">
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="copyButton:" destination="I2E-Nz-5xc" eventType="touchUpInside" id="kBx-bH-PNF"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="wze-Zx-qhE" firstAttribute="leading" secondItem="3Uo-1y-qBd" secondAttribute="leading" constant="16" id="4eq-fd-1Xg"/>
+                                    <constraint firstAttribute="trailing" secondItem="wze-Zx-qhE" secondAttribute="trailing" constant="16" id="565-Xv-jpC"/>
                                     <constraint firstItem="6WC-L7-gPm" firstAttribute="leading" secondItem="3Uo-1y-qBd" secondAttribute="leading" constant="16" id="5hc-RI-EOa"/>
+                                    <constraint firstItem="wze-Zx-qhE" firstAttribute="top" secondItem="z9g-MW-1UT" secondAttribute="bottom" constant="10" id="8IA-gj-O0e"/>
                                     <constraint firstItem="gSY-ab-LS6" firstAttribute="top" secondItem="3Uo-1y-qBd" secondAttribute="top" constant="16" id="Iz2-VD-iRt"/>
                                     <constraint firstAttribute="trailing" secondItem="mCN-Ji-5mt" secondAttribute="trailing" constant="60" id="Jvu-FS-7xp"/>
                                     <constraint firstItem="WKx-MT-4HI" firstAttribute="leading" secondItem="3Uo-1y-qBd" secondAttribute="leading" constant="16" id="NZ6-nh-j8b"/>
@@ -336,9 +359,9 @@
                                     <constraint firstItem="mCN-Ji-5mt" firstAttribute="leading" secondItem="3Uo-1y-qBd" secondAttribute="leading" constant="60" id="ZW3-Sf-uwe"/>
                                     <constraint firstAttribute="trailing" secondItem="Uxo-U7-9gw" secondAttribute="trailing" constant="16" id="Zbh-Rj-daE"/>
                                     <constraint firstItem="z9g-MW-1UT" firstAttribute="top" secondItem="m9y-OW-uFQ" secondAttribute="bottom" constant="16" id="bEn-lz-BQl"/>
-                                    <constraint firstItem="FHi-4x-pLk" firstAttribute="top" secondItem="z9g-MW-1UT" secondAttribute="bottom" constant="41" id="diM-UY-XAn"/>
                                     <constraint firstItem="WKx-MT-4HI" firstAttribute="top" secondItem="6WC-L7-gPm" secondAttribute="bottom" constant="16" id="e5B-Rn-hbs"/>
                                     <constraint firstAttribute="trailing" secondItem="FHi-4x-pLk" secondAttribute="trailing" constant="16" id="gOq-Nw-vuM"/>
+                                    <constraint firstItem="FHi-4x-pLk" firstAttribute="top" secondItem="wze-Zx-qhE" secondAttribute="bottom" constant="10" id="glH-XO-n7S"/>
                                     <constraint firstAttribute="trailing" secondItem="gSY-ab-LS6" secondAttribute="trailing" constant="16" id="h1x-zm-tTD"/>
                                     <constraint firstItem="m9y-OW-uFQ" firstAttribute="top" secondItem="Uxo-U7-9gw" secondAttribute="bottom" constant="16" id="i1G-xX-9gB"/>
                                     <constraint firstItem="Uxo-U7-9gw" firstAttribute="leading" secondItem="g53-PE-vwA" secondAttribute="trailing" constant="20" id="qfV-IL-7JF"/>
@@ -371,6 +394,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="contentTextView" destination="z9g-MW-1UT" id="eSI-AU-P66"/>
+                        <outlet property="copyItemButton" destination="wze-Zx-qhE" id="ZIr-CD-H83"/>
                         <outlet property="itemTextField" destination="Uxo-U7-9gw" id="Ess-4p-bzc"/>
                         <outlet property="studyTimeStackView" destination="m9y-OW-uFQ" id="LeR-72-Sdl"/>
                     </connections>
@@ -518,6 +542,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="doc.on.doc.fill" catalog="system" width="116" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="seo" width="533.33331298828125" height="400"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
