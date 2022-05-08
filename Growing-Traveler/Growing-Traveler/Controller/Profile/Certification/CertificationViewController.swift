@@ -33,6 +33,12 @@ class CertificationViewController: UIViewController {
         
         setTableView()
         
+        setcertificationBackgroundView()
+        
+        setImageView()
+        
+        setLabel()
+        
         setNavigationItems()
         
         fetchUserInfoData()
@@ -41,7 +47,7 @@ class CertificationViewController: UIViewController {
     
     func fetchUserInfoData() {
         
-        userManager.fetchData(fetchUserID: userID) { [weak self] result in
+        userManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -50,6 +56,16 @@ class CertificationViewController: UIViewController {
             case .success(let userInfo):
                 
                 strongSelf.userInfo = userInfo
+                
+                if strongSelf.userInfo?.certification.count == 0 {
+                    
+                    strongSelf.certificationBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    strongSelf.certificationBackgroundView.isHidden = true
+                    
+                }
                 
                 strongSelf.certificationTableView.reloadData()
                 
@@ -123,7 +139,7 @@ class CertificationViewController: UIViewController {
         
     }
     
-    func setReleaseBackgroundView() {
+    func setcertificationBackgroundView() {
         
         certificationBackgroundView.backgroundColor = UIColor.clear
         

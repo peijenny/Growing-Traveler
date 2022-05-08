@@ -263,11 +263,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="rLi-Mr-TQI" firstAttribute="top" secondItem="GBr-bK-zhV" secondAttribute="top" id="0BF-03-lHl"/>
-                            <constraint firstItem="D9W-NE-GYL" firstAttribute="top" secondItem="GBr-bK-zhV" secondAttribute="top" constant="200" id="8Iq-K8-sbR"/>
                             <constraint firstItem="GBr-bK-zhV" firstAttribute="bottom" secondItem="rLi-Mr-TQI" secondAttribute="bottom" id="9vH-uT-7f1"/>
                             <constraint firstItem="GBr-bK-zhV" firstAttribute="trailing" secondItem="rLi-Mr-TQI" secondAttribute="trailing" id="MLF-tG-AI7"/>
+                            <constraint firstItem="D9W-NE-GYL" firstAttribute="centerY" secondItem="GBr-bK-zhV" secondAttribute="centerY" id="Osl-AU-gaS"/>
                             <constraint firstItem="D9W-NE-GYL" firstAttribute="leading" secondItem="GBr-bK-zhV" secondAttribute="leading" constant="20" id="PK4-GX-3ag"/>
-                            <constraint firstItem="GBr-bK-zhV" firstAttribute="bottom" secondItem="D9W-NE-GYL" secondAttribute="bottom" constant="200" id="bXZ-Wn-Z29"/>
                             <constraint firstItem="rLi-Mr-TQI" firstAttribute="leading" secondItem="GBr-bK-zhV" secondAttribute="leading" id="dgi-7H-tsq"/>
                             <constraint firstItem="GBr-bK-zhV" firstAttribute="trailing" secondItem="D9W-NE-GYL" secondAttribute="trailing" constant="20" id="g3p-oV-eFR"/>
                         </constraints>
