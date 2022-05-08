@@ -126,7 +126,7 @@ class BlockadeFriendViewController: UIViewController {
             blockadeTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             blockadeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             blockadeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            blockadeTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            blockadeTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         blockadeTableView.register(

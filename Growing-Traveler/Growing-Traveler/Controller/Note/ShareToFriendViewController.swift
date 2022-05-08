@@ -158,7 +158,7 @@ class ShareToFriendViewController: UIViewController {
             shareToFriendTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             shareToFriendTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             shareToFriendTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            shareToFriendTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            shareToFriendTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         shareToFriendTableView.register(

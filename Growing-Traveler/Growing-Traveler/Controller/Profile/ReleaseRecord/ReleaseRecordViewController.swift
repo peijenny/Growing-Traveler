@@ -194,7 +194,7 @@ class ReleaseRecordViewController: UIViewController {
             resleaseBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             resleaseBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             resleaseBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            resleaseBackgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            resleaseBackgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
     }
@@ -249,7 +249,7 @@ class ReleaseRecordViewController: UIViewController {
             releaseRecordTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             releaseRecordTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             releaseRecordTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            releaseRecordTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            releaseRecordTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         releaseRecordTableView.register(

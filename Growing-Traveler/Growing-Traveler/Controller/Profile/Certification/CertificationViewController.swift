@@ -153,7 +153,7 @@ class CertificationViewController: UIViewController {
             certificationBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             certificationBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             certificationBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            certificationBackgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            certificationBackgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
     }
@@ -208,7 +208,7 @@ class CertificationViewController: UIViewController {
             certificationTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             certificationTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             certificationTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            certificationTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            certificationTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         certificationTableView.register(

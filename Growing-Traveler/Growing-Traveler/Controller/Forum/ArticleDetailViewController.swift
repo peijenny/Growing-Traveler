@@ -184,7 +184,7 @@ class ArticleDetailViewController: UIViewController {
             articleDetailTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             articleDetailTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             articleDetailTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            articleDetailTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            articleDetailTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         articleDetailTableView.register(

@@ -283,7 +283,7 @@ class MandateViewController: UIViewController {
             mandateTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             mandateTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             mandateTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            mandateTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            mandateTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         mandateTableView.register(

@@ -102,7 +102,7 @@ class ProfileSettingViewController: BaseViewController {
             profileSettingTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             profileSettingTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             profileSettingTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            profileSettingTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            profileSettingTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         profileSettingTableView.register(
