@@ -192,10 +192,10 @@ class PublishForumArticleViewController: BaseViewController {
         publishArticleTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
             publishArticleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             publishArticleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -80.0)
         ])
         
         publishArticleTableView.register(

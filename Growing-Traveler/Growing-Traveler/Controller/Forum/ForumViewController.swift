@@ -461,7 +461,16 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
 
         let viewController = ArticleDetailViewController()
         
-        viewController.forumArticle = allForumArticles[indexPath.section][indexPath.row]
+        if inputText == nil {
+            
+            viewController.forumArticle = allForumArticles[indexPath.section][indexPath.row]
+            
+        } else {
+            
+            let searchArticels = searchForumArticles.filter({ $0.forumType == forumType[indexPath.section] })
+            
+            viewController.forumArticle = searchArticels[indexPath.row]
+        }
 
         navigationController?.pushViewController(viewController, animated: true)
         
