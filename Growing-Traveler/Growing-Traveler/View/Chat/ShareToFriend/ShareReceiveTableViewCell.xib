@@ -33,7 +33,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqQ-KO-7BV">
                         <rect key="frame" x="55" y="10" width="209" height="225"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undrawUpload" translatesAutoresizingMaskIntoConstraints="NO" id="8HG-be-Ze9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undrawImages" translatesAutoresizingMaskIntoConstraints="NO" id="8HG-be-Ze9">
                                 <rect key="frame" x="0.0" y="0.0" width="209" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="209" id="I6T-pN-sij"/>
@@ -112,6 +112,6 @@
     </objects>
     <resources>
         <image name="person.circle" catalog="system" width="128" height="121"/>
-        <image name="undrawUpload" width="362.33334350585938" height="254.66667175292969"/>
+        <image name="undrawImages" width="334.66665649414062" height="244.33332824707031"/>
     </resources>
 </document>

@@ -28,7 +28,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Blm-MB-k7P">
                         <rect key="frame" x="195" y="10" width="209" height="225"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undrawUpload" translatesAutoresizingMaskIntoConstraints="NO" id="uyw-k4-0v7">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undrawImages" translatesAutoresizingMaskIntoConstraints="NO" id="uyw-k4-0v7">
                                 <rect key="frame" x="0.0" y="0.0" width="209" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="OaZ-HH-kWE"/>
@@ -102,6 +102,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="undrawUpload" width="362.33334350585938" height="254.66667175292969"/>
+        <image name="undrawImages" width="334.66665649414062" height="244.33332824707031"/>
     </resources>
 </document>

@@ -46,7 +46,9 @@ class ProfileViewController: UIViewController {
     
     let featureList: [FeatureType] = [.mandate, .analysis, .release, .license]
     
-    let featureImage: [ImageAsset] = [.specialDeals, .vision, .blogging, .meditation]
+//    let featureImage: [ImageAsset] = [.specialDeals, .vision, .blogging, .meditation]
+    
+    let featureImage: [ImageAsset] = [.undrawTask, .undrawChart, .undrawFAQ, .undrawExperience]
     
     var userManager = UserManager()
     

@@ -69,6 +69,8 @@
 		28754AC7280305370079F430 /* StudyGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28754AC6280305370079F430 /* StudyGoal.swift */; };
 		28754ACA2803079A0079F430 /* StudyItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28754AC82803079A0079F430 /* StudyItemTableViewCell.swift */; };
 		28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28754AC92803079A0079F430 /* StudyItemTableViewCell.xib */; };
+		28828A5D2827D81100BA02EF /* 94021-startup.json in Resources */ = {isa = PBXBuildFile; fileRef = 28828A5C2827D81100BA02EF /* 94021-startup.json */; };
+		28828A5F2827DBD400BA02EF /* 101546-study-abroad.json in Resources */ = {isa = PBXBuildFile; fileRef = 28828A5E2827DBD400BA02EF /* 101546-study-abroad.json */; };
 		288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */; };
 		288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288367A8280129F30010CEAD /* StudyGoal.storyboard */; };
 		288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */; };
@@ -213,6 +215,8 @@
 		28754AC6280305370079F430 /* StudyGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoal.swift; sourceTree = "<group>"; };
 		28754AC82803079A0079F430 /* StudyItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyItemTableViewCell.swift; sourceTree = "<group>"; };
 		28754AC92803079A0079F430 /* StudyItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyItemTableViewCell.xib; sourceTree = "<group>"; };
+		28828A5C2827D81100BA02EF /* 94021-startup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "94021-startup.json"; sourceTree = "<group>"; };
+		28828A5E2827DBD400BA02EF /* 101546-study-abroad.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "101546-study-abroad.json"; path = "../../../../../Downloads/101546-study-abroad.json"; sourceTree = "<group>"; };
 		288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		288367A8280129F30010CEAD /* StudyGoal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyGoal.storyboard; sourceTree = "<group>"; };
 		288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalViewController.swift; sourceTree = "<group>"; };
@@ -564,6 +568,7 @@
 		288367AF2801396D0010CEAD /* StudyGoal */ = {
 			isa = PBXGroup;
 			children = (
+				28D79FE5281A85B900505B5B /* Rank */,
 				28AF15AF2804090D004E97B8 /* PlanStudyGoal */,
 				28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */,
 				28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */,
@@ -784,7 +789,6 @@
 			children = (
 				2808C90E280FEC2B00DC1EC5 /* Analysis */,
 				281358D7281BC8D3000B0CAE /* Certification */,
-				28D79FE5281A85B900505B5B /* Rank */,
 				283E65862817D17700F1033F /* Setting */,
 				28DA833C2812AB420081CB14 /* Mandate */,
 				28DA83302812744F0081CB14 /* ProfileView.xib */,
@@ -810,6 +814,8 @@
 				281358F1281E790E000B0CAE /* Growth-Animation.json */,
 				281358ED281E6B72000B0CAE /* Vision.json */,
 				28DA83422812AF950081CB14 /* 93125-progress-bar.json */,
+				28828A5C2827D81100BA02EF /* 94021-startup.json */,
+				28828A5E2827DBD400BA02EF /* 101546-study-abroad.json */,
 			);
 			path = LottieFiles;
 			sourceTree = "<group>";
@@ -927,11 +933,13 @@
 				28D79FF3281A8BDE00505B5B /* RankTableViewCell.xib in Resources */,
 				280C1B0B280D78B90091B9DC /* FriendListTableViewCell.xib in Resources */,
 				281358F2281E790E000B0CAE /* Growth-Animation.json in Resources */,
+				28828A5F2827DBD400BA02EF /* 101546-study-abroad.json in Resources */,
 				2808C927281131A400DC1EC5 /* AnalysisContentTableViewCell.xib in Resources */,
 				28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */,
 				28BB6F3A28098CCD002B0458 /* ArticleDetailHeaderView.xib in Resources */,
 				28DA83402812AB940081CB14 /* MandateTableViewCell.xib in Resources */,
 				283E658E2817D8A700F1033F /* SettingContentTableViewCell.xib in Resources */,
+				28828A5D2827D81100BA02EF /* 94021-startup.json in Resources */,
 				283E65922817DF2300F1033F /* SettingSignTableViewCell.xib in Resources */,
 				280C1AFC280D5D7C0091B9DC /* Chat.storyboard in Resources */,
 				28DA832D281272560081CB14 /* Profile.storyboard in Resources */,

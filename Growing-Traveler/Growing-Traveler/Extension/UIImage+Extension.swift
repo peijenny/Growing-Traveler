@@ -29,13 +29,11 @@ enum ImageAsset: String {
     case telephoneCall
     case videoCamera
     
-    case specialDeals
-    case vision
-    case idea
-    case blogging
-    case meditation
-    
-    case undrawUpload
+    case undrawTask
+    case undrawChart
+    case undrawExperience
+    case undrawFAQ
+    case undrawImages
     case undrawNotFound
 
 }

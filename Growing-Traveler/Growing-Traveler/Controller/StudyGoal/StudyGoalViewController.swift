@@ -150,19 +150,34 @@ class StudyGoalViewController: UIViewController {
     
     func setHeaserLottieView() {
         
-        lottieAnimation = AnimationView(name: "Growth-Animation")
+        lottieAnimation = AnimationView(name: "101546-study-abroad")
+        
+        lottieAnimation.backgroundColor = UIColor.clear
+        
+        let size = headerAnimationView.frame.height * CGFloat(0.8) - 30
+        
+//        lottieAnimation.cornerRadius = size / 2
         
         lottieAnimation.contentMode = .scaleAspectFit
         
-        lottieAnimation.frame = CGRect(
-            x: headerAnimationView.frame.width * CGFloat(0.1),
-            y: headerAnimationView.frame.height * CGFloat(0.2) + 30,
-            width: headerAnimationView.frame.width * CGFloat(0.8),
-            height: headerAnimationView.frame.height * CGFloat(0.8)
-        )
+//        lottieAnimation.frame = CGRect(
+//            x: headerAnimationView.frame.width * CGFloat(0.1),
+//            y: headerAnimationView.frame.height * CGFloat(0.2),
+//            width: headerAnimationView.frame.width * CGFloat(0.8),
+//            height: headerAnimationView.frame.height * CGFloat(0.8)
+//        )
 
         headerAnimationView.addSubview(lottieAnimation)
         
+        lottieAnimation.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            lottieAnimation.centerXAnchor.constraint(equalTo: headerAnimationView.centerXAnchor),
+            lottieAnimation.centerYAnchor.constraint(equalTo: headerAnimationView.centerYAnchor, constant: 50),
+            lottieAnimation.widthAnchor.constraint(equalToConstant: size),
+            lottieAnimation.heightAnchor.constraint(equalToConstant: size)
+        ])
+
         lottieAnimation.loopMode = .loop
 
     }
