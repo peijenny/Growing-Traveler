@@ -203,6 +203,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             
             cell.modifyUserPhotoButton.addTarget(self, action: #selector(modifyUserPhoto), for: .touchUpInside)
             
+            cell.selectionStyle = .none
+            
             return cell
             
         } else if indexPath.row == 1 {
@@ -250,6 +252,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             
             cell.showUserContent(userInfo: userInfo)
             
+            cell.selectionStyle = .none
+            
             return cell
             
         } else {
@@ -263,6 +267,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             
             cell.deleteAccountButton.addTarget(self, action: #selector(deleteAccount), for: .touchUpInside)
 
+            cell.selectionStyle = .none
+            
             return cell
             
         }

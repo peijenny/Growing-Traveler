@@ -214,6 +214,8 @@ extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSourc
         
         cell.unblockButton.addTarget(self, action: #selector(shareToFriendButton), for: .touchUpInside)
         
+        cell.selectionStyle = .none
+        
         return cell
         
     }

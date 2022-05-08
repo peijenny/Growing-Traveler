@@ -19,7 +19,7 @@ class NoteViewController: BaseViewController {
             noteTableView.delegate = self
             
             noteTableView.dataSource = self
-            
+
         }
         
     }
@@ -142,6 +142,8 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = cell as? NoteTableViewCell else { return cell }
         
         cell.showNoteData(note: notes[indexPath.row])
+        
+        cell.selectionStyle = .none
 
         return cell
         

@@ -521,6 +521,8 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
 
                 cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
+                
+                cell.selectionStyle = .none
 
                 return cell
                 
@@ -533,6 +535,8 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let cell = cell as? AnalysisPieChartTableViewCell else { return cell }
                 
                 cell.updateChatsData(spendStudyItem: spendStudyItem)
+                
+                cell.selectionStyle = .none
                 
                 return cell
                 
@@ -555,6 +559,8 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.showPieText(certificateText: certificateText, interesteText: interesteText)
                 
             }
+            
+            cell.selectionStyle = .none
             
             return cell
             

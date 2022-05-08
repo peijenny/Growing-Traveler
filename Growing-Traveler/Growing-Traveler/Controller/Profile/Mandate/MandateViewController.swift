@@ -325,6 +325,8 @@ extension MandateViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.showMandateItem(mandateItem: mandateItem)
         
+        cell.selectionStyle = .none
+        
         return cell
         
     }

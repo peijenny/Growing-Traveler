@@ -17,7 +17,7 @@ class RankViewController: UIViewController {
             rankTableView.delegate = self
             
             rankTableView.dataSource = self
-            
+
             let longPressRecognizer = UILongPressGestureRecognizer(
                 target: self, action: #selector(longPressed(sender:)))
             
@@ -187,6 +187,8 @@ extension RankViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.showRankData(
             rankNumber: indexPath.row + 1, userInfo: usersInfo[indexPath.row], blockadeList: blockadeList)
+        
+        cell.selectionStyle = .none
         
         return cell
         

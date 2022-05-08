@@ -251,6 +251,8 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
             
         }
         
+        cell.selectionStyle = .none
+        
         return cell
         
     }

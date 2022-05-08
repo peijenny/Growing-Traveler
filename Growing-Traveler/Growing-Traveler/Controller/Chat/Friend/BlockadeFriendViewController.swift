@@ -172,6 +172,8 @@ extension BlockadeFriendViewController: UITableViewDelegate, UITableViewDataSour
         
         cell.unblockButton.addTarget(self, action: #selector(unblockUserButton), for: .touchUpInside)
         
+        cell.selectionStyle = .none
+        
         return cell
         
     }

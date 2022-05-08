@@ -93,6 +93,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.signInButton.addTarget(self, action: #selector(signInWithEmail), for: .touchUpInside)
             
+            cell.selectionStyle = .none
+            
             return cell
             
         } else {
@@ -121,6 +123,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
             cell.signUpButton.addTarget(self, action: #selector(signUpWithEmail), for: .touchUpInside)
             
             cell.uploadUserPhotoButton.addTarget(self, action: #selector(uploadUserPhoto), for: .touchUpInside)
+            
+            cell.selectionStyle = .none
             
             return cell
             

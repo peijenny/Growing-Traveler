@@ -408,6 +408,8 @@ extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource 
             blockadeList: ownFriend?.blockadeList ?? [],
             deleteAccount: false)
         
+        cell.selectionStyle = .none
+        
         return cell
         
     }
