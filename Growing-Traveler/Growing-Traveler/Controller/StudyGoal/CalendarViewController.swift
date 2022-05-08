@@ -39,7 +39,15 @@ class CalendarViewController: UIViewController {
     
     var studyGoalManager = StudyGoalManager()
     
-    var studyGoals: [StudyGoal] = []
+    var studyGoals: [StudyGoal] = [] {
+        
+        didSet {
+            
+            displayTableView.reloadData()
+            
+        }
+        
+    }
     
     var selectedDate = Date()
     
@@ -84,7 +92,7 @@ class CalendarViewController: UIViewController {
             switch result {
                 
             case .success(let data):
-
+                
                 strongSelf.studyGoals = data.filter({
                     
                     let startDate = $0.studyPeriod.startDate
