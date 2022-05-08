@@ -60,7 +60,7 @@ class AnalysisContentTableViewCell: UITableViewCell {
             string: certificateText,
             attributes: [ NSAttributedString.Key.paragraphStyle: paragraphStyle,
                            NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 16.0)!,
-                           NSAttributedString.Key.foregroundColor: UIColor.hexStringToUIColor(hex: "6B799E") ])
+                          NSAttributedString.Key.foregroundColor: UIColor.black ])
         
         bottomContentLabel.attributedText = certificateAttributes
         
@@ -68,7 +68,7 @@ class AnalysisContentTableViewCell: UITableViewCell {
     
     func showBarText(feedback: Feedback, experienceValue: Int) {
         
-        topTitleLabel.text = "近期學習狀況 → \(feedback.title)"
+        topTitleLabel.text = "近期學習狀況： \(feedback.title)"
         
         bottomTitleLabel.text = "近期學習的評語："
         
@@ -77,10 +77,10 @@ class AnalysisContentTableViewCell: UITableViewCell {
         paragraphStyle.alignment = .left
         
         let experienceAttributes = NSAttributedString(
-            string: "獲得的經驗值： \(experienceValue)",
+            string: "獲得的經驗值 → \(experienceValue)",
             attributes: [ NSAttributedString.Key.paragraphStyle: paragraphStyle,
                           NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 16.0)!,
-                          NSAttributedString.Key.foregroundColor: UIColor.hexStringToUIColor(hex: "0384BD") ])
+                          NSAttributedString.Key.foregroundColor: UIColor.black ])
         
         topContentLabel.attributedText = experienceAttributes
         
@@ -88,7 +88,7 @@ class AnalysisContentTableViewCell: UITableViewCell {
             string: feedback.comment,
             attributes: [ NSAttributedString.Key.paragraphStyle: paragraphStyle,
                            NSAttributedString.Key.font: UIFont(name: "PingFang TC", size: 16.0)!,
-                          NSAttributedString.Key.foregroundColor: UIColor.hexStringToUIColor(hex: "6B799E") ])
+                          NSAttributedString.Key.foregroundColor: UIColor.black ])
         
         bottomContentLabel.attributedText = commentAttributes
         
