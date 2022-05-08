@@ -12,6 +12,12 @@ class ReleaseRecordViewController: UIViewController {
 
     var releaseRecordTableView = UITableView()
     
+    var resleaseBackgroundView = UIView()
+    
+    var imageView = UIImageView()
+    
+    var label = UILabel()
+    
     var forumArticleManager = ForumArticleManager()
     
     var forumArticles: [ForumArticle] = []
@@ -30,6 +36,12 @@ class ReleaseRecordViewController: UIViewController {
         setBackgroundView()
         
         setTableView()
+        
+        setReleaseBackgroundView()
+        
+        setImageView()
+        
+        setLabel()
         
         setNavigationItem()
         
@@ -126,6 +138,16 @@ class ReleaseRecordViewController: UIViewController {
                 
                 strongSelf.forumArticles = filterArticles
                 
+                if strongSelf.forumArticles.count == 0 {
+                    
+                    strongSelf.resleaseBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    strongSelf.resleaseBackgroundView.isHidden = true
+                    
+                }
+                
                 strongSelf.releaseRecordTableView.reloadData()
                 
             case .failure(let error):
@@ -154,6 +176,61 @@ class ReleaseRecordViewController: UIViewController {
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+        
+    }
+    
+    func setReleaseBackgroundView() {
+        
+        resleaseBackgroundView.backgroundColor = UIColor.clear
+        
+        resleaseBackgroundView.isHidden = true
+        
+        view.addSubview(resleaseBackgroundView)
+        
+        resleaseBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            resleaseBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            resleaseBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            resleaseBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            resleaseBackgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+        ])
+        
+    }
+    
+    func setImageView() {
+        
+        imageView.image = UIImage.asset(.undrawNotFound)
+        
+        resleaseBackgroundView.addSubview(imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: resleaseBackgroundView.topAnchor, constant: 50),
+            imageView.trailingAnchor.constraint(equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
+            imageView.leadingAnchor.constraint(equalTo: resleaseBackgroundView.leadingAnchor, constant: 50),
+            imageView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+    }
+    
+    func setLabel() {
+        
+        label.text = "目前暫無發佈紀錄"
+        
+        label.textAlignment = .center
+        
+        resleaseBackgroundView.addSubview(label)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            label.trailingAnchor.constraint(equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
+            label.leadingAnchor.constraint(equalTo: resleaseBackgroundView.leadingAnchor, constant: 50),
+            label.heightAnchor.constraint(equalToConstant: 25)
         ])
         
     }

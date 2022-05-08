@@ -45,14 +45,43 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s86-Ns-WjX">
+                                <rect key="frame" x="10" y="149" width="394" height="703"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undrawNotFound" translatesAutoresizingMaskIntoConstraints="NO" id="CVS-jt-yZH">
+                                        <rect key="frame" x="50" y="50" width="294" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="Zht-oC-T41"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前沒有學習筆記" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjv-FP-925">
+                                        <rect key="frame" x="50" y="270" width="294" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Bjv-FP-925" secondAttribute="trailing" constant="50" id="VyT-1J-rAi"/>
+                                    <constraint firstItem="Bjv-FP-925" firstAttribute="top" secondItem="CVS-jt-yZH" secondAttribute="bottom" constant="20" id="XJC-an-Rw8"/>
+                                    <constraint firstItem="CVS-jt-yZH" firstAttribute="leading" secondItem="s86-Ns-WjX" secondAttribute="leading" constant="50" id="ZDj-ht-DKn"/>
+                                    <constraint firstAttribute="trailing" secondItem="CVS-jt-yZH" secondAttribute="trailing" constant="50" id="nJD-fI-QWZ"/>
+                                    <constraint firstItem="Bjv-FP-925" firstAttribute="leading" secondItem="s86-Ns-WjX" secondAttribute="leading" constant="50" id="tFf-WW-KVa"/>
+                                    <constraint firstItem="CVS-jt-yZH" firstAttribute="top" secondItem="s86-Ns-WjX" secondAttribute="top" constant="50" id="xuM-MW-XsC"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f4a-8U-Rrn"/>
                         <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="0wF-HZ-Dcd" firstAttribute="leading" secondItem="f4a-8U-Rrn" secondAttribute="leading" constant="8" id="7fF-th-ZBn"/>
+                            <constraint firstItem="s86-Ns-WjX" firstAttribute="leading" secondItem="f4a-8U-Rrn" secondAttribute="leading" constant="10" id="DbV-Kt-Gfh"/>
+                            <constraint firstItem="f4a-8U-Rrn" firstAttribute="bottom" secondItem="s86-Ns-WjX" secondAttribute="bottom" constant="10" id="M4D-OK-0nu"/>
                             <constraint firstItem="IOt-KH-OGh" firstAttribute="top" secondItem="f4a-8U-Rrn" secondAttribute="top" id="P1F-I6-zUf"/>
                             <constraint firstItem="Jhn-pg-fiM" firstAttribute="top" secondItem="IOt-KH-OGh" secondAttribute="bottom" id="UB1-7u-fBp"/>
                             <constraint firstAttribute="bottom" secondItem="Jhn-pg-fiM" secondAttribute="bottom" id="Xiq-yF-10B"/>
+                            <constraint firstItem="s86-Ns-WjX" firstAttribute="top" secondItem="IOt-KH-OGh" secondAttribute="bottom" constant="10" id="Zj7-GI-sQe"/>
                             <constraint firstItem="f4a-8U-Rrn" firstAttribute="trailing" secondItem="0wF-HZ-Dcd" secondAttribute="trailing" constant="8" id="bYm-r0-OPw"/>
                             <constraint firstItem="f4a-8U-Rrn" firstAttribute="bottom" secondItem="0wF-HZ-Dcd" secondAttribute="bottom" constant="8" id="c3I-K6-NMO"/>
                             <constraint firstItem="0wF-HZ-Dcd" firstAttribute="top" secondItem="IOt-KH-OGh" secondAttribute="bottom" constant="10" id="fFY-9B-wbC"/>
@@ -60,12 +89,14 @@
                             <constraint firstItem="f4a-8U-Rrn" firstAttribute="trailing" secondItem="Jhn-pg-fiM" secondAttribute="trailing" id="neS-Sk-PzY"/>
                             <constraint firstItem="IOt-KH-OGh" firstAttribute="leading" secondItem="f4a-8U-Rrn" secondAttribute="leading" id="ri7-OE-IKG"/>
                             <constraint firstItem="IOt-KH-OGh" firstAttribute="trailing" secondItem="f4a-8U-Rrn" secondAttribute="trailing" id="rnb-3N-wjK"/>
+                            <constraint firstItem="f4a-8U-Rrn" firstAttribute="trailing" secondItem="s86-Ns-WjX" secondAttribute="trailing" constant="10" id="spu-XS-waT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="個人學習筆記" id="NS7-BK-0Gh">
                         <barButtonItem key="backBarButtonItem" title=" " id="8Ee-b2-Niq"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="noteBackgroundView" destination="s86-Ns-WjX" id="scP-4V-4EV"/>
                         <outlet property="noteSearchBar" destination="IOt-KH-OGh" id="nE7-uL-OmT"/>
                         <outlet property="noteTableView" destination="0wF-HZ-Dcd" id="ajv-Tv-fPc"/>
                     </connections>
@@ -215,6 +246,7 @@
     </scenes>
     <resources>
         <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
+        <image name="undrawNotFound" width="1120.59228515625" height="777.91583251953125"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

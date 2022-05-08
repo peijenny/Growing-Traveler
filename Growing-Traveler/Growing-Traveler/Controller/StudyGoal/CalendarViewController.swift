@@ -35,6 +35,8 @@ class CalendarViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var displayBackgroundView: UIView!
+    
     var studyGoalManager = StudyGoalManager()
     
     var studyGoals: [StudyGoal] = []
@@ -109,6 +111,16 @@ class CalendarViewController: UIViewController {
                     return false
                     
                 })
+                
+                if strongSelf.studyGoals.count == 0 {
+                    
+                    strongSelf.displayBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    strongSelf.displayBackgroundView.isHidden = true
+                    
+                }
                 
                 strongSelf.displayTableView.reloadData()
                 

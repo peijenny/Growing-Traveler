@@ -45,11 +45,14 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zxj-yt-UX8">
                                 <rect key="frame" x="8" y="88" width="398" height="766"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chatting-using-apps" translatesAutoresizingMaskIntoConstraints="NO" id="PU4-Uy-HJX">
-                                        <rect key="frame" x="0.0" y="0.0" width="398" height="383"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undrawNotFound" translatesAutoresizingMaskIntoConstraints="NO" id="PU4-Uy-HJX">
+                                        <rect key="frame" x="50" y="50" width="298" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="L8K-lM-PCb"/>
+                                        </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前還沒有好友" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMb-6O-ApL">
-                                        <rect key="frame" x="16" y="399" width="366" height="26"/>
+                                        <rect key="frame" x="50" y="270" width="298" height="25.5"/>
                                         <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -57,14 +60,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstItem="PU4-Uy-HJX" firstAttribute="top" secondItem="Zxj-yt-UX8" secondAttribute="top" id="FCg-V0-Btx"/>
-                                    <constraint firstItem="PU4-Uy-HJX" firstAttribute="height" secondItem="Zxj-yt-UX8" secondAttribute="height" multiplier="0.5" id="H9b-WE-9ex"/>
-                                    <constraint firstItem="OMb-6O-ApL" firstAttribute="top" secondItem="PU4-Uy-HJX" secondAttribute="bottom" constant="16" id="HBD-Iv-kt8"/>
-                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="OMb-6O-ApL" secondAttribute="bottom" constant="341.5" id="Ic7-7q-gM6"/>
-                                    <constraint firstItem="PU4-Uy-HJX" firstAttribute="leading" secondItem="Zxj-yt-UX8" secondAttribute="leading" id="QhN-m8-Pep"/>
-                                    <constraint firstItem="OMb-6O-ApL" firstAttribute="leading" secondItem="Zxj-yt-UX8" secondAttribute="leading" constant="16" id="cm8-Gr-TM3"/>
-                                    <constraint firstAttribute="trailing" secondItem="PU4-Uy-HJX" secondAttribute="trailing" id="etu-j9-Cqc"/>
-                                    <constraint firstAttribute="trailing" secondItem="OMb-6O-ApL" secondAttribute="trailing" constant="16" id="kQL-i8-MnK"/>
+                                    <constraint firstItem="OMb-6O-ApL" firstAttribute="leading" secondItem="Zxj-yt-UX8" secondAttribute="leading" constant="50" id="cm8-Gr-TM3"/>
+                                    <constraint firstItem="PU4-Uy-HJX" firstAttribute="top" secondItem="Zxj-yt-UX8" secondAttribute="top" constant="50" id="ilQ-YH-mY2"/>
+                                    <constraint firstAttribute="trailing" secondItem="OMb-6O-ApL" secondAttribute="trailing" constant="50" id="kQL-i8-MnK"/>
+                                    <constraint firstAttribute="trailing" secondItem="PU4-Uy-HJX" secondAttribute="trailing" constant="50" id="quQ-5u-RYf"/>
+                                    <constraint firstItem="PU4-Uy-HJX" firstAttribute="leading" secondItem="Zxj-yt-UX8" secondAttribute="leading" constant="50" id="spD-hv-fwD"/>
+                                    <constraint firstItem="OMb-6O-ApL" firstAttribute="top" secondItem="PU4-Uy-HJX" secondAttribute="bottom" constant="20" id="uwE-as-5Bp"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -607,12 +608,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chatting-using-apps" width="533.33331298828125" height="400"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="person.fill.badge.plus" catalog="system" width="128" height="124"/>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
+        <image name="undrawNotFound" width="1120.59228515625" height="777.91583251953125"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -26,6 +26,8 @@ class NoteViewController: BaseViewController {
     
     @IBOutlet weak var noteSearchBar: UISearchBar!
     
+    @IBOutlet weak var noteBackgroundView: UIView!
+    
     var userManager = UserManager()
     
     var notes: [Note] = []
@@ -62,6 +64,16 @@ class NoteViewController: BaseViewController {
             case .success(let notes):
                 
                 strongSelf.notes = notes
+                
+                if strongSelf.notes.count == 0 {
+                    
+                    strongSelf.noteBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    strongSelf.noteBackgroundView.isHidden = true
+                    
+                }
                 
                 strongSelf.noteTableView.reloadData()
                 

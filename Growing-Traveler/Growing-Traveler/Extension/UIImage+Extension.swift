@@ -36,6 +36,7 @@ enum ImageAsset: String {
     case meditation
     
     case undrawUpload
+    case undrawNotFound
 
 }
 

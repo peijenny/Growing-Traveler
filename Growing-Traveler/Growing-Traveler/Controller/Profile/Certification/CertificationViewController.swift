@@ -9,8 +9,14 @@ import UIKit
 import PKHUD
 
 class CertificationViewController: UIViewController {
-
+    
     var certificationTableView = UITableView()
+    
+    var certificationBackgroundView = UIView()
+    
+    var imageView = UIImageView()
+    
+    var label = UILabel()
     
     var userManager = UserManager()
     
@@ -113,6 +119,61 @@ class CertificationViewController: UIViewController {
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+        
+    }
+    
+    func setReleaseBackgroundView() {
+        
+        certificationBackgroundView.backgroundColor = UIColor.clear
+        
+        certificationBackgroundView.isHidden = true
+        
+        view.addSubview(certificationBackgroundView)
+        
+        certificationBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            certificationBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            certificationBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            certificationBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            certificationBackgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+        ])
+        
+    }
+    
+    func setImageView() {
+        
+        imageView.image = UIImage.asset(.undrawNotFound)
+        
+        certificationBackgroundView.addSubview(imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: certificationBackgroundView.topAnchor, constant: 50),
+            imageView.trailingAnchor.constraint(equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
+            imageView.leadingAnchor.constraint(equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
+            imageView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+    }
+    
+    func setLabel() {
+        
+        label.text = "目前暫無考試認證"
+        
+        label.textAlignment = .center
+        
+        certificationBackgroundView.addSubview(label)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            label.trailingAnchor.constraint(equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
+            label.leadingAnchor.constraint(equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
+            label.heightAnchor.constraint(equalToConstant: 25)
         ])
         
     }
