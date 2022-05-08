@@ -124,6 +124,8 @@ class ConfirmApplyViewController: UIViewController {
         
         friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.agree.title)
         
+        self.navigationController?.isNavigationBarHidden = false
+        
         self.view.removeFromSuperview()
         
         getConfirmStatus?(true)
