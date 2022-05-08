@@ -435,13 +435,13 @@
                                 <rect key="frame" x="16" y="447.5" width="382" height="414.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undrawNotFound" translatesAutoresizingMaskIntoConstraints="NO" id="TLI-iP-do8">
-                                        <rect key="frame" x="50" y="50" width="282" height="200"/>
+                                        <rect key="frame" x="50" y="20" width="282" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="X7B-zF-pPj"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前暫無學習計劃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbX-3h-ZSk">
-                                        <rect key="frame" x="50" y="270" width="282" height="22.5"/>
+                                        <rect key="frame" x="50" y="240" width="282" height="22.5"/>
                                         <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -454,7 +454,7 @@
                                     <constraint firstAttribute="trailing" secondItem="EbX-3h-ZSk" secondAttribute="trailing" constant="50" id="SJs-gK-aE5"/>
                                     <constraint firstItem="EbX-3h-ZSk" firstAttribute="leading" secondItem="OhK-Nn-6dy" secondAttribute="leading" constant="50" id="t8g-Ww-587"/>
                                     <constraint firstAttribute="trailing" secondItem="TLI-iP-do8" secondAttribute="trailing" constant="50" id="uif-YP-Zzm"/>
-                                    <constraint firstItem="TLI-iP-do8" firstAttribute="top" secondItem="OhK-Nn-6dy" secondAttribute="top" constant="50" id="yez-qW-fW6"/>
+                                    <constraint firstItem="TLI-iP-do8" firstAttribute="top" secondItem="OhK-Nn-6dy" secondAttribute="top" constant="20" id="yez-qW-fW6"/>
                                 </constraints>
                             </view>
                         </subviews>
