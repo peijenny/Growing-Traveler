@@ -37,7 +37,7 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = UIColor.white.withAlphaComponent(0.9)
 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

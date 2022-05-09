@@ -8,6 +8,7 @@
 import UIKit
 import PKHUD
 import Lottie
+import Firebase
 
 enum StatusType {
     
@@ -79,6 +80,8 @@ class StudyGoalViewController: UIViewController {
         setHeaserLottieView()
         
         setSelectLineView()
+        
+        setNavigationBar()
 
         // MARK: - 註冊 TableView header / footer / cell
         studyGoalTableView.register(
@@ -95,29 +98,7 @@ class StudyGoalViewController: UIViewController {
             UINib(nibName: String(describing: StudyGoalTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
         )
-        
-        // MARK: - 右上角的 成長日曆 Button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage.asset(.calendar),
-            style: .plain, target: self,
-            action: #selector(pushToCalenderPage)
-        )
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
-        if userID != "" {
-            
-            studyGoalBackgroundView.isHidden = true
-            
-            fetchUserData()
-            
-            listenData(status: StatusType.running.title)
-            
-        } else {
-            
-            studyGoalBackgroundView.isHidden = false
-        }
-        
+
     }
  
     override func viewWillAppear(_ animated: Bool) {
@@ -125,29 +106,26 @@ class StudyGoalViewController: UIViewController {
         
         lottieAnimation.play()
         
+        fetchUserData()
+        
+        listenData(status: titleText)
+        
         if userID == "" {
             
-            studyGoals.removeAll()
+            studyGoalBackgroundView.isHidden = false
+            
+            studyGoals = []
             
             studyGoalTableView.reloadData()
             
-            studyGoalTableView.isHidden = false
-            
         }
         
-//        tabBarController?.tabBar.isHidden = true
-        
     }
-
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        tabBarController?.tabBar.isHidden = false
-//
-//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        addGoalButton.titleLabel?.text = nil
         
         // MARK: - 右下角 新增個人學習計劃 Button 修改圖片的顯示方式與加上圓角
         addGoalButton.imageView?.contentMode = .scaleAspectFill
@@ -166,7 +144,7 @@ class StudyGoalViewController: UIViewController {
             height: underlineView.frame.height
         )
         
-        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: "0384BD")
+        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
         underlineView.addSubview(selectLineView)
         
@@ -174,23 +152,35 @@ class StudyGoalViewController: UIViewController {
     
     func setHeaserLottieView() {
         
-        lottieAnimation = AnimationView(name: "Growth-Animation")
+        lottieAnimation = AnimationView(name: "101546-study-abroad")
+        
+        lottieAnimation.backgroundColor = UIColor.clear
+        
+        let size = headerAnimationView.frame.height * CGFloat(0.8) - 30
+        
+//        lottieAnimation.cornerRadius = size / 2
         
         lottieAnimation.contentMode = .scaleAspectFit
         
-        lottieAnimation.frame = CGRect(
-            x: 0, y: 30,
-            width: headerAnimationView.frame.width,
-            height: headerAnimationView.frame.height
-        )
-        
-//        lottieAnimation.center = headerAnimationView.center
-        
+//        lottieAnimation.frame = CGRect(
+//            x: headerAnimationView.frame.width * CGFloat(0.1),
+//            y: headerAnimationView.frame.height * CGFloat(0.2),
+//            width: headerAnimationView.frame.width * CGFloat(0.8),
+//            height: headerAnimationView.frame.height * CGFloat(0.8)
+//        )
+
         headerAnimationView.addSubview(lottieAnimation)
         
+        lottieAnimation.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            lottieAnimation.centerXAnchor.constraint(equalTo: headerAnimationView.centerXAnchor),
+            lottieAnimation.centerYAnchor.constraint(equalTo: headerAnimationView.centerYAnchor, constant: 50),
+            lottieAnimation.widthAnchor.constraint(equalToConstant: size),
+            lottieAnimation.heightAnchor.constraint(equalToConstant: size)
+        ])
+
         lottieAnimation.loopMode = .loop
-        
-//        lottieAnimation.play()
 
     }
     
@@ -227,9 +217,38 @@ class StudyGoalViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
+        
+    }
+    
+    func setNavigationBar() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.calendar),
+            style: .plain, target: self,
+            action: #selector(pushToCalenderPage)
+        )
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.award),
+            style: .plain, target: self,
+            action: #selector(pushToRankPage)
+        )
+        
+    }
+    
+    @objc func pushToRankPage(sender: UIButton) {
+        
+        let viewController = UIStoryboard.studyGoal
+            .instantiateViewController(withIdentifier: String(describing: RankViewController.self))
+        
+        guard let viewController = viewController as? RankViewController else { return }
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
 
@@ -258,7 +277,7 @@ class StudyGoalViewController: UIViewController {
                     withIdentifier: String(describing: AuthenticationViewController.self)
                     ) as? AuthenticationViewController else { return }
             
-            authViewController.modalPresentationStyle = .popover
+            authViewController.modalPresentationStyle = .formSheet
 
             present(authViewController, animated: true, completion: nil)
             
@@ -292,7 +311,7 @@ class StudyGoalViewController: UIViewController {
     // MARK: - 即時監聽 Firestore 的個人學習計畫
     func listenData(status: String) {
         
-        studyGoalManager.fetchData { [weak self] result in
+        studyGoalManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -302,17 +321,13 @@ class StudyGoalViewController: UIViewController {
                 
                 var resultData: [StudyGoal] = []
                 
-                let formatter = DateFormatter()
-                
-                formatter.dateFormat = "yyyy.MM.dd"
-                
                 if status == StatusType.pending.title {
 
                     resultData = data.filter({
                         
-                        let startDate = Date(timeIntervalSince1970: $0.studyPeriod.startDate).formatted()
+                        let startDate = $0.studyPeriod.startDate
                         
-                        let nowDate = Date().formatted()
+                        let nowDate = Date().timeIntervalSince1970
                         
                         if $0.studyItems.allSatisfy({ $0.isCompleted == false }) == true &&
                             startDate > nowDate {
@@ -329,9 +344,9 @@ class StudyGoalViewController: UIViewController {
                     
                     resultData = data.filter({
                         
-                        let startDate = Date(timeIntervalSince1970: $0.studyPeriod.startDate).formatted()
+                        let startDate = $0.studyPeriod.startDate
                         
-                        let nowDate = Date().formatted()
+                        let nowDate = Date().timeIntervalSince1970
                         
                         if $0.studyItems.allSatisfy({ $0.isCompleted == true }) == true {
                             
@@ -376,6 +391,8 @@ class StudyGoalViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -396,7 +413,7 @@ class StudyGoalViewController: UIViewController {
         }
         
         // 動畫
-        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
 
             guard let strongSelf = self else { return }
             
@@ -404,9 +421,9 @@ class StudyGoalViewController: UIViewController {
             
         })
         
-        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: "69B6CA") })
+        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText) })
         
-        sender.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
+        sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
         guard let titleText = sender.titleLabel?.text else { return }
         
@@ -469,7 +486,7 @@ extension StudyGoalViewController: UITableViewDataSource {
 
             if sender.tintColor?.cgColor == UIColor.clear.cgColor {
                 
-                sender.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
+                sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
                 
                 studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = true
                 
@@ -545,11 +562,11 @@ extension StudyGoalViewController: UITableViewDelegate {
 
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
         
-        headerView.showStudyGoalHeader(studyGoal: studyGoals[section])
+        headerView.showStudyGoalHeader(studyGoal: studyGoals[section], isCalendar: false)
 
         tableView.tableHeaderView = UIView.init(frame: CGRect.init(
             x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height))
-        
+
         topCGFloat = headerView.frame.height
         
         setContentInset()
@@ -631,7 +648,7 @@ extension StudyGoalViewController: UITableViewDelegate {
             message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
             preferredStyle: .alert)
         
-        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
             
             self.studyGoalManager.deleteData(
                 studyGoal: self.studyGoals[sender.tag])
@@ -639,8 +656,7 @@ extension StudyGoalViewController: UITableViewDelegate {
             self.studyGoals.remove(at: sender.tag)
 
             self.studyGoalTableView.reloadData()
-
-
+            
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)

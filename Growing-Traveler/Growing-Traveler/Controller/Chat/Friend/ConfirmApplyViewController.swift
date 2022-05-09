@@ -60,6 +60,8 @@ class ConfirmApplyViewController: UIViewController {
     
     @IBAction func closeButton(_ sender: UIButton) {
         
+        self.navigationController?.isNavigationBarHidden = false
+        
         self.view.removeFromSuperview()
         
         getConfirmStatus?(false)
@@ -87,6 +89,8 @@ class ConfirmApplyViewController: UIViewController {
         }
 
         friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.refuse.title)
+        
+        self.navigationController?.isNavigationBarHidden = false
         
         self.view.removeFromSuperview()
         
@@ -119,6 +123,8 @@ class ConfirmApplyViewController: UIViewController {
         }
         
         friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.agree.title)
+        
+        self.navigationController?.isNavigationBarHidden = false
         
         self.view.removeFromSuperview()
         

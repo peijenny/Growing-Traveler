@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import PKHUD
 
 class FriendManager {
     
@@ -51,6 +52,49 @@ class FriendManager {
             }
             
             completion(Result.success(users))
+            
+        }
+        
+    }
+    
+    // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
+    func listenFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
+        
+        if fetchUserID != "" {
+         
+            database.collection("friend")
+            .whereField("userID", isEqualTo: fetchUserID)
+            .addSnapshotListener { snapshot, error in
+            
+                guard let snapshot = snapshot else {
+                    
+                    print("Error fetching document: \(error!)")
+                    
+                    completion(Result.failure(error!))
+                    
+                    return
+                    
+                }
+                
+                let document = snapshot.documents[0]
+                    
+                do {
+                    
+                    if let friend = try document.data(as: Friend.self, decoder: Firestore.Decoder()) {
+                        
+                        completion(Result.success(friend))
+                        
+                    }
+                    
+                } catch {
+                    
+                    print(error)
+                    
+                    completion(Result.failure(error))
+                    
+                }
+                    
+            }
             
         }
         
@@ -177,12 +221,14 @@ class FriendManager {
         } catch {
 
             print(error)
+            
+            HUD.flash(.labeledError(title: "狀態修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
         }
         
     }
     
-    func addData(friend: Friend) {
+    func updateData(friend: Friend) {
         
         do {
             
@@ -193,6 +239,8 @@ class FriendManager {
         } catch {
 
             print(error)
+            
+            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
         }
         

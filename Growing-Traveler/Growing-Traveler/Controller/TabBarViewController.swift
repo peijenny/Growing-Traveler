@@ -11,11 +11,11 @@ private enum Tab {
     
     case studyGoal
     
-    case forum
+    case note
     
     case chat
     
-    case analysis
+    case forum
     
     case profile
     
@@ -29,26 +29,23 @@ private enum Tab {
             
         case .studyGoal: controller = UIStoryboard.studyGoal.instantiateInitialViewController() ?? UIViewController()
             
-        case .forum: controller = UIStoryboard.forum.instantiateInitialViewController() ??
+        case .note: controller = UIStoryboard.note.instantiateInitialViewController() ??
             UIViewController()
             
         case .chat: controller = UIStoryboard.chat.instantiateInitialViewController() ??
             UIViewController()
             
-        case .analysis: controller = UIStoryboard.analysis.instantiateInitialViewController() ??
+        case .forum: controller = UIStoryboard.forum.instantiateInitialViewController() ??
             UIViewController()
             
         case .profile: controller = UIStoryboard.profile.instantiateInitialViewController() ??
             UIViewController()
             
-//        case .auth: controller = UIStoryboard.auth.instantiateInitialViewController() ??
-//            UIViewController()
-//
         }
         
         controller.tabBarItem = tabBarItem()
 
-        controller.tabBarItem.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: -6.0, right: 0.0)
+        controller.tabBarItem.imageInsets = UIEdgeInsets(top: -6.0, left: 0.0, bottom: 0.0, right: 0.0)
         
         return controller
         
@@ -61,47 +58,43 @@ private enum Tab {
         case .studyGoal:
 
             return UITabBarItem(
-                title: nil,
-                image: UIImage.asset(.checklistOrigin),
-                selectedImage: UIImage.asset(.checklistSelect)
+                title: "目標",
+                image: UIImage.asset(.archery),
+                selectedImage: UIImage.asset(.archery)
+            )
+            
+        case .note:
+            
+            return UITabBarItem(
+                title: "筆記",
+                image: UIImage.asset(.book),
+                selectedImage: UIImage.asset(.book)
+            )
+        
+        case .chat:
+            
+            return UITabBarItem(
+                title: "聊天室",
+                image: UIImage.asset(.speechBubble),
+                selectedImage: UIImage.asset(.speechBubble)
             )
             
         case .forum:
 
             return UITabBarItem(
-                title: nil,
-                image: UIImage.asset(.askOrigin),
-                selectedImage: UIImage.asset(.askSelect)
-            )
-            
-        case .chat:
-            
-            return UITabBarItem(
-                title: nil,
-                image: UIImage.asset(.commentsOrigin),
-                selectedImage: UIImage.asset(.commentsSelect)
-            )
-            
-        case .analysis:
-            
-            return UITabBarItem(
-                title: nil,
-                image: UIImage.asset(.chartOrigin),
-                selectedImage: UIImage.asset(.chartSelect)
+                title: "討論區",
+                image: UIImage.asset(.speaker),
+                selectedImage: UIImage.asset(.speaker)
             )
             
         case .profile:
             
             return UITabBarItem(
-                title: nil,
-                image: UIImage.asset(.userOrigin),
-                selectedImage: UIImage.asset(.userSelect)
+                title: "個人",
+                image: UIImage.asset(.idCard),
+                selectedImage: UIImage.asset(.idCard)
             )
             
-//        case .auth:
-//
-//            return UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
-//
         }
          
     }
@@ -110,17 +103,20 @@ private enum Tab {
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
-    private let tabs: [Tab] = [.studyGoal, .forum, .chat, .analysis, .profile]
+    @IBOutlet weak var myTabBar: UITabBar!
     
-//    private let tabs: [Tab] = [.studyGoal, .chat, .analysis, .profile, .auth]
-
+    private let tabs: [Tab] = [.studyGoal, .note, .chat, .forum, .profile]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewControllers = tabs.map({ $0.controller() })
         
-        delegate = self
+        tabBar.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
+        tabBar.barTintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        delegate = self
     }
     
     // MARK: - UITabBarControllerDelegate
@@ -130,14 +126,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         shouldSelect viewController: UIViewController
     ) -> Bool {
 
-//        guard let navVC = viewController as? UINavigationController,
-//              navVC.viewControllers.first is StudyGoalViewController
-//        else { return true }
-
-//        guard let navVC = viewController as? UINavigationController,
-//              navVC.viewControllers.first is ForumViewController
-//        else { return true }
-
         if let viewControllers = tabBarController.viewControllers {
             
             if viewController != viewControllers[0] && viewController != viewControllers[1] {
@@ -146,7 +134,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
 
                     if let authViewController = UIStoryboard.auth.instantiateInitialViewController() {
 
-                        authViewController.modalPresentationStyle = .popover
+                        authViewController.modalPresentationStyle = .formSheet
 
                         present(authViewController, animated: true, completion: nil)
                     }

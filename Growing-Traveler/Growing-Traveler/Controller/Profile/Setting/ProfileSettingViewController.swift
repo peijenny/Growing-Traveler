@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import PKHUD
 
 class ProfileSettingViewController: BaseViewController {
     
@@ -15,6 +16,8 @@ class ProfileSettingViewController: BaseViewController {
     var userManger = UserManager()
     
     var deleteUserManager = DeleteUserManager()
+    
+    var friendManager = FriendManager()
     
     var studyGoals: [StudyGoal] = []
     
@@ -41,8 +44,10 @@ class ProfileSettingViewController: BaseViewController {
         
         title = "個人設定"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
 
+        setBackgroundView()
+        
         setTableView()
         
         fetchUserInfoData()
@@ -53,9 +58,7 @@ class ProfileSettingViewController: BaseViewController {
             barButtonSystemItem: .done,
             target: self,
             action: #selector(submitButton))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+
     }
     
     @objc func submitButton(sender: UIButton) {
@@ -63,6 +66,25 @@ class ProfileSettingViewController: BaseViewController {
         isCheck = true
         
         profileSettingTableView.reloadData()
+        
+    }
+    
+    func setBackgroundView() {
+        
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
         
     }
     
@@ -80,7 +102,7 @@ class ProfileSettingViewController: BaseViewController {
             profileSettingTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             profileSettingTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             profileSettingTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            profileSettingTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            profileSettingTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         profileSettingTableView.register(
@@ -134,6 +156,8 @@ class ProfileSettingViewController: BaseViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -169,13 +193,17 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
                 cell.setUserPhoto(userPhotoLink: userInfo?.userPhoto ?? "")
                 
-            } else if userImageLink != nil {
-             
+            }
+            
+            if userImageLink != nil {
+                
                 cell.setUserPhoto(userPhotoLink: userImageLink ?? "")
                 
             }
             
             cell.modifyUserPhotoButton.addTarget(self, action: #selector(modifyUserPhoto), for: .touchUpInside)
+            
+            cell.selectionStyle = .none
             
             return cell
             
@@ -204,6 +232,16 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                         
                         userManger.updateData(user: updateUserInfo)
                         
+                        friendList?.userName = cell.userNameTextField.text ?? ""
+                        
+                        if let friendList = friendList {
+                            
+                            friendManager.updateData(friend: friendList)
+                            
+                        }
+                        
+                        HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                        
                     }
                     
                 }
@@ -213,6 +251,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             }
             
             cell.showUserContent(userInfo: userInfo)
+            
+            cell.selectionStyle = .none
             
             return cell
             
@@ -226,18 +266,46 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             cell.signOutAccountButton.addTarget(self, action: #selector(signOutAccount), for: .touchUpInside)
             
             cell.deleteAccountButton.addTarget(self, action: #selector(deleteAccount), for: .touchUpInside)
+            
+            cell.privacyPolicyButton.addTarget(self, action: #selector(privacyPolicyButton), for: .touchUpInside)
+            
+            cell.eulaButton.addTarget(self, action: #selector(eulaButton), for: .touchUpInside)
 
+            cell.selectionStyle = .none
+            
             return cell
             
         }
         
     }
     
+    @objc func privacyPolicyButton(sender: UIButton) {
+        
+        let viewController = UIStoryboard.profile
+            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.privacyTitle = PrivacyPolicy.privacyPolicy.title
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    @objc func eulaButton(sender: UIButton) {
+        
+        let viewController = UIStoryboard.profile
+            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.privacyTitle = PrivacyPolicy.eula.title
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
     @objc func signOutAccount(sender: UIButton) {
-        
-        navigationController?.popViewController(animated: true)
-        
-        tabBarController?.selectedIndex = 0
         
         let firebaseAuth = Auth.auth()
 
@@ -246,6 +314,10 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             try firebaseAuth.signOut()
 
             userID = ""
+            
+            navigationController?.popViewController(animated: true)
+            
+            tabBarController?.selectedIndex = 0
 
         } catch let signOutError as NSError {
 
@@ -262,7 +334,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             message: "請問確定刪除此使用者帳號？\n 刪除行為不可逆，資料將一併刪除！",
             preferredStyle: .alert)
         
-        let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
 
             let user = Auth.auth().currentUser
 
@@ -271,6 +343,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 if let error = error {
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 } else {
                     
@@ -279,12 +353,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 }
 
             }
-            
-            self.navigationController?.popViewController(animated: true)
-            
-            self.tabBarController?.selectedIndex = 0
-            
-            print("帳號已刪除！")
             
         }
         
@@ -310,6 +378,12 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
         userID = ""
         
+        self.navigationController?.popViewController(animated: true)
+        
+        self.tabBarController?.selectedIndex = 0
+        
+        print("帳號已刪除！")
+        
     }
     
     func fetchAllData() {
@@ -327,6 +401,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -346,6 +422,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -363,6 +441,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -405,6 +485,8 @@ extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavig
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 

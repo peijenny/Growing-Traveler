@@ -55,6 +55,8 @@ class MandateTableViewCell: UITableViewCell {
         
         mandateProgressView.progress = Float(progress)
         
+        mandateImageView.loadImage(mandateItem.image)
+        
     }
     
 }

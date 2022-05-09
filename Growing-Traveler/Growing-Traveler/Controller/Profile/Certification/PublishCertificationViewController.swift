@@ -69,6 +69,8 @@ class PublishCertificationViewController: BaseViewController {
 
     @IBAction func closeButton(_ sender: UIButton) {
         
+        self.navigationController?.isNavigationBarHidden = false
+        
         self.view.removeFromSuperview()
         
     }
@@ -124,6 +126,8 @@ class PublishCertificationViewController: BaseViewController {
                     content: certificationContent)
                 )
                 
+                HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+                
             } else {
                 
                 let index = modifyCertificationIndex ?? 0
@@ -134,9 +138,13 @@ class PublishCertificationViewController: BaseViewController {
                 
                 userInfo.certification[index].content = certificationContent
                 
+                HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                
             }
 
             userManager.updateData(user: userInfo)
+            
+            self.navigationController?.isNavigationBarHidden = false
             
             self.view.removeFromSuperview()
             
@@ -167,6 +175,8 @@ extension PublishCertificationViewController: UIImagePickerControllerDelegate, U
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 
@@ -184,11 +194,11 @@ extension PublishCertificationViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
-        if textView.textColor == UIColor.lightGray {
+        if textView.textColor == UIColor.systemGray3 {
             
             textView.text = nil
             
-            textView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
+            textView.textColor = UIColor.black
             
         }
         
@@ -200,7 +210,7 @@ extension PublishCertificationViewController: UITextViewDelegate {
             
             textView.text = "請描述內容......"
             
-            textView.textColor = UIColor.lightGray
+            textView.textColor = UIColor.systemGray3
             
         }
         

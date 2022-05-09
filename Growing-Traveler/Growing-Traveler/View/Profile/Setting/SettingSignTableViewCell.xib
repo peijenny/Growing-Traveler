@@ -11,15 +11,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="SettingSignTableViewCell" customModule="Growing_Traveler" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTi-Gx-PBR">
                         <rect key="frame" x="16" y="32" width="382" height="40"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="gLS-6d-LY1"/>
                         </constraints>
@@ -28,6 +28,11 @@
                         <buttonConfiguration key="configuration" style="plain" title="登出帳戶">
                             <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         </buttonConfiguration>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uxi-NA-ZRl">
                         <rect key="frame" x="16" y="108" width="382" height="40"/>
@@ -40,22 +45,49 @@
                         <buttonConfiguration key="configuration" style="plain" title="刪除帳戶">
                             <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         </buttonConfiguration>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ulh-y2-Dum">
+                        <rect key="frame" x="16" y="173" width="382" height="31"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcE-yd-ACn">
+                                <rect key="frame" x="0.0" y="0.0" width="186" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="隱私權政策"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cvl-zX-u3C">
+                                <rect key="frame" x="196" y="0.0" width="186" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="最終用戶許可協議"/>
+                            </button>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="fTi-Gx-PBR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="HHG-jx-GLx"/>
                     <constraint firstItem="Uxi-NA-ZRl" firstAttribute="top" secondItem="fTi-Gx-PBR" secondAttribute="bottom" constant="36" id="Lxl-6q-mLe"/>
                     <constraint firstAttribute="trailing" secondItem="Uxi-NA-ZRl" secondAttribute="trailing" constant="16" id="Ola-Ke-saw"/>
-                    <constraint firstAttribute="bottom" secondItem="Uxi-NA-ZRl" secondAttribute="bottom" constant="32" id="OqF-cC-zt1"/>
+                    <constraint firstAttribute="trailing" secondItem="ulh-y2-Dum" secondAttribute="trailing" constant="16" id="TNu-mW-WlW"/>
                     <constraint firstItem="Uxi-NA-ZRl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="WjK-hv-kUy"/>
+                    <constraint firstAttribute="bottom" secondItem="ulh-y2-Dum" secondAttribute="bottom" constant="16" id="Yw8-Yu-NuP"/>
                     <constraint firstAttribute="trailing" secondItem="fTi-Gx-PBR" secondAttribute="trailing" constant="16" id="eHj-H9-8Ln"/>
                     <constraint firstItem="fTi-Gx-PBR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="32" id="iDA-vS-86R"/>
+                    <constraint firstItem="ulh-y2-Dum" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="rSS-0X-lIA"/>
+                    <constraint firstItem="ulh-y2-Dum" firstAttribute="top" secondItem="Uxi-NA-ZRl" secondAttribute="bottom" constant="25" id="xqb-Ke-c2y"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="deleteAccountButton" destination="Uxi-NA-ZRl" id="jKv-pG-phs"/>
+                <outlet property="eulaButton" destination="Cvl-zX-u3C" id="U1V-Yd-xYc"/>
+                <outlet property="privacyPolicyButton" destination="JcE-yd-ACn" id="krH-38-Aqd"/>
                 <outlet property="signOutAccountButton" destination="fTi-Gx-PBR" id="MNu-EI-22n"/>
             </connections>
             <point key="canvasLocation" x="132" y="121"/>

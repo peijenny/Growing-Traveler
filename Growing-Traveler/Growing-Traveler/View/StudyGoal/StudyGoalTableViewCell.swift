@@ -30,7 +30,7 @@ class StudyGoalTableViewCell: UITableViewCell {
         
         if isCompleted {
             
-            checkButton.tintColor = UIColor.hexStringToUIColor(hex: "0384BD")
+            checkButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
             
             studyItemLabel.textColor = UIColor.lightGray
                    
@@ -43,7 +43,7 @@ class StudyGoalTableViewCell: UITableViewCell {
             
             attributedString.addAttribute(
                 .strikethroughColor,
-                value: UIColor.hexStringToUIColor(hex: "0384BD"),
+                value: UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText),
                 range: NSRange(location: 0, length: attributedString.length)
             )
             

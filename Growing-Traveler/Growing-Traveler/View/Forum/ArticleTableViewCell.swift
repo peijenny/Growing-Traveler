@@ -62,7 +62,7 @@ class ArticleTableViewCell: UITableViewCell {
     
     func checkImage(forumArticle: ForumArticle) {
         
-        let article = forumArticle.content.filter({ $0.contentType == "image" })
+        let article = forumArticle.content.filter({ $0.contentType == SendType.image.title })
         
         if article.count > 0 {
             
@@ -77,9 +77,23 @@ class ArticleTableViewCell: UITableViewCell {
         
     }
     
-    func showLoadMoreButton(amountOver: Bool, isSearch: Bool, isLastOne: Bool) {
+//    func showLoadMoreButton(amountOver: Bool, isSearch: Bool, isLastOne: Bool, indexPathCount: Int) {
+//
+//        if amountOver && !isSearch && isLastOne && indexPathCount >= 5 {
+//
+//            buttonHeightConstraint.constant = 40.0
+//
+//        } else {
+//
+//            buttonHeightConstraint.constant = 0.0
+//
+//        }
+//
+//    }
+    
+    func showLoadMoreButton(amountOver: Bool, isLastOne: Bool) {
         
-        if amountOver && !isSearch && isLastOne {
+        if amountOver && isLastOne {
             
             buttonHeightConstraint.constant = 40.0
             

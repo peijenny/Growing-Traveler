@@ -83,6 +83,8 @@ class AuthenticationViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -91,7 +93,7 @@ class AuthenticationViewController: UIViewController {
     
     func setupProviderLoginView() {
 
-        let authorizationButton = ASAuthorizationAppleIDButton()
+        let authorizationButton = ASAuthorizationAppleIDButton(type: .default, style: .black)
         
         authorizationButton.addTarget(
             self, action: #selector(handleAuthorizationAppleIDButtonPress),
@@ -235,7 +237,7 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                 
                 if let user = authDataResult?.user {
                     
-                    HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil))
+                    HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil), delay: 0.5)
                     
                     var photo = ""
                     
@@ -276,9 +278,11 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                             applyList: [], deliveryList: []
                         )
                         
-                        self.friendManager.addData(friend: friend)
+                        self.friendManager.updateData(friend: friend)
                         
                     }
+                    
+                    self.view.window?.rootViewController?.viewWillAppear(true)
                     
                     self.dismiss(animated: true, completion: nil)
                     

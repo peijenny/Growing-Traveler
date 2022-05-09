@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import PKHUD
 
 class CalendarViewController: UIViewController {
 
@@ -34,9 +35,21 @@ class CalendarViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var displayBackgroundView: UIView!
+    
     var studyGoalManager = StudyGoalManager()
     
-    var studyGoals: [StudyGoal] = []
+    var studyGoals: [StudyGoal] = [] {
+        
+        didSet {
+            
+            displayTableView.reloadData()
+            
+        }
+        
+    }
+    
+    var selectedDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +65,7 @@ class CalendarViewController: UIViewController {
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        fetchData(date: Date())
+        listenData()
         
     }
     
@@ -75,23 +83,21 @@ class CalendarViewController: UIViewController {
         
     }
     
-    func fetchData(date: Date) {
-        
-        studyGoals.removeAll()
-        
-        studyGoalManager.fetchData { [weak self] result in
+    func listenData() {
+ 
+        studyGoalManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
             switch result {
                 
             case .success(let data):
-
+                
                 strongSelf.studyGoals = data.filter({
                     
                     let startDate = $0.studyPeriod.startDate
 
-                    let selectDate = date.timeIntervalSince1970
+                    let selectDate = strongSelf.selectedDate.timeIntervalSince1970
 
                     let endDate = $0.studyPeriod.endDate
                     
@@ -104,12 +110,25 @@ class CalendarViewController: UIViewController {
                     return false
                     
                 })
+
+                if strongSelf.studyGoals.count == 0 {
+                    
+                    strongSelf.displayBackgroundView.isHidden = false
+
+                } else {
+
+                    strongSelf.displayBackgroundView.isHidden = true
+
+                }
                 
                 strongSelf.displayTableView.reloadData()
                 
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -133,7 +152,9 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
-        fetchData(date: date)
+        selectedDate = date
+        
+        listenData()
         
     }
     
@@ -171,7 +192,7 @@ extension CalendarViewController: UITableViewDelegate {
 
         guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
         
-        headerView.showStudyGoalHeader(studyGoal: studyGoals[section])
+        headerView.showStudyGoalHeader(studyGoal: studyGoals[section], isCalendar: true)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         
@@ -200,6 +221,16 @@ extension CalendarViewController: UITableViewDelegate {
                 guard let viewController = viewController as? PlanStudyGoalViewController else { return }
                 
                 viewController.studyGoal = studyGoals[index]
+                
+                viewController.selectedDate = selectedDate
+                
+                viewController.getSelectedDate = { selectedDate in
+                    
+                    self.selectedDate = selectedDate
+                    
+                    self.listenData()
+                       
+                }
                 
                 navigationController?.pushViewController(viewController, animated: true)
                 

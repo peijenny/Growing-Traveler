@@ -7,6 +7,7 @@
 
 import UIKit
 import JXPhotoBrowser
+import PKHUD
 
 class PublishForumArticleViewController: BaseViewController {
 
@@ -57,7 +58,7 @@ class PublishForumArticleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
         if modifyForumArticle == nil {
             
@@ -76,8 +77,6 @@ class PublishForumArticleViewController: BaseViewController {
             target: self,
             action: #selector(submitButton)
         )
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
         setTableView()
 
@@ -117,11 +116,11 @@ class PublishForumArticleViewController: BaseViewController {
                 
                 if contentArray[index].range(of: "https://i.imgur.com") != nil {
                     
-                    articleType = "image"
+                    articleType = SendType.image.title
                     
                 } else {
                     
-                    articleType = "string"
+                    articleType = SendType.string.title
                     
                 }
                 
@@ -153,6 +152,8 @@ class PublishForumArticleViewController: BaseViewController {
                 
                 forumArticleManager.addData(forumArticle: forumArticle)
                 
+                HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+                
             } else {
                 
                 guard var modifyForumArticle = modifyForumArticle else { return }
@@ -168,6 +169,8 @@ class PublishForumArticleViewController: BaseViewController {
                 forumArticleManager.updateArticleData(
                 forumArticle: modifyForumArticle)
                 
+                HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                
             }
             
             navigationController?.popViewController(animated: true)
@@ -180,7 +183,7 @@ class PublishForumArticleViewController: BaseViewController {
     
     func setTableView() {
         
-        publishArticleTableView.backgroundColor = UIColor.clear
+        publishArticleTableView.backgroundColor = UIColor.white
         
         publishArticleTableView.separatorStyle = .none
         
@@ -189,10 +192,10 @@ class PublishForumArticleViewController: BaseViewController {
         publishArticleTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            publishArticleTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            publishArticleTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            publishArticleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            publishArticleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -80.0)
         ])
         
         publishArticleTableView.register(
@@ -233,7 +236,18 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         
         cell.contentTextView.delegate = self
         
-        cell.categoryTextField.text = selectCategoryItem?.title
+        cell.categoryLabel.text = selectCategoryItem?.title ?? "請選擇分類標籤"
+        
+        if cell.categoryLabel.text ?? "" != "請選擇分類標籤" {
+            
+            cell.categoryLabel.textColor = UIColor.black
+            
+        }
+        
+        let categoryTapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(selectCategoryTagButton))
+        
+        cell.categoryLabel.addGestureRecognizer(categoryTapGestureRecognizer)
         
         cell.selectCategoryButton.addTarget(
             self, action: #selector(selectCategoryTagButton), for: .touchUpInside)
@@ -311,10 +325,19 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         
         let navController = UINavigationController(rootViewController: categoryViewController)
         
-        if let sheetPresentationController = navController.sheetPresentationController {
-            
-            sheetPresentationController.detents = [.medium()]
-            
+        if #available(iOS 15.0, *) {
+
+            if let sheetPresentationController = navController.sheetPresentationController {
+
+                sheetPresentationController.detents = [.medium()]
+
+            }
+
+        } else {
+            // Fallback on earlier versions
+
+            navController.modalPresentationStyle = .fullScreen
+
         }
         
         self.present(navController, animated: true, completion: nil)
@@ -344,6 +367,8 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
                 case .failure(let error):
 
                     print(error)
+                    
+                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }
 
@@ -365,7 +390,7 @@ extension PublishForumArticleViewController: UITextViewDelegate {
             
             textView.text = nil
             
-            textView.textColor = UIColor.hexStringToUIColor(hex: "9C8F96")
+            textView.textColor = UIColor.black
             
         }
         

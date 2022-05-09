@@ -13,6 +13,10 @@ class FriendListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var friendNameLabel: UILabel!
     
+    @IBOutlet weak var friendStatusLabel: UILabel!
+    
+    @IBOutlet weak var unblockButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,16 +31,67 @@ class FriendListTableViewCell: UITableViewCell {
         
     }
     
-    func showFriendInfo(friendName: String, friendPhotoLink: String) {
+    func showFriendInfo(friendInfo: UserInfo, blockadeList: [String], deleteAccount: Bool) {
         
-        friendNameLabel.text = friendName
+        friendNameLabel.text = friendInfo.userName
         
-        if friendPhotoLink != "" {
+        friendStatusLabel.text = ""
+        
+        if blockadeList.filter({ $0 == friendInfo.userID }).count != 0 {
             
-            friendIconImageView.loadImage(friendPhotoLink)
+            friendNameLabel.text = "\(friendInfo.userName)"
+            
+            friendStatusLabel.text = "[帳號已封鎖]"
+            
+        } 
+        
+        if deleteAccount {
+            
+            friendNameLabel.text = "\(friendInfo.userName)"
+            
+            friendStatusLabel.text = "[帳號已刪除]"
             
         }
         
+        if friendInfo.userPhoto != "" {
+            
+            friendIconImageView.loadImage(friendInfo.userPhoto)
+            
+        }
+        
+    }
+    
+    func showBlockadeUserInfo(friendInfo: UserInfo) {
+        
+        unblockButton.isHidden = false
+        
+        friendNameLabel.text = friendInfo.userName
+        
+        friendStatusLabel.text = ""
+        
+        if friendInfo.userPhoto != "" {
+            
+            friendIconImageView.loadImage(friendInfo.userPhoto)
+            
+        }
+        
+    }
+    
+    func showFriendListInfo(friendInfo: UserInfo) {
+        
+        unblockButton.isHidden = false
+        
+        unblockButton.setTitle("確認傳送", for: .normal)
+
+        friendStatusLabel.isHidden = true
+        
+        friendNameLabel.text = friendInfo.userName
+        
+        if friendInfo.userPhoto != "" {
+            
+            friendIconImageView.loadImage(friendInfo.userPhoto)
+            
+        }
     }
     
 }

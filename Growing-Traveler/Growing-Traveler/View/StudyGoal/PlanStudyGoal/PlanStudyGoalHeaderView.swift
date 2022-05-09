@@ -12,15 +12,15 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
   
     @IBOutlet weak var studyGoalTitleTextField: UITextField!
     
-    @IBOutlet weak var startDateTextField: UITextField!
+    @IBOutlet weak var startDateLabel: UILabel!
     
     @IBOutlet weak var startDateCalenderButton: UIButton!
     
-    @IBOutlet weak var endDateTextField: UITextField!
+    @IBOutlet weak var endDateLabel: UILabel!
     
     @IBOutlet weak var endDateCalenderButton: UIButton!
-    
-    @IBOutlet weak var categoryTextField: UITextField!
+
+    @IBOutlet weak var categoryLabel: UILabel!
     
     @IBOutlet weak var categoryTagButton: UIButton!
     
@@ -41,11 +41,15 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
         
         if dateType == SelectDateType.startDate.title {
             
-            startDateTextField.text = formatter.string(from: startDate)
+            startDateLabel.text = formatter.string(from: startDate)
+            
+            startDateLabel.textColor = UIColor.black
             
         } else if dateType == SelectDateType.endDate.title {
             
-            endDateTextField.text = formatter.string(from: endDate)
+            endDateLabel.text = formatter.string(from: endDate)
+            
+            endDateLabel.textColor = UIColor.black
             
         }
         
@@ -63,13 +67,19 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
             
             studyGoalTitleTextField.text = studyGoal.title
             
-            startDateTextField.text = formatter.string(from: Date(
+            startDateLabel.text = formatter.string(from: Date(
                 timeIntervalSince1970: studyGoal.studyPeriod.startDate))
+            
+            startDateLabel.textColor = UIColor.black
 
-            endDateTextField.text = formatter.string(from: Date(
+            endDateLabel.text = formatter.string(from: Date(
                 timeIntervalSince1970: studyGoal.studyPeriod.endDate))
             
-            categoryTextField.text = studyGoal.category.title
+            endDateLabel.textColor = UIColor.black
+            
+            categoryLabel.text = studyGoal.category.title
+            
+            categoryLabel.textColor = UIColor.black
             
         }
 
@@ -81,15 +91,15 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
             
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
 
-        } else if startDateTextField.text == "" {
+        } else if startDateLabel.text == "" {
             
             HUD.flash(.label(InputError.startDateEmpty.title), delay: 0.5)
 
-        } else if endDateTextField.text == "" {
+        } else if endDateLabel.text == "" {
             
             HUD.flash(.label(InputError.endDateEmpty.title), delay: 0.5)
 
-        } else if categoryTextField.text == "" {
+        } else if categoryLabel.text == "" {
             
             HUD.flash(.label(InputError.categoryEmpty.title), delay: 0.5)
 

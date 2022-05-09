@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 enum MandateType {
     
@@ -68,11 +69,13 @@ class MandateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBackgroundView()
+        
         setTableView()
 
-        title = "成長任務"
+        title = "學習成就"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
         fetchData()
         
@@ -110,6 +113,8 @@ class MandateViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -134,6 +139,8 @@ class MandateViewController: UIViewController {
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -211,6 +218,8 @@ class MandateViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
@@ -233,9 +242,30 @@ class MandateViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
+        
+    }
+    
+    func setBackgroundView() {
+        
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
         
     }
     
@@ -253,7 +283,7 @@ class MandateViewController: UIViewController {
             mandateTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             mandateTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             mandateTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            mandateTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            mandateTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         mandateTableView.register(
@@ -294,6 +324,8 @@ extension MandateViewController: UITableViewDelegate, UITableViewDataSource {
         let mandateItem = ownMandates[indexPath.section].mandate[indexPath.row]
         
         cell.showMandateItem(mandateItem: mandateItem)
+        
+        cell.selectionStyle = .none
         
         return cell
         

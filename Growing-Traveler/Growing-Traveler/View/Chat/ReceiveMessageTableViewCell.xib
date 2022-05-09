@@ -25,25 +25,26 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLF-vV-zWP">
-                        <rect key="frame" x="55" y="10" width="78.5" height="55"/>
+                        <rect key="frame" x="55" y="10" width="78.5" height="35"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pT-kn-rpc">
-                                <rect key="frame" x="10" y="10" width="58.5" height="35"/>
+                                <rect key="frame" x="10" y="5" width="58.5" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="GPn-qK-Urj"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="GPn-qK-Urj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.67058825489999996" green="0.74901962280000001" blue="0.78823530669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.74901960784313726" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="8pT-kn-rpc" firstAttribute="leading" secondItem="HLF-vV-zWP" secondAttribute="leading" constant="10" id="T0X-59-fpZ"/>
                             <constraint firstAttribute="trailing" secondItem="8pT-kn-rpc" secondAttribute="trailing" constant="10" id="Tj3-Uf-5IU"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="esn-W6-4rP"/>
-                            <constraint firstItem="8pT-kn-rpc" firstAttribute="top" secondItem="HLF-vV-zWP" secondAttribute="top" constant="10" id="kfI-Pt-odq"/>
-                            <constraint firstAttribute="bottom" secondItem="8pT-kn-rpc" secondAttribute="bottom" constant="10" id="mnF-fn-MMm"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="esn-W6-4rP"/>
+                            <constraint firstItem="8pT-kn-rpc" firstAttribute="top" secondItem="HLF-vV-zWP" secondAttribute="top" constant="5" id="kfI-Pt-odq"/>
+                            <constraint firstAttribute="bottom" secondItem="8pT-kn-rpc" secondAttribute="bottom" constant="5" id="mnF-fn-MMm"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="x2N-Go-ABl"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYM-kc-Bq6">
@@ -53,10 +54,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OXJ-8w-EEd">
-                        <rect key="frame" x="55" y="65" width="150" height="100"/>
+                        <rect key="frame" x="55" y="45" width="160" height="120"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="84f-xR-fFh"/>
-                            <constraint firstAttribute="height" constant="100" id="ffy-v4-05d"/>
+                            <constraint firstAttribute="width" constant="160" id="84f-xR-fFh"/>
+                            <constraint firstAttribute="height" constant="120" id="ffy-v4-05d"/>
                         </constraints>
                     </imageView>
                 </subviews>

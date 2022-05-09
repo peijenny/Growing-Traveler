@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class MoreArticlesViewController: UIViewController {
     
@@ -28,11 +29,13 @@ class MoreArticlesViewController: UIViewController {
         }
         
     }
+    
+    var friendManager = FriendManager()
+    
+    var blockadeList: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
         
         if let forumType = forumType {
             
@@ -40,7 +43,9 @@ class MoreArticlesViewController: UIViewController {
             
         }
         
-        fetchData()
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        setBackgroundView()
         
         setTableView()
         
@@ -50,6 +55,8 @@ class MoreArticlesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         fetchUserInfoData()
+        
+        fetchFriendBlockadeListData()
         
     }
     
@@ -85,31 +92,95 @@ class MoreArticlesViewController: UIViewController {
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
         }
         
     }
     
+    func fetchFriendBlockadeListData() {
+        
+        friendManager.fetchFriendListData(
+        fetchUserID: userID) { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let userFriend):
+                
+                strongSelf.blockadeList = userFriend.blockadeList
+                
+                strongSelf.fetchData()
+                
+                strongSelf.moreArticlesTableView.reloadData()
+                
+            case .failure(let error):
+                
+                print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
+            }
+                
+        }
+        
+    }
+    
     func fetchData() {
         
-        forumArticleManager.fetchData(forumType: forumType ?? "", completion: { [weak self] result in
+        forumArticleManager.fetchData(forumType: forumType ?? "") { [weak self] result in
             
             guard let strongSelf = self else { return }
             
             switch result {
                 
             case .success(let data):
+                
+                var filterData = data
+                
+                if strongSelf.blockadeList != [] {
+                    
+                    for index in 0..<strongSelf.blockadeList.count {
+                        
+                        filterData = filterData.filter({ $0.userID != strongSelf.blockadeList[index] })
+                        
+                    }
+                    
+                }
 
-                strongSelf.forumArticles = data
+                strongSelf.forumArticles = filterData
                 
             case .failure(let error):
                 
                 print(error)
                 
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
             }
             
-        })
+        }
+        
+    }
+    
+    func setBackgroundView() {
+        
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
         
     }
     
@@ -127,7 +198,7 @@ class MoreArticlesViewController: UIViewController {
             moreArticlesTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             moreArticlesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             moreArticlesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            moreArticlesTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            moreArticlesTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         moreArticlesTableView.register(
@@ -138,6 +209,40 @@ class MoreArticlesViewController: UIViewController {
         moreArticlesTableView.delegate = self
         
         moreArticlesTableView.dataSource = self
+        
+        let longPressRecognizer = UILongPressGestureRecognizer(
+            target: self, action: #selector(longPressed(sender:)))
+        
+        moreArticlesTableView.addGestureRecognizer(longPressRecognizer)
+        
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.moreArticlesTableView)
+            
+            if let indexPath = moreArticlesTableView.indexPathForRow(at: touchPoint) {
+                
+                // 彈跳出 User 視窗
+                guard let viewController = UIStoryboard
+                    .chat
+                    .instantiateViewController(
+                    withIdentifier: String(describing: UserInfoViewController.self)
+                    ) as? UserInfoViewController else { return }
+                
+                viewController.deleteAccount = false
+                
+                viewController.selectUserID = forumArticles[indexPath.row].userID
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
+                
+            }
+            
+        }
         
     }
 
@@ -194,4 +299,5 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
         navigationController?.pushViewController(viewController, animated: true)
         
     }
+    
 }

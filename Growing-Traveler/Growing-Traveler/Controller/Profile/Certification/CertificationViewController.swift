@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import PKHUD
 
 class CertificationViewController: UIViewController {
-
+    
     var certificationTableView = UITableView()
+    
+    var certificationBackgroundView = UIView()
+    
+    var imageView = UIImageView()
+    
+    var label = UILabel()
     
     var userManager = UserManager()
     
@@ -20,9 +27,17 @@ class CertificationViewController: UIViewController {
 
         title = "個人認證"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: "E6EBF6")
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        setBackgroundView()
         
         setTableView()
+        
+        setcertificationBackgroundView()
+        
+        setImageView()
+        
+        setLabel()
         
         setNavigationItems()
         
@@ -32,7 +47,7 @@ class CertificationViewController: UIViewController {
     
     func fetchUserInfoData() {
         
-        userManager.fetchData(fetchUserID: userID) { [weak self] result in
+        userManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -42,11 +57,23 @@ class CertificationViewController: UIViewController {
                 
                 strongSelf.userInfo = userInfo
                 
+                if strongSelf.userInfo?.certification.count == 0 {
+                    
+                    strongSelf.certificationBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    strongSelf.certificationBackgroundView.isHidden = true
+                    
+                }
+                
                 strongSelf.certificationTableView.reloadData()
                 
             case .failure(let error):
                 
                 print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
             
@@ -61,8 +88,6 @@ class CertificationViewController: UIViewController {
             action: #selector(addCertification)
         )
         
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
     }
     
     @objc func addCertification(sender: UIButton) {
@@ -72,6 +97,8 @@ class CertificationViewController: UIViewController {
                 ) as? PublishCertificationViewController else { return }
         
         viewController.userInfo = userInfo
+        
+        self.navigationController?.isNavigationBarHidden = true
         
         self.view.addSubview(viewController.view)
 
@@ -93,6 +120,80 @@ class CertificationViewController: UIViewController {
         
     }
     
+    func setBackgroundView() {
+        
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+        
+    }
+    
+    func setcertificationBackgroundView() {
+        
+        certificationBackgroundView.backgroundColor = UIColor.clear
+        
+        certificationBackgroundView.isHidden = true
+        
+        view.addSubview(certificationBackgroundView)
+        
+        certificationBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            certificationBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            certificationBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            certificationBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            certificationBackgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
+        ])
+        
+    }
+    
+    func setImageView() {
+        
+        imageView.image = UIImage.asset(.undrawNotFound)
+        
+        certificationBackgroundView.addSubview(imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: certificationBackgroundView.topAnchor, constant: 50),
+            imageView.trailingAnchor.constraint(equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
+            imageView.leadingAnchor.constraint(equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
+            imageView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+    }
+    
+    func setLabel() {
+        
+        label.text = "目前暫無考試認證"
+        
+        label.textAlignment = .center
+        
+        certificationBackgroundView.addSubview(label)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            label.trailingAnchor.constraint(equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
+            label.leadingAnchor.constraint(equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
+            label.heightAnchor.constraint(equalToConstant: 25)
+        ])
+        
+    }
+    
     func setTableView() {
         
         certificationTableView.backgroundColor = UIColor.clear
@@ -107,7 +208,7 @@ class CertificationViewController: UIViewController {
             certificationTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             certificationTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             certificationTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            certificationTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            certificationTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         certificationTableView.register(
@@ -150,6 +251,8 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
             
         }
         
+        cell.selectionStyle = .none
+        
         return cell
         
     }
@@ -188,7 +291,7 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
                 message: "請問確定刪除個人認證嗎？\n 刪除行為不可逆，將無法瀏覽此認證！",
                 preferredStyle: .alert)
             
-            let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
+            let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
 
                 self.userInfo?.certification.remove(at: indexPath.row)
                 

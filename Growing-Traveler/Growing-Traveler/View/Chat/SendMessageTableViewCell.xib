@@ -23,33 +23,33 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mvk-cW-UAn">
-                        <rect key="frame" x="340.5" y="10" width="57.5" height="55"/>
+                        <rect key="frame" x="340.5" y="10" width="57.5" height="35"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXe-HL-wZw">
-                                <rect key="frame" x="10" y="10" width="37.5" height="35"/>
+                                <rect key="frame" x="10" y="5" width="37.5" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="M7U-dR-HG1"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="M7U-dR-HG1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.89411771299999998" green="0.77647060160000003" blue="0.5176470876" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="tXe-HL-wZw" firstAttribute="leading" secondItem="Mvk-cW-UAn" secondAttribute="leading" constant="10" id="33m-R5-gRs"/>
-                            <constraint firstItem="tXe-HL-wZw" firstAttribute="top" secondItem="Mvk-cW-UAn" secondAttribute="top" constant="10" id="Al3-Bl-yUa"/>
+                            <constraint firstItem="tXe-HL-wZw" firstAttribute="top" secondItem="Mvk-cW-UAn" secondAttribute="top" constant="5" id="Al3-Bl-yUa"/>
                             <constraint firstAttribute="trailing" secondItem="tXe-HL-wZw" secondAttribute="trailing" constant="10" id="C1P-s1-FmF"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="YCi-Tb-r6y"/>
-                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="qt3-6Y-c5e"/>
-                            <constraint firstAttribute="bottom" secondItem="tXe-HL-wZw" secondAttribute="bottom" constant="10" id="rR8-eB-NaY"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="YCi-Tb-r6y"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="qt3-6Y-c5e"/>
+                            <constraint firstAttribute="bottom" secondItem="tXe-HL-wZw" secondAttribute="bottom" constant="5" id="rR8-eB-NaY"/>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CEE-vA-SDc">
-                        <rect key="frame" x="248" y="65" width="150" height="100"/>
+                        <rect key="frame" x="238" y="45" width="160" height="120"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="3Vo-1t-ecz"/>
-                            <constraint firstAttribute="height" constant="100" id="qgD-tl-7EM"/>
+                            <constraint firstAttribute="width" constant="160" id="3Vo-1t-ecz"/>
+                            <constraint firstAttribute="height" constant="120" id="qgD-tl-7EM"/>
                         </constraints>
                     </imageView>
                 </subviews>

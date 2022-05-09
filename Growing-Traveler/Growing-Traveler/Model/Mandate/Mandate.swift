@@ -29,4 +29,6 @@ struct MandateItem: Codable {
     
     var pogress: Int
     
+    var image: String
+    
 }

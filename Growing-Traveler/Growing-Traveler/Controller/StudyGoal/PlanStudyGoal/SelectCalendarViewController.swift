@@ -7,12 +7,15 @@
 
 import UIKit
 import FSCalendar
+import PKHUD
 
 class SelectCalendarViewController: UIViewController {
     
     var calendarView = FSCalendar()
     
     var getSelectDate: ((_ date: Date) -> Void)?
+    
+    var selectDate: Date?
     
     var startDate: Date? {
         
@@ -30,16 +33,10 @@ class SelectCalendarViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "日期篩選"
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .close,
-            target: self,
-            action: #selector(setClosePageButton)
-        )
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+
         setCalenderFrame()
+        
+        setNavigationBar()
         
         view.backgroundColor = UIColor.white
         
@@ -49,11 +46,49 @@ class SelectCalendarViewController: UIViewController {
         // 修改 weekendColor
         calendarView.appearance.titleWeekendColor = UIColor.lightGray
         
+        calendarView.appearance.headerTitleColor = UIColor.hexStringToUIColor(
+            hex: ColorChart.darkBlue.hexText)
+        
+        calendarView.appearance.weekdayTextColor = UIColor.hexStringToUIColor(
+            hex: ColorChart.darkBlue.hexText)
+
     }
     
-    @objc func setClosePageButton() {
+    func setNavigationBar() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(selectDateButton)
+        )
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(setClosePageButton)
+        )
+        
+    }
+    
+    @objc func setClosePageButton(sender: UIButton) {
         
         dismiss(animated: true, completion: .none)
+        
+    }
+    
+    @objc func selectDateButton(sender: UIButton) {
+        
+        if let selectDate = selectDate {
+            
+            getSelectDate?(selectDate)
+            
+            dismiss(animated: true, completion: .none)
+            
+        } else {
+            
+            HUD.flash(.label("請選擇日期！"), delay: 0.5)
+            
+        }
         
     }
 
@@ -88,9 +123,7 @@ extension SelectCalendarViewController: FSCalendarDelegate, FSCalendarDataSource
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
-        getSelectDate?(date)
-        
-        dismiss(animated: true, completion: .none)
+        selectDate = date
         
     }
     
