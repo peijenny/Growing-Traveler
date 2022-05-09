@@ -266,12 +266,42 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             cell.signOutAccountButton.addTarget(self, action: #selector(signOutAccount), for: .touchUpInside)
             
             cell.deleteAccountButton.addTarget(self, action: #selector(deleteAccount), for: .touchUpInside)
+            
+            cell.privacyPolicyButton.addTarget(self, action: #selector(privacyPolicyButton), for: .touchUpInside)
+            
+            cell.eulaButton.addTarget(self, action: #selector(eulaButton), for: .touchUpInside)
 
             cell.selectionStyle = .none
             
             return cell
             
         }
+        
+    }
+    
+    @objc func privacyPolicyButton(sender: UIButton) {
+        
+        let viewController = UIStoryboard.profile
+            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.privacyTitle = PrivacyPolicy.privacyPolicy.title
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    @objc func eulaButton(sender: UIButton) {
+        
+        let viewController = UIStoryboard.profile
+            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.privacyTitle = PrivacyPolicy.eula.title
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
     

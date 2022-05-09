@@ -13,6 +13,10 @@ class SettingSignTableViewCell: UITableViewCell {
     
     @IBOutlet weak var deleteAccountButton: UIButton!
     
+    @IBOutlet weak var privacyPolicyButton: UIButton!
+    
+    @IBOutlet weak var eulaButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
