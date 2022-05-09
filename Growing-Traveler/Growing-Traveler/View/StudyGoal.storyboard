@@ -519,7 +519,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eSy-xK-pGh">
-                                <rect key="frame" x="16" y="208" width="382" height="616"/>
+                                <rect key="frame" x="16" y="230" width="382" height="594"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                             </tableView>
@@ -568,7 +568,7 @@
                             <constraint firstItem="Wxb-Lc-aCI" firstAttribute="trailing" secondItem="TDl-pt-egS" secondAttribute="trailing" constant="10" id="c01-Mo-g5G"/>
                             <constraint firstItem="Wxb-Lc-aCI" firstAttribute="trailing" secondItem="eSy-xK-pGh" secondAttribute="trailing" constant="16" id="dhm-bg-C8q"/>
                             <constraint firstItem="Wxb-Lc-aCI" firstAttribute="bottom" secondItem="TDl-pt-egS" secondAttribute="bottom" constant="30" id="n4h-xq-6c3"/>
-                            <constraint firstItem="eSy-xK-pGh" firstAttribute="top" secondItem="CB2-lh-wmp" secondAttribute="bottom" constant="48" id="xpE-U1-8kQ"/>
+                            <constraint firstItem="eSy-xK-pGh" firstAttribute="top" secondItem="CB2-lh-wmp" secondAttribute="bottom" constant="70" id="xpE-U1-8kQ"/>
                         </constraints>
                     </view>
                     <connections>

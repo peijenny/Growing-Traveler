@@ -853,6 +853,7 @@
 				28CE2D3927FECBF400ACA813 /* Resources */,
 				7AADBE0DB1F89970C41D7F4C /* [CP] Embed Pods Frameworks */,
 				285F3F412801756000E84CF2 /* SwiftLint */,
+				28828A622828E47D00BA02EF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -971,6 +972,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		28828A622828E47D00BA02EF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)\n",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		69AC68648D4AB83E6666AD1F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1263,6 +1283,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Growing-Traveler/Growing-Traveler.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = C4JD5546YM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Growing-Traveler/Info.plist";

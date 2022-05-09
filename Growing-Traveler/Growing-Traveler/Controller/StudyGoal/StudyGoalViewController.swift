@@ -275,7 +275,7 @@ class StudyGoalViewController: UIViewController {
                     withIdentifier: String(describing: AuthenticationViewController.self)
                     ) as? AuthenticationViewController else { return }
             
-            authViewController.modalPresentationStyle = .popover
+            authViewController.modalPresentationStyle = .formSheet
 
             present(authViewController, animated: true, completion: nil)
             

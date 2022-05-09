@@ -62,7 +62,6 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="j9u-Xt-LNL" secondAttribute="bottom" constant="10" id="FdR-hK-dZQ"/>
-                        <constraint firstItem="rU0-Im-g4N" firstAttribute="leading" relation="lessThanOrEqual" secondItem="ZKC-au-2sh" secondAttribute="trailing" constant="226" id="LWA-lO-IqJ"/>
                         <constraint firstItem="ZKC-au-2sh" firstAttribute="top" secondItem="0lN-sN-QgT" secondAttribute="top" constant="10" id="LsG-nX-W5X"/>
                         <constraint firstAttribute="bottom" secondItem="rU0-Im-g4N" secondAttribute="bottom" constant="7" id="Zdo-Cj-L9A"/>
                         <constraint firstItem="rU0-Im-g4N" firstAttribute="top" secondItem="0lN-sN-QgT" secondAttribute="top" constant="7" id="aOX-5K-H6e"/>
