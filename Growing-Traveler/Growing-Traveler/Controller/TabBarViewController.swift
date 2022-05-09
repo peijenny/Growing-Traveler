@@ -128,7 +128,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
 
         if let viewControllers = tabBarController.viewControllers {
             
-            if viewController != viewControllers[0] && viewController != viewControllers[1] {
+            if viewController != viewControllers[0] && viewController != viewControllers[3] {
                 
                 guard userID != "" else {
 
