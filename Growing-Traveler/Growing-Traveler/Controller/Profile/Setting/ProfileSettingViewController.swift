@@ -17,6 +17,8 @@ class ProfileSettingViewController: BaseViewController {
     
     var deleteUserManager = DeleteUserManager()
     
+    var friendManager = FriendManager()
+    
     var studyGoals: [StudyGoal] = []
     
     var friendList: Friend?
@@ -100,7 +102,7 @@ class ProfileSettingViewController: BaseViewController {
             profileSettingTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             profileSettingTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             profileSettingTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            profileSettingTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            profileSettingTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         profileSettingTableView.register(
@@ -191,13 +193,17 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
                 cell.setUserPhoto(userPhotoLink: userInfo?.userPhoto ?? "")
                 
-            } else if userImageLink != nil {
-             
+            }
+            
+            if userImageLink != nil {
+                
                 cell.setUserPhoto(userPhotoLink: userImageLink ?? "")
                 
             }
             
             cell.modifyUserPhotoButton.addTarget(self, action: #selector(modifyUserPhoto), for: .touchUpInside)
+            
+            cell.selectionStyle = .none
             
             return cell
             
@@ -226,6 +232,14 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                         
                         userManger.updateData(user: updateUserInfo)
                         
+                        friendList?.userName = cell.userNameTextField.text ?? ""
+                        
+                        if let friendList = friendList {
+                            
+                            friendManager.updateData(friend: friendList)
+                            
+                        }
+                        
                         HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
                         
                     }
@@ -237,6 +251,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             }
             
             cell.showUserContent(userInfo: userInfo)
+            
+            cell.selectionStyle = .none
             
             return cell
             
@@ -250,10 +266,42 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             cell.signOutAccountButton.addTarget(self, action: #selector(signOutAccount), for: .touchUpInside)
             
             cell.deleteAccountButton.addTarget(self, action: #selector(deleteAccount), for: .touchUpInside)
+            
+            cell.privacyPolicyButton.addTarget(self, action: #selector(privacyPolicyButton), for: .touchUpInside)
+            
+            cell.eulaButton.addTarget(self, action: #selector(eulaButton), for: .touchUpInside)
 
+            cell.selectionStyle = .none
+            
             return cell
             
         }
+        
+    }
+    
+    @objc func privacyPolicyButton(sender: UIButton) {
+        
+        let viewController = UIStoryboard.profile
+            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.privacyTitle = PrivacyPolicy.privacyPolicy.title
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    @objc func eulaButton(sender: UIButton) {
+        
+        let viewController = UIStoryboard.profile
+            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.privacyTitle = PrivacyPolicy.eula.title
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
     

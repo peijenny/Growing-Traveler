@@ -198,7 +198,7 @@ class MoreArticlesViewController: UIViewController {
             moreArticlesTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             moreArticlesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             moreArticlesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            moreArticlesTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            moreArticlesTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         moreArticlesTableView.register(

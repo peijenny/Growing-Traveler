@@ -278,7 +278,7 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                             applyList: [], deliveryList: []
                         )
                         
-                        self.friendManager.addData(friend: friend)
+                        self.friendManager.updateData(friend: friend)
                         
                     }
                     

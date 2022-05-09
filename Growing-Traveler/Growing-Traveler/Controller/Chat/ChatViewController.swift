@@ -524,6 +524,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 
+                cell.selectionStyle = .none
+                
                 return cell
                 
             } else {
@@ -540,6 +542,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.showMessage(sendMessage: sendMessage)
                     
                 }
+                
+                cell.selectionStyle = .none
 
                 return cell
                 
@@ -575,6 +579,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.setCreateTime(receiveCreateTime:
                     chatMessage?.messageContent[indexPath.row].createTime ?? TimeInterval())
                 
+                cell.selectionStyle = .none
+                
                 return cell
                 
             } else {
@@ -604,6 +610,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.showShareArticle(forumArticle: article[0])
                 }
 
+                cell.selectionStyle = .none
+                
                 return cell
                 
             }

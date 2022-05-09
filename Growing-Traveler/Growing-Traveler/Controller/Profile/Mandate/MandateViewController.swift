@@ -73,7 +73,7 @@ class MandateViewController: UIViewController {
         
         setTableView()
 
-        title = "成長任務"
+        title = "學習成就"
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
@@ -283,7 +283,7 @@ class MandateViewController: UIViewController {
             mandateTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             mandateTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             mandateTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            mandateTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            mandateTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         mandateTableView.register(
@@ -324,6 +324,8 @@ extension MandateViewController: UITableViewDelegate, UITableViewDataSource {
         let mandateItem = ownMandates[indexPath.section].mandate[indexPath.row]
         
         cell.showMandateItem(mandateItem: mandateItem)
+        
+        cell.selectionStyle = .none
         
         return cell
         

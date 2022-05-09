@@ -125,6 +125,8 @@ class StudyGoalViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        addGoalButton.titleLabel?.text = nil
+        
         // MARK: - 右下角 新增個人學習計劃 Button 修改圖片的顯示方式與加上圓角
         addGoalButton.imageView?.contentMode = .scaleAspectFill
 
@@ -275,7 +277,7 @@ class StudyGoalViewController: UIViewController {
                     withIdentifier: String(describing: AuthenticationViewController.self)
                     ) as? AuthenticationViewController else { return }
             
-            authViewController.modalPresentationStyle = .popover
+            authViewController.modalPresentationStyle = .formSheet
 
             present(authViewController, animated: true, completion: nil)
             

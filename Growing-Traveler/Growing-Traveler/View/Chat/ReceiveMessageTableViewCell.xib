@@ -44,6 +44,7 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="esn-W6-4rP"/>
                             <constraint firstItem="8pT-kn-rpc" firstAttribute="top" secondItem="HLF-vV-zWP" secondAttribute="top" constant="5" id="kfI-Pt-odq"/>
                             <constraint firstAttribute="bottom" secondItem="8pT-kn-rpc" secondAttribute="bottom" constant="5" id="mnF-fn-MMm"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="x2N-Go-ABl"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receive Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYM-kc-Bq6">

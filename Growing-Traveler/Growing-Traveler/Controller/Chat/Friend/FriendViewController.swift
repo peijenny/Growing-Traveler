@@ -257,6 +257,8 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
+        cell.selectionStyle = .none
+        
         return cell
         
     }

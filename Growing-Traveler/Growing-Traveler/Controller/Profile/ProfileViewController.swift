@@ -26,7 +26,7 @@ enum FeatureType {
             
         case .analysis: return "學習分析"
             
-        case .release: return "發布紀錄"
+        case .release: return "發佈文章紀錄"
             
         case .license: return "個人認證"
             

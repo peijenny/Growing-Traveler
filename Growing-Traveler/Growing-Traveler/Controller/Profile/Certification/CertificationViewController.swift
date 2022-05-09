@@ -33,6 +33,12 @@ class CertificationViewController: UIViewController {
         
         setTableView()
         
+        setcertificationBackgroundView()
+        
+        setImageView()
+        
+        setLabel()
+        
         setNavigationItems()
         
         fetchUserInfoData()
@@ -41,7 +47,7 @@ class CertificationViewController: UIViewController {
     
     func fetchUserInfoData() {
         
-        userManager.fetchData(fetchUserID: userID) { [weak self] result in
+        userManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -50,6 +56,16 @@ class CertificationViewController: UIViewController {
             case .success(let userInfo):
                 
                 strongSelf.userInfo = userInfo
+                
+                if strongSelf.userInfo?.certification.count == 0 {
+                    
+                    strongSelf.certificationBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    strongSelf.certificationBackgroundView.isHidden = true
+                    
+                }
                 
                 strongSelf.certificationTableView.reloadData()
                 
@@ -123,7 +139,7 @@ class CertificationViewController: UIViewController {
         
     }
     
-    func setReleaseBackgroundView() {
+    func setcertificationBackgroundView() {
         
         certificationBackgroundView.backgroundColor = UIColor.clear
         
@@ -137,7 +153,7 @@ class CertificationViewController: UIViewController {
             certificationBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             certificationBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             certificationBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            certificationBackgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            certificationBackgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
     }
@@ -192,7 +208,7 @@ class CertificationViewController: UIViewController {
             certificationTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             certificationTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             certificationTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            certificationTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            certificationTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         certificationTableView.register(
@@ -234,6 +250,8 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
             cell.showCertificationData(certification: certification)
             
         }
+        
+        cell.selectionStyle = .none
         
         return cell
         

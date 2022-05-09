@@ -192,10 +192,10 @@ class PublishForumArticleViewController: BaseViewController {
         publishArticleTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
             publishArticleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             publishArticleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -80.0)
         ])
         
         publishArticleTableView.register(
@@ -325,10 +325,19 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         
         let navController = UINavigationController(rootViewController: categoryViewController)
         
-        if let sheetPresentationController = navController.sheetPresentationController {
-            
-            sheetPresentationController.detents = [.medium()]
-            
+        if #available(iOS 15.0, *) {
+
+            if let sheetPresentationController = navController.sheetPresentationController {
+
+                sheetPresentationController.detents = [.medium()]
+
+            }
+
+        } else {
+            // Fallback on earlier versions
+
+            navController.modalPresentationStyle = .fullScreen
+
         }
         
         self.present(navController, animated: true, completion: nil)

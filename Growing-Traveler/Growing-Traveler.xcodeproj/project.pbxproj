@@ -71,6 +71,7 @@
 		28754ACB2803079A0079F430 /* StudyItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28754AC92803079A0079F430 /* StudyItemTableViewCell.xib */; };
 		28828A5D2827D81100BA02EF /* 94021-startup.json in Resources */ = {isa = PBXBuildFile; fileRef = 28828A5C2827D81100BA02EF /* 94021-startup.json */; };
 		28828A5F2827DBD400BA02EF /* 101546-study-abroad.json in Resources */ = {isa = PBXBuildFile; fileRef = 28828A5E2827DBD400BA02EF /* 101546-study-abroad.json */; };
+		28828A612828DEA200BA02EF /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28828A602828DEA200BA02EF /* PrivacyPolicyViewController.swift */; };
 		288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */; };
 		288367A9280129F30010CEAD /* StudyGoal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288367A8280129F30010CEAD /* StudyGoal.storyboard */; };
 		288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */; };
@@ -217,6 +218,7 @@
 		28754AC92803079A0079F430 /* StudyItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyItemTableViewCell.xib; sourceTree = "<group>"; };
 		28828A5C2827D81100BA02EF /* 94021-startup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "94021-startup.json"; sourceTree = "<group>"; };
 		28828A5E2827DBD400BA02EF /* 101546-study-abroad.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "101546-study-abroad.json"; path = "../../../../../Downloads/101546-study-abroad.json"; sourceTree = "<group>"; };
+		28828A602828DEA200BA02EF /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		288367A6280126FE0010CEAD /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		288367A8280129F30010CEAD /* StudyGoal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StudyGoal.storyboard; sourceTree = "<group>"; };
 		288367AA28012A2F0010CEAD /* StudyGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalViewController.swift; sourceTree = "<group>"; };
@@ -751,6 +753,7 @@
 			isa = PBXGroup;
 			children = (
 				283E65842817CD6300F1033F /* ProfileSettingViewController.swift */,
+				28828A602828DEA200BA02EF /* PrivacyPolicyViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -850,6 +853,7 @@
 				28CE2D3927FECBF400ACA813 /* Resources */,
 				7AADBE0DB1F89970C41D7F4C /* [CP] Embed Pods Frameworks */,
 				285F3F412801756000E84CF2 /* SwiftLint */,
+				28828A622828E47D00BA02EF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -969,6 +973,25 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
+		28828A622828E47D00BA02EF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)\n",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		69AC68648D4AB83E6666AD1F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1042,6 +1065,7 @@
 				2808C91A28100F6000DC1EC5 /* CalculateBar.swift in Sources */,
 				28BB6EF828069112002B0458 /* ForumArticle.swift in Sources */,
 				280C1B06280D77900091B9DC /* ChatViewController.swift in Sources */,
+				28828A612828DEA200BA02EF /* PrivacyPolicyViewController.swift in Sources */,
 				28BB6EF6280690EB002B0458 /* ForumArticleManager.swift in Sources */,
 				28BB6F2C28096AAA002B0458 /* MoreArticlesViewController.swift in Sources */,
 				281358E5281C2D2A000B0CAE /* NoteTableViewCell.swift in Sources */,
@@ -1186,7 +1210,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1240,7 +1264,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1259,6 +1283,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Growing-Traveler/Growing-Traveler.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = C4JD5546YM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Growing-Traveler/Info.plist";

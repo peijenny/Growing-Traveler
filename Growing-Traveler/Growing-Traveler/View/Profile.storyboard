@@ -263,11 +263,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="rLi-Mr-TQI" firstAttribute="top" secondItem="GBr-bK-zhV" secondAttribute="top" id="0BF-03-lHl"/>
-                            <constraint firstItem="D9W-NE-GYL" firstAttribute="top" secondItem="GBr-bK-zhV" secondAttribute="top" constant="200" id="8Iq-K8-sbR"/>
                             <constraint firstItem="GBr-bK-zhV" firstAttribute="bottom" secondItem="rLi-Mr-TQI" secondAttribute="bottom" id="9vH-uT-7f1"/>
                             <constraint firstItem="GBr-bK-zhV" firstAttribute="trailing" secondItem="rLi-Mr-TQI" secondAttribute="trailing" id="MLF-tG-AI7"/>
+                            <constraint firstItem="D9W-NE-GYL" firstAttribute="centerY" secondItem="GBr-bK-zhV" secondAttribute="centerY" id="Osl-AU-gaS"/>
                             <constraint firstItem="D9W-NE-GYL" firstAttribute="leading" secondItem="GBr-bK-zhV" secondAttribute="leading" constant="20" id="PK4-GX-3ag"/>
-                            <constraint firstItem="GBr-bK-zhV" firstAttribute="bottom" secondItem="D9W-NE-GYL" secondAttribute="bottom" constant="200" id="bXZ-Wn-Z29"/>
                             <constraint firstItem="rLi-Mr-TQI" firstAttribute="leading" secondItem="GBr-bK-zhV" secondAttribute="leading" id="dgi-7H-tsq"/>
                             <constraint firstItem="GBr-bK-zhV" firstAttribute="trailing" secondItem="D9W-NE-GYL" secondAttribute="trailing" constant="20" id="g3p-oV-eFR"/>
                         </constraints>
@@ -281,6 +280,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QAt-Zb-qil" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1718.840579710145" y="93.75"/>
+        </scene>
+        <!--Privacy Policy View Controller-->
+        <scene sceneID="LB0-Af-wa6">
+            <objects>
+                <viewController storyboardIdentifier="PrivacyPolicyViewController" id="B4p-FQ-c1l" customClass="PrivacyPolicyViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8BQ-Hx-nyE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FPu-EV-XNg">
+                                <rect key="frame" x="0.0" y="110" width="414" height="786"/>
+                                <subviews>
+                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXm-09-IIt">
+                                        <rect key="frame" x="10" y="10" width="394" height="716"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="DXm-09-IIt" secondAttribute="trailing" constant="10" id="Qww-7V-1f1"/>
+                                    <constraint firstItem="DXm-09-IIt" firstAttribute="top" secondItem="FPu-EV-XNg" secondAttribute="top" constant="10" id="R92-Yz-OyZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="DXm-09-IIt" secondAttribute="bottom" constant="60" id="l1g-gj-lLr"/>
+                                    <constraint firstItem="DXm-09-IIt" firstAttribute="leading" secondItem="FPu-EV-XNg" secondAttribute="leading" constant="10" id="sFX-2g-MpI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tDF-z8-7ZN"/>
+                        <color key="backgroundColor" red="0.69803921570000005" green="0.81960784310000001" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="FPu-EV-XNg" firstAttribute="trailing" secondItem="tDF-z8-7ZN" secondAttribute="trailing" id="0oL-G7-C7d"/>
+                            <constraint firstItem="FPu-EV-XNg" firstAttribute="leading" secondItem="tDF-z8-7ZN" secondAttribute="leading" id="5ut-AM-elK"/>
+                            <constraint firstAttribute="bottom" secondItem="FPu-EV-XNg" secondAttribute="bottom" id="WtI-b5-Ixn"/>
+                            <constraint firstItem="FPu-EV-XNg" firstAttribute="leading" secondItem="tDF-z8-7ZN" secondAttribute="leading" id="bcw-K4-Sl1"/>
+                            <constraint firstItem="FPu-EV-XNg" firstAttribute="trailing" secondItem="tDF-z8-7ZN" secondAttribute="trailing" id="blN-Kh-yig"/>
+                            <constraint firstItem="FPu-EV-XNg" firstAttribute="top" secondItem="8BQ-Hx-nyE" secondAttribute="top" constant="110" id="hpe-lg-LhF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="DXm-09-IIt" id="bjw-Cq-6Eh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fby-0d-cwc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2518.840579710145" y="93.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hLe-kG-EbI">
@@ -299,7 +346,7 @@
             </objects>
             <point key="canvasLocation" x="-661" y="94"/>
         </scene>
-        <!--成長分析-->
+        <!--學習分析-->
         <scene sceneID="8xa-q3-o6H">
             <objects>
                 <viewController storyboardIdentifier="AnalysisViewController" id="DHo-pO-1Db" customClass="AnalysisViewController" customModule="Growing_Traveler" customModuleProvider="target" sceneMemberID="viewController">
@@ -352,7 +399,7 @@
                             <constraint firstItem="5Fz-Uh-Kjh" firstAttribute="top" secondItem="t1V-u8-86M" secondAttribute="bottom" id="kCf-7N-Yj1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="成長分析" id="nMy-Q0-ZXA"/>
+                    <navigationItem key="navigationItem" title="學習分析" id="nMy-Q0-ZXA"/>
                     <connections>
                         <outlet property="analysisTableView" destination="5Fz-Uh-Kjh" id="qhY-zx-MYt"/>
                         <outlet property="selectSegmentedControl" destination="35w-pe-DBz" id="KcV-8Z-LoC"/>

@@ -126,7 +126,7 @@ class BlockadeFriendViewController: UIViewController {
             blockadeTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             blockadeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             blockadeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            blockadeTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            blockadeTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         blockadeTableView.register(
@@ -172,6 +172,8 @@ extension BlockadeFriendViewController: UITableViewDelegate, UITableViewDataSour
         
         cell.unblockButton.addTarget(self, action: #selector(unblockUserButton), for: .touchUpInside)
         
+        cell.selectionStyle = .none
+        
         return cell
         
     }
@@ -186,7 +188,7 @@ extension BlockadeFriendViewController: UITableViewDelegate, UITableViewDataSour
             
             friend.blockadeList.remove(at: indexPath.row)
             
-            friendManager.addData(friend: friend)
+            friendManager.updateData(friend: friend)
             
             HUD.flash(.labeledSuccess(title: "已解除封鎖此帳號", subtitle: nil), delay: 0.5)
             

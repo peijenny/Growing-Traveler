@@ -184,7 +184,7 @@ class ArticleDetailViewController: UIViewController {
             articleDetailTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             articleDetailTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             articleDetailTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            articleDetailTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            articleDetailTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         articleDetailTableView.register(
@@ -439,7 +439,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
                     withIdentifier: String(describing: AuthenticationViewController.self)
                     ) as? AuthenticationViewController else { return }
             
-            authViewController.modalPresentationStyle = .popover
+            authViewController.modalPresentationStyle = .formSheet
 
             present(authViewController, animated: true, completion: nil)
 
@@ -478,9 +478,18 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         
         let navController = UINavigationController(rootViewController: viewController)
         
-        if let sheetPresentationController = navController.sheetPresentationController {
+        if #available(iOS 15.0, *) {
             
-            sheetPresentationController.detents = [.medium()]
+            if let sheetPresentationController = navController.sheetPresentationController {
+                
+                sheetPresentationController.detents = [.medium()]
+                
+            }
+            
+        } else {
+            // Fallback on earlier versions
+            
+            navController.modalPresentationStyle = .fullScreen
             
         }
         

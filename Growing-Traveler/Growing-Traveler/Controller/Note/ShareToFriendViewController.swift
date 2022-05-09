@@ -158,7 +158,7 @@ class ShareToFriendViewController: UIViewController {
             shareToFriendTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             shareToFriendTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             shareToFriendTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            shareToFriendTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -160.0)
+            shareToFriendTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
         ])
         
         shareToFriendTableView.register(
@@ -213,6 +213,8 @@ extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSourc
         cell.showFriendListInfo(friendInfo: usersInfo[indexPath.row])
         
         cell.unblockButton.addTarget(self, action: #selector(shareToFriendButton), for: .touchUpInside)
+        
+        cell.selectionStyle = .none
         
         return cell
         

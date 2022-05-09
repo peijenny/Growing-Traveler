@@ -134,7 +134,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
 
                     if let authViewController = UIStoryboard.auth.instantiateInitialViewController() {
 
-                        authViewController.modalPresentationStyle = .popover
+                        authViewController.modalPresentationStyle = .formSheet
 
                         present(authViewController, animated: true, completion: nil)
                     }
