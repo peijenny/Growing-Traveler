@@ -325,10 +325,19 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         
         let navController = UINavigationController(rootViewController: categoryViewController)
         
-        if let sheetPresentationController = navController.sheetPresentationController {
-            
-            sheetPresentationController.detents = [.medium()]
-            
+        if #available(iOS 15.0, *) {
+
+            if let sheetPresentationController = navController.sheetPresentationController {
+
+                sheetPresentationController.detents = [.medium()]
+
+            }
+
+        } else {
+            // Fallback on earlier versions
+
+            navController.modalPresentationStyle = .fullScreen
+
         }
         
         self.present(navController, animated: true, completion: nil)

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -178,6 +179,8 @@
                                                     <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="tKQ-Ro-0GY" secondAttribute="height" multiplier="1:1" id="Tyd-vF-wu1"/>
+                                                        <constraint firstAttribute="width" constant="40" id="Vyz-4o-Zmb"/>
+                                                        <constraint firstAttribute="height" constant="40" id="dog-0c-Wkk"/>
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>
@@ -235,7 +238,9 @@
                                                     <rect key="frame" x="358" y="0.0" width="40" height="40"/>
                                                     <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="O0L-BF-F0C"/>
                                                         <constraint firstAttribute="width" secondItem="khI-wM-Aqo" secondAttribute="height" multiplier="1:1" id="a6e-Ry-Ug4"/>
+                                                        <constraint firstAttribute="height" constant="40" id="spu-Dc-nqg"/>
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>

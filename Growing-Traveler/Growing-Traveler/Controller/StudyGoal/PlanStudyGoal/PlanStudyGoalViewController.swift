@@ -548,9 +548,18 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         let navController = UINavigationController(rootViewController: selectCalenderViewController)
         
-        if let sheetPresentationController = navController.sheetPresentationController {
+        if #available(iOS 15.0, *) {
             
-            sheetPresentationController.detents = [.medium()]
+            if let sheetPresentationController = navController.sheetPresentationController {
+                
+                sheetPresentationController.detents = [.medium()]
+                
+            }
+            
+        } else {
+            // Fallback on earlier versions
+            
+            navController.modalPresentationStyle = .fullScreen
             
         }
         
@@ -570,10 +579,18 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         let navController = UINavigationController(rootViewController: categoryViewController)
         
-        if let sheetPresentationController = navController.sheetPresentationController {
+        if #available(iOS 15.0, *) {
             
-            sheetPresentationController.detents = [.medium()]
+            if let sheetPresentationController = navController.sheetPresentationController {
+                
+                sheetPresentationController.detents = [.medium()]
+                
+            }
             
+        } else {
+            // Fallback on earlier versions
+            
+            navController.modalPresentationStyle = .fullScreen
         }
         
         self.present(navController, animated: true, completion: nil)

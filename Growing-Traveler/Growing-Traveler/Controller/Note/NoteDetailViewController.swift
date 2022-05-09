@@ -130,10 +130,18 @@ class NoteDetailViewController: UIViewController {
         
         let navController = UINavigationController(rootViewController: viewController)
         
-        if let sheetPresentationController = navController.sheetPresentationController {
+        if #available(iOS 15.0, *) {
             
-            sheetPresentationController.detents = [.medium()]
+            if let sheetPresentationController = navController.sheetPresentationController {
+                
+                sheetPresentationController.detents = [.medium()]
+                
+            }
             
+        } else {
+            // Fallback on earlier versions
+            
+            navController.modalPresentationStyle = .fullScreen
         }
         
         present(navController, animated: true)
