@@ -119,13 +119,13 @@
                                 <rect key="frame" x="0.0" y="328.5" width="414" height="517.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="undrawNotFound" translatesAutoresizingMaskIntoConstraints="NO" id="rBb-21-8Fu">
-                                        <rect key="frame" x="50" y="20" width="314" height="200"/>
+                                        <rect key="frame" x="50" y="30" width="314" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="VKJ-zO-Spq"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此區暫無學習目標與項目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F82-7Y-oE1">
-                                        <rect key="frame" x="50" y="240" width="314" height="22.5"/>
+                                        <rect key="frame" x="50" y="250" width="314" height="22.5"/>
                                         <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -134,7 +134,7 @@
                                 <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="F82-7Y-oE1" firstAttribute="leading" secondItem="VFk-re-Iup" secondAttribute="leading" constant="50" id="1gq-66-ynU"/>
-                                    <constraint firstItem="rBb-21-8Fu" firstAttribute="top" secondItem="VFk-re-Iup" secondAttribute="top" constant="20" id="6bh-dO-Qzw"/>
+                                    <constraint firstItem="rBb-21-8Fu" firstAttribute="top" secondItem="VFk-re-Iup" secondAttribute="top" constant="30" id="6bh-dO-Qzw"/>
                                     <constraint firstAttribute="trailing" secondItem="rBb-21-8Fu" secondAttribute="trailing" constant="50" id="EPr-QH-2Kv"/>
                                     <constraint firstAttribute="trailing" secondItem="F82-7Y-oE1" secondAttribute="trailing" constant="50" id="bac-U2-gUm"/>
                                     <constraint firstItem="F82-7Y-oE1" firstAttribute="top" secondItem="rBb-21-8Fu" secondAttribute="bottom" constant="20" id="rAa-Fg-Q0G"/>

@@ -67,6 +67,12 @@ class CalendarViewController: UIViewController {
         
         listenData()
         
+        if userID == "" {
+            
+            displayBackgroundView.isHidden = false
+            
+        }
+        
     }
     
     override var hidesBottomBarWhenPushed: Bool {
