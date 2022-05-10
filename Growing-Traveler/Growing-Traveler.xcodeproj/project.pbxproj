@@ -87,8 +87,6 @@
 		28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */; };
 		28AF15B128040948004E97B8 /* StudyGoalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B028040948004E97B8 /* StudyGoalHeaderView.swift */; };
 		28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15B228040954004E97B8 /* StudyGoalHeaderView.xib */; };
-		28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B428040A82004E97B8 /* StudyGoalFooterView.swift */; };
-		28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15B628040A8E004E97B8 /* StudyGoalFooterView.xib */; };
 		28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */; };
 		28BB6EE628066441002B0458 /* Forum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EE528066441002B0458 /* Forum.storyboard */; };
 		28BB6EE928066639002B0458 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EE828066639002B0458 /* ForumViewController.swift */; };
@@ -147,6 +145,8 @@
 		28DA833F2812AB940081CB14 /* MandateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA833D2812AB940081CB14 /* MandateTableViewCell.swift */; };
 		28DA83402812AB940081CB14 /* MandateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DA833E2812AB940081CB14 /* MandateTableViewCell.xib */; };
 		28DA83432812AF950081CB14 /* 93125-progress-bar.json in Resources */ = {isa = PBXBuildFile; fileRef = 28DA83422812AF950081CB14 /* 93125-progress-bar.json */; };
+		28EB79DB282A5258007B0677 /* BottomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EB79D9282A5258007B0677 /* BottomTableViewCell.swift */; };
+		28EB79DC282A5258007B0677 /* BottomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EB79DA282A5258007B0677 /* BottomTableViewCell.xib */; };
 		28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F7C971280347F200BE4C76 /* StudyGoalManager.swift */; };
 		28FF433D2813D08E00C58E6B /* Mandate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF433C2813D08E00C58E6B /* Mandate.swift */; };
 		28FF433F2813D12200C58E6B /* MandateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF433E2813D12200C58E6B /* MandateManager.swift */; };
@@ -234,8 +234,6 @@
 		28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalTableViewCell.xib; sourceTree = "<group>"; };
 		28AF15B028040948004E97B8 /* StudyGoalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalHeaderView.swift; sourceTree = "<group>"; };
 		28AF15B228040954004E97B8 /* StudyGoalHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalHeaderView.xib; sourceTree = "<group>"; };
-		28AF15B428040A82004E97B8 /* StudyGoalFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalFooterView.swift; sourceTree = "<group>"; };
-		28AF15B628040A8E004E97B8 /* StudyGoalFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalFooterView.xib; sourceTree = "<group>"; };
 		28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		28BB6EE528066441002B0458 /* Forum.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Forum.storyboard; sourceTree = "<group>"; };
 		28BB6EE828066639002B0458 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
@@ -297,6 +295,8 @@
 		28DA833D2812AB940081CB14 /* MandateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateTableViewCell.swift; sourceTree = "<group>"; };
 		28DA833E2812AB940081CB14 /* MandateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MandateTableViewCell.xib; sourceTree = "<group>"; };
 		28DA83422812AF950081CB14 /* 93125-progress-bar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "93125-progress-bar.json"; sourceTree = "<group>"; };
+		28EB79D9282A5258007B0677 /* BottomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTableViewCell.swift; sourceTree = "<group>"; };
+		28EB79DA282A5258007B0677 /* BottomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomTableViewCell.xib; sourceTree = "<group>"; };
 		28F7C971280347F200BE4C76 /* StudyGoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalManager.swift; sourceTree = "<group>"; };
 		28FF433C2813D08E00C58E6B /* Mandate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mandate.swift; sourceTree = "<group>"; };
 		28FF433E2813D12200C58E6B /* MandateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateManager.swift; sourceTree = "<group>"; };
@@ -572,12 +572,12 @@
 			children = (
 				28D79FE5281A85B900505B5B /* Rank */,
 				28AF15AF2804090D004E97B8 /* PlanStudyGoal */,
+				28EB79D9282A5258007B0677 /* BottomTableViewCell.swift */,
+				28EB79DA282A5258007B0677 /* BottomTableViewCell.xib */,
 				28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */,
 				28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */,
 				28AF15B028040948004E97B8 /* StudyGoalHeaderView.swift */,
 				28AF15B228040954004E97B8 /* StudyGoalHeaderView.xib */,
-				28AF15B428040A82004E97B8 /* StudyGoalFooterView.swift */,
-				28AF15B628040A8E004E97B8 /* StudyGoalFooterView.xib */,
 			);
 			path = StudyGoal;
 			sourceTree = "<group>";
@@ -906,7 +906,6 @@
 				28BB6EE628066441002B0458 /* Forum.storyboard in Resources */,
 				28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */,
 				28BC2C1D2816860000E69BE0 /* Authentication.storyboard in Resources */,
-				28AF15B728040A8E004E97B8 /* StudyGoalFooterView.xib in Resources */,
 				2808C92B281131C700DC1EC5 /* AnalysisPieChartTableViewCell.xib in Resources */,
 				28CE2D4B27FECBF500ACA813 /* LaunchScreen.storyboard in Resources */,
 				28BB6EEF28066FC1002B0458 /* PublishArticleTableViewCell.xib in Resources */,
@@ -918,6 +917,7 @@
 				288367B528013E800010CEAD /* PlanStudyGoalHeaderView.xib in Resources */,
 				28CE2D4827FECBF500ACA813 /* Assets.xcassets in Resources */,
 				28C998602823839A00E3B4C0 /* ShareReceiveTableViewCell.xib in Resources */,
+				28EB79DC282A5258007B0677 /* BottomTableViewCell.xib in Resources */,
 				281358DB281BC8F6000B0CAE /* CertificationTableViewCell.xib in Resources */,
 				281358E6281C2D2A000B0CAE /* NoteTableViewCell.xib in Resources */,
 				28AF15B328040954004E97B8 /* StudyGoalHeaderView.xib in Resources */,
@@ -1088,6 +1088,7 @@
 				28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */,
 				283E65852817CD6300F1033F /* ProfileSettingViewController.swift in Sources */,
 				282522C5280ED6590008B916 /* BlockadeFriendViewController.swift in Sources */,
+				28EB79DB282A5258007B0677 /* BottomTableViewCell.swift in Sources */,
 				281358E2281C2C53000B0CAE /* NoteViewController.swift in Sources */,
 				2808C92A281131C700DC1EC5 /* AnalysisPieChartTableViewCell.swift in Sources */,
 				283E65912817DF2300F1033F /* SettingSignTableViewCell.swift in Sources */,
@@ -1126,7 +1127,6 @@
 				2808C914280FECA800DC1EC5 /* AnalysisViewController.swift in Sources */,
 				28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */,
 				2808C926281131A400DC1EC5 /* AnalysisContentTableViewCell.swift in Sources */,
-				28AF15B528040A82004E97B8 /* StudyGoalFooterView.swift in Sources */,
 				28C998662824A93C00E3B4C0 /* UIView+Extension.swift in Sources */,
 				28D702BF28019E0300FE9AEA /* Category.swift in Sources */,
 				28C9985B28236C8500E3B4C0 /* ShareToFriendViewController.swift in Sources */,

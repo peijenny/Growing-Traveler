@@ -60,10 +60,6 @@ class StudyGoalViewController: UIViewController {
     
     var titleText = StatusType.running.title
     
-    var topCGFloat = CGFloat()
-    
-    var bottomCGFloat = CGFloat()
-    
     @IBOutlet weak var underlineView: UIView!
     
     var selectLineView = UIView()
@@ -90,13 +86,13 @@ class StudyGoalViewController: UIViewController {
         )
         
         studyGoalTableView.register(
-            UINib(nibName: String(describing: StudyGoalFooterView.self), bundle: nil),
-            forHeaderFooterViewReuseIdentifier: String(describing: StudyGoalFooterView.self)
+            UINib(nibName: String(describing: StudyGoalTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
         )
         
         studyGoalTableView.register(
-            UINib(nibName: String(describing: StudyGoalTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
+            UINib(nibName: String(describing: BottomTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: BottomTableViewCell.self)
         )
 
     }
@@ -158,16 +154,7 @@ class StudyGoalViewController: UIViewController {
         
         let size = headerAnimationView.frame.height * CGFloat(0.8) - 30
         
-//        lottieAnimation.cornerRadius = size / 2
-        
         lottieAnimation.contentMode = .scaleAspectFit
-        
-//        lottieAnimation.frame = CGRect(
-//            x: headerAnimationView.frame.width * CGFloat(0.1),
-//            y: headerAnimationView.frame.height * CGFloat(0.2),
-//            width: headerAnimationView.frame.width * CGFloat(0.8),
-//            height: headerAnimationView.frame.height * CGFloat(0.8)
-//        )
 
         headerAnimationView.addSubview(lottieAnimation)
         
@@ -301,8 +288,6 @@ class StudyGoalViewController: UIViewController {
         guard let viewController = viewController as? PlanStudyGoalViewController else { return }
         
         viewController.studyGoal = studyGoal
-        
-//        viewController.user = user
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -446,33 +431,53 @@ extension StudyGoalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return studyGoals[section].studyItems.count
+        return studyGoals[section].studyItems.count + 1
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: StudyGoalTableViewCell.self),
-            for: indexPath
-        )
+        if indexPath.row < studyGoals[indexPath.section].studyItems.count {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: StudyGoalTableViewCell.self),
+                for: indexPath
+            )
 
-        guard let cell = cell as? StudyGoalTableViewCell else { return cell }
-        
-        cell.selectionStyle = .none
-        
-        cell.checkButton.addTarget(
-            self, action: #selector(checkItemButton), for: .touchUpInside)
-        
-        let isCompleted = studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted
-        
-        cell.checkIsCompleted(isCompleted: isCompleted)
-        
-        let studyItem = studyGoals[indexPath.section].studyItems[indexPath.row]
-        
-        cell.showStudyItem(studyItem: studyItem)
-        
-        return cell
+            guard let cell = cell as? StudyGoalTableViewCell else { return cell }
+            
+            cell.selectionStyle = .none
+            
+            cell.checkButton.addTarget(
+                self, action: #selector(checkItemButton), for: .touchUpInside)
+            
+            let isCompleted = studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted
+            
+            cell.checkIsCompleted(isCompleted: isCompleted)
+            
+            let studyItem = studyGoals[indexPath.section].studyItems[indexPath.row]
+            
+            cell.showStudyItem(studyItem: studyItem)
+            
+            return cell
+            
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: BottomTableViewCell.self),
+                for: indexPath
+            )
+
+            guard let cell = cell as? BottomTableViewCell else { return cell }
+            
+            cell.showStudyGoalBottom(studyGoal: studyGoals[indexPath.section])
+            
+            cell.deleteButton.addTarget(
+                self, action: #selector(deleteRowButton), for: .touchUpInside)
+            
+            return cell
+            
+        }
         
     }
     
@@ -544,12 +549,6 @@ extension StudyGoalViewController: UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
-        
-    }
-    
 }
 
 // MARK: - TableView Delegate
@@ -567,10 +566,10 @@ extension StudyGoalViewController: UITableViewDelegate {
         tableView.tableHeaderView = UIView.init(frame: CGRect.init(
             x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height))
 
-        topCGFloat = headerView.frame.height
-        
-        setContentInset()
-        
+        studyGoalTableView.contentInset = UIEdgeInsets.init(
+            top: -headerView.frame.height, left: 0, bottom: 0, right: 0
+        )
+
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         
         headerView.addGestureRecognizer(tapGestureRecognizer)
@@ -579,59 +578,14 @@ extension StudyGoalViewController: UITableViewDelegate {
         
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        let footerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: String(describing: StudyGoalFooterView.self))
-
-        guard let footerView = footerView as? StudyGoalFooterView else { return footerView }
-        
-        footerView.showStudyGoalFooter(studyGoal: studyGoals[section])
-        
-        tableView.tableFooterView = UIView.init(frame: CGRect.init(
-            x: 0, y: 0, width: footerView.frame.width, height: footerView.frame.height))
-        
-        bottomCGFloat = footerView.frame.height
-        
-        setContentInset()
-
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        
-        footerView.addGestureRecognizer(tapGestureRecognizer)
-        
-        footerView.deleteButton.addTarget(
-            self, action: #selector(deleteRowButton), for: .touchUpInside)
-        
-        footerView.deleteButton.tag = section
-        
-        return footerView
-    }
-    
-    func setContentInset() {
-        
-        studyGoalTableView.contentInset = UIEdgeInsets.init(
-            top: -topCGFloat, left: 0, bottom: -bottomCGFloat, right: 0
-        )
-        
-    }
-    
     @objc func handleTap(sender: UITapGestureRecognizer) {
 
         let headerView = sender.view as? StudyGoalHeaderView
-        
-        let footerView = sender.view as? StudyGoalFooterView
-        
+
         for index in 0..<studyGoals.count {
             
             if sender.view == headerView &&
                 headerView?.hideRecordLabel.text == studyGoals[index].id {
-                
-                pushToPlanStudyGoalPage(studyGoal: studyGoals[index])
-                
-            }
-            
-            if sender.view == footerView &&
-                footerView?.hideRecordLabel.text == studyGoals[index].id {
                 
                 pushToPlanStudyGoalPage(studyGoal: studyGoals[index])
                 
@@ -648,14 +602,29 @@ extension StudyGoalViewController: UITableViewDelegate {
             message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
             preferredStyle: .alert)
         
-        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
+        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
             
-            self.studyGoalManager.deleteData(
-                studyGoal: self.studyGoals[sender.tag])
+            guard let strongSelf = self else { return }
+            
+            let point = sender.convert(CGPoint.zero, to: strongSelf.studyGoalTableView)
 
-            self.studyGoals.remove(at: sender.tag)
+            if let indexPath = strongSelf.studyGoalTableView.indexPathForRow(at: point) {
 
-            self.studyGoalTableView.reloadData()
+                strongSelf.studyGoalManager.deleteData(studyGoal: strongSelf.studyGoals[indexPath.section])
+                
+                strongSelf.studyGoals.remove(at: indexPath.section)
+                
+                strongSelf.studyGoalTableView.beginUpdates()
+                
+                let indexSet = NSMutableIndexSet()
+                
+                indexSet.add(indexPath.section)
+
+                strongSelf.studyGoalTableView.deleteSections(indexSet as IndexSet, with: UITableView.RowAnimation.left)
+
+                strongSelf.studyGoalTableView.endUpdates()
+                
+            }
             
         }
         
@@ -668,5 +637,5 @@ extension StudyGoalViewController: UITableViewDelegate {
         present(alertController, animated: true, completion: nil)
 
     }
-    
+
 }
