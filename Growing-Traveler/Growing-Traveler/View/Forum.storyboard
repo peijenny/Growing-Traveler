@@ -96,7 +96,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IuM-aV-O0U">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ko-Xi-uNt">
@@ -197,10 +197,10 @@
                         <constraints>
                             <constraint firstItem="3Ko-Xi-uNt" firstAttribute="centerX" secondItem="N3Y-vr-oWB" secondAttribute="centerX" id="9Pe-Q0-MxW"/>
                             <constraint firstItem="IuM-aV-O0U" firstAttribute="leading" secondItem="N3Y-vr-oWB" secondAttribute="leading" id="IeA-7C-dtH"/>
-                            <constraint firstItem="N3Y-vr-oWB" firstAttribute="bottom" secondItem="IuM-aV-O0U" secondAttribute="bottom" id="Qd6-yQ-sSX"/>
+                            <constraint firstAttribute="bottom" secondItem="IuM-aV-O0U" secondAttribute="bottom" id="Mx1-sS-IA2"/>
                             <constraint firstItem="N3Y-vr-oWB" firstAttribute="trailing" secondItem="IuM-aV-O0U" secondAttribute="trailing" id="Qil-jd-fz9"/>
                             <constraint firstItem="3Ko-Xi-uNt" firstAttribute="width" secondItem="awU-3s-9jd" secondAttribute="width" multiplier="0.903382" id="Xbi-nv-fjL"/>
-                            <constraint firstItem="IuM-aV-O0U" firstAttribute="top" secondItem="N3Y-vr-oWB" secondAttribute="top" id="drS-uK-mAB"/>
+                            <constraint firstItem="IuM-aV-O0U" firstAttribute="top" secondItem="awU-3s-9jd" secondAttribute="top" id="f8j-HP-b63"/>
                             <constraint firstItem="3Ko-Xi-uNt" firstAttribute="centerY" secondItem="N3Y-vr-oWB" secondAttribute="centerY" id="wYx-g0-wA6"/>
                         </constraints>
                     </view>
@@ -210,7 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ak5-G3-8aa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="49"/>
+            <point key="canvasLocation" x="831.88405797101461" y="48.883928571428569"/>
         </scene>
     </scenes>
     <resources>

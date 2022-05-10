@@ -231,7 +231,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKb-Ga-D2s">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Uo-1y-qBd">
@@ -398,10 +398,10 @@
                             <constraint firstItem="3Uo-1y-qBd" firstAttribute="centerY" secondItem="XnG-n8-b3f" secondAttribute="centerY" id="6K8-N7-6Yu"/>
                             <constraint firstItem="XnG-n8-b3f" firstAttribute="trailing" secondItem="3Uo-1y-qBd" secondAttribute="trailing" constant="20" id="KmJ-v6-Gip"/>
                             <constraint firstItem="lKb-Ga-D2s" firstAttribute="leading" secondItem="XnG-n8-b3f" secondAttribute="leading" id="NNQ-VZ-6nS"/>
-                            <constraint firstItem="XnG-n8-b3f" firstAttribute="bottom" secondItem="lKb-Ga-D2s" secondAttribute="bottom" id="Nne-Hi-iYm"/>
-                            <constraint firstItem="lKb-Ga-D2s" firstAttribute="top" secondItem="XnG-n8-b3f" secondAttribute="top" id="Opy-d2-2fu"/>
                             <constraint firstItem="XnG-n8-b3f" firstAttribute="trailing" secondItem="lKb-Ga-D2s" secondAttribute="trailing" id="Srz-Sd-J1d"/>
                             <constraint firstItem="3Uo-1y-qBd" firstAttribute="leading" secondItem="XnG-n8-b3f" secondAttribute="leading" constant="20" id="dSJ-vC-TFJ"/>
+                            <constraint firstItem="lKb-Ga-D2s" firstAttribute="top" secondItem="WIl-AK-Qo5" secondAttribute="top" id="gdl-ko-4Mx"/>
+                            <constraint firstAttribute="bottom" secondItem="lKb-Ga-D2s" secondAttribute="bottom" id="tX1-B1-oyj"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
