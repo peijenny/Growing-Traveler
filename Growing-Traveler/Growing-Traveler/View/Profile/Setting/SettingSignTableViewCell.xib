@@ -59,13 +59,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="186" height="31"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="隱私權政策"/>
+                                <buttonConfiguration key="configuration" style="plain" title="隱私權政策">
+                                    <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
+                                </buttonConfiguration>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cvl-zX-u3C">
                                 <rect key="frame" x="196" y="0.0" width="186" height="31"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="最終用戶許可協議"/>
+                                <buttonConfiguration key="configuration" style="plain" title="最終用戶許可協議">
+                                    <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
+                                </buttonConfiguration>
                             </button>
                         </subviews>
                     </stackView>

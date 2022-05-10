@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FzT-wu-3dN">
-                                <rect key="frame" x="0.0" y="542" width="414" height="354"/>
+                                <rect key="frame" x="0.0" y="516" width="414" height="380"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r90-d9-dAg">
                                         <rect key="frame" x="117" y="248" width="180" height="44"/>
@@ -97,16 +97,45 @@
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="JQP-zj-8Gb">
+                                        <rect key="frame" x="10" y="302" width="394" height="32.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1Z-23-t8n">
+                                                <rect key="frame" x="0.0" y="0.0" width="181.5" height="32.5"/>
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="隱私權政策">
+                                                    <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="privacyPolicyButtonWithSender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="p30-XM-ol2"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-CO-XrY">
+                                                <rect key="frame" x="212.5" y="0.0" width="181.5" height="32.5"/>
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="最終用戶許可協議">
+                                                    <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="eulaButtonWithSender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="vMP-VF-JqT"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="354" id="3qI-9M-u6y"/>
+                                    <constraint firstItem="JQP-zj-8Gb" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="10" id="1Th-iN-PEX"/>
+                                    <constraint firstAttribute="height" constant="380" id="3qI-9M-u6y"/>
                                     <constraint firstAttribute="trailing" secondItem="3GA-co-Gz4" secondAttribute="trailing" constant="16" id="3zG-63-oBG"/>
                                     <constraint firstItem="rzb-Rg-du1" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="16" id="7TN-Ff-2Vt"/>
                                     <constraint firstItem="r90-d9-dAg" firstAttribute="centerX" secondItem="FzT-wu-3dN" secondAttribute="centerX" id="8vO-U7-7Gk"/>
                                     <constraint firstItem="KCD-Z9-V2Q" firstAttribute="top" secondItem="eq1-Cp-a92" secondAttribute="bottom" constant="16" id="A3A-lG-LQu"/>
                                     <constraint firstItem="rzb-Rg-du1" firstAttribute="top" secondItem="FzT-wu-3dN" secondAttribute="top" constant="16" id="Bf5-E5-Sb8"/>
                                     <constraint firstItem="KCD-Z9-V2Q" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="16" id="CQT-nj-HHE"/>
+                                    <constraint firstAttribute="trailing" secondItem="JQP-zj-8Gb" secondAttribute="trailing" constant="10" id="DhI-ha-I0x"/>
                                     <constraint firstAttribute="trailing" secondItem="eq1-Cp-a92" secondAttribute="trailing" constant="16" id="EPc-rF-UQE"/>
                                     <constraint firstItem="rzb-Rg-du1" firstAttribute="top" secondItem="eq1-Cp-a92" secondAttribute="top" id="HxY-Bf-e26"/>
                                     <constraint firstAttribute="trailing" secondItem="KCD-Z9-V2Q" secondAttribute="trailing" constant="16" id="IRP-tE-LUX"/>
@@ -114,6 +143,7 @@
                                     <constraint firstItem="r90-d9-dAg" firstAttribute="top" secondItem="9uh-Ve-wY1" secondAttribute="bottom" constant="16" id="bOc-ST-tWW"/>
                                     <constraint firstItem="3GA-co-Gz4" firstAttribute="top" secondItem="KCD-Z9-V2Q" secondAttribute="bottom" constant="26" id="bRd-QJ-YXe"/>
                                     <constraint firstItem="9uh-Ve-wY1" firstAttribute="top" secondItem="3GA-co-Gz4" secondAttribute="bottom" constant="30" id="gOw-90-IL9"/>
+                                    <constraint firstItem="JQP-zj-8Gb" firstAttribute="top" secondItem="r90-d9-dAg" secondAttribute="bottom" constant="10" id="j0x-My-0Xt"/>
                                     <constraint firstAttribute="trailing" secondItem="9uh-Ve-wY1" secondAttribute="trailing" constant="16" id="mbW-HQ-pO0"/>
                                     <constraint firstItem="9uh-Ve-wY1" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="16" id="oUH-A8-ISX"/>
                                     <constraint firstItem="3GA-co-Gz4" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="16" id="wAM-jH-PEw"/>
