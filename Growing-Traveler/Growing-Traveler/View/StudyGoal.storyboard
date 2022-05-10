@@ -91,7 +91,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s7B-ph-YYk">
-                                <rect key="frame" x="16" y="328.5" width="382" height="517.5"/>
+                                <rect key="frame" x="16" y="338.5" width="382" height="507.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yw1-6K-0DR">
@@ -158,7 +158,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="s7B-ph-YYk" secondAttribute="bottom" constant="16" id="hbX-JN-YnV"/>
                             <constraint firstItem="yw1-6K-0DR" firstAttribute="top" secondItem="4j2-rB-qVK" secondAttribute="bottom" id="lyL-Wv-qxT"/>
                             <constraint firstItem="yw1-6K-0DR" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="me9-QT-i04"/>
-                            <constraint firstItem="s7B-ph-YYk" firstAttribute="top" secondItem="yw1-6K-0DR" secondAttribute="bottom" id="oNJ-Rx-mE1"/>
+                            <constraint firstItem="s7B-ph-YYk" firstAttribute="top" secondItem="yw1-6K-0DR" secondAttribute="bottom" constant="10" id="oNJ-Rx-mE1"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="VFk-re-Iup" secondAttribute="bottom" constant="16" id="oNo-DE-pBO"/>
                             <constraint firstItem="4j2-rB-qVK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tYs-Oh-2ri"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="s7B-ph-YYk" secondAttribute="trailing" constant="16" id="toa-Zn-pAr"/>
@@ -231,7 +231,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKb-Ga-D2s">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Uo-1y-qBd">
@@ -398,10 +398,10 @@
                             <constraint firstItem="3Uo-1y-qBd" firstAttribute="centerY" secondItem="XnG-n8-b3f" secondAttribute="centerY" id="6K8-N7-6Yu"/>
                             <constraint firstItem="XnG-n8-b3f" firstAttribute="trailing" secondItem="3Uo-1y-qBd" secondAttribute="trailing" constant="20" id="KmJ-v6-Gip"/>
                             <constraint firstItem="lKb-Ga-D2s" firstAttribute="leading" secondItem="XnG-n8-b3f" secondAttribute="leading" id="NNQ-VZ-6nS"/>
-                            <constraint firstItem="XnG-n8-b3f" firstAttribute="bottom" secondItem="lKb-Ga-D2s" secondAttribute="bottom" id="Nne-Hi-iYm"/>
-                            <constraint firstItem="lKb-Ga-D2s" firstAttribute="top" secondItem="XnG-n8-b3f" secondAttribute="top" id="Opy-d2-2fu"/>
                             <constraint firstItem="XnG-n8-b3f" firstAttribute="trailing" secondItem="lKb-Ga-D2s" secondAttribute="trailing" id="Srz-Sd-J1d"/>
                             <constraint firstItem="3Uo-1y-qBd" firstAttribute="leading" secondItem="XnG-n8-b3f" secondAttribute="leading" constant="20" id="dSJ-vC-TFJ"/>
+                            <constraint firstItem="lKb-Ga-D2s" firstAttribute="top" secondItem="WIl-AK-Qo5" secondAttribute="top" id="gdl-ko-4Mx"/>
+                            <constraint firstAttribute="bottom" secondItem="lKb-Ga-D2s" secondAttribute="bottom" id="tX1-B1-oyj"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

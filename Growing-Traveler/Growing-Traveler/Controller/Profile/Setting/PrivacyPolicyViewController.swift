@@ -36,6 +36,8 @@ class PrivacyPolicyViewController: UIViewController {
     
     var privacyURL = String()
     
+    var comePage = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,7 +60,28 @@ class PrivacyPolicyViewController: UIViewController {
             webView.allowsBackForwardNavigationGestures = true
             
         }
+        
+        if comePage == "auth" {
+            
+            setNavigationItem()
+            
+        }
 
+    }
+    
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .stop, target: self, action: #selector(closePage))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    @objc func closePage(sender: UIButton) {
+        
+        dismiss(animated: true, completion: nil)
+        
     }
     
     override var hidesBottomBarWhenPushed: Bool {

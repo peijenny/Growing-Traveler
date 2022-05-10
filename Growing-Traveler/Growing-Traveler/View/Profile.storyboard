@@ -96,7 +96,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rLi-Mr-TQI">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D9W-NE-GYL">
@@ -263,8 +263,8 @@
                         <viewLayoutGuide key="safeArea" id="GBr-bK-zhV"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="rLi-Mr-TQI" firstAttribute="top" secondItem="GBr-bK-zhV" secondAttribute="top" id="0BF-03-lHl"/>
-                            <constraint firstItem="GBr-bK-zhV" firstAttribute="bottom" secondItem="rLi-Mr-TQI" secondAttribute="bottom" id="9vH-uT-7f1"/>
+                            <constraint firstItem="rLi-Mr-TQI" firstAttribute="top" secondItem="FUS-MV-JlZ" secondAttribute="top" id="JY4-rl-N4n"/>
+                            <constraint firstAttribute="bottom" secondItem="rLi-Mr-TQI" secondAttribute="bottom" id="L9m-6S-3UX"/>
                             <constraint firstItem="GBr-bK-zhV" firstAttribute="trailing" secondItem="rLi-Mr-TQI" secondAttribute="trailing" id="MLF-tG-AI7"/>
                             <constraint firstItem="D9W-NE-GYL" firstAttribute="centerY" secondItem="GBr-bK-zhV" secondAttribute="centerY" id="Osl-AU-gaS"/>
                             <constraint firstItem="D9W-NE-GYL" firstAttribute="leading" secondItem="GBr-bK-zhV" secondAttribute="leading" constant="20" id="PK4-GX-3ag"/>

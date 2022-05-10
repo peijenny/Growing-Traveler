@@ -67,6 +67,48 @@ class AuthenticationViewController: UIViewController {
         
     }
     
+    @IBAction func privacyPolicyButton(sender: UIButton) {
+        
+        let viewController = UIStoryboard.profile
+            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.privacyTitle = PrivacyPolicy.privacyPolicy.title
+        
+        viewController.comePage = "auth"
+        
+        let navController = UINavigationController(rootViewController: viewController)
+
+        navController.modalPresentationStyle = .fullScreen
+        
+        self.present(navController, animated: true, completion: nil)
+        
+//        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    @IBAction func eulaButton(sender: UIButton) {
+        
+        let viewController = UIStoryboard.profile
+            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.comePage = "auth"
+        
+        viewController.privacyTitle = PrivacyPolicy.eula.title
+        
+        let navController = UINavigationController(rootViewController: viewController)
+
+        navController.modalPresentationStyle = .fullScreen
+        
+        self.present(navController, animated: true, completion: nil)
+        
+//        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
     func fetchUserData() {
         
         friendManager.listenFriendInfoData { [weak self] result in

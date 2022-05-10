@@ -91,15 +91,15 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
             
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
 
-        } else if startDateLabel.text == "" {
+        } else if startDateLabel.text == "請選擇開始日期" {
             
             HUD.flash(.label(InputError.startDateEmpty.title), delay: 0.5)
 
-        } else if endDateLabel.text == "" {
+        } else if endDateLabel.text == "請選擇結束日期" {
             
             HUD.flash(.label(InputError.endDateEmpty.title), delay: 0.5)
 
-        } else if categoryLabel.text == "" {
+        } else if categoryLabel.text == "請選擇分類標籤" {
             
             HUD.flash(.label(InputError.categoryEmpty.title), delay: 0.5)
 

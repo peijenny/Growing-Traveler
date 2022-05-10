@@ -66,8 +66,6 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-//        tabBarController?.tabBar.isHidden = true
-        
         fetchUserInfoData()
         
         if userID == "" {
@@ -81,7 +79,6 @@ class ProfileViewController: UIViewController {
     }
     
     func setNavigationBar() {
-        
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage.asset(.edit), style: .plain, target: self, action: #selector(setProfileButton))
@@ -139,7 +136,11 @@ class ProfileViewController: UIViewController {
         
         profileView.userNameLabel.text = userInfo.userName
         
-        profileView.userPhotoImageView.loadImage(userInfo.userPhoto)
+        if userInfo.userPhoto != "" {
+            
+            profileView.userPhotoImageView.loadImage(userInfo.userPhoto)
+            
+        }
         
         profileView.experienceValueLabel.text = "Ex. \(userInfo.achievement.experienceValue)"
         
