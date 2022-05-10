@@ -63,6 +63,10 @@ class CalendarViewController: UIViewController {
         
         calendarView.appearance.titleWeekendColor = UIColor.lightGray
         
+        calendarView.appearance.todayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        calendarView.appearance.titleTodayColor = UIColor.white
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         listenData()
@@ -157,6 +161,10 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     // MARK: - Calendar Delegate
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        
+        calendarView.appearance.todayColor = UIColor.clear
+        
+        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
         selectedDate = date
         
