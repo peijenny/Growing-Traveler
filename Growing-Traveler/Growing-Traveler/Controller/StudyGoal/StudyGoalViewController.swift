@@ -470,6 +470,8 @@ extension StudyGoalViewController: UITableViewDataSource {
 
             guard let cell = cell as? BottomTableViewCell else { return cell }
             
+            cell.selectionStyle = .none
+            
             cell.showStudyGoalBottom(studyGoal: studyGoals[indexPath.section])
             
             cell.deleteButton.addTarget(

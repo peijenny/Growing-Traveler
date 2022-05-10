@@ -119,13 +119,13 @@
                                 <rect key="frame" x="0.0" y="328.5" width="414" height="517.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="undrawNotFound" translatesAutoresizingMaskIntoConstraints="NO" id="rBb-21-8Fu">
-                                        <rect key="frame" x="50" y="30" width="314" height="200"/>
+                                        <rect key="frame" x="50" y="40" width="314" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="VKJ-zO-Spq"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此區暫無學習目標與項目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F82-7Y-oE1">
-                                        <rect key="frame" x="50" y="250" width="314" height="22.5"/>
+                                        <rect key="frame" x="50" y="260" width="314" height="22.5"/>
                                         <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -134,7 +134,7 @@
                                 <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="F82-7Y-oE1" firstAttribute="leading" secondItem="VFk-re-Iup" secondAttribute="leading" constant="50" id="1gq-66-ynU"/>
-                                    <constraint firstItem="rBb-21-8Fu" firstAttribute="top" secondItem="VFk-re-Iup" secondAttribute="top" constant="30" id="6bh-dO-Qzw"/>
+                                    <constraint firstItem="rBb-21-8Fu" firstAttribute="top" secondItem="VFk-re-Iup" secondAttribute="top" constant="40" id="6bh-dO-Qzw"/>
                                     <constraint firstAttribute="trailing" secondItem="rBb-21-8Fu" secondAttribute="trailing" constant="50" id="EPr-QH-2Kv"/>
                                     <constraint firstAttribute="trailing" secondItem="F82-7Y-oE1" secondAttribute="trailing" constant="50" id="bac-U2-gUm"/>
                                     <constraint firstItem="F82-7Y-oE1" firstAttribute="top" secondItem="rBb-21-8Fu" secondAttribute="bottom" constant="20" id="rAa-Fg-Q0G"/>
@@ -262,7 +262,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9y-OW-uFQ">
-                                        <rect key="frame" x="100" y="128" width="241" height="35"/>
+                                        <rect key="frame" x="100" y="128" width="238" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="gRp-Rl-tID"/>
                                         </constraints>
@@ -346,8 +346,8 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOe-rF-7en">
-                                        <rect key="frame" x="346" y="128" width="12" height="35"/>
-                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                        <rect key="frame" x="343" y="128" width="15" height="35"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -462,8 +462,14 @@
                                             <constraint firstAttribute="height" constant="200" id="X7B-zF-pPj"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前暫無學習計劃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbX-3h-ZSk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="當日暫無學習計劃" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbX-3h-ZSk">
                                         <rect key="frame" x="50" y="240" width="282" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請點選其他日期，以查看學習目標" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MwM-ve-PIw">
+                                        <rect key="frame" x="50" y="267.5" width="282" height="23"/>
                                         <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -471,9 +477,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="MwM-ve-PIw" firstAttribute="leading" secondItem="OhK-Nn-6dy" secondAttribute="leading" constant="50" id="26E-KS-1UH"/>
                                     <constraint firstItem="EbX-3h-ZSk" firstAttribute="top" secondItem="TLI-iP-do8" secondAttribute="bottom" constant="20" id="J7s-Aw-L0Y"/>
                                     <constraint firstItem="TLI-iP-do8" firstAttribute="leading" secondItem="OhK-Nn-6dy" secondAttribute="leading" constant="50" id="OLM-dj-RRl"/>
                                     <constraint firstAttribute="trailing" secondItem="EbX-3h-ZSk" secondAttribute="trailing" constant="50" id="SJs-gK-aE5"/>
+                                    <constraint firstItem="MwM-ve-PIw" firstAttribute="top" secondItem="EbX-3h-ZSk" secondAttribute="bottom" constant="5" id="ajq-KV-RXC"/>
+                                    <constraint firstAttribute="trailing" secondItem="MwM-ve-PIw" secondAttribute="trailing" constant="50" id="rR4-n1-f3w"/>
                                     <constraint firstItem="EbX-3h-ZSk" firstAttribute="leading" secondItem="OhK-Nn-6dy" secondAttribute="leading" constant="50" id="t8g-Ww-587"/>
                                     <constraint firstAttribute="trailing" secondItem="TLI-iP-do8" secondAttribute="trailing" constant="50" id="uif-YP-Zzm"/>
                                     <constraint firstItem="TLI-iP-do8" firstAttribute="top" secondItem="OhK-Nn-6dy" secondAttribute="top" constant="20" id="yez-qW-fW6"/>
