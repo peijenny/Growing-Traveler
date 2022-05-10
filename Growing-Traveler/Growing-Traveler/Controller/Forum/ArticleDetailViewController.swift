@@ -250,6 +250,8 @@ class ArticleDetailViewController: UIViewController {
 
                     self.addChild(viewController)
                     
+                   
+                    
                 }
                 
             }
@@ -512,6 +514,18 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         self.view.addSubview(viewController.view)
 
         self.addChild(viewController)
+        
+        viewController.getFriendStatus = { [weak self] isBlock in
+            
+            guard let strongSelf = self else { return }
+            
+            if isBlock {
+                
+                strongSelf.navigationController?.popViewController(animated: true)
+                
+            }
+            
+        }
         
     }
     
