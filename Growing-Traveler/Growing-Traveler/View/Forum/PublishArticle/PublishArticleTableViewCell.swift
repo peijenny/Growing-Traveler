@@ -58,7 +58,7 @@ class PublishArticleTableViewCell: UITableViewCell {
 
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
-        } else if categoryLabel.text == "" {
+        } else if categoryLabel.text == "請選擇分類標籤" {
             
             HUD.flash(.label(InputError.categoryEmpty.title), delay: 0.5)
             
