@@ -42,6 +42,20 @@ class BlockadeFriendViewController: UIViewController {
         
     }
     
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
     func fetchUsersInfoData() {
         
         userManager.fetchUsersData { [weak self] result in
