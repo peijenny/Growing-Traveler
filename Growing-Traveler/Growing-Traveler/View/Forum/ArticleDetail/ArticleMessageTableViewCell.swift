@@ -36,25 +36,33 @@ class ArticleMessageTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setArticleContent(content: ArticleContent) {
+    func setArticleContent(content: ArticleContent, isBlock: Bool) {
         
-        if content.contentType == SendType.string.title {
+        if isBlock {
             
-            messageTextLabel.text = content.contentText
+            messageTextLabel.text = "已封鎖的內容將無法預見！"
             
-            messageImageView.image = nil
+        } else {
             
-            imageViewHeightConstraint.constant = 0.0
-            
-        } else if content.contentType == SendType.image.title {
-            
-            messageTextLabel.text = nil
-            
-            messageImageView.loadImage(content.contentText)
-            
-            imageViewHeightConstraint.constant = 223.0
-            
-            labelHeightConstraint.constant = 0.0
+            if content.contentType == SendType.string.title {
+                
+                messageTextLabel.text = content.contentText
+                
+                messageImageView.image = nil
+                
+                imageViewHeightConstraint.constant = 0.0
+                
+            } else if content.contentType == SendType.image.title {
+                
+                messageTextLabel.text = nil
+                
+                messageImageView.loadImage(content.contentText)
+                
+                imageViewHeightConstraint.constant = 223.0
+                
+                labelHeightConstraint.constant = 0.0
+                
+            }
             
         }
         
@@ -67,8 +75,6 @@ class ArticleMessageTableViewCell: UITableViewCell {
         formatter.dateFormat = "yyyy.MM.dd HH:mm:ss"
         
         let createTime = Date(timeIntervalSince1970: articleMessage.createTime)
-
-        setArticleContent(content: articleMessage.message)
         
         userIDLabel.text = userName
         
@@ -90,13 +96,15 @@ class ArticleMessageTableViewCell: UITableViewCell {
             
             friendStatusLabel.text = "[帳號已封鎖]"
             
+            userIDLabel.text = "已封鎖的使用者"
+            
         }
                 
         createTimeLabel.text = formatter.string(from: createTime)
         
         orderIDLabel.text = "[\(articleMessage.message.orderID + 1) 樓]"
         
-        setArticleContent(content: articleMessage.message)
+        setArticleContent(content: articleMessage.message, isBlock: isBlock)
         
     }
     

@@ -97,37 +97,48 @@
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="JQP-zj-8Gb">
-                                        <rect key="frame" x="10" y="302" width="394" height="32.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xP7-uR-afz">
+                                        <rect key="frame" x="16" y="321" width="382" height="29"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1Z-23-t8n">
-                                                <rect key="frame" x="0.0" y="0.0" width="181.5" height="32.5"/>
-                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="隱私權政策">
-                                                    <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="privacyPolicyButtonWithSender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="p30-XM-ol2"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-CO-XrY">
-                                                <rect key="frame" x="212.5" y="0.0" width="181.5" height="32.5"/>
-                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="最終用戶許可協議">
-                                                    <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="eulaButtonWithSender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="vMP-VF-JqT"/>
-                                                </connections>
-                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登入與註冊即代表您同意" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ae6-XJ-gRw">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="29"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="vCV-Fk-byu"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lzR-LI-hQ6">
+                                                <rect key="frame" x="160" y="0.0" width="222" height="29"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-CO-XrY">
+                                                        <rect key="frame" x="0.0" y="0.0" width="128.5" height="29"/>
+                                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                                        <color key="tintColor" red="0.28627450980000002" green="0.63137254899999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="最終用戶許可協議"/>
+                                                        <connections>
+                                                            <action selector="eulaButtonWithSender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="vMP-VF-JqT"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1Z-23-t8n">
+                                                        <rect key="frame" x="138.5" y="0.0" width="83.5" height="29"/>
+                                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                                        <color key="tintColor" red="0.28627450980000002" green="0.63137254899999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="隱私權政策"/>
+                                                        <connections>
+                                                            <action selector="privacyPolicyButtonWithSender:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="p30-XM-ol2"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="JQP-zj-8Gb" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="10" id="1Th-iN-PEX"/>
                                     <constraint firstAttribute="height" constant="380" id="3qI-9M-u6y"/>
                                     <constraint firstAttribute="trailing" secondItem="3GA-co-Gz4" secondAttribute="trailing" constant="16" id="3zG-63-oBG"/>
                                     <constraint firstItem="rzb-Rg-du1" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="16" id="7TN-Ff-2Vt"/>
@@ -135,17 +146,18 @@
                                     <constraint firstItem="KCD-Z9-V2Q" firstAttribute="top" secondItem="eq1-Cp-a92" secondAttribute="bottom" constant="16" id="A3A-lG-LQu"/>
                                     <constraint firstItem="rzb-Rg-du1" firstAttribute="top" secondItem="FzT-wu-3dN" secondAttribute="top" constant="16" id="Bf5-E5-Sb8"/>
                                     <constraint firstItem="KCD-Z9-V2Q" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="16" id="CQT-nj-HHE"/>
-                                    <constraint firstAttribute="trailing" secondItem="JQP-zj-8Gb" secondAttribute="trailing" constant="10" id="DhI-ha-I0x"/>
                                     <constraint firstAttribute="trailing" secondItem="eq1-Cp-a92" secondAttribute="trailing" constant="16" id="EPc-rF-UQE"/>
                                     <constraint firstItem="rzb-Rg-du1" firstAttribute="top" secondItem="eq1-Cp-a92" secondAttribute="top" id="HxY-Bf-e26"/>
                                     <constraint firstAttribute="trailing" secondItem="KCD-Z9-V2Q" secondAttribute="trailing" constant="16" id="IRP-tE-LUX"/>
                                     <constraint firstItem="eq1-Cp-a92" firstAttribute="leading" secondItem="rzb-Rg-du1" secondAttribute="trailing" constant="16" id="Niv-Cb-Rb1"/>
                                     <constraint firstItem="r90-d9-dAg" firstAttribute="top" secondItem="9uh-Ve-wY1" secondAttribute="bottom" constant="16" id="bOc-ST-tWW"/>
                                     <constraint firstItem="3GA-co-Gz4" firstAttribute="top" secondItem="KCD-Z9-V2Q" secondAttribute="bottom" constant="26" id="bRd-QJ-YXe"/>
+                                    <constraint firstItem="xP7-uR-afz" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="16" id="f8z-i1-6mL"/>
                                     <constraint firstItem="9uh-Ve-wY1" firstAttribute="top" secondItem="3GA-co-Gz4" secondAttribute="bottom" constant="30" id="gOw-90-IL9"/>
-                                    <constraint firstItem="JQP-zj-8Gb" firstAttribute="top" secondItem="r90-d9-dAg" secondAttribute="bottom" constant="10" id="j0x-My-0Xt"/>
                                     <constraint firstAttribute="trailing" secondItem="9uh-Ve-wY1" secondAttribute="trailing" constant="16" id="mbW-HQ-pO0"/>
+                                    <constraint firstAttribute="trailing" secondItem="xP7-uR-afz" secondAttribute="trailing" constant="16" id="n20-wH-87s"/>
                                     <constraint firstItem="9uh-Ve-wY1" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="16" id="oUH-A8-ISX"/>
+                                    <constraint firstAttribute="bottom" secondItem="xP7-uR-afz" secondAttribute="bottom" constant="30" id="qo5-SW-XZd"/>
                                     <constraint firstItem="3GA-co-Gz4" firstAttribute="leading" secondItem="FzT-wu-3dN" secondAttribute="leading" constant="16" id="wAM-jH-PEw"/>
                                 </constraints>
                             </view>

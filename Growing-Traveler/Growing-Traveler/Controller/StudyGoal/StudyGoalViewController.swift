@@ -42,6 +42,11 @@ class StudyGoalViewController: UIViewController {
             
             studyGoalTableView.dataSource = self
             
+            let longPressRecognizer = UILongPressGestureRecognizer(
+                target: self, action: #selector(longPressed(sender:)))
+            
+            studyGoalTableView.addGestureRecognizer(longPressRecognizer)
+            
         }
         
     }
@@ -59,10 +64,6 @@ class StudyGoalViewController: UIViewController {
     var studyGoals: [StudyGoal] = []
     
     var titleText = StatusType.running.title
-    
-    var topCGFloat = CGFloat()
-    
-    var bottomCGFloat = CGFloat()
     
     @IBOutlet weak var underlineView: UIView!
     
@@ -83,20 +84,19 @@ class StudyGoalViewController: UIViewController {
         
         setNavigationBar()
 
-        // MARK: - 註冊 TableView header / footer / cell
         studyGoalTableView.register(
-            UINib(nibName: String(describing: StudyGoalHeaderView.self), bundle: nil),
-            forHeaderFooterViewReuseIdentifier: String(describing: StudyGoalHeaderView.self)
-        )
-        
-        studyGoalTableView.register(
-            UINib(nibName: String(describing: StudyGoalFooterView.self), bundle: nil),
-            forHeaderFooterViewReuseIdentifier: String(describing: StudyGoalFooterView.self)
+            UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: TopTableViewCell.self)
         )
         
         studyGoalTableView.register(
             UINib(nibName: String(describing: StudyGoalTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
+        )
+        
+        studyGoalTableView.register(
+            UINib(nibName: String(describing: BottomTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: BottomTableViewCell.self)
         )
 
     }
@@ -158,16 +158,7 @@ class StudyGoalViewController: UIViewController {
         
         let size = headerAnimationView.frame.height * CGFloat(0.8) - 30
         
-//        lottieAnimation.cornerRadius = size / 2
-        
         lottieAnimation.contentMode = .scaleAspectFit
-        
-//        lottieAnimation.frame = CGRect(
-//            x: headerAnimationView.frame.width * CGFloat(0.1),
-//            y: headerAnimationView.frame.height * CGFloat(0.2),
-//            width: headerAnimationView.frame.width * CGFloat(0.8),
-//            height: headerAnimationView.frame.height * CGFloat(0.8)
-//        )
 
         headerAnimationView.addSubview(lottieAnimation)
         
@@ -291,18 +282,15 @@ class StudyGoalViewController: UIViewController {
     // MARK: - 跳轉到個人學習計劃 Button (新增 / 修改)
     func pushToPlanStudyGoalPage(studyGoal: StudyGoal?) {
         
-        let viewController = UIStoryboard(
-            name: "StudyGoal",
-            bundle: nil
-        ).instantiateViewController(
+        let viewController = UIStoryboard
+            .studyGoal
+            .instantiateViewController(
             withIdentifier: String(describing: PlanStudyGoalViewController.self)
         )
         
         guard let viewController = viewController as? PlanStudyGoalViewController else { return }
         
         viewController.studyGoal = studyGoal
-        
-//        viewController.user = user
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -436,7 +424,7 @@ class StudyGoalViewController: UIViewController {
 }
 
 // MARK: - TableView DataSource
-extension StudyGoalViewController: UITableViewDataSource {
+extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -446,33 +434,117 @@ extension StudyGoalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return studyGoals[section].studyItems.count
+        return studyGoals[section].studyItems.count + 2
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: StudyGoalTableViewCell.self),
-            for: indexPath
-        )
+        if indexPath.row == 0 {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: TopTableViewCell.self),
+                for: indexPath
+            )
 
-        guard let cell = cell as? StudyGoalTableViewCell else { return cell }
+            guard let cell = cell as? TopTableViewCell else { return cell }
+            
+            cell.selectionStyle = .none
+            
+            cell.showStudyGoalHeader(studyGoal: studyGoals[indexPath.section], isCalendar: false)
+            
+            return cell
+            
+        } else if indexPath.row - 1 < studyGoals[indexPath.section].studyItems.count {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: StudyGoalTableViewCell.self),
+                for: indexPath
+            )
+
+            guard let cell = cell as? StudyGoalTableViewCell else { return cell }
+            
+            cell.selectionStyle = .none
+            
+            cell.checkButton.addTarget(
+                self, action: #selector(checkItemButton), for: .touchUpInside)
+            
+            let isCompleted = studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted
+            
+            cell.checkIsCompleted(isCompleted: isCompleted)
+            
+            let studyItem = studyGoals[indexPath.section].studyItems[indexPath.row - 1]
+            
+            cell.showStudyItem(studyItem: studyItem)
+            
+            return cell
+            
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: BottomTableViewCell.self),
+                for: indexPath
+            )
+
+            guard let cell = cell as? BottomTableViewCell else { return cell }
+            
+            cell.selectionStyle = .none
+            
+            cell.showStudyGoalBottom(studyGoal: studyGoals[indexPath.section])
+            
+            return cell
+            
+        }
         
-        cell.selectionStyle = .none
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
         
-        cell.checkButton.addTarget(
-            self, action: #selector(checkItemButton), for: .touchUpInside)
-        
-        let isCompleted = studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted
-        
-        cell.checkIsCompleted(isCompleted: isCompleted)
-        
-        let studyItem = studyGoals[indexPath.section].studyItems[indexPath.row]
-        
-        cell.showStudyItem(studyItem: studyItem)
-        
-        return cell
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.studyGoalTableView)
+            
+            if let indexPath = studyGoalTableView.indexPathForRow(at: touchPoint) {
+                
+                print("TEST \(indexPath.section)")
+                
+                let alertController = UIAlertController(
+                    title: "刪除個人學習計劃",
+                    message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
+                    preferredStyle: .alert)
+                
+                let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
+                    
+                    guard let strongSelf = self else { return }
+                    
+                    strongSelf.studyGoalManager.deleteData(studyGoal: strongSelf.studyGoals[indexPath.section])
+                    
+                    strongSelf.studyGoals.remove(at: indexPath.section)
+                    
+                    strongSelf.studyGoalTableView.beginUpdates()
+                    
+                    let indexSet = NSMutableIndexSet()
+                    
+                    indexSet.add(indexPath.section)
+
+                    strongSelf.studyGoalTableView.deleteSections(
+                        indexSet as IndexSet, with: UITableView.RowAnimation.left)
+
+                    strongSelf.studyGoalTableView.endUpdates()
+                    
+                }
+                
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+                
+                alertController.addAction(agreeAction)
+                
+                alertController.addAction(cancelAction)
+                
+                present(alertController, animated: true, completion: nil)
+
+            }
+            
+        }
         
     }
     
@@ -488,7 +560,7 @@ extension StudyGoalViewController: UITableViewDataSource {
                 
                 sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
                 
-                studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = true
+                studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted = true
                 
                 user.achievement.experienceValue += 50
 
@@ -496,7 +568,7 @@ extension StudyGoalViewController: UITableViewDataSource {
                 
                 sender.tintColor = UIColor.clear
                 
-                studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = false
+                studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted = false
                 
                 user.achievement.experienceValue -= 50
 
@@ -546,127 +618,8 @@ extension StudyGoalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
+        pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
         
-    }
-    
-}
-
-// MARK: - TableView Delegate
-extension StudyGoalViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let headerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: String(describing: StudyGoalHeaderView.self))
-
-        guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
-        
-        headerView.showStudyGoalHeader(studyGoal: studyGoals[section], isCalendar: false)
-
-        tableView.tableHeaderView = UIView.init(frame: CGRect.init(
-            x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height))
-
-        topCGFloat = headerView.frame.height
-        
-        setContentInset()
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        
-        headerView.addGestureRecognizer(tapGestureRecognizer)
-        
-        return headerView
-        
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        let footerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: String(describing: StudyGoalFooterView.self))
-
-        guard let footerView = footerView as? StudyGoalFooterView else { return footerView }
-        
-        footerView.showStudyGoalFooter(studyGoal: studyGoals[section])
-        
-        tableView.tableFooterView = UIView.init(frame: CGRect.init(
-            x: 0, y: 0, width: footerView.frame.width, height: footerView.frame.height))
-        
-        bottomCGFloat = footerView.frame.height
-        
-        setContentInset()
-
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        
-        footerView.addGestureRecognizer(tapGestureRecognizer)
-        
-        footerView.deleteButton.addTarget(
-            self, action: #selector(deleteRowButton), for: .touchUpInside)
-        
-        footerView.deleteButton.tag = section
-        
-        return footerView
-    }
-    
-    func setContentInset() {
-        
-        studyGoalTableView.contentInset = UIEdgeInsets.init(
-            top: -topCGFloat, left: 0, bottom: -bottomCGFloat, right: 0
-        )
-        
-    }
-    
-    @objc func handleTap(sender: UITapGestureRecognizer) {
-
-        let headerView = sender.view as? StudyGoalHeaderView
-        
-        let footerView = sender.view as? StudyGoalFooterView
-        
-        for index in 0..<studyGoals.count {
-            
-            if sender.view == headerView &&
-                headerView?.hideRecordLabel.text == studyGoals[index].id {
-                
-                pushToPlanStudyGoalPage(studyGoal: studyGoals[index])
-                
-            }
-            
-            if sender.view == footerView &&
-                footerView?.hideRecordLabel.text == studyGoals[index].id {
-                
-                pushToPlanStudyGoalPage(studyGoal: studyGoals[index])
-                
-            }
-            
-        }
-        
-    }
-    
-    @objc func deleteRowButton(_ sender: UIButton) {
-        
-        let alertController = UIAlertController(
-            title: "刪除個人學習計劃",
-            message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
-            preferredStyle: .alert)
-        
-        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
-            
-            self.studyGoalManager.deleteData(
-                studyGoal: self.studyGoals[sender.tag])
-
-            self.studyGoals.remove(at: sender.tag)
-
-            self.studyGoalTableView.reloadData()
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
-        
-        alertController.addAction(agreeAction)
-        
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-
     }
     
 }
