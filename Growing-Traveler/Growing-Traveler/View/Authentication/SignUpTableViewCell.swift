@@ -38,6 +38,8 @@ class SignUpTableViewCell: UITableViewCell {
 
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
         
+//        uploadUserPhotoButton.layer.cornerRadius = uploadUserPhotoButton.frame.width / 2
+        
     }
     
     func setUserPhoto(userPhotoLink: String) {

@@ -9,7 +9,6 @@ import UIKit
 
 class SettingImageTableViewCell: UITableViewCell {
     
-    
     @IBOutlet weak var userPhotoImageView: UIImageView!
     
     @IBOutlet weak var modifyUserPhotoButton: UIButton!
@@ -25,6 +24,8 @@ class SettingImageTableViewCell: UITableViewCell {
         userPhotoImageView.contentMode = .scaleAspectFill
 
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
+        
+//        modifyUserPhotoButton.layer.cornerRadius = modifyUserPhotoButton.frame.width / 2
         
     }
     
