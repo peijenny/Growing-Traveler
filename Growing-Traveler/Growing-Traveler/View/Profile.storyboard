@@ -379,6 +379,32 @@
                                 </segments>
                                 <color key="selectedSegmentTintColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </segmentedControl>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c3O-kg-Y8I">
+                                <rect key="frame" x="10" y="102" width="394" height="750"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undrawNotFound" translatesAutoresizingMaskIntoConstraints="NO" id="eZ0-fU-FCV">
+                                        <rect key="frame" x="50" y="50" width="294" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="oir-et-BPC"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="近七天暫無可分析的數據" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQQ-fI-7gm">
+                                        <rect key="frame" x="50" y="270" width="294" height="23"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="eZ0-fU-FCV" secondAttribute="trailing" constant="50" id="cAe-fR-zA5"/>
+                                    <constraint firstItem="eZ0-fU-FCV" firstAttribute="leading" secondItem="c3O-kg-Y8I" secondAttribute="leading" constant="50" id="f3p-4N-KCR"/>
+                                    <constraint firstItem="kQQ-fI-7gm" firstAttribute="top" secondItem="eZ0-fU-FCV" secondAttribute="bottom" constant="20" id="g9N-38-Hva"/>
+                                    <constraint firstItem="kQQ-fI-7gm" firstAttribute="leading" secondItem="c3O-kg-Y8I" secondAttribute="leading" constant="50" id="m4d-2O-uJB"/>
+                                    <constraint firstItem="eZ0-fU-FCV" firstAttribute="top" secondItem="c3O-kg-Y8I" secondAttribute="top" constant="50" id="sFG-AO-ijz"/>
+                                    <constraint firstAttribute="trailing" secondItem="kQQ-fI-7gm" secondAttribute="trailing" constant="50" id="vnV-x5-rQH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nDm-L3-9yC"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -389,11 +415,15 @@
                             <constraint firstItem="nDm-L3-9yC" firstAttribute="trailing" secondItem="U8F-Gg-vBP" secondAttribute="trailing" id="Cyr-xs-jTx"/>
                             <constraint firstItem="U8F-Gg-vBP" firstAttribute="leading" secondItem="nDm-L3-9yC" secondAttribute="leading" id="F5K-d6-pck"/>
                             <constraint firstItem="nDm-L3-9yC" firstAttribute="bottom" secondItem="5Fz-Uh-Kjh" secondAttribute="bottom" constant="8" id="GZ4-kh-t4C"/>
+                            <constraint firstItem="c3O-kg-Y8I" firstAttribute="leading" secondItem="nDm-L3-9yC" secondAttribute="leading" constant="10" id="KLB-Cs-lwn"/>
                             <constraint firstItem="U8F-Gg-vBP" firstAttribute="top" secondItem="t1V-u8-86M" secondAttribute="bottom" id="MIN-OD-hM8"/>
                             <constraint firstItem="35w-pe-DBz" firstAttribute="leading" secondItem="nDm-L3-9yC" secondAttribute="leading" constant="30" id="Mr4-2i-jEb"/>
                             <constraint firstItem="35w-pe-DBz" firstAttribute="top" secondItem="nDm-L3-9yC" secondAttribute="top" constant="10" id="UaC-re-9Wc"/>
+                            <constraint firstItem="nDm-L3-9yC" firstAttribute="trailing" secondItem="c3O-kg-Y8I" secondAttribute="trailing" constant="10" id="VNa-qP-Xwm"/>
                             <constraint firstItem="t1V-u8-86M" firstAttribute="top" secondItem="yLN-Ov-88N" secondAttribute="top" id="WKE-FT-oD6"/>
                             <constraint firstAttribute="bottom" secondItem="U8F-Gg-vBP" secondAttribute="bottom" id="d3p-T9-pvt"/>
+                            <constraint firstItem="nDm-L3-9yC" firstAttribute="bottom" secondItem="c3O-kg-Y8I" secondAttribute="bottom" constant="10" id="dSD-sh-r74"/>
+                            <constraint firstItem="c3O-kg-Y8I" firstAttribute="top" secondItem="t1V-u8-86M" secondAttribute="bottom" id="eF4-er-TBm"/>
                             <constraint firstItem="t1V-u8-86M" firstAttribute="leading" secondItem="nDm-L3-9yC" secondAttribute="leading" id="fUA-X9-pa3"/>
                             <constraint firstItem="nDm-L3-9yC" firstAttribute="trailing" secondItem="35w-pe-DBz" secondAttribute="trailing" constant="30" id="hu3-xy-DNE"/>
                             <constraint firstItem="5Fz-Uh-Kjh" firstAttribute="top" secondItem="35w-pe-DBz" secondAttribute="bottom" constant="8" id="jaT-6V-V6H"/>
@@ -402,6 +432,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="學習分析" id="nMy-Q0-ZXA"/>
                     <connections>
+                        <outlet property="analysisBackground" destination="c3O-kg-Y8I" id="qbM-Qn-P3c"/>
                         <outlet property="analysisTableView" destination="5Fz-Uh-Kjh" id="qhY-zx-MYt"/>
                         <outlet property="selectSegmentedControl" destination="35w-pe-DBz" id="KcV-8Z-LoC"/>
                     </connections>
@@ -413,6 +444,7 @@
     </scenes>
     <resources>
         <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
+        <image name="undrawNotFound" width="1120.59228515625" height="777.91583251953125"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
