@@ -504,11 +504,11 @@ extension ForumViewController: UISearchBarDelegate {
             
         } else {
             
-            inputText = searchText
+            inputText = searchText.lowercased()
             
         }
         
-        searchForumArticles = forumArticles.filter({ $0.title.range(of: searchText) != nil })
+        searchForumArticles = forumArticles.filter({ $0.title.lowercased().range(of: searchText.lowercased()) != nil })
 
     }
     

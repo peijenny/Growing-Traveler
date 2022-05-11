@@ -221,7 +221,7 @@ extension NoteViewController: UISearchBarDelegate {
             
         } else {
             
-            notes = notes.filter({ $0.noteTitle.range(of: searchText) != nil })
+            notes = notes.filter({ $0.noteTitle.lowercased().range(of: searchText.lowercased()) != nil })
             
             noteTableView.reloadData()
             
