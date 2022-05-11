@@ -17,6 +17,8 @@ class TopTableViewCell: UITableViewCell {
     
     @IBOutlet weak var finishItemCountLabel: UILabel!
 
+    @IBOutlet weak var topView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -98,6 +98,7 @@
                 <outlet property="endDateLabel" destination="ZbX-BW-ECa" id="uoV-JQ-JFf"/>
                 <outlet property="finishItemCountLabel" destination="Tvp-Pw-iw7" id="lQQ-Dy-7L4"/>
                 <outlet property="studyGoalTitleLabel" destination="hQq-Ed-W8I" id="DKj-OH-1jT"/>
+                <outlet property="topView" destination="lsb-Y6-uUb" id="N6H-fv-4af"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="103.79464285714285"/>
         </tableViewCell>

@@ -42,6 +42,11 @@ class StudyGoalViewController: UIViewController {
             
             studyGoalTableView.dataSource = self
             
+            let longPressRecognizer = UILongPressGestureRecognizer(
+                target: self, action: #selector(longPressed(sender:)))
+            
+            studyGoalTableView.addGestureRecognizer(longPressRecognizer)
+            
         }
         
     }
@@ -487,10 +492,57 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.showStudyGoalBottom(studyGoal: studyGoals[indexPath.section])
             
-            cell.deleteButton.addTarget(
-                self, action: #selector(deleteRowButton), for: .touchUpInside)
-            
             return cell
+            
+        }
+        
+    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = sender.location(in: self.studyGoalTableView)
+            
+            if let indexPath = studyGoalTableView.indexPathForRow(at: touchPoint) {
+                
+                print("TEST \(indexPath.section)")
+                
+                let alertController = UIAlertController(
+                    title: "刪除個人學習計劃",
+                    message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
+                    preferredStyle: .alert)
+                
+                let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
+                    
+                    guard let strongSelf = self else { return }
+                    
+                    strongSelf.studyGoalManager.deleteData(studyGoal: strongSelf.studyGoals[indexPath.section])
+                    
+                    strongSelf.studyGoals.remove(at: indexPath.section)
+                    
+                    strongSelf.studyGoalTableView.beginUpdates()
+                    
+                    let indexSet = NSMutableIndexSet()
+                    
+                    indexSet.add(indexPath.section)
+
+                    strongSelf.studyGoalTableView.deleteSections(
+                        indexSet as IndexSet, with: UITableView.RowAnimation.left)
+
+                    strongSelf.studyGoalTableView.endUpdates()
+                    
+                }
+                
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+                
+                alertController.addAction(agreeAction)
+                
+                alertController.addAction(cancelAction)
+                
+                present(alertController, animated: true, completion: nil)
+
+            }
             
         }
         
@@ -564,58 +616,9 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    @objc func deleteRowButton(_ sender: UIButton) {
-        
-        let alertController = UIAlertController(
-            title: "刪除個人學習計劃",
-            message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
-            preferredStyle: .alert)
-        
-        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
-            
-            guard let strongSelf = self else { return }
-            
-            let point = sender.convert(CGPoint.zero, to: strongSelf.studyGoalTableView)
-
-            if let indexPath = strongSelf.studyGoalTableView.indexPathForRow(at: point) {
-
-                strongSelf.studyGoalManager.deleteData(studyGoal: strongSelf.studyGoals[indexPath.section])
-                
-                strongSelf.studyGoals.remove(at: indexPath.section)
-                
-                strongSelf.studyGoalTableView.beginUpdates()
-                
-                let indexSet = NSMutableIndexSet()
-                
-                indexSet.add(indexPath.section)
-
-                strongSelf.studyGoalTableView.deleteSections(indexSet as IndexSet, with: UITableView.RowAnimation.left)
-
-                strongSelf.studyGoalTableView.endUpdates()
-                
-            }
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
-        
-        alertController.addAction(agreeAction)
-        
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
-        
-//        if indexPath.row == 0 {
-//
-//            pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
-//
-//        }
         
     }
     
