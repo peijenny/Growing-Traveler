@@ -38,7 +38,7 @@ class StudyGoalViewController: UIViewController {
         
         didSet {
             
-//            studyGoalTableView.delegate = self
+            studyGoalTableView.delegate = self
             
             studyGoalTableView.dataSource = self
             
@@ -277,10 +277,9 @@ class StudyGoalViewController: UIViewController {
     // MARK: - 跳轉到個人學習計劃 Button (新增 / 修改)
     func pushToPlanStudyGoalPage(studyGoal: StudyGoal?) {
         
-        let viewController = UIStoryboard(
-            name: "StudyGoal",
-            bundle: nil
-        ).instantiateViewController(
+        let viewController = UIStoryboard
+            .studyGoal
+            .instantiateViewController(
             withIdentifier: String(describing: PlanStudyGoalViewController.self)
         )
         
@@ -420,7 +419,7 @@ class StudyGoalViewController: UIViewController {
 }
 
 // MARK: - TableView DataSource
-extension StudyGoalViewController: UITableViewDataSource {
+extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -509,7 +508,7 @@ extension StudyGoalViewController: UITableViewDataSource {
                 
                 sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
                 
-                studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = true
+                studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted = true
                 
                 user.achievement.experienceValue += 50
 
@@ -517,7 +516,7 @@ extension StudyGoalViewController: UITableViewDataSource {
                 
                 sender.tintColor = UIColor.clear
                 
-                studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted = false
+                studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted = false
                 
                 user.achievement.experienceValue -= 50
 
@@ -610,11 +609,13 @@ extension StudyGoalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 0 {
-            
-            pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
-            
-        }
+        pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
+        
+//        if indexPath.row == 0 {
+//
+//            pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
+//
+//        }
         
     }
     
