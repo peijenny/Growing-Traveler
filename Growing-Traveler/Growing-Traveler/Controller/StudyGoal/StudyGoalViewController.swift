@@ -8,7 +8,6 @@
 import UIKit
 import PKHUD
 import Lottie
-import Firebase
 
 enum StatusType {
     
@@ -360,15 +359,7 @@ class StudyGoalViewController: UIViewController {
     
     @IBAction func handleStatusButton(_ sender: UIButton) {
         
-        if userID == "" {
-            
-            studyGoals.removeAll()
-            
-            studyGoalTableView.reloadData()
-            
-            studyGoalTableView.isHidden = false
-            
-        }
+        studyGoalTableView.isHidden = userID == "" ? false : true
         
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
 
