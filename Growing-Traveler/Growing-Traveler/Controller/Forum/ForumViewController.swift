@@ -116,6 +116,8 @@ class ForumViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        HUD.show(.labeledProgress(title: "文章載入中...", subtitle: nil))
+        
         fetchFriendBlockadeListData()
         
         fetchUserInfoData()
@@ -264,6 +266,8 @@ class ForumViewController: BaseViewController {
                 strongSelf.allForumArticles = [essay, question, chat]
                 
                 strongSelf.articleTableView.reloadData()
+                
+                HUD.flash(.labeledSuccess(title: "載入成功！", subtitle: nil))
                 
             case .failure(let error):
                 
