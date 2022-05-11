@@ -31,6 +31,8 @@ class ArticleDetailViewController: UIViewController {
     
     var blockadeList: [String] = []
     
+    var isBlock = Bool()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -227,7 +229,6 @@ class ArticleDetailViewController: UIViewController {
             if let indexPath = articleDetailTableView.indexPathForRow(at: touchPoint) {
                 
                 // 彈跳出 User 視窗
-                
                 guard let viewController = UIStoryboard
                     .chat
                     .instantiateViewController(
@@ -243,6 +244,26 @@ class ArticleDetailViewController: UIViewController {
                     if usersInfo.filter({ $0.userID == articleMessages[indexPath.row].userID }).count == 0 {
                         
                         viewController.deleteAccount = true
+                        
+                    }
+                    
+                    viewController.getFriendStatus = { [weak self] isBlock in
+                        
+                        guard let strongSelf = self else { return }
+                        
+                        if isBlock {
+                            
+                            if viewController.selectUserID == strongSelf.forumArticle?.userID {
+                                
+                                strongSelf.navigationController?.popViewController(animated: true)
+                                
+                            }
+                            
+                            strongSelf.fetchFriendBlockadeListData()
+                            
+                            strongSelf.articleDetailTableView.reloadData()
+                            
+                        }
                         
                     }
                     
@@ -369,7 +390,6 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func showPhoto() {
         
-        // 展示 image (pop-up Image 單獨顯示的視窗)
         let browser = JXPhotoBrowser()
 
         browser.numberOfItems = { 1 }
@@ -487,8 +507,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             }
             
         } else {
-            // Fallback on earlier versions
-            
+
             navController.modalPresentationStyle = .fullScreen
             
         }
@@ -512,6 +531,18 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         self.view.addSubview(viewController.view)
 
         self.addChild(viewController)
+        
+        viewController.getFriendStatus = { [weak self] isBlock in
+            
+            guard let strongSelf = self else { return }
+            
+            if isBlock {
+                
+                strongSelf.navigationController?.popViewController(animated: true)
+                
+            }
+            
+        }
         
     }
     

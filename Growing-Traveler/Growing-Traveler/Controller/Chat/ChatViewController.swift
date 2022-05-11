@@ -195,6 +195,8 @@ class ChatViewController: BaseViewController {
                 
                 strongSelf.friendStatusLabel.isHidden = false
                 
+                strongSelf.navigationController?.popViewController(animated: true)
+                
             }
             
         }

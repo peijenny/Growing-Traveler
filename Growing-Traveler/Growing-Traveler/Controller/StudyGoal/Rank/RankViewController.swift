@@ -29,7 +29,15 @@ class RankViewController: UIViewController {
     
     var friendManager = FriendManager()
     
-    var usersInfo: [UserInfo] = []
+    var usersInfo: [UserInfo] = [] {
+        
+        didSet {
+            
+            rankTableView.reloadData()
+            
+        }
+        
+    }
     
     var blockadeList: [String] = []
     
@@ -119,7 +127,11 @@ class RankViewController: UIViewController {
                 
                 strongSelf.usersInfo = sortUserInfo
                 
-                strongSelf.fetchUserFriendData()
+                if userID != "" {
+                    
+                    strongSelf.fetchUserFriendData()
+                    
+                }
                 
             case .failure(let error):
                 

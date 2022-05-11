@@ -51,7 +51,13 @@ class SelectCalendarViewController: UIViewController {
         
         calendarView.appearance.weekdayTextColor = UIColor.hexStringToUIColor(
             hex: ColorChart.darkBlue.hexText)
-
+        
+        calendarView.appearance.todayColor = UIColor.clear
+        
+        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        calendarView.appearance.selectionColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
     }
     
     func setNavigationBar() {

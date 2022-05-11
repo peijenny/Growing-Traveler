@@ -59,23 +59,25 @@ class RankTableViewCell: UITableViewCell {
         
         experienceValueLabel.text = "\(userInfo.achievement.experienceValue)"
         
-        userNameLabel.text = userInfo.userName
-        
-        if userInfo.userPhoto != "" {
-            
-            userPhotoImageView.loadImage(userInfo.userPhoto)
-            
-        }
-        
         if blockadeList.filter({ $0 == userInfo.userID }).count == 0 {
+            
+            if userInfo.userPhoto != "" {
+                
+                userPhotoImageView.loadImage(userInfo.userPhoto)
+                
+            }
+            
+            userNameLabel.text = userInfo.userName
 
             friendStatusLabel.text = nil
 
         } else {
+            
+            userPhotoImageView.image = UIImage.asset(.block)
 
             friendStatusLabel.text = "[帳號已封鎖]"
             
-//            userNameLabel.text = "已封鎖的使用者"
+            userNameLabel.text = "已封鎖的使用者"
 
         }
         

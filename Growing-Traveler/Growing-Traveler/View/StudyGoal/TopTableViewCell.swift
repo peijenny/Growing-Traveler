@@ -1,23 +1,34 @@
 //
-//  StudyGoalHeaderView.swift
+//  TopTableViewCell.swift
 //  Growing-Traveler
 //
-//  Created by Jenny Hung on 2022/4/11.
+//  Created by Jenny Hung on 2022/5/10.
 //
 
 import UIKit
 
-class StudyGoalHeaderView: UITableViewHeaderFooterView {
-
+class TopTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var studyGoalTitleLabel: UILabel!
     
     @IBOutlet weak var endDateLabel: UILabel!
-    
-    @IBOutlet weak var hideRecordLabel: UILabel!
-    
+
     @IBOutlet weak var backgroundBottomView: UIView!
     
     @IBOutlet weak var finishItemCountLabel: UILabel!
+
+    @IBOutlet weak var topView: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
     
     func showStudyGoalHeader(studyGoal: StudyGoal, isCalendar: Bool) {
         
@@ -31,8 +42,6 @@ class StudyGoalHeaderView: UITableViewHeaderFooterView {
         
         studyGoalTitleLabel.text = studyGoal.title
 
-        hideRecordLabel.text = "\(studyGoal.id)"
-        
         if isCalendar {
             
             backgroundBottomView.isHidden = true
