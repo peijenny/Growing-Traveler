@@ -267,7 +267,7 @@ class ForumViewController: BaseViewController {
                 
                 strongSelf.articleTableView.reloadData()
                 
-                HUD.flash(.labeledSuccess(title: "載入成功！", subtitle: nil))
+                HUD.hide()
                 
             case .failure(let error):
                 
