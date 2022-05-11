@@ -32,18 +32,39 @@ class SelectCalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "日期篩選"
-
-        setCalenderFrame()
-        
-        setNavigationBar()
+        title = "日期篩選"
         
         view.backgroundColor = UIColor.white
         
-        // 左右滑動
+        setCalenderFrame()
+        
+        setCalendarStyle()
+        
+        setNavigationBar()
+        
+    }
+    
+    func setCalenderFrame() {
+        
+        view.addSubview(calendarView)
+        
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            calendarView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            calendarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            calendarView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75)
+        ])
+        
+    }
+    
+    func setCalendarStyle() {
+        
+        // MARK: - calendar scroll direction
         calendarView.scrollDirection = .horizontal
         
-        // 修改 weekendColor
+        // MARK: - modify calendar weekendColor
         calendarView.appearance.titleWeekendColor = UIColor.lightGray
         
         calendarView.appearance.headerTitleColor = UIColor.hexStringToUIColor(
@@ -63,16 +84,10 @@ class SelectCalendarViewController: UIViewController {
     func setNavigationBar() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done,
-            target: self,
-            action: #selector(selectDateButton)
-        )
+            barButtonSystemItem: .done, target: self, action: #selector(selectDateButton))
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
-            target: self,
-            action: #selector(setClosePageButton)
-        )
+            barButtonSystemItem: .cancel, target: self, action: #selector(setClosePageButton))
         
     }
     
@@ -98,27 +113,11 @@ class SelectCalendarViewController: UIViewController {
         
     }
 
-    func setCalenderFrame() {
-        
-        view.addSubview(calendarView)
-        
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            calendarView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            calendarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            calendarView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75)
-        ])
-        
-    }
-
 }
 
 extension SelectCalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     // MARK: - Calendar DataSource
-    
     func minimumDate(for calendar: FSCalendar) -> Date {
         
         return startDate ?? Date()
@@ -126,7 +125,6 @@ extension SelectCalendarViewController: FSCalendarDelegate, FSCalendarDataSource
     }
     
     // MARK: - Calendar Delegate
-    
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
         selectDate = date
