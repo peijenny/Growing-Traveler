@@ -316,25 +316,25 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
             
             viewController.isBlock = false
             
+            let userInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID })
+            
+            if userInfo.count == 0 {
+                
+                viewController.deleteAccount = true
+                
+            } else {
+                
+                viewController.deleteAccount = false
+                
+            }
+            
+            navigationController?.pushViewController(viewController, animated: true)
+            
         } else {
             
             viewController.isBlock = true
             
         }
-        
-        let userInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID })
-        
-        if userInfo.count == 0 {
-            
-            viewController.deleteAccount = true
-            
-        } else {
-            
-            viewController.deleteAccount = false
-            
-        }
-        
-        navigationController?.pushViewController(viewController, animated: true)
         
     }
     

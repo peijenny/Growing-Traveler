@@ -72,6 +72,8 @@ class RankTableViewCell: UITableViewCell {
             friendStatusLabel.text = nil
 
         } else {
+            
+            userPhotoImageView.image = UIImage.asset(.block)
 
             friendStatusLabel.text = "[帳號已封鎖]"
             

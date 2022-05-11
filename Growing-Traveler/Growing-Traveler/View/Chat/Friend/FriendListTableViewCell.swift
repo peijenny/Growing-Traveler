@@ -37,9 +37,17 @@ class FriendListTableViewCell: UITableViewCell {
         
         friendStatusLabel.text = ""
         
+        if friendInfo.userPhoto != "" {
+            
+            friendIconImageView.loadImage(friendInfo.userPhoto)
+            
+        }
+        
         if blockadeList.filter({ $0 == friendInfo.userID }).count != 0 {
             
-            friendNameLabel.text = "\(friendInfo.userName)"
+            friendIconImageView.image = UIImage.asset(.block)
+            
+            friendNameLabel.text = "已封鎖的使用者"
             
             friendStatusLabel.text = "[帳號已封鎖]"
             
@@ -50,12 +58,6 @@ class FriendListTableViewCell: UITableViewCell {
             friendNameLabel.text = "\(friendInfo.userName)"
             
             friendStatusLabel.text = "[帳號已刪除]"
-            
-        }
-        
-        if friendInfo.userPhoto != "" {
-            
-            friendIconImageView.loadImage(friendInfo.userPhoto)
             
         }
         
