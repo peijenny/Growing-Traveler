@@ -8,6 +8,26 @@
 import UIKit
 import PKHUD
 
+enum SelectStatus {
+    
+    case add
+    
+    case modify
+    
+    var title: String {
+        
+        switch self {
+            
+        case .add: return "add"
+            
+        case .modify: return "modify"
+            
+        }
+        
+    }
+    
+}
+
 class SelectStudyItemViewController: BaseViewController {
 
     @IBOutlet weak var itemTextField: UITextField!
@@ -17,16 +37,16 @@ class SelectStudyItemViewController: BaseViewController {
     @IBOutlet weak var contentTextView: UITextView!
     
     @IBOutlet weak var copyItemButton: UIButton!
+    
+    var getStudyItem: ((_ studyItem: StudyItem, _ whetherToUpdate: Bool) -> Void)?
+    
+    var modifyStudyItem: StudyItem?
 
     var studyTime = [30, 60, 90, 120, 150]
     
     var timeButtons: [UIButton] = []
     
     var selectStudyTime: Int?
-    
-    var getStudyItem: ((_ studyItem: StudyItem, _ whetherToUpdate: Bool) -> Void)?
-    
-    var modifyStudyItem: StudyItem?
     
     var itemNumber: Int?
     
@@ -35,6 +55,8 @@ class SelectStudyItemViewController: BaseViewController {
         
         createTimeButton()
         
+        setTextViewAndTextField()
+        
         if modifyStudyItem != nil {
             
             modifyStudyItemData()
@@ -42,6 +64,10 @@ class SelectStudyItemViewController: BaseViewController {
             copyItemButton.isHidden = false
             
         }
+
+    }
+    
+    func setTextViewAndTextField() {
         
         contentTextView.layer.borderColor = UIColor.systemGray5.cgColor
         
@@ -64,7 +90,7 @@ class SelectStudyItemViewController: BaseViewController {
         itemTextField.delegate = self
         
         itemTextField.delegate = self
-
+        
     }
     
     func modifyStudyItemData() {
@@ -98,71 +124,36 @@ class SelectStudyItemViewController: BaseViewController {
     
     @IBAction func copyButton(_ sender: UIButton) {
         
-        if itemTextField?.text == "" {
-
-            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
-            
-        } else if selectStudyTime == nil {
-            
-            HUD.flash(.label(InputError.studyTimeEmpty.title), delay: 0.5)
-            
-        } else if contentTextView.text == "請描述內容......." {
-            
-            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
-            
-        } else {
-            
-            guard let itemTitle = itemTextField?.text,
-                  let selectTime = selectStudyTime,
-                  let content = contentTextView?.text else {
-                return
-            }
-            
-            var studyItem = StudyItem(itemTitle: itemTitle, studyTime: selectTime, content: content, isCompleted: false)
-            
-            studyItem.id = itemNumber
-            
-            self.getStudyItem?(studyItem, false)
-            
-            self.navigationController?.isNavigationBarHidden = false
-            
-            self.view.removeFromSuperview()
-            
-        }
+        handleStudyItem(status: SelectStatus.add.title)
         
     }
     
     func createTimeButton() {
-        // 數量會依據熱門 Tag 的數量決定
         
         for index in 0..<studyTime.count {
             
             let originX = studyTimeStackView.frame.height * CGFloat(index)
 
-            let myButton = UIButton(
-                frame: CGRect(
-                    x: originX + 5 * CGFloat(index),
-                    y: 0,
-                    width: studyTimeStackView.frame.height,
-                    height: studyTimeStackView.frame.height)
-            )
+            let timeButton = UIButton(frame: CGRect(
+                x: originX + 5 * CGFloat(index), y: 0,
+                width: studyTimeStackView.frame.height, height: studyTimeStackView.frame.height))
             
-            myButton.cornerRadius = 5
+            timeButton.cornerRadius = 5
             
-            myButton.setTitle("\(studyTime[index])", for: .normal)
+            timeButton.setTitle("\(studyTime[index])", for: .normal)
             
-            myButton.setTitleColor(UIColor.white, for: .normal)
+            timeButton.setTitleColor(UIColor.white, for: .normal)
             
-            myButton.isEnabled = true
+            timeButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
             
-            myButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+            timeButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
             
-            myButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
+            timeButton.isEnabled = true
             
-            studyTimeStackView.addSubview(myButton)
+            timeButtons.append(timeButton)
             
-            timeButtons.append(myButton)
-            
+            studyTimeStackView.addSubview(timeButton)
+
         }
         
     }
@@ -181,47 +172,64 @@ class SelectStudyItemViewController: BaseViewController {
     
     @IBAction func confirmButton(_ sender: UIButton) {
         
-        if itemTextField?.text == "" {
-
-            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
+        if modifyStudyItem != nil {
             
-        } else if selectStudyTime == nil {
-            
-            HUD.flash(.label(InputError.studyTimeEmpty.title), delay: 0.5)
-            
-        } else if contentTextView.text == "請描述內容......." {
-            
-            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
+            handleStudyItem(status: SelectStatus.modify.title)
             
         } else {
             
-            guard let itemTitle = itemTextField?.text,
-                  let selectTime = selectStudyTime,
-                  let content = contentTextView?.text else {
-                return
-            }
-            
-            var studyItem = StudyItem(itemTitle: itemTitle, studyTime: selectTime, content: content, isCompleted: false)
-            
-            if modifyStudyItem != nil {
-                
-                studyItem.id = modifyStudyItem?.id
-
-                self.getStudyItem?(studyItem, true)
-                
-            } else {
-                
-                studyItem.id = itemNumber
-                
-                self.getStudyItem?(studyItem, false)
-                
-            }
-            
-            self.navigationController?.isNavigationBarHidden = false
-            
-            self.view.removeFromSuperview()
+            handleStudyItem(status: SelectStatus.add.title)
             
         }
+        
+    }
+    
+    func handleStudyItem(status: String) {
+        
+        guard let itemTitle = itemTextField?.text, itemTextField?.text == "" else {
+            
+            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
+            
+            return
+            
+        }
+        
+        guard let selectTime = selectStudyTime, selectStudyTime == nil else {
+            
+            HUD.flash(.label(InputError.studyTimeEmpty.title), delay: 0.5)
+            
+            return
+            
+        }
+        
+        guard let content = contentTextView?.text, contentTextView.text == "請描述內容......." else {
+            
+            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
+            
+            return
+            
+        }
+        
+        var studyItem = StudyItem(
+            itemTitle: itemTitle, studyTime: selectTime, content: content, isCompleted: false)
+        
+        if status == SelectStatus.modify.title {
+            
+            studyItem.id = modifyStudyItem?.id
+
+            self.getStudyItem?(studyItem, true)
+            
+        } else {
+            
+            studyItem.id = itemNumber
+            
+            self.getStudyItem?(studyItem, false)
+            
+        }
+        
+        self.navigationController?.isNavigationBarHidden = false
+        
+        self.view.removeFromSuperview()
         
     }
     
