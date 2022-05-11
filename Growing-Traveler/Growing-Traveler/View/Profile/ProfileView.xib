@@ -36,8 +36,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PMM-Fl-ECl">
                     <rect key="frame" x="157" y="17.5" width="100" height="100"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="5qW-23-sxH">
-                            <rect key="frame" x="0.0" y="0.5" width="100" height="99"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="5qW-23-sxH">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                             <color key="tintColor" red="0.75686274509803919" green="0.74901960784313726" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </imageView>
                     </subviews>
@@ -83,6 +83,6 @@
         </view>
     </objects>
     <resources>
-        <image name="person.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="userIcon" width="170.66667175292969" height="170.66667175292969"/>
     </resources>
 </document>

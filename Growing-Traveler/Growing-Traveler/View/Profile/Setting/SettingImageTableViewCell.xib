@@ -20,8 +20,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1a7-iL-Hef">
                         <rect key="frame" x="157" y="16" width="100" height="100"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="SR4-Vy-IAh">
-                                <rect key="frame" x="0.0" y="0.5" width="100" height="99"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="SR4-Vy-IAh">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                 <color key="tintColor" red="0.75686274509999996" green="0.74901960779999999" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                         </subviews>
@@ -71,7 +71,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="photo.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="userIcon" width="170.66667175292969" height="170.66667175292969"/>
     </resources>
 </document>

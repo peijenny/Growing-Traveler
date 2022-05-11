@@ -140,6 +140,10 @@ class ProfileViewController: UIViewController {
             
             profileView.userPhotoImageView.loadImage(userInfo.userPhoto)
             
+        } else {
+            
+            profileView.userPhotoImageView.image = UIImage.asset(.userIcon)
+            
         }
         
         profileView.experienceValueLabel.text = "Ex. \(userInfo.achievement.experienceValue)"

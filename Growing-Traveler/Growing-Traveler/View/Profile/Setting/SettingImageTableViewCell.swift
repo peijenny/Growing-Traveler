@@ -35,6 +35,10 @@ class SettingImageTableViewCell: UITableViewCell {
             
             userPhotoImageView.loadImage(userPhotoLink)
             
+        } else {
+            
+            userPhotoImageView.image = UIImage.asset(.userIcon)
+            
         }
         
     }

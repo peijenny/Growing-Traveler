@@ -176,7 +176,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="undrawImages" width="334.66665649414062" height="244.33332824707031"/>
+        <image name="undrawImages" width="764.1728515625" height="572.5679931640625"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
