@@ -11,8 +11,6 @@ class BottomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var categoryLabel: UILabel!
     
-    @IBOutlet weak var hideRecordLabel: UILabel!
-    
     @IBOutlet weak var deleteButton: UIButton!
     
     override func awakeFromNib() {
@@ -29,8 +27,6 @@ class BottomTableViewCell: UITableViewCell {
     func showStudyGoalBottom(studyGoal: StudyGoal) {
         
         categoryLabel.text = studyGoal.category.title
-        
-        hideRecordLabel.text = "\(studyGoal.id)"
         
     }
     

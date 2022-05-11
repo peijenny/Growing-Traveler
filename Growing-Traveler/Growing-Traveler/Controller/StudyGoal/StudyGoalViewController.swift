@@ -38,7 +38,7 @@ class StudyGoalViewController: UIViewController {
         
         didSet {
             
-            studyGoalTableView.delegate = self
+//            studyGoalTableView.delegate = self
             
             studyGoalTableView.dataSource = self
             
@@ -79,10 +79,9 @@ class StudyGoalViewController: UIViewController {
         
         setNavigationBar()
 
-        // MARK: - 註冊 TableView header / footer / cell
         studyGoalTableView.register(
-            UINib(nibName: String(describing: StudyGoalHeaderView.self), bundle: nil),
-            forHeaderFooterViewReuseIdentifier: String(describing: StudyGoalHeaderView.self)
+            UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: TopTableViewCell.self)
         )
         
         studyGoalTableView.register(
@@ -431,13 +430,28 @@ extension StudyGoalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return studyGoals[section].studyItems.count + 1
+        return studyGoals[section].studyItems.count + 2
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row < studyGoals[indexPath.section].studyItems.count {
+        if indexPath.row == 0 {
+            
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: TopTableViewCell.self),
+                for: indexPath
+            )
+
+            guard let cell = cell as? TopTableViewCell else { return cell }
+            
+            cell.selectionStyle = .none
+            
+            cell.showStudyGoalHeader(studyGoal: studyGoals[indexPath.section], isCalendar: false)
+            
+            return cell
+            
+        } else if indexPath.row - 1 < studyGoals[indexPath.section].studyItems.count {
             
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: StudyGoalTableViewCell.self),
@@ -451,11 +465,11 @@ extension StudyGoalViewController: UITableViewDataSource {
             cell.checkButton.addTarget(
                 self, action: #selector(checkItemButton), for: .touchUpInside)
             
-            let isCompleted = studyGoals[indexPath.section].studyItems[indexPath.row].isCompleted
+            let isCompleted = studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted
             
             cell.checkIsCompleted(isCompleted: isCompleted)
             
-            let studyItem = studyGoals[indexPath.section].studyItems[indexPath.row]
+            let studyItem = studyGoals[indexPath.section].studyItems[indexPath.row - 1]
             
             cell.showStudyItem(studyItem: studyItem)
             
@@ -551,52 +565,6 @@ extension StudyGoalViewController: UITableViewDataSource {
         
     }
     
-}
-
-// MARK: - TableView Delegate
-extension StudyGoalViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let headerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: String(describing: StudyGoalHeaderView.self))
-
-        guard let headerView = headerView as? StudyGoalHeaderView else { return headerView }
-        
-        headerView.showStudyGoalHeader(studyGoal: studyGoals[section], isCalendar: false)
-
-        tableView.tableHeaderView = UIView.init(frame: CGRect.init(
-            x: 0, y: 0, width: headerView.frame.width, height: headerView.frame.height))
-
-        studyGoalTableView.contentInset = UIEdgeInsets.init(
-            top: -headerView.frame.height, left: 0, bottom: 0, right: 0
-        )
-
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        
-        headerView.addGestureRecognizer(tapGestureRecognizer)
-        
-        return headerView
-        
-    }
-    
-    @objc func handleTap(sender: UITapGestureRecognizer) {
-
-        let headerView = sender.view as? StudyGoalHeaderView
-
-        for index in 0..<studyGoals.count {
-            
-            if sender.view == headerView &&
-                headerView?.hideRecordLabel.text == studyGoals[index].id {
-                
-                pushToPlanStudyGoalPage(studyGoal: studyGoals[index])
-                
-            }
-            
-        }
-        
-    }
-    
     @objc func deleteRowButton(_ sender: UIButton) {
         
         let alertController = UIAlertController(
@@ -639,5 +607,15 @@ extension StudyGoalViewController: UITableViewDelegate {
         present(alertController, animated: true, completion: nil)
 
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == 0 {
+            
+            pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
+            
+        }
+        
+    }
+    
 }

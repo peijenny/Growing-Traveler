@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="TopTableViewCell" customModule="Growing_Traveler" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="90.5"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="90.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9HT-Gz-vO7">
+                        <rect key="frame" x="0.0" y="50.5" width="414" height="40"/>
+                        <color key="backgroundColor" red="0.28627450980000002" green="0.63137254899999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsb-Y6-uUb">
+                        <rect key="frame" x="0.0" y="10" width="414" height="80.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目標名稱" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQq-Ed-W8I">
+                                <rect key="frame" x="16" y="10" width="382" height="25.5"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="AqF-Im-Gjn">
+                                <rect key="frame" x="16" y="45.5" width="382" height="25"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="GI0-g5-pd0">
+                                        <rect key="frame" x="0.0" y="0.0" width="181" height="25"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.square" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1hp-h1-pbC">
+                                                <rect key="frame" x="0.0" y="1" width="30" height="22.5"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="f9b-Nh-ahv"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已完成的項目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvp-Pw-iw7">
+                                                <rect key="frame" x="34" y="0.0" width="147" height="25"/>
+                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="結束日期" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbX-BW-ECa">
+                                        <rect key="frame" x="201" y="0.0" width="181" height="25"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="ysh-rD-pH5"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="AqF-Im-Gjn" secondAttribute="bottom" constant="10" id="9TP-No-eYc"/>
+                            <constraint firstAttribute="trailing" secondItem="AqF-Im-Gjn" secondAttribute="trailing" constant="16" id="Imo-wl-csX"/>
+                            <constraint firstItem="AqF-Im-Gjn" firstAttribute="top" secondItem="hQq-Ed-W8I" secondAttribute="bottom" constant="10" id="R9z-KU-yGH"/>
+                            <constraint firstItem="hQq-Ed-W8I" firstAttribute="top" secondItem="lsb-Y6-uUb" secondAttribute="top" constant="10" id="WOU-eR-bct"/>
+                            <constraint firstItem="AqF-Im-Gjn" firstAttribute="leading" secondItem="lsb-Y6-uUb" secondAttribute="leading" constant="16" id="Wq8-iT-2x9"/>
+                            <constraint firstItem="hQq-Ed-W8I" firstAttribute="leading" secondItem="lsb-Y6-uUb" secondAttribute="leading" constant="16" id="rd6-4E-JFA"/>
+                            <constraint firstAttribute="trailing" secondItem="hQq-Ed-W8I" secondAttribute="trailing" constant="16" id="y7a-Ik-uCy"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="lsb-Y6-uUb" secondAttribute="trailing" id="6NP-nw-U6b"/>
+                    <constraint firstItem="9HT-Gz-vO7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KvW-yU-Kwn"/>
+                    <constraint firstItem="lsb-Y6-uUb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Mwb-MS-R8B"/>
+                    <constraint firstAttribute="bottom" secondItem="lsb-Y6-uUb" secondAttribute="bottom" id="QuT-pX-84x"/>
+                    <constraint firstAttribute="bottom" secondItem="9HT-Gz-vO7" secondAttribute="bottom" id="Rfy-J6-LBC"/>
+                    <constraint firstItem="9HT-Gz-vO7" firstAttribute="height" secondItem="lsb-Y6-uUb" secondAttribute="height" multiplier="0.5" id="Tnp-75-2dV"/>
+                    <constraint firstItem="lsb-Y6-uUb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fm6-Eg-cu4"/>
+                    <constraint firstAttribute="trailing" secondItem="9HT-Gz-vO7" secondAttribute="trailing" id="l76-kc-xu9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="backgroundBottomView" destination="9HT-Gz-vO7" id="2dS-Yx-DYf"/>
+                <outlet property="endDateLabel" destination="ZbX-BW-ECa" id="uoV-JQ-JFf"/>
+                <outlet property="finishItemCountLabel" destination="Tvp-Pw-iw7" id="lQQ-Dy-7L4"/>
+                <outlet property="studyGoalTitleLabel" destination="hQq-Ed-W8I" id="DKj-OH-1jT"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="103.79464285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkmark.square" catalog="system" width="128" height="114"/>
+    </resources>
+</document>
