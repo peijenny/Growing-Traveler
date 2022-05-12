@@ -44,43 +44,6 @@ class SelectCalendarViewController: UIViewController {
         
     }
     
-    func setCalenderFrame() {
-        
-        view.addSubview(calendarView)
-        
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            calendarView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            calendarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            calendarView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75)
-        ])
-        
-    }
-    
-    func setCalendarStyle() {
-        
-        // MARK: - calendar scroll direction
-        calendarView.scrollDirection = .horizontal
-        
-        // MARK: - modify calendar weekendColor
-        calendarView.appearance.titleWeekendColor = UIColor.lightGray
-        
-        calendarView.appearance.headerTitleColor = UIColor.hexStringToUIColor(
-            hex: ColorChart.darkBlue.hexText)
-        
-        calendarView.appearance.weekdayTextColor = UIColor.hexStringToUIColor(
-            hex: ColorChart.darkBlue.hexText)
-        
-        calendarView.appearance.todayColor = UIColor.clear
-        
-        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
-        
-        calendarView.appearance.selectionColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
-        
-    }
-    
     func setNavigationBar() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -128,6 +91,47 @@ extension SelectCalendarViewController: FSCalendarDelegate, FSCalendarDataSource
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
         selectDate = date
+        
+    }
+    
+}
+
+extension SelectCalendarViewController {
+ 
+    func setCalenderFrame() {
+        
+        view.addSubview(calendarView)
+        
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            calendarView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            calendarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            calendarView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75)
+        ])
+        
+    }
+    
+    func setCalendarStyle() {
+        
+        // MARK: - calendar scroll direction
+        calendarView.scrollDirection = .horizontal
+        
+        // MARK: - modify calendar weekendColor
+        calendarView.appearance.titleWeekendColor = UIColor.lightGray
+        
+        calendarView.appearance.headerTitleColor = UIColor.hexStringToUIColor(
+            hex: ColorChart.darkBlue.hexText)
+        
+        calendarView.appearance.weekdayTextColor = UIColor.hexStringToUIColor(
+            hex: ColorChart.darkBlue.hexText)
+        
+        calendarView.appearance.todayColor = UIColor.clear
+        
+        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        calendarView.appearance.selectionColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
     }
     

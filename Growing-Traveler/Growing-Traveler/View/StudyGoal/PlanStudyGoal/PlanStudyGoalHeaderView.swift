@@ -33,6 +33,18 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
         // Initialization code
     }
     
+    func showCategoryItem(itemTitle: String) {
+        
+        categoryLabel.text = itemTitle
+        
+        if categoryLabel.text ?? "" != "請選擇分類標籤" {
+            
+            categoryLabel.textColor = UIColor.black
+            
+        }
+        
+    }
+    
     func showSelectedDate(dateType: String, startDate: Date, endDate: Date) {
         
         let formatter = DateFormatter()

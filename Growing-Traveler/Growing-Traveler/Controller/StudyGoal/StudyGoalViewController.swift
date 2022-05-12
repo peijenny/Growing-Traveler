@@ -351,7 +351,8 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.row == 0 {
             
-            cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TopTableViewCell.self), for: indexPath)
+            cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: TopTableViewCell.self), for: indexPath)
 
             guard let cell = cell as? TopTableViewCell else { return cell }
             
@@ -359,7 +360,8 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
         } else if indexPath.row - 1 < studyGoals[indexPath.section].studyItems.count {
             
-            cell = tableView.dequeueReusableCell(withIdentifier: String(describing: StudyGoalTableViewCell.self), for: indexPath)
+            cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: StudyGoalTableViewCell.self), for: indexPath)
 
             guard let cell = cell as? StudyGoalTableViewCell else { return cell }
             
@@ -371,7 +373,8 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
         } else {
             
-            cell = tableView.dequeueReusableCell(withIdentifier: String(describing: BottomTableViewCell.self), for: indexPath)
+            cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: BottomTableViewCell.self), for: indexPath)
 
             guard let cell = cell as? BottomTableViewCell else { return cell }
             
