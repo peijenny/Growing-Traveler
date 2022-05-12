@@ -14,9 +14,9 @@ class CertificationViewController: UIViewController {
     
     var certificationBackgroundView = UIView()
     
-    var imageView = UIImageView()
+    var placeHolderImageView = UIImageView()
     
-    var label = UILabel()
+    var placeHolderLabel = UILabel()
     
     var userManager = UserManager()
     
@@ -29,6 +29,8 @@ class CertificationViewController: UIViewController {
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
+        setNavigationItem()
+        
         setBackgroundView()
         
         setTableView()
@@ -38,8 +40,6 @@ class CertificationViewController: UIViewController {
         setImageView()
         
         setLabel()
-        
-        setNavigationItems()
         
         fetchUserInfoData()
         
@@ -81,20 +81,18 @@ class CertificationViewController: UIViewController {
         
     }
     
-    func setNavigationItems() {
+    func setNavigationItem() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self,
-            action: #selector(addCertification)
-        )
+            barButtonSystemItem: .add, target: self, action: #selector(addCertification))
         
     }
     
     @objc func addCertification(sender: UIButton) {
         
         guard let viewController = UIStoryboard.profile.instantiateViewController(
-                withIdentifier: String(describing: PublishCertificationViewController.self)
-                ) as? PublishCertificationViewController else { return }
+            withIdentifier: String(describing: PublishCertificationViewController.self)
+        ) as? PublishCertificationViewController else { return }
         
         viewController.userInfo = userInfo
         
@@ -160,36 +158,36 @@ class CertificationViewController: UIViewController {
     
     func setImageView() {
         
-        imageView.image = UIImage.asset(.undrawNotFound)
+        placeHolderImageView.image = UIImage.asset(.undrawNotFound)
         
-        certificationBackgroundView.addSubview(imageView)
+        certificationBackgroundView.addSubview(placeHolderImageView)
         
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        placeHolderImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: certificationBackgroundView.topAnchor, constant: 50),
-            imageView.trailingAnchor.constraint(equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
-            imageView.leadingAnchor.constraint(equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
-            imageView.heightAnchor.constraint(equalToConstant: 200)
+            placeHolderImageView.topAnchor.constraint(equalTo: certificationBackgroundView.topAnchor, constant: 50),
+            placeHolderImageView.trailingAnchor.constraint(equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
+            placeHolderImageView.leadingAnchor.constraint(equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
+            placeHolderImageView.heightAnchor.constraint(equalToConstant: 200)
         ])
         
     }
     
     func setLabel() {
         
-        label.text = "目前暫無考試認證"
+        placeHolderLabel.text = "目前暫無考試認證"
         
-        label.textAlignment = .center
+        placeHolderLabel.textAlignment = .center
         
-        certificationBackgroundView.addSubview(label)
+        certificationBackgroundView.addSubview(placeHolderLabel)
         
-        label.translatesAutoresizingMaskIntoConstraints = false
+        placeHolderLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
-            label.trailingAnchor.constraint(equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
-            label.leadingAnchor.constraint(equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
-            label.heightAnchor.constraint(equalToConstant: 25)
+            placeHolderLabel.topAnchor.constraint(equalTo: placeHolderImageView.bottomAnchor, constant: 20),
+            placeHolderLabel.trailingAnchor.constraint(equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
+            placeHolderLabel.leadingAnchor.constraint(equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
+            placeHolderLabel.heightAnchor.constraint(equalToConstant: 25)
         ])
         
     }
@@ -213,8 +211,7 @@ class CertificationViewController: UIViewController {
         
         certificationTableView.register(
             UINib(nibName: String(describing: CertificationTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: CertificationTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: CertificationTableViewCell.self))
 
         certificationTableView.delegate = self
         
@@ -225,12 +222,6 @@ class CertificationViewController: UIViewController {
 }
 
 extension CertificationViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -260,8 +251,8 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let viewController = UIStoryboard.profile.instantiateViewController(
-                withIdentifier: String(describing: PublishCertificationViewController.self)
-                ) as? PublishCertificationViewController else { return }
+            withIdentifier: String(describing: PublishCertificationViewController.self)
+        ) as? PublishCertificationViewController else { return }
         
         viewController.userInfo = userInfo
         
@@ -275,21 +266,17 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-            return true
+        return true
         
-        }
+    }
     
     func tableView(
-        _ tableView: UITableView,
-        commit editingStyle: UITableViewCell.EditingStyle,
-        forRowAt indexPath: IndexPath) {
+        _ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             
             let alertController = UIAlertController(
-                title: "刪除個人認證",
-                message: "請問確定刪除個人認證嗎？\n 刪除行為不可逆，將無法瀏覽此認證！",
-                preferredStyle: .alert)
+                title: "刪除個人認證", message: "請問確定刪除個人認證嗎？\n 刪除行為不可逆，將無法瀏覽此認證！", preferredStyle: .alert)
             
             let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
 
