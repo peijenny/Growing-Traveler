@@ -249,6 +249,8 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                         
                         print("登入錯誤，於 firebase 無法找到配對的帳號！")
                         
+                        HUD.flash(.labeledError(title: "登入失敗！", subtitle: "無法找到配對的帳號"))
+                        
                         return
                         
                     }
