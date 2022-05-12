@@ -7,35 +7,11 @@
 
 import UIKit
 
-enum ConfirmType {
-    
-    case agree
-    
-    case refuse
-    
-    case apply
-    
-    var title: String {
-        
-        switch self {
-            
-        case .agree: return "同意"
-            
-        case .refuse: return "取消"
-            
-        case .apply: return "申請"
-            
-        }
-        
-    }
-    
-}
-
 class ConfirmApplyViewController: UIViewController {
     
-    var bothSides: BothSides?
-    
     var friendManager = FriendManager()
+    
+    var bothSides: BothSides?
     
     var getConfirmStatus: ((_ isConfirm: Bool) -> Void)?
 
@@ -131,4 +107,5 @@ class ConfirmApplyViewController: UIViewController {
         getConfirmStatus?(true)
 
     }
+    
 }
