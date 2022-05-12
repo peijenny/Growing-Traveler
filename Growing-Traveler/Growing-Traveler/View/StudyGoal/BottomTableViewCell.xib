@@ -32,10 +32,10 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rce-gi-k8u">
-                        <rect key="frame" x="16" y="7" width="120" height="36"/>
+                        <rect key="frame" x="16" y="10" width="120" height="30"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="標籤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anQ-Ud-7SB">
-                                <rect key="frame" x="0.0" y="0.0" width="120" height="36"/>
+                                <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,7 +49,7 @@
                             <constraint firstAttribute="bottom" secondItem="anQ-Ud-7SB" secondAttribute="bottom" id="PSZ-JN-dqQ"/>
                             <constraint firstItem="anQ-Ud-7SB" firstAttribute="leading" secondItem="rce-gi-k8u" secondAttribute="leading" id="UXi-hS-L1d"/>
                             <constraint firstAttribute="trailing" secondItem="anQ-Ud-7SB" secondAttribute="trailing" id="dW8-Hm-uwz"/>
-                            <constraint firstAttribute="height" constant="36" id="kRW-Lu-FeK"/>
+                            <constraint firstAttribute="height" constant="30" id="kRW-Lu-FeK"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -67,9 +67,9 @@
                     <constraint firstItem="rce-gi-k8u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="b4g-v2-qdx"/>
                     <constraint firstItem="NJ7-9c-Amh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cY8-3N-Vsk"/>
                     <constraint firstAttribute="trailing" secondItem="Vio-EA-NUG" secondAttribute="trailing" id="i0z-s1-VIG"/>
-                    <constraint firstItem="rce-gi-k8u" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="ktH-AH-9eo"/>
+                    <constraint firstItem="rce-gi-k8u" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ktH-AH-9eo"/>
                     <constraint firstItem="Vio-EA-NUG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="lCQ-Ah-FdK"/>
-                    <constraint firstAttribute="bottom" secondItem="rce-gi-k8u" secondAttribute="bottom" constant="17" id="nFO-jU-1xc"/>
+                    <constraint firstAttribute="bottom" secondItem="rce-gi-k8u" secondAttribute="bottom" constant="20" id="nFO-jU-1xc"/>
                     <constraint firstItem="Vio-EA-NUG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wpo-NH-Cry"/>
                 </constraints>
             </tableViewCellContentView>
