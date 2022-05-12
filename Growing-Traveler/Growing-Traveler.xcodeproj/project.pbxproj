@@ -100,6 +100,7 @@
 		28B76537282CFC42009EFA0A /* FeatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76536282CFC42009EFA0A /* FeatureType.swift */; };
 		28B76539282CFCF7009EFA0A /* PrivacyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76538282CFCF7009EFA0A /* PrivacyPolicy.swift */; };
 		28B7653B282CFF7C009EFA0A /* MandateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B7653A282CFF7C009EFA0A /* MandateType.swift */; };
+		28B7653D282D0634009EFA0A /* SignType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B7653C282D0634009EFA0A /* SignType.swift */; };
 		28BB6EE628066441002B0458 /* Forum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EE528066441002B0458 /* Forum.storyboard */; };
 		28BB6EE928066639002B0458 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EE828066639002B0458 /* ForumViewController.swift */; };
 		28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */; };
@@ -259,6 +260,7 @@
 		28B76536282CFC42009EFA0A /* FeatureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureType.swift; sourceTree = "<group>"; };
 		28B76538282CFCF7009EFA0A /* PrivacyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicy.swift; sourceTree = "<group>"; };
 		28B7653A282CFF7C009EFA0A /* MandateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateType.swift; sourceTree = "<group>"; };
+		28B7653C282D0634009EFA0A /* SignType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignType.swift; sourceTree = "<group>"; };
 		28BB6EE528066441002B0458 /* Forum.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Forum.storyboard; sourceTree = "<group>"; };
 		28BB6EE828066639002B0458 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
 		28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishForumArticleViewController.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				28B76536282CFC42009EFA0A /* FeatureType.swift */,
 				28B76538282CFCF7009EFA0A /* PrivacyPolicy.swift */,
 				28B7653A282CFF7C009EFA0A /* MandateType.swift */,
+				28B7653C282D0634009EFA0A /* SignType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1110,6 +1113,7 @@
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				281358DD281BD0D5000B0CAE /* PublishCertificationViewController.swift in Sources */,
 				2808C91A28100F6000DC1EC5 /* CalculateBar.swift in Sources */,
+				28B7653D282D0634009EFA0A /* SignType.swift in Sources */,
 				28BB6EF828069112002B0458 /* ForumArticle.swift in Sources */,
 				280C1B06280D77900091B9DC /* ChatViewController.swift in Sources */,
 				28828A612828DEA200BA02EF /* PrivacyPolicyViewController.swift in Sources */,

@@ -11,43 +11,23 @@ import CryptoKit
 import FirebaseAuth
 import PKHUD
 
-enum SignType {
-    
-    case signIn
-    
-    case signUp
-    
-    var title: String {
-        
-        switch self {
-            
-        case .signIn: return "登入"
-            
-        case .signUp: return "註冊"
-            
-        }
-        
-    }
-    
-}
-
 class AuthenticationViewController: UIViewController {
 
     @IBOutlet weak var signInWithAppleButtonView: UIView!
-    
-    fileprivate var currentNonce: String?
-    
-    var friendManager = FriendManager()
-    
-    var userManager = UserManager()
-    
-    var errorManager = ErrorManager()
-    
-    var users: [UserInfo] = []
 
     @IBOutlet weak var signInButton: UIButton!
     
     @IBOutlet weak var signUpButton: UIButton!
+    
+    var friendManager = FriendManager()
+    
+    var errorManager = ErrorManager()
+    
+    var userManager = UserManager()
+    
+    var users: [UserInfo] = []
+    
+    fileprivate var currentNonce: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,8 +49,8 @@ class AuthenticationViewController: UIViewController {
     
     @IBAction func privacyPolicyButton(sender: UIButton) {
         
-        let viewController = UIStoryboard.profile
-            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        let viewController = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: String(describing: PrivacyPolicyViewController.self))
         
         guard let viewController = viewController as? PrivacyPolicyViewController else { return }
         
@@ -84,14 +64,12 @@ class AuthenticationViewController: UIViewController {
         
         self.present(navController, animated: true, completion: nil)
         
-//        navigationController?.pushViewController(viewController, animated: true)
-        
     }
     
     @IBAction func eulaButton(sender: UIButton) {
         
-        let viewController = UIStoryboard.profile
-            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        let viewController = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: String(describing: PrivacyPolicyViewController.self))
         
         guard let viewController = viewController as? PrivacyPolicyViewController else { return }
         
@@ -104,8 +82,6 @@ class AuthenticationViewController: UIViewController {
         navController.modalPresentationStyle = .fullScreen
         
         self.present(navController, animated: true, completion: nil)
-        
-//        navigationController?.pushViewController(viewController, animated: true)
         
     }
     
@@ -138,8 +114,7 @@ class AuthenticationViewController: UIViewController {
         let authorizationButton = ASAuthorizationAppleIDButton(type: .default, style: .black)
         
         authorizationButton.addTarget(
-            self, action: #selector(handleAuthorizationAppleIDButtonPress),
-            for: .touchUpInside)
+            self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
         
         authorizationButton.frame = signInWithAppleButtonView.bounds
         
@@ -162,14 +137,14 @@ class AuthenticationViewController: UIViewController {
         currentNonce = nonce
         
         return request
+        
     }
     
     func performSignIn() {
         
         let request = createAppleIDRequest()
         
-        let authorizationController = ASAuthorizationController(
-            authorizationRequests: [request])
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         
         authorizationController.delegate = self
         
@@ -206,8 +181,8 @@ class AuthenticationViewController: UIViewController {
     func presentToSignPage(signType: String) {
         
         guard let viewController = UIStoryboard.auth.instantiateViewController(
-                withIdentifier: String(describing: SignInViewController.self)
-                ) as? SignInViewController else { return }
+            withIdentifier: String(describing: SignInViewController.self)
+        ) as? SignInViewController else { return }
         
         viewController.modalPresentationStyle = .fullScreen
         
@@ -222,8 +197,7 @@ class AuthenticationViewController: UIViewController {
 extension AuthenticationViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(
-        controller: ASAuthorizationController,
-        didCompleteWithAuthorization authorization: ASAuthorization) {
+        controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
@@ -235,6 +209,8 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
             
             guard let nonce = currentNonce else {
                 
+                HUD.flash(.labeledError(title: "登入失敗！", subtitle: "請稍後再試"))
+                
                 print("Invalid state: A login callback was received, but no login request was sent.")
                 
                 return
@@ -243,21 +219,25 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
             
             guard let appleIDToken = appleIDCredential.identityToken else {
                 
+                HUD.flash(.labeledError(title: "登入失敗！", subtitle: "請稍後再試"))
+                
                 print("Unable to fetch identity token.")
                 
                 return
+                
             }
             
             guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
                 
+                HUD.flash(.labeledError(title: "登入失敗！", subtitle: "請稍後再試"))
+                
                 print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
                 
                 return
+                
             }
             
-            let credential = OAuthProvider.credential(
-                withProviderID: "apple.com",
-                idToken: idTokenString, rawNonce: nonce)
+            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
             
             Auth.auth().signIn(with: credential) { authDataResult, error in
 
@@ -300,25 +280,14 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                         let today = dateFormatter.string(from: Date())
                         
                         let userInfo = UserInfo(
-                            userID: user.uid,
-                            userName: "\(givenName) \(familyName)",
-                            userEmail: user.email ?? "",
-                            userPhoto: "\(photo)",
-                            userPhone: user.phoneNumber ?? "",
-                            signInType: "appleID",
-                            achievement: Achievement(
-                                experienceValue: 0, completionGoals: [], loginDates: [today]),
-                            certification: []
-                        )
+                            userID: user.uid, userName: "\(givenName) \(familyName)",userEmail: user.email ?? "",
+                            userPhoto: "\(photo)", userPhone: user.phoneNumber ?? "", signInType: "appleID",
+                            achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [today]), certification: [])
                         
                         self.userManager.addData(user: userInfo)
                         
-                        let friend = Friend(
-                            userID: user.uid,
-                            userName: "\(givenName) \(familyName)",
-                            friendList: [], blockadeList: [],
-                            applyList: [], deliveryList: []
-                        )
+                        let friend = Friend(userID: user.uid, userName: "\(givenName) \(familyName)",
+                            friendList: [], blockadeList: [], applyList: [], deliveryList: [])
                         
                         self.friendManager.updateData(friend: friend)
                         
@@ -351,8 +320,7 @@ private func randomNonceString(length: Int = 32) -> String {
     
     precondition(length > 0)
     
-    let charset: [Character] =
-    Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+    let charset: [Character] = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
     
     var result = ""
     
@@ -382,11 +350,7 @@ private func randomNonceString(length: Int = 32) -> String {
         
         randoms.forEach { random in
             
-            if remainingLength == 0 {
-                
-                return
-                
-            }
+            if remainingLength == 0 { return }
             
             if random < charset.count {
                 
