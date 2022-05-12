@@ -265,7 +265,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         
         viewController.userName = ownerfriend?.userName ?? ""
         
-        if ownerfriend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).isEmpty {
+        if ownerfriend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).count == 0 {
             
             viewController.isBlock = false
             
