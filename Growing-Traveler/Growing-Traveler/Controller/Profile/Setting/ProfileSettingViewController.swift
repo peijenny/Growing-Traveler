@@ -250,24 +250,24 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     
     @objc func privacyPolicyButton(sender: UIButton) {
         
-        pushToPrivacyPolicyPage(PrivacyPolicyType: PrivacyPolicy.privacyPolicy.title)
+        pushToPrivacyPolicyPage(privacyPolicyType: PrivacyPolicy.privacyPolicy.title)
         
     }
     
     @objc func eulaButton(sender: UIButton) {
         
-        pushToPrivacyPolicyPage(PrivacyPolicyType: PrivacyPolicy.eula.title)
+        pushToPrivacyPolicyPage(privacyPolicyType: PrivacyPolicy.eula.title)
         
     }
     
-    func pushToPrivacyPolicyPage(PrivacyPolicyType: String) {
+    func pushToPrivacyPolicyPage(privacyPolicyType: String) {
         
         let viewController = UIStoryboard.profile.instantiateViewController(
             withIdentifier: String(describing: PrivacyPolicyViewController.self))
         
         guard let viewController = viewController as? PrivacyPolicyViewController else { return }
         
-        viewController.privacyTitle = PrivacyPolicyType
+        viewController.privacyTitle = privacyPolicyType
         
         navigationController?.pushViewController(viewController, animated: true)
         
