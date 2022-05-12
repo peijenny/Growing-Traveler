@@ -8,34 +8,6 @@
 import UIKit
 import PKHUD
 
-enum SendType {
-    
-    case image
-    
-    case string
-    
-    case articleID
-    
-    case noteID
-    
-    var title: String {
-        
-        switch self {
-            
-        case .image: return "image"
-            
-        case .string: return "string"
-            
-        case .articleID: return "articleID"
-            
-        case .noteID: return "noteID"
-            
-        }
-        
-    }
-    
-}
-
 class ChatViewController: BaseViewController {
     
     @IBOutlet weak var chatTableView: UITableView! {
@@ -51,8 +23,16 @@ class ChatViewController: BaseViewController {
     }
     
     @IBOutlet weak var snedInputTextView: UITextView!
+
+    @IBOutlet weak var friendStatusLabel: UILabel!
+    
+    var displayImageView = UIImageView()
+    
+    var forumArticleManager = ForumArticleManager()
     
     var chatRoomManager = ChatRoomManager()
+    
+    var friendManager = FriendManager()
     
     var userManager = UserManager()
     
@@ -80,13 +60,11 @@ class ChatViewController: BaseViewController {
         
     }
     
-    var userName = String()
-    
     var chatMessage: Chat? {
         
         didSet {
             
-            self.title = "\(chatMessage?.friendName ?? "")"
+            title = "\(chatMessage?.friendName ?? "")"
             
             chatTableView.reloadData()
             
@@ -106,23 +84,17 @@ class ChatViewController: BaseViewController {
         
     }
     
-    var myImageView = UIImageView()
+    var userName = String()
     
     var isBlock = Bool()
     
     var deleteAccount = Bool()
-
-    @IBOutlet weak var friendStatusLabel: UILabel!
-    
-    var friendManager = FriendManager()
-    
-    var otherFriendList: Friend?
     
     var notes: [Note] = []
     
-    var forumArticles: [ForumArticle] = []
+    var otherFriendList: Friend?
     
-    var forumArticleManager = ForumArticleManager()
+    var forumArticles: [ForumArticle] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,23 +103,19 @@ class ChatViewController: BaseViewController {
         
         chatTableView.register(
             UINib(nibName: String(describing: ReceiveMessageTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: ReceiveMessageTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: ReceiveMessageTableViewCell.self))
         
         chatTableView.register(
             UINib(nibName: String(describing: SendMessageTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: SendMessageTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: SendMessageTableViewCell.self))
         
         chatTableView.register(
             UINib(nibName: String(describing: ShareReceiveTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: ShareReceiveTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: ShareReceiveTableViewCell.self))
         
         chatTableView.register(
             UINib(nibName: String(describing: ShareSendTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: ShareSendTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: ShareSendTableViewCell.self))
         
         if deleteAccount {
             
@@ -174,12 +142,9 @@ class ChatViewController: BaseViewController {
     
     @objc func friendInfoButton(sender: UIButton) {
         
-        // 彈跳出 User 視窗
-        guard let viewController = UIStoryboard
-            .chat
-            .instantiateViewController(
+        guard let viewController = UIStoryboard.chat.instantiateViewController(
             withIdentifier: String(describing: UserInfoViewController.self)
-            ) as? UserInfoViewController else { return }
+        ) as? UserInfoViewController else { return }
         
         viewController.deleteAccount = false
         
@@ -211,7 +176,7 @@ class ChatViewController: BaseViewController {
 
         guard let phoneEmail = friendInfo?.userEmail else { return }
 
-        // 語音通話
+        // audio call
         if let facetimeURL: NSURL = NSURL(string: "facetime-audio://\(phoneEmail)") {
 
             let application: UIApplication = UIApplication.shared
@@ -230,7 +195,7 @@ class ChatViewController: BaseViewController {
 
         guard let phoneEmail = friendInfo?.userEmail else { return }
 
-        // 視訊通話
+        // video call
         if let facetimeURL: NSURL = NSURL(string: "facetime://\(phoneEmail)") {
 
             let application: UIApplication = UIApplication.shared
@@ -261,11 +226,7 @@ class ChatViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        notes = []
-//
-//        forumArticles = []
-//
+
         if isBlock {
             
             friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
@@ -322,7 +283,7 @@ class ChatViewController: BaseViewController {
 
                 strongSelf.otherFriendList = friendList
                 
-                if friendList.blockadeList.filter({ $0 == userID }).count != 0 {
+                if friendList.blockadeList.filter({ $0 == userID }).isEmpty {
                     
                     strongSelf.friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
 
@@ -339,6 +300,7 @@ class ChatViewController: BaseViewController {
             }
 
         }
+        
     }
     
     func fetchChatRoomData() {
@@ -359,8 +321,7 @@ class ChatViewController: BaseViewController {
                         
                         strongSelf.fetchshareNoteData(
                             shareUserID: chatMessage.messageContent[index].sendUserID,
-                            noteID: chatMessage.messageContent[index].sendMessage
-                        )
+                            noteID: chatMessage.messageContent[index].sendMessage)
                         
                     } else if chatMessage.messageContent[index].sendType == SendType.articleID.title {
                         
@@ -462,12 +423,10 @@ class ChatViewController: BaseViewController {
 
             }
             
+            let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
+            
             let messageContent = MessageContent(
-                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-                sendMessage: inputContent,
-                sendType: sendType,
-                sendUserID: userID
-            )
+                createTime: createTime, sendMessage: inputContent, sendType: sendType, sendUserID: userID)
             
             chatMessage?.messageContent.append(messageContent)
             
@@ -490,15 +449,10 @@ class ChatViewController: BaseViewController {
         present(picker, animated: true)
         
     }
+    
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -508,15 +462,15 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
+        var cell = UITableViewCell()
+        
         if chatMessage?.messageContent[indexPath.row].sendType == SendType.image.title ||
             chatMessage?.messageContent[indexPath.row].sendType == SendType.string.title {
             
             if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
                 
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: String(describing: ReceiveMessageTableViewCell.self),
-                    for: indexPath
-                )
+                cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ReceiveMessageTableViewCell.self), for: indexPath)
                 
                 guard let cell = cell as? ReceiveMessageTableViewCell else { return cell }
                 
@@ -526,16 +480,10 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 
-                cell.selectionStyle = .none
-                
-                return cell
-                
             } else {
                 
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: String(describing: SendMessageTableViewCell.self),
-                    for: indexPath
-                )
+                cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: SendMessageTableViewCell.self), for: indexPath)
                 
                 guard let cell = cell as? SendMessageTableViewCell else { return cell }
                 
@@ -545,20 +493,14 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 
-                cell.selectionStyle = .none
-
-                return cell
-                
             }
             
         } else {
             
             if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
                 
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: String(describing: ShareReceiveTableViewCell.self),
-                    for: indexPath
-                )
+                cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ShareReceiveTableViewCell.self), for: indexPath)
                 
                 guard let cell = cell as? ShareReceiveTableViewCell else { return cell }
                 
@@ -566,13 +508,13 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let article = forumArticles.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
                 
-                if note.count != 0 {
+                if !note.isEmpty {
                     
                     cell.showShareNote(note: note[0], userPhoto: friendInfo?.userPhoto)
                     
                 }
                 
-                if article.count != 0 {
+                if !article.isEmpty {
                     
                     cell.showShareArticle(forumArticle: article[0], userPhoto: friendInfo?.userPhoto)
 
@@ -581,16 +523,10 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.setCreateTime(receiveCreateTime:
                     chatMessage?.messageContent[indexPath.row].createTime ?? TimeInterval())
                 
-                cell.selectionStyle = .none
-                
-                return cell
-                
             } else {
 
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: String(describing: ShareSendTableViewCell.self),
-                    for: indexPath
-                )
+                cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ShareSendTableViewCell.self), for: indexPath)
                 
                 guard let cell = cell as? ShareSendTableViewCell else { return cell }
                 
@@ -601,24 +537,24 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.setCreateTime(sendCreateTime:
                     chatMessage?.messageContent[indexPath.row].createTime ?? TimeInterval())
                 
-                if note.count != 0 {
+                if !note.isEmpty {
                     
                     cell.showShareNote(note: note[0])
                     
                 }
                 
-                if article.count != 0 {
+                if !article.isEmpty {
                     
                     cell.showShareArticle(forumArticle: article[0])
                 }
-
-                cell.selectionStyle = .none
-                
-                return cell
                 
             }
             
         }
+        
+        cell.selectionStyle = .none
+        
+        return cell
         
     }
     
@@ -628,17 +564,17 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         
         if sendMessage.sendType == SendType.image.title {
             
-            myImageView.loadImage(sendMessage.sendMessage)
+            displayImageView.loadImage(sendMessage.sendMessage)
             
-            myImageView.showPhoto(imageView: myImageView)
+            displayImageView.showPhoto(imageView: displayImageView)
             
         }
         
         if sendMessage.sendType == SendType.noteID.title {
             
             guard let viewController = UIStoryboard.note.instantiateViewController(
-                    withIdentifier: String(describing: NoteDetailViewController.self)
-                    ) as? NoteDetailViewController else { return }
+                withIdentifier: String(describing: NoteDetailViewController.self)
+            ) as? NoteDetailViewController else { return }
             
             viewController.noteID = sendMessage.sendMessage
             
