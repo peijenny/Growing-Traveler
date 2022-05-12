@@ -50,6 +50,8 @@ class RankViewController: UIViewController {
 
         title = "成長排行榜"
         
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
         listenUsersInfoData()
         
         registerTableViewCell()

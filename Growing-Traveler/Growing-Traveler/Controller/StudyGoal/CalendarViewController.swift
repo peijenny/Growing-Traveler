@@ -37,6 +37,8 @@ class CalendarViewController: UIViewController {
     
     @IBOutlet weak var displayBackgroundView: UIView!
     
+    @IBOutlet weak var calendarBackgroundView: UIView!
+    
     var studyGoalManager = StudyGoalManager()
     
     var studyGoals: [StudyGoal] = [] {
@@ -55,6 +57,10 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
         
         title = "成長日曆"
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        calendarBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
         displayTableView.register(
             UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),

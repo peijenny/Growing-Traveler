@@ -55,6 +55,8 @@ class PlanStudyGoalViewController: BaseViewController {
         
         title = (studyGoal == nil) ? "新增個人學習計劃" : "編輯個人學習計劃"
         
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
         if selectedDate != nil {
             
             getSelectedDate?(selectedDate ?? Date())

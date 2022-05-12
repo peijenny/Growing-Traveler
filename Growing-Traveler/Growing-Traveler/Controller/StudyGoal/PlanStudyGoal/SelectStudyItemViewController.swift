@@ -18,6 +18,8 @@ class SelectStudyItemViewController: BaseViewController {
     
     @IBOutlet weak var copyItemButton: UIButton!
     
+    @IBOutlet weak var submitButton: UIButton!
+    
     var getStudyItem: ((_ studyItem: StudyItem, _ whetherToUpdate: Bool) -> Void)?
     
     var modifyStudyItem: StudyItem?
@@ -45,6 +47,19 @@ class SelectStudyItemViewController: BaseViewController {
             
         }
 
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        copyItemButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        
+        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        copyItemButton.layer.cornerRadius = 5
+
+        submitButton.layer.cornerRadius = 5
+        
     }
     
     func setTextViewAndTextField() {
