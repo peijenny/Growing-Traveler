@@ -171,6 +171,10 @@ class UserInfoViewController: UIViewController {
 
         if friendList.blockadeList.filter({ $0 == selectUserID }).count > 0 {
             
+            userPhotoImageView.image = UIImage.asset(.block)
+            
+            userNameLabel.text = "已封鎖的使用者"
+            
             friendStatusLabel.text = SearchFriendStatus.blocked.title
             
         } else if friendList.friendList.filter({ $0 == selectUserID }).count > 0 {
