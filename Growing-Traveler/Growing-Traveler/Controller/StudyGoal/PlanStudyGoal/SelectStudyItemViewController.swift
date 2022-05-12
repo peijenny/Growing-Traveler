@@ -8,26 +8,6 @@
 import UIKit
 import PKHUD
 
-enum SelectStatus {
-    
-    case add
-    
-    case modify
-    
-    var title: String {
-        
-        switch self {
-            
-        case .add: return "add"
-            
-        case .modify: return "modify"
-            
-        }
-        
-    }
-    
-}
-
 class SelectStudyItemViewController: BaseViewController {
 
     @IBOutlet weak var itemTextField: UITextField!

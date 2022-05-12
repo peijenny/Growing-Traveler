@@ -8,26 +8,6 @@
 import UIKit
 import PKHUD
 
-enum SelectDateType {
-    
-    case startDate
-    
-    case endDate
-    
-    var title: String {
-        
-        switch self {
-            
-        case .startDate: return "start"
-            
-        case .endDate: return "end"
-            
-        }
-        
-    }
-    
-}
-
 class PlanStudyGoalViewController: BaseViewController {
 
     @IBOutlet weak var planStudyGoalTableView: UITableView! {

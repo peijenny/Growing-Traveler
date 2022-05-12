@@ -89,6 +89,9 @@
 		28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */; };
 		28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */; };
 		28B76525282CBD39009EFA0A /* InputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76524282CBD39009EFA0A /* InputError.swift */; };
+		28B76527282CC53C009EFA0A /* SelectDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76526282CC53C009EFA0A /* SelectDateType.swift */; };
+		28B76529282CC564009EFA0A /* StatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76528282CC564009EFA0A /* StatusType.swift */; };
+		28B7652B282CC586009EFA0A /* SelectStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B7652A282CC586009EFA0A /* SelectStatus.swift */; };
 		28BB6EE628066441002B0458 /* Forum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EE528066441002B0458 /* Forum.storyboard */; };
 		28BB6EE928066639002B0458 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EE828066639002B0458 /* ForumViewController.swift */; };
 		28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */; };
@@ -237,6 +240,9 @@
 		28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalTableViewCell.xib; sourceTree = "<group>"; };
 		28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		28B76524282CBD39009EFA0A /* InputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputError.swift; sourceTree = "<group>"; };
+		28B76526282CC53C009EFA0A /* SelectDateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateType.swift; sourceTree = "<group>"; };
+		28B76528282CC564009EFA0A /* StatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusType.swift; sourceTree = "<group>"; };
+		28B7652A282CC586009EFA0A /* SelectStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStatus.swift; sourceTree = "<group>"; };
 		28BB6EE528066441002B0458 /* Forum.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Forum.storyboard; sourceTree = "<group>"; };
 		28BB6EE828066639002B0458 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
 		28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishForumArticleViewController.swift; sourceTree = "<group>"; };
@@ -532,7 +538,7 @@
 		288367A4280125230010CEAD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				28B76523282CBC71009EFA0A /* Base */,
+				28B76523282CBC71009EFA0A /* Enum */,
 				28DA83462813CF3D0081CB14 /* Mandate */,
 				2808C90F280FEC3700DC1EC5 /* Analysis */,
 				280C1B0C280E42230091B9DC /* Profile */,
@@ -608,13 +614,16 @@
 			path = PlanStudyGoal;
 			sourceTree = "<group>";
 		};
-		28B76523282CBC71009EFA0A /* Base */ = {
+		28B76523282CBC71009EFA0A /* Enum */ = {
 			isa = PBXGroup;
 			children = (
 				281358EB281D4DEF000B0CAE /* ErrorManager.swift */,
 				28B76524282CBD39009EFA0A /* InputError.swift */,
+				28B76526282CC53C009EFA0A /* SelectDateType.swift */,
+				28B76528282CC564009EFA0A /* StatusType.swift */,
+				28B7652A282CC586009EFA0A /* SelectStatus.swift */,
 			);
-			path = Base;
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		28BB6EE428066418002B0458 /* Forum */ = {
@@ -1064,10 +1073,12 @@
 				28C9985F2823839A00E3B4C0 /* ShareReceiveTableViewCell.swift in Sources */,
 				28BB6F44280AA722002B0458 /* ArticleMessageViewController.swift in Sources */,
 				28BC2C1A2815603C00E69BE0 /* UIImage+Extension.swift in Sources */,
+				28B76529282CC564009EFA0A /* StatusType.swift in Sources */,
 				2857035E281197FC00849FAA /* Double+Extension.swift in Sources */,
 				28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */,
 				282522DB280FE5520008B916 /* KeyToken.swift in Sources */,
 				281358EA281D11BA000B0CAE /* NoteDetailViewController.swift in Sources */,
+				28B76527282CC53C009EFA0A /* SelectDateType.swift in Sources */,
 				28D79FDC2817F53D00505B5B /* SignInTableViewCell.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
 				283E65892817D19C00F1033F /* SettingImageTableViewCell.swift in Sources */,
@@ -1128,6 +1139,7 @@
 				28BB6F3828098CC1002B0458 /* ArticleDetailHeaderView.swift in Sources */,
 				28BB6F41280A919C002B0458 /* ArticleDetailTableViewCell.swift in Sources */,
 				281358D2281AC24A000B0CAE /* ReleaseRecordViewController.swift in Sources */,
+				28B7652B282CC586009EFA0A /* SelectStatus.swift in Sources */,
 				285F3F4328017AEF00E84CF2 /* SelectCategoryViewController.swift in Sources */,
 				28C99863282383A900E3B4C0 /* ShareSendTableViewCell.swift in Sources */,
 				28FF433D2813D08E00C58E6B /* Mandate.swift in Sources */,

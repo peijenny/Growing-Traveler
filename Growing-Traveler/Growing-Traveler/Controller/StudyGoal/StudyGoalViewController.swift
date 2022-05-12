@@ -9,30 +9,6 @@ import UIKit
 import PKHUD
 import Lottie
 
-enum StatusType {
-    
-    case pending
-    
-    case running
-    
-    case finished
-    
-    var title: String {
-        
-        switch self {
-            
-        case .pending: return "待處理"
-            
-        case .running: return "處理中"
-            
-        case .finished: return "已處理"
-            
-        }
-        
-    }
-    
-}
-
 class StudyGoalViewController: UIViewController {
     
     @IBOutlet weak var studyGoalTableView: UITableView! {
