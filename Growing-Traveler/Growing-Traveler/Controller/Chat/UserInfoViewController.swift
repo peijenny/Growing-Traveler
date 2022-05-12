@@ -14,28 +14,28 @@ class UserInfoViewController: UIViewController {
     
     @IBOutlet weak var userNameLabel: UILabel!
     
-    var selectUserID: String?
-    
-    var userManager = UserManager()
-    
-    var userInfo: UserInfo?
-    
-    var bothSides: BothSides?
-    
-    var deleteAccount = Bool()
-    
-    var friendManager = FriendManager()
-    
-    var ownerFriend: Friend?
-    
-    var otherFriend: Friend?
-
     @IBOutlet weak var friendStatusLabel: UILabel!
     
     @IBOutlet weak var blockUserButton: UIButton!
     
     @IBOutlet weak var addUserButton: UIButton!
     
+    var friendManager = FriendManager()
+    
+    var userManager = UserManager()
+    
+    var userInfo: UserInfo?
+    
+    var ownerFriend: Friend?
+    
+    var otherFriend: Friend?
+    
+    var bothSides: BothSides?
+    
+    var selectUserID: String?
+    
+    var deleteAccount = Bool()
+
     var getFriendStatus: ((_ isBlock: Bool) -> Void)?
     
     override func viewDidLoad() {
@@ -169,7 +169,7 @@ class UserInfoViewController: UIViewController {
 
         guard let friendList = ownerFriend else { return }
 
-        if friendList.blockadeList.filter({ $0 == selectUserID }).count > 0 {
+        if friendList.blockadeList.filter({ $0 == selectUserID }).isEmpty {
             
             userPhotoImageView.image = UIImage.asset(.block)
             
@@ -177,19 +177,19 @@ class UserInfoViewController: UIViewController {
             
             friendStatusLabel.text = SearchFriendStatus.blocked.title
             
-        } else if friendList.friendList.filter({ $0 == selectUserID }).count > 0 {
+        } else if friendList.friendList.filter({ $0 == selectUserID }).isEmpty {
             
             friendStatusLabel.text = SearchFriendStatus.friendship.title
             
             blockUserButton.isEnabled = true
             
-        } else if friendList.deliveryList.filter({ $0 == selectUserID }).count > 0 {
+        } else if friendList.deliveryList.filter({ $0 == selectUserID }).isEmpty {
             
             friendStatusLabel.text = SearchFriendStatus.invitaion.title
             
             blockUserButton.isEnabled = true
             
-        } else if friendList.applyList.filter({ $0 == selectUserID }).count > 0 {
+        } else if friendList.applyList.filter({ $0 == selectUserID }).isEmpty {
             
             friendStatusLabel.text = SearchFriendStatus.applied.title
             
@@ -222,9 +222,7 @@ class UserInfoViewController: UIViewController {
     @IBAction func blockUserButton(_ sender: UIButton) {
         
         let alertController = UIAlertController(
-            title: "封鎖帳號",
-            message: "請問確定封鎖此帳號嗎？\n 將不再看到此帳號的相關文章及訊息！",
-            preferredStyle: .alert)
+            title: "封鎖帳號", message: "請問確定封鎖此帳號嗎？\n 將不再看到此帳號的相關文章及訊息！", preferredStyle: .alert)
         
         let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
             
