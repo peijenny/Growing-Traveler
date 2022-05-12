@@ -100,16 +100,7 @@ class StudyGoalViewController: UIViewController {
         listenData(status: titleText)
         
         // MARK: - login out and not login behavior
-        if userID == "" {
-            
-            studyGoalBackgroundView.isHidden = false
-            
-            studyGoals = []
-            
-            studyGoalTableView.reloadData()
-            
-        }
-        
+        handleUserIDIsEmpty()
     }
     
     override func viewDidLayoutSubviews() {
@@ -119,6 +110,20 @@ class StudyGoalViewController: UIViewController {
         addGoalButton.imageView?.contentMode = .scaleAspectFill
 
         addGoalButton.layer.cornerRadius = addGoalButton.frame.width / 2
+        
+    }
+    
+    func handleUserIDIsEmpty() {
+        
+        if userID == "" {
+            
+            studyGoalBackgroundView.isHidden = false
+            
+            studyGoals = []
+            
+            studyGoalTableView.reloadData()
+            
+        }
         
     }
     
@@ -293,15 +298,7 @@ class StudyGoalViewController: UIViewController {
                 
                 strongSelf.studyGoals = strongSelf.handleSelectStudyGoals(status: status, studyGoals: data)
                 
-                if strongSelf.studyGoals.isEmpty {
-                    
-                    strongSelf.studyGoalBackgroundView.isHidden = false
-                    
-                } else {
-                    
-                    strongSelf.studyGoalBackgroundView.isHidden = true
-                    
-                }
+                strongSelf.studyGoalBackgroundView.isHidden = strongSelf.studyGoals.isEmpty ? false : true
                 
                 strongSelf.studyGoalTableView.reloadData()
                 
@@ -359,7 +356,7 @@ class StudyGoalViewController: UIViewController {
     
     @IBAction func handleStatusButton(_ sender: UIButton) {
         
-        studyGoalTableView.isHidden = userID == "" ? false : true
+        handleUserIDIsEmpty()
         
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
 
@@ -375,7 +372,7 @@ class StudyGoalViewController: UIViewController {
         
         guard let titleText = sender.titleLabel?.text else { return }
         
-        listenData(status: "\(titleText)")
+        listenData(status: titleText)
         
         self.titleText = titleText
         

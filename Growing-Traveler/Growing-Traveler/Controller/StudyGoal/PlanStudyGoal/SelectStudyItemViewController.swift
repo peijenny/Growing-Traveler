@@ -186,7 +186,7 @@ class SelectStudyItemViewController: BaseViewController {
     
     func handleStudyItem(status: String) {
         
-        guard let itemTitle = itemTextField?.text, itemTextField?.text == "" else {
+        guard let itemTitle = itemTextField?.text, itemTextField?.text != "" else {
             
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
@@ -194,7 +194,7 @@ class SelectStudyItemViewController: BaseViewController {
             
         }
         
-        guard let selectTime = selectStudyTime, selectStudyTime == nil else {
+        guard let selectTime = selectStudyTime, selectStudyTime != nil else {
             
             HUD.flash(.label(InputError.studyTimeEmpty.title), delay: 0.5)
             
@@ -202,7 +202,7 @@ class SelectStudyItemViewController: BaseViewController {
             
         }
         
-        guard let content = contentTextView?.text, contentTextView.text == "請描述內容......." else {
+        guard let content = contentTextView?.text, contentTextView.text != "請描述內容......." else {
             
             HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
             

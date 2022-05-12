@@ -204,7 +204,6 @@ class PlanStudyGoalViewController: BaseViewController {
             
     }
     
-    
     func registerTableViewCell() {
         
         planStudyGoalTableView.register(
