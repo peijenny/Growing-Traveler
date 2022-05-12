@@ -9,7 +9,6 @@ import UIKit
 
 class SettingImageTableViewCell: UITableViewCell {
     
-    
     @IBOutlet weak var userPhotoImageView: UIImageView!
     
     @IBOutlet weak var modifyUserPhotoButton: UIButton!
@@ -26,6 +25,8 @@ class SettingImageTableViewCell: UITableViewCell {
 
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
         
+//        modifyUserPhotoButton.layer.cornerRadius = modifyUserPhotoButton.frame.width / 2
+        
     }
     
     func setUserPhoto(userPhotoLink: String) {
@@ -33,6 +34,10 @@ class SettingImageTableViewCell: UITableViewCell {
         if userPhotoLink != "" {
             
             userPhotoImageView.loadImage(userPhotoLink)
+            
+        } else {
+            
+            userPhotoImageView.image = UIImage.asset(.userIcon)
             
         }
         

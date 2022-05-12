@@ -71,8 +71,11 @@ class AnalysisPieChartTableViewCell: UITableViewCell {
 
         analysisPieChartView.setNeedsDisplay()
         
-        analysisPieChartView.animate(xAxisDuration: 2.0, easingOption: .easeOutElastic)
+        analysisPieChartView.animate(xAxisDuration: 1.0, easingOption: .easeOutQuad)
         
+        // easeOutElastic
+        // easeOutCirc
+        // easeOutQuad
     }
     
 }

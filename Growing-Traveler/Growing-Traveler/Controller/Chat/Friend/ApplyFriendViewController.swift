@@ -294,11 +294,11 @@ class ApplyFriendViewController: BaseViewController {
         
         guard let inputEmail = inputEmailTextField.text else { return }
         
-        if allUsers.filter({ $0.userEmail == inputEmail }).count > 0 {
+        if allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() }).count > 0 {
             
             userInfoView.isHidden = true
             
-            searchUser = allUsers.filter({ $0.userEmail == inputEmail })[0]
+            searchUser = allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() })[0]
             
             fetchData(friendID: searchUser?.userID ?? "")
             

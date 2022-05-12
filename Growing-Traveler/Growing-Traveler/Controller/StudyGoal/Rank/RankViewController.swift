@@ -27,7 +27,13 @@ class RankViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var rankBackgroundView: UIView!
+    
+    @IBOutlet weak var rankCircleView: UIView!
+    
     var friendManager = FriendManager()
+    
+    var blockadeList: [String] = []
     
     var usersInfo: [UserInfo] = [] {
         
@@ -39,30 +45,21 @@ class RankViewController: UIViewController {
         
     }
     
-    var blockadeList: [String] = []
-    
-    @IBOutlet weak var rankBackgroundView: UIView!
-    
-    @IBOutlet weak var rankCircleView: UIView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "成長排行榜"
+        title = "成長排行榜"
         
         listenUsersInfoData()
         
-        rankTableView.register(
-            UINib(nibName: String(describing: RankTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: RankTableViewCell.self)
-        )
-        
-        rankBackgroundView.layer.cornerRadius = 20
+        registerTableViewCell()
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        rankBackgroundView.layer.cornerRadius = 20
         
         rankCircleView.layer.cornerRadius = rankCircleView.frame.width / 2
         
@@ -153,12 +150,9 @@ class RankViewController: UIViewController {
             
             if let indexPath = rankTableView.indexPathForRow(at: touchPoint) {
                 
-                // 彈跳出 User 視窗
-                guard let viewController = UIStoryboard
-                    .chat
-                    .instantiateViewController(
+                guard let viewController = UIStoryboard.chat.instantiateViewController(
                     withIdentifier: String(describing: UserInfoViewController.self)
-                    ) as? UserInfoViewController else { return }
+                ) as? UserInfoViewController else { return }
                 
                 viewController.deleteAccount = false
                 
@@ -174,15 +168,17 @@ class RankViewController: UIViewController {
         
     }
     
+    func registerTableViewCell() {
+        
+        rankTableView.register(
+            UINib(nibName: String(describing: RankTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: RankTableViewCell.self))
+        
+    }
+    
 }
 
 extension RankViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

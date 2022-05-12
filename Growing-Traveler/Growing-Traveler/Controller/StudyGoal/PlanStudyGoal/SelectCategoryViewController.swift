@@ -12,7 +12,11 @@ class SelectCategoryViewController: UIViewController {
     
     var categoryTableView = UITableView()
     
+    var getSelectCategoryItem: ((_ item: CategoryItem) -> Void)?
+    
     var categoryManager = CategoryManager()
+    
+    var selectItem: CategoryItem?
     
     var category: [Category]? {
         
@@ -23,23 +27,68 @@ class SelectCategoryViewController: UIViewController {
         }
         
     }
-    
-    var selectItem: CategoryItem?
-    
-    var getSelectCategoryItem: ((_ item: CategoryItem) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchData()
-        
-        self.title = "分類標籤"
+        title = "分類標籤"
 
         view.backgroundColor = UIColor.white
         
-        setNavigationBar()
+        fetchCategoryData()
         
         setTableView()
+        
+        setNavigationBar()
+        
+    }
+    
+    func fetchCategoryData() {
+        
+        categoryManager.fetchData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let data):
+                
+                strongSelf.category = data
+                
+            case .failure(let error):
+                
+                print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
+            }
+            
+        }
+        
+    }
+    
+    func setTableView() {
+        
+        categoryTableView.separatorInset.right = 15.0
+        
+        view.addSubview(categoryTableView)
+        
+        categoryTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            categoryTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            categoryTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            categoryTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            categoryTableView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+        
+        categoryTableView.register(
+            UINib(nibName: String(describing: CategoryTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: CategoryTableViewCell.self))
+
+        categoryTableView.delegate = self
+        
+        categoryTableView.dataSource = self
         
     }
     
@@ -80,55 +129,6 @@ class SelectCategoryViewController: UIViewController {
         }
         
     }
-    
-    func setTableView() {
-        
-        categoryTableView.separatorInset.right = 15.0
-        
-        view.addSubview(categoryTableView)
-        
-        categoryTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            categoryTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            categoryTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            categoryTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            categoryTableView.heightAnchor.constraint(equalTo: view.heightAnchor)
-        ])
-        
-        categoryTableView.register(
-            UINib(nibName: String(describing: CategoryTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: CategoryTableViewCell.self)
-        )
-
-        categoryTableView.delegate = self
-        
-        categoryTableView.dataSource = self
-        
-    }
-    
-    func fetchData() {
-        
-        categoryManager.fetchData(completion: { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let data):
-                
-                strongSelf.category = data
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        })
-    }
 
 }
 
@@ -149,20 +149,20 @@ extension SelectCategoryViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: CategoryTableViewCell.self),
-            for: indexPath
-        )
+            withIdentifier: String(describing: CategoryTableViewCell.self), for: indexPath)
 
         guard let cell = cell as? CategoryTableViewCell else { return cell }
         
         cell.categoryItemLabel.text = category?[indexPath.section].items[indexPath.row].title
         
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return category?[section].title ?? ""
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

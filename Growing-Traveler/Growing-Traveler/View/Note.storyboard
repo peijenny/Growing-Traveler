@@ -42,7 +42,7 @@
                                 <rect key="frame" x="8" y="149" width="398" height="705"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="IOt-KH-OGh">
+                            <searchBar contentMode="redraw" placeholder="請輸入日記標題關鍵字" translatesAutoresizingMaskIntoConstraints="NO" id="IOt-KH-OGh">
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>

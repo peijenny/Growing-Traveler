@@ -42,6 +42,8 @@ class ArticleMessageTableViewCell: UITableViewCell {
             
             messageTextLabel.text = "已封鎖的內容將無法預見！"
             
+            imageViewHeightConstraint.constant = 0.0
+            
         } else {
             
             if content.contentType == SendType.string.title {

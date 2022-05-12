@@ -151,6 +151,10 @@ class UserInfoViewController: UIViewController {
             
             userPhotoImageView.loadImage(userInfo?.userPhoto)
             
+        } else {
+            
+            userPhotoImageView.image = UIImage.asset(.userIcon)
+            
         }
         
         userNameLabel.text = userInfo?.userName ?? ""

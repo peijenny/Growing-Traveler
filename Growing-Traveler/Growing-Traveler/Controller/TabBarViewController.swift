@@ -19,8 +19,6 @@ private enum Tab {
     
     case profile
     
-//    case auth
-    
     func controller() -> UIViewController {
         
         var controller: UIViewController
@@ -57,43 +55,23 @@ private enum Tab {
             
         case .studyGoal:
 
-            return UITabBarItem(
-                title: "目標",
-                image: UIImage.asset(.archery),
-                selectedImage: UIImage.asset(.archery)
-            )
+            return UITabBarItem(title: "目標", image: UIImage.asset(.archery), selectedImage: UIImage.asset(.archery))
             
         case .note:
             
-            return UITabBarItem(
-                title: "筆記",
-                image: UIImage.asset(.book),
-                selectedImage: UIImage.asset(.book)
-            )
+            return UITabBarItem(title: "筆記", image: UIImage.asset(.book), selectedImage: UIImage.asset(.book))
         
         case .chat:
             
-            return UITabBarItem(
-                title: "聊天室",
-                image: UIImage.asset(.speechBubble),
-                selectedImage: UIImage.asset(.speechBubble)
-            )
+            return UITabBarItem(title: "聊天室", image: UIImage.asset(.speechBubble), selectedImage: UIImage.asset(.speechBubble))
             
         case .forum:
 
-            return UITabBarItem(
-                title: "討論區",
-                image: UIImage.asset(.speaker),
-                selectedImage: UIImage.asset(.speaker)
-            )
+            return UITabBarItem(title: "討論區", image: UIImage.asset(.speaker), selectedImage: UIImage.asset(.speaker))
             
         case .profile:
             
-            return UITabBarItem(
-                title: "個人",
-                image: UIImage.asset(.idCard),
-                selectedImage: UIImage.asset(.idCard)
-            )
+            return UITabBarItem(title: "個人", image: UIImage.asset(.idCard), selectedImage: UIImage.asset(.idCard))
             
         }
          
@@ -117,30 +95,26 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         tabBar.barTintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
         delegate = self
+        
     }
     
     // MARK: - UITabBarControllerDelegate
-
     func tabBarController(
-        _ tabBarController: UITabBarController,
-        shouldSelect viewController: UIViewController
-    ) -> Bool {
+        _ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
 
-        if let viewControllers = tabBarController.viewControllers {
+        if let viewControllers = tabBarController.viewControllers,
+        viewController != viewControllers[0] && viewController != viewControllers[3] {
             
-            if viewController != viewControllers[0] && viewController != viewControllers[3] {
-                
-                guard userID != "" else {
+            guard userID != "" else {
 
-                    if let authViewController = UIStoryboard.auth.instantiateInitialViewController() {
+                if let authViewController = UIStoryboard.auth.instantiateInitialViewController() {
 
-                        authViewController.modalPresentationStyle = .formSheet
+                    authViewController.modalPresentationStyle = .formSheet
 
-                        present(authViewController, animated: true, completion: nil)
-                    }
-
-                    return false
+                    present(authViewController, animated: true, completion: nil)
                 }
+
+                return false
                 
             }
             

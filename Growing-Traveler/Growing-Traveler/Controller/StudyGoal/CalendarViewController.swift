@@ -58,8 +58,7 @@ class CalendarViewController: UIViewController {
         
         displayTableView.register(
             UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: TopTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: TopTableViewCell.self))
         
         calendarView.appearance.titleWeekendColor = UIColor.lightGray
         
@@ -67,15 +66,12 @@ class CalendarViewController: UIViewController {
         
         calendarView.appearance.titleTodayColor = UIColor.white
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+           title: "", style: .plain, target: nil, action: nil)
         
-        listenData()
+        displayBackgroundView.isHidden = userID == "" ? false : true
         
-        if userID == "" {
-            
-            displayBackgroundView.isHidden = false
-            
-        }
+        listenStudyGoalData()
         
     }
     
@@ -93,7 +89,7 @@ class CalendarViewController: UIViewController {
         
     }
     
-    func listenData() {
+    func listenStudyGoalData() {
  
         studyGoalManager.listenData { [weak self] result in
             
@@ -103,34 +99,8 @@ class CalendarViewController: UIViewController {
                 
             case .success(let data):
                 
-                strongSelf.studyGoals = data.filter({
-                    
-                    let startDate = $0.studyPeriod.startDate
+                strongSelf.studyGoals = strongSelf.handleStudyGoal(studyGoals: data)
 
-                    let selectDate = strongSelf.selectedDate.timeIntervalSince1970
-
-                    let endDate = $0.studyPeriod.endDate
-                    
-                    if startDate <= selectDate && endDate >= selectDate {
-                        
-                        return true
-                        
-                    }
-                    
-                    return false
-                    
-                })
-
-                if strongSelf.studyGoals.count == 0 {
-                    
-                    strongSelf.displayBackgroundView.isHidden = false
-
-                } else {
-
-                    strongSelf.displayBackgroundView.isHidden = true
-
-                }
-                
                 strongSelf.displayTableView.reloadData()
                 
             case .failure(let error):
@@ -144,22 +114,30 @@ class CalendarViewController: UIViewController {
         }
         
     }
+    
+    func handleStudyGoal(studyGoals: [StudyGoal]) -> [StudyGoal] {
+        
+        let resultData = studyGoals.filter({
+            
+            let lessEqualStartDate = $0.studyPeriod.startDate <= selectedDate.timeIntervalSince1970
+            
+            let greaterEqualEndDate = $0.studyPeriod.endDate >= selectedDate.timeIntervalSince1970
+            
+            return lessEqualStartDate && greaterEqualEndDate ? true : false
+            
+        })
+        
+        displayBackgroundView.isHidden = resultData.isEmpty ? false : true
+        
+        return resultData
+        
+    }
 
 }
 
-// MARK: - FSCalendar Delegate / DataSource
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
-    // MARK: - Calendar DataSource
-    
-//    func minimumDate(for calendar: FSCalendar) -> Date {
-//
-//        return Date()
-//
-//    }
-    
-    // MARK: - Calendar Delegate
-    
+    // MARK: - calendar delegate
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
         calendarView.appearance.todayColor = UIColor.clear
@@ -168,20 +146,13 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
         
         selectedDate = date
         
-        listenData()
+        listenStudyGoalData()
         
     }
     
 }
 
-// MARK: - TableView DataSource
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -192,9 +163,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: TopTableViewCell.self),
-            for: indexPath
-        )
+            withIdentifier: String(describing: TopTableViewCell.self), for: indexPath)
 
         guard let cell = cell as? TopTableViewCell else { return cell }
         
@@ -208,11 +177,8 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let viewController = UIStoryboard
-            .studyGoal
-            .instantiateViewController(
-            withIdentifier: String(describing: PlanStudyGoalViewController.self)
-        )
+        let viewController = UIStoryboard.studyGoal.instantiateViewController(
+            withIdentifier: String(describing: PlanStudyGoalViewController.self))
 
         guard let viewController = viewController as? PlanStudyGoalViewController else { return }
 
@@ -220,11 +186,13 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
 
         viewController.selectedDate = selectedDate
 
-        viewController.getSelectedDate = { selectedDate in
+        viewController.getSelectedDate = { [weak self] selectedDate in
 
-            self.selectedDate = selectedDate
+            guard let strongSelf = self else { return }
+            
+            strongSelf.selectedDate = selectedDate
 
-            self.listenData()
+            strongSelf.listenStudyGoalData()
 
         }
 

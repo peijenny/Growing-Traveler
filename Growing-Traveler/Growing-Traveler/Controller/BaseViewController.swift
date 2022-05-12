@@ -8,28 +8,16 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-// MARK: - BaseVC 處理 keyboard 事件
+// MARK: - BaseVC handle keyboard event
 class BaseViewController: UIViewController {
     
-    static var identifier: String {
-        
-        return String(describing: self)
-    }
+    static var identifier: String { return String(describing: self) }
     
-    var isHideNavigationBar: Bool {
+    var isHideNavigationBar: Bool { return false }
 
-        return false
-    }
+    var isEnableResignOnTouchOutside: Bool { return true }
 
-    var isEnableResignOnTouchOutside: Bool {
-
-        return true
-    }
-
-    var isEnableIQKeyboard: Bool {
-
-        return true
-    }
+    var isEnableIQKeyboard: Bool { return true }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,45 +32,35 @@ class BaseViewController: UIViewController {
         super.viewWillAppear(animated)
 
         if isHideNavigationBar {
+            
             navigationController?.setNavigationBarHidden(true, animated: true)
-        }
-
-        if !isEnableIQKeyboard {
-            IQKeyboardManager.shared.enable = false
-        } else {
-            IQKeyboardManager.shared.enable = true
-        }
-
-        if !isEnableResignOnTouchOutside {
-            IQKeyboardManager.shared.shouldResignOnTouchOutside = false
-        } else {
-            IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+            
         }
         
+        IQKeyboardManager.shared.enable = !isEnableIQKeyboard ? false : true
+        
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = !isEnableResignOnTouchOutside ? false : true
+        
         self.setNeedsStatusBarAppearanceUpdate()
+        
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         if isHideNavigationBar {
+            
             navigationController?.setNavigationBarHidden(false, animated: true)
+            
         }
+        
+        IQKeyboardManager.shared.enable = !isEnableIQKeyboard ? true : false
+        
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = !isEnableResignOnTouchOutside ? true : false
 
-        if !isEnableIQKeyboard {
-            IQKeyboardManager.shared.enable = true
-        } else {
-            IQKeyboardManager.shared.enable = false
-        }
-
-        if !isEnableResignOnTouchOutside {
-            IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        } else {
-            IQKeyboardManager.shared.enable = false
-        }
     }
 
-    // 當點擊 view 任何一處時，鍵盤收起
+    // when click view any where, keyboard hide
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)
@@ -98,6 +76,7 @@ extension BaseViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         return true
+        
     }
     
 }
