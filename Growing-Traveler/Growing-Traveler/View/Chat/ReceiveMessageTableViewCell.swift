@@ -57,7 +57,15 @@ class ReceiveMessageTableViewCell: UITableViewCell {
 
         setMessageContent(message: receiveMessage.sendMessage, type: receiveMessage.sendType)
         
-        friendImageView.loadImage(friendPhoto)
+        if friendPhoto != nil {
+            
+            friendImageView.loadImage(friendPhoto)
+            
+        } else {
+            
+            friendImageView.image = UIImage.asset(.userIcon)
+            
+        }
         
     }
     

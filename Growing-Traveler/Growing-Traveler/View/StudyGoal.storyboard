@@ -101,20 +101,6 @@
                                     <constraint firstAttribute="height" constant="4" id="DWp-lo-bjl"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1D-fh-S7D" userLabel="addStudyGoalButton">
-                                <rect key="frame" x="348" y="209.5" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="D9e-28-Tgn"/>
-                                    <constraint firstAttribute="height" constant="50" id="yXR-K7-ZY8"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="plus" catalog="system"/>
-                                <connections>
-                                    <action selector="addStudyGoalButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9Hf-Xj-p0p"/>
-                                </connections>
-                            </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFk-re-Iup">
                                 <rect key="frame" x="0.0" y="328.5" width="414" height="517.5"/>
                                 <subviews>
@@ -141,17 +127,31 @@
                                     <constraint firstItem="rBb-21-8Fu" firstAttribute="leading" secondItem="VFk-re-Iup" secondAttribute="leading" constant="50" id="zgf-Ez-8g2"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1D-fh-S7D" userLabel="addStudyGoalButton">
+                                <rect key="frame" x="344" y="792" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="D9e-28-Tgn"/>
+                                    <constraint firstAttribute="height" constant="50" id="yXR-K7-ZY8"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="plus" catalog="system"/>
+                                <connections>
+                                    <action selector="addStudyGoalButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9Hf-Xj-p0p"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="I0E-VG-B8O" secondAttribute="trailing" id="0aQ-cc-w0g"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="t1D-fh-S7D" secondAttribute="trailing" constant="16" id="76N-EQ-69z"/>
-                            <constraint firstItem="4j2-rB-qVK" firstAttribute="top" secondItem="t1D-fh-S7D" secondAttribute="bottom" constant="20" id="FDG-ho-c77"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="t1D-fh-S7D" secondAttribute="trailing" constant="20" id="IEx-OG-1N3"/>
                             <constraint firstItem="yw1-6K-0DR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="KZ1-c9-0kW"/>
                             <constraint firstItem="VFk-re-Iup" firstAttribute="top" secondItem="yw1-6K-0DR" secondAttribute="bottom" id="L9r-zM-RE2"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4j2-rB-qVK" secondAttribute="trailing" id="MJC-tD-mQZ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="VFk-re-Iup" secondAttribute="trailing" id="OJs-qs-Hwy"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="t1D-fh-S7D" secondAttribute="bottom" constant="20" id="PvW-Sl-Czs"/>
                             <constraint firstItem="s7B-ph-YYk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="WHe-aF-GXg"/>
                             <constraint firstItem="I0E-VG-B8O" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="djw-fk-LGc"/>
                             <constraint firstItem="I0E-VG-B8O" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="gOk-zH-mFX"/>

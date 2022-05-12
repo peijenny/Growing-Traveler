@@ -77,20 +77,6 @@ class ArticleTableViewCell: UITableViewCell {
         
     }
     
-//    func showLoadMoreButton(amountOver: Bool, isSearch: Bool, isLastOne: Bool, indexPathCount: Int) {
-//
-//        if amountOver && !isSearch && isLastOne && indexPathCount >= 5 {
-//
-//            buttonHeightConstraint.constant = 40.0
-//
-//        } else {
-//
-//            buttonHeightConstraint.constant = 0.0
-//
-//        }
-//
-//    }
-    
     func showLoadMoreButton(amountOver: Bool, isLastOne: Bool) {
         
         if amountOver && isLastOne {

@@ -42,11 +42,37 @@ class AnalysisBarChatTableViewCell: UITableViewCell {
         // 設定 BarChartDataSet 設定要顯示的資料是什麼，以及圖表下方的 Label
         let chartDataSet = BarChartDataSet(entries: dataEntries, label: "過去七天的學習時數")
         
-        chartDataSet.colors = ChartColorTemplates.joyful()
+//        chartDataSet.colors = ChartColorTemplates.colorful()
+//
+        chartDataSet.colors = ChartColorTemplates.pastel()
+//
+//        chartDataSet.colors = ChartColorTemplates.material()
+//
+//        chartDataSet.colors = ChartColorTemplates.liberty()
+//
+//        chartDataSet.colors = ChartColorTemplates.joyful()
+//
+//        chartDataSet.colors = ChartColorTemplates.vordiplom()
+        
+        analysisBarChatView.gridBackgroundColor = UIColor.red
         
         let chartData = BarChartData(dataSet: chartDataSet)
         
+        let pFormatter = NumberFormatter()
+        
+        pFormatter.numberStyle = .percent
+        
+        pFormatter.maximumFractionDigits = 1
+        
+        pFormatter.multiplier = 1
+        
+        pFormatter.percentSymbol = "小時"
+        
+        chartData.setValueFont(UIFont(name: "PingFang TC", size: 12)!)
+        
         analysisBarChatView.data = chartData
+        
+        analysisBarChatView.data?.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
         
         analysisBarChatView.xAxis.valueFormatter = IndexAxisValueFormatter(values: sevenDaysArray)
         
@@ -54,7 +80,7 @@ class AnalysisBarChatTableViewCell: UITableViewCell {
         
         analysisBarChatView.setNeedsDisplay()
         
-        analysisBarChatView.animate(xAxisDuration: 2.0, easingOption: .easeOutBack)
+        analysisBarChatView.animate(xAxisDuration: 1.0, easingOption: .easeOutQuad)
         
     }
     

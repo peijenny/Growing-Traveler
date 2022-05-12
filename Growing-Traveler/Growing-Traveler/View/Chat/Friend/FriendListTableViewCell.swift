@@ -41,6 +41,10 @@ class FriendListTableViewCell: UITableViewCell {
             
             friendIconImageView.loadImage(friendInfo.userPhoto)
             
+        } else {
+            
+            friendIconImageView.image = UIImage.asset(.userIcon)
+            
         }
         
         if blockadeList.filter({ $0 == friendInfo.userID }).count != 0 {
@@ -75,6 +79,10 @@ class FriendListTableViewCell: UITableViewCell {
             
             friendIconImageView.loadImage(friendInfo.userPhoto)
             
+        } else {
+            
+            friendIconImageView.image = UIImage.asset(.userIcon)
+            
         }
         
     }
@@ -93,7 +101,12 @@ class FriendListTableViewCell: UITableViewCell {
             
             friendIconImageView.loadImage(friendInfo.userPhoto)
             
+        } else {
+            
+            friendIconImageView.image = UIImage.asset(.userIcon)
+            
         }
+        
     }
     
 }

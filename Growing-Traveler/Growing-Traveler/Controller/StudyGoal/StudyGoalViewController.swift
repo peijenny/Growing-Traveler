@@ -8,7 +8,6 @@
 import UIKit
 import PKHUD
 import Lottie
-import Firebase
 
 enum StatusType {
     
@@ -29,7 +28,9 @@ enum StatusType {
         case .finished: return "已處理"
             
         }
+        
     }
+    
 }
 
 class StudyGoalViewController: UIViewController {
@@ -42,6 +43,7 @@ class StudyGoalViewController: UIViewController {
             
             studyGoalTableView.dataSource = self
             
+            // MARK: - long Press tableView cell -> push userInfo page
             let longPressRecognizer = UILongPressGestureRecognizer(
                 target: self, action: #selector(longPressed(sender:)))
             
@@ -55,25 +57,25 @@ class StudyGoalViewController: UIViewController {
     
     @IBOutlet var statusButton: [UIButton]!
     
-    var studyGoalManager = StudyGoalManager()
-    
-    var userManager = UserManager()
-    
-    var user: UserInfo?
-    
-    var studyGoals: [StudyGoal] = []
-    
-    var titleText = StatusType.running.title
-    
     @IBOutlet weak var underlineView: UIView!
-    
-    var selectLineView = UIView()
     
     @IBOutlet weak var headerAnimationView: UIView!
     
     @IBOutlet weak var studyGoalBackgroundView: UIView!
     
     var lottieAnimation = AnimationView()
+    
+    var selectLineView = UIView()
+    
+    var studyGoalManager = StudyGoalManager()
+    
+    var userManager = UserManager()
+    
+    var studyGoals: [StudyGoal] = []
+    
+    var user: UserInfo?
+    
+    var titleText = StatusType.running.title
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,21 +85,8 @@ class StudyGoalViewController: UIViewController {
         setSelectLineView()
         
         setNavigationBar()
-
-        studyGoalTableView.register(
-            UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: TopTableViewCell.self)
-        )
         
-        studyGoalTableView.register(
-            UINib(nibName: String(describing: StudyGoalTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self)
-        )
-        
-        studyGoalTableView.register(
-            UINib(nibName: String(describing: BottomTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: BottomTableViewCell.self)
-        )
+        registerTableViewCell()
 
     }
  
@@ -109,6 +98,22 @@ class StudyGoalViewController: UIViewController {
         fetchUserData()
         
         listenData(status: titleText)
+        
+        // MARK: - login out and not login behavior
+        handleUserIDIsEmpty()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // MARK: - set add study goal button style
+        addGoalButton.imageView?.contentMode = .scaleAspectFill
+
+        addGoalButton.layer.cornerRadius = addGoalButton.frame.width / 2
+        
+    }
+    
+    func handleUserIDIsEmpty() {
         
         if userID == "" {
             
@@ -122,15 +127,59 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    func fetchUserData() {
         
-        addGoalButton.titleLabel?.text = nil
-        
-        // MARK: - 右下角 新增個人學習計劃 Button 修改圖片的顯示方式與加上圓角
-        addGoalButton.imageView?.contentMode = .scaleAspectFill
+        userManager.listenData { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success(let user):
+                
+                strongSelf.user = user
+                
+                // MARK: - calculation number of times
+                let dateFormatter = DateFormatter()
 
-        addGoalButton.layer.cornerRadius = addGoalButton.frame.width / 2
+                dateFormatter.dateFormat = "yyyy.MM.dd"
+
+                let today = dateFormatter.string(from: Date())
+
+                guard var user = strongSelf.user else { return }
+                
+                if user.achievement.loginDates.filter({ $0 == today }).isEmpty {
+                    
+                    user.achievement.loginDates.append(today)
+                    
+                    strongSelf.userManager.updateData(user: user)
+                    
+                }
+                
+            case .failure(let error):
+                
+                print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
+            }
+            
+        }
+        
+    }
+    
+    func registerTableViewCell() {
+        
+        studyGoalTableView.register(
+            UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: TopTableViewCell.self))
+        
+        studyGoalTableView.register(
+            UINib(nibName: String(describing: StudyGoalTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self))
+        
+        studyGoalTableView.register(
+            UINib(nibName: String(describing: BottomTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: BottomTableViewCell.self))
         
     }
     
@@ -139,10 +188,7 @@ class StudyGoalViewController: UIViewController {
         let viewWidth = UIScreen.main.bounds.width / CGFloat(3.0)
         
         selectLineView.frame = CGRect(
-            x: viewWidth, y: 0,
-            width: viewWidth,
-            height: underlineView.frame.height
-        )
+            x: viewWidth, y: 0, width: viewWidth, height: underlineView.frame.height)
         
         selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
@@ -175,67 +221,20 @@ class StudyGoalViewController: UIViewController {
 
     }
     
-    func fetchUserData() {
-        
-        userManager.listenData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-            case .success(let user):
-                
-                strongSelf.user = user
-
-                let date = Date()
-
-                let dateFormatter = DateFormatter()
-
-                dateFormatter.dateFormat = "yyyy.MM.dd"
-
-                let today = dateFormatter.string(from: date)
-
-                guard var user = strongSelf.user else { return }
-                
-                if user.achievement.loginDates.filter({ $0 == today }).count == 0 {
-                    
-                    user.achievement.loginDates.append(today)
-                    
-                    strongSelf.userManager.updateData(user: user)
-                    
-                }
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
     func setNavigationBar() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage.asset(.calendar),
-            style: .plain, target: self,
-            action: #selector(pushToCalenderPage)
-        )
+            image: UIImage.asset(.calendar), style: .plain, target: self, action: #selector(pushToCalenderPage))
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage.asset(.award),
-            style: .plain, target: self,
-            action: #selector(pushToRankPage)
-        )
+            image: UIImage.asset(.award), style: .plain, target: self, action: #selector(pushToRankPage))
         
     }
     
     @objc func pushToRankPage(sender: UIButton) {
         
-        let viewController = UIStoryboard.studyGoal
-            .instantiateViewController(withIdentifier: String(describing: RankViewController.self))
+        let viewController = UIStoryboard.studyGoal.instantiateViewController(
+            withIdentifier: String(describing: RankViewController.self))
         
         guard let viewController = viewController as? RankViewController else { return }
         
@@ -243,15 +242,10 @@ class StudyGoalViewController: UIViewController {
         
     }
 
-    // MARK: - 跳轉到成長日曆頁面
     @objc func pushToCalenderPage(sender: UIButton) {
         
-        let viewController = UIStoryboard(
-            name: "StudyGoal",
-            bundle: nil
-        ).instantiateViewController(
-            withIdentifier: String(describing: CalendarViewController.self)
-        )
+        let viewController = UIStoryboard.studyGoal.instantiateViewController(
+            withIdentifier: String(describing: CalendarViewController.self))
         
         guard let viewController = viewController as? CalendarViewController else { return }
         
@@ -259,7 +253,6 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    // MARK: - 新增個人學習計劃 Button
     @IBAction func addStudyGoalButton(_ sender: UIButton) {
         
         guard userID != "" else {
@@ -273,20 +266,17 @@ class StudyGoalViewController: UIViewController {
             present(authViewController, animated: true, completion: nil)
             
             return
+            
         }
         
         pushToPlanStudyGoalPage(studyGoal: nil)
         
     }
-    
-    // MARK: - 跳轉到個人學習計劃 Button (新增 / 修改)
+
     func pushToPlanStudyGoalPage(studyGoal: StudyGoal?) {
         
-        let viewController = UIStoryboard
-            .studyGoal
-            .instantiateViewController(
-            withIdentifier: String(describing: PlanStudyGoalViewController.self)
-        )
+        let viewController = UIStoryboard.studyGoal.instantiateViewController(
+            withIdentifier: String(describing: PlanStudyGoalViewController.self))
         
         guard let viewController = viewController as? PlanStudyGoalViewController else { return }
         
@@ -296,7 +286,6 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    // MARK: - 即時監聽 Firestore 的個人學習計畫
     func listenData(status: String) {
         
         studyGoalManager.listenData { [weak self] result in
@@ -307,71 +296,9 @@ class StudyGoalViewController: UIViewController {
                 
             case .success(let data):
                 
-                var resultData: [StudyGoal] = []
+                strongSelf.studyGoals = strongSelf.handleSelectStudyGoals(status: status, studyGoals: data)
                 
-                if status == StatusType.pending.title {
-
-                    resultData = data.filter({
-                        
-                        let startDate = $0.studyPeriod.startDate
-                        
-                        let nowDate = Date().timeIntervalSince1970
-                        
-                        if $0.studyItems.allSatisfy({ $0.isCompleted == false }) == true &&
-                            startDate > nowDate {
-                                
-                                return true
-                            
-                        }
-                        
-                        return false
-
-                    })
-                    
-                } else if status == StatusType.running.title {
-                    
-                    resultData = data.filter({
-                        
-                        let startDate = $0.studyPeriod.startDate
-                        
-                        let nowDate = Date().timeIntervalSince1970
-                        
-                        if $0.studyItems.allSatisfy({ $0.isCompleted == true }) == true {
-                            
-                            return false
-                            
-                        } else if $0.studyItems.allSatisfy({ $0.isCompleted == false }) == true &&
-                                    startDate > nowDate {
-                                
-                                return false
-                            
-                        }
-                        
-                        return true
-
-                    })
-                    
-                } else if status == StatusType.finished.title {
-                    
-                    resultData = data.filter({
-                        
-                        $0.studyItems.allSatisfy({ $0.isCompleted == true })
-
-                    })
-
-                }
-                
-                strongSelf.studyGoals = resultData
-                
-                if resultData.count == 0 {
-                    
-                    strongSelf.studyGoalBackgroundView.isHidden = false
-                    
-                } else {
-                    
-                    strongSelf.studyGoalBackgroundView.isHidden = true
-                    
-                }
+                strongSelf.studyGoalBackgroundView.isHidden = strongSelf.studyGoals.isEmpty ? false : true
                 
                 strongSelf.studyGoalTableView.reloadData()
                 
@@ -387,20 +314,50 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    // MARK: - NavBar 下方的 (待處理 / 處理中 / 已處理) Button
-    @IBAction func handleStatusButton(_ sender: UIButton) {
+    func handleSelectStudyGoals(status: String, studyGoals: [StudyGoal]) -> [StudyGoal] {
         
-        if userID == "" {
+        var resultData: [StudyGoal] = []
+        
+        if status == StatusType.pending.title {
+
+            resultData = studyGoals.filter({
+                
+                let isPending = $0.studyPeriod.startDate > Date().timeIntervalSince1970
+                
+                let notStartDoing = $0.studyItems.allSatisfy({ $0.isCompleted == false })
+                
+                return notStartDoing && isPending ? true : false
+                
+            })
             
-            studyGoals.removeAll()
+        } else if status == StatusType.running.title {
             
-            studyGoalTableView.reloadData()
+            resultData = studyGoals.filter({
+                
+                let isRunning = $0.studyPeriod.startDate > Date().timeIntervalSince1970
+                
+                let isStartDoing = $0.studyItems.allSatisfy({ $0.isCompleted == true })
+                
+                let isDoing = $0.studyItems.allSatisfy({ $0.isCompleted == false })
+                
+                return isStartDoing || isDoing && isRunning ? false : true
+
+            })
             
-            studyGoalTableView.isHidden = false
+        } else {
             
+            resultData = studyGoals.filter({ $0.studyItems.allSatisfy({ $0.isCompleted == true }) })
+
         }
         
-        // 動畫
+        return resultData
+        
+    }
+    
+    @IBAction func handleStatusButton(_ sender: UIButton) {
+        
+        handleUserIDIsEmpty()
+        
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
 
             guard let strongSelf = self else { return }
@@ -415,7 +372,7 @@ class StudyGoalViewController: UIViewController {
         
         guard let titleText = sender.titleLabel?.text else { return }
         
-        listenData(status: "\(titleText)")
+        listenData(status: titleText)
         
         self.titleText = titleText
         
@@ -423,7 +380,6 @@ class StudyGoalViewController: UIViewController {
     
 }
 
-// MARK: - TableView DataSource
 extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -443,9 +399,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: TopTableViewCell.self),
-                for: indexPath
-            )
+                withIdentifier: String(describing: TopTableViewCell.self), for: indexPath)
 
             guard let cell = cell as? TopTableViewCell else { return cell }
             
@@ -458,9 +412,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.row - 1 < studyGoals[indexPath.section].studyItems.count {
             
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: StudyGoalTableViewCell.self),
-                for: indexPath
-            )
+                withIdentifier: String(describing: StudyGoalTableViewCell.self), for: indexPath)
 
             guard let cell = cell as? StudyGoalTableViewCell else { return cell }
             
@@ -482,9 +434,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: BottomTableViewCell.self),
-                for: indexPath
-            )
+                withIdentifier: String(describing: BottomTableViewCell.self), for: indexPath)
 
             guard let cell = cell as? BottomTableViewCell else { return cell }
             
@@ -506,11 +456,8 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
             if let indexPath = studyGoalTableView.indexPathForRow(at: touchPoint) {
                 
-                print("TEST \(indexPath.section)")
-                
                 let alertController = UIAlertController(
-                    title: "刪除個人學習計劃",
-                    message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
+                    title: "刪除個人學習計劃", message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
                     preferredStyle: .alert)
                 
                 let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
@@ -580,7 +527,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
                 
-                if user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).count == 0 {
+                if user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).isEmpty {
                     
                     user.achievement.completionGoals.append(studyGoals[indexPath.section].id)
                     
@@ -588,7 +535,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
                 
             } else {
                 
-                if user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).count != 0 {
+                if !user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).isEmpty {
                     
                     var deleteIndex = Int()
                     

@@ -23,10 +23,11 @@ enum SelectDateType {
         case .endDate: return "end"
             
         }
+        
     }
+    
 }
 
-// MARK: - 檢查項目是否為空
 enum InputError {
     
     case titleEmpty
@@ -85,69 +86,38 @@ class PlanStudyGoalViewController: BaseViewController {
 
     }
     
-    let selectCalenderViewController = SelectCalendarViewController()
+    var selectStartDate = Date()
     
-    var selectStartDate = Date() {
-        
-        didSet {
-            
-            planStudyGoalTableView.reloadData()
-            
-        }
-        
-    }
+    var selectEndDate = Date()
     
-    var selectEndDate = Date() {
-        
-        didSet {
-            
-            planStudyGoalTableView.reloadData()
-            
-        }
-    }
+    var selectCategoryItem: CategoryItem?
     
-    var selectDateType = String()
+    var selectCalenderViewController = SelectCalendarViewController()
     
-    var selectCategoryItem: CategoryItem? {
-        
-        didSet {
-            
-            planStudyGoalTableView.reloadData()
-            
-        }
-        
-    }
+    var getSelectedDate: ((_ selectedDate: Date) -> Void)?
     
-    var studyItems: [StudyItem] = []
-    
-    var checkStudyGoalFillIn = false
-    
-    var studyGoal: StudyGoal?
-    
-    let studyGoalManager = StudyGoalManager()
-    
-    var isOpenEdited = false
+    var studyGoalManager = StudyGoalManager()
     
     var userManager = UserManager()
     
-    var user: UserInfo?
+    var studyItems: [StudyItem] = []
+    
+    var studyGoal: StudyGoal?
+    
+    var userInfo: UserInfo?
     
     var selectedDate: Date?
     
-    var getSelectedDate: ((_ selectedDate: Date) -> Void)?
-
+    var selectDateType = String()
+    
+    var checkStudyGoalFillIn = false
+    
+    var isOpenEdited = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if studyGoal == nil {
-            
-            title = "新增個人學習計劃"
-            
-        } else {
-            
-            title = "編輯個人學習計劃"
-            
-        }
+        title = studyGoal == nil ? "新增個人學習計劃" : "編輯個人學習計劃"
         
         if selectedDate != nil {
             
@@ -155,23 +125,13 @@ class PlanStudyGoalViewController: BaseViewController {
             
         }
         
-        planStudyGoalTableView.register(
-            UINib(nibName: String(describing: PlanStudyGoalHeaderView.self), bundle: nil),
-            forHeaderFooterViewReuseIdentifier: String(describing: PlanStudyGoalHeaderView.self))
+        setNavigationItem()
         
-        planStudyGoalTableView.register(
-            UINib(nibName: String(describing: StudyItemTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: StudyItemTableViewCell.self))
+        registerTableViewCell()
         
-        // MARK: - 確認送出資料 Button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done,
-            target: self,
-            action: #selector(submitButton))
-
+        fetchUserInfoData()
+        
         modifyPlanStudyGoalSetting()
-        
-        fetchUserData()
         
     }
     
@@ -189,16 +149,17 @@ class PlanStudyGoalViewController: BaseViewController {
         
     }
     
-    func fetchUserData() {
+    func fetchUserInfoData() {
         
         userManager.listenData { [weak self] result in
             
             guard let strongSelf = self else { return }
             
             switch result {
+                
             case .success(let user):
                 
-                strongSelf.user = user
+                strongSelf.userInfo = user
                 
                 strongSelf.planStudyGoalTableView.reloadData()
                 
@@ -214,7 +175,6 @@ class PlanStudyGoalViewController: BaseViewController {
         
     }
     
-    // MARK: - 修改個人學習計劃設定
     func modifyPlanStudyGoalSetting() {
         
         studyItems = studyGoal?.studyItems ?? []
@@ -222,12 +182,17 @@ class PlanStudyGoalViewController: BaseViewController {
         selectCategoryItem = studyGoal?.category
         
         selectStartDate = Date(
-            timeIntervalSince1970: studyGoal?.studyPeriod.startDate ?? TimeInterval()
-        )
+            timeIntervalSince1970: studyGoal?.studyPeriod.startDate ?? TimeInterval())
         
         selectEndDate = Date(
-            timeIntervalSince1970: studyGoal?.studyPeriod.endDate ?? TimeInterval()
-        )
+            timeIntervalSince1970: studyGoal?.studyPeriod.endDate ?? TimeInterval())
+        
+    }
+    
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done, target: self, action: #selector(submitButton))
         
     }
     
@@ -239,16 +204,21 @@ class PlanStudyGoalViewController: BaseViewController {
             
     }
     
-}
-
-// MARK: - TableView DataSource
-extension PlanStudyGoalViewController: UITableViewDataSource {
-
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func registerTableViewCell() {
         
-        return 1
+        planStudyGoalTableView.register(
+            UINib(nibName: String(describing: PlanStudyGoalHeaderView.self), bundle: nil),
+            forHeaderFooterViewReuseIdentifier: String(describing: PlanStudyGoalHeaderView.self))
+        
+        planStudyGoalTableView.register(
+            UINib(nibName: String(describing: StudyItemTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: StudyItemTableViewCell.self))
         
     }
+    
+}
+
+extension PlanStudyGoalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -259,13 +229,9 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: StudyItemTableViewCell.self),
-            for: indexPath
-        )
+            withIdentifier: String(describing: StudyItemTableViewCell.self), for: indexPath)
 
         guard let cell = cell as? StudyItemTableViewCell else { return cell }
-        
-        cell.selectionStyle = .none
         
         studyItems = studyItems.sorted { (lhs, rhs) in
             
@@ -274,8 +240,9 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
         }
         
         cell.showStudyItem(
-            itemTitle: studyItems[indexPath.row].itemTitle,
-            studyTime: studyItems[indexPath.row].studyTime)
+            itemTitle: studyItems[indexPath.row].itemTitle, studyTime: studyItems[indexPath.row].studyTime)
+        
+        cell.selectionStyle = .none
         
         return cell
         
@@ -283,21 +250,18 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        popupSelectStudyItemPage(
-            studyItem: studyItems[indexPath.row],
-            selectRow: indexPath.row
-        )
+        popupSelectStudyItemPage(studyItem: studyItems[indexPath.row], selectRow: indexPath.row)
 
     }
     
-    // MARK: - tableView Row 可以被修改
+    // MARK: - tableView row can be modify
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         
         return true
         
     }
     
-    // MARK: - 移動 TableView Row (修改排序 id)
+    // MARK: - move tableView row (sort by id)
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
         studyItems[sourceIndexPath.row].id = destinationIndexPath.row
@@ -306,20 +270,22 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
         
     }
     
-    // MARK: - 刪除 TableView Row
+    // MARK: - delete TableView Row
     func tableView(_ tableView: UITableView,
     trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
     -> UISwipeActionsConfiguration? {
         
-        let contextItem = UIContextualAction(style: .destructive, title: "刪除") {  _, _, _ in
+        let contextItem = UIContextualAction(style: .destructive, title: "刪除") { [weak self]  _, _, _ in
             
-            self.studyItems.remove(at: indexPath.row)
+            guard let strongSelf = self else { return }
             
-            self.planStudyGoalTableView.beginUpdates()
+            strongSelf.studyItems.remove(at: indexPath.row)
+            
+            strongSelf.planStudyGoalTableView.beginUpdates()
 
-            self.planStudyGoalTableView.deleteRows(at: [indexPath], with: .left)
+            strongSelf.planStudyGoalTableView.deleteRows(at: [indexPath], with: .left)
 
-            self.planStudyGoalTableView.endUpdates()
+            strongSelf.planStudyGoalTableView.endUpdates()
             
         }
         
@@ -331,7 +297,6 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
 
 }
 
-// MARK: - TableView Delegate
 extension PlanStudyGoalViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -343,30 +308,30 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         headerView.studyGoalTitleTextField.delegate = self
         
-        if checkStudyGoalFillIn == true {
+        if checkStudyGoalFillIn {
             
             if headerView.checkFullIn(itemCount: studyItems.count,
                 startDate: selectStartDate, endDate: selectEndDate) {
                 
+                var showLabelTitle = ""
+                
                 if studyGoal != nil {
                     
                     addStudyGoalToDatabase(
-                        id: studyGoal?.id ?? "",
-                        title: headerView.studyGoalTitleTextField.text ?? ""
-                    )
+                        id: studyGoal?.id ?? "", title: headerView.studyGoalTitleTextField.text ?? "")
                     
-                    HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                    showLabelTitle = "修改成功！"
                     
                 } else {
                     
                     addStudyGoalToDatabase(
-                        id: studyGoalManager.database.document().documentID,
-                        title: headerView.studyGoalTitleTextField.text ?? ""
-                    )
+                        id: studyGoalManager.database.document().documentID, title: headerView.studyGoalTitleTextField.text ?? "")
                     
-                    HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+                    showLabelTitle = "新增成功！"
                     
                 }
+                
+                HUD.flash(.labeledSuccess(title: showLabelTitle, subtitle: nil), delay: 0.5)
                 
             }
             
@@ -437,21 +402,15 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
 
         guard let selectCategoryItem = selectCategoryItem else { return }
         
-        studyGoal = StudyGoal(
-            id: id,
-            title: title,
-            category: selectCategoryItem,
-            studyPeriod: StudyPeriod(
-                startDate: selectStartDate.timeIntervalSince1970,
-                endDate: selectEndDate.timeIntervalSince1970),
-            studyItems: studyItems,
-            createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-            userID: userID
-        )
+        let studyPeriod = StudyPeriod(startDate: selectStartDate.timeIntervalSince1970, endDate: selectEndDate.timeIntervalSince1970)
         
-        if let studyGoal = studyGoal {
-            
-            guard var user = user else { return }
+        let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
+        
+        studyGoal = StudyGoal(
+            id: id, title: title, category: selectCategoryItem, studyPeriod: studyPeriod,
+            studyItems: studyItems, createTime: createTime, userID: userID)
+        
+        if let studyGoal = studyGoal, var user = userInfo {
             
             var deleteIndex: Int?
             
@@ -468,8 +427,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
                 
                 user.achievement.completionGoals.remove(at: deleteIndex ?? 0)
                 
-                let userManager = UserManager()
-                
                 userManager.updateData(user: user)
                 
             }
@@ -484,15 +441,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
     
     @objc func editStudyItemButton(sender: UIButton) {
         
-        if isOpenEdited {
-            
-            isOpenEdited = false
-            
-        } else {
-            
-            isOpenEdited = true
-            
-        }
+        isOpenEdited = isOpenEdited ? false : true
         
         planStudyGoalTableView.isEditing = isOpenEdited
         
@@ -510,6 +459,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             
             strongSelf.selectDateType = SelectDateType.startDate.title
             
+            strongSelf.planStudyGoalTableView.reloadData()
+            
         }
         
         setSelectCalenderViewController()
@@ -518,15 +469,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
     
     @objc func selectEndDateButton(sender: UIButton) {
         
-        if selectStartDate >= Date() {
-            
-            selectCalenderViewController.startDate = selectStartDate
-            
-        } else {
-            
-            selectCalenderViewController.startDate = Date()
-            
-        }
+        selectCalenderViewController.startDate = selectStartDate >= Date() ? selectStartDate : Date()
         
         selectCalenderViewController.getSelectDate = { [weak self] date in
             
@@ -535,6 +478,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             strongSelf.selectEndDate = date
             
             strongSelf.selectDateType = SelectDateType.endDate.title
+            
+            strongSelf.planStudyGoalTableView.reloadData()
             
         }
         
@@ -557,7 +502,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             }
             
         } else {
-            // Fallback on earlier versions
             
             navController.modalPresentationStyle = .fullScreen
             
@@ -573,7 +517,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         categoryViewController.getSelectCategoryItem = { [weak self] item in
             
-            self?.selectCategoryItem = item
+            guard let strongSelf = self else { return }
+            
+            strongSelf.selectCategoryItem = item
+            
+            strongSelf.planStudyGoalTableView.reloadData()
             
         }
         
@@ -588,7 +536,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             }
             
         } else {
-            // Fallback on earlier versions
             
             navController.modalPresentationStyle = .fullScreen
         }
@@ -605,15 +552,9 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
     
     func popupSelectStudyItemPage(studyItem: StudyItem?, selectRow: Int?) {
         
-        guard let selectStudyItemViewController = UIStoryboard
-            .studyGoal
-            .instantiateViewController(
-                withIdentifier: String(describing: SelectStudyItemViewController.self)
-                ) as? SelectStudyItemViewController else {
-
-                    return
-
-                }
+        guard let selectStudyItemViewController = UIStoryboard.studyGoal.instantiateViewController(
+            withIdentifier: String(describing: SelectStudyItemViewController.self)
+        ) as? SelectStudyItemViewController else { return }
         
         selectStudyItemViewController.itemNumber = studyItems.count
         
@@ -629,17 +570,19 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         selectStudyItemViewController.getStudyItem = { [weak self] studyItem, whetherToUpdate in
             
-            if whetherToUpdate == false {
+            guard let strongSelf = self else { return }
+            
+            if !whetherToUpdate {
                 
-                self?.studyItems.append(studyItem)
+                strongSelf.studyItems.append(studyItem)
                 
             } else {
                 
-                self?.studyItems[selectRow ?? 0] = studyItem
+                strongSelf.studyItems[selectRow ?? 0] = studyItem
                 
             }
             
-            self?.planStudyGoalTableView.reloadData()
+            strongSelf.planStudyGoalTableView.reloadData()
             
         }
         

@@ -49,6 +49,10 @@ class ShareReceiveTableViewCell: UITableViewCell {
             
             friendImageView.loadImage(userPhoto)
             
+        } else {
+            
+            friendImageView.image = UIImage.asset(.userIcon)
+            
         }
         
         let fistImage = note.content.filter({ $0.contentType == SendType.image.title })
@@ -70,6 +74,10 @@ class ShareReceiveTableViewCell: UITableViewCell {
         if userPhoto != nil {
             
             friendImageView.loadImage(userPhoto)
+            
+        } else {
+            
+            friendImageView.image = UIImage.asset(.userIcon)
             
         }
         

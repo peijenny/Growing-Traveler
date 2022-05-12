@@ -24,6 +24,8 @@ class AnalysisViewController: UIViewController {
     
     @IBOutlet weak var selectSegmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var analysisBackground: UIView!
+    
     var sevenDaysArray: [String] = []
     
     var calculateStudyTime: [Double] = [] {
@@ -219,6 +221,16 @@ class AnalysisViewController: UIViewController {
             
         }
         
+        if finishedCalculates.count == 0 {
+            
+            analysisBackground.isHidden = false
+            
+        } else {
+            
+            analysisBackground.isHidden = true
+            
+        }
+        
         var allTime: Double = 0
         
         for index in 0..<finishedCalculates.count {
@@ -387,6 +399,16 @@ class AnalysisViewController: UIViewController {
             calculates.append(CalculateBar(
                 startDate: startDate, endDate: endDate, periodDays: periodDays, totalMinutes: totalMinutes,
                 averageMinutes: averageTime, includedDays: includedDays, included: includedArray))
+            
+        }
+        
+        if calculates.count == 0 {
+            
+            analysisBackground.isHidden = false
+            
+        } else {
+            
+            analysisBackground.isHidden = true
             
         }
         

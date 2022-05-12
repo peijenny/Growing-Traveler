@@ -22,6 +22,7 @@ enum ImageAsset: String {
     case add
     case block
     case user
+    case userIcon
     
     case create
     case edit

@@ -34,6 +34,10 @@ class CertificationTableViewCell: UITableViewCell {
             
             certificationImageView.loadImage(certification.imageLink)
             
+        } else {
+            
+            certificationImageView.image = UIImage.asset(.userIcon)
+            
         }
         
         certificationContentLabel.text = certification.content
