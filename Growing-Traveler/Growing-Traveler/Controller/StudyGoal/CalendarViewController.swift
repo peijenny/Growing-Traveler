@@ -69,7 +69,7 @@ class CalendarViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(
            title: "", style: .plain, target: nil, action: nil)
         
-        displayBackgroundView.isHidden = userID == "" ? false : true
+        displayBackgroundView.isHidden = (userID == "") ? false : true
         
         let formatter = DateFormatter()
         
@@ -129,11 +129,11 @@ class CalendarViewController: UIViewController {
             
             let greaterEqualEndDate = $0.studyPeriod.endDate >= selectedDate.timeIntervalSince1970
             
-            return lessEqualStartDate && greaterEqualEndDate ? true : false
+            return (lessEqualStartDate && greaterEqualEndDate) ? true : false
             
         })
         
-        displayBackgroundView.isHidden = resultData.isEmpty ? false : true
+        displayBackgroundView.isHidden = (resultData.isEmpty) ? false : true
         
         return resultData
         

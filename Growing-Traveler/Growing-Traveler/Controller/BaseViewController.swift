@@ -37,9 +37,9 @@ class BaseViewController: UIViewController {
             
         }
         
-        IQKeyboardManager.shared.enable = !isEnableIQKeyboard ? false : true
+        IQKeyboardManager.shared.enable = (!isEnableIQKeyboard) ? false : true
         
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = !isEnableResignOnTouchOutside ? false : true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = (!isEnableResignOnTouchOutside) ? false : true
         
         self.setNeedsStatusBarAppearanceUpdate()
         
@@ -54,9 +54,9 @@ class BaseViewController: UIViewController {
             
         }
         
-        IQKeyboardManager.shared.enable = !isEnableIQKeyboard ? true : false
+        IQKeyboardManager.shared.enable = (!isEnableIQKeyboard) ? true : false
         
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = !isEnableResignOnTouchOutside ? true : false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = (!isEnableResignOnTouchOutside) ? true : false
 
     }
 

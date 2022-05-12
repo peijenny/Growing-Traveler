@@ -53,7 +53,7 @@ class PlanStudyGoalViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = studyGoal == nil ? "新增個人學習計劃" : "編輯個人學習計劃"
+        title = (studyGoal == nil) ? "新增個人學習計劃" : "編輯個人學習計劃"
         
         if selectedDate != nil {
             
@@ -234,7 +234,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             if headerView.checkFullIn(itemCount: studyItems.count,
                 startDate: selectStartDate, endDate: selectEndDate) {
                 
-                let showLabelTitle = studyGoal != nil ? "修改成功！" : "新增成功！"
+                let showLabelTitle = (studyGoal != nil) ? "修改成功！" : "新增成功！"
                 
                 let studyGoalID = studyGoal != nil ?
                 studyGoal?.id ?? "" : studyGoalManager.database.document().documentID
@@ -313,7 +313,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             
             for index in 0..<user.achievement.completionGoals.count {
                 
-                deleteIndex = studyGoal.id == user.achievement.completionGoals[index] ? index : nil
+                deleteIndex = studyGoal.id == (user.achievement.completionGoals[index]) ? index : nil
                 
             }
             
@@ -335,7 +335,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
     
     @objc func editStudyItemButton(sender: UIButton) {
         
-        isOpenEdited = isOpenEdited ? false : true
+        isOpenEdited = (isOpenEdited) ? false : true
         
         planStudyGoalTableView.isEditing = isOpenEdited
         
@@ -363,7 +363,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
     
     @objc func selectEndDateButton(sender: UIButton) {
         
-        selectCalenderViewController.startDate = selectStartDate >= Date() ? selectStartDate : Date()
+        selectCalenderViewController.startDate = (selectStartDate >= Date()) ? selectStartDate : Date()
         
         selectCalenderViewController.getSelectDate = { [weak self] date in
             

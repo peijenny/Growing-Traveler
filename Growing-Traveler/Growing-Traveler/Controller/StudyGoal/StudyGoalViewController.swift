@@ -144,7 +144,7 @@ class StudyGoalViewController: UIViewController {
                 
                 strongSelf.studyGoals = strongSelf.handleSelectStudyGoals(status: status, studyGoals: data)
                 
-                strongSelf.studyGoalBackgroundView.isHidden = strongSelf.studyGoals.isEmpty ? false : true
+                strongSelf.studyGoalBackgroundView.isHidden = (strongSelf.studyGoals.isEmpty) ? false : true
                 
                 strongSelf.studyGoalTableView.reloadData()
                 
@@ -275,7 +275,7 @@ class StudyGoalViewController: UIViewController {
                 
                 let notStartDoing = $0.studyItems.allSatisfy({ $0.isCompleted == false })
                 
-                return notStartDoing && isPending ? true : false
+                return (notStartDoing && isPending) ? true : false
                 
             })
             
@@ -289,7 +289,7 @@ class StudyGoalViewController: UIViewController {
                 
                 let isDoing = $0.studyItems.allSatisfy({ $0.isCompleted == false })
                 
-                return isStartDoing || isDoing && isRunning ? false : true
+                return (isStartDoing || isDoing && isRunning) ? false : true
 
             })
             
