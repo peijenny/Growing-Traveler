@@ -92,6 +92,7 @@
 		28B76527282CC53C009EFA0A /* SelectDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76526282CC53C009EFA0A /* SelectDateType.swift */; };
 		28B76529282CC564009EFA0A /* StatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76528282CC564009EFA0A /* StatusType.swift */; };
 		28B7652B282CC586009EFA0A /* SelectStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B7652A282CC586009EFA0A /* SelectStatus.swift */; };
+		28B7652D282CDCBA009EFA0A /* ForumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B7652C282CDCBA009EFA0A /* ForumType.swift */; };
 		28BB6EE628066441002B0458 /* Forum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EE528066441002B0458 /* Forum.storyboard */; };
 		28BB6EE928066639002B0458 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EE828066639002B0458 /* ForumViewController.swift */; };
 		28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */; };
@@ -243,6 +244,7 @@
 		28B76526282CC53C009EFA0A /* SelectDateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateType.swift; sourceTree = "<group>"; };
 		28B76528282CC564009EFA0A /* StatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusType.swift; sourceTree = "<group>"; };
 		28B7652A282CC586009EFA0A /* SelectStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStatus.swift; sourceTree = "<group>"; };
+		28B7652C282CDCBA009EFA0A /* ForumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumType.swift; sourceTree = "<group>"; };
 		28BB6EE528066441002B0458 /* Forum.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Forum.storyboard; sourceTree = "<group>"; };
 		28BB6EE828066639002B0458 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
 		28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishForumArticleViewController.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				28B76526282CC53C009EFA0A /* SelectDateType.swift */,
 				28B76528282CC564009EFA0A /* StatusType.swift */,
 				28B7652A282CC586009EFA0A /* SelectStatus.swift */,
+				28B7652C282CDCBA009EFA0A /* ForumType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1105,6 +1108,7 @@
 				280C1B01280D772E0091B9DC /* ChatRoomManager.swift in Sources */,
 				28DA8333281274BF0081CB14 /* NibOwnerLoadable.swift in Sources */,
 				28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */,
+				28B7652D282CDCBA009EFA0A /* ForumType.swift in Sources */,
 				281358EC281D4DEF000B0CAE /* ErrorManager.swift in Sources */,
 				28D702BD28019D0C00FE9AEA /* CategoryManager.swift in Sources */,
 				283E65852817CD6300F1033F /* ProfileSettingViewController.swift in Sources */,
