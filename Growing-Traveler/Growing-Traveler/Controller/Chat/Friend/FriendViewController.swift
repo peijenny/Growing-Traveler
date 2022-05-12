@@ -9,30 +9,6 @@ import UIKit
 import Charts
 import PKHUD
 
-enum FriendType {
-    
-    case friend
-    
-    case blockade
-    
-    case apply
-    
-    var title: String {
-        
-        switch self {
-            
-        case .friend: return "好友列表"
-            
-        case .blockade: return "封鎖列表"
-            
-        case .apply: return "發出邀請列表"
-            
-        }
-        
-    }
-    
-}
-
 class FriendViewController: UIViewController {
 
     @IBOutlet weak var friendListTableView: UITableView! {
@@ -52,9 +28,17 @@ class FriendViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var friendBackgroundView: UIView!
+    
+    var chatRoomManager = ChatRoomManager()
+    
     var friendManager = FriendManager()
     
+    var userManager = UserManager()
+    
     var ownerfriend: Friend?
+    
+    var usersInfo: [UserInfo] = []
     
     var friendsChat: [Chat] = [] {
         
@@ -66,23 +50,12 @@ class FriendViewController: UIViewController {
         
     }
     
-    var chatRoomManager = ChatRoomManager()
-    
-    @IBOutlet weak var friendBackgroundView: UIView!
-    
-    var userManager = UserManager()
-    
-    var usersInfo: [UserInfo] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setNavigationItems()
 
-        friendListTableView.register(
-            UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self)
-        )
+        registerTableViewCell()
         
     }
     
@@ -93,11 +66,11 @@ class FriendViewController: UIViewController {
         
         fetchFriendsChatData()
         
-        fetchUserInfo()
+        fetchUserInfoData()
         
     }
     
-    func fetchUserInfo() {
+    func fetchUserInfoData() {
         
         userManager.fetchUsersData { [weak self] result in
             
@@ -161,15 +134,7 @@ class FriendViewController: UIViewController {
                 
                 strongSelf.friendsChat = friendsChat
                 
-                if friendsChat.count == 0 {
-                    
-                    strongSelf.friendBackgroundView.isHidden = false
-                    
-                } else {
-                    
-                    strongSelf.friendBackgroundView.isHidden = true
-                    
-                }
+                strongSelf.friendBackgroundView.isHidden = (friendsChat.count == 0) ? false : true
                 
                 strongSelf.friendListTableView.reloadData()
 
@@ -180,7 +145,9 @@ class FriendViewController: UIViewController {
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
             }
+            
         }
+        
     }
     
     func setNavigationItems() {
@@ -192,8 +159,8 @@ class FriendViewController: UIViewController {
     
     @objc func applyFriendButton(sender: UIButton) {
         
-        let viewController = UIStoryboard(name: "Chat", bundle: nil)
-            .instantiateViewController(withIdentifier: String(describing: ApplyFriendViewController.self))
+        let viewController = UIStoryboard.chat.instantiateViewController(
+            withIdentifier: String(describing: ApplyFriendViewController.self))
         
         guard let viewController = viewController as? ApplyFriendViewController else { return }
         
@@ -207,15 +174,17 @@ class FriendViewController: UIViewController {
         
     }
     
+    func registerTableViewCell() {
+        
+        friendListTableView.register(
+            UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self))
+        
+    }
+    
 }
 
 extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -226,9 +195,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: FriendListTableViewCell.self),
-            for: indexPath
-        )
+            withIdentifier: String(describing: FriendListTableViewCell.self), for: indexPath)
         
         guard let cell = cell as? FriendListTableViewCell else { return cell }
 
@@ -237,9 +204,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         if userInfo.count != 0 {
             
             cell.showFriendInfo(
-                friendInfo: userInfo[0],
-                blockadeList: ownerfriend?.blockadeList ?? [],
-                deleteAccount: false)
+                friendInfo: userInfo[0], blockadeList: ownerfriend?.blockadeList ?? [], deleteAccount: false)
             
         } else {
             
@@ -251,9 +216,7 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
                 certification: [])
             
             cell.showFriendInfo(
-                friendInfo: blockUserInfo,
-                blockadeList: ownerfriend?.blockadeList ?? [],
-                deleteAccount: true)
+                friendInfo: blockUserInfo, blockadeList: ownerfriend?.blockadeList ?? [], deleteAccount: true)
             
         }
         
@@ -271,26 +234,16 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let indexPath = friendListTableView.indexPathForRow(at: touchPoint) {
                 
-                // 彈跳出 User 視窗
-                
-                guard let viewController = UIStoryboard
-                    .chat
-                    .instantiateViewController(
+                guard let viewController = UIStoryboard.chat.instantiateViewController(
                     withIdentifier: String(describing: UserInfoViewController.self)
-                    ) as? UserInfoViewController else { return }
+                ) as? UserInfoViewController else { return }
                 
                 viewController.selectUserID = friendsChat[indexPath.row].friendID
-
-                if usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID }).count == 0 {
-                    
-                    viewController.deleteAccount = true
-                    
-                } else {
-                    
-                    viewController.deleteAccount = false
-                    
-                }
                 
+                let isFilterUserInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID }).isEmpty
+                
+                viewController.deleteAccount = (isFilterUserInfo) ? true : false
+
                 self.view.addSubview(viewController.view)
 
                 self.addChild(viewController)
@@ -312,21 +265,13 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         
         viewController.userName = ownerfriend?.userName ?? ""
         
-        if ownerfriend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).count == 0 {
+        if ownerfriend?.blockadeList.filter({ $0 == friendsChat[indexPath.row].friendID }).isEmpty {
             
             viewController.isBlock = false
             
-            let userInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID })
+            let isFilterUserInfo = usersInfo.filter({ $0.userID == friendsChat[indexPath.row].friendID }).isEmpty
             
-            if userInfo.count == 0 {
-                
-                viewController.deleteAccount = true
-                
-            } else {
-                
-                viewController.deleteAccount = false
-                
-            }
+            viewController.deleteAccount = (isFilterUserInfo) ? true : false
             
             navigationController?.pushViewController(viewController, animated: true)
             
