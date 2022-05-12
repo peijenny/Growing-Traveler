@@ -24,25 +24,20 @@ class NoteDetailViewController: UIViewController {
         
     }
     
-//    var modifyNote: Note?
+    var userManager = UserManager()
     
+    var note: Note?
+
     var noteID: String?
     
     var noteUserID: String?
     
-    var userManager = UserManager()
-    
-    var note: Note?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        setNavigationItems()
-        
+    
         noteDatailTableView.register(
             UINib(nibName: String(describing: ArticleDetailTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self))
         
     }
     
@@ -69,8 +64,7 @@ class NoteDetailViewController: UIViewController {
     
     func fetchNoteData() {
         
-        userManager.fetchshareNoteData(
-        shareUserID: noteUserID ?? "", noteID: noteID ?? "") { [weak self] result in
+        userManager.fetchshareNoteData(shareUserID: noteUserID ?? "", noteID: noteID ?? "") { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -107,6 +101,7 @@ class NoteDetailViewController: UIViewController {
             }
             
         }
+        
     }
     
     func setNavigationItems() {
@@ -139,8 +134,7 @@ class NoteDetailViewController: UIViewController {
             }
             
         } else {
-            // Fallback on earlier versions
-            
+
             navController.modalPresentationStyle = .fullScreen
         }
         
@@ -151,8 +145,8 @@ class NoteDetailViewController: UIViewController {
     @objc func modifyNoteData(sender: UIButton) {
         
         guard let viewController = UIStoryboard.note.instantiateViewController(
-                withIdentifier: String(describing: PublishNoteViewController.self)
-                ) as? PublishNoteViewController else { return }
+            withIdentifier: String(describing: PublishNoteViewController.self)
+        ) as? PublishNoteViewController else { return }
         
         viewController.modifyNote = note
         
@@ -163,13 +157,7 @@ class NoteDetailViewController: UIViewController {
 }
 
 extension NoteDetailViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return note?.content.count ?? 0
@@ -178,9 +166,7 @@ extension NoteDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: ArticleDetailTableViewCell.self),
-            for: indexPath
-        )
+            withIdentifier: String(describing: ArticleDetailTableViewCell.self), for: indexPath)
         
         guard let cell = cell as? ArticleDetailTableViewCell else { return cell }
         
@@ -199,16 +185,13 @@ extension NoteDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: ArticleDetailTableViewCell.self),
-            for: indexPath
-        )
+            withIdentifier: String(describing: ArticleDetailTableViewCell.self), for: indexPath)
         
         guard let cell = cell as? ArticleDetailTableViewCell else { return }
         
         if note?.content[indexPath.row].contentType ?? "" == SendType.image.title {
             
-            cell.contentImageView.loadImage(
-                note?.content[indexPath.row].contentText)
+            cell.contentImageView.loadImage(note?.content[indexPath.row].contentText)
             
             cell.contentImageView.showPhoto(imageView: cell.contentImageView)
             

@@ -11,26 +11,26 @@ import PKHUD
 class ShareToFriendViewController: UIViewController {
     
     var shareToFriendTableView = UITableView()
-
-    var sendType = ""
-    
-    var friendManager = FriendManager()
-    
-    var friendList: [String] = []
     
     var chatRoomManager = ChatRoomManager()
     
-    var chats: [Chat] = []
+    var friendManager = FriendManager()
     
     var userManager = UserManager()
     
     var usersInfo: [UserInfo] = []
+    
+    var chats: [Chat] = []
+    
+    var friendList: [String] = []
     
     var shareType: String?
     
     var shareID: String?
     
     var userName: String?
+    
+    var sendType = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,8 +91,6 @@ class ShareToFriendViewController: UIViewController {
             case .success(let chats):
 
                 strongSelf.chats = chats
-                
-                // fetch user 所有的聊天記錄
                 
             case .failure(let error):
 
@@ -163,8 +161,7 @@ class ShareToFriendViewController: UIViewController {
         
         shareToFriendTableView.register(
             UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self))
 
         shareToFriendTableView.delegate = self
         
@@ -189,12 +186,6 @@ class ShareToFriendViewController: UIViewController {
 
 extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return friendList.count
@@ -204,9 +195,7 @@ extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: FriendListTableViewCell.self),
-            for: indexPath
-        )
+            withIdentifier: String(describing: FriendListTableViewCell.self), for: indexPath)
         
         guard let cell = cell as? FriendListTableViewCell else { return cell }
         
@@ -228,12 +217,10 @@ extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSourc
             
             var selectChat = chats.filter({ $0.friendID == usersInfo[indexPath.row].userID })[0]
             
+            let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
+            
             selectChat.messageContent.append(MessageContent(
-                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-                sendMessage: shareID ?? "",
-                sendType: shareType ?? "",
-                sendUserID: userID
-            ))
+                createTime: createTime, sendMessage: shareID ?? "", sendType: shareType ?? "", sendUserID: userID))
             
             chatRoomManager.addData(userName: userName ?? "", chat: selectChat)
             
