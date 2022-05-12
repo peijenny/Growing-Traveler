@@ -71,6 +71,12 @@ class CalendarViewController: UIViewController {
         
         displayBackgroundView.isHidden = userID == "" ? false : true
         
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        selectedDate = formatter.date(from: formatter.string(from: Date())) ?? Date()
+
         listenStudyGoalData()
         
     }
