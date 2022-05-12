@@ -98,6 +98,7 @@
 		28B76533282CF7C2009EFA0A /* ConfirmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76532282CF7C2009EFA0A /* ConfirmType.swift */; };
 		28B76535282CF839009EFA0A /* SendType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76534282CF839009EFA0A /* SendType.swift */; };
 		28B76537282CFC42009EFA0A /* FeatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76536282CFC42009EFA0A /* FeatureType.swift */; };
+		28B76539282CFCF7009EFA0A /* PrivacyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76538282CFCF7009EFA0A /* PrivacyPolicy.swift */; };
 		28BB6EE628066441002B0458 /* Forum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EE528066441002B0458 /* Forum.storyboard */; };
 		28BB6EE928066639002B0458 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EE828066639002B0458 /* ForumViewController.swift */; };
 		28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */; };
@@ -255,6 +256,7 @@
 		28B76532282CF7C2009EFA0A /* ConfirmType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmType.swift; sourceTree = "<group>"; };
 		28B76534282CF839009EFA0A /* SendType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendType.swift; sourceTree = "<group>"; };
 		28B76536282CFC42009EFA0A /* FeatureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureType.swift; sourceTree = "<group>"; };
+		28B76538282CFCF7009EFA0A /* PrivacyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicy.swift; sourceTree = "<group>"; };
 		28BB6EE528066441002B0458 /* Forum.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Forum.storyboard; sourceTree = "<group>"; };
 		28BB6EE828066639002B0458 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
 		28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishForumArticleViewController.swift; sourceTree = "<group>"; };
@@ -640,6 +642,7 @@
 				28B76532282CF7C2009EFA0A /* ConfirmType.swift */,
 				28B76534282CF839009EFA0A /* SendType.swift */,
 				28B76536282CFC42009EFA0A /* FeatureType.swift */,
+				28B76538282CFCF7009EFA0A /* PrivacyPolicy.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1153,6 +1156,7 @@
 				28BB6EFC2807C25C002B0458 /* UploadImageManager.swift in Sources */,
 				28DA833828127AEE0081CB14 /* FeatureCollectionViewCell.swift in Sources */,
 				288367AE280134280010CEAD /* PlanStudyGoalViewController.swift in Sources */,
+				28B76539282CFCF7009EFA0A /* PrivacyPolicy.swift in Sources */,
 				28D79FE328182C3100505B5B /* DeleteUserManager.swift in Sources */,
 				28FF433F2813D12200C58E6B /* MandateManager.swift in Sources */,
 				288367AB28012A2F0010CEAD /* StudyGoalViewController.swift in Sources */,

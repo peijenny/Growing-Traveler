@@ -15,15 +15,15 @@ class ProfileSettingViewController: BaseViewController {
     
     var userManger = UserManager()
     
+    var friendManager = FriendManager()
+    
     var deleteUserManager = DeleteUserManager()
     
-    var friendManager = FriendManager()
+    var forumArticles: [ForumArticle] = []
     
     var studyGoals: [StudyGoal] = []
     
     var friendList: Friend?
-    
-    var forumArticles: [ForumArticle] = []
     
     var userInfo: UserInfo? {
         
@@ -55,9 +55,7 @@ class ProfileSettingViewController: BaseViewController {
         fetchAllData()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done,
-            target: self,
-            action: #selector(submitButton))
+            barButtonSystemItem: .done, target: self, action: #selector(submitButton))
 
     }
     
@@ -107,38 +105,21 @@ class ProfileSettingViewController: BaseViewController {
         
         profileSettingTableView.register(
             UINib(nibName: String(describing: SettingImageTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: SettingImageTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: SettingImageTableViewCell.self))
 
         profileSettingTableView.register(
             UINib(nibName: String(describing: SettingContentTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: SettingContentTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: SettingContentTableViewCell.self))
         
         profileSettingTableView.register(
             UINib(nibName: String(describing: SettingSignTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: SettingSignTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: SettingSignTableViewCell.self))
         
         profileSettingTableView.delegate = self
         
         profileSettingTableView.dataSource = self
         
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        tabBarController?.tabBar.isHidden = false
-//
-//    }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        tabBarController?.tabBar.isHidden = true
-//
-//    }
     
     func fetchUserInfoData() {
         
@@ -168,12 +149,6 @@ class ProfileSettingViewController: BaseViewController {
 
 extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 3
@@ -182,9 +157,11 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        var cell = UITableViewCell()
+        
         if indexPath.row == 0 {
             
-            let cell = tableView.dequeueReusableCell(
+            cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: SettingImageTableViewCell.self), for: indexPath)
             
             guard let cell = cell as? SettingImageTableViewCell else { return cell }
@@ -203,13 +180,9 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             
             cell.modifyUserPhotoButton.addTarget(self, action: #selector(modifyUserPhoto), for: .touchUpInside)
             
-            cell.selectionStyle = .none
-            
-            return cell
-            
         } else if indexPath.row == 1 {
             
-            let cell = tableView.dequeueReusableCell(
+            cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: SettingContentTableViewCell.self), for: indexPath)
             
             guard let cell = cell as? SettingContentTableViewCell else { return cell }
@@ -252,13 +225,9 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             
             cell.showUserContent(userInfo: userInfo)
             
-            cell.selectionStyle = .none
-            
-            return cell
-            
         } else {
             
-            let cell = tableView.dequeueReusableCell(
+            cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: SettingSignTableViewCell.self), for: indexPath)
             
             guard let cell = cell as? SettingSignTableViewCell else { return cell }
@@ -270,36 +239,35 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             cell.privacyPolicyButton.addTarget(self, action: #selector(privacyPolicyButton), for: .touchUpInside)
             
             cell.eulaButton.addTarget(self, action: #selector(eulaButton), for: .touchUpInside)
-
-            cell.selectionStyle = .none
-            
-            return cell
             
         }
+        
+        cell.selectionStyle = .none
+        
+        return cell
         
     }
     
     @objc func privacyPolicyButton(sender: UIButton) {
         
-        let viewController = UIStoryboard.profile
-            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
-        
-        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
-        
-        viewController.privacyTitle = PrivacyPolicy.privacyPolicy.title
-        
-        navigationController?.pushViewController(viewController, animated: true)
+        pushToPrivacyPolicyPage(PrivacyPolicyType: PrivacyPolicy.privacyPolicy.title)
         
     }
     
     @objc func eulaButton(sender: UIButton) {
         
-        let viewController = UIStoryboard.profile
-            .instantiateViewController(withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        pushToPrivacyPolicyPage(PrivacyPolicyType: PrivacyPolicy.eula.title)
+        
+    }
+    
+    func pushToPrivacyPolicyPage(PrivacyPolicyType: String) {
+        
+        let viewController = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: String(describing: PrivacyPolicyViewController.self))
         
         guard let viewController = viewController as? PrivacyPolicyViewController else { return }
         
-        viewController.privacyTitle = PrivacyPolicy.eula.title
+        viewController.privacyTitle = PrivacyPolicyType
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -322,6 +290,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         } catch let signOutError as NSError {
 
             print("Error signing out: %@", signOutError)
+            
+            HUD.flash(.labeledError(title: "登出失敗！", subtitle: "請稍候嘗試"), delay: 0.5)
 
         }
         
@@ -330,9 +300,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     @objc func deleteAccount(sender: UIButton) {
         
         let alertController = UIAlertController(
-            title: "刪除使用者帳號確認",
-            message: "請問確定刪除此使用者帳號？\n 刪除行為不可逆，資料將一併刪除！",
-            preferredStyle: .alert)
+            title: "刪除使用者帳號確認", message: "請問確定刪除使用者帳號？\n 刪除行為不可逆，資料將一併刪除！", preferredStyle: .alert)
         
         let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
 
@@ -381,8 +349,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         self.navigationController?.popViewController(animated: true)
         
         self.tabBarController?.selectedIndex = 0
-        
-        print("帳號已刪除！")
         
     }
     
@@ -464,7 +430,9 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
 extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 
