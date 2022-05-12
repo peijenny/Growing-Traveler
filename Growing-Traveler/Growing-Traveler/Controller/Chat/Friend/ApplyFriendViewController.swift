@@ -8,54 +8,6 @@
 import UIKit
 import PKHUD
 
-enum SearchFriendStatus {
-    
-    case yourInfo
-    
-    case yourself
-    
-    case blocked
-    
-    case friendship
-    
-    case invitaion
-    
-    case applied
-    
-    case noSearch
-    
-    case noRelation
-    
-    case deleteAccount
-    
-    var title: String {
-        
-        switch self {
-            
-        case .yourInfo: return "你自己的帳號"
-            
-        case .yourself: return "不可加入自己！"
-            
-        case .blocked: return "你已封鎖該使用者！"
-            
-        case .friendship: return "你們已經是好友了！"
-            
-        case .invitaion: return "你已發送好友邀請，請等待對方同意！"
-            
-        case .applied: return "對方發出好友邀請給你！"
-            
-        case .noSearch: return "沒有該使用者的資料！請重新搜尋！"
-            
-        case .noRelation: return "你們還不是朋友，點擊按鈕發送好友邀請！"
-            
-        case .deleteAccount: return "此帳戶已刪除，無法加為好友！"
-            
-        }
-        
-    }
-    
-}
-
 class ApplyFriendViewController: BaseViewController {
     
     @IBOutlet weak var applyTableView: UITableView! {
@@ -77,6 +29,14 @@ class ApplyFriendViewController: BaseViewController {
     @IBOutlet weak var userInfoLabel: UILabel!
     
     @IBOutlet weak var userInfoView: UIView!
+    
+    var friendManager = FriendManager()
+    
+    var otherFriend: Friend?
+    
+    var searchUser: UserInfo?
+    
+    var allUsers: [UserInfo] = []
     
     var friendsInfo: [UserInfo] = [] {
         
@@ -101,27 +61,18 @@ class ApplyFriendViewController: BaseViewController {
         }
     }
     
-    var otherFriend: Friend?
-    
-    var allUsers: [UserInfo] = []
-    
-    var friendManager = FriendManager()
-    
-    var searchUser: UserInfo?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "好友邀請"
+        title = "好友邀請"
+        
+        fetchUserData()
 
         applyTableView.register(
             UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self))
         
         inputEmailTextField.delegate = self
-        
-        fetchUserData()
         
         userInfoView.isHidden = true
         
@@ -143,31 +94,29 @@ class ApplyFriendViewController: BaseViewController {
     
     func fetchFriendInfoData(friendList: [String]) {
         
-        friendManager.fetchFriendInfoData(
-            friendList: friendList,
-            completion: { [weak self] result in
+        friendManager.fetchFriendInfoData(friendList: friendList) { [weak self] result in
                 
-                guard let strongSelf = self else { return }
+            guard let strongSelf = self else { return }
+            
+            switch result {
                 
-                switch result {
+            case .success(let friendsInfo):
+                
+                if friendsInfo.count == friendList.count {
                     
-                case .success(let friendsInfo):
-                    
-                    if friendsInfo.count == friendList.count {
-                        
-                        strongSelf.friendsInfo = friendsInfo
-                        
-                    }
-                    
-                case .failure(let error):
-                    
-                    print(error)
-                    
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    strongSelf.friendsInfo = friendsInfo
                     
                 }
+                
+            case .failure(let error):
+                
+                print(error)
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
+            }
             
-        })
+        }
         
     }
     
@@ -195,7 +144,7 @@ class ApplyFriendViewController: BaseViewController {
                         
                     }
                     
-                    if friend.blockadeList.filter({ $0 == userID }).count > 0 {
+                    if friend.blockadeList.filter({ $0 == userID }).isEmpty {
                         
                         strongSelf.hintTextLabel.text = SearchFriendStatus.noSearch.title
                         
@@ -217,15 +166,9 @@ class ApplyFriendViewController: BaseViewController {
     
     func popupConfirmApplyPage() {
         
-        guard let viewController = UIStoryboard
-            .chat
-            .instantiateViewController(
-                withIdentifier: String(describing: ConfirmApplyViewController.self)
-                ) as? ConfirmApplyViewController else {
-
-                    return
-
-                }
+        guard let viewController = UIStoryboard.chat.instantiateViewController(
+            withIdentifier: String(describing: ConfirmApplyViewController.self)
+        ) as? ConfirmApplyViewController else { return }
         
         guard let ownFriend = ownFriend else { return }
         
@@ -252,6 +195,7 @@ class ApplyFriendViewController: BaseViewController {
                         strongSelf.friendsInfo.remove(at: index)
                         
                     }
+                    
                 }
                 
                 strongSelf.applyTableView.reloadData()
@@ -294,7 +238,7 @@ class ApplyFriendViewController: BaseViewController {
         
         guard let inputEmail = inputEmailTextField.text else { return }
         
-        if allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() }).count > 0 {
+        if allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() }).isEmpty {
             
             userInfoView.isHidden = true
             
@@ -320,19 +264,19 @@ class ApplyFriendViewController: BaseViewController {
                 
                 hintTextLabel.text = SearchFriendStatus.yourself.title
                 
-            } else if ownFriend.blockadeList.filter({ $0 == searchUser.userID }).count > 0 {
+            } else if ownFriend.blockadeList.filter({ $0 == searchUser.userID }).isEmpty {
                 
                 hintTextLabel.text = SearchFriendStatus.blocked.title
                 
-            } else if ownFriend.friendList.filter({ $0 == searchUser.userID }).count > 0 {
+            } else if ownFriend.friendList.filter({ $0 == searchUser.userID }).isEmpty {
                 
                 hintTextLabel.text = SearchFriendStatus.friendship.title
                 
-            } else if ownFriend.deliveryList.filter({ $0 == searchUser.userID }).count > 0 {
+            } else if ownFriend.deliveryList.filter({ $0 == searchUser.userID }).isEmpty {
                 
                 hintTextLabel.text = SearchFriendStatus.invitaion.title
                 
-            } else if ownFriend.applyList.filter({ $0 == searchUser.userID }).count > 0 {
+            } else if ownFriend.applyList.filter({ $0 == searchUser.userID }).isEmpty {
                 
                 hintTextLabel.text = SearchFriendStatus.applied.title
                 
@@ -368,9 +312,9 @@ class ApplyFriendViewController: BaseViewController {
             
             userInfoView.isHidden = true
             
-            searchUser = nil
-            
             inputEmailTextField.text = nil
+            
+            searchUser = nil
             
             friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
             
@@ -382,12 +326,6 @@ class ApplyFriendViewController: BaseViewController {
 
 extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return friendsInfo.count
@@ -397,16 +335,12 @@ extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: FriendListTableViewCell.self),
-            for: indexPath
-        )
+            withIdentifier: String(describing: FriendListTableViewCell.self), for: indexPath)
         
         guard let cell = cell as? FriendListTableViewCell else { return cell }
         
         cell.showFriendInfo(
-            friendInfo: friendsInfo[indexPath.row],
-            blockadeList: ownFriend?.blockadeList ?? [],
-            deleteAccount: false)
+            friendInfo: friendsInfo[indexPath.row], blockadeList: ownFriend?.blockadeList ?? [], deleteAccount: false)
         
         cell.selectionStyle = .none
         
