@@ -144,7 +144,7 @@ class ApplyFriendViewController: BaseViewController {
                         
                     }
                     
-                    if friend.blockadeList.filter({ $0 == userID }).isEmpty {
+                    if !friend.blockadeList.filter({ $0 == userID }).isEmpty {
                         
                         strongSelf.hintTextLabel.text = SearchFriendStatus.noSearch.title
                         
@@ -238,20 +238,22 @@ class ApplyFriendViewController: BaseViewController {
         
         guard let inputEmail = inputEmailTextField.text else { return }
         
-        if allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() }).isEmpty {
+        let filterUsers = allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() })
+        
+        if !filterUsers.isEmpty {
             
             userInfoView.isHidden = true
             
-            searchUser = allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() })[0]
+            searchUser = filterUsers[0]
+
+            fetchData(friendID: filterUsers[0].userID)
             
-            fetchData(friendID: searchUser?.userID ?? "")
-            
-            handleFriendStatus(searchUser: searchUser)
-            
+            handleFriendStatus(searchUser: filterUsers[0])
+
         } else {
-            
+
             hintTextLabel.text = SearchFriendStatus.noSearch.title
-            
+
         }
         
     }
@@ -264,19 +266,19 @@ class ApplyFriendViewController: BaseViewController {
                 
                 hintTextLabel.text = SearchFriendStatus.yourself.title
                 
-            } else if ownFriend.blockadeList.filter({ $0 == searchUser.userID }).isEmpty {
+            } else if !ownFriend.blockadeList.filter({ $0 == searchUser.userID }).isEmpty {
                 
                 hintTextLabel.text = SearchFriendStatus.blocked.title
                 
-            } else if ownFriend.friendList.filter({ $0 == searchUser.userID }).isEmpty {
+            } else if !ownFriend.friendList.filter({ $0 == searchUser.userID }).isEmpty {
                 
                 hintTextLabel.text = SearchFriendStatus.friendship.title
                 
-            } else if ownFriend.deliveryList.filter({ $0 == searchUser.userID }).isEmpty {
+            } else if !ownFriend.deliveryList.filter({ $0 == searchUser.userID }).isEmpty {
                 
                 hintTextLabel.text = SearchFriendStatus.invitaion.title
                 
-            } else if ownFriend.applyList.filter({ $0 == searchUser.userID }).isEmpty {
+            } else if !ownFriend.applyList.filter({ $0 == searchUser.userID }).isEmpty {
                 
                 hintTextLabel.text = SearchFriendStatus.applied.title
                 

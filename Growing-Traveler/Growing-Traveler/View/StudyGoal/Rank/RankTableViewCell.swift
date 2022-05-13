@@ -21,6 +21,8 @@ class RankTableViewCell: UITableViewCell {
     
     @IBOutlet weak var friendStatusLabel: UILabel!
     
+    @IBOutlet weak var userInfoButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

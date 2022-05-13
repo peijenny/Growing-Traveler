@@ -358,7 +358,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gc-OT-XL4">
-                                <rect key="frame" x="20" y="234" width="374" height="438"/>
+                                <rect key="frame" x="20" y="257.5" width="374" height="391"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc5-eb-7GL">
                                         <rect key="frame" x="318" y="16" width="40" height="40"/>
@@ -437,8 +437,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0XE-c7-MDa">
-                                        <rect key="frame" x="16" y="385" width="342" height="37"/>
+                                        <rect key="frame" x="16" y="385" width="342" height="0.0"/>
                                         <color key="backgroundColor" red="0.54117647058823526" green="0.73333333333333328" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="g35-hF-UJO"/>
+                                        </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="檢舉使用者發佈內容">
@@ -466,7 +469,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Dc5-eb-7GL" secondAttribute="trailing" constant="16" id="N1g-Z8-DK5"/>
                                     <constraint firstItem="VZO-tJ-eLm" firstAttribute="centerX" secondItem="0gc-OT-XL4" secondAttribute="centerX" id="VAf-h1-YoU"/>
                                     <constraint firstItem="wKC-h4-xqD" firstAttribute="top" secondItem="xXR-5a-NV9" secondAttribute="bottom" constant="16" id="VNX-iq-hp5"/>
-                                    <constraint firstAttribute="bottom" secondItem="0XE-c7-MDa" secondAttribute="bottom" constant="16" id="YIu-Pr-VxB"/>
+                                    <constraint firstAttribute="bottom" secondItem="0XE-c7-MDa" secondAttribute="bottom" constant="6" id="YIu-Pr-VxB"/>
                                     <constraint firstAttribute="trailing" secondItem="vtE-T3-geD" secondAttribute="trailing" constant="16" id="bxw-2T-j67"/>
                                     <constraint firstItem="Dc5-eb-7GL" firstAttribute="top" secondItem="0gc-OT-XL4" secondAttribute="top" constant="16" id="eAR-rV-Umw"/>
                                     <constraint firstItem="xXR-5a-NV9" firstAttribute="leading" secondItem="0gc-OT-XL4" secondAttribute="leading" constant="16" id="fij-pk-zXb"/>

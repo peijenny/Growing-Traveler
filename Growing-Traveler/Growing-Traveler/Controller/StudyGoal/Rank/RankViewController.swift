@@ -17,11 +17,6 @@ class RankViewController: UIViewController {
             rankTableView.delegate = self
             
             rankTableView.dataSource = self
-
-            let longPressRecognizer = UILongPressGestureRecognizer(
-                target: self, action: #selector(longPressed(sender:)))
-            
-            rankTableView.addGestureRecognizer(longPressRecognizer)
             
         }
         
@@ -144,34 +139,6 @@ class RankViewController: UIViewController {
         
     }
     
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
-        
-        if sender.state == UIGestureRecognizer.State.began {
-            
-            let touchPoint = sender.location(in: self.rankTableView)
-            
-            if let indexPath = rankTableView.indexPathForRow(at: touchPoint) {
-                
-                guard let viewController = UIStoryboard.chat.instantiateViewController(
-                    withIdentifier: String(describing: UserInfoViewController.self)
-                ) as? UserInfoViewController else { return }
-                
-                viewController.deleteAccount = false
-                
-                viewController.selectUserID = usersInfo[indexPath.row].userID
-                
-                viewController.blockContentType = BlockContentType.user.title
-                
-                self.view.addSubview(viewController.view)
-
-                self.addChild(viewController)
-                
-            }
-            
-        }
-        
-    }
-    
     func registerTableViewCell() {
         
         rankTableView.register(
@@ -200,10 +167,47 @@ extension RankViewController: UITableViewDelegate, UITableViewDataSource {
         cell.showRankData(
             rankNumber: indexPath.row + 1, userInfo: usersInfo[indexPath.row], blockadeList: blockadeList)
         
+        cell.userInfoButton.addTarget(self, action: #selector(showUserInfoButton), for: .touchUpInside)
+        
         cell.selectionStyle = .none
         
         return cell
         
+    }
+    
+    @objc func showUserInfoButton(sender: UIButton) {
+     
+        let point = sender.convert(CGPoint.zero, to: rankTableView)
+
+        if let indexPath = rankTableView.indexPathForRow(at: point) {
+            
+            guard let viewController = UIStoryboard.chat.instantiateViewController(
+                withIdentifier: String(describing: UserInfoViewController.self)
+            ) as? UserInfoViewController else { return }
+            
+            viewController.deleteAccount = false
+            
+            viewController.selectUserID = usersInfo[indexPath.row].userID
+            
+            viewController.blockContentType = BlockContentType.user.title
+            
+            viewController.getFriendStatus = { [weak self] isBlock in
+                
+                guard let strongSelf = self else { return }
+                
+                if isBlock {
+                    
+                    strongSelf.listenUsersInfoData()
+                    
+                }
+                
+            }
+            
+            self.view.addSubview(viewController.view)
+
+            self.addChild(viewController)
+            
+        }
     }
     
 }
