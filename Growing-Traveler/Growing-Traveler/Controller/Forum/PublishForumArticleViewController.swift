@@ -72,10 +72,7 @@ class PublishForumArticleViewController: BaseViewController {
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done,
-            target: self,
-            action: #selector(submitButton)
-        )
+            barButtonSystemItem: .done, target: self, action: #selector(submitButton))
         
         setTableView()
 
@@ -188,10 +185,10 @@ class PublishForumArticleViewController: BaseViewController {
         publishArticleTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             publishArticleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             publishArticleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -80.0)
+            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -140.0)
         ])
         
         publishArticleTableView.register(

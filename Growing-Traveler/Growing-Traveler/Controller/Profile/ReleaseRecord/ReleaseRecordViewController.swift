@@ -73,7 +73,9 @@ class ReleaseRecordViewController: UIViewController {
     func setNavigationItem() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self, action: #selector(addForumArticle))
+            image: UIImage.asset(.create), style: .plain, target: self, action: #selector(addForumArticle))
+        
+        navigationItem.backButtonTitle = ""
         
     }
     

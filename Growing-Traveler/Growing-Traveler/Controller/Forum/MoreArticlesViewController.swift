@@ -210,7 +210,6 @@ class MoreArticlesViewController: UIViewController {
         
         moreArticlesTableView.dataSource = self
         
-        
     }
 
 }
