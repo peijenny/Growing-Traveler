@@ -47,11 +47,11 @@ enum ReportContentType {
         
         switch self {
         
-        case .chat: return "聊天室內容檢舉"
+        case .chat: return "檢舉聊天內容"
             
-        case .article: return "討論區文章檢舉"
+        case .article: return "檢舉此文章"
             
-        case .message: return "討論區留言檢舉"
+        case .message: return "檢舉此留言"
             
         }
         

@@ -58,6 +58,10 @@ class UserInfoViewController: UIViewController {
             reportPublishedButton.isHidden = true
 
         }
+        
+        blockUserButton.setTitle(blockContentType ?? "", for: .normal)
+        
+        reportPublishedButton.setTitle(reportContentType ?? "", for: .normal)
 
     }
     
