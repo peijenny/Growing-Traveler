@@ -22,31 +22,29 @@ class SignInViewController: BaseViewController {
         }
         
     }
-   
-    var signType = String()
-    
-    var userManager = UserManager()
     
     var friendManager = FriendManager()
     
     var errorManager = ErrorManager()
     
-    var isCheck = false
+    var userManager = UserManager()
     
     var userImageLink: String?
+    
+    var signType = String()
+    
+    var isCheck = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         signTableView.register(
             UINib(nibName: String(describing: SignInTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: SignInTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: SignInTableViewCell.self))
         
         signTableView.register(
             UINib(nibName: String(describing: SignUpTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: SignUpTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: SignUpTableViewCell.self))
         
     }
 
@@ -59,13 +57,7 @@ class SignInViewController: BaseViewController {
 }
 
 extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
         return 1
@@ -74,9 +66,11 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        var cell = UITableViewCell()
+        
         if signType == SignType.signIn.title {
             
-            let cell = tableView.dequeueReusableCell(
+            cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: SignInTableViewCell.self), for: indexPath)
             
             guard let cell = cell as? SignInTableViewCell else { return cell }
@@ -93,13 +87,9 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.signInButton.addTarget(self, action: #selector(signInWithEmail), for: .touchUpInside)
             
-            cell.selectionStyle = .none
-            
-            return cell
-            
         } else {
             
-            let cell = tableView.dequeueReusableCell(
+            cell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: SignUpTableViewCell.self), for: indexPath)
             
             guard let cell = cell as? SignUpTableViewCell else { return cell }
@@ -124,11 +114,11 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.uploadUserPhotoButton.addTarget(self, action: #selector(uploadUserPhoto), for: .touchUpInside)
             
-            cell.selectionStyle = .none
-            
-            return cell
-            
         }
+        
+        cell.selectionStyle = .none
+        
+        return cell
         
     }
     
@@ -167,6 +157,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                             
                             print("登入錯誤，於 firebase 無法找到配對的帳號！")
                             
+                            HUD.flash(.labeledError(title: "登入失敗！", subtitle: "無法找到配對的帳號"))
+                            
                             return
                             
                         }
@@ -185,8 +177,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 self.view.window?.rootViewController?.viewWillAppear(true)
                 
-                self.view.window?.rootViewController?
-                .dismiss(animated: true, completion: nil)
+                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                 
             }
             
@@ -213,6 +204,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                             
                             print("註冊錯誤，於 firebase 無法找到配對的帳號！")
                             
+                            HUD.flash(.labeledError(title: "註冊失敗！", subtitle: "無法找到配對的帳號"))
+                            
                             return
                             
                         }
@@ -233,26 +226,14 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
                 let today = dateFormatter.string(from: Date())
                 
-                let userInfo = UserInfo(
-                    userID: user.uid,
-                    userName: signUpContent.userName,
-                    userEmail: signUpContent.email,
-                    userPhoto: signUpContent.userPhotoLink,
-                    userPhone: "",
-                    signInType: "email",
-                    achievement: Achievement(
-                    experienceValue: 0, completionGoals: [], loginDates: [today]),
-                    certification: []
-                )
+                let userInfo = UserInfo(userID: user.uid, userName: signUpContent.userName,
+                    userEmail: signUpContent.email, userPhoto: signUpContent.userPhotoLink, userPhone: "", signInType: "email",
+                    achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [today]), certification: [])
                 
                 self.userManager.addData(user: userInfo)
                 
-                let friend = Friend(
-                    userID: user.uid,
-                    userName: signUpContent.userName,
-                    friendList: [], blockadeList: [],
-                    applyList: [], deliveryList: []
-                )
+                let friend = Friend(userID: user.uid, userName: signUpContent.userName,
+                    friendList: [], blockadeList: [], applyList: [], deliveryList: [])
                 
                 self.friendManager.updateData(friend: friend)
                 
@@ -260,8 +241,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
                 self.view.window?.rootViewController?.viewWillAppear(true)
                 
-                self.view.window?.rootViewController?
-                .dismiss(animated: true, completion: nil)
+                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
 
             }
             

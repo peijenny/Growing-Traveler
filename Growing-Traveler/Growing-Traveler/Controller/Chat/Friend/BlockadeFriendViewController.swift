@@ -12,18 +12,18 @@ class BlockadeFriendViewController: UIViewController {
     
     var blockadeTableView = UITableView()
     
+    var friendManager = FriendManager()
+    
     var userManager = UserManager()
     
     var usersInfo: [UserInfo] = []
-    
-    var friendManager = FriendManager()
     
     var friend: Friend?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "封鎖列表"
+        title = "封鎖列表"
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
@@ -145,8 +145,7 @@ class BlockadeFriendViewController: UIViewController {
         
         blockadeTableView.register(
             UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self))
 
         blockadeTableView.delegate = self
         
@@ -157,12 +156,6 @@ class BlockadeFriendViewController: UIViewController {
 }
 
 extension BlockadeFriendViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -178,7 +171,7 @@ extension BlockadeFriendViewController: UITableViewDelegate, UITableViewDataSour
         
         let userInfo = usersInfo.filter({ $0.userID == friend?.blockadeList[indexPath.row] })
         
-        if userInfo.count != 0 {
+        if !userInfo.isEmpty {
             
             cell.showBlockadeUserInfo(friendInfo: userInfo[0])
             

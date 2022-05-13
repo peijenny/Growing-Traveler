@@ -15,12 +15,12 @@ class PublishNoteViewController: BaseViewController {
     @IBOutlet weak var modifyTimeLabel: UILabel!
     
     @IBOutlet weak var noteTextView: UITextView!
-
-    var imageLink: String?
+    
+    var userManager = UserManager()
     
     var modifyNote: Note?
     
-    var userManager = UserManager()
+    var imageLink: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,7 @@ class PublishNoteViewController: BaseViewController {
         
         modifyTimeLabel.text = formatter.string(from: createTime)
         
-        setNavigationItems()
+        setNavigationItem()
         
         noteTextView.layer.borderColor = UIColor.hexStringToUIColor(hex: "9C8F96").cgColor
         
@@ -81,12 +81,10 @@ class PublishNoteViewController: BaseViewController {
         
     }
     
-    func setNavigationItems() {
+    func setNavigationItem() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done, target: self,
-            action: #selector(checkNote)
-        )
+            barButtonSystemItem: .done, target: self, action: #selector(checkNote))
         
     }
     
@@ -134,8 +132,7 @@ class PublishNoteViewController: BaseViewController {
     
     func checkFullIn() {
         
-        guard let inputTitle = noteTitleTextField.text,
-              noteTitleTextField.text != "" else {
+        guard let inputTitle = noteTitleTextField.text, noteTitleTextField.text != "" else {
             
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
@@ -161,9 +158,7 @@ class PublishNoteViewController: BaseViewController {
             }
             
             let noteContent = ArticleContent(
-                orderID: index,
-                contentType: noteType,
-                contentText: inputContentArray[index])
+                orderID: index, contentType: noteType, contentText: inputContentArray[index])
             
             noteContents.append(noteContent)
             
@@ -171,13 +166,12 @@ class PublishNoteViewController: BaseViewController {
         
         if modifyNote == nil {
             
+            let noteID = userManager.database.document().documentID
+            
+            let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
+            
             let note = Note(
-                userID: userID,
-                noteID: userManager.database.document().documentID,
-                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-                noteTitle: inputTitle,
-                content: noteContents
-            )
+                userID: userID, noteID: noteID, createTime: createTime, noteTitle: inputTitle, content: noteContents)
             
             HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
             
@@ -200,8 +194,7 @@ class PublishNoteViewController: BaseViewController {
             userManager.updateUserNoteData(note: modifyNote)
             
             navigationController?.popToViewController(
-                navigationController?.viewControllers[1] ?? UIViewController(),
-                animated: true)
+                navigationController?.viewControllers[1] ?? UIViewController(), animated: true)
             
         }
         
@@ -213,14 +206,14 @@ class PublishNoteViewController: BaseViewController {
         
         let data = try? Data(contentsOf: imageURL)
         
-        // 建立圖檔
+        // create image
         let attachment = NSTextAttachment()
         
         guard let image = UIImage(data: data ?? Data()) else { return }
         
         attachment.image = image
 
-        // 設定圖檔的大小
+        // setting image size
         let imageAspectRatio = CGFloat(image.size.height / image.size.width)
 
         let imageWidth = noteTextView.frame.width - 2 * CGFloat(0)
@@ -229,10 +222,10 @@ class PublishNoteViewController: BaseViewController {
 
         attachment.bounds = CGRect(x: 0, y: 0, width: imageWidth * 0.6, height: imageHeight * 0.6)
         
-        // 取得 textView 所有的內容，轉成可以修改的
+        // get all taxtView content, and change to can be edit
         let mutableStr = NSMutableAttributedString(attributedString: noteTextView.attributedText)
         
-        // 取得目前游標的位置
+        // get now location of the cursor
         let selectedRange = noteTextView.selectedRange
         
         mutableStr.insert(NSAttributedString(string: "\n\0\(imageLink)\0\n\n"), at: selectedRange.location)
@@ -261,8 +254,7 @@ class PublishNoteViewController: BaseViewController {
             
         } else {
             
-            contentArray = noteTextView
-                .attributedText.string.split(separator: "\0").map({ String($0) })
+            contentArray = noteTextView.attributedText.string.split(separator: "\0").map({ String($0) })
             
         }
         
@@ -274,7 +266,8 @@ class PublishNoteViewController: BaseViewController {
 
 extension PublishNoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 

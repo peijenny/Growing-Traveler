@@ -210,52 +210,12 @@ class MoreArticlesViewController: UIViewController {
         
         moreArticlesTableView.dataSource = self
         
-        let longPressRecognizer = UILongPressGestureRecognizer(
-            target: self, action: #selector(longPressed(sender:)))
-        
-        moreArticlesTableView.addGestureRecognizer(longPressRecognizer)
-        
-    }
-    
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
-        
-        if sender.state == UIGestureRecognizer.State.began {
-            
-            let touchPoint = sender.location(in: self.moreArticlesTableView)
-            
-            if let indexPath = moreArticlesTableView.indexPathForRow(at: touchPoint) {
-                
-                // 彈跳出 User 視窗
-                guard let viewController = UIStoryboard
-                    .chat
-                    .instantiateViewController(
-                    withIdentifier: String(describing: UserInfoViewController.self)
-                    ) as? UserInfoViewController else { return }
-                
-                viewController.deleteAccount = false
-                
-                viewController.selectUserID = forumArticles[indexPath.row].userID
-                
-                self.view.addSubview(viewController.view)
-
-                self.addChild(viewController)
-                
-            }
-            
-        }
-        
     }
 
 }
 
 extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return forumArticles.count
@@ -279,14 +239,57 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
             
             let userName = userInfo[0].userName
             
-            cell.showMoreArticles(
-                forumArticle: forumArticles[indexPath.row],
-                userName: userName
-            )
+            cell.showMoreArticles(forumArticle: forumArticles[indexPath.row], userName: userName)
             
         }
+
+        cell.userInfoButton.addTarget(self, action: #selector(showUserInfoButton), for: .touchUpInside)
         
         return cell
+        
+    }
+    
+    @objc func showUserInfoButton(sender: UIButton) {
+        
+        let point = sender.convert(CGPoint.zero, to: moreArticlesTableView)
+
+        if let indexPath = moreArticlesTableView.indexPathForRow(at: point) {
+            
+            guard let viewController = UIStoryboard.chat.instantiateViewController(
+                withIdentifier: String(describing: UserInfoViewController.self)
+            ) as? UserInfoViewController else { return }
+            
+            viewController.deleteAccount = false
+            
+            viewController.selectUserID = forumArticles[indexPath.row].userID
+            
+            viewController.articleID = forumArticles[indexPath.row].id
+            
+            viewController.reportContentType = ReportContentType.article.title
+            
+            viewController.blockContentType = BlockContentType.article.title
+            
+            viewController.getFriendStatus = { [weak self] isBlock in
+                
+                guard let strongSelf = self else { return }
+                
+                if isBlock {
+                    
+                    strongSelf.forumArticles = strongSelf.forumArticles.filter({
+                        
+                        $0.userID != strongSelf.forumArticles[indexPath.row].userID
+                        
+                    })
+                    
+                }
+                
+            }
+            
+            self.view.addSubview(viewController.view)
+
+            self.addChild(viewController)
+            
+        }
         
     }
     

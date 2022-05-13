@@ -8,26 +8,6 @@
 import UIKit
 import WebKit
 
-enum PrivacyPolicy {
-    
-    case privacyPolicy
-    
-    case eula
-    
-    var title: String {
-        
-        switch self {
-            
-        case .privacyPolicy: return "隱私權政策"
-            
-        case .eula: return "最終用戶許可協議"
-            
-        }
-        
-    }
-    
-}
-
 class PrivacyPolicyViewController: UIViewController {
 
     @IBOutlet var webView: WKWebView!

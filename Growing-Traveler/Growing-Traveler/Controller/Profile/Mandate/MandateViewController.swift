@@ -8,35 +8,19 @@
 import UIKit
 import PKHUD
 
-enum MandateType {
-    
-    case login
-    
-    case friends
-    
-    case completion
-    
-    var title: String {
-        
-        switch self {
-            
-        case .login: return "login"
-            
-        case .friends: return "friends"
-            
-        case .completion: return "completion"
-            
-        }
-        
-    }
-    
-}
-
 class MandateViewController: UIViewController {
     
     var mandateTableView = UITableView()
     
     var mandateManager = MandateManager()
+    
+    var friendManager = FriendManager()
+    
+    var userManager = UserManager()
+    
+    var user: UserInfo?
+    
+    var friend: Friend?
     
     var mandates: [Mandate] = [] {
         
@@ -58,24 +42,16 @@ class MandateViewController: UIViewController {
         
     }
     
-    var userManager = UserManager()
-    
-    var user: UserInfo?
-    
-    var friendManager = FriendManager()
-    
-    var friend: Friend?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setBackgroundView()
-        
-        setTableView()
 
         title = "學習成就"
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        setBackgroundView()
+        
+        setTableView()
         
         fetchData()
         
@@ -123,8 +99,7 @@ class MandateViewController: UIViewController {
     
     func fetchFriendData() {
         
-        friendManager.fetchFriendListData(
-        fetchUserID: userID) { [weak self] result in
+        friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -198,7 +173,7 @@ class MandateViewController: UIViewController {
             
             case .success(let mandates):
                 
-                if mandates.count == 0 {
+                if mandates.isEmpty {
                  
                     strongSelf.mandateManager.addData(mandates: strongSelf.mandates)
                     
@@ -288,8 +263,7 @@ class MandateViewController: UIViewController {
         
         mandateTableView.register(
             UINib(nibName: String(describing: MandateTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: MandateTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: MandateTableViewCell.self))
 
         mandateTableView.delegate = self
         
@@ -316,8 +290,7 @@ extension MandateViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: MandateTableViewCell.self),
-            for: indexPath)
+            withIdentifier: String(describing: MandateTableViewCell.self), for: indexPath)
         
         guard let cell = cell as? MandateTableViewCell else { return cell }
         

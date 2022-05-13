@@ -26,18 +26,6 @@ class AnalysisViewController: UIViewController {
     
     @IBOutlet weak var analysisBackground: UIView!
     
-    var sevenDaysArray: [String] = []
-    
-    var calculateStudyTime: [Double] = [] {
-        
-        didSet {
-            
-            analysisTableView.reloadData()
-            
-        }
-        
-    }
-    
     var analysisManager = AnalysisManager()
     
     var categoryManager = CategoryManager()
@@ -70,10 +58,7 @@ class AnalysisViewController: UIViewController {
         
     }
     
-    var feedback = Feedback(
-        title: "",
-        timeLimit: TimeLimit(lower: 0, upper: 0),
-        comment: "")
+    var feedback = Feedback(title: "", timeLimit: TimeLimit(lower: 0, upper: 0), comment: "")
     
     let day = 24 * 60 * 60
     
@@ -83,23 +68,32 @@ class AnalysisViewController: UIViewController {
     
     var experienceValue = Int()
     
+    var sevenDaysArray: [String] = []
+    
+    var calculateStudyTime: [Double] = [] {
+        
+        didSet {
+            
+            analysisTableView.reloadData()
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         analysisTableView.register(
             UINib(nibName: String(describing: AnalysisBarChatTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: AnalysisBarChatTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: AnalysisBarChatTableViewCell.self))
         
         analysisTableView.register(
             UINib(nibName: String(describing: AnalysisPieChartTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: AnalysisPieChartTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: AnalysisPieChartTableViewCell.self))
         
         analysisTableView.register(
             UINib(nibName: String(describing: AnalysisContentTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: AnalysisContentTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: AnalysisContentTableViewCell.self))
         
         selectSegmentedControl.addTarget(
             self, action: #selector(selectIndexChanged(_:)), for: .valueChanged)
@@ -109,15 +103,6 @@ class AnalysisViewController: UIViewController {
         fetchStudyGoalData()
         
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        fetchFeedbackData()
-//
-//        fetchStudyGoalData()
-//
-//    }
     
     @objc func selectIndexChanged(_ send: UISegmentedControl) {
         
@@ -197,11 +182,7 @@ class AnalysisViewController: UIViewController {
         
         spendStudyItem = CalculateSpendStudyItem(itemsTime: [], itemsTitle: [])
 
-        let finishedStudyGoals = studyGoals.filter({
-            
-            $0.studyItems.allSatisfy({ $0.isCompleted == true })
-
-        })
+        let finishedStudyGoals = studyGoals.filter({ $0.studyItems.allSatisfy({ $0.isCompleted == true }) })
         
         for finishedIndex in 0..<finishedStudyGoals.count {
             
@@ -216,20 +197,11 @@ class AnalysisViewController: UIViewController {
             }
             
             finishedCalculates.append(CalculatePie(
-                    totalMinutes: Double(totalMinutes),
-                    categoryItem: finishedStudyGoals[finishedIndex].category))
+                totalMinutes: Double(totalMinutes), categoryItem: finishedStudyGoals[finishedIndex].category))
             
         }
         
-        if finishedCalculates.count == 0 {
-            
-            analysisBackground.isHidden = false
-            
-        } else {
-            
-            analysisBackground.isHidden = true
-            
-        }
+        analysisBackground.isHidden = (finishedCalculates.isEmpty) ? false : true
         
         var allTime: Double = 0
         
@@ -402,15 +374,7 @@ class AnalysisViewController: UIViewController {
             
         }
         
-        if calculates.count == 0 {
-            
-            analysisBackground.isHidden = false
-            
-        } else {
-            
-            analysisBackground.isHidden = true
-            
-        }
+        analysisBackground.isHidden = (calculates.isEmpty) ? false : true
         
         calculateSevenDayStudyTime()
         
@@ -427,8 +391,6 @@ class AnalysisViewController: UIViewController {
             totalStudyTime += calculateStudyTime[index]
             
         }
-        
-//        experienceValue = Int(totalStudyTime * 50)
         
         experienceValue = finishItem * 50
         
@@ -515,12 +477,6 @@ class AnalysisViewController: UIViewController {
 
 extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 2
@@ -529,6 +485,8 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        var cell = UITableViewCell()
+        
         guard let select = selectSegmentedControl.titleForSegment(
             at: selectSegmentedControl.selectedSegmentIndex) else { return UITableViewCell() }
          
@@ -536,39 +494,28 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
             
             if select == "近七天學習時間" {
                 
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: String(describing: AnalysisBarChatTableViewCell.self),
-                    for: indexPath)
+                cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: AnalysisBarChatTableViewCell.self), for: indexPath)
 
                 guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
 
                 cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
-                
-                cell.selectionStyle = .none
 
-                return cell
-                
             } else {
                 
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: String(describing: AnalysisPieChartTableViewCell.self),
-                    for: indexPath)
+                cell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: AnalysisPieChartTableViewCell.self), for: indexPath)
 
                 guard let cell = cell as? AnalysisPieChartTableViewCell else { return cell }
                 
                 cell.updateChatsData(spendStudyItem: spendStudyItem)
                 
-                cell.selectionStyle = .none
-                
-                return cell
-                
             }
             
         } else {
             
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: AnalysisContentTableViewCell.self),
-                for: indexPath)
+            cell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: AnalysisContentTableViewCell.self), for: indexPath)
 
             guard let cell = cell as? AnalysisContentTableViewCell else { return cell }
             
@@ -582,11 +529,11 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
                 
             }
             
-            cell.selectionStyle = .none
-            
-            return cell
-            
         }
+        
+        cell.selectionStyle = .none
+
+        return cell
         
     }
     

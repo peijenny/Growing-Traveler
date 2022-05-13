@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import JXPhotoBrowser
 import PKHUD
 
 class PublishForumArticleViewController: BaseViewController {
@@ -73,10 +72,7 @@ class PublishForumArticleViewController: BaseViewController {
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done,
-            target: self,
-            action: #selector(submitButton)
-        )
+            barButtonSystemItem: .done, target: self, action: #selector(submitButton))
         
         setTableView()
 
@@ -140,15 +136,13 @@ class PublishForumArticleViewController: BaseViewController {
             
             if modifyForumArticle == nil {
                 
+                let forumID = forumArticleManager.database.document().documentID
+                
+                let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
+                
                 let forumArticle = ForumArticle(
-                    id: forumArticleManager.database.document().documentID,
-                    userID: userID,
-                    createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-                    title: inputTitle,
-                    category: selectCategoryItem,
-                    content: articleContents,
-                    forumType: forumType
-                )
+                    id: forumID, userID: userID, createTime: createTime, title: inputTitle,
+                    category: selectCategoryItem, content: articleContents, forumType: forumType)
                 
                 forumArticleManager.addData(forumArticle: forumArticle)
                 
@@ -166,8 +160,7 @@ class PublishForumArticleViewController: BaseViewController {
                 
                 modifyForumArticle.forumType = forumType
                 
-                forumArticleManager.updateArticleData(
-                forumArticle: modifyForumArticle)
+                forumArticleManager.updateArticleData(forumArticle: modifyForumArticle)
                 
                 HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
                 
@@ -192,10 +185,10 @@ class PublishForumArticleViewController: BaseViewController {
         publishArticleTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             publishArticleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             publishArticleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -80.0)
+            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -140.0)
         ])
         
         publishArticleTableView.register(
@@ -213,11 +206,6 @@ class PublishForumArticleViewController: BaseViewController {
 
 extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 1
@@ -226,9 +214,7 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: PublishArticleTableViewCell.self),
-            for: indexPath
-        )
+            withIdentifier: String(describing: PublishArticleTableViewCell.self), for: indexPath)
 
         guard let cell = cell as? PublishArticleTableViewCell else { return cell }
         
@@ -286,8 +272,7 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
             inputTitle = cell.titleTextField.text
             
             forumType = cell.typeSegmentedControl.titleForSegment(
-                at: cell.typeSegmentedControl.selectedSegmentIndex
-            )
+                at: cell.typeSegmentedControl.selectedSegmentIndex)
             
             if cell.checkInputContent() != [] {
                 
@@ -334,8 +319,7 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
             }
 
         } else {
-            // Fallback on earlier versions
-
+            
             navController.modalPresentationStyle = .fullScreen
 
         }
@@ -348,7 +332,9 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
 
 extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 

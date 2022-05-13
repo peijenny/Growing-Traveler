@@ -8,34 +8,6 @@
 import UIKit
 import PKHUD
 
-enum FeatureType {
-    
-    case mandate
-    
-    case analysis
-    
-    case release
-    
-    case license
-    
-    var title: String {
-        
-        switch self {
-            
-        case .mandate: return "學習成就"
-            
-        case .analysis: return "學習分析"
-            
-        case .release: return "發佈文章紀錄"
-            
-        case .license: return "個人認證"
-            
-        }
-        
-    }
-    
-}
-
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var profileView: ProfileView!
@@ -44,22 +16,20 @@ class ProfileViewController: UIViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Int, FeatureType>?
     
-    let featureList: [FeatureType] = [.mandate, .analysis, .release, .license]
-    
-//    let featureImage: [ImageAsset] = [.specialDeals, .vision, .blogging, .meditation]
-    
-    let featureImage: [ImageAsset] = [.undrawTask, .undrawChart, .undrawFAQ, .undrawExperience]
-    
     var userManager = UserManager()
     
     var userInfo: UserInfo?
+    
+    let featureList: [FeatureType] = [.mandate, .analysis, .release, .license]
+    
+    let featureImage: [ImageAsset] = [.undrawTask, .undrawChart, .undrawFAQ, .undrawExperience]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureDataSource()
         
-        setNavigationBar()
+        setNavigationItems()
         
     }
     
@@ -72,13 +42,11 @@ class ProfileViewController: UIViewController {
             
             tabBarController?.selectedIndex = 0
             
-            print("TEST 1")
-            
         }
         
     }
     
-    func setNavigationBar() {
+    func setNavigationItems() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage.asset(.edit), style: .plain, target: self, action: #selector(setProfileButton))
@@ -157,7 +125,7 @@ class ProfileViewController: UIViewController {
             forCellWithReuseIdentifier: String(describing: FeatureCollectionViewCell.self))
         
         dataSource = UICollectionViewDiffableDataSource.init(
-        collectionView: featureCollectionView, cellProvider: { collectionView, indexPath, item in
+        collectionView: featureCollectionView) { collectionView, indexPath, item in
             
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: String(describing: FeatureCollectionViewCell.self), for: indexPath)
@@ -170,7 +138,7 @@ class ProfileViewController: UIViewController {
             
             return cell
             
-        })
+        }
         
         featureCollectionView.dataSource = dataSource
         
@@ -211,12 +179,6 @@ class ProfileViewController: UIViewController {
         
         return UICollectionViewCompositionalLayout(section: section)
         
-//        let configuration = UICollectionViewCompositionalLayoutConfiguration()
-//
-//        configuration.scrollDirection = .horizontal
-//
-//        return UICollectionViewCompositionalLayout(section: section, configuration: configuration)
-
     }
 
 }
@@ -233,18 +195,10 @@ extension ProfileViewController: UICollectionViewDelegate {
             
             navigationController?.pushViewController(viewController, animated: true)
             
-//        case 1:
-//            let viewController = UIStoryboard.profile
-//                .instantiateViewController(withIdentifier: String(describing: RankViewController.self))
-//
-//            guard let viewController = viewController as? RankViewController else { return }
-//
-//            navigationController?.pushViewController(viewController, animated: true)
-
         case 1:
             
-            let viewController = UIStoryboard.profile
-                .instantiateViewController(withIdentifier: String(describing: AnalysisViewController.self))
+            let viewController = UIStoryboard.profile.instantiateViewController(
+                withIdentifier: String(describing: AnalysisViewController.self))
             
             guard let viewController = viewController as? AnalysisViewController else { return }
             

@@ -24,7 +24,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ejW-gK-HRJ">
-                        <rect key="frame" x="16" y="249.5" width="382" height="18.5"/>
+                        <rect key="frame" x="16" y="249.5" width="132.5" height="18.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發文者" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crT-1a-Uaf">
                                 <rect key="frame" x="0.0" y="0.0" width="45" height="18.5"/>
@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TESTNAMEID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJl-cN-RiK">
-                                <rect key="frame" x="50" y="0.0" width="332" height="18.5"/>
+                                <rect key="frame" x="50" y="0.0" width="82.5" height="18.5"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -142,23 +142,34 @@
                             <constraint firstAttribute="height" constant="25" id="Ye6-Z9-3M6"/>
                         </constraints>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUa-ib-ntk">
+                        <rect key="frame" x="368" y="249.5" width="30" height="23.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="N0s-Uu-HPj"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="more"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="gfM-is-cXg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="1yc-ac-K0I"/>
+                    <constraint firstItem="Zx3-EC-Tcm" firstAttribute="top" secondItem="tUa-ib-ntk" secondAttribute="bottom" constant="5" id="24g-LO-sff"/>
                     <constraint firstItem="b8B-zz-MSK" firstAttribute="top" secondItem="GmG-5H-94K" secondAttribute="bottom" constant="10" id="4qQ-ZF-PCx"/>
                     <constraint firstItem="GmG-5H-94K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="57g-mP-Omr"/>
+                    <constraint firstItem="tUa-ib-ntk" firstAttribute="top" secondItem="gfM-is-cXg" secondAttribute="bottom" constant="5" id="Bld-ta-yvn"/>
                     <constraint firstItem="Zx3-EC-Tcm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="FZp-tG-zpd"/>
                     <constraint firstAttribute="trailing" secondItem="GmG-5H-94K" secondAttribute="trailing" constant="16" id="KR0-oJ-tGg"/>
                     <constraint firstItem="GmG-5H-94K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="PHh-Gj-kQR"/>
                     <constraint firstAttribute="trailing" secondItem="b8B-zz-MSK" secondAttribute="trailing" constant="16" id="Pz8-sK-1vd"/>
                     <constraint firstItem="ejW-gK-HRJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="WZw-BI-U0M"/>
+                    <constraint firstItem="tUa-ib-ntk" firstAttribute="leading" relation="lessThanOrEqual" secondItem="ejW-gK-HRJ" secondAttribute="trailing" constant="219.5" id="Wu1-up-wxx"/>
                     <constraint firstItem="b8B-zz-MSK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Xnh-ow-WSV"/>
                     <constraint firstAttribute="bottom" secondItem="Zx3-EC-Tcm" secondAttribute="bottom" constant="10" id="Ye1-eI-1y5"/>
+                    <constraint firstAttribute="trailing" secondItem="tUa-ib-ntk" secondAttribute="trailing" constant="16" id="gxK-qx-xFP"/>
                     <constraint firstAttribute="trailing" secondItem="gfM-is-cXg" secondAttribute="trailing" constant="16" id="i0i-ws-Vcb"/>
                     <constraint firstItem="ejW-gK-HRJ" firstAttribute="top" secondItem="gfM-is-cXg" secondAttribute="bottom" constant="5" id="qKv-k6-1yA"/>
                     <constraint firstItem="gfM-is-cXg" firstAttribute="top" secondItem="b8B-zz-MSK" secondAttribute="bottom" constant="5" id="rg0-rZ-63Y"/>
                     <constraint firstAttribute="trailing" secondItem="Zx3-EC-Tcm" secondAttribute="trailing" constant="16" id="ucX-5X-y04"/>
-                    <constraint firstAttribute="trailing" secondItem="ejW-gK-HRJ" secondAttribute="trailing" constant="16" id="xFD-6T-UZ2"/>
                     <constraint firstItem="Zx3-EC-Tcm" firstAttribute="top" secondItem="ejW-gK-HRJ" secondAttribute="bottom" constant="10" id="xqZ-sj-8gj"/>
                 </constraints>
             </tableViewCellContentView>
@@ -173,11 +184,13 @@
                 <outlet property="mainImageView" destination="GmG-5H-94K" id="PN1-XX-Ez1"/>
                 <outlet property="titleLabel" destination="gfM-is-cXg" id="e5X-ZX-1RR"/>
                 <outlet property="userIDLabel" destination="ZJl-cN-RiK" id="2sI-vi-Iqc"/>
+                <outlet property="userInfoButton" destination="tUa-ib-ntk" id="dnh-AG-8pG"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="106.47321428571428"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="more" width="21.333333969116211" height="21.333333969116211"/>
         <image name="undrawImages" width="764.1728515625" height="572.5679931640625"/>
     </resources>
 </document>

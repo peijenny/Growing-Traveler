@@ -53,7 +53,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jenny Hung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVT-Wu-mTd">
-                        <rect key="frame" x="150" y="20" width="248" height="22.5"/>
+                        <rect key="frame" x="150" y="20" width="101.5" height="22.5"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -75,20 +75,30 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSQ-o2-GwK">
+                        <rect key="frame" x="368" y="20" width="30" height="22.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="EMp-RT-nke"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="more"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="eVT-Wu-mTd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Bxt-I3-3I7"/>
                     <constraint firstItem="RoR-AT-oxL" firstAttribute="leading" secondItem="W9A-fP-4SF" secondAttribute="trailing" constant="16" id="Ca4-To-kUO"/>
                     <constraint firstAttribute="bottom" secondItem="RoR-AT-oxL" secondAttribute="bottom" constant="16" id="Ct1-Ah-oqU"/>
                     <constraint firstItem="W9A-fP-4SF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Erl-Fm-zum"/>
-                    <constraint firstAttribute="trailing" secondItem="eVT-Wu-mTd" secondAttribute="trailing" constant="16" id="HC3-h9-Aaj"/>
                     <constraint firstItem="eVT-Wu-mTd" firstAttribute="leading" secondItem="RoR-AT-oxL" secondAttribute="trailing" constant="10" id="JMK-t8-XvB"/>
                     <constraint firstItem="lKa-fh-hrJ" firstAttribute="top" secondItem="eVT-Wu-mTd" secondAttribute="bottom" constant="5" id="Mq0-OB-WmG"/>
+                    <constraint firstAttribute="trailing" secondItem="TSQ-o2-GwK" secondAttribute="trailing" constant="16" id="O6H-u9-KSS"/>
                     <constraint firstAttribute="trailing" secondItem="lKa-fh-hrJ" secondAttribute="trailing" constant="16" id="T3l-6g-tbd"/>
                     <constraint firstItem="RoR-AT-oxL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="T4n-rb-HsS"/>
                     <constraint firstItem="W9A-fP-4SF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Wy7-Bf-Oxw"/>
                     <constraint firstItem="lKa-fh-hrJ" firstAttribute="leading" secondItem="RoR-AT-oxL" secondAttribute="trailing" constant="10" id="afz-l0-8eR"/>
+                    <constraint firstItem="TSQ-o2-GwK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="kQT-nf-X8N"/>
                     <constraint firstAttribute="bottom" secondItem="lKa-fh-hrJ" secondAttribute="bottom" constant="20" id="oYo-bf-5ig"/>
+                    <constraint firstItem="lKa-fh-hrJ" firstAttribute="top" secondItem="TSQ-o2-GwK" secondAttribute="bottom" constant="5" id="pyz-2q-nvd"/>
                     <constraint firstAttribute="bottom" secondItem="W9A-fP-4SF" secondAttribute="bottom" constant="16" id="wS1-pA-oTQ"/>
                 </constraints>
             </tableViewCellContentView>
@@ -99,6 +109,7 @@
                 <outlet property="friendStatusLabel" destination="Bbk-px-mOH" id="0up-NA-171"/>
                 <outlet property="rankNumberBackgroundView" destination="J7F-TI-be5" id="Fk6-Rf-4qQ"/>
                 <outlet property="rankNumberLabel" destination="sI7-iG-uto" id="8fL-rv-LvA"/>
+                <outlet property="userInfoButton" destination="TSQ-o2-GwK" id="e3n-EJ-mrF"/>
                 <outlet property="userNameLabel" destination="eVT-Wu-mTd" id="iP3-gW-kdV"/>
                 <outlet property="userPhotoImageView" destination="RoR-AT-oxL" id="TCh-Jc-b5b"/>
             </connections>
@@ -107,6 +118,7 @@
     </objects>
     <resources>
         <image name="circle.fill" catalog="system" width="128" height="121"/>
+        <image name="more" width="21.333333969116211" height="21.333333969116211"/>
         <image name="userIcon" width="170.66667175292969" height="170.66667175292969"/>
     </resources>
 </document>

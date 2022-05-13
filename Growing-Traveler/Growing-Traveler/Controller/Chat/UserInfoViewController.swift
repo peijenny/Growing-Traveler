@@ -10,43 +10,65 @@ import PKHUD
 
 class UserInfoViewController: UIViewController {
 
-    @IBOutlet weak var userPhotoImageView: UIImageView!
+//    @IBOutlet weak var userPhotoImageView: UIImageView!
     
     @IBOutlet weak var userNameLabel: UILabel!
     
-    var selectUserID: String?
-    
-    var userManager = UserManager()
-    
-    var userInfo: UserInfo?
-    
-    var bothSides: BothSides?
-    
-    var deleteAccount = Bool()
-    
-    var friendManager = FriendManager()
-    
-    var ownerFriend: Friend?
-    
-    var otherFriend: Friend?
-
     @IBOutlet weak var friendStatusLabel: UILabel!
     
     @IBOutlet weak var blockUserButton: UIButton!
     
     @IBOutlet weak var addUserButton: UIButton!
     
+    @IBOutlet weak var reportPublishedButton: UIButton!
+    
+    var friendManager = FriendManager()
+    
+    var userManager = UserManager()
+    
+    var reportManager = ReportManager()
+    
+    var userInfo: UserInfo?
+    
+    var ownerFriend: Friend?
+    
+    var otherFriend: Friend?
+    
+    var bothSides: BothSides?
+    
+    var selectUserID: String?
+    
+    var deleteAccount = Bool()
+
     var getFriendStatus: ((_ isBlock: Bool) -> Void)?
+    
+    var articleID: String?  // 檢舉文章
+    
+    var articleMessage: ArticleMessage? // 檢舉留言
+    
+    var reportContentType: String? // 檢舉類型
+    
+    var blockContentType: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if reportContentType == nil {
+
+            reportPublishedButton.isHidden = true
+
+        }
+        
+        blockUserButton.setTitle(blockContentType ?? "", for: .normal)
+        
+        reportPublishedButton.setTitle(reportContentType ?? "", for: .normal)
 
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
+//        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
         
     }
     
@@ -147,15 +169,15 @@ class UserInfoViewController: UIViewController {
     
     func showUserInfo() {
         
-        if userInfo?.userPhoto != "" {
-            
-            userPhotoImageView.loadImage(userInfo?.userPhoto)
-            
-        } else {
-            
-            userPhotoImageView.image = UIImage.asset(.userIcon)
-            
-        }
+//        if userInfo?.userPhoto != "" {
+//
+//            userPhotoImageView.loadImage(userInfo?.userPhoto)
+//
+//        } else {
+//
+//            userPhotoImageView.image = UIImage.asset(.userIcon)
+//
+//        }
         
         userNameLabel.text = userInfo?.userName ?? ""
         
@@ -169,23 +191,27 @@ class UserInfoViewController: UIViewController {
 
         guard let friendList = ownerFriend else { return }
 
-        if friendList.blockadeList.filter({ $0 == selectUserID }).count > 0 {
+        if !friendList.blockadeList.filter({ $0 == selectUserID }).isEmpty {
+            
+//            userPhotoImageView.image = UIImage.asset(.block)
+            
+            userNameLabel.text = "已封鎖的使用者"
             
             friendStatusLabel.text = SearchFriendStatus.blocked.title
             
-        } else if friendList.friendList.filter({ $0 == selectUserID }).count > 0 {
+        } else if !friendList.friendList.filter({ $0 == selectUserID }).isEmpty {
             
             friendStatusLabel.text = SearchFriendStatus.friendship.title
             
             blockUserButton.isEnabled = true
             
-        } else if friendList.deliveryList.filter({ $0 == selectUserID }).count > 0 {
+        } else if !friendList.deliveryList.filter({ $0 == selectUserID }).isEmpty {
             
             friendStatusLabel.text = SearchFriendStatus.invitaion.title
             
             blockUserButton.isEnabled = true
             
-        } else if friendList.applyList.filter({ $0 == selectUserID }).count > 0 {
+        } else if !friendList.applyList.filter({ $0 == selectUserID }).isEmpty {
             
             friendStatusLabel.text = SearchFriendStatus.applied.title
             
@@ -218,9 +244,7 @@ class UserInfoViewController: UIViewController {
     @IBAction func blockUserButton(_ sender: UIButton) {
         
         let alertController = UIAlertController(
-            title: "封鎖帳號",
-            message: "請問確定封鎖此帳號嗎？\n 將不再看到此帳號的相關文章及訊息！",
-            preferredStyle: .alert)
+            title: "封鎖", message: "請問確定\(blockContentType ?? "")嗎？\n 將無法再看到相關內容！", preferredStyle: .alert)
         
         let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
             
@@ -263,6 +287,48 @@ class UserInfoViewController: UIViewController {
             self.view.removeFromSuperview()
             
         }
+        
+    }
+    
+    @IBAction func reportPublishedButton(_ sender: UIButton) {
+        
+        var reportInputText = ""
+        
+        let controller = UIAlertController(title: "檢舉", message: "請描述您要檢舉的內容", preferredStyle: .alert)
+        
+        controller.addTextField { textField in
+            
+           textField.placeholder = "檢舉內容"
+        }
+
+        let agreeAction = UIAlertAction(title: "確認", style: .default) { [unowned controller] _ in
+            
+            reportInputText = controller.textFields?[0].text ?? ""
+            
+            let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
+            
+            let reportContent = ReportContent(
+                reportID: self.reportManager.database.document().documentID,
+                userID: userID, reportedUserID: self.selectUserID ?? "",
+                reportType: self.reportContentType ?? "", reportContent: reportInputText,
+                createTime: createTime, friendID: self.selectUserID ?? nil,
+                articleID: self.articleID ?? nil, articleMessage: self.articleMessage ?? nil)
+            
+            self.reportManager.addReportData(reportContent: reportContent)
+            
+            HUD.flash(.labeledSuccess(title: "檢舉成功！", subtitle: "站方會盡快處理此檢舉"), delay: 0.5)
+            
+            self.view.removeFromSuperview()
+            
+        }
+        
+        controller.addAction(agreeAction)
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        controller.addAction(cancelAction)
+        
+        present(controller, animated: true, completion: nil)
         
     }
     
