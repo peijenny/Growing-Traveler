@@ -53,11 +53,7 @@ class PublishCertificationViewController: BaseViewController {
     
     func modifyCertification(index: Int) {
         
-        guard let certification = userInfo?.certification[index] else {
-            
-            return
-            
-        }
+        guard let certification = userInfo?.certification[index] else { return }
         
         certificationTitleTextField.text = certification.title
         
@@ -118,13 +114,10 @@ class PublishCertificationViewController: BaseViewController {
             
             if modifyCertificationIndex == nil {
                 
-                userInfo.certification.append(
-                Certification(
-                    createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-                    title: certificationTitle,
-                    imageLink: certificationImage,
-                    content: certificationContent)
-                )
+                let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
+                
+                userInfo.certification.append(Certification(
+                    createTime: createTime, title: certificationTitle, imageLink: certificationImage, content: certificationContent))
                 
                 HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
                 
@@ -156,7 +149,8 @@ class PublishCertificationViewController: BaseViewController {
 
 extension PublishCertificationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 

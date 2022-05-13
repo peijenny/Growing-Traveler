@@ -8,70 +8,6 @@
 import UIKit
 import PKHUD
 
-enum SelectDateType {
-    
-    case startDate
-    
-    case endDate
-    
-    var title: String {
-        
-        switch self {
-            
-        case .startDate: return "start"
-            
-        case .endDate: return "end"
-            
-        }
-        
-    }
-    
-}
-
-enum InputError {
-    
-    case titleEmpty
-    
-    case startDateEmpty
-    
-    case endDateEmpty
-    
-    case studyTimeEmpty
-    
-    case categoryEmpty
-    
-    case studyItemEmpty
-    
-    case contentEmpty
-    
-    case startDatereLativelyLate
-    
-    var title: String {
-        
-        switch self {
-            
-        case .titleEmpty: return "標題不可為空！"
-            
-        case .startDateEmpty: return "尚未選擇開始日期！"
-            
-        case .endDateEmpty: return "尚未選擇結束日期！"
-            
-        case .studyTimeEmpty: return "請選擇項目的學習時間！"
-            
-        case .categoryEmpty: return "尚未選擇分類標籤！"
-            
-        case .studyItemEmpty: return "學習項目不可為空！"
-            
-        case .contentEmpty: return "內容輸入不可為空！"
-            
-        case .startDatereLativelyLate: return "開始日期大於結束日期！"
-            
-        }
-        
-    }
-    
-}
-
 class PlanStudyGoalViewController: BaseViewController {
 
     @IBOutlet weak var planStudyGoalTableView: UITableView! {
@@ -117,7 +53,9 @@ class PlanStudyGoalViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = studyGoal == nil ? "新增個人學習計劃" : "編輯個人學習計劃"
+        title = (studyGoal == nil) ? "新增個人學習計劃" : "編輯個人學習計劃"
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
         if selectedDate != nil {
             
@@ -181,11 +119,9 @@ class PlanStudyGoalViewController: BaseViewController {
         
         selectCategoryItem = studyGoal?.category
         
-        selectStartDate = Date(
-            timeIntervalSince1970: studyGoal?.studyPeriod.startDate ?? TimeInterval())
+        selectStartDate = Date(timeIntervalSince1970: studyGoal?.studyPeriod.startDate ?? TimeInterval())
         
-        selectEndDate = Date(
-            timeIntervalSince1970: studyGoal?.studyPeriod.endDate ?? TimeInterval())
+        selectEndDate = Date(timeIntervalSince1970: studyGoal?.studyPeriod.endDate ?? TimeInterval())
         
     }
     
@@ -233,11 +169,7 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
 
         guard let cell = cell as? StudyItemTableViewCell else { return cell }
         
-        studyItems = studyItems.sorted { (lhs, rhs) in
-            
-            return lhs.id ?? 0 < rhs.id ?? 0
-            
-        }
+        studyItems = studyItems.sorted(by: { $0.id ?? 0 < $1.id ?? 0 })
         
         cell.showStudyItem(
             itemTitle: studyItems[indexPath.row].itemTitle, studyTime: studyItems[indexPath.row].studyTime)
@@ -271,27 +203,18 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
     }
     
     // MARK: - delete TableView Row
-    func tableView(_ tableView: UITableView,
-    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
     -> UISwipeActionsConfiguration? {
         
-        let contextItem = UIContextualAction(style: .destructive, title: "刪除") { [weak self]  _, _, _ in
+        let contextItem = UIContextualAction(style: .destructive, title: "刪除") { _, _, _ in
             
-            guard let strongSelf = self else { return }
-            
-            strongSelf.studyItems.remove(at: indexPath.row)
-            
-            strongSelf.planStudyGoalTableView.beginUpdates()
+            self.studyItems.remove(at: indexPath.row)
 
-            strongSelf.planStudyGoalTableView.deleteRows(at: [indexPath], with: .left)
-
-            strongSelf.planStudyGoalTableView.endUpdates()
+            self.planStudyGoalTableView.deleteRows(at: [indexPath], with: .left)
             
         }
         
-        let swipeActions = UISwipeActionsConfiguration(actions: [contextItem])
-        
-        return swipeActions
+        return UISwipeActionsConfiguration(actions: [contextItem])
         
     }
 
@@ -313,23 +236,12 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             if headerView.checkFullIn(itemCount: studyItems.count,
                 startDate: selectStartDate, endDate: selectEndDate) {
                 
-                var showLabelTitle = ""
+                let showLabelTitle = (studyGoal != nil) ? "修改成功！" : "新增成功！"
                 
-                if studyGoal != nil {
-                    
-                    addStudyGoalToDatabase(
-                        id: studyGoal?.id ?? "", title: headerView.studyGoalTitleTextField.text ?? "")
-                    
-                    showLabelTitle = "修改成功！"
-                    
-                } else {
-                    
-                    addStudyGoalToDatabase(
-                        id: studyGoalManager.database.document().documentID, title: headerView.studyGoalTitleTextField.text ?? "")
-                    
-                    showLabelTitle = "新增成功！"
-                    
-                }
+                let studyGoalID = studyGoal != nil ?
+                studyGoal?.id ?? "" : studyGoalManager.database.document().documentID
+                
+                addStudyGoalToDatabase(id: studyGoalID, title: headerView.studyGoalTitleTextField.text ?? "")
                 
                 HUD.flash(.labeledSuccess(title: showLabelTitle, subtitle: nil), delay: 0.5)
                 
@@ -341,9 +253,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         headerView.modifyStudyGoal(studyGoal: studyGoal)
         
-        if studyGoal != nil {
-            
-            guard let selectCategoryItem = selectCategoryItem else { return headerView }
+        if studyGoal != nil, let selectCategoryItem = selectCategoryItem {
             
             studyGoal?.category = selectCategoryItem
             
@@ -353,31 +263,19 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             
         }
         
-        headerView.categoryLabel.text = selectCategoryItem?.title ?? "請選擇分類標籤"
-        
-        if headerView.categoryLabel.text ?? "" != "請選擇分類標籤" {
-            
-            headerView.categoryLabel.textColor = UIColor.black
-            
-        }
-        
-        let categoryTapGestureRecognizer = UITapGestureRecognizer(
-            target: self, action: #selector(selectCategoryTagButton))
-        
-        headerView.categoryLabel.addGestureRecognizer(categoryTapGestureRecognizer)
-        
-        let startDateTapGestureRecognizer = UITapGestureRecognizer(
-            target: self, action: #selector(selectStartDateButton))
-        
-        headerView.startDateLabel.addGestureRecognizer(startDateTapGestureRecognizer)
-        
-        let endDateTapGestureRecognizer = UITapGestureRecognizer(
-            target: self, action: #selector(selectEndDateButton))
-        
-        headerView.endDateLabel.addGestureRecognizer(endDateTapGestureRecognizer)
-        
+        headerView.showCategoryItem(itemTitle: selectCategoryItem?.title ?? "請選擇分類標籤")
+
         headerView.showSelectedDate(dateType: selectDateType,
             startDate: selectStartDate, endDate: selectEndDate)
+        
+        headerView.startDateLabel.addGestureRecognizer(UITapGestureRecognizer(
+            target: self, action: #selector(selectStartDateButton)))
+        
+        headerView.endDateLabel.addGestureRecognizer(UITapGestureRecognizer(
+            target: self, action: #selector(selectEndDateButton)))
+        
+        headerView.categoryLabel.addGestureRecognizer(UITapGestureRecognizer(
+            target: self, action: #selector(selectCategoryTagButton)))
 
         headerView.startDateCalenderButton.addTarget(
             self, action: #selector(selectStartDateButton), for: .touchUpInside)
@@ -402,7 +300,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
 
         guard let selectCategoryItem = selectCategoryItem else { return }
         
-        let studyPeriod = StudyPeriod(startDate: selectStartDate.timeIntervalSince1970, endDate: selectEndDate.timeIntervalSince1970)
+        let studyPeriod = StudyPeriod(
+            startDate: selectStartDate.timeIntervalSince1970, endDate: selectEndDate.timeIntervalSince1970)
         
         let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
         
@@ -416,11 +315,8 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             
             for index in 0..<user.achievement.completionGoals.count {
                 
-                if studyGoal.id == user.achievement.completionGoals[index] {
-                    
-                    deleteIndex = index
-                    
-                }
+                deleteIndex = studyGoal.id == (user.achievement.completionGoals[index]) ? index : nil
+                
             }
             
             if deleteIndex != nil {
@@ -441,7 +337,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
     
     @objc func editStudyItemButton(sender: UIButton) {
         
-        isOpenEdited = isOpenEdited ? false : true
+        isOpenEdited = (isOpenEdited) ? false : true
         
         planStudyGoalTableView.isEditing = isOpenEdited
         
@@ -469,7 +365,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
     
     @objc func selectEndDateButton(sender: UIButton) {
         
-        selectCalenderViewController.startDate = selectStartDate >= Date() ? selectStartDate : Date()
+        selectCalenderViewController.startDate = (selectStartDate >= Date()) ? selectStartDate : Date()
         
         selectCalenderViewController.getSelectDate = { [weak self] date in
             
@@ -493,19 +389,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         let navController = UINavigationController(rootViewController: selectCalenderViewController)
         
-        if #available(iOS 15.0, *) {
-            
-            if let sheetPresentationController = navController.sheetPresentationController {
-                
-                sheetPresentationController.detents = [.medium()]
-                
-            }
-            
-        } else {
-            
-            navController.modalPresentationStyle = .fullScreen
-            
-        }
+        setSheetPresentation(navController: navController)
         
         self.present(navController, animated: true, completion: nil)
         
@@ -527,18 +411,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         let navController = UINavigationController(rootViewController: categoryViewController)
         
-        if #available(iOS 15.0, *) {
-            
-            if let sheetPresentationController = navController.sheetPresentationController {
-                
-                sheetPresentationController.detents = [.medium()]
-                
-            }
-            
-        } else {
-            
-            navController.modalPresentationStyle = .fullScreen
-        }
+        setSheetPresentation(navController: navController)
         
         self.present(navController, animated: true, completion: nil)
         
@@ -559,9 +432,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         selectStudyItemViewController.itemNumber = studyItems.count
         
         selectStudyItemViewController.modifyStudyItem = studyItem
-
-        selectStudyItemViewController.view.center = view.center
-
+        
         self.view.addSubview(selectStudyItemViewController.view)
 
         self.addChild(selectStudyItemViewController)
@@ -583,6 +454,24 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
             }
             
             strongSelf.planStudyGoalTableView.reloadData()
+            
+        }
+        
+    }
+    
+    func setSheetPresentation(navController: UINavigationController) {
+        
+        if #available(iOS 15.0, *) {
+            
+            if let sheetPresentationController = navController.sheetPresentationController {
+                
+                sheetPresentationController.detents = [.medium()]
+                
+            }
+            
+        } else {
+            
+            navController.modalPresentationStyle = .fullScreen
             
         }
         

@@ -25,6 +25,8 @@ class MoreArticlesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userIDLabel: UILabel!
     
+    @IBOutlet weak var userInfoButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

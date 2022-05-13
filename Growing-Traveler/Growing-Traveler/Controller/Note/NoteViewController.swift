@@ -39,8 +39,7 @@ class NoteViewController: BaseViewController {
         
         noteTableView.register(
             UINib(nibName: String(describing: NoteTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: NoteTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: NoteTableViewCell.self))
         
         noteSearchBar.delegate = self
         
@@ -65,7 +64,7 @@ class NoteViewController: BaseViewController {
                 
                 strongSelf.notes = notes
                 
-                if strongSelf.notes.count == 0 {
+                if strongSelf.notes.isEmpty {
                     
                     strongSelf.noteBackgroundView.isHidden = false
                     
@@ -99,8 +98,8 @@ class NoteViewController: BaseViewController {
     @objc func addNewNote(sender: UIButton) {
         
         guard let viewController = UIStoryboard.note.instantiateViewController(
-                withIdentifier: String(describing: PublishNoteViewController.self)
-                ) as? PublishNoteViewController else { return }
+            withIdentifier: String(describing: PublishNoteViewController.self)
+        ) as? PublishNoteViewController else { return }
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -117,17 +116,12 @@ class NoteViewController: BaseViewController {
             fetchNoteData()
             
         }
+        
     }
     
 }
 
 extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -152,8 +146,8 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let viewController = UIStoryboard.note.instantiateViewController(
-                withIdentifier: String(describing: NoteDetailViewController.self)
-                ) as? NoteDetailViewController else { return }
+            withIdentifier: String(describing: NoteDetailViewController.self)
+        ) as? NoteDetailViewController else { return }
         
         viewController.noteID = notes[indexPath.row].noteID
         
@@ -165,21 +159,17 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-            return true
+        return true
         
-        }
+    }
     
     func tableView(
-        _ tableView: UITableView,
-        commit editingStyle: UITableViewCell.EditingStyle,
-        forRowAt indexPath: IndexPath) {
+        _ tableView: UITableView, fcommit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             
             let alertController = UIAlertController(
-                title: "刪除學習筆記",
-                message: "請問確定刪除個人筆記嗎？\n 刪除行為不可逆，將無法瀏覽此筆記！",
-                preferredStyle: .alert)
+                title: "刪除學習筆記", message: "請問確定刪除個人筆記嗎？\n 刪除行為不可逆，將無法瀏覽此筆記！", preferredStyle: .alert)
             
             let agreeAction = UIAlertAction(title: "確認", style: .default) { _ in
 

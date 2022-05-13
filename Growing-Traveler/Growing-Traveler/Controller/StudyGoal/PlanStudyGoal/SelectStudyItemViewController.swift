@@ -8,26 +8,6 @@
 import UIKit
 import PKHUD
 
-enum SelectStatus {
-    
-    case add
-    
-    case modify
-    
-    var title: String {
-        
-        switch self {
-            
-        case .add: return "add"
-            
-        case .modify: return "modify"
-            
-        }
-        
-    }
-    
-}
-
 class SelectStudyItemViewController: BaseViewController {
 
     @IBOutlet weak var itemTextField: UITextField!
@@ -37,6 +17,8 @@ class SelectStudyItemViewController: BaseViewController {
     @IBOutlet weak var contentTextView: UITextView!
     
     @IBOutlet weak var copyItemButton: UIButton!
+    
+    @IBOutlet weak var submitButton: UIButton!
     
     var getStudyItem: ((_ studyItem: StudyItem, _ whetherToUpdate: Bool) -> Void)?
     
@@ -65,6 +47,19 @@ class SelectStudyItemViewController: BaseViewController {
             
         }
 
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        copyItemButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        
+        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        copyItemButton.layer.cornerRadius = 5
+
+        submitButton.layer.cornerRadius = 5
+        
     }
     
     func setTextViewAndTextField() {
@@ -132,11 +127,10 @@ class SelectStudyItemViewController: BaseViewController {
         
         for index in 0..<studyTime.count {
             
-            let originX = studyTimeStackView.frame.height * CGFloat(index)
+            let originX = (studyTimeStackView.frame.height * CGFloat(index)) + 5 * CGFloat(index)
 
             let timeButton = UIButton(frame: CGRect(
-                x: originX + 5 * CGFloat(index), y: 0,
-                width: studyTimeStackView.frame.height, height: studyTimeStackView.frame.height))
+                x: originX, y: 0, width: studyTimeStackView.frame.height, height: studyTimeStackView.frame.height))
             
             timeButton.cornerRadius = 5
             
@@ -210,8 +204,7 @@ class SelectStudyItemViewController: BaseViewController {
             
         }
         
-        var studyItem = StudyItem(
-            itemTitle: itemTitle, studyTime: selectTime, content: content, isCompleted: false)
+        var studyItem = StudyItem(itemTitle: itemTitle, studyTime: selectTime, content: content, isCompleted: false)
         
         if status == SelectStatus.modify.title {
             

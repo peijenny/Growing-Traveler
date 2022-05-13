@@ -21,7 +21,6 @@ class ArticleMessageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
     override var hidesBottomBarWhenPushed: Bool {
@@ -66,30 +65,16 @@ class ArticleMessageViewController: BaseViewController {
             
         } else {
 
-            var contentType = ""
-
-            if contentText.range(of: "https://i.imgur.com") != nil {
-
-                contentType = SendType.image.title
-
-            } else {
-
-                contentType = SendType.string.title
-
-            }
+            let contentType = (contentText.range(of: "https://i.imgur.com") != nil) ?
+            SendType.image.title : SendType.string.title
+            
+            let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
 
             let message = ArticleContent(
-                orderID: orderID,
-                contentType: contentType,
-                contentText: contentText
-            )
+                orderID: orderID, contentType: contentType, contentText: contentText)
 
             let articleMessage = ArticleMessage(
-                userID: userID,
-                articleID: articleID,
-                createTime: TimeInterval(Int(Date().timeIntervalSince1970)),
-                message: message
-            )
+                userID: userID, articleID: articleID, createTime: createTime, message: message)
 
             forumArticleManager.addMessageData(articleMessage: articleMessage)
             
@@ -105,7 +90,9 @@ class ArticleMessageViewController: BaseViewController {
 
 extension ArticleMessageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 

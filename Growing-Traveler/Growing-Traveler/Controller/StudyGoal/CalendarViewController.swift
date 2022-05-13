@@ -37,6 +37,8 @@ class CalendarViewController: UIViewController {
     
     @IBOutlet weak var displayBackgroundView: UIView!
     
+    @IBOutlet weak var calendarBackgroundView: UIView!
+    
     var studyGoalManager = StudyGoalManager()
     
     var studyGoals: [StudyGoal] = [] {
@@ -56,6 +58,10 @@ class CalendarViewController: UIViewController {
         
         title = "成長日曆"
         
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        calendarBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
         displayTableView.register(
             UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: TopTableViewCell.self))
@@ -69,8 +75,14 @@ class CalendarViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(
            title: "", style: .plain, target: nil, action: nil)
         
-        displayBackgroundView.isHidden = userID == "" ? false : true
+        displayBackgroundView.isHidden = (userID == "") ? false : true
         
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        selectedDate = formatter.date(from: formatter.string(from: Date())) ?? Date()
+
         listenStudyGoalData()
         
     }
@@ -123,11 +135,11 @@ class CalendarViewController: UIViewController {
             
             let greaterEqualEndDate = $0.studyPeriod.endDate >= selectedDate.timeIntervalSince1970
             
-            return lessEqualStartDate && greaterEqualEndDate ? true : false
+            return (lessEqualStartDate && greaterEqualEndDate) ? true : false
             
         })
         
-        displayBackgroundView.isHidden = resultData.isEmpty ? false : true
+        displayBackgroundView.isHidden = (resultData.isEmpty) ? false : true
         
         return resultData
         

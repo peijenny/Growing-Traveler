@@ -14,25 +14,27 @@ class ReleaseRecordViewController: UIViewController {
     
     var resleaseBackgroundView = UIView()
     
-    var imageView = UIImageView()
+    var placeHolderImageView = UIImageView()
     
-    var label = UILabel()
+    var placeHolderLabel = UILabel()
     
     var forumArticleManager = ForumArticleManager()
-    
-    var forumArticles: [ForumArticle] = []
     
     var userManager = UserManager()
     
     var usersInfo: [UserInfo] = []
     
+    var forumArticles: [ForumArticle] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "發佈文章紀錄"
+        title = "發佈文章紀錄"
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
 
+        setNavigationItem()
+        
         setBackgroundView()
         
         setTableView()
@@ -42,8 +44,6 @@ class ReleaseRecordViewController: UIViewController {
         setImageView()
         
         setLabel()
-        
-        setNavigationItem()
         
     }
     
@@ -73,7 +73,9 @@ class ReleaseRecordViewController: UIViewController {
     func setNavigationItem() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self, action: #selector(addForumArticle))
+            image: UIImage.asset(.create), style: .plain, target: self, action: #selector(addForumArticle))
+        
+        navigationItem.backButtonTitle = ""
         
     }
     
@@ -82,14 +84,15 @@ class ReleaseRecordViewController: UIViewController {
         guard userID != "" else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
-                    withIdentifier: String(describing: AuthenticationViewController.self)
-                    ) as? AuthenticationViewController else { return }
+                withIdentifier: String(describing: AuthenticationViewController.self)
+            ) as? AuthenticationViewController else { return }
             
             authViewController.modalPresentationStyle = .formSheet
 
             present(authViewController, animated: true, completion: nil)
             
             return
+            
         }
 
         let viewController = PublishForumArticleViewController()
@@ -159,6 +162,7 @@ class ReleaseRecordViewController: UIViewController {
             }
             
         }
+        
     }
     
     func setBackgroundView() {
@@ -201,36 +205,36 @@ class ReleaseRecordViewController: UIViewController {
     
     func setImageView() {
         
-        imageView.image = UIImage.asset(.undrawNotFound)
+        placeHolderImageView.image = UIImage.asset(.undrawNotFound)
         
-        resleaseBackgroundView.addSubview(imageView)
+        resleaseBackgroundView.addSubview(placeHolderImageView)
         
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        placeHolderImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: resleaseBackgroundView.topAnchor, constant: 50),
-            imageView.trailingAnchor.constraint(equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
-            imageView.leadingAnchor.constraint(equalTo: resleaseBackgroundView.leadingAnchor, constant: 50),
-            imageView.heightAnchor.constraint(equalToConstant: 200)
+            placeHolderImageView.topAnchor.constraint(equalTo: resleaseBackgroundView.topAnchor, constant: 50),
+            placeHolderImageView.trailingAnchor.constraint(equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
+            placeHolderImageView.leadingAnchor.constraint(equalTo: resleaseBackgroundView.leadingAnchor, constant: 50),
+            placeHolderImageView.heightAnchor.constraint(equalToConstant: 200)
         ])
         
     }
     
     func setLabel() {
         
-        label.text = "目前暫無發佈紀錄"
+        placeHolderLabel.text = "目前暫無發佈紀錄"
         
-        label.textAlignment = .center
+        placeHolderLabel.textAlignment = .center
         
-        resleaseBackgroundView.addSubview(label)
+        resleaseBackgroundView.addSubview(placeHolderLabel)
         
-        label.translatesAutoresizingMaskIntoConstraints = false
+        placeHolderLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
-            label.trailingAnchor.constraint(equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
-            label.leadingAnchor.constraint(equalTo: resleaseBackgroundView.leadingAnchor, constant: 50),
-            label.heightAnchor.constraint(equalToConstant: 25)
+            placeHolderLabel.topAnchor.constraint(equalTo: placeHolderImageView.bottomAnchor, constant: 20),
+            placeHolderLabel.trailingAnchor.constraint(equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
+            placeHolderLabel.leadingAnchor.constraint(equalTo: resleaseBackgroundView.leadingAnchor, constant: 50),
+            placeHolderLabel.heightAnchor.constraint(equalToConstant: 25)
         ])
         
     }
@@ -254,8 +258,7 @@ class ReleaseRecordViewController: UIViewController {
         
         releaseRecordTableView.register(
             UINib(nibName: String(describing: MoreArticlesTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: MoreArticlesTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: MoreArticlesTableViewCell.self))
 
         releaseRecordTableView.delegate = self
         
@@ -267,12 +270,6 @@ class ReleaseRecordViewController: UIViewController {
 
 extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-        
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return forumArticles.count
@@ -282,9 +279,7 @@ extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: MoreArticlesTableViewCell.self),
-            for: indexPath
-        )
+            withIdentifier: String(describing: MoreArticlesTableViewCell.self), for: indexPath)
         
         guard let cell = cell as? MoreArticlesTableViewCell else { return cell }
         
@@ -292,16 +287,15 @@ extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSourc
         
         let userInfo = usersInfo.filter({ $0.userID == forumArticles[indexPath.row].userID })
         
-        if userInfo.count != 0 {
+        if !userInfo.isEmpty {
             
             let userName = userInfo[0].userName
             
-            cell.showMoreArticles(
-                forumArticle: forumArticles[indexPath.row],
-                userName: userName
-            )
+            cell.showMoreArticles(forumArticle: forumArticles[indexPath.row], userName: userName)
             
         }
+        
+        cell.userInfoButton.isHidden = true
         
         return cell
         
@@ -319,21 +313,17 @@ extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-            return true
+        return true
         
-        }
+    }
     
     func tableView(
-        _ tableView: UITableView,
-        commit editingStyle: UITableViewCell.EditingStyle,
-        forRowAt indexPath: IndexPath) {
+        _ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             
             let alertController = UIAlertController(
-                title: "刪除討論區發文",
-                message: "請問確定刪除此篇文章嗎？\n 刪除行為不可逆，將無法瀏覽此文章！",
-                preferredStyle: .alert)
+                title: "刪除討論區發文", message: "請問確定刪除此篇文章嗎？\n 刪除行為不可逆，將無法瀏覽此文章！", preferredStyle: .alert)
             
             let agreeAction = UIAlertAction(title: "確認", style: .destructive) { _ in
                 

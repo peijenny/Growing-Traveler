@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import JXPhotoBrowser
 import PKHUD
 
 class ArticleDetailViewController: UIViewController {
@@ -21,7 +20,7 @@ class ArticleDetailViewController: UIViewController {
     
     var articleMessages: [ArticleMessage] = []
     
-    let myImageView = UIImageView()
+    let displayImageView = UIImageView()
     
     var userManager = UserManager()
     
@@ -40,6 +39,8 @@ class ArticleDetailViewController: UIViewController {
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
+        setNavigationItem()
+        
         setBackgroundView()
         
         setTableView()
@@ -50,6 +51,49 @@ class ArticleDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         fetchFriendBlockadeListData()
+        
+        fetchUserInfoData()
+        
+    }
+    
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.more), style: .plain, target: self, action: #selector(showUserInfoButton))
+
+    }
+    
+    @objc func showUserInfoButton(sender: UIButton) {
+        
+        guard let viewController = UIStoryboard.chat.instantiateViewController(
+            withIdentifier: String(describing: UserInfoViewController.self)
+        ) as? UserInfoViewController else { return }
+        
+        viewController.deleteAccount = false
+        
+        viewController.selectUserID = forumArticle?.userID ?? ""
+        
+        viewController.articleID = forumArticle?.id
+        
+        viewController.reportContentType = ReportContentType.article.title
+        
+        viewController.blockContentType = BlockContentType.article.title
+        
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
+        
+        viewController.getFriendStatus = { [weak self] isBlock in
+            
+            guard let strongSelf = self else { return }
+            
+            if isBlock {
+                
+                strongSelf.navigationController?.popViewController(animated: true)
+                
+            }
+            
+        }
         
     }
     
@@ -67,8 +111,6 @@ class ArticleDetailViewController: UIViewController {
                 strongSelf.blockadeList = userFriend.blockadeList
                 
                 strongSelf.listenMessageData()
-                
-                strongSelf.fetchUserInfoData()
                 
                 strongSelf.articleDetailTableView.reloadData()
                 
@@ -191,91 +233,23 @@ class ArticleDetailViewController: UIViewController {
         
         articleDetailTableView.register(
             UINib(nibName: String(describing: ArticleDetailHeaderView.self), bundle: nil),
-            forHeaderFooterViewReuseIdentifier: String(describing: ArticleDetailHeaderView.self)
-        )
+            forHeaderFooterViewReuseIdentifier: String(describing: ArticleDetailHeaderView.self))
         
         articleDetailTableView.register(
             UINib(nibName: String(describing: ArticleDetailTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self))
         
         articleDetailTableView.register(
             UINib(nibName: String(describing: ArticleMessageHeaderView.self), bundle: nil),
-            forHeaderFooterViewReuseIdentifier: String(describing: ArticleMessageHeaderView.self)
-        )
+            forHeaderFooterViewReuseIdentifier: String(describing: ArticleMessageHeaderView.self))
         
         articleDetailTableView.register(
             UINib(nibName: String(describing: ArticleMessageTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: ArticleMessageTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: ArticleMessageTableViewCell.self))
 
         articleDetailTableView.delegate = self
         
         articleDetailTableView.dataSource = self
-        
-        let longPressRecognizer = UILongPressGestureRecognizer(
-            target: self, action: #selector(longPressed(sender:)))
-        
-        articleDetailTableView.addGestureRecognizer(longPressRecognizer)
-        
-    }
-    
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
-        
-        if sender.state == UIGestureRecognizer.State.began {
-            
-            let touchPoint = sender.location(in: self.articleDetailTableView)
-            
-            if let indexPath = articleDetailTableView.indexPathForRow(at: touchPoint) {
-                
-                // 彈跳出 User 視窗
-                guard let viewController = UIStoryboard
-                    .chat
-                    .instantiateViewController(
-                    withIdentifier: String(describing: UserInfoViewController.self)
-                    ) as? UserInfoViewController else { return }
-                
-                viewController.deleteAccount = false
-                
-                if indexPath.section == 1 {
-                    
-                    viewController.selectUserID = articleMessages[indexPath.row].userID
-                    
-                    if usersInfo.filter({ $0.userID == articleMessages[indexPath.row].userID }).count == 0 {
-                        
-                        viewController.deleteAccount = true
-                        
-                    }
-                    
-                    viewController.getFriendStatus = { [weak self] isBlock in
-                        
-                        guard let strongSelf = self else { return }
-                        
-                        if isBlock {
-                            
-                            if viewController.selectUserID == strongSelf.forumArticle?.userID {
-                                
-                                strongSelf.navigationController?.popViewController(animated: true)
-                                
-                            }
-                            
-                            strongSelf.fetchFriendBlockadeListData()
-                            
-                            strongSelf.articleDetailTableView.reloadData()
-                            
-                        }
-                        
-                    }
-                    
-                    self.view.addSubview(viewController.view)
-
-                    self.addChild(viewController)
-                    
-                }
-                
-            }
-            
-        }
         
     }
 
@@ -291,15 +265,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
-            
-            return forumArticle?.content.count ?? 0
-            
-        } else {
-            
-            return articleMessages.count
-            
-        }
+        return (section == 0) ? forumArticle?.content.count ?? 0 : articleMessages.count
         
     }
     
@@ -308,9 +274,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         if indexPath.section == 0 {
             
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: ArticleDetailTableViewCell.self),
-                for: indexPath
-            )
+                withIdentifier: String(describing: ArticleDetailTableViewCell.self), for: indexPath)
             
             guard let cell = cell as? ArticleDetailTableViewCell else { return cell }
             
@@ -325,9 +289,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: ArticleMessageTableViewCell.self),
-                for: indexPath
-            )
+                withIdentifier: String(describing: ArticleMessageTableViewCell.self), for: indexPath)
             
             guard let cell = cell as? ArticleMessageTableViewCell else { return cell }
             
@@ -337,15 +299,11 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
             var isBlock = false
             
-            if userInfo.count != 0 {
+            if !userInfo.isEmpty {
                 
                 userName = userInfo[0].userName
                 
-                if blockadeList.filter({ $0 == userInfo[0].userID }).count != 0 {
-                    
-                    isBlock = true
-                    
-                }
+                isBlock = (!blockadeList.filter({ $0 == userInfo[0].userID }).isEmpty) ? true : false
                 
             } else {
                 
@@ -353,16 +311,72 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
 
             }
             
-            cell.showMessages(
-                articleMessage: articleMessages[indexPath.row],
-                articleUserID: forumArticle?.userID ?? "",
-                userName: userName,
-                isBlock: isBlock
-            )
+            cell.showMessages(articleMessage: articleMessages[indexPath.row],
+                articleUserID: forumArticle?.userID ?? "", userName: userName, isBlock: isBlock)
+            
+            cell.userInfoButton.addTarget(self, action: #selector(showUserInfoData), for: .touchUpInside)
             
             cell.selectionStyle = .none
             
             return cell
+            
+        }
+        
+    }
+    
+    @objc func showUserInfoData(sender: UIButton) {
+        
+        let point = sender.convert(CGPoint.zero, to: articleDetailTableView)
+
+        if let indexPath = articleDetailTableView.indexPathForRow(at: point) {
+            
+            guard let viewController = UIStoryboard.chat.instantiateViewController(
+                withIdentifier: String(describing: UserInfoViewController.self)
+            ) as? UserInfoViewController else { return }
+            
+            viewController.deleteAccount = false
+            
+            if indexPath.section == 1 {
+                
+                viewController.selectUserID = articleMessages[indexPath.row].userID
+                
+                viewController.articleMessage = articleMessages[indexPath.row]
+                
+                viewController.reportContentType = ReportContentType.message.title
+                
+                viewController.blockContentType = BlockContentType.message.title
+                
+                viewController.deleteAccount = (usersInfo.filter({
+                   
+                    $0.userID == articleMessages[indexPath.row].userID
+                    
+                }).isEmpty) ? true : false
+                
+                viewController.getFriendStatus = { [weak self] isBlock in
+                    
+                    guard let strongSelf = self else { return }
+                    
+                    if isBlock {
+                        
+                        if viewController.selectUserID == strongSelf.forumArticle?.userID {
+                            
+                            strongSelf.navigationController?.popViewController(animated: true)
+                            
+                        }
+                        
+                        strongSelf.fetchFriendBlockadeListData()
+                        
+                        strongSelf.articleDetailTableView.reloadData()
+                        
+                    }
+                    
+                }
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
+                
+            }
             
         }
         
@@ -374,35 +388,17 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         
         if indexPath.section == 0 && forumArticle.content[indexPath.row].contentType == SendType.image.title {
             
-            myImageView.loadImage(forumArticle.content[indexPath.row].contentText)
+            displayImageView.loadImage(forumArticle.content[indexPath.row].contentText)
             
-            showPhoto()
+            displayImageView.showPhoto(imageView: displayImageView)
             
         } else if indexPath.section == 1 && articleMessages[indexPath.row].message.contentType == SendType.image.title {
             
-            myImageView.loadImage(articleMessages[indexPath.row].message.contentText)
+            displayImageView.loadImage(articleMessages[indexPath.row].message.contentText)
             
-            showPhoto()
-            
-        }
-        
-    }
-    
-    func showPhoto() {
-        
-        let browser = JXPhotoBrowser()
-
-        browser.numberOfItems = { 1 }
-
-        browser.reloadCellAtIndex = { context in
-
-            let browserCell = context.cell as? JXPhotoBrowserImageCell
-            
-            browserCell?.imageView.image = self.myImageView.image
+            displayImageView.showPhoto(imageView: displayImageView)
             
         }
-
-        browser.show()
         
     }
     
@@ -418,18 +414,14 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             guard let forumArticle = forumArticle else { return headerView }
             
             let userInfo = usersInfo.filter({ $0.userID == forumArticle.userID })
-            
-            if userInfo.count != 0 {
+
+            if !userInfo.isEmpty {
              
                 let userName = userInfo[0].userName
 
                 headerView.showArticleDetail(forumArticle: forumArticle, userName: userName)
                 
             }
-            
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-            
-            headerView.addGestureRecognizer(tapGestureRecognizer)
             
             return headerView
             
@@ -447,6 +439,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
                 self, action: #selector(sendMessageButton), for: .touchUpInside)
             
             return headerView
+            
         }
         
     }
@@ -456,25 +449,20 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         guard userID != "" else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
-                    withIdentifier: String(describing: AuthenticationViewController.self)
-                    ) as? AuthenticationViewController else { return }
+                withIdentifier: String(describing: AuthenticationViewController.self)
+            ) as? AuthenticationViewController else { return }
             
             authViewController.modalPresentationStyle = .formSheet
 
             present(authViewController, animated: true, completion: nil)
 
             return
+            
         }
         
-        guard let viewController = UIStoryboard
-            .forum
-            .instantiateViewController(
-                withIdentifier: String(describing: ArticleMessageViewController.self)
-                ) as? ArticleMessageViewController else {
-
-                    return
-
-                }
+        guard let viewController = UIStoryboard.forum.instantiateViewController(
+            withIdentifier: String(describing: ArticleMessageViewController.self)
+        ) as? ArticleMessageViewController else { return }
         
         viewController.articleID = forumArticle?.id ?? ""
         
@@ -513,36 +501,6 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         }
         
         present(navController, animated: true)
-        
-    }
-    
-    @objc func handleTap(sender: UITapGestureRecognizer) {
-
-        guard let viewController = UIStoryboard
-            .chat
-            .instantiateViewController(
-            withIdentifier: String(describing: UserInfoViewController.self)
-            ) as? UserInfoViewController else { return }
-        
-        viewController.deleteAccount = false
-        
-        viewController.selectUserID = forumArticle?.userID ?? ""
-        
-        self.view.addSubview(viewController.view)
-
-        self.addChild(viewController)
-        
-        viewController.getFriendStatus = { [weak self] isBlock in
-            
-            guard let strongSelf = self else { return }
-            
-            if isBlock {
-                
-                strongSelf.navigationController?.popViewController(animated: true)
-                
-            }
-            
-        }
         
     }
     
