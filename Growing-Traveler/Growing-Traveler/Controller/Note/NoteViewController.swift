@@ -163,8 +163,14 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        
+        return "刪除"
+        
+    }
+    
     func tableView(
-        _ tableView: UITableView, fcommit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        _ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             

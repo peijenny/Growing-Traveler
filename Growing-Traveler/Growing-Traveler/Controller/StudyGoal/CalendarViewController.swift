@@ -166,10 +166,15 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
 
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         return studyGoals.count
         
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -181,7 +186,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.selectionStyle = .none
         
-        cell.showStudyGoalHeader(studyGoal: studyGoals[indexPath.row], isCalendar: true)
+        cell.showStudyGoalHeader(studyGoal: studyGoals[indexPath.section], isCalendar: true)
         
         return cell
         
@@ -194,7 +199,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
 
         guard let viewController = viewController as? PlanStudyGoalViewController else { return }
 
-        viewController.studyGoal = studyGoals[indexPath.row]
+        viewController.studyGoal = studyGoals[indexPath.section]
 
         viewController.selectedDate = selectedDate
 
