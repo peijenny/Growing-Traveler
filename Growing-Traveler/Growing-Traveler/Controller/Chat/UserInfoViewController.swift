@@ -53,13 +53,11 @@ class UserInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reportPublishedButton.isHidden = true
-        
-//        if reportContentType == nil {
-//
-//            reportPublishedButton.isHidden = true
-//
-//        }
+        if reportContentType == nil {
+
+            reportPublishedButton.isHidden = true
+
+        }
 
     }
     
@@ -315,6 +313,8 @@ class UserInfoViewController: UIViewController {
             self.reportManager.addReportData(reportContent: reportContent)
             
             HUD.flash(.labeledSuccess(title: "檢舉成功！", subtitle: "站方會盡快處理此檢舉"), delay: 0.5)
+            
+            self.view.removeFromSuperview()
             
         }
         

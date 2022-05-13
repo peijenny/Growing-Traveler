@@ -287,7 +287,7 @@ class ChatViewController: BaseViewController {
 
                 strongSelf.otherFriendList = friendList
                 
-                if friendList.blockadeList.filter({ $0 == userID }).isEmpty {
+                if !friendList.blockadeList.filter({ $0 == userID }).isEmpty {
                     
                     strongSelf.friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
 

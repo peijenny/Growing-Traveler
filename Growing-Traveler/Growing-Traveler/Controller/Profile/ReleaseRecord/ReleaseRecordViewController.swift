@@ -295,6 +295,8 @@ extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSourc
             
         }
         
+        cell.userInfoButton.isHidden = true
+        
         return cell
         
     }
