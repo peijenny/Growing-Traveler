@@ -10,7 +10,7 @@ import PKHUD
 
 class UserInfoViewController: UIViewController {
 
-    @IBOutlet weak var userPhotoImageView: UIImageView!
+//    @IBOutlet weak var userPhotoImageView: UIImageView!
     
     @IBOutlet weak var userNameLabel: UILabel!
     
@@ -66,7 +66,7 @@ class UserInfoViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
+//        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
         
     }
     
@@ -167,15 +167,15 @@ class UserInfoViewController: UIViewController {
     
     func showUserInfo() {
         
-        if userInfo?.userPhoto != "" {
-            
-            userPhotoImageView.loadImage(userInfo?.userPhoto)
-            
-        } else {
-            
-            userPhotoImageView.image = UIImage.asset(.userIcon)
-            
-        }
+//        if userInfo?.userPhoto != "" {
+//
+//            userPhotoImageView.loadImage(userInfo?.userPhoto)
+//
+//        } else {
+//
+//            userPhotoImageView.image = UIImage.asset(.userIcon)
+//
+//        }
         
         userNameLabel.text = userInfo?.userName ?? ""
         
@@ -191,7 +191,7 @@ class UserInfoViewController: UIViewController {
 
         if !friendList.blockadeList.filter({ $0 == selectUserID }).isEmpty {
             
-            userPhotoImageView.image = UIImage.asset(.block)
+//            userPhotoImageView.image = UIImage.asset(.block)
             
             userNameLabel.text = "已封鎖的使用者"
             
