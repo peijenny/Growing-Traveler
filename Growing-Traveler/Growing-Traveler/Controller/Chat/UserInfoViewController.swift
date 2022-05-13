@@ -59,7 +59,7 @@ class UserInfoViewController: UIViewController {
 
         }
         
-        blockUserButton.setTitle(blockContentType ?? "", for: .normal)
+//        blockUserButton.setTitle(blockContentType ?? "", for: .normal)
         
         reportPublishedButton.setTitle(reportContentType ?? "", for: .normal)
 

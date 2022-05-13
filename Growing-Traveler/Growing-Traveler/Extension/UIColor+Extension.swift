@@ -19,6 +19,8 @@ enum ColorChart {
     
     case darkBlue
     
+    case lightRed
+    
     var hexText: String {
         
         switch self {
@@ -32,6 +34,8 @@ enum ColorChart {
         case .blue: return "8ABBE0"
             
         case .darkBlue: return "49A1D8"
+            
+        case .lightRed: return "D8A196"
             
         }
         
