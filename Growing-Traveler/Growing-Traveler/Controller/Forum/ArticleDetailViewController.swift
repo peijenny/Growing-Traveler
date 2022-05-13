@@ -52,6 +52,8 @@ class ArticleDetailViewController: UIViewController {
         
         fetchFriendBlockadeListData()
         
+        fetchUserInfoData()
+        
     }
     
     func setNavigationItem() {
@@ -109,8 +111,6 @@ class ArticleDetailViewController: UIViewController {
                 strongSelf.blockadeList = userFriend.blockadeList
                 
                 strongSelf.listenMessageData()
-                
-                strongSelf.fetchUserInfoData()
                 
                 strongSelf.articleDetailTableView.reloadData()
                 
@@ -414,7 +414,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             guard let forumArticle = forumArticle else { return headerView }
             
             let userInfo = usersInfo.filter({ $0.userID == forumArticle.userID })
-            
+
             if !userInfo.isEmpty {
              
                 let userName = userInfo[0].userName
