@@ -528,6 +528,8 @@ extension StudyGoalViewController {
             lottieAnimation.widthAnchor.constraint(equalToConstant: headerAnimationView.frame.height * CGFloat(0.8)),
             lottieAnimation.heightAnchor.constraint(equalToConstant: headerAnimationView.frame.height * CGFloat(0.8))
         ])
+        
+        lottieAnimation.loopMode = .loop
 
     }
     
@@ -554,8 +556,6 @@ extension StudyGoalViewController {
         lottieAnimation.backgroundColor = UIColor.clear
         
         lottieAnimation.contentMode = .scaleAspectFit
-        
-        lottieAnimation.loopMode = .loop
         
     }
     
