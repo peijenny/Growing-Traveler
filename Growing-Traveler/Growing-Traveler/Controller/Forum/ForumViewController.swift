@@ -18,11 +18,6 @@ class ForumViewController: BaseViewController {
             
             articleTableView.dataSource = self
             
-            let longPressRecognizer = UILongPressGestureRecognizer(
-                target: self, action: #selector(longPressed(sender:)))
-            
-            articleTableView.addGestureRecognizer(longPressRecognizer)
-            
         }
         
     }
@@ -37,9 +32,9 @@ class ForumViewController: BaseViewController {
     
     var forumArticles: [ForumArticle] = []
     
-    var allForumArticles: [[ForumArticle]] = []
-    
     var usersInfo: [UserInfo] = []
+    
+    var allForumArticles: [[ForumArticle]] = []
     
     var searchForumArticles: [ForumArticle] = [] {
         
@@ -91,8 +86,7 @@ class ForumViewController: BaseViewController {
         
         articleTableView.register(
             UINib(nibName: String(describing: ArticleTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: ArticleTableViewCell.self)
-        )
+            forCellReuseIdentifier: String(describing: ArticleTableViewCell.self))
 
     }
     
@@ -259,52 +253,6 @@ class ForumViewController: BaseViewController {
         
     }
     
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
-        
-        if sender.state == UIGestureRecognizer.State.began {
-            
-            let touchPoint = sender.location(in: self.articleTableView)
-            
-            if let indexPath = articleTableView.indexPathForRow(at: touchPoint) {
-                
-                guard let viewController = UIStoryboard.chat.instantiateViewController(
-                    withIdentifier: String(describing: UserInfoViewController.self)
-                ) as? UserInfoViewController else { return }
-                
-                viewController.deleteAccount = false
-                
-                if inputText != nil {
-                    
-                    let selectForumType = forumType[indexPath.section].title
-                    
-                    let searchArticle = searchForumArticles.filter({ $0.forumType == selectForumType })
-                    
-                    viewController.selectUserID = searchArticle[indexPath.row].userID
-                    
-                    viewController.articleID = searchArticle[indexPath.row].id
-                    
-                } else {
-                    
-                    viewController.selectUserID = allForumArticles[indexPath.section][indexPath.row].userID
-                    
-                    viewController.articleID = allForumArticles[indexPath.section][indexPath.row].id
-                    
-                }
-                
-                viewController.reportContentType = ReportContentType.article.title
-                
-                viewController.blockContentType = BlockContentType.article.title
-                
-                self.view.addSubview(viewController.view)
-
-                self.addChild(viewController)
-                
-            }
-            
-        }
-        
-    }
-    
 }
 
 extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
@@ -377,7 +325,65 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.loadMoreButton.addTarget(self, action: #selector(loadMoreButton), for: .touchUpInside)
         
+        cell.userInfoButton.addTarget(self, action: #selector(showUserInfoButton), for: .touchUpInside)
+        
         return cell
+        
+    }
+    
+    @objc func showUserInfoButton(sender: UIButton) {
+        
+        let point = sender.convert(CGPoint.zero, to: articleTableView)
+
+        if let indexPath = articleTableView.indexPathForRow(at: point) {
+            
+            guard let viewController = UIStoryboard.chat.instantiateViewController(
+                withIdentifier: String(describing: UserInfoViewController.self)
+            ) as? UserInfoViewController else { return }
+            
+            viewController.deleteAccount = false
+            
+            if inputText != nil {
+                
+                let selectForumType = forumType[indexPath.section].title
+                
+                let searchArticle = searchForumArticles.filter({ $0.forumType == selectForumType })
+                
+                viewController.selectUserID = searchArticle[indexPath.row].userID
+                
+                viewController.articleID = searchArticle[indexPath.row].id
+                
+            } else {
+                
+                viewController.selectUserID = allForumArticles[indexPath.section][indexPath.row].userID
+                
+                viewController.articleID = allForumArticles[indexPath.section][indexPath.row].id
+                
+            }
+            
+            viewController.reportContentType = ReportContentType.article.title
+            
+            viewController.blockContentType = BlockContentType.article.title
+            
+            viewController.getFriendStatus = { [weak self] isBlock in
+                
+                guard let strongSelf = self else { return }
+                
+                if isBlock {
+                    
+                    strongSelf.fetchFriendBlockadeListData()
+                    
+                    strongSelf.fetchUserInfoData()
+                    
+                }
+                
+            }
+            
+            self.view.addSubview(viewController.view)
+
+            self.addChild(viewController)
+            
+        }
         
     }
     

@@ -26,6 +26,7 @@ enum ImageAsset: String {
     
     case create
     case edit
+    case more
     
     case telephoneCall
     case videoCamera

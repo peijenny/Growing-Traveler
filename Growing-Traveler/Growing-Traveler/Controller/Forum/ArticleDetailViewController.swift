@@ -39,6 +39,8 @@ class ArticleDetailViewController: UIViewController {
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
+        setNavigationItem()
+        
         setBackgroundView()
         
         setTableView()
@@ -49,6 +51,47 @@ class ArticleDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         fetchFriendBlockadeListData()
+        
+    }
+    
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.more), style: .plain, target: self, action: #selector(showUserInfoButton))
+
+    }
+    
+    @objc func showUserInfoButton(sender: UIButton) {
+        
+        guard let viewController = UIStoryboard.chat.instantiateViewController(
+            withIdentifier: String(describing: UserInfoViewController.self)
+        ) as? UserInfoViewController else { return }
+        
+        viewController.deleteAccount = false
+        
+        viewController.selectUserID = forumArticle?.userID ?? ""
+        
+        viewController.articleID = forumArticle?.id
+        
+        viewController.reportContentType = ReportContentType.article.title
+        
+        viewController.blockContentType = BlockContentType.article.title
+        
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
+        
+        viewController.getFriendStatus = { [weak self] isBlock in
+            
+            guard let strongSelf = self else { return }
+            
+            if isBlock {
+                
+                strongSelf.navigationController?.popViewController(animated: true)
+                
+            }
+            
+        }
         
     }
     
@@ -208,73 +251,6 @@ class ArticleDetailViewController: UIViewController {
         
         articleDetailTableView.dataSource = self
         
-        let longPressRecognizer = UILongPressGestureRecognizer(
-            target: self, action: #selector(longPressed(sender:)))
-        
-        articleDetailTableView.addGestureRecognizer(longPressRecognizer)
-        
-    }
-    
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
-        
-        if sender.state == UIGestureRecognizer.State.began {
-            
-            let touchPoint = sender.location(in: self.articleDetailTableView)
-            
-            if let indexPath = articleDetailTableView.indexPathForRow(at: touchPoint) {
-              
-                guard let viewController = UIStoryboard.chat.instantiateViewController(
-                    withIdentifier: String(describing: UserInfoViewController.self)
-                ) as? UserInfoViewController else { return }
-                
-                viewController.deleteAccount = false
-                
-                if indexPath.section == 1 {
-                    
-                    viewController.selectUserID = articleMessages[indexPath.row].userID
-                    
-                    viewController.articleMessage = articleMessages[indexPath.row]
-                    
-                    viewController.reportContentType = ReportContentType.message.title
-                    
-                    viewController.blockContentType = BlockContentType.message.title
-                    
-                    viewController.deleteAccount = (usersInfo.filter({
-                       
-                        $0.userID == articleMessages[indexPath.row].userID
-                        
-                    }).isEmpty) ? true : false
-                    
-                    viewController.getFriendStatus = { [weak self] isBlock in
-                        
-                        guard let strongSelf = self else { return }
-                        
-                        if isBlock {
-                            
-                            if viewController.selectUserID == strongSelf.forumArticle?.userID {
-                                
-                                strongSelf.navigationController?.popViewController(animated: true)
-                                
-                            }
-                            
-                            strongSelf.fetchFriendBlockadeListData()
-                            
-                            strongSelf.articleDetailTableView.reloadData()
-                            
-                        }
-                        
-                    }
-                    
-                    self.view.addSubview(viewController.view)
-
-                    self.addChild(viewController)
-                    
-                }
-                
-            }
-            
-        }
-        
     }
 
 }
@@ -338,9 +314,69 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             cell.showMessages(articleMessage: articleMessages[indexPath.row],
                 articleUserID: forumArticle?.userID ?? "", userName: userName, isBlock: isBlock)
             
+            cell.userInfoButton.addTarget(self, action: #selector(showUserInfoData), for: .touchUpInside)
+            
             cell.selectionStyle = .none
             
             return cell
+            
+        }
+        
+    }
+    
+    @objc func showUserInfoData(sender: UIButton) {
+        
+        let point = sender.convert(CGPoint.zero, to: articleDetailTableView)
+
+        if let indexPath = articleDetailTableView.indexPathForRow(at: point) {
+            
+            guard let viewController = UIStoryboard.chat.instantiateViewController(
+                withIdentifier: String(describing: UserInfoViewController.self)
+            ) as? UserInfoViewController else { return }
+            
+            viewController.deleteAccount = false
+            
+            if indexPath.section == 1 {
+                
+                viewController.selectUserID = articleMessages[indexPath.row].userID
+                
+                viewController.articleMessage = articleMessages[indexPath.row]
+                
+                viewController.reportContentType = ReportContentType.message.title
+                
+                viewController.blockContentType = BlockContentType.message.title
+                
+                viewController.deleteAccount = (usersInfo.filter({
+                   
+                    $0.userID == articleMessages[indexPath.row].userID
+                    
+                }).isEmpty) ? true : false
+                
+                viewController.getFriendStatus = { [weak self] isBlock in
+                    
+                    guard let strongSelf = self else { return }
+                    
+                    if isBlock {
+                        
+                        if viewController.selectUserID == strongSelf.forumArticle?.userID {
+                            
+                            strongSelf.navigationController?.popViewController(animated: true)
+                            
+                        }
+                        
+                        strongSelf.fetchFriendBlockadeListData()
+                        
+                        strongSelf.articleDetailTableView.reloadData()
+                        
+                    }
+                    
+                }
+                
+                self.view.addSubview(viewController.view)
+
+                self.addChild(viewController)
+                
+            }
             
         }
         
@@ -386,10 +422,6 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
                 headerView.showArticleDetail(forumArticle: forumArticle, userName: userName)
                 
             }
-            
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-            
-            headerView.addGestureRecognizer(tapGestureRecognizer)
             
             return headerView
             
@@ -469,40 +501,6 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         }
         
         present(navController, animated: true)
-        
-    }
-    
-    @objc func handleTap(sender: UITapGestureRecognizer) {
-
-        guard let viewController = UIStoryboard.chat.instantiateViewController(
-            withIdentifier: String(describing: UserInfoViewController.self)
-        ) as? UserInfoViewController else { return }
-        
-        viewController.deleteAccount = false
-        
-        viewController.selectUserID = forumArticle?.userID ?? ""
-        
-        viewController.articleID = forumArticle?.id
-        
-        viewController.reportContentType = ReportContentType.article.title
-        
-        viewController.blockContentType = BlockContentType.article.title
-        
-        self.view.addSubview(viewController.view)
-
-        self.addChild(viewController)
-        
-        viewController.getFriendStatus = { [weak self] isBlock in
-            
-            guard let strongSelf = self else { return }
-            
-            if isBlock {
-                
-                strongSelf.navigationController?.popViewController(animated: true)
-                
-            }
-            
-        }
         
     }
     

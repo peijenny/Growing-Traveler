@@ -27,6 +27,8 @@ class ArticleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var createTimeLabel: UILabel!
     
+    @IBOutlet weak var userInfoButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
