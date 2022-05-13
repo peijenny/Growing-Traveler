@@ -23,8 +23,25 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vio-EA-NUG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fT3-U9-Xyz">
+                                <rect key="frame" x="358" y="10" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UH6-K1-G0N"/>
+                                    <constraint firstAttribute="width" constant="40" id="eJh-Xp-pOo"/>
+                                </constraints>
+                                <color key="tintColor" red="0.84705882349999995" green="0.63137254899999995" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="trash" catalog="system"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fT3-U9-Xyz" secondAttribute="trailing" constant="16" id="JGO-Ps-zrF"/>
+                            <constraint firstAttribute="bottom" secondItem="fT3-U9-Xyz" secondAttribute="bottom" constant="10" id="fla-Ez-S6a"/>
+                            <constraint firstItem="fT3-U9-Xyz" firstAttribute="top" secondItem="Vio-EA-NUG" secondAttribute="top" constant="10" id="tND-N7-663"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="15"/>
@@ -32,7 +49,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rce-gi-k8u">
-                        <rect key="frame" x="16" y="10" width="120" height="30"/>
+                        <rect key="frame" x="16" y="15" width="120" height="30"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="標籤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anQ-Ud-7SB">
                                 <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
@@ -61,15 +78,15 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="NJ7-9c-Amh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1JC-7S-2H8"/>
-                    <constraint firstAttribute="bottom" secondItem="Vio-EA-NUG" secondAttribute="bottom" constant="10" id="9vH-FK-XW5"/>
+                    <constraint firstAttribute="bottom" secondItem="Vio-EA-NUG" secondAttribute="bottom" id="9vH-FK-XW5"/>
                     <constraint firstItem="NJ7-9c-Amh" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.6" id="N7a-WI-SXK"/>
                     <constraint firstAttribute="trailing" secondItem="NJ7-9c-Amh" secondAttribute="trailing" id="YpS-It-5o7"/>
                     <constraint firstItem="rce-gi-k8u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="b4g-v2-qdx"/>
                     <constraint firstItem="NJ7-9c-Amh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cY8-3N-Vsk"/>
                     <constraint firstAttribute="trailing" secondItem="Vio-EA-NUG" secondAttribute="trailing" id="i0z-s1-VIG"/>
-                    <constraint firstItem="rce-gi-k8u" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ktH-AH-9eo"/>
+                    <constraint firstItem="rce-gi-k8u" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="ktH-AH-9eo"/>
                     <constraint firstItem="Vio-EA-NUG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="lCQ-Ah-FdK"/>
-                    <constraint firstAttribute="bottom" secondItem="rce-gi-k8u" secondAttribute="bottom" constant="20" id="nFO-jU-1xc"/>
+                    <constraint firstAttribute="bottom" secondItem="rce-gi-k8u" secondAttribute="bottom" constant="15" id="nFO-jU-1xc"/>
                     <constraint firstItem="Vio-EA-NUG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wpo-NH-Cry"/>
                 </constraints>
             </tableViewCellContentView>
@@ -77,11 +94,13 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="categoryLabel" destination="anQ-Ud-7SB" id="Mf4-Cl-FhV"/>
+                <outlet property="deleteButton" destination="fT3-U9-Xyz" id="z8r-Qn-UQ3"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="103.45982142857143"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -11,6 +11,8 @@ class BottomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var categoryLabel: UILabel!
     
+    @IBOutlet weak var deleteButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

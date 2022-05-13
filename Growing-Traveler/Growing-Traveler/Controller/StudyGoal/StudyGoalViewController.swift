@@ -19,12 +19,6 @@ class StudyGoalViewController: UIViewController {
             
             studyGoalTableView.dataSource = self
             
-            // MARK: - long Press tableView cell -> push userInfo page
-            let longPressRecognizer = UILongPressGestureRecognizer(
-                target: self, action: #selector(longPressed(sender:)))
-            
-            studyGoalTableView.addGestureRecognizer(longPressRecognizer)
-            
         }
         
     }
@@ -356,57 +350,56 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.showStudyGoalBottom(studyGoal: studyGoals[indexPath.section])
             
+            cell.deleteButton.addTarget(self, action: #selector(deleteStudyGoalButton), for: .touchUpInside)
+            
         }
         
         return cell
         
     }
     
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+    @objc func deleteStudyGoalButton(sender: UIButton) {
         
-        if sender.state == UIGestureRecognizer.State.began {
+        let point = sender.convert(CGPoint.zero, to: studyGoalTableView)
+
+        if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
             
-            let touchPoint = sender.location(in: self.studyGoalTableView)
+            let alertController = UIAlertController(
+                title: "刪除個人學習計劃", message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
+                preferredStyle: .alert)
             
-            if let indexPath = studyGoalTableView.indexPathForRow(at: touchPoint) {
+            let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
                 
-                let alertController = UIAlertController(
-                    title: "刪除個人學習計劃", message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
-                    preferredStyle: .alert)
+                guard let strongSelf = self else { return }
                 
-                let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
-                    
-                    guard let strongSelf = self else { return }
-                    
-                    strongSelf.studyGoalManager.deleteData(studyGoal: strongSelf.studyGoals[indexPath.section])
-                    
-                    strongSelf.studyGoals.remove(at: indexPath.section)
-                    
-                    strongSelf.studyGoalTableView.beginUpdates()
-                    
-                    let indexSet = NSMutableIndexSet()
-                    
-                    indexSet.add(indexPath.section)
+                strongSelf.studyGoalManager.deleteData(studyGoal: strongSelf.studyGoals[indexPath.section])
+                
+                strongSelf.studyGoals.remove(at: indexPath.section)
+                
+                strongSelf.studyGoalTableView.beginUpdates()
+                
+                let indexSet = NSMutableIndexSet()
+                
+                indexSet.add(indexPath.section)
 
-                    strongSelf.studyGoalTableView.deleteSections(
-                        indexSet as IndexSet, with: UITableView.RowAnimation.left)
+                strongSelf.studyGoalTableView.deleteSections(
+                    indexSet as IndexSet, with: UITableView.RowAnimation.left)
 
-                    strongSelf.studyGoalTableView.endUpdates()
-                    
-                }
+                strongSelf.studyGoalTableView.endUpdates()
                 
-                let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+                HUD.flash(.labeledSuccess(title: "計劃已刪除！", subtitle: nil), delay: 0.5)
                 
-                alertController.addAction(agreeAction)
-                
-                alertController.addAction(cancelAction)
-                
-                present(alertController, animated: true, completion: nil)
-
             }
             
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+            
+            alertController.addAction(agreeAction)
+            
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
         }
-        
     }
     
     @objc func checkItemButton(sender: UIButton) {
