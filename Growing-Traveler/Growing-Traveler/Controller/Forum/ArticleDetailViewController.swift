@@ -231,11 +231,19 @@ class ArticleDetailViewController: UIViewController {
                 
                 if indexPath.section == 1 {
                     
-                    let selectUserID = articleMessages[indexPath.row].userID
+                    viewController.selectUserID = articleMessages[indexPath.row].userID
                     
-                    viewController.selectUserID = selectUserID
+                    viewController.articleMessage = articleMessages[indexPath.row]
                     
-                    viewController.deleteAccount = (usersInfo.filter({ $0.userID == selectUserID }).isEmpty) ? true : false
+                    viewController.reportContentType = ReportContentType.message.title
+                    
+                    viewController.blockContentType = BlockContentType.message.title
+                    
+                    viewController.deleteAccount = (usersInfo.filter({
+                       
+                        $0.userID == articleMessages[indexPath.row].userID
+                        
+                    }).isEmpty) ? true : false
                     
                     viewController.getFriendStatus = { [weak self] isBlock in
                         
@@ -473,6 +481,12 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         viewController.deleteAccount = false
         
         viewController.selectUserID = forumArticle?.userID ?? ""
+        
+        viewController.articleID = forumArticle?.id
+        
+        viewController.reportContentType = ReportContentType.article.title
+        
+        viewController.blockContentType = BlockContentType.article.title
         
         self.view.addSubview(viewController.view)
 

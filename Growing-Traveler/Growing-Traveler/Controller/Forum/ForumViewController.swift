@@ -281,11 +281,19 @@ class ForumViewController: BaseViewController {
                     
                     viewController.selectUserID = searchArticle[indexPath.row].userID
                     
+                    viewController.articleID = searchArticle[indexPath.row].id
+                    
                 } else {
                     
                     viewController.selectUserID = allForumArticles[indexPath.section][indexPath.row].userID
                     
+                    viewController.articleID = allForumArticles[indexPath.section][indexPath.row].id
+                    
                 }
+                
+                viewController.reportContentType = ReportContentType.article.title
+                
+                viewController.blockContentType = BlockContentType.article.title
                 
                 self.view.addSubview(viewController.view)
 

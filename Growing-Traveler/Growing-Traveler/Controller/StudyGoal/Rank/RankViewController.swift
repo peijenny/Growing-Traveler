@@ -160,6 +160,8 @@ class RankViewController: UIViewController {
                 
                 viewController.selectUserID = usersInfo[indexPath.row].userID
                 
+                viewController.blockContentType = BlockContentType.user.title
+                
                 self.view.addSubview(viewController.view)
 
                 self.addChild(viewController)

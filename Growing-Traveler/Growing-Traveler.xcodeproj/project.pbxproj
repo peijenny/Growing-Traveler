@@ -101,6 +101,8 @@
 		28B76539282CFCF7009EFA0A /* PrivacyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76538282CFCF7009EFA0A /* PrivacyPolicy.swift */; };
 		28B7653B282CFF7C009EFA0A /* MandateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B7653A282CFF7C009EFA0A /* MandateType.swift */; };
 		28B7653D282D0634009EFA0A /* SignType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B7653C282D0634009EFA0A /* SignType.swift */; };
+		28B7653F282DE523009EFA0A /* ReportContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B7653E282DE523009EFA0A /* ReportContentType.swift */; };
+		28B76542282E0C72009EFA0A /* ReportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B76541282E0C72009EFA0A /* ReportManager.swift */; };
 		28BB6EE628066441002B0458 /* Forum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BB6EE528066441002B0458 /* Forum.storyboard */; };
 		28BB6EE928066639002B0458 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EE828066639002B0458 /* ForumViewController.swift */; };
 		28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */; };
@@ -261,6 +263,8 @@
 		28B76538282CFCF7009EFA0A /* PrivacyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicy.swift; sourceTree = "<group>"; };
 		28B7653A282CFF7C009EFA0A /* MandateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateType.swift; sourceTree = "<group>"; };
 		28B7653C282D0634009EFA0A /* SignType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignType.swift; sourceTree = "<group>"; };
+		28B7653E282DE523009EFA0A /* ReportContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportContentType.swift; sourceTree = "<group>"; };
+		28B76541282E0C72009EFA0A /* ReportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportManager.swift; sourceTree = "<group>"; };
 		28BB6EE528066441002B0458 /* Forum.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Forum.storyboard; sourceTree = "<group>"; };
 		28BB6EE828066639002B0458 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
 		28BB6EEA28066926002B0458 /* PublishForumArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishForumArticleViewController.swift; sourceTree = "<group>"; };
@@ -557,6 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				28B76523282CBC71009EFA0A /* Enum */,
+				28B76540282E0B68009EFA0A /* Report */,
 				28DA83462813CF3D0081CB14 /* Mandate */,
 				2808C90F280FEC3700DC1EC5 /* Analysis */,
 				280C1B0C280E42230091B9DC /* Profile */,
@@ -651,6 +656,15 @@
 				28B7653C282D0634009EFA0A /* SignType.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		28B76540282E0B68009EFA0A /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				28B7653E282DE523009EFA0A /* ReportContentType.swift */,
+				28B76541282E0C72009EFA0A /* ReportManager.swift */,
+			);
+			path = Report;
 			sourceTree = "<group>";
 		};
 		28BB6EE428066418002B0458 /* Forum */ = {
@@ -1085,6 +1099,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B76542282E0C72009EFA0A /* ReportManager.swift in Sources */,
 				28DA833F2812AB940081CB14 /* MandateTableViewCell.swift in Sources */,
 				28D702C12802B41B00FE9AEA /* SelectStudyItemViewController.swift in Sources */,
 				28CE2D4327FECBF400ACA813 /* TabBarViewController.swift in Sources */,
@@ -1130,6 +1145,7 @@
 				28DA833B28129CFF0081CB14 /* MandateViewController.swift in Sources */,
 				28D79FE02817F56100505B5B /* SignUpTableViewCell.swift in Sources */,
 				281358F5281E7BE2000B0CAE /* UIColor+Extension.swift in Sources */,
+				28B7653F282DE523009EFA0A /* ReportContentType.swift in Sources */,
 				288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */,
 				280C1B01280D772E0091B9DC /* ChatRoomManager.swift in Sources */,
 				28DA8333281274BF0081CB14 /* NibOwnerLoadable.swift in Sources */,

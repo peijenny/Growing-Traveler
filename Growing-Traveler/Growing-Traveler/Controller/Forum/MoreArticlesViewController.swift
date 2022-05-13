@@ -236,6 +236,12 @@ class MoreArticlesViewController: UIViewController {
                 
                 viewController.selectUserID = forumArticles[indexPath.row].userID
                 
+                viewController.articleID = forumArticles[indexPath.row].id
+                
+                viewController.reportContentType = ReportContentType.article.title
+                
+                viewController.blockContentType = BlockContentType.article.title
+                
                 self.view.addSubview(viewController.view)
 
                 self.addChild(viewController)

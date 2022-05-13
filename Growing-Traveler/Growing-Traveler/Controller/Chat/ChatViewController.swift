@@ -150,6 +150,10 @@ class ChatViewController: BaseViewController {
         
         viewController.selectUserID = friendID
         
+        viewController.reportContentType = ReportContentType.chat.title
+        
+        viewController.blockContentType = BlockContentType.chat.title
+        
         viewController.getFriendStatus = { [weak self] isBlock in
             
             guard let strongSelf = self else { return }

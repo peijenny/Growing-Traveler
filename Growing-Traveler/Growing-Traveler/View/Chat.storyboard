@@ -358,7 +358,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gc-OT-XL4">
-                                <rect key="frame" x="20" y="254.5" width="374" height="397"/>
+                                <rect key="frame" x="20" y="234" width="374" height="438"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc5-eb-7GL">
                                         <rect key="frame" x="318" y="16" width="40" height="40"/>
@@ -420,7 +420,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtE-T3-geD">
-                                        <rect key="frame" x="16" y="344.5" width="342" height="36.5"/>
+                                        <rect key="frame" x="16" y="338.5" width="342" height="36.5"/>
                                         <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
@@ -436,28 +436,48 @@
                                             <action selector="blockUserButton:" destination="Ajc-IU-atk" eventType="touchUpInside" id="Ium-Bc-R7p"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0XE-c7-MDa">
+                                        <rect key="frame" x="16" y="385" width="342" height="37"/>
+                                        <color key="backgroundColor" red="0.54117647058823526" green="0.73333333333333328" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="檢舉使用者發佈內容">
+                                            <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="reportPublishedButton:" destination="Ajc-IU-atk" eventType="touchUpInside" id="vzz-TZ-MDb"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="0XE-c7-MDa" secondAttribute="trailing" constant="16" id="3W4-d6-i7I"/>
                                     <constraint firstItem="wKC-h4-xqD" firstAttribute="leading" secondItem="0gc-OT-XL4" secondAttribute="leading" constant="16" id="CSd-88-CJu"/>
-                                    <constraint firstItem="vtE-T3-geD" firstAttribute="top" secondItem="wKC-h4-xqD" secondAttribute="bottom" constant="16" id="Ckb-7j-mgt"/>
                                     <constraint firstItem="fFg-B8-XSk" firstAttribute="top" secondItem="VZO-tJ-eLm" secondAttribute="bottom" constant="20" id="ERw-Uw-n15"/>
+                                    <constraint firstItem="0XE-c7-MDa" firstAttribute="top" secondItem="vtE-T3-geD" secondAttribute="bottom" constant="10" id="EX5-XS-ppX"/>
                                     <constraint firstItem="vtE-T3-geD" firstAttribute="leading" secondItem="0gc-OT-XL4" secondAttribute="leading" constant="16" id="FM3-1T-YhS"/>
                                     <constraint firstItem="1Wq-eR-hj5" firstAttribute="top" secondItem="fFg-B8-XSk" secondAttribute="bottom" constant="16" id="HIm-Ub-pjS"/>
                                     <constraint firstItem="xXR-5a-NV9" firstAttribute="top" secondItem="1Wq-eR-hj5" secondAttribute="bottom" constant="16" id="HPF-Cc-igg"/>
                                     <constraint firstAttribute="trailing" secondItem="Dc5-eb-7GL" secondAttribute="trailing" constant="16" id="N1g-Z8-DK5"/>
                                     <constraint firstItem="VZO-tJ-eLm" firstAttribute="centerX" secondItem="0gc-OT-XL4" secondAttribute="centerX" id="VAf-h1-YoU"/>
                                     <constraint firstItem="wKC-h4-xqD" firstAttribute="top" secondItem="xXR-5a-NV9" secondAttribute="bottom" constant="16" id="VNX-iq-hp5"/>
+                                    <constraint firstAttribute="bottom" secondItem="0XE-c7-MDa" secondAttribute="bottom" constant="16" id="YIu-Pr-VxB"/>
                                     <constraint firstAttribute="trailing" secondItem="vtE-T3-geD" secondAttribute="trailing" constant="16" id="bxw-2T-j67"/>
                                     <constraint firstItem="Dc5-eb-7GL" firstAttribute="top" secondItem="0gc-OT-XL4" secondAttribute="top" constant="16" id="eAR-rV-Umw"/>
-                                    <constraint firstAttribute="bottom" secondItem="vtE-T3-geD" secondAttribute="bottom" constant="16" id="fZR-da-6EQ"/>
                                     <constraint firstItem="xXR-5a-NV9" firstAttribute="leading" secondItem="0gc-OT-XL4" secondAttribute="leading" constant="16" id="fij-pk-zXb"/>
                                     <constraint firstItem="1Wq-eR-hj5" firstAttribute="leading" secondItem="0gc-OT-XL4" secondAttribute="leading" constant="16" id="gMS-y9-2eY"/>
                                     <constraint firstItem="VZO-tJ-eLm" firstAttribute="top" secondItem="0gc-OT-XL4" secondAttribute="top" constant="16" id="h8U-kU-8zC"/>
                                     <constraint firstAttribute="trailing" secondItem="1Wq-eR-hj5" secondAttribute="trailing" constant="16" id="hn4-0X-aRb"/>
                                     <constraint firstAttribute="trailing" secondItem="xXR-5a-NV9" secondAttribute="trailing" constant="16" id="j74-v6-BJw"/>
                                     <constraint firstItem="fFg-B8-XSk" firstAttribute="centerX" secondItem="0gc-OT-XL4" secondAttribute="centerX" id="mzy-kV-jr5"/>
+                                    <constraint firstItem="0XE-c7-MDa" firstAttribute="leading" secondItem="0gc-OT-XL4" secondAttribute="leading" constant="16" id="pZW-F0-ftj"/>
                                     <constraint firstAttribute="trailing" secondItem="wKC-h4-xqD" secondAttribute="trailing" constant="16" id="qnf-jW-Ln2"/>
+                                    <constraint firstItem="vtE-T3-geD" firstAttribute="top" secondItem="wKC-h4-xqD" secondAttribute="bottom" constant="10" id="vCo-Ow-gVe"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -482,6 +502,7 @@
                         <outlet property="addUserButton" destination="wKC-h4-xqD" id="drU-Zr-CsV"/>
                         <outlet property="blockUserButton" destination="vtE-T3-geD" id="c07-G2-Szp"/>
                         <outlet property="friendStatusLabel" destination="xXR-5a-NV9" id="xKW-n2-mRa"/>
+                        <outlet property="reportPublishedButton" destination="0XE-c7-MDa" id="h3v-hl-fbf"/>
                         <outlet property="userNameLabel" destination="1Wq-eR-hj5" id="ciP-Ly-rJJ"/>
                         <outlet property="userPhotoImageView" destination="fFg-B8-XSk" id="K6R-y7-QFE"/>
                     </connections>
