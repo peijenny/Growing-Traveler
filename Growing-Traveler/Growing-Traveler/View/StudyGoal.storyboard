@@ -525,11 +525,9 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDl-pt-egS">
                                 <rect key="frame" x="10" y="230" width="394" height="602"/>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2e-Cl-7WE">
                                 <rect key="frame" x="10" y="60" width="394" height="394"/>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="394" id="2JL-Tg-Xuf"/>
                                     <constraint firstAttribute="width" secondItem="R2e-Cl-7WE" secondAttribute="height" multiplier="1:1" id="cws-3F-SVv"/>

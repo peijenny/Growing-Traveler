@@ -30,6 +30,8 @@ class FriendViewController: UIViewController {
     
     @IBOutlet weak var friendBackgroundView: UIView!
     
+    @IBOutlet weak var headerView: UIView!
+    
     let badgeLabel = UILabel()
     
     var chatRoomManager = ChatRoomManager()
@@ -58,6 +60,10 @@ class FriendViewController: UIViewController {
         setNavigationItems()
 
         registerTableViewCell()
+        
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
     }
     

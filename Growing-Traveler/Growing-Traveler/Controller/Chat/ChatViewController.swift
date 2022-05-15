@@ -26,6 +26,10 @@ class ChatViewController: BaseViewController {
 
     @IBOutlet weak var friendStatusLabel: UILabel!
     
+    @IBOutlet weak var uploadImageButton: UIButton!
+    
+    @IBOutlet weak var sendMessageButton: UIButton!
+    
     var displayImageView = UIImageView()
     
     var forumArticleManager = ForumArticleManager()
@@ -124,6 +128,16 @@ class ChatViewController: BaseViewController {
             friendStatusLabel.isHidden = false
             
         }
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        friendStatusLabel.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        uploadImageButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        sendMessageButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
     }
 

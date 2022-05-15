@@ -23,9 +23,29 @@ class ArticleDetailHeaderView: UITableViewHeaderFooterView {
     
 //    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var headerBackgroundView: UIView!
+    
+    @IBOutlet weak var categoryStackView: UIStackView!
+    
+    @IBOutlet weak var categoryBackgroundView: UIView!
+    
+    @IBOutlet weak var middleBackgoundView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       
+        headerBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        categoryStackView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        categoryStackView.cornerRadius = 10
+        
+        categoryBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        
+        categoryBackgroundView.cornerRadius = 10
+        
+        middleBackgoundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        
     }
     
     func showArticleDetail(forumArticle: ForumArticle, userName: String) {

@@ -65,7 +65,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="few-fZ-4ej">
                                                 <rect key="frame" x="0.0" y="0.0" width="181" height="44"/>
-                                                <color key="backgroundColor" red="0.67450982329999998" green="0.75294119120000003" blue="0.79607844350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Email 登入"/>
@@ -75,7 +75,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUh-eL-n6u">
                                                 <rect key="frame" x="201" y="0.0" width="181" height="44"/>
-                                                <color key="backgroundColor" red="0.43137254901960786" green="0.47450977560000002" blue="0.60392159219999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Email 註冊"/>
@@ -115,7 +115,6 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-CO-XrY">
                                                         <rect key="frame" x="0.0" y="0.0" width="128.5" height="29"/>
                                                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
-                                                        <color key="tintColor" red="0.28627450980000002" green="0.63137254899999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="最終用戶許可協議"/>
                                                         <connections>
@@ -125,7 +124,6 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1Z-23-t8n">
                                                         <rect key="frame" x="138.5" y="0.0" width="83.5" height="29"/>
                                                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
-                                                        <color key="tintColor" red="0.28627450980000002" green="0.63137254899999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="隱私權政策"/>
                                                         <connections>
@@ -133,6 +131,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -174,6 +173,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="eulaButton" destination="Y1Z-23-t8n" id="mji-o3-1ZN"/>
+                        <outlet property="privacyPolicyButton" destination="dcY-CO-XrY" id="iCj-s6-3Ha"/>
                         <outlet property="signInButton" destination="few-fZ-4ej" id="WdN-KD-hB5"/>
                         <outlet property="signInWithAppleButtonView" destination="r90-d9-dAg" id="Fzc-aM-yOh"/>
                         <outlet property="signUpButton" destination="RUh-eL-n6u" id="8f7-Io-lYw"/>
@@ -211,7 +212,7 @@
                                     <constraint firstAttribute="height" constant="50" id="yLt-yy-bMo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="tintColor" red="0.231372565" green="0.50980395079999996" blue="0.72156864399999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" image="arrowshape.turn.up.left.2" catalog="system"/>
                                 <connections>
@@ -226,7 +227,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="132-BO-2g7"/>
-                        <color key="backgroundColor" red="0.67450982329999998" green="0.75294119120000003" blue="0.79607844350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="GL5-ZN-ZGQ" firstAttribute="top" secondItem="132-BO-2g7" secondAttribute="top" constant="16" id="8jQ-eY-QWl"/>
                             <constraint firstItem="xsI-KC-8FE" firstAttribute="leading" secondItem="132-BO-2g7" secondAttribute="leading" constant="16" id="B9N-L3-gUx"/>
@@ -241,6 +242,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="KXW-Ot-vmY" id="Grb-xp-Xkj"/>
                         <outlet property="signTableView" destination="xsI-KC-8FE" id="Tva-E4-Mhf"/>
                     </connections>
                 </viewController>

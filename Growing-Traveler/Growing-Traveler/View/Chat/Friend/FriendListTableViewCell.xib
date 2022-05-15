@@ -19,7 +19,6 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lh1-ku-vdE">
                         <rect key="frame" x="8" y="8" width="398" height="46"/>
-                        <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="10"/>
@@ -60,7 +59,6 @@
                     </imageView>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ce-SE-Ngh">
                         <rect key="frame" x="293" y="16" width="105" height="30"/>
-                        <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="3ce-SE-Ngh" secondAttribute="height" multiplier="3.5:1" id="EZk-xM-thS"/>
                         </constraints>
@@ -69,11 +67,6 @@
                         <buttonConfiguration key="configuration" style="plain" title="解除封鎖">
                             <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         </buttonConfiguration>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -98,6 +91,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="friendIconImageView" destination="C6z-d1-sTJ" id="KBg-Xb-ggQ"/>
+                <outlet property="friendListBackgroundView" destination="lh1-ku-vdE" id="SZu-b2-u56"/>
                 <outlet property="friendNameLabel" destination="tRE-Zx-8K6" id="4dQ-hC-SBw"/>
                 <outlet property="friendStatusLabel" destination="Jnq-Kf-k56" id="MfW-qq-wdf"/>
                 <outlet property="unblockButton" destination="3ce-SE-Ngh" id="O4g-eJ-FLo"/>

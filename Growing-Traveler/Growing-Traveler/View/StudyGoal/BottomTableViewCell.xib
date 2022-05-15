@@ -93,6 +93,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="categoryBackgroundView" destination="rce-gi-k8u" id="IbJ-N0-Dkh"/>
                 <outlet property="categoryLabel" destination="anQ-Ud-7SB" id="Mf4-Cl-FhV"/>
                 <outlet property="deleteButton" destination="fT3-U9-Xyz" id="z8r-Qn-UQ3"/>
             </connections>

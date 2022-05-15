@@ -41,7 +41,9 @@ class ProfileView: UIView, NibOwnerLoadable {
         
         userPhotoImageView.contentMode = .scaleAspectFill
 
-        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
+        userPhotoImageView.cornerRadius = userPhotoImageView.frame.width / 2
+        
+        userNameLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
     }
 

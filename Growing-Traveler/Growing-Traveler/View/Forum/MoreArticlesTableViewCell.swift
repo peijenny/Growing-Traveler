@@ -27,15 +27,28 @@ class MoreArticlesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userInfoButton: UIButton!
     
+    @IBOutlet weak var articleTypeBackgroundView: UIView!
+    
+    @IBOutlet weak var categoryBackgroundView: UIView!
+    
+    @IBOutlet weak var middleBackgroundView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        articleTypeBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        categoryBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        categoryBackgroundView.cornerRadius = 10
+        
+        middleBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
     func showMoreArticles(forumArticle: ForumArticle, userName: String) {

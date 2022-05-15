@@ -30,6 +30,10 @@ class ApplyFriendViewController: BaseViewController {
     
     @IBOutlet weak var userInfoView: UIView!
     
+    @IBOutlet weak var applyFriendBackgroundView: UIView!
+    
+    @IBOutlet weak var addFriendButton: UIButton!
+    
     var friendManager = FriendManager()
     
     var otherFriend: Friend?
@@ -75,6 +79,16 @@ class ApplyFriendViewController: BaseViewController {
         inputEmailTextField.delegate = self
         
         userInfoView.isHidden = true
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        applyFriendBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        userInfoView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        userInfoView.cornerRadius = 10
+        
+        addFriendButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
     }
     
@@ -189,13 +203,15 @@ class ApplyFriendViewController: BaseViewController {
             if isConfirm {
                 
                 for index in 0..<strongSelf.friendsInfo.count {
-                    
+
                     if strongSelf.friendsInfo[index].userID == otherFriend.userID {
-                        
+
                         strongSelf.friendsInfo.remove(at: index)
                         
+                        break
+
                     }
-                    
+
                 }
                 
                 strongSelf.applyTableView.reloadData()

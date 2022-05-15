@@ -855,8 +855,8 @@
 				281358D7281BC8D3000B0CAE /* Certification */,
 				283E65862817D17700F1033F /* Setting */,
 				28DA833C2812AB420081CB14 /* Mandate */,
-				28DA83302812744F0081CB14 /* ProfileView.xib */,
 				28DA8334281274E30081CB14 /* ProfileView.swift */,
+				28DA83302812744F0081CB14 /* ProfileView.xib */,
 				28DA833628127AEE0081CB14 /* FeatureCollectionViewCell.swift */,
 				28DA833728127AEE0081CB14 /* FeatureCollectionViewCell.xib */,
 			);

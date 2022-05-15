@@ -12,6 +12,10 @@ class ArticleMessageViewController: BaseViewController {
 
     @IBOutlet weak var messageTextField: UITextField!
     
+    @IBOutlet weak var submitButton: UIButton!
+    
+    @IBOutlet weak var selectImageButton: UIButton!
+    
     var forumArticleManager = ForumArticleManager()
     
     var articleID = String()
@@ -20,7 +24,15 @@ class ArticleMessageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        submitButton.cornerRadius = 5
+        
+        selectImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
 
+        selectImageButton.cornerRadius = 5
+        
     }
 
     override var hidesBottomBarWhenPushed: Bool {

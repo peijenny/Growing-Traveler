@@ -16,6 +16,8 @@ class PublishNoteViewController: BaseViewController {
     
     @IBOutlet weak var noteTextView: UITextView!
     
+    @IBOutlet weak var uploadImageButton: UIButton!
+    
     var userManager = UserManager()
     
     var modifyNote: Note?
@@ -64,7 +66,13 @@ class PublishNoteViewController: BaseViewController {
         }
 
         noteTextView.delegate = self
-
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        uploadImageButton.cornerRadius = 5
+        
     }
     
     override var hidesBottomBarWhenPushed: Bool {

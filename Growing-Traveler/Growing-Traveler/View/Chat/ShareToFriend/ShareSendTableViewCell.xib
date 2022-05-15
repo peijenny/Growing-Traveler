@@ -35,11 +35,6 @@
                                     <constraint firstAttribute="height" constant="150" id="OaZ-HH-kWE"/>
                                     <constraint firstAttribute="width" constant="209" id="jC4-Om-edS"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUf-V7-Scn">
                                 <rect key="frame" x="10" y="190" width="189" height="25"/>
@@ -74,11 +69,6 @@
                             <constraint firstItem="uyw-k4-0v7" firstAttribute="leading" secondItem="Blm-MB-k7P" secondAttribute="leading" id="nKf-qd-cGZ"/>
                             <constraint firstItem="xLw-4w-jhz" firstAttribute="top" secondItem="uyw-k4-0v7" secondAttribute="bottom" constant="10" id="pwy-qV-JQe"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>
@@ -94,6 +84,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="sendBackgroundView" destination="Blm-MB-k7P" id="6Qo-EI-3d6"/>
                 <outlet property="sendTimeLabel" destination="hb2-st-Gl3" id="T1Y-Gf-uuA"/>
                 <outlet property="shareImageView" destination="uyw-k4-0v7" id="Jua-uH-DJz"/>
                 <outlet property="shareTitleLabel" destination="LUf-V7-Scn" id="f97-jK-jJL"/>

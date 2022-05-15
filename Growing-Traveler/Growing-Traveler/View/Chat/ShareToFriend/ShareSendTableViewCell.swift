@@ -17,9 +17,19 @@ class ShareSendTableViewCell: UITableViewCell {
     
     @IBOutlet weak var sendTimeLabel: UILabel!
     
+    @IBOutlet weak var sendBackgroundView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        shareTypeLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        
+        sendBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        sendBackgroundView.cornerRadius = 10
+        
+        shareImageView.cornerRadius = 10
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

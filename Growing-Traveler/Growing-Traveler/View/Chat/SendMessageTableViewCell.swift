@@ -31,15 +31,17 @@ class SendMessageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        sendBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        sendBackgroundView.cornerRadius = 15
+        
+        sendIamgeView.cornerRadius = 15
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        sendBackgroundView.layer.cornerRadius = 15
-        
-        sendIamgeView.layer.cornerRadius = 15
         
     }
     

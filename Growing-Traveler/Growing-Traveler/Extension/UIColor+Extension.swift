@@ -19,23 +19,36 @@ enum ColorChart {
     
     case darkBlue
     
+    case salviaBlue
+    
     case lightRed
     
     var hexText: String {
         
         switch self {
             
-        case .lightGary: return "EBEBE3"
+        case .lightGary: return "E6E6E6"
+            // E6E6E6
+            // EBEBE3
             
-        case .gray: return "C1BFCE"
+        case .gray: return "C4C4C4"
+            // C4C4C4
+            // C1BFCE
             
         case .lightBlue: return "B2D1E4"
+            // C1DDDF
             
         case .blue: return "8ABBE0"
+            // 79C5CF
             
         case .darkBlue: return "49A1D8"
+            // 0093C1
+            
+        case .salviaBlue: return "6E799A"
+            // 0E305D
             
         case .lightRed: return "D8A196"
+            // F08080
             
         }
         

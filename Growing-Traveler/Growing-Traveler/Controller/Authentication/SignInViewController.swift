@@ -23,6 +23,8 @@ class SignInViewController: BaseViewController {
         
     }
     
+    @IBOutlet weak var backButton: UIButton!
+    
     var friendManager = FriendManager()
     
     var errorManager = ErrorManager()
@@ -45,6 +47,10 @@ class SignInViewController: BaseViewController {
         signTableView.register(
             UINib(nibName: String(describing: SignUpTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: SignUpTableViewCell.self))
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        backButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
     }
 

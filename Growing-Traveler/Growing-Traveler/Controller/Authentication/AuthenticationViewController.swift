@@ -19,6 +19,10 @@ class AuthenticationViewController: UIViewController {
     
     @IBOutlet weak var signUpButton: UIButton!
     
+    @IBOutlet weak var privacyPolicyButton: UIButton!
+    
+    @IBOutlet weak var eulaButton: UIButton!
+    
     var friendManager = FriendManager()
     
     var errorManager = ErrorManager()
@@ -35,6 +39,18 @@ class AuthenticationViewController: UIViewController {
         fetchUserData()
         
         setupProviderLoginView()
+        
+        signInButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        signInButton.cornerRadius = 5
+        
+        signUpButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.salviaBlue.hexText)
+        
+        signUpButton.cornerRadius = 5
+        
+        privacyPolicyButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        eulaButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
     }
     
@@ -237,7 +253,8 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                 
             }
             
-            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
+            let credential = OAuthProvider.credential(
+                withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
             
             Auth.auth().signIn(with: credential) { authDataResult, error in
 
@@ -282,9 +299,11 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                         let today = dateFormatter.string(from: Date())
                         
                         let userInfo = UserInfo(
-                            userID: user.uid, userName: "\(givenName) \(familyName)",userEmail: user.email ?? "",
+                            userID: user.uid,
+                            userName: "\(givenName) \(familyName)", userEmail: user.email ?? "",
                             userPhoto: "\(photo)", userPhone: user.phoneNumber ?? "", signInType: "appleID",
-                            achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [today]), certification: [])
+                            achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [today]),
+                            certification: [])
                         
                         self.userManager.addData(user: userInfo)
                         

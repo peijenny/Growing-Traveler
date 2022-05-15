@@ -68,7 +68,7 @@ class AnalysisBarChatTableViewCell: UITableViewCell {
         
         pFormatter.percentSymbol = "小時"
         
-        chartData.setValueFont(UIFont(name: "PingFang TC", size: 12)!)
+        chartData.setValueFont(UIFont(name: "PingFang TC", size: 11)!)
         
         analysisBarChatView.data = chartData
         
