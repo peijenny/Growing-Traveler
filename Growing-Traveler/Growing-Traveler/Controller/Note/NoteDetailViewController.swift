@@ -24,7 +24,7 @@ class NoteDetailViewController: UIViewController {
         
     }
     
-    @IBOutlet weak var noteDetailBackgroundView: UILabel!
+    @IBOutlet weak var noteDetailBackgroundView: UIView!
     
     var userManager = UserManager()
     

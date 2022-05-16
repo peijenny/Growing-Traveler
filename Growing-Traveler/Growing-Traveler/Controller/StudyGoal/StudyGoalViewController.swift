@@ -317,8 +317,6 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
         var cell = UITableViewCell()
         
-        cell.selectionStyle = .none
-        
         if indexPath.row == 0 {
             
             cell = tableView.dequeueReusableCell(
@@ -353,6 +351,8 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             cell.deleteButton.addTarget(self, action: #selector(deleteStudyGoalButton), for: .touchUpInside)
             
         }
+        
+        cell.selectionStyle = .none
         
         return cell
         
@@ -472,7 +472,11 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
+        if indexPath.row == 0 {
+            
+            pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
+            
+        }
         
     }
     

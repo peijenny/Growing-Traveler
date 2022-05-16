@@ -240,7 +240,7 @@
                     <connections>
                         <outlet property="noteCreateTimeLabel" destination="QHK-Nr-S9c" id="tCs-cC-M1S"/>
                         <outlet property="noteDatailTableView" destination="ty7-TA-rPg" id="zzc-hm-BGG"/>
-                        <outlet property="noteDetailBackgroundView" destination="QHK-Nr-S9c" id="f5L-AN-igs"/>
+                        <outlet property="noteDetailBackgroundView" destination="So8-xn-Y7q" id="Ukd-oA-Lzi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gWd-2c-csE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

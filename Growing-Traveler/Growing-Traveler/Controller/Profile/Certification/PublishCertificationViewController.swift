@@ -53,7 +53,7 @@ class PublishCertificationViewController: BaseViewController {
 
         certificationContentTextView.delegate = self
         
-        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
         uploadImageButton.cornerRadius = 5
         
