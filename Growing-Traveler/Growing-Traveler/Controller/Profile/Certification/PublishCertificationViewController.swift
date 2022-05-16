@@ -129,7 +129,8 @@ class PublishCertificationViewController: BaseViewController {
                 let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
                 
                 userInfo.certification.append(Certification(
-                    createTime: createTime, title: certificationTitle, imageLink: certificationImage, content: certificationContent))
+                    createTime: createTime, title: certificationTitle,
+                    imageLink: certificationImage, content: certificationContent))
                 
                 HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
                 
@@ -162,7 +163,8 @@ class PublishCertificationViewController: BaseViewController {
 extension PublishCertificationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
-        _ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 

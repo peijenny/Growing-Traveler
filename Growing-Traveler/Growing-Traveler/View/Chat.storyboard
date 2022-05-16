@@ -40,7 +40,7 @@
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XO5-tM-iTJ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zxj-yt-UX8">
                                 <rect key="frame" x="8" y="88" width="398" height="766"/>
@@ -72,18 +72,18 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Zxj-yt-UX8" firstAttribute="top" secondItem="XO5-tM-iTJ" secondAttribute="bottom" constant="1" id="7Tr-5v-uAc"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Zxj-yt-UX8" secondAttribute="bottom" constant="8" id="8RB-3k-fYo"/>
                             <constraint firstItem="XO5-tM-iTJ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Bnw-BS-g6K"/>
                             <constraint firstItem="WMq-2c-fwb" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="FGf-cX-6nB"/>
+                            <constraint firstItem="Zxj-yt-UX8" firstAttribute="top" secondItem="XO5-tM-iTJ" secondAttribute="bottom" id="HQP-lE-J0D"/>
                             <constraint firstItem="Zxj-yt-UX8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="IxW-TA-QKb"/>
-                            <constraint firstItem="WMq-2c-fwb" firstAttribute="top" secondItem="XO5-tM-iTJ" secondAttribute="bottom" constant="1" id="M9a-Ml-Ych"/>
                             <constraint firstAttribute="trailing" secondItem="XO5-tM-iTJ" secondAttribute="trailing" id="REe-ZN-yd0"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WMq-2c-fwb" secondAttribute="trailing" constant="8" id="SkH-P9-MTq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="WMq-2c-fwb" secondAttribute="bottom" constant="8" id="YYI-Js-l8n"/>
                             <constraint firstItem="WMq-2c-fwb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="cnS-RY-7Iw"/>
                             <constraint firstItem="XO5-tM-iTJ" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="lqO-JE-5Oq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Zxj-yt-UX8" secondAttribute="trailing" constant="8" id="w68-jd-gDW"/>
+                            <constraint firstItem="WMq-2c-fwb" firstAttribute="top" secondItem="XO5-tM-iTJ" secondAttribute="bottom" id="y01-oB-f2g"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="聊天室" id="idY-Gf-ohl">

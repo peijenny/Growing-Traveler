@@ -87,13 +87,13 @@
                 <constraints>
                     <constraint firstItem="eVT-Wu-mTd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Bxt-I3-3I7"/>
                     <constraint firstItem="RoR-AT-oxL" firstAttribute="leading" secondItem="W9A-fP-4SF" secondAttribute="trailing" constant="16" id="Ca4-To-kUO"/>
-                    <constraint firstAttribute="bottom" secondItem="RoR-AT-oxL" secondAttribute="bottom" constant="16" id="Ct1-Ah-oqU"/>
                     <constraint firstItem="W9A-fP-4SF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Erl-Fm-zum"/>
+                    <constraint firstItem="RoR-AT-oxL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IGr-yS-pUx"/>
                     <constraint firstItem="eVT-Wu-mTd" firstAttribute="leading" secondItem="RoR-AT-oxL" secondAttribute="trailing" constant="10" id="JMK-t8-XvB"/>
                     <constraint firstItem="lKa-fh-hrJ" firstAttribute="top" secondItem="eVT-Wu-mTd" secondAttribute="bottom" constant="5" id="Mq0-OB-WmG"/>
                     <constraint firstAttribute="trailing" secondItem="TSQ-o2-GwK" secondAttribute="trailing" constant="16" id="O6H-u9-KSS"/>
+                    <constraint firstItem="W9A-fP-4SF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Pwp-6L-3bb"/>
                     <constraint firstAttribute="trailing" secondItem="lKa-fh-hrJ" secondAttribute="trailing" constant="16" id="T3l-6g-tbd"/>
-                    <constraint firstItem="RoR-AT-oxL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="T4n-rb-HsS"/>
                     <constraint firstItem="W9A-fP-4SF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Wy7-Bf-Oxw"/>
                     <constraint firstItem="lKa-fh-hrJ" firstAttribute="leading" secondItem="RoR-AT-oxL" secondAttribute="trailing" constant="10" id="afz-l0-8eR"/>
                     <constraint firstItem="TSQ-o2-GwK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="kQT-nf-X8N"/>

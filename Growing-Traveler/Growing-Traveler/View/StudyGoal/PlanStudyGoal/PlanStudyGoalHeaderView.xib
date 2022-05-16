@@ -13,10 +13,10 @@
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PlanStudyGoalHeaderView" customModule="Growing_Traveler" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="266"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2c0-1L-xAC">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="266"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="eLX-tD-sYj">
                             <rect key="frame" x="8" y="210" width="398" height="40"/>
@@ -293,13 +293,13 @@
                         <constraint firstItem="CW4-78-J4r" firstAttribute="top" secondItem="2c0-1L-xAC" secondAttribute="top" constant="10" id="5u3-5F-LjN"/>
                         <constraint firstAttribute="trailing" secondItem="dEB-SO-qJg" secondAttribute="trailing" constant="8" id="CC1-sS-dMU"/>
                         <constraint firstItem="eLX-tD-sYj" firstAttribute="top" secondItem="sor-8n-x4i" secondAttribute="bottom" constant="10" id="EVy-w0-tnc"/>
+                        <constraint firstAttribute="bottom" secondItem="eLX-tD-sYj" secondAttribute="bottom" constant="16" id="K5V-8O-l98"/>
                         <constraint firstAttribute="trailing" secondItem="sor-8n-x4i" secondAttribute="trailing" constant="8" id="PU6-n7-Xkt"/>
                         <constraint firstItem="CW4-78-J4r" firstAttribute="leading" secondItem="2c0-1L-xAC" secondAttribute="leading" constant="8" id="Q7j-06-a0n"/>
                         <constraint firstItem="sor-8n-x4i" firstAttribute="leading" secondItem="2c0-1L-xAC" secondAttribute="leading" constant="8" id="cKE-Sj-bYZ"/>
                         <constraint firstAttribute="trailing" secondItem="eLX-tD-sYj" secondAttribute="trailing" constant="8" id="e7m-bW-fxl"/>
                         <constraint firstItem="dEB-SO-qJg" firstAttribute="top" secondItem="CW4-78-J4r" secondAttribute="bottom" constant="10" id="hlo-VT-X06"/>
                         <constraint firstItem="dEB-SO-qJg" firstAttribute="leading" secondItem="2c0-1L-xAC" secondAttribute="leading" constant="8" id="uMf-Bv-Jqw"/>
-                        <constraint firstAttribute="bottom" secondItem="eLX-tD-sYj" secondAttribute="bottom" constant="10" id="vBC-8j-uiF"/>
                     </constraints>
                 </view>
             </subviews>

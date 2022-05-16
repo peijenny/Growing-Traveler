@@ -213,7 +213,8 @@ class AuthenticationViewController: UIViewController {
 extension AuthenticationViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(
-        controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization) {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             

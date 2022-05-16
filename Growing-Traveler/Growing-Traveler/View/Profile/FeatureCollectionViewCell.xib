@@ -50,8 +50,6 @@
                         <constraints>
                             <constraint firstItem="P8f-GS-5uy" firstAttribute="centerY" secondItem="FgI-f6-xtZ" secondAttribute="centerY" id="HLq-ES-1D8"/>
                             <constraint firstItem="P8f-GS-5uy" firstAttribute="centerX" secondItem="FgI-f6-xtZ" secondAttribute="centerX" id="OSS-HZ-Pvw"/>
-                            <constraint firstAttribute="height" constant="400" id="VFB-ed-baQ"/>
-                            <constraint firstAttribute="width" constant="300" id="swB-Sh-qW8"/>
                         </constraints>
                     </view>
                 </subviews>

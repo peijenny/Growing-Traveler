@@ -191,7 +191,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="znl-Gu-T2U">
-                                <rect key="frame" x="16" y="52" width="382" height="800"/>
+                                <rect key="frame" x="16" y="54" width="382" height="798"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -199,7 +199,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Tox-EJ-OEw" firstAttribute="bottom" secondItem="d3u-Ut-ILf" secondAttribute="bottom" constant="10" id="9d9-cP-8wk"/>
-                            <constraint firstItem="znl-Gu-T2U" firstAttribute="top" secondItem="Tox-EJ-OEw" secondAttribute="top" constant="8" id="S7R-nP-hCe"/>
+                            <constraint firstItem="znl-Gu-T2U" firstAttribute="top" secondItem="Tox-EJ-OEw" secondAttribute="top" constant="10" id="S7R-nP-hCe"/>
                             <constraint firstItem="Tox-EJ-OEw" firstAttribute="trailing" secondItem="znl-Gu-T2U" secondAttribute="trailing" constant="16" id="deW-5V-eao"/>
                             <constraint firstItem="d3u-Ut-ILf" firstAttribute="top" secondItem="Tox-EJ-OEw" secondAttribute="top" constant="10" id="sgr-Kk-Czz"/>
                             <constraint firstItem="znl-Gu-T2U" firstAttribute="leading" secondItem="Tox-EJ-OEw" secondAttribute="leading" constant="16" id="tAF-Jx-Ras"/>

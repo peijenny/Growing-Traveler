@@ -44,6 +44,8 @@ class MoreArticlesTableViewCell: UITableViewCell {
         
         middleBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
+        articleTypeBackgroundView.cornerRadius = 10
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
