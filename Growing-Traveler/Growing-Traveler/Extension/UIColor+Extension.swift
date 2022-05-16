@@ -31,7 +31,7 @@ enum ColorChart {
             // E6E6E6
             // EBEBE3
             
-        case .gray: return "C4C4C4"
+        case .gray: return "C1BFCE"
             // C4C4C4
             // C1BFCE
             
