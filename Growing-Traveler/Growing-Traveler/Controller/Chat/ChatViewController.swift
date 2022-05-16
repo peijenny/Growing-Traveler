@@ -401,6 +401,8 @@ class ChatViewController: BaseViewController {
                 
                 let forumArticle = forumArticle
                 
+                print("TEST \(forumArticle)")
+                
                 strongSelf.forumArticles.append(forumArticle)
                 
                 strongSelf.chatTableView.reloadData()
@@ -606,9 +608,19 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
             let viewController = ArticleDetailViewController()
             
-            viewController.forumArticle = forumArticles.filter({ $0.id == sendMessage.sendMessage })[0]
+            let forumArticle = forumArticles.filter({ $0.id == sendMessage.sendMessage })
             
-            navigationController?.pushViewController(viewController, animated: true)
+            if forumArticle.isEmpty {
+                
+                HUD.flash(.label("該文章已被刪除！"), delay: 0.5)
+                
+            } else {
+                
+                viewController.forumArticle = forumArticle[0]
+                
+                navigationController?.pushViewController(viewController, animated: true)
+                
+            }
             
         }
         
