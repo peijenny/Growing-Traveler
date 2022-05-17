@@ -10,8 +10,6 @@ import PKHUD
 
 class NoteViewController: BaseViewController {
 
-    @IBOutlet weak var searchNoteTextField: UITextField!
-    
     @IBOutlet weak var noteTableView: UITableView! {
         
         didSet {
@@ -28,6 +26,8 @@ class NoteViewController: BaseViewController {
     
     @IBOutlet weak var noteBackgroundView: UIView!
     
+    @IBOutlet weak var bottomBackgroundView: UIView!
+    
     var userManager = UserManager()
     
     var notes: [Note] = []
@@ -42,6 +42,10 @@ class NoteViewController: BaseViewController {
             forCellReuseIdentifier: String(describing: NoteTableViewCell.self))
         
         noteSearchBar.delegate = self
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        bottomBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
     }
     
@@ -105,20 +109,6 @@ class NoteViewController: BaseViewController {
         
     }
     
-    @IBAction func searchButton(_ sender: UIButton) {
-        
-        guard let searchText = searchNoteTextField.text else { return }
-        
-        notes = notes.filter({ $0.noteTitle.range(of: searchText) != nil })
-        
-        if searchText == "" {
-            
-            fetchNoteData()
-            
-        }
-        
-    }
-    
 }
 
 extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
@@ -163,8 +153,14 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        
+        return "刪除"
+        
+    }
+    
     func tableView(
-        _ tableView: UITableView, fcommit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        _ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             

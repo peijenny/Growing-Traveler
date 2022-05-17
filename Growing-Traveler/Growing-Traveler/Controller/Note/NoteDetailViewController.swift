@@ -24,6 +24,8 @@ class NoteDetailViewController: UIViewController {
         
     }
     
+    @IBOutlet weak var noteDetailBackgroundView: UIView!
+    
     var userManager = UserManager()
     
     var note: Note?
@@ -38,6 +40,10 @@ class NoteDetailViewController: UIViewController {
         noteDatailTableView.register(
             UINib(nibName: String(describing: ArticleDetailTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self))
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        noteDetailBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
     }
     

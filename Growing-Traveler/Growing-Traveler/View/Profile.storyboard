@@ -20,11 +20,11 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zd-r5-jvf">
                                 <rect key="frame" x="0.0" y="304" width="414" height="592"/>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Zo-HV-7AS">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="304"/>
-                                <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QUz-4x-s82" customClass="ProfileView" customModule="Growing_Traveler" customModuleProvider="target">
                                 <rect key="frame" x="8" y="96" width="398" height="200"/>
@@ -80,6 +80,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="featureCollectionView" destination="jYY-xN-o6w" id="Rmg-ab-f8b"/>
+                        <outlet property="headerView" destination="3Zo-HV-7AS" id="Adg-PN-fnj"/>
+                        <outlet property="profileBackgroundView" destination="0zd-r5-jvf" id="hRd-8p-nTa"/>
                         <outlet property="profileView" destination="QUz-4x-s82" id="atn-jM-19b"/>
                     </connections>
                 </viewController>
@@ -156,7 +158,7 @@
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iE-Jc-wvj">
                                                 <rect key="frame" x="302" y="0.0" width="40" height="40"/>
-                                                <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="KxP-yq-el1"/>
                                                     <constraint firstAttribute="width" constant="40" id="ucH-ib-6PK"/>
@@ -164,11 +166,6 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="folder.badge.plus" catalog="system"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="uploadImageButton:" destination="O0I-kJ-Gct" eventType="touchUpInside" id="3wT-PY-TlG"/>
                                                 </connections>
@@ -210,7 +207,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRS-7K-29Y">
                                         <rect key="frame" x="16" y="362" width="342" height="40"/>
-                                        <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="YQl-Z3-yal"/>
                                         </constraints>
@@ -219,11 +216,6 @@
                                         <buttonConfiguration key="configuration" style="plain" title="確認">
                                             <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                         </buttonConfiguration>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="confirm:" destination="O0I-kJ-Gct" eventType="touchUpInside" id="zG4-Jb-Cv2"/>
                                         </connections>
@@ -276,6 +268,8 @@
                         <outlet property="certificationContentTextView" destination="aGZ-iE-NAd" id="WNi-yO-8YT"/>
                         <outlet property="certificationImageTextField" destination="Oja-xZ-W9p" id="Zpt-Dv-w9d"/>
                         <outlet property="certificationTitleTextField" destination="lF6-fA-0hY" id="yyy-zO-yEG"/>
+                        <outlet property="confirmButton" destination="PRS-7K-29Y" id="1tO-lL-Eqo"/>
+                        <outlet property="uploadImageButton" destination="1iE-Jc-wvj" id="3IR-tC-BQA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QAt-Zb-qil" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -302,7 +296,6 @@
                                         </wkWebViewConfiguration>
                                     </wkWebView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="DXm-09-IIt" secondAttribute="trailing" constant="10" id="Qww-7V-1f1"/>
                                     <constraint firstItem="DXm-09-IIt" firstAttribute="top" secondItem="FPu-EV-XNg" secondAttribute="top" constant="10" id="R92-Yz-OyZ"/>
@@ -312,7 +305,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tDF-z8-7ZN"/>
-                        <color key="backgroundColor" red="0.69803921570000005" green="0.81960784310000001" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="FPu-EV-XNg" firstAttribute="trailing" secondItem="tDF-z8-7ZN" secondAttribute="trailing" id="0oL-G7-C7d"/>
                             <constraint firstItem="FPu-EV-XNg" firstAttribute="leading" secondItem="tDF-z8-7ZN" secondAttribute="leading" id="5ut-AM-elK"/>
@@ -323,6 +316,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="privacyPolicyBackgroundView" destination="FPu-EV-XNg" id="IB9-w5-Qro"/>
                         <outlet property="webView" destination="DXm-09-IIt" id="bjw-Cq-6Eh"/>
                     </connections>
                 </viewController>
@@ -357,11 +351,9 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t1V-u8-86M">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="102"/>
-                                <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8F-Gg-vBP">
                                 <rect key="frame" x="0.0" y="102" width="414" height="794"/>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5Fz-Uh-Kjh">
                                 <rect key="frame" x="8" y="102" width="398" height="752"/>
@@ -369,7 +361,6 @@
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="35w-pe-DBz">
                                 <rect key="frame" x="30" y="54" width="354" height="41"/>
-                                <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="c9R-jh-yH9"/>
                                 </constraints>
@@ -377,7 +368,6 @@
                                     <segment title="近七天學習時間"/>
                                     <segment title="近七天學習類型"/>
                                 </segments>
-                                <color key="selectedSegmentTintColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </segmentedControl>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c3O-kg-Y8I">
                                 <rect key="frame" x="10" y="102" width="394" height="750"/>
@@ -433,7 +423,9 @@
                     <navigationItem key="navigationItem" title="學習分析" id="nMy-Q0-ZXA"/>
                     <connections>
                         <outlet property="analysisBackground" destination="c3O-kg-Y8I" id="qbM-Qn-P3c"/>
+                        <outlet property="analysisBackgroundView" destination="U8F-Gg-vBP" id="LNR-Wd-wze"/>
                         <outlet property="analysisTableView" destination="5Fz-Uh-Kjh" id="qhY-zx-MYt"/>
+                        <outlet property="headerView" destination="t1V-u8-86M" id="jqv-1r-3xC"/>
                         <outlet property="selectSegmentedControl" destination="35w-pe-DBz" id="KcV-8Z-LoC"/>
                     </connections>
                 </viewController>

@@ -30,6 +30,10 @@ class FriendViewController: UIViewController {
     
     @IBOutlet weak var friendBackgroundView: UIView!
     
+    @IBOutlet weak var headerView: UIView!
+    
+    let badgeLabel = UILabel()
+    
     var chatRoomManager = ChatRoomManager()
     
     var friendManager = FriendManager()
@@ -56,6 +60,10 @@ class FriendViewController: UIViewController {
         setNavigationItems()
 
         registerTableViewCell()
+        
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
     }
     
@@ -108,6 +116,10 @@ class FriendViewController: UIViewController {
 
                 strongSelf.ownerfriend = friend
                 
+                strongSelf.badgeLabel.text = (!friend.applyList.isEmpty) ? "\(friend.applyList.count)" : nil
+                
+                strongSelf.setNavigationItems()
+                
                 strongSelf.friendListTableView.reloadData()
 
             case .failure(let error):
@@ -152,9 +164,43 @@ class FriendViewController: UIViewController {
     
     func setNavigationItems() {
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage.asset(.add), style: .plain, target: self, action: #selector(applyFriendButton))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(
+//            image: UIImage.asset(.add), style: .plain, target: self, action: #selector(applyFriendButton))
+        
+        // badge label
+        badgeLabel.frame = CGRect(x: 20, y: -5, width: 20, height: 20)
+        
+        badgeLabel.layer.borderColor = UIColor.clear.cgColor
+        
+        badgeLabel.layer.borderWidth = 2
+        
+        badgeLabel.layer.cornerRadius = badgeLabel.bounds.size.height / 2
+        
+        badgeLabel.textAlignment = .center
+        
+        badgeLabel.layer.masksToBounds = true
+        
+        badgeLabel.font = UIFont(name: "PingFang TC", size: 12)
+        
+        badgeLabel.textColor = UIColor.white
+        
+        badgeLabel.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightRed.hexText)
+        
+        // rightBar button
+        let rightBarButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
+        
+        rightBarButton.setBackgroundImage(UIImage.asset(.add), for: .normal)
+        
+        rightBarButton.addTarget(self, action: #selector(applyFriendButton), for: .touchUpInside)
+        
+        if badgeLabel.text != nil {
+            
+            rightBarButton.addSubview(badgeLabel)
+            
+        }
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
+        
     }
     
     @objc func applyFriendButton(sender: UIButton) {

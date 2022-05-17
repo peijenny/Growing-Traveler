@@ -20,6 +20,8 @@ class FeatureCollectionViewCell: UICollectionViewCell {
 
         featureBackgroundView.layer.cornerRadius = 15
         
+        featureBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        
     }
 
 }

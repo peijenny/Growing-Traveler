@@ -26,13 +26,23 @@ class PublishArticleTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        selectCategoryButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        selectCategoryButton.cornerRadius = 5
+        
+        addImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        addImageButton.cornerRadius = 5
+        
+        typeSegmentedControl.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue  .hexText)
+        
+        typeSegmentedControl.selectedSegmentTintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
         
         contentTextView.layer.borderColor = UIColor.darkGray.cgColor
         

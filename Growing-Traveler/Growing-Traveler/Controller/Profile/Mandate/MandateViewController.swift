@@ -255,10 +255,10 @@ class MandateViewController: UIViewController {
         mandateTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            mandateTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            mandateTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             mandateTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             mandateTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            mandateTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
+            mandateTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -100.0)
         ])
         
         mandateTableView.register(

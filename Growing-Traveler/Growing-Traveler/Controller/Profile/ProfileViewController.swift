@@ -14,6 +14,10 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var featureCollectionView: UICollectionView!
     
+    @IBOutlet weak var headerView: UIView!
+    
+    @IBOutlet weak var profileBackgroundView: UIView!
+    
     private var dataSource: UICollectionViewDiffableDataSource<Int, FeatureType>?
     
     var userManager = UserManager()
@@ -30,6 +34,10 @@ class ProfileViewController: UIViewController {
         configureDataSource()
         
         setNavigationItems()
+        
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        profileBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
     }
     

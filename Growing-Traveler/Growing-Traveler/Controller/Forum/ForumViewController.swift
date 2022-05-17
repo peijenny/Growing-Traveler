@@ -24,6 +24,10 @@ class ForumViewController: BaseViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var headerView: UIView!
+    
+    @IBOutlet weak var articleBackgroundView: UIView!
+    
     var forumArticleManager = ForumArticleManager()
     
     var friendManager = FriendManager()
@@ -60,6 +64,10 @@ class ForumViewController: BaseViewController {
         registerTableViewCell()
         
         searchBar.delegate = self
+        
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        articleBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
     }
     

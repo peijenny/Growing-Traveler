@@ -12,6 +12,8 @@ class PrivacyPolicyViewController: UIViewController {
 
     @IBOutlet var webView: WKWebView!
     
+    @IBOutlet weak var privacyPolicyBackgroundView: UIView!
+    
     var privacyTitle = String()
     
     var privacyURL = String()
@@ -46,6 +48,10 @@ class PrivacyPolicyViewController: UIViewController {
             setNavigationItem()
             
         }
+        
+        privacyPolicyBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
 
     }
     

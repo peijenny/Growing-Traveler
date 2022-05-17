@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,7 +21,6 @@
                         <rect key="frame" x="16" y="5" width="382" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="EG0-Bn-iff"/>
-                            <constraint firstAttribute="width" secondItem="sNT-US-WfR" secondAttribute="height" multiplier="191:20" id="kzb-5n-Pqo"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                         <nil key="textColor"/>
@@ -28,10 +28,9 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="sNT-US-WfR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="0RK-vW-v3E"/>
                     <constraint firstAttribute="trailing" secondItem="sNT-US-WfR" secondAttribute="trailing" constant="16" id="3da-Lk-D9g"/>
                     <constraint firstItem="sNT-US-WfR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ciA-y6-tCB"/>
-                    <constraint firstItem="sNT-US-WfR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="pP0-II-aSb"/>
-                    <constraint firstAttribute="bottom" secondItem="sNT-US-WfR" secondAttribute="bottom" constant="5" id="yxk-Fk-aGA"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

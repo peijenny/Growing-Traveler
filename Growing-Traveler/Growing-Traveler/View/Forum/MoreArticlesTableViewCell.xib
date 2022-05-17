@@ -56,7 +56,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="I4A-2f-1hz" firstAttribute="leading" secondItem="Rki-00-bf6" secondAttribute="leading" id="8B1-bm-ocL"/>
                                             <constraint firstItem="I4A-2f-1hz" firstAttribute="top" secondItem="Rki-00-bf6" secondAttribute="top" id="8ql-7E-vIe"/>
@@ -70,7 +70,7 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r15-Xv-cv0">
                                                 <rect key="frame" x="0.0" y="0.0" width="45" height="25"/>
-                                                <color key="backgroundColor" red="0.69803921570000005" green="0.81960784310000001" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="個人品牌經營" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyd-Op-SYy">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="25"/>
@@ -79,7 +79,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="r15-Xv-cv0" firstAttribute="top" secondItem="a8Z-o2-OC0" secondAttribute="top" id="4xH-Tm-SGQ"/>
                                             <constraint firstAttribute="bottom" secondItem="eyd-Op-SYy" secondAttribute="bottom" id="Cek-Q4-JrH"/>
@@ -91,11 +91,6 @@
                                             <constraint firstAttribute="width" constant="90" id="y7j-ET-4Wp"/>
                                             <constraint firstItem="eyd-Op-SYy" firstAttribute="leading" secondItem="a8Z-o2-OC0" secondAttribute="leading" id="ztc-dx-ewh"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.28627450980000002" green="0.63137254899999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -174,12 +169,15 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="articleTypeBackgroundView" destination="Rki-00-bf6" id="zQZ-fv-RN6"/>
+                <outlet property="categoryBackgroundView" destination="a8Z-o2-OC0" id="CWA-A4-48R"/>
                 <outlet property="categoryLabel" destination="eyd-Op-SYy" id="JPe-v5-Dhe"/>
                 <outlet property="createTimeLabel" destination="U7d-p7-w7K" id="J6n-eb-HkW"/>
                 <outlet property="forumTypeLabel" destination="I4A-2f-1hz" id="2k9-tp-X59"/>
                 <outlet property="imageViewLeadingConstraint" destination="PzY-cm-Bw6" id="Kwd-kn-3FO"/>
                 <outlet property="imageViewWidthConstraint" destination="spm-vV-eiv" id="J4b-s8-to8"/>
                 <outlet property="mainImageView" destination="wgE-7I-iNs" id="c5I-Uv-24K"/>
+                <outlet property="middleBackgroundView" destination="r15-Xv-cv0" id="mRX-se-G4A"/>
                 <outlet property="titleLabel" destination="pyT-a9-80X" id="Yqh-T6-WY9"/>
                 <outlet property="userIDLabel" destination="xLk-ma-s5o" id="a3n-Bn-qAn"/>
                 <outlet property="userInfoButton" destination="q9a-0A-KEI" id="v0m-Hl-6QU"/>

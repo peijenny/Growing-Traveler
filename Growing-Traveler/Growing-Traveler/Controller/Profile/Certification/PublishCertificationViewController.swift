@@ -16,6 +16,10 @@ class PublishCertificationViewController: BaseViewController {
     
     @IBOutlet weak var certificationContentTextView: UITextView!
     
+    @IBOutlet weak var uploadImageButton: UIButton!
+    
+    @IBOutlet weak var confirmButton: UIButton!
+    
     var userManager = UserManager()
     
     var userInfo: UserInfo?
@@ -48,6 +52,14 @@ class PublishCertificationViewController: BaseViewController {
         }
 
         certificationContentTextView.delegate = self
+        
+        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        uploadImageButton.cornerRadius = 5
+        
+        confirmButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        confirmButton.cornerRadius = 5
         
     }
     
@@ -117,7 +129,8 @@ class PublishCertificationViewController: BaseViewController {
                 let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
                 
                 userInfo.certification.append(Certification(
-                    createTime: createTime, title: certificationTitle, imageLink: certificationImage, content: certificationContent))
+                    createTime: createTime, title: certificationTitle,
+                    imageLink: certificationImage, content: certificationContent))
                 
                 HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
                 
@@ -150,7 +163,8 @@ class PublishCertificationViewController: BaseViewController {
 extension PublishCertificationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
-        _ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 

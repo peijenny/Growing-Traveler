@@ -11,9 +11,19 @@ class BottomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var categoryLabel: UILabel!
     
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    @IBOutlet weak var categoryBackgroundView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        categoryBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        categoryBackgroundView.cornerRadius = 10
+        
+        deleteButton.tintColor = UIColor.systemRed
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

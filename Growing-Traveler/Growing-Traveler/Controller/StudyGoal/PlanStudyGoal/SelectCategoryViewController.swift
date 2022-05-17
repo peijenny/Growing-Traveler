@@ -117,7 +117,8 @@ extension SelectCategoryViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CategoryTableViewCell.self), for: indexPath)
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: CategoryTableViewCell.self), for: indexPath)
 
         guard let cell = cell as? CategoryTableViewCell else { return cell }
         

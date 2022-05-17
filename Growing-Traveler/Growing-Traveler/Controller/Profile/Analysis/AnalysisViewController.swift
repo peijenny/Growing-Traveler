@@ -26,6 +26,10 @@ class AnalysisViewController: UIViewController {
     
     @IBOutlet weak var analysisBackground: UIView!
     
+    @IBOutlet weak var headerView: UIView!
+    
+    @IBOutlet weak var analysisBackgroundView: UIView!
+    
     var analysisManager = AnalysisManager()
     
     var categoryManager = CategoryManager()
@@ -101,6 +105,14 @@ class AnalysisViewController: UIViewController {
         fetchFeedbackData()
         
         fetchStudyGoalData()
+        
+        selectSegmentedControl.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        selectSegmentedControl.selectedSegmentTintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        analysisBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
     }
     

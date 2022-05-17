@@ -15,8 +15,16 @@ class ConfirmApplyViewController: UIViewController {
     
     var getConfirmStatus: ((_ isConfirm: Bool) -> Void)?
 
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    @IBOutlet weak var agreeButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cancelButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        agreeButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
 
     }
     
@@ -54,24 +62,32 @@ class ConfirmApplyViewController: UIViewController {
                 
                 bothSides.owner.applyList.remove(at: index)
                 
+                break
+                
             }
+            
+        }
+        
+        for index in 0..<bothSides.owner.applyList.count {
             
             if bothSides.other.deliveryList[index] == bothSides.owner.userID {
                 
                 bothSides.other.deliveryList.remove(at: index)
+                
+                break
                 
             }
             
         }
 
         friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.refuse.title)
-        
+
         self.navigationController?.isNavigationBarHidden = false
-        
+
         self.view.removeFromSuperview()
-        
+
         getConfirmStatus?(true)
-        
+
     }
     
     @IBAction func agreeApplyButton(_ sender: UIButton) {
@@ -86,7 +102,13 @@ class ConfirmApplyViewController: UIViewController {
                 
                 bothSides.owner.friendList.append(bothSides.other.userID)
                 
+                break
+                
             }
+            
+        }
+        
+        for index in 0..<bothSides.owner.applyList.count {
             
             if bothSides.other.deliveryList[index] == bothSides.owner.userID {
                 
@@ -94,16 +116,18 @@ class ConfirmApplyViewController: UIViewController {
                 
                 bothSides.other.friendList.append(bothSides.owner.userID)
                 
+                break
+                
             }
             
         }
         
         friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.agree.title)
-        
+
         self.navigationController?.isNavigationBarHidden = false
-        
+
         self.view.removeFromSuperview()
-        
+
         getConfirmStatus?(true)
 
     }

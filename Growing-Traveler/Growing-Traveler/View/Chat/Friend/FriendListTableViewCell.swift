@@ -17,17 +17,25 @@ class FriendListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var unblockButton: UIButton!
     
+    @IBOutlet weak var friendListBackgroundView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        friendListBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        unblockButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        unblockButton.cornerRadius = 10
+        
+        friendIconImageView.contentMode = .scaleAspectFill
+
+        friendIconImageView.cornerRadius = friendIconImageView.frame.width / 2
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        friendIconImageView.contentMode = .scaleAspectFill
-
-        friendIconImageView.layer.cornerRadius = friendIconImageView.frame.width / 2
         
     }
     

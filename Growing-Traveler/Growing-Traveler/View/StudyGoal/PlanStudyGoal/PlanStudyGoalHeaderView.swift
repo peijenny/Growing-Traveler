@@ -30,7 +30,27 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        startDateCalenderButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        startDateCalenderButton.cornerRadius = 5
+        
+        endDateCalenderButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        endDateCalenderButton.cornerRadius = 5
+        
+        categoryTagButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        categoryTagButton.cornerRadius = 5
+        
+        addStudyItemButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        addStudyItemButton.cornerRadius = 5
+        
+        openEditButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        openEditButton.cornerRadius = 5
+        
     }
     
     func showCategoryItem(itemTitle: String) {

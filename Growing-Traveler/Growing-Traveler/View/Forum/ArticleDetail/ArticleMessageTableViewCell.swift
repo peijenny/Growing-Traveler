@@ -29,13 +29,18 @@ class ArticleMessageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        orderIDLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.gray.hexText)
+        
+        createTimeLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.gray.hexText)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
     func setArticleContent(content: ArticleContent, isBlock: Bool) {

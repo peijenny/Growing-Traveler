@@ -20,7 +20,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzp-i4-70M">
                         <rect key="frame" x="0.0" y="28" width="414" height="22.5"/>
-                        <color key="backgroundColor" red="0.28627450980000002" green="0.63137254899999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOE-H8-84Y">
                         <rect key="frame" x="0.0" y="50.5" width="414" height="144.5"/>
@@ -48,18 +48,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="a7p-T3-WbJ" firstAttribute="leading" secondItem="C5z-0F-Xlg" secondAttribute="leading" constant="10" id="bX6-QY-6D1"/>
                             <constraint firstItem="a7p-T3-WbJ" firstAttribute="top" secondItem="C5z-0F-Xlg" secondAttribute="top" constant="10" id="oM1-wt-xFp"/>
                             <constraint firstAttribute="trailing" secondItem="a7p-T3-WbJ" secondAttribute="trailing" constant="10" id="xXT-43-jY7"/>
                             <constraint firstAttribute="bottom" secondItem="a7p-T3-WbJ" secondAttribute="bottom" constant="10" id="zKT-zi-dqT"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undrawImages" translatesAutoresizingMaskIntoConstraints="NO" id="9SP-hi-zU4">
                         <rect key="frame" x="16" y="60.5" width="173" height="123"/>
@@ -114,9 +109,11 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="certificationBackgroundView" destination="C5z-0F-Xlg" id="75K-xk-cam"/>
                 <outlet property="certificationContentLabel" destination="hbi-sC-xib" id="Bc5-Pe-ZBw"/>
                 <outlet property="certificationImageView" destination="9SP-hi-zU4" id="XAg-Hq-u92"/>
                 <outlet property="certificationTitleLabel" destination="a7p-T3-WbJ" id="eCS-P9-ZSZ"/>
+                <outlet property="middleBackgroundVIew" destination="gzp-i4-70M" id="kit-kt-0hB"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="54.910714285714285"/>
         </tableViewCell>

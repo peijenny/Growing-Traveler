@@ -19,7 +19,15 @@ class SettingSignTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        signOutAccountButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        signOutAccountButton.cornerRadius = 5
+        
+        deleteAccountButton.backgroundColor = UIColor.systemRed
+        
+        deleteAccountButton.cornerRadius = 5
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
