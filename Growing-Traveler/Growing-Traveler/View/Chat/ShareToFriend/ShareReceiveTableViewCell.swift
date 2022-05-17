@@ -19,15 +19,24 @@ class ShareReceiveTableViewCell: UITableViewCell {
     
     @IBOutlet weak var receiveTimeLabel: UILabel!
     
+    @IBOutlet weak var receiveBackgroundVIew: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        shareTypeLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        
+        receiveBackgroundVIew.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        receiveBackgroundVIew.cornerRadius = 10
+        
+        shareImageView.cornerRadius = 10
+        
+        friendImageView.cornerRadius = friendImageView.frame.width / 2
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        friendImageView.layer.cornerRadius = friendImageView.frame.width / 2
         
     }
     

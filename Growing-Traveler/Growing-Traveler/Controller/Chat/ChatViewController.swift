@@ -26,6 +26,10 @@ class ChatViewController: BaseViewController {
 
     @IBOutlet weak var friendStatusLabel: UILabel!
     
+    @IBOutlet weak var uploadImageButton: UIButton!
+    
+    @IBOutlet weak var sendMessageButton: UIButton!
+    
     var displayImageView = UIImageView()
     
     var forumArticleManager = ForumArticleManager()
@@ -124,6 +128,16 @@ class ChatViewController: BaseViewController {
             friendStatusLabel.isHidden = false
             
         }
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        friendStatusLabel.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        uploadImageButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        sendMessageButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
         
     }
 
@@ -387,6 +401,8 @@ class ChatViewController: BaseViewController {
                 
                 let forumArticle = forumArticle
                 
+                print("TEST \(forumArticle)")
+                
                 strongSelf.forumArticles.append(forumArticle)
                 
                 strongSelf.chatTableView.reloadData()
@@ -592,9 +608,19 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
             let viewController = ArticleDetailViewController()
             
-            viewController.forumArticle = forumArticles.filter({ $0.id == sendMessage.sendMessage })[0]
+            let forumArticle = forumArticles.filter({ $0.id == sendMessage.sendMessage })
             
-            navigationController?.pushViewController(viewController, animated: true)
+            if forumArticle.isEmpty {
+                
+                HUD.flash(.label("該文章已被刪除！"), delay: 0.5)
+                
+            } else {
+                
+                viewController.forumArticle = forumArticle[0]
+                
+                navigationController?.pushViewController(viewController, animated: true)
+                
+            }
             
         }
         
@@ -604,7 +630,9 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 

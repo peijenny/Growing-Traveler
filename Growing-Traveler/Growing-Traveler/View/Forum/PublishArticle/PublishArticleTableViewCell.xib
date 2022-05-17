@@ -32,13 +32,11 @@
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1bS-Yl-K8M">
                                 <rect key="frame" x="80" y="4" width="318" height="32"/>
-                                <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <segments>
                                     <segment title="文章"/>
                                     <segment title="問題"/>
                                     <segment title="閒聊"/>
                                 </segments>
-                                <color key="selectedSegmentTintColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </segmentedControl>
                         </subviews>
                         <constraints>
@@ -90,18 +88,13 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAG-FC-Sz0">
                                 <rect key="frame" x="358" y="0.0" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.54117647058823526" green="0.73333333333333328" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lAG-FC-Sz0" secondAttribute="height" multiplier="1:1" id="ZP6-Lt-t6R"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="tag" catalog="system"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
                         <constraints>
@@ -143,18 +136,13 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ymp-Ms-Px1">
                                 <rect key="frame" x="358" y="0.0" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.54117647059999996" green="0.73333333329999995" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ymp-Ms-Px1" secondAttribute="height" multiplier="1:1" id="Gcb-ae-5vZ"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="folder.badge.plus" catalog="system"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
                         <constraints>

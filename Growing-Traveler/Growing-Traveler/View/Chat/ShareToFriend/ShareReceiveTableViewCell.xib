@@ -40,13 +40,8 @@
                                     <constraint firstAttribute="width" constant="209" id="I6T-pN-sij"/>
                                     <constraint firstAttribute="height" constant="150" id="MPJ-Hz-Rv2"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EN1-tE-R23">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EN1-tE-R23">
                                 <rect key="frame" x="10" y="190" width="189" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="Qkm-uS-b2W"/>
@@ -55,7 +50,7 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[筆記分享]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGk-C3-CsQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[筆記/文章分享]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGk-C3-CsQ">
                                 <rect key="frame" x="10" y="160" width="189" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="CJD-qT-e0m"/>
@@ -79,11 +74,6 @@
                             <constraint firstItem="8HG-be-Ze9" firstAttribute="leading" secondItem="cqQ-KO-7BV" secondAttribute="leading" id="hbV-RK-KjW"/>
                             <constraint firstAttribute="bottom" secondItem="EN1-tE-R23" secondAttribute="bottom" constant="10" id="jJu-gf-Gt5"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,6 +93,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="friendImageView" destination="W10-qX-8wb" id="cWw-52-Ya9"/>
+                <outlet property="receiveBackgroundVIew" destination="cqQ-KO-7BV" id="7KR-h2-bIz"/>
                 <outlet property="receiveTimeLabel" destination="EJ6-Bk-L47" id="BLe-pc-7qE"/>
                 <outlet property="shareImageView" destination="8HG-be-Ze9" id="rSx-8R-nlp"/>
                 <outlet property="shareTitleLabel" destination="EN1-tE-R23" id="s4Z-eF-ZpD"/>

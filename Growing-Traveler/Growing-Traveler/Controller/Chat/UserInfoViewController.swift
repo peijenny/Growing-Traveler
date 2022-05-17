@@ -59,10 +59,24 @@ class UserInfoViewController: UIViewController {
 
         }
         
-        blockUserButton.setTitle(blockContentType ?? "", for: .normal)
+//        blockUserButton.setTitle(blockContentType ?? "", for: .normal)
         
         reportPublishedButton.setTitle(reportContentType ?? "", for: .normal)
+        
+        blockUserButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        addUserButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.salviaBlue.hexText)
+        
+        reportPublishedButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        
+        blockUserButton.cornerRadius = 5
 
+        addUserButton.cornerRadius = 5
+        
+        reportPublishedButton.cornerRadius = 5
+        
+        friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.lightRed.hexText)
+        
     }
     
     override func viewDidLayoutSubviews() {

@@ -36,7 +36,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jhn-pg-fiM">
                                 <rect key="frame" x="0.0" y="139" width="414" height="757"/>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0wF-HZ-Dcd">
                                 <rect key="frame" x="8" y="149" width="398" height="705"/>
@@ -74,7 +73,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f4a-8U-Rrn"/>
-                        <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="0wF-HZ-Dcd" firstAttribute="leading" secondItem="f4a-8U-Rrn" secondAttribute="leading" constant="8" id="7fF-th-ZBn"/>
                             <constraint firstItem="s86-Ns-WjX" firstAttribute="leading" secondItem="f4a-8U-Rrn" secondAttribute="leading" constant="10" id="DbV-Kt-Gfh"/>
@@ -97,7 +96,8 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="8Ee-b2-Niq"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="noteBackgroundView" destination="s86-Ns-WjX" id="scP-4V-4EV"/>
+                        <outlet property="bottomBackgroundView" destination="Jhn-pg-fiM" id="o9E-Hj-pcl"/>
+                        <outlet property="noteBackgroundView" destination="s86-Ns-WjX" id="U55-sV-KoG"/>
                         <outlet property="noteSearchBar" destination="IOt-KH-OGh" id="nE7-uL-OmT"/>
                         <outlet property="noteTableView" destination="0wF-HZ-Dcd" id="ajv-Tv-fPc"/>
                     </connections>
@@ -136,7 +136,7 @@
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jeV-g3-Vt6">
                                 <rect key="frame" x="368" y="60" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Z1g-DB-HFj"/>
                                     <constraint firstAttribute="width" constant="30" id="lSj-yR-5rh"/>
@@ -155,7 +155,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6zv-8T-HlR"/>
-                        <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6zv-8T-HlR" firstAttribute="trailing" secondItem="jeV-g3-Vt6" secondAttribute="trailing" constant="16" id="010-cj-9rf"/>
                             <constraint firstItem="6zv-8T-HlR" firstAttribute="trailing" secondItem="kbn-hC-cHb" secondAttribute="trailing" constant="16" id="2zS-EV-DRh"/>
@@ -188,6 +188,7 @@
                         <outlet property="modifyTimeLabel" destination="ZA4-ip-Bhy" id="dS5-Dd-RbJ"/>
                         <outlet property="noteTextView" destination="kbn-hC-cHb" id="ONU-ld-Ax8"/>
                         <outlet property="noteTitleTextField" destination="R2j-ov-XnX" id="DOb-9P-HYH"/>
+                        <outlet property="uploadImageButton" destination="jeV-g3-Vt6" id="bsZ-H3-u1k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7WM-Le-kTQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -204,7 +205,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="So8-xn-Y7q">
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022.04.21 10:21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHK-Nr-S9c">
                                 <rect key="frame" x="16" y="60" width="382" height="30"/>
@@ -221,7 +222,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o2A-A6-y3M"/>
-                        <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="So8-xn-Y7q" firstAttribute="top" secondItem="o2A-A6-y3M" secondAttribute="top" id="0P2-Zt-ASZ"/>
                             <constraint firstItem="QHK-Nr-S9c" firstAttribute="leading" secondItem="o2A-A6-y3M" secondAttribute="leading" constant="16" id="26K-Nz-Ayg"/>
@@ -239,6 +240,7 @@
                     <connections>
                         <outlet property="noteCreateTimeLabel" destination="QHK-Nr-S9c" id="tCs-cC-M1S"/>
                         <outlet property="noteDatailTableView" destination="ty7-TA-rPg" id="zzc-hm-BGG"/>
+                        <outlet property="noteDetailBackgroundView" destination="So8-xn-Y7q" id="Ukd-oA-Lzi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gWd-2c-csE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

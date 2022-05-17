@@ -60,11 +60,6 @@
                         <buttonConfiguration key="configuration" style="plain" title="載入更多">
                             <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
                         </buttonConfiguration>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </button>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="b8B-zz-MSK">
                         <rect key="frame" x="16" y="180" width="382" height="25"/>

@@ -97,10 +97,10 @@ class ProfileSettingViewController: BaseViewController {
         profileSettingTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            profileSettingTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            profileSettingTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             profileSettingTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             profileSettingTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            profileSettingTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
+            profileSettingTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -200.0)
         ])
         
         profileSettingTableView.register(
@@ -312,7 +312,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
                     print(error)
                     
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 } else {
                     
@@ -432,7 +432,7 @@ extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavig
     
     func imagePickerController(
         _ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 

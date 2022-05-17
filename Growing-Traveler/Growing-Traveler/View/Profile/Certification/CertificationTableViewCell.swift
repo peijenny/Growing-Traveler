@@ -15,9 +15,18 @@ class CertificationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var certificationContentLabel: UILabel!
     
+    @IBOutlet weak var certificationBackgroundView: UIView!
+    
+    @IBOutlet weak var middleBackgroundVIew: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        certificationBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        certificationBackgroundView.cornerRadius = 10
+        
+        middleBackgroundVIew.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

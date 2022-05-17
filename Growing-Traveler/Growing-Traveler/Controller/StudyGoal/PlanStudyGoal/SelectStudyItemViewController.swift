@@ -37,8 +37,6 @@ class SelectStudyItemViewController: BaseViewController {
         
         createTimeButton()
         
-        setTextViewAndTextField()
-        
         if modifyStudyItem != nil {
             
             modifyStudyItemData()
@@ -46,6 +44,8 @@ class SelectStudyItemViewController: BaseViewController {
             copyItemButton.isHidden = false
             
         }
+        
+        setTextViewAndTextField()
 
     }
     

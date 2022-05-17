@@ -31,17 +31,19 @@ class ReceiveMessageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        receiveBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.gray.hexText)
+        
+        receiveBackgroundView.cornerRadius = 15
+        
+        receiveImageView.cornerRadius = 15
+        
+        friendImageView.cornerRadius = friendImageView.frame.width / 2
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        receiveBackgroundView.layer.cornerRadius = 15
-        
-        receiveImageView.layer.cornerRadius = 15
-        
-        friendImageView.layer.cornerRadius = friendImageView.frame.width / 2
         
     }
     

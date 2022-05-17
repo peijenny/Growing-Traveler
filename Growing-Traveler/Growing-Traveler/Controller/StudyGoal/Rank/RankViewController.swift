@@ -51,6 +51,10 @@ class RankViewController: UIViewController {
         
         registerTableViewCell()
         
+        rankBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        rankCircleView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
     }
     
     override func viewDidLayoutSubviews() {

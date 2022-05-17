@@ -166,8 +166,10 @@ class CertificationViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             placeHolderImageView.topAnchor.constraint(equalTo: certificationBackgroundView.topAnchor, constant: 50),
-            placeHolderImageView.trailingAnchor.constraint(equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
-            placeHolderImageView.leadingAnchor.constraint(equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
+            placeHolderImageView.trailingAnchor.constraint(
+                equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
+            placeHolderImageView.leadingAnchor.constraint(
+                equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
             placeHolderImageView.heightAnchor.constraint(equalToConstant: 200)
         ])
         
@@ -185,7 +187,8 @@ class CertificationViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             placeHolderLabel.topAnchor.constraint(equalTo: placeHolderImageView.bottomAnchor, constant: 20),
-            placeHolderLabel.trailingAnchor.constraint(equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
+            placeHolderLabel.trailingAnchor.constraint(
+                equalTo: certificationBackgroundView.trailingAnchor, constant: -50),
             placeHolderLabel.leadingAnchor.constraint(equalTo: certificationBackgroundView.leadingAnchor, constant: 50),
             placeHolderLabel.heightAnchor.constraint(equalToConstant: 25)
         ])
@@ -267,6 +270,12 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
         return true
+        
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        
+        return "刪除"
         
     }
     

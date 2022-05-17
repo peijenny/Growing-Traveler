@@ -13,10 +13,10 @@
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PlanStudyGoalHeaderView" customModule="Growing_Traveler" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="266"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2c0-1L-xAC">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="260"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="266"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="eLX-tD-sYj">
                             <rect key="frame" x="8" y="210" width="398" height="40"/>
@@ -32,7 +32,7 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lA3-BD-eIS">
                                             <rect key="frame" x="298" y="0.0" width="40" height="40"/>
-                                            <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="oVk-us-Cxs"/>
                                                 <constraint firstAttribute="width" secondItem="lA3-BD-eIS" secondAttribute="height" multiplier="1:1" id="uzR-zN-SXQ"/>
@@ -50,7 +50,7 @@
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68h-KJ-h9q">
                                     <rect key="frame" x="358" y="0.0" width="40" height="40"/>
-                                    <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="Qgi-IG-kYe"/>
                                         <constraint firstAttribute="height" constant="40" id="yOL-BV-IRg"/>
@@ -109,7 +109,7 @@
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Js-zV-rdu">
                                     <rect key="frame" x="358" y="0.0" width="40" height="40"/>
-                                    <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="2Js-zV-rdu" secondAttribute="height" multiplier="1:1" id="ISZ-Sc-Dnp"/>
                                     </constraints>
@@ -176,7 +176,7 @@
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKQ-Ro-0GY">
                                                     <rect key="frame" x="358" y="0.0" width="40" height="40"/>
-                                                    <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="tKQ-Ro-0GY" secondAttribute="height" multiplier="1:1" id="Tyd-vF-wu1"/>
                                                         <constraint firstAttribute="width" constant="40" id="Vyz-4o-Zmb"/>
@@ -236,7 +236,7 @@
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khI-wM-Aqo">
                                                     <rect key="frame" x="358" y="0.0" width="40" height="40"/>
-                                                    <color key="backgroundColor" red="0.28627450980392155" green="0.63137254901960782" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="O0L-BF-F0C"/>
                                                         <constraint firstAttribute="width" secondItem="khI-wM-Aqo" secondAttribute="height" multiplier="1:1" id="a6e-Ry-Ug4"/>
@@ -293,13 +293,13 @@
                         <constraint firstItem="CW4-78-J4r" firstAttribute="top" secondItem="2c0-1L-xAC" secondAttribute="top" constant="10" id="5u3-5F-LjN"/>
                         <constraint firstAttribute="trailing" secondItem="dEB-SO-qJg" secondAttribute="trailing" constant="8" id="CC1-sS-dMU"/>
                         <constraint firstItem="eLX-tD-sYj" firstAttribute="top" secondItem="sor-8n-x4i" secondAttribute="bottom" constant="10" id="EVy-w0-tnc"/>
+                        <constraint firstAttribute="bottom" secondItem="eLX-tD-sYj" secondAttribute="bottom" constant="16" id="K5V-8O-l98"/>
                         <constraint firstAttribute="trailing" secondItem="sor-8n-x4i" secondAttribute="trailing" constant="8" id="PU6-n7-Xkt"/>
                         <constraint firstItem="CW4-78-J4r" firstAttribute="leading" secondItem="2c0-1L-xAC" secondAttribute="leading" constant="8" id="Q7j-06-a0n"/>
                         <constraint firstItem="sor-8n-x4i" firstAttribute="leading" secondItem="2c0-1L-xAC" secondAttribute="leading" constant="8" id="cKE-Sj-bYZ"/>
                         <constraint firstAttribute="trailing" secondItem="eLX-tD-sYj" secondAttribute="trailing" constant="8" id="e7m-bW-fxl"/>
                         <constraint firstItem="dEB-SO-qJg" firstAttribute="top" secondItem="CW4-78-J4r" secondAttribute="bottom" constant="10" id="hlo-VT-X06"/>
                         <constraint firstItem="dEB-SO-qJg" firstAttribute="leading" secondItem="2c0-1L-xAC" secondAttribute="leading" constant="8" id="uMf-Bv-Jqw"/>
-                        <constraint firstAttribute="bottom" secondItem="eLX-tD-sYj" secondAttribute="bottom" constant="10" id="vBC-8j-uiF"/>
                     </constraints>
                 </view>
             </subviews>

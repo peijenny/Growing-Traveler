@@ -21,7 +21,11 @@ class MandateTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       
+        mandateProgressView.progressTintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        mandateProgressView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

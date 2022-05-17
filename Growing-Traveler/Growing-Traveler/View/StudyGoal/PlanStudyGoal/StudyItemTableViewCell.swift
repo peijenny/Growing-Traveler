@@ -13,9 +13,15 @@ class StudyItemTableViewCell: UITableViewCell {
     
     @IBOutlet weak var studyTimeLabel: UILabel!
     
+    @IBOutlet weak var studyItemBackgroundView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        studyItemBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        studyItemBackgroundView.cornerRadius = 10
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

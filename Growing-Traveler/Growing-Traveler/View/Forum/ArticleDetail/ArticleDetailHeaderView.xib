@@ -55,7 +55,7 @@
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1HE-gc-icc">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="25"/>
-                                            <color key="backgroundColor" red="0.69803921570000005" green="0.81960784310000001" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="標籤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L59-rx-B5v">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
@@ -67,7 +67,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.69803921568627447" green="0.81960784313725488" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="L59-rx-B5v" secondAttribute="trailing" id="8Gm-qu-dr7"/>
                                         <constraint firstItem="1HE-gc-icc" firstAttribute="leading" secondItem="KKq-e5-fkX" secondAttribute="leading" id="91J-NW-fgD"/>
@@ -78,19 +78,9 @@
                                         <constraint firstItem="L59-rx-B5v" firstAttribute="leading" secondItem="KKq-e5-fkX" secondAttribute="leading" id="eS5-UZ-bab"/>
                                         <constraint firstItem="1HE-gc-icc" firstAttribute="width" secondItem="KKq-e5-fkX" secondAttribute="width" multiplier="0.5" id="lIx-ha-QK9"/>
                                     </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" red="0.28627450980000002" green="0.63137254899999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="10"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3V-3g-bdD">
                             <rect key="frame" x="0.0" y="134" width="414" height="16"/>
@@ -131,9 +121,13 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="categoryBackgroundView" destination="KKq-e5-fkX" id="uau-zc-YwO"/>
                 <outlet property="categoryLabel" destination="L59-rx-B5v" id="gxV-Mh-xO1"/>
+                <outlet property="categoryStackView" destination="eht-MQ-opN" id="QiF-UO-8ei"/>
                 <outlet property="createTimeLabel" destination="Dfj-mo-CqU" id="mQS-bL-X76"/>
                 <outlet property="forumTypeLabel" destination="cXK-m5-6fR" id="Xd1-oc-tm1"/>
+                <outlet property="headerBackgroundView" destination="Yc6-74-Tsx" id="yht-IA-wv6"/>
+                <outlet property="middleBackgoundView" destination="1HE-gc-icc" id="bGg-10-xhO"/>
                 <outlet property="titleLabel" destination="0xB-Zl-yCk" id="TyV-RZ-gCz"/>
                 <outlet property="userIDLabel" destination="bUc-ku-e6R" id="qgI-cz-V6q"/>
             </connections>

@@ -28,17 +28,23 @@ class SignUpTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        uploadUserPhotoButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        uploadUserPhotoButton.cornerRadius = uploadUserPhotoButton.frame.width / 2
+        
+        userPhotoImageView.contentMode = .scaleAspectFill
+
+        userPhotoImageView.cornerRadius = userPhotoImageView.frame.width / 2
+        
+        signUpButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        signUpButton.cornerRadius = 10
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        userPhotoImageView.contentMode = .scaleAspectFill
-
-        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
-        
-//        uploadUserPhotoButton.layer.cornerRadius = uploadUserPhotoButton.frame.width / 2
         
     }
     
