@@ -74,7 +74,7 @@ class ForumViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        HUD.show(.labeledProgress(title: "文章載入中...", subtitle: nil))
+        HUD.show(.labeledProgress(title: "文章載入中...", subtitle: nil))
         
         fetchFriendBlockadeListData()
         

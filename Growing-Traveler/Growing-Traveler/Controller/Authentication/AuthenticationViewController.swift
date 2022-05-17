@@ -336,6 +336,7 @@ extension AuthenticationViewController: ASAuthorizationControllerPresentationCon
         return self.view.window!
         
     }
+    
 }
 
 private func randomNonceString(length: Int = 32) -> String {
