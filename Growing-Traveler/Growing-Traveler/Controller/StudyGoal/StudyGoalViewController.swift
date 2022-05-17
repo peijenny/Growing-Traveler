@@ -9,6 +9,25 @@ import UIKit
 import PKHUD
 import Lottie
 
+//enum IndexPathRow {
+//    
+//    case header
+//    
+//    case body
+//    
+//    case footer
+//    
+//    var number: Int {
+//        
+//        switch self {
+//            
+//        case .header: return 1
+//            
+//        case .body: return 
+//        }
+//    }
+//}
+
 class StudyGoalViewController: UIViewController {
     
     @IBOutlet weak var studyGoalTableView: UITableView! {
@@ -361,112 +380,114 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     @objc func deleteStudyGoalButton(sender: UIButton) {
         
         let point = sender.convert(CGPoint.zero, to: studyGoalTableView)
+        
+        guard let indexPath = studyGoalTableView.indexPathForRow(at: point) else { return }
 
-        if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
+        let alertController = UIAlertController(
+            title: "刪除個人學習計劃", message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
+            preferredStyle: .alert)
+        
+        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
             
-            let alertController = UIAlertController(
-                title: "刪除個人學習計劃", message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
-                preferredStyle: .alert)
+            guard let strongSelf = self else { return }
             
-            let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
-                
-                guard let strongSelf = self else { return }
-                
-                strongSelf.studyGoalManager.deleteData(studyGoal: strongSelf.studyGoals[indexPath.section])
-                
-                strongSelf.studyGoals.remove(at: indexPath.section)
-                
-                strongSelf.studyGoalTableView.beginUpdates()
-                
-                let indexSet = NSMutableIndexSet()
-                
-                indexSet.add(indexPath.section)
+            strongSelf.deleteStudyGoal(section: indexPath.section)
 
-                strongSelf.studyGoalTableView.deleteSections(
-                    indexSet as IndexSet, with: UITableView.RowAnimation.left)
-
-                strongSelf.studyGoalTableView.endUpdates()
-                
-                HUD.flash(.labeledSuccess(title: "計劃已刪除！", subtitle: nil), delay: 0.5)
-                
-            }
-            
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel)
-            
-            alertController.addAction(agreeAction)
-            
-            alertController.addAction(cancelAction)
-            
-            present(alertController, animated: true, completion: nil)
+            HUD.flash(.labeledSuccess(title: "計劃已刪除！", subtitle: nil), delay: 0.5)
             
         }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        
+        alertController.addAction(agreeAction)
+        
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
     }
     
     @objc func checkItemButton(sender: UIButton) {
         
         let point = sender.convert(CGPoint.zero, to: studyGoalTableView)
+        
+        guard let indexPath = studyGoalTableView.indexPathForRow(at: point) else { return }
+        
+        handleStudyItemComplete(selectButton: sender, section: indexPath.section, row: indexPath.row)
+        
+        handleStudyItemFinish(section: indexPath.section, row: indexPath.row)
+        
+    }
+    
+    func deleteStudyGoal(section: Int) {
+        
+        studyGoalManager.deleteData(studyGoal: studyGoals[section])
+        
+        studyGoals.remove(at: section)
+        
+        let indexSet = NSMutableIndexSet()
+        
+        indexSet.add(section)
 
-        if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
+        studyGoalTableView.deleteSections(indexSet as IndexSet, with: UITableView.RowAnimation.left)
+        
+    }
+    
+    func handleStudyItemComplete(selectButton: UIButton, section: Int, row: Int) {
+        
+        guard var user = user else { return }
+        
+        if selectButton.tintColor?.cgColor == UIColor.clear.cgColor {
             
-            guard var user = user else { return }
+            selectButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+            
+            studyGoals[section].studyItems[row - 1].isCompleted = true
+            
+            user.achievement.experienceValue += 50
 
-            if sender.tintColor?.cgColor == UIColor.clear.cgColor {
-                
-                sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
-                
-                studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted = true
-                
-                user.achievement.experienceValue += 50
+        } else {
+            
+            selectButton.tintColor = UIColor.clear
+            
+            studyGoals[section].studyItems[row - 1].isCompleted = false
+            
+            user.achievement.experienceValue -= 50
 
-            } else {
+        }
+        
+        studyGoalManager.updateData(studyGoal: studyGoals[section])
+        
+    }
+    
+    func handleStudyItemFinish(section: Int, row: Int) {
+        
+        guard var user = user else { return }
+        
+        let studyGoalsID = user.achievement.completionGoals
+        
+        if studyGoals[section].studyItems.allSatisfy({ $0.isCompleted == true}) {
+            
+            HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
+            
+            if studyGoalsID.filter({ $0 == studyGoals[section].id }).isEmpty {
                 
-                sender.tintColor = UIColor.clear
+                user.achievement.completionGoals.append(studyGoals[section].id)
                 
-                studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted = false
-                
-                user.achievement.experienceValue -= 50
-
             }
             
-            studyGoalManager.updateData(studyGoal: studyGoals[indexPath.section])
+        } else {
             
-            if studyGoals[indexPath.section].studyItems.allSatisfy({ $0.isCompleted == true}) {
+            if !studyGoalsID.filter({ $0 == studyGoals[section].id }).isEmpty {
                 
-                HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
+                let deleteIndex = studyGoalsID.getArrayIndex(studyGoals[section].id)[0]
                 
-                if user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).isEmpty {
-                    
-                    user.achievement.completionGoals.append(studyGoals[indexPath.section].id)
-                    
-                }
-                
-            } else {
-                
-                if !user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).isEmpty {
-                    
-                    var deleteIndex = Int()
-                    
-                    for index in 0..<user.achievement.completionGoals.count {
-
-                        if user.achievement.completionGoals[index] == studyGoals[indexPath.section].id {
-
-                            deleteIndex = index
-                            
-                        }
-
-                    }
-                    
-                    user.achievement.completionGoals.remove(at: deleteIndex)
-                    
-                }
+                user.achievement.completionGoals.remove(at: deleteIndex)
                 
             }
-            
-            listenData(status: titleText)
-            
-            userManager.updateData(user: user)
             
         }
+        
+        userManager.updateData(user: user)
         
     }
     
