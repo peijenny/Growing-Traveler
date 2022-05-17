@@ -25,7 +25,7 @@ class ShareReceiveTableViewCell: UITableViewCell {
         
         shareTypeLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
         
-        receiveBackgroundVIew.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        receiveBackgroundVIew.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.gray.hexText)
         
         receiveBackgroundVIew.cornerRadius = 10
         

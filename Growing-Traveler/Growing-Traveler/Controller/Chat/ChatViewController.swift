@@ -131,6 +131,8 @@ class ChatViewController: BaseViewController {
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
+        chatTableView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
         friendStatusLabel.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
         friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
