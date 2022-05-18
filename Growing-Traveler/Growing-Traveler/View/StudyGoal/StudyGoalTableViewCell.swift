@@ -7,11 +7,19 @@
 
 import UIKit
 
+protocol CheckStudyItemDelegate {
+    
+    func checkItemCompleted(studyGoalTableViewCell: StudyGoalTableViewCell, studyItemCompleted: Bool)
+    
+}
+
 class StudyGoalTableViewCell: UITableViewCell {
 
     @IBOutlet weak var checkButton: UIButton!
     
     @IBOutlet weak var studyItemLabel: UILabel!
+    
+    var delegate: CheckStudyItemDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,12 +28,34 @@ class StudyGoalTableViewCell: UITableViewCell {
         
         checkButton.cornerRadius = 5
         
+        checkButton.addTarget(self, action: #selector(checkItemButton), for: .touchUpInside)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
     }
+    
+    @objc func checkItemButton(sender: UIButton) {
+        
+        if sender.tintColor?.cgColor == UIColor.clear.cgColor {
+            
+            sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+            
+            delegate?.checkItemCompleted(studyGoalTableViewCell: self, studyItemCompleted: true)
+
+        } else {
+            
+            sender.tintColor = UIColor.clear
+            
+            delegate?.checkItemCompleted(studyGoalTableViewCell: self, studyItemCompleted: false)
+            
+        }
+
+    }
+    
+    
     
     func checkIsCompleted(isCompleted: Bool) {
         
