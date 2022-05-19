@@ -146,12 +146,16 @@ class StudyGoalViewController: UIViewController {
     
     func setSelectLineView() {
         
-        let viewWidth = UIScreen.main.bounds.width / CGFloat(3.0)
-        
-        selectLineView.frame = CGRect(
-            x: viewWidth, y: 0, width: viewWidth, height: selectlineBackgroundView.frame.height)
-        
         selectlineBackgroundView.addSubview(selectLineView)
+        
+        selectLineView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            selectLineView.topAnchor.constraint(equalTo: selectlineBackgroundView.topAnchor),
+            selectLineView.centerXAnchor.constraint(equalTo: selectlineBackgroundView.centerXAnchor),
+            selectLineView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / CGFloat(3.0)),
+            selectLineView.heightAnchor.constraint(equalToConstant: selectlineBackgroundView.frame.height)
+        ])
         
     }
     
@@ -278,7 +282,6 @@ class StudyGoalViewController: UIViewController {
     }
     
     // MARK: - Target / IBAction
-    
     @objc func pushToRankPage(sender: UIButton) {
         
         let viewController = UIStoryboard.studyGoal.instantiateViewController(
@@ -375,7 +378,7 @@ class StudyGoalViewController: UIViewController {
     func handleSelectStudyGoals(status: String, studyGoals: [StudyGoal]) -> [StudyGoal] {
         
         var resultStudyGoals: [StudyGoal] = []
-    
+        
         for index in 0..<studyGoals.count {
             
             let isPending = studyGoals[index].studyItems.allSatisfy({ $0.isCompleted == false })
@@ -408,6 +411,7 @@ class StudyGoalViewController: UIViewController {
     
 }
 
+// MARK: - tableView delegate / dataSource
 extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -451,6 +455,16 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         
         return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == 0 {
+            
+            pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
+            
+        }
         
     }
     
@@ -571,16 +585,6 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         guard let user = user else { return }
         
         userManager.updateData(user: user)
-        
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.row == 0 {
-            
-            pushToPlanStudyGoalPage(studyGoal: studyGoals[indexPath.section])
-            
-        }
         
     }
     

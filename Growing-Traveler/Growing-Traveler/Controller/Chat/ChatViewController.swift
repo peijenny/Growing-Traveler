@@ -145,12 +145,6 @@ class ChatViewController: BaseViewController {
 
     func setNavigationItems() {
 
-//        navigationItem.rightBarButtonItems = [
-//            UIBarButtonItem(image: UIImage.asset(.telephoneCall),
-//                style: .plain, target: self, action: #selector(callAudioPhone)),
-//            UIBarButtonItem(image: UIImage.asset(.videoCamera),
-//                style: .plain, target: self, action: #selector(callVideoPhone))]
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage.asset(.user), style: .plain, target: self, action: #selector(friendInfoButton))
 
@@ -190,44 +184,6 @@ class ChatViewController: BaseViewController {
 
         self.addChild(viewController)
         
-    }
-
-    @objc func callAudioPhone(sender: UIButton) {
-
-        guard let phoneEmail = friendInfo?.userEmail else { return }
-
-        // audio call
-        if let facetimeURL: NSURL = NSURL(string: "facetime-audio://\(phoneEmail)") {
-
-            let application: UIApplication = UIApplication.shared
-
-            if application.canOpenURL(facetimeURL as URL) {
-
-                application.open(facetimeURL as URL)
-
-            }
-
-        }
-
-    }
-
-    @objc func callVideoPhone(sender: UIButton) {
-
-        guard let phoneEmail = friendInfo?.userEmail else { return }
-
-        // video call
-        if let facetimeURL: NSURL = NSURL(string: "facetime://\(phoneEmail)") {
-
-            let application: UIApplication = UIApplication.shared
-
-            if application.canOpenURL(facetimeURL as URL) {
-
-                application.open(facetimeURL as URL)
-
-            }
-
-        }
-
     }
     
     override var hidesBottomBarWhenPushed: Bool {

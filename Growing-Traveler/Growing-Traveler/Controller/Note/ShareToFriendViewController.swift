@@ -220,7 +220,8 @@ extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSourc
             let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
             
             selectChat.messageContent.append(MessageContent(
-                createTime: createTime, sendMessage: shareID ?? "", sendType: shareType ?? "", sendUserID: KeyToken().userID))
+                createTime: createTime, sendMessage: shareID ?? "",
+                sendType: shareType ?? "", sendUserID: KeyToken().userID))
             
             chatRoomManager.addData(userName: userName ?? "", chat: selectChat)
             
