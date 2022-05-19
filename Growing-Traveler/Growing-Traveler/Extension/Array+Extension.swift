@@ -9,9 +9,9 @@ import UIKit
 
 extension Array where Element: Equatable {
 
-    func getArrayIndex(_ value :  Element) -> [Int] {
+    func getArrayIndex(_ value: Element) -> [Int] {
         
-        return self.indices.filter {self[$0] == value}
+        return self.indices.filter { self[$0] == value }
         
     }
 

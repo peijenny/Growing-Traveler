@@ -9,7 +9,6 @@ import UIKit
 
 class AnalysisContentTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var topTitleLabel: UILabel!
     
     @IBOutlet weak var topContentLabel: UILabel!

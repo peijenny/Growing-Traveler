@@ -279,7 +279,8 @@ class DeleteUserManager {
         
     }
     
-    func fetchArticleMessagesData(allForumArticles: [ForumArticle], completion: @escaping (Result<[DeleteArticle]>) -> Void) {
+    func fetchArticleMessagesData(
+        allForumArticles: [ForumArticle], completion: @escaping (Result<[DeleteArticle]>) -> Void) {
         
         var deleteArticleMessages: [DeleteArticle] = []
         

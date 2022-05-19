@@ -55,23 +55,28 @@ private enum Tab {
             
         case .studyGoal:
 
-            return UITabBarItem(title: "目標", image: UIImage.asset(.archery), selectedImage: UIImage.asset(.archery))
+            return UITabBarItem(
+                title: "目標", image: UIImage.asset(.archery), selectedImage: UIImage.asset(.archery))
             
         case .note:
             
-            return UITabBarItem(title: "筆記", image: UIImage.asset(.book), selectedImage: UIImage.asset(.book))
+            return UITabBarItem(
+                title: "筆記", image: UIImage.asset(.book), selectedImage: UIImage.asset(.book))
         
         case .chat:
             
-            return UITabBarItem(title: "聊天室", image: UIImage.asset(.speechBubble), selectedImage: UIImage.asset(.speechBubble))
+            return UITabBarItem(
+                title: "聊天室", image: UIImage.asset(.speechBubble), selectedImage: UIImage.asset(.speechBubble))
             
         case .forum:
 
-            return UITabBarItem(title: "討論區", image: UIImage.asset(.speaker), selectedImage: UIImage.asset(.speaker))
+            return UITabBarItem(
+                title: "討論區", image: UIImage.asset(.speaker), selectedImage: UIImage.asset(.speaker))
             
         case .profile:
             
-            return UITabBarItem(title: "個人", image: UIImage.asset(.idCard), selectedImage: UIImage.asset(.idCard))
+            return UITabBarItem(
+                title: "個人", image: UIImage.asset(.idCard), selectedImage: UIImage.asset(.idCard))
             
         }
          

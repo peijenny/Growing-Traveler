@@ -56,7 +56,6 @@ class ArticleDetailViewController: UIViewController {
         
     }
     
-    
     override var hidesBottomBarWhenPushed: Bool {
         
         get {

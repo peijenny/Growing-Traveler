@@ -151,35 +151,29 @@ class ErrorManager {
 
         case .internalError:
             
-            HUD.flash(.labeledError(title: AuthError.internalError.title,
-                subtitle: AuthError.internalError.subTitle), delay: 0.5)
+            HUD.flash(.labeledError(title: AuthError.internalError.title, subtitle: nil), delay: 0.5)
 
         // SignIn Error
         case .invalidEmail:
             
-            HUD.flash(.labeledError(title: AuthError.invalidEmail.title,
-                subtitle: AuthError.invalidEmail.subTitle), delay: 0.5)
+            HUD.flash(.labeledError(title: AuthError.invalidEmail.title, subtitle: nil), delay: 0.5)
 
         case .operationNotAllowed:
             
-            HUD.flash(.labeledError(title: AuthError.operationNotAllowed.title,
-                subtitle: AuthError.operationNotAllowed.subTitle), delay: 0.5)
+            HUD.flash(.labeledError(title: AuthError.operationNotAllowed.title, subtitle: nil), delay: 0.5)
 
         case .userDisabled:
             
-            HUD.flash(.labeledError(title: AuthError.userDisabled.title,
-                subtitle: AuthError.userDisabled.subTitle), delay: 0.5)
+            HUD.flash(.labeledError(title: AuthError.userDisabled.title, subtitle: nil), delay: 0.5)
 
         case .wrongPassword:
             
-            HUD.flash(.labeledError(title: AuthError.wrongPassword.title,
-                subtitle: AuthError.wrongPassword.subTitle), delay: 0.5)
+            HUD.flash(.labeledError(title: AuthError.wrongPassword.title, subtitle: nil), delay: 0.5)
 
         // SignUp Error
         case .emailAlreadyInUse:
             
-            HUD.flash(.labeledError(title: AuthError.emailAlreadyInUse.title,
-                subtitle: AuthError.emailAlreadyInUse.subTitle), delay: 0.5)
+            HUD.flash(.labeledError(title: AuthError.emailAlreadyInUse.title, subtitle: nil), delay: 0.5)
 
         case .weakPassword:
             
