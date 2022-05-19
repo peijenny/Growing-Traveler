@@ -105,13 +105,13 @@ class AuthenticationViewController: UIViewController {
         
         friendManager.listenFriendInfoData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let usersInfo):
                 
-                strongSelf.users = usersInfo
+                self.users = usersInfo
                 
             case .failure:
                 

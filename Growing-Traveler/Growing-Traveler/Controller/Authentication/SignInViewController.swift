@@ -157,12 +157,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     if let error = error as? NSError {
                         
-                        print(error)
-                        
                         guard let errorCode = AuthErrorCode(rawValue: error.code) else {
-                            
-                            print("登入錯誤，於 firebase 無法找到配對的帳號！")
-                            
+
                             HUD.flash(.labeledError(title: "登入失敗！", subtitle: "無法找到配對的帳號"))
                             
                             return
@@ -204,11 +200,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     if let error = error as? NSError {
                         
-                        print(error)
-                        
                         guard let errorCode = AuthErrorCode(rawValue: error.code) else {
-                            
-                            print("註冊錯誤，於 firebase 無法找到配對的帳號！")
                             
                             HUD.flash(.labeledError(title: "註冊失敗！", subtitle: "無法找到配對的帳號"))
                             
@@ -281,19 +273,17 @@ extension SignInViewController: UIImagePickerControllerDelegate, UINavigationCon
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
                     
-                    strongSelf.userImageLink = "\(imageLink)"
+                    self.userImageLink = "\(imageLink)"
 
-                    strongSelf.signTableView.reloadData()
+                    self.signTableView.reloadData()
                     
-                case .failure(let error):
-
-                    print(error)
+                case .failure:
                     
                     HUD.flash(.labeledError(title: "上傳失敗！", subtitle: "請稍後再試"), delay: 0.5)
 

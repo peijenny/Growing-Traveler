@@ -60,29 +60,27 @@ class NoteViewController: BaseViewController {
         
         userManager.fetchUserNoteData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let notes):
                 
-                strongSelf.notes = notes
+                self.notes = notes
                 
-                if strongSelf.notes.isEmpty {
+                if self.notes.isEmpty {
                     
-                    strongSelf.noteBackgroundView.isHidden = false
+                    self.noteBackgroundView.isHidden = false
                     
                 } else {
                     
-                    strongSelf.noteBackgroundView.isHidden = true
+                    self.noteBackgroundView.isHidden = true
                     
                 }
                 
-                strongSelf.noteTableView.reloadData()
+                self.noteTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 

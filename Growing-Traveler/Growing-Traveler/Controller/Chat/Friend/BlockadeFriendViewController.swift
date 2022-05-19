@@ -60,19 +60,17 @@ class BlockadeFriendViewController: UIViewController {
         
         userManager.fetchUsersData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let usersInfo):
                 
-                strongSelf.usersInfo = usersInfo
+                self.usersInfo = usersInfo
                 
-                strongSelf.blockadeTableView.reloadData()
+                self.blockadeTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -85,19 +83,17 @@ class BlockadeFriendViewController: UIViewController {
         
         friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let friend):
                 
-                strongSelf.friend = friend
+                self.friend = friend
                 
-                strongSelf.blockadeTableView.reloadData()
+                self.blockadeTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 

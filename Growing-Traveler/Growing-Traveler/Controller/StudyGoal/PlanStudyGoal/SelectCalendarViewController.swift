@@ -81,11 +81,11 @@ class SelectCalendarViewController: UIViewController {
 extension SelectCalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
     // MARK: - Calendar DataSource
-//    func minimumDate(for calendar: FSCalendar) -> Date {
-//        
-//        return startDate ?? Date()
-//        
-//    }
+    func minimumDate(for calendar: FSCalendar) -> Date {
+        
+        return startDate ?? Date()
+        
+    }
     
     // MARK: - Calendar Delegate
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {

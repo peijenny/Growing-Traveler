@@ -213,15 +213,15 @@ class ChatViewController: BaseViewController {
         
         viewController.getFriendStatus = { [weak self] isBlock in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             if isBlock {
                 
-                strongSelf.friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
+                self.friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
                 
-                strongSelf.friendStatusLabel.isHidden = false
+                self.friendStatusLabel.isHidden = false
                 
-                strongSelf.navigationController?.popViewController(animated: true)
+                self.navigationController?.popViewController(animated: true)
                 
             }
             
@@ -237,21 +237,21 @@ class ChatViewController: BaseViewController {
         
         userManager.fetchData(fetchUserID: friendID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch result {
 
             case .success(let friendInfo):
 
-                strongSelf.friendInfo = friendInfo
+                self.friendInfo = friendInfo
                 
-                if strongSelf.friendInfo != nil {
+                if self.friendInfo != nil {
                     
-                    strongSelf.fetchOtherFriendListData()
+                    self.fetchOtherFriendListData()
                     
                 }
                 
-                strongSelf.chatTableView.reloadData()
+                self.chatTableView.reloadData()
 
             case .failure:
                 
@@ -267,19 +267,19 @@ class ChatViewController: BaseViewController {
         
         friendManager.fetchFriendListData(fetchUserID: friendID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
 
             case .success(let friendList):
 
-                strongSelf.otherFriendList = friendList
+                self.otherFriendList = friendList
                 
                 if !friendList.blockadeList.filter({ $0 == KeyToken().userID }).isEmpty {
                     
-                    strongSelf.friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
+                    self.friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
 
-                    strongSelf.friendStatusLabel.isHidden = false
+                    self.friendStatusLabel.isHidden = false
                     
                 }
                 
@@ -297,15 +297,15 @@ class ChatViewController: BaseViewController {
 
         chatRoomManager.fetchData(friendID: friendID) { [weak self] result in
 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch result {
 
             case .success(let chatMessage):
 
-                strongSelf.chatMessage = chatMessage
+                self.chatMessage = chatMessage
                 
-                strongSelf.handleChatMessage(chatMessage: chatMessage)
+                self.handleChatMessage(chatMessage: chatMessage)
                 
             case .failure:
 
@@ -341,7 +341,7 @@ class ChatViewController: BaseViewController {
         
         userManager.fetchshareNoteData(shareUserID: shareUserID, noteID: noteID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch result {
 
@@ -349,9 +349,9 @@ class ChatViewController: BaseViewController {
                 
                 let note = note
                 
-                strongSelf.notes.append(note)
+                self.notes.append(note)
                 
-                strongSelf.chatTableView.reloadData()
+                self.chatTableView.reloadData()
                 
             case .failure:
 
@@ -367,7 +367,7 @@ class ChatViewController: BaseViewController {
         
         forumArticleManager.fetchForumArticleData(articleID: articleID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
@@ -375,9 +375,9 @@ class ChatViewController: BaseViewController {
                 
                 let forumArticle = forumArticle
                 
-                strongSelf.forumArticles.append(forumArticle)
+                self.forumArticles.append(forumArticle)
                 
-                strongSelf.chatTableView.reloadData()
+                self.chatTableView.reloadData()
                 
             case .failure:
                 
@@ -603,13 +603,13 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
 
-                    strongSelf.addMessageData(inputContent: imageLink)
+                    self.addMessageData(inputContent: imageLink)
 
                 case .failure:
 

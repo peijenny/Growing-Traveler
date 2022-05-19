@@ -99,11 +99,11 @@ class ArticleDetailViewController: UIViewController {
         
         viewController.getFriendStatus = { [weak self] isBlock in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             if isBlock {
                 
-                strongSelf.navigationController?.popViewController(animated: true)
+                self.navigationController?.popViewController(animated: true)
                 
             }
             
@@ -115,17 +115,17 @@ class ArticleDetailViewController: UIViewController {
         
         friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let userFriend):
                 
-                strongSelf.blockadeList = userFriend.blockadeList
+                self.blockadeList = userFriend.blockadeList
                 
-                strongSelf.listenMessageData()
+                self.listenMessageData()
                 
-                strongSelf.articleDetailTableView.reloadData()
+                self.articleDetailTableView.reloadData()
                 
             case .failure:
                 
@@ -141,15 +141,15 @@ class ArticleDetailViewController: UIViewController {
         
         userManager.fetchUsersData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let usersInfo):
                 
-                strongSelf.usersInfo = usersInfo
+                self.usersInfo = usersInfo
                 
-                strongSelf.articleDetailTableView.reloadData()
+                self.articleDetailTableView.reloadData()
                 
             case .failure:
                 
@@ -169,15 +169,15 @@ class ArticleDetailViewController: UIViewController {
             articleID: articleID,
             completion: { [weak self] result in
                 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
             
                 switch result {
                     
                 case .success(let data):
                     
-                    strongSelf.articleMessages = data
+                    self.articleMessages = data
                     
-                    strongSelf.articleDetailTableView.reloadData()
+                    self.articleDetailTableView.reloadData()
                     
                 case .failure:
                     
@@ -347,19 +347,19 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
                 
                 viewController.getFriendStatus = { [weak self] isBlock in
                     
-                    guard let strongSelf = self else { return }
+                    guard let self = self else { return }
                     
                     if isBlock {
                         
-                        if viewController.selectUserID == strongSelf.forumArticle?.userID {
+                        if viewController.selectUserID == self.forumArticle?.userID {
                             
-                            strongSelf.navigationController?.popViewController(animated: true)
+                            self.navigationController?.popViewController(animated: true)
                             
                         }
                         
-                        strongSelf.fetchFriendBlockadeListData()
+                        self.fetchFriendBlockadeListData()
                         
-                        strongSelf.articleDetailTableView.reloadData()
+                        self.articleDetailTableView.reloadData()
                         
                     }
                     

@@ -72,21 +72,21 @@ class NoteDetailViewController: UIViewController {
         
         userManager.fetchshareNoteData(shareUserID: noteUserID ?? "", noteID: noteID ?? "") { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let note):
                 
-                strongSelf.note = note
+                self.note = note
                 
-                if KeyToken().userID == strongSelf.note?.userID {
+                if KeyToken().userID == self.note?.userID {
                     
-                    strongSelf.setNavigationItems()
+                    self.setNavigationItems()
                     
                 }
                 
-                strongSelf.title = note.noteTitle
+                self.title = note.noteTitle
                 
                 let formatter = DateFormatter()
                 
@@ -94,13 +94,11 @@ class NoteDetailViewController: UIViewController {
                 
                 let createTime = Date(timeIntervalSince1970: note.createTime)
                 
-                strongSelf.noteCreateTimeLabel.text = formatter.string(from: createTime)
+                self.noteCreateTimeLabel.text = formatter.string(from: createTime)
                 
-                strongSelf.noteDatailTableView.reloadData()
+                self.noteDatailTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 

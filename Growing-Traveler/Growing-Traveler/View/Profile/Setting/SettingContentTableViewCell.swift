@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class SettingContentTableViewCell: UITableViewCell {
 
@@ -19,13 +20,12 @@ class SettingContentTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
     func showUserContent(userInfo: UserInfo) {
@@ -47,7 +47,7 @@ class SettingContentTableViewCell: UITableViewCell {
         guard let userName = userNameTextField.text,
               userNameTextField.text != nil else {
             
-            print("姓名欄位不可為空！")
+            HUD.flash(.label("姓名欄位不可為空！"), delay: 0.5)
             
             return nil
             
@@ -56,7 +56,7 @@ class SettingContentTableViewCell: UITableViewCell {
         guard let userEmail = userEmailTextField.text,
                 userEmailTextField.text != nil else {
             
-            print("Email 欄位不可為空！")
+            HUD.flash(.label("Email 欄位不可為空！"), delay: 0.5)
             
             return nil
             

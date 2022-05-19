@@ -15,9 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var isForcePortrait: Bool = false
     
-    var isForceAllDerictions: Bool = false // 支援所有方向
+    var isForceAllDerictions: Bool = false // support all orientations
     
-    // 設定螢幕支援的方向
+    // Set screen support orientation
     func application(
         _ application: UIApplication,
         supportedInterfaceOrientationsFor window: UIWindow?)

@@ -49,29 +49,27 @@ class CertificationViewController: UIViewController {
         
         userManager.listenData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let userInfo):
                 
-                strongSelf.userInfo = userInfo
+                self.userInfo = userInfo
                 
-                if strongSelf.userInfo?.certification.count == 0 {
+                if self.userInfo?.certification.count == 0 {
                     
-                    strongSelf.certificationBackgroundView.isHidden = false
+                    self.certificationBackgroundView.isHidden = false
                     
                 } else {
                     
-                    strongSelf.certificationBackgroundView.isHidden = true
+                    self.certificationBackgroundView.isHidden = true
                     
                 }
                 
-                strongSelf.certificationTableView.reloadData()
+                self.certificationTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 

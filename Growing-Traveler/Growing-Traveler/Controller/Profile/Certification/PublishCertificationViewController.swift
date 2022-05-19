@@ -172,17 +172,15 @@ extension PublishCertificationViewController: UIImagePickerControllerDelegate, U
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
 
-                    strongSelf.certificationImageTextField.text = "\(imageLink)"
+                    self.certificationImageTextField.text = "\(imageLink)"
 
-                case .failure(let error):
-
-                    print(error)
+                case .failure:
                     
                     HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 

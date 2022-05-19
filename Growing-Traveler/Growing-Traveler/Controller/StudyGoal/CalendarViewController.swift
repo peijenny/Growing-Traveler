@@ -135,19 +135,17 @@ class CalendarViewController: UIViewController {
  
         studyGoalManager.listenData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let data):
                 
-                strongSelf.studyGoals = strongSelf.handleStudyGoal(studyGoals: data)
+                self.studyGoals = self.handleStudyGoal(studyGoals: data)
 
-                strongSelf.displayTableView.reloadData()
+                self.displayTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -236,11 +234,11 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
 
         viewController.getSelectedDate = { [weak self] selectedDate in
 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
-            strongSelf.selectedDate = selectedDate
+            self.selectedDate = selectedDate
 
-            strongSelf.listenStudyGoalData()
+            self.listenStudyGoalData()
 
         }
 

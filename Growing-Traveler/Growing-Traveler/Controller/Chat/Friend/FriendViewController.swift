@@ -82,19 +82,17 @@ class FriendViewController: UIViewController {
         
         userManager.fetchUsersData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let usersInfo):
                 
-                strongSelf.usersInfo = usersInfo
+                self.usersInfo = usersInfo
                 
-                strongSelf.friendListTableView.reloadData()
+                self.friendListTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -108,23 +106,21 @@ class FriendViewController: UIViewController {
 
         friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch result {
 
             case .success(let friend):
 
-                strongSelf.ownerfriend = friend
+                self.ownerfriend = friend
                 
-                strongSelf.badgeLabel.text = (!friend.applyList.isEmpty) ? "\(friend.applyList.count)" : nil
+                self.badgeLabel.text = (!friend.applyList.isEmpty) ? "\(friend.applyList.count)" : nil
                 
-                strongSelf.setNavigationItems()
+                self.setNavigationItems()
                 
-                strongSelf.friendListTableView.reloadData()
+                self.friendListTableView.reloadData()
 
-            case .failure(let error):
-
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
@@ -138,21 +134,19 @@ class FriendViewController: UIViewController {
         
         chatRoomManager.fetchFriendsChatData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let friendsChat):
                 
-                strongSelf.friendsChat = friendsChat
+                self.friendsChat = friendsChat
                 
-                strongSelf.friendBackgroundView.isHidden = (friendsChat.count == 0) ? false : true
+                self.friendBackgroundView.isHidden = (friendsChat.count == 0) ? false : true
                 
-                strongSelf.friendListTableView.reloadData()
+                self.friendListTableView.reloadData()
 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -163,9 +157,6 @@ class FriendViewController: UIViewController {
     }
     
     func setNavigationItems() {
-        
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(
-//            image: UIImage.asset(.add), style: .plain, target: self, action: #selector(applyFriendButton))
         
         // badge label
         badgeLabel.frame = CGRect(x: 20, y: -5, width: 20, height: 20)

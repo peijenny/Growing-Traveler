@@ -78,19 +78,17 @@ class MoreArticlesViewController: UIViewController {
         
         userManager.fetchUsersData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let usersInfo):
                 
-                strongSelf.usersInfo = usersInfo
+                self.usersInfo = usersInfo
                 
-                strongSelf.moreArticlesTableView.reloadData()
+                self.moreArticlesTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -102,24 +100,21 @@ class MoreArticlesViewController: UIViewController {
     
     func fetchFriendBlockadeListData() {
         
-        friendManager.fetchFriendListData(
-        fetchUserID: KeyToken().userID) { [weak self] result in
+        friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let userFriend):
                 
-                strongSelf.blockadeList = userFriend.blockadeList
+                self.blockadeList = userFriend.blockadeList
                 
-                strongSelf.fetchData()
+                self.fetchData()
                 
-                strongSelf.moreArticlesTableView.reloadData()
+                self.moreArticlesTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -133,7 +128,7 @@ class MoreArticlesViewController: UIViewController {
         
         forumArticleManager.fetchData(forumType: forumType ?? "") { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
@@ -141,21 +136,19 @@ class MoreArticlesViewController: UIViewController {
                 
                 var filterData = data
                 
-                if strongSelf.blockadeList != [] {
+                if self.blockadeList != [] {
                     
-                    for index in 0..<strongSelf.blockadeList.count {
+                    for index in 0..<self.blockadeList.count {
                         
-                        filterData = filterData.filter({ $0.userID != strongSelf.blockadeList[index] })
+                        filterData = filterData.filter({ $0.userID != self.blockadeList[index] })
                         
                     }
                     
                 }
 
-                strongSelf.forumArticles = filterData
+                self.forumArticles = filterData
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -271,13 +264,13 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
             
             viewController.getFriendStatus = { [weak self] isBlock in
                 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 
                 if isBlock {
                     
-                    strongSelf.forumArticles = strongSelf.forumArticles.filter({
+                    self.forumArticles = self.forumArticles.filter({
                         
-                        $0.userID != strongSelf.forumArticles[indexPath.row].userID
+                        $0.userID != self.forumArticles[indexPath.row].userID
                         
                     })
                     

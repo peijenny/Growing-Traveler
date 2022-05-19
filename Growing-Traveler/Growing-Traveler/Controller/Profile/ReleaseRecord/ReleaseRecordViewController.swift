@@ -105,19 +105,17 @@ class ReleaseRecordViewController: UIViewController {
         
         userManager.fetchUsersData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let usersInfo):
                 
-                strongSelf.usersInfo = usersInfo
+                self.usersInfo = usersInfo
                 
-                strongSelf.releaseRecordTableView.reloadData()
+                self.releaseRecordTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -131,7 +129,7 @@ class ReleaseRecordViewController: UIViewController {
         
         forumArticleManager.fetchSearchData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
@@ -139,23 +137,21 @@ class ReleaseRecordViewController: UIViewController {
                 
                 let filterArticles = forumArticles.filter({ $0.userID == KeyToken().userID })
                 
-                strongSelf.forumArticles = filterArticles
+                self.forumArticles = filterArticles
                 
-                if strongSelf.forumArticles.count == 0 {
+                if self.forumArticles.count == 0 {
                     
-                    strongSelf.resleaseBackgroundView.isHidden = false
+                    self.resleaseBackgroundView.isHidden = false
                     
                 } else {
                     
-                    strongSelf.resleaseBackgroundView.isHidden = true
+                    self.resleaseBackgroundView.isHidden = true
                     
                 }
                 
-                strongSelf.releaseRecordTableView.reloadData()
+                self.releaseRecordTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 

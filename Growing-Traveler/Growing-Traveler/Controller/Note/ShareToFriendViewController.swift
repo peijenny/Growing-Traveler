@@ -58,19 +58,17 @@ class ShareToFriendViewController: UIViewController {
         
         friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let friend):
                 
-                strongSelf.friendList = friend.friendList
+                self.friendList = friend.friendList
                 
-                strongSelf.fetchUserInfoData()
+                self.fetchUserInfoData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -84,18 +82,16 @@ class ShareToFriendViewController: UIViewController {
 
         chatRoomManager.fetchFriendsChatData { [weak self] result in
 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch result {
 
             case .success(let chats):
 
-                strongSelf.chats = chats
+                self.chats = chats
                 
-            case .failure(let error):
+            case .failure:
 
-                print(error)
-                
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
             }
@@ -108,32 +104,30 @@ class ShareToFriendViewController: UIViewController {
         
         userManager.fetchUsersData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch result {
 
             case .success(let usersInfo):
                 
-                strongSelf.userName = usersInfo.filter({ $0.userID == KeyToken().userID })[0].userName
+                self.userName = usersInfo.filter({ $0.userID == KeyToken().userID })[0].userName
                 
                 let usersInfo = usersInfo
                 
-                for index in 0..<strongSelf.friendList.count {
+                for index in 0..<self.friendList.count {
                     
-                    let filterUserInfo = usersInfo.filter({ $0.userID == strongSelf.friendList[index] })
+                    let filterUserInfo = usersInfo.filter({ $0.userID == self.friendList[index] })
                     
                     if filterUserInfo.count != 0 {
                         
-                        strongSelf.usersInfo.append(filterUserInfo[0])
+                        self.usersInfo.append(filterUserInfo[0])
                     }
                     
                 }
                 
-                strongSelf.shareToFriendTableView.reloadData()
+                self.shareToFriendTableView.reloadData()
 
-            case .failure(let error):
-
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 

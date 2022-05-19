@@ -110,7 +110,7 @@ class ApplyFriendViewController: BaseViewController {
         
         friendManager.fetchFriendInfoData(friendList: friendList) { [weak self] result in
                 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
@@ -118,13 +118,11 @@ class ApplyFriendViewController: BaseViewController {
                 
                 if friendsInfo.count == friendList.count {
                     
-                    strongSelf.friendsInfo = friendsInfo
+                    self.friendsInfo = friendsInfo
                     
                 }
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -138,7 +136,7 @@ class ApplyFriendViewController: BaseViewController {
         
         friendManager.fetchFriendListData(fetchUserID: friendID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
@@ -146,29 +144,27 @@ class ApplyFriendViewController: BaseViewController {
                 
                 if friendID == KeyToken().userID {
                     
-                    strongSelf.ownFriend = friend
+                    self.ownFriend = friend
                     
                 } else {
                     
-                    strongSelf.otherFriend = friend
+                    self.otherFriend = friend
 
-                    if friendID != strongSelf.searchUser?.userID {
+                    if friendID != self.searchUser?.userID {
                         
-                        strongSelf.popupConfirmApplyPage()
+                        self.popupConfirmApplyPage()
                         
                     }
                     
                     if !friend.blockadeList.filter({ $0 == KeyToken().userID }).isEmpty {
                         
-                        strongSelf.hintTextLabel.text = SearchFriendStatus.noSearch.title
+                        self.hintTextLabel.text = SearchFriendStatus.noSearch.title
                         
                     }
                     
                 }
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -196,17 +192,17 @@ class ApplyFriendViewController: BaseViewController {
         
         viewController.getConfirmStatus = { [weak self] isConfirm in
 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
-            guard let otherFriend = strongSelf.otherFriend else { return }
+            guard let otherFriend = self.otherFriend else { return }
 
             if isConfirm {
                 
-                for index in 0..<strongSelf.friendsInfo.count {
+                for index in 0..<self.friendsInfo.count {
 
-                    if strongSelf.friendsInfo[index].userID == otherFriend.userID {
+                    if self.friendsInfo[index].userID == otherFriend.userID {
 
-                        strongSelf.friendsInfo.remove(at: index)
+                        self.friendsInfo.remove(at: index)
                         
                         break
 
@@ -214,9 +210,9 @@ class ApplyFriendViewController: BaseViewController {
 
                 }
                 
-                strongSelf.applyTableView.reloadData()
+                self.applyTableView.reloadData()
                 
-                strongSelf.fetchData(friendID: KeyToken().userID)
+                self.fetchData(friendID: KeyToken().userID)
 
             }
 
@@ -230,17 +226,15 @@ class ApplyFriendViewController: BaseViewController {
         
         friendManager.listenFriendInfoData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let users):
                 
-                strongSelf.allUsers = users
+                self.allUsers = users
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 

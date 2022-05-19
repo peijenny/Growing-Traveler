@@ -132,17 +132,15 @@ class AnalysisViewController: UIViewController {
         
         analysisManager.fetchStudyData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let studyGoals):
                 
-                strongSelf.fetchFeedbackData(studyGoals: studyGoals)
+                self.fetchFeedbackData(studyGoals: studyGoals)
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -156,19 +154,17 @@ class AnalysisViewController: UIViewController {
         
         analysisManager.fetchFeedbackData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let feedbacks):
                 
-                strongSelf.handleAnalysisManager.handlePieChartData(studyGoals: studyGoals)
+                self.handleAnalysisManager.handlePieChartData(studyGoals: studyGoals)
                 
-                strongSelf.handleAnalysisManager.handleBarChartData(studyGoals: studyGoals, feedbacks: feedbacks)
+                self.handleAnalysisManager.handleBarChartData(studyGoals: studyGoals, feedbacks: feedbacks)
             
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
