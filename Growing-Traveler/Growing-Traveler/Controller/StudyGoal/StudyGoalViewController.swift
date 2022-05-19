@@ -9,7 +9,7 @@ import UIKit
 import PKHUD
 import Lottie
 
-enum TableViewCellType: CaseIterable {
+enum TableViewCellType: CaseIterable { // have to modify
     
     case header
     

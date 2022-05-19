@@ -98,7 +98,7 @@ class CalendarViewController: UIViewController {
         
         calendarView.appearance.titleTodayColor = UIColor.white
         
-        if KeyToken().userID == "" {
+        if KeyToken().userID.isEmpty {
             
             displayBackgroundView.isHidden = false
         

@@ -60,7 +60,7 @@ class FriendManager {
     // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
     func listenFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
         
-        if fetchUserID != "" {
+        if !fetchUserID.isEmpty {
          
             database.collection("friend")
             .whereField("userID", isEqualTo: fetchUserID)
@@ -103,7 +103,7 @@ class FriendManager {
     // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
     func fetchFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
         
-        if fetchUserID != "" {
+        if !fetchUserID.isEmpty {
          
             database.collection("friend")
             .whereField("userID", isEqualTo: fetchUserID)

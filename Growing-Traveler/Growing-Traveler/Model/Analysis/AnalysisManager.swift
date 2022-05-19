@@ -16,7 +16,7 @@ class AnalysisManager {
     
     func fetchStudyData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
-        if KeyToken().userID != "" {
+        if !KeyToken().userID {
             
             database.collection("studyGoal")
                 .whereField("userID", isEqualTo: KeyToken().userID)

@@ -53,7 +53,7 @@ class TopTableViewCell: UITableViewCell {
             
         }
         
-        let finishItems = studyGoal.studyItems.filter({ $0.isCompleted == true }).count
+        let finishItems = studyGoal.studyItems.filter({ $0.isCompleted }).count
         
         let totalItems = studyGoal.studyItems.count
         

@@ -81,7 +81,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard let cell = cell as? SignInTableViewCell else { return cell }
             
-            if isCheck == true {
+            if isCheck {
                 
                 isCheck = false
                 
@@ -100,7 +100,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard let cell = cell as? SignUpTableViewCell else { return cell }
             
-            if isCheck == true {
+            if isCheck {
                 
                 isCheck = false
                 
@@ -146,7 +146,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
     
     func sendSignInData(signInContent: SignIn) {
 
-        if signInContent.email != "" &&  signInContent.password != "" {
+        if !signInContent.email.isEmpty &&  !signInContent.password.isEmpty {
             
             HUD.show(.labeledProgress(title: "登入中...", subtitle: nil))
             
@@ -189,7 +189,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
     
     func sendSignUpData(signUpContent: SignUp) {
 
-        if signUpContent.email != "" &&  signUpContent.password != "" {
+        if !signUpContent.email.isEmpty &&  !signUpContent.password.isEmpty {
             
             HUD.show(.labeledProgress(title: "註冊中...", subtitle: nil))
             

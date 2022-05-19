@@ -71,7 +71,7 @@ class ArticleMessageViewController: BaseViewController {
         
         guard let contentText = messageTextField.text else { return }
         
-        if contentText == "" {
+        if contentText.isEmpty {
             
             HUD.flash(.label("留言不可為空！"), delay: 0.5)
             

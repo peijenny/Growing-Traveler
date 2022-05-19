@@ -33,7 +33,7 @@ class SettingImageTableViewCell: UITableViewCell {
     
     func setUserPhoto(userPhotoLink: String) {
         
-        if userPhotoLink != "" {
+        if !userPhotoLink.isEmpty {
             
             userPhotoImageView.loadImage(userPhotoLink)
             

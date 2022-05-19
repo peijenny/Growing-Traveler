@@ -199,7 +199,7 @@ extension NoteViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if searchText == "" {
+        if searchText.isEmpty {
             
             fetchNoteData()
             

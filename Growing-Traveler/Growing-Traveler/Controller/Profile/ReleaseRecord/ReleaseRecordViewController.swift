@@ -81,7 +81,7 @@ class ReleaseRecordViewController: UIViewController {
     
     @objc func addForumArticle(sender: UIButton) {
         
-        guard KeyToken().userID != "" else {
+        guard !KeyToken().userID.isEmpty else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)

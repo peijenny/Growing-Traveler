@@ -60,14 +60,14 @@ class SignUpTableViewCell: UITableViewCell {
         
         let userPhotoLink = userPhotoLinkLabel.text ?? ""
         
-        guard let accountName = userNameTextField.text, userNameTextField.text != ""  else {
+        guard let accountName = userNameTextField.text, !accountName.isEmpty else {
             
             HUD.flash(.label("請輸入姓名！"), delay: 0.5)
             
             return nil
         }
         
-        guard let accountEmail = userAccountTextField.text, userAccountTextField.text != ""  else {
+        guard let accountEmail = userAccountTextField.text, !accountEmail.isEmpty else {
 
             HUD.flash(.label("請輸入帳號！"), delay: 0.5)
             
@@ -75,7 +75,7 @@ class SignUpTableViewCell: UITableViewCell {
             
         }
         
-        guard let accountPassword = userPasswordTextField.text, userPasswordTextField.text != "" else {
+        guard let accountPassword = userPasswordTextField.text, !accountPassword.isEmpty else {
 
             HUD.flash(.label("請輸入密碼！"), delay: 0.5)
             
@@ -83,7 +83,7 @@ class SignUpTableViewCell: UITableViewCell {
             
         }
         
-        guard userCheckPasswordTextField.text != "" else {
+        guard let checkPassword = userPasswordTextField.text, !checkPassword.isEmpty else {
             
             HUD.flash(.label("請輸入檢查碼！"), delay: 0.5)
             

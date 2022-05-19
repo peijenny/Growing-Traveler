@@ -96,7 +96,7 @@ class PublishCertificationViewController: BaseViewController {
     @IBAction func confirm(_ sender: UIButton) {
         
         guard let certificationTitle = certificationTitleTextField.text,
-              certificationTitleTextField.text != "" else {
+              !certificationTitle.isEmpty else {
             
                   HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
                   
@@ -105,7 +105,7 @@ class PublishCertificationViewController: BaseViewController {
         }
         
         guard let certificationImage = certificationImageTextField.text,
-              certificationImageTextField.text != "" else {
+              !certificationImage.isEmpty else {
             
             HUD.flash(.label("請上傳認證照！"), delay: 0.5)
             
@@ -114,7 +114,7 @@ class PublishCertificationViewController: BaseViewController {
         }
         
         guard let certificationContent = certificationContentTextView.text,
-              certificationContentTextView.text != "" else {
+              !certificationContent.isEmpty else {
             
             HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
             

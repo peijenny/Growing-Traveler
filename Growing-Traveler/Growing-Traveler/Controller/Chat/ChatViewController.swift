@@ -401,7 +401,7 @@ class ChatViewController: BaseViewController {
         
         var sendType = String()
         
-        if inputContent != "" {
+        if !inputContent.isEmpty {
             
             if inputContent.range(of: "https://i.imgur.com") != nil {
 

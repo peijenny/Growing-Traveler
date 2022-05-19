@@ -19,7 +19,7 @@ class ChatRoomManager {
         
         var friendsChat: [Chat] = []
         
-        if KeyToken().userID != "" {
+        if !KeyToken().userID.isEmpty {
             
             database.document(KeyToken().userID).collection("message")
             .getDocuments { snapshot, error in
@@ -64,7 +64,7 @@ class ChatRoomManager {
 
     func fetchData(friendID: String, completion: @escaping (Result<Chat>) -> Void) {
         
-        if KeyToken().userID != "" {
+        if !KeyToken().userID.isEmpty {
             
             database.document(KeyToken().userID).collection("message")
             .whereField("friendID", isEqualTo: friendID)
@@ -114,7 +114,7 @@ class ChatRoomManager {
         
         do {
             
-            if KeyToken().userID != "" {
+            if !KeyToken().userID.isEmpty {
                 
                 // 修改自己的 Document
                 try database.document(KeyToken().userID).collection("message")

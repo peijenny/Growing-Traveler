@@ -19,10 +19,6 @@ class ArticleDetailHeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var categoryLabel: UILabel!
     
-//    @IBOutlet weak var contentTextView: UITextView!
-    
-//    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var headerBackgroundView: UIView!
     
     @IBOutlet weak var categoryStackView: UIStackView!
@@ -63,8 +59,6 @@ class ArticleDetailHeaderView: UITableViewHeaderFooterView {
         createTimeLabel.text = formatter.string(from: createTime)
         
         forumTypeLabel.text = forumArticle.forumType
-        
-//        userIDLabel.text = forumArticle.userID
         
         userIDLabel.text = userName
         

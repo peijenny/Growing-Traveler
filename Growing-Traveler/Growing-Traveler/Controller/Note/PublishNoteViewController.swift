@@ -140,7 +140,7 @@ class PublishNoteViewController: BaseViewController {
     
     func checkFullIn() {
         
-        guard let inputTitle = noteTitleTextField.text, noteTitleTextField.text != "" else {
+        guard let !inputTitle = noteTitleTextField.text, noteTitleTextField.text?.isEmpty else {
             
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
@@ -251,7 +251,7 @@ class PublishNoteViewController: BaseViewController {
         
         if noteTextView.text.range(of: "https://i.imgur.com") == nil {
             
-            if noteTextView.text != "" {
+            if !noteTextView.text.isEmpty {
                 
                 contentArray = [noteTextView.text]
                 

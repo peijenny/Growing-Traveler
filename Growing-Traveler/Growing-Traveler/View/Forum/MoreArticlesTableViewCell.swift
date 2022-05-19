@@ -71,8 +71,6 @@ class MoreArticlesTableViewCell: UITableViewCell {
         
         createTimeLabel.text = formatter.string(from: createTime)
 
-//        userIDLabel.text = forumArticle.userID
-        
         userIDLabel.text = userName
         
     }
@@ -94,6 +92,7 @@ class MoreArticlesTableViewCell: UITableViewCell {
             imageViewWidthConstraint.constant = 0.0
             
             imageViewLeadingConstraint.constant = 0.0
+            
         }
         
     }

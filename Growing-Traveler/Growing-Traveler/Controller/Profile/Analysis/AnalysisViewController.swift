@@ -91,9 +91,7 @@ class AnalysisViewController: UIViewController {
         
         selectSegmentedControl.addTarget(
             self, action: #selector(selectIndexChanged(_:)), for: .valueChanged)
-        
-//        fetchFeedbackData()
-        
+
         fetchStudyGoalData()
         
         selectSegmentedControl.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)

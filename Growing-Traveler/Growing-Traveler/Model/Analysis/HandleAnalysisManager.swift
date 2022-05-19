@@ -61,7 +61,7 @@ class HandleAnalysisManager {
     
     private func countStudyTime(studyGoals: [StudyGoal]) {
         
-        let filterStudyGoals = studyGoals.filter({ $0.studyItems.allSatisfy({ $0.isCompleted == true }) })
+        let filterStudyGoals = studyGoals.filter({ $0.studyItems.allSatisfy({ $0.isCompleted }) })
         
         for index in 0..<filterStudyGoals.count {
             

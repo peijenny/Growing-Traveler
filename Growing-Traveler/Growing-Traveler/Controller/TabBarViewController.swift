@@ -110,7 +110,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         if let viewControllers = tabBarController.viewControllers,
         viewController != viewControllers[0] && viewController != viewControllers[3] {
             
-            guard KeyToken().userID != "" else {
+            guard !KeyToken().userID.isEmpty else {
 
                 if let authViewController = UIStoryboard.auth.instantiateInitialViewController() {
 

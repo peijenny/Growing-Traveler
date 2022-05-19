@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
 
         fetchUserInfoData()
         
-        if KeyToken().userID == "" {
+        if KeyToken().userID.isEmpty {
             
             tabBarController?.selectedIndex = 0
             
@@ -110,7 +110,7 @@ class ProfileViewController: UIViewController {
         
         profileView.userNameLabel.text = userInfo.userName
         
-        if userInfo.userPhoto != "" {
+        if !userInfo.userPhoto.isEmpty {
             
             profileView.userPhotoImageView.loadImage(userInfo.userPhoto)
             

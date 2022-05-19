@@ -45,7 +45,7 @@ class FriendListTableViewCell: UITableViewCell {
         
         friendStatusLabel.text = ""
         
-        if friendInfo.userPhoto != "" {
+        if !friendInfo.userPhoto.isEmpty {
             
             friendIconImageView.loadImage(friendInfo.userPhoto)
             
@@ -83,7 +83,7 @@ class FriendListTableViewCell: UITableViewCell {
         
         friendStatusLabel.text = ""
         
-        if friendInfo.userPhoto != "" {
+        if !friendInfo.userPhoto.isEmpty {
             
             friendIconImageView.loadImage(friendInfo.userPhoto)
             
@@ -105,7 +105,7 @@ class FriendListTableViewCell: UITableViewCell {
         
         friendNameLabel.text = friendInfo.userName
         
-        if friendInfo.userPhoto != "" {
+        if !friendInfo.userPhoto.isEmpty {
             
             friendIconImageView.loadImage(friendInfo.userPhoto)
             

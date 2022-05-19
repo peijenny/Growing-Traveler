@@ -93,7 +93,7 @@ class UserManager {
     
     func listenData(completion: @escaping (Result<UserInfo>) -> Void) {
         
-        if KeyToken().userID != "" {
+        if !KeyToken().userID.isEmpty {
             
             database.document(KeyToken().userID).addSnapshotListener { snapshot, error in
                 
@@ -133,7 +133,7 @@ class UserManager {
         
         do {
             
-            if KeyToken().userID != "" {
+            if !KeyToken().userID.isEmpty {
                 
                 // 修改 使用者資料
                 try database.document(KeyToken().userID).setData(from: user, merge: true)

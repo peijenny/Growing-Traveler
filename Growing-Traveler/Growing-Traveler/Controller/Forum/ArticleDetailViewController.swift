@@ -437,7 +437,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     @objc func sendMessageButton(sender: UIButton) {
         
-        guard KeyToken().userID != "" else {
+        guard !KeyToken().userID.isEmpty else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)

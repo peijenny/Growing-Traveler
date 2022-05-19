@@ -24,9 +24,7 @@ class CategoryManager {
     
     func fetchData(completion: @escaping (Result<[Category]>) -> Void) {
         
-        database
-            .order(by: "items", descending: false)
-            .getDocuments { snapshot, error in
+        database.order(by: "items", descending: false).getDocuments { snapshot, error in
             
             var categorys: [Category] = []
             
@@ -63,5 +61,7 @@ class CategoryManager {
             }
             
         }
+        
     }
+    
 }

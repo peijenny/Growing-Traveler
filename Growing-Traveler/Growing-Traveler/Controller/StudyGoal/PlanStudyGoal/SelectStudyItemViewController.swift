@@ -188,7 +188,7 @@ class SelectStudyItemViewController: BaseViewController {
     
     func handleStudyItem(status: String) {
         
-        guard let itemTitle = itemTextField?.text, itemTextField?.text != "" else {
+        guard let itemTitle = itemTextField?.text, !itemTitle.isEmpty else {
             
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             

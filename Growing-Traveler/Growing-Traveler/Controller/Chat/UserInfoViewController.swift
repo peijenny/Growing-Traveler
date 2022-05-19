@@ -82,7 +82,7 @@ class UserInfoViewController: UIViewController {
             
             friendStatusLabel.text = SearchFriendStatus.yourInfo.title
             
-        } else if KeyToken().userID == "" {
+        } else if KeyToken().userID.isEmpty {
             
             friendStatusLabel.text = "請先登入會員才能加入或封鎖帳號！"
             

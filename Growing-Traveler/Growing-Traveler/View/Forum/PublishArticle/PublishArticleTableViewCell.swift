@@ -128,7 +128,7 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         if contentTextView.text.range(of: "https://i.imgur.com") == nil {
             
-            if contentTextView.text != "" {
+            if !contentTextView.text.isEmpty {
                 
                 contentArray = [contentTextView.text]
                 

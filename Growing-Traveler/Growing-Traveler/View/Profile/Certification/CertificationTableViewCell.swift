@@ -39,7 +39,7 @@ class CertificationTableViewCell: UITableViewCell {
         
         certificationTitleLabel.text = certification.title
         
-        if certification.imageLink != "" {
+        if !certification.imageLink.isEmpty {
             
             certificationImageView.loadImage(certification.imageLink)
             

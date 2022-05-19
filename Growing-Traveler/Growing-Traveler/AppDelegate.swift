@@ -23,15 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         supportedInterfaceOrientationsFor window: UIWindow?)
     -> UIInterfaceOrientationMask {
         
-        if isForceAllDerictions == true {
+        if isForceAllDerictions {
             
             return .all
             
-        } else if isForceLandscape == true {
+        } else if isForceLandscape {
             
             return .landscape
             
-        } else if isForcePortrait == true {
+        } else if isForcePortrait {
             
             return .portrait
             

@@ -21,7 +21,7 @@ class MandateManager {
         
         do {
             
-            if KeyToken().userID != "" {
+            if !KeyToken().userID.isEmpty {
                 
                 for index in 0..<mandates.count {
                     
@@ -87,7 +87,7 @@ class MandateManager {
     
     func fetchOwnerData(completion: @escaping (Result<[Mandate]>) -> Void) {
         
-        if KeyToken().userID != "" {
+        if !KeyToken().userID.isEmpty {
             
             database.collection("user").document(KeyToken().userID)
                 .collection("mandate").addSnapshotListener { snapshot, error in

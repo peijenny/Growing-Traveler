@@ -123,7 +123,7 @@ class RankViewController: UIViewController {
                 
                 self.usersInfo = sortUserInfo
                 
-                if KeyToken().userID != "" {
+                if !KeyToken().userID.isEmpty {
                     
                     self.fetchUserFriendData()
                     

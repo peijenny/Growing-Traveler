@@ -80,7 +80,7 @@ class ForumViewController: BaseViewController {
         
         fetchUserInfoData()
         
-        if KeyToken().userID == "" {
+        if KeyToken().userID.isEmpty {
             
             listenForumArticleData()
             
@@ -107,7 +107,7 @@ class ForumViewController: BaseViewController {
     
     @objc func addForumArticle(sender: UIButton) {
         
-        guard KeyToken().userID != "" else {
+        guard !KeyToken().userID.isEmpty else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)
@@ -437,7 +437,7 @@ extension ForumViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        inputText = (searchText == "") ? nil : searchText.lowercased()
+        inputText = searchText.isEmpty ? nil : searchText.lowercased()
         
         searchForumArticles = forumArticles.filter({ $0.title.lowercased().range(of: searchText.lowercased()) != nil })
 

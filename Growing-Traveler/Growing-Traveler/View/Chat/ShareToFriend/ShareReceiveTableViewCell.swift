@@ -20,6 +20,7 @@ class ShareReceiveTableViewCell: UITableViewCell {
     @IBOutlet weak var receiveTimeLabel: UILabel!
     
     @IBOutlet weak var receiveBackgroundVIew: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
