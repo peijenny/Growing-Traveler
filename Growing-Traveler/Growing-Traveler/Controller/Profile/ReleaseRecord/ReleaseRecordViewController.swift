@@ -213,7 +213,8 @@ class ReleaseRecordViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             placeHolderImageView.topAnchor.constraint(equalTo: resleaseBackgroundView.topAnchor, constant: 50),
-            placeHolderImageView.trailingAnchor.constraint(equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
+            placeHolderImageView.trailingAnchor.constraint(
+                equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
             placeHolderImageView.leadingAnchor.constraint(equalTo: resleaseBackgroundView.leadingAnchor, constant: 50),
             placeHolderImageView.heightAnchor.constraint(equalToConstant: 200)
         ])

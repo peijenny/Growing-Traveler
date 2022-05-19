@@ -232,9 +232,11 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
                 let today = dateFormatter.string(from: Date())
                 
-                let userInfo = UserInfo(userID: user.uid, userName: signUpContent.userName,
-                    userEmail: signUpContent.email, userPhoto: signUpContent.userPhotoLink, userPhone: "", signInType: "email",
-                    achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [today]), certification: [])
+                let userInfo = UserInfo(
+                    userID: user.uid, userName: signUpContent.userName,userEmail: signUpContent.email,
+                    userPhoto: signUpContent.userPhotoLink, userPhone: "", signInType: "email",
+                    achievement: Achievement(
+                        experienceValue: 0, completionGoals: [], loginDates: [today]), certification: [])
                 
                 self.userManager.addData(user: userInfo)
                 
@@ -269,7 +271,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SignInViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 
