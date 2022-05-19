@@ -83,7 +83,7 @@ class BlockadeFriendViewController: UIViewController {
     
     func fetchBlockadeData() {
         
-        friendManager.listenFriendListData(fetchUserID: userID) { [weak self] result in
+        friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             

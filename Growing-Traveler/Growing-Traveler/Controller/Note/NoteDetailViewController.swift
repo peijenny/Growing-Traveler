@@ -80,7 +80,7 @@ class NoteDetailViewController: UIViewController {
                 
                 strongSelf.note = note
                 
-                if userID == strongSelf.note?.userID {
+                if KeyToken().userID == strongSelf.note?.userID {
                     
                     strongSelf.setNavigationItems()
                     

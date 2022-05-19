@@ -81,7 +81,7 @@ class ReleaseRecordViewController: UIViewController {
     
     @objc func addForumArticle(sender: UIButton) {
         
-        guard userID != "" else {
+        guard KeyToken().userID != "" else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)
@@ -137,7 +137,7 @@ class ReleaseRecordViewController: UIViewController {
                 
             case .success(let forumArticles):
                 
-                let filterArticles = forumArticles.filter({ $0.userID == userID })
+                let filterArticles = forumArticles.filter({ $0.userID == KeyToken().userID })
                 
                 strongSelf.forumArticles = filterArticles
                 

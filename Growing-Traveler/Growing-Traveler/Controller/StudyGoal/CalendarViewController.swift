@@ -75,7 +75,7 @@ class CalendarViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(
            title: "", style: .plain, target: nil, action: nil)
         
-        displayBackgroundView.isHidden = (userID == "") ? false : true
+        displayBackgroundView.isHidden = (KeyToken().userID == "") ? false : true
         
         let formatter = DateFormatter()
         

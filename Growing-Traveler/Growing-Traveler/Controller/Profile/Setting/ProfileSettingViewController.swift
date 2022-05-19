@@ -281,7 +281,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
             try firebaseAuth.signOut()
 
-            userID = ""
+            KeyToken().userID = ""
             
             navigationController?.popViewController(animated: true)
             
@@ -336,15 +336,15 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     
     func deleteAllData() {
         
-        deleteUserManager.deleteUserInfoData(deleteUserID: userID)
+        deleteUserManager.deleteUserInfoData(deleteUserID: KeyToken().userID)
         
         deleteUserManager.deleteStudyGoalsData(studyGoals: studyGoals)
         
         deleteUserManager.deleteForumArticlesData(forumArticles: forumArticles)
         
-        deleteUserManager.deleteFriendListData(deleteUserID: userID)
+        deleteUserManager.deleteFriendListData(deleteUserID: KeyToken().userID)
 
-        userID = ""
+        KeyToken().userID = ""
         
         self.navigationController?.popViewController(animated: true)
         

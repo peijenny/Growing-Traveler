@@ -19,9 +19,9 @@ class ChatRoomManager {
         
         var friendsChat: [Chat] = []
         
-        if userID != "" {
+        if KeyToken().userID != "" {
             
-            database.document(userID).collection("message")
+            database.document(KeyToken().userID).collection("message")
             .getDocuments { snapshot, error in
                 
                 guard let snapshot = snapshot else {
@@ -64,9 +64,9 @@ class ChatRoomManager {
 
     func fetchData(friendID: String, completion: @escaping (Result<Chat>) -> Void) {
         
-        if userID != "" {
+        if KeyToken().userID != "" {
             
-            database.document(userID).collection("message")
+            database.document(KeyToken().userID).collection("message")
             .whereField("friendID", isEqualTo: friendID)
             .addSnapshotListener { snapshot, error in
                 
@@ -108,21 +108,21 @@ class ChatRoomManager {
         
         var friendChat = chat
         
-        friendChat.friendID = userID
+        friendChat.friendID = KeyToken().userID
         
         friendChat.friendName = userName
         
         do {
             
-            if userID != "" {
+            if KeyToken().userID != "" {
                 
                 // 修改自己的 Document
-                try database.document(userID).collection("message")
+                try database.document(KeyToken().userID).collection("message")
                     .document(chat.friendID).setData(from: chat, merge: true)
                 
                 // 修改朋友的 Document
                 try database.document(chat.friendID).collection("message")
-                    .document(userID).setData(from: friendChat, merge: true)
+                    .document(KeyToken().userID).setData(from: friendChat, merge: true)
                 
             }
 

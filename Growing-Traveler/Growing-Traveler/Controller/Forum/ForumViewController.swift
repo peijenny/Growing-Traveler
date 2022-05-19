@@ -80,7 +80,7 @@ class ForumViewController: BaseViewController {
         
         fetchUserInfoData()
         
-        if userID == "" {
+        if KeyToken().userID == "" {
             
             listenForumArticleData()
             
@@ -107,7 +107,7 @@ class ForumViewController: BaseViewController {
     
     @objc func addForumArticle(sender: UIButton) {
         
-        guard userID != "" else {
+        guard KeyToken().userID != "" else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)
@@ -129,7 +129,7 @@ class ForumViewController: BaseViewController {
     
     func fetchFriendBlockadeListData() {
         
-        friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
+        friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             

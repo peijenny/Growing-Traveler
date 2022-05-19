@@ -86,7 +86,7 @@ class ArticleMessageViewController: BaseViewController {
                 orderID: orderID, contentType: contentType, contentText: contentText)
 
             let articleMessage = ArticleMessage(
-                userID: userID, articleID: articleID, createTime: createTime, message: message)
+                userID: KeyToken().userID, articleID: articleID, createTime: createTime, message: message)
 
             forumArticleManager.addMessageData(articleMessage: articleMessage)
             

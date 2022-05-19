@@ -93,9 +93,9 @@ class UserManager {
     
     func listenData(completion: @escaping (Result<UserInfo>) -> Void) {
         
-        if userID != "" {
+        if KeyToken().userID != "" {
             
-            database.document(userID).addSnapshotListener { snapshot, error in
+            database.document(KeyToken().userID).addSnapshotListener { snapshot, error in
                 
                 guard let snapshot = snapshot else {
                     
@@ -133,10 +133,10 @@ class UserManager {
         
         do {
             
-            if userID != "" {
+            if KeyToken().userID != "" {
                 
                 // 修改 使用者資料
-                try database.document(userID).setData(from: user, merge: true)
+                try database.document(KeyToken().userID).setData(from: user, merge: true)
                 
             }
             
@@ -205,7 +205,7 @@ class UserManager {
     
     func fetchUserNoteData(completion: @escaping (Result<[Note]>) -> Void) {
         
-        database.document(userID).collection("note")
+        database.document(KeyToken().userID).collection("note")
             .getDocuments { snapshot, error in
             
             var notes: [Note] = []
@@ -248,7 +248,7 @@ class UserManager {
      
         do {
             
-            try database.document(userID).collection("note")
+            try database.document(KeyToken().userID).collection("note")
                 .document(note.noteID).setData(from: note, merge: true)
             
         } catch {
@@ -263,7 +263,7 @@ class UserManager {
     
     func deleteUserNoteData(note: Note) {
         
-        database.document(userID).collection("note")
+        database.document(KeyToken().userID).collection("note")
         .document(note.noteID).delete { error in
             
             if let error = error {

@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             print("You're sign in as \(user.uid), email: \(user.email ?? "")")
             
-            userID = "\(Auth.auth().currentUser?.uid ?? "")"
+            KeyToken().userID = "\(Auth.auth().currentUser?.uid ?? "")"
 
         }
 

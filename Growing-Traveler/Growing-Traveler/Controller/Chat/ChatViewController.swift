@@ -303,7 +303,7 @@ class ChatViewController: BaseViewController {
 
                 strongSelf.otherFriendList = friendList
                 
-                if !friendList.blockadeList.filter({ $0 == userID }).isEmpty {
+                if !friendList.blockadeList.filter({ $0 == KeyToken().userID }).isEmpty {
                     
                     strongSelf.friendStatusLabel.text = "此好友已離開聊天室，無法發送訊息！"
 
@@ -448,7 +448,7 @@ class ChatViewController: BaseViewController {
             let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
             
             let messageContent = MessageContent(
-                createTime: createTime, sendMessage: inputContent, sendType: sendType, sendUserID: userID)
+                createTime: createTime, sendMessage: inputContent, sendType: sendType, sendUserID: KeyToken().userID)
             
             chatMessage?.messageContent.append(messageContent)
             
@@ -489,7 +489,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         if chatMessage?.messageContent[indexPath.row].sendType == SendType.image.title ||
             chatMessage?.messageContent[indexPath.row].sendType == SendType.string.title {
             
-            if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
+            if chatMessage?.messageContent[indexPath.row].sendUserID != KeyToken().userID {
                 
                 cell = tableView.dequeueReusableCell(
                     withIdentifier: String(describing: ReceiveMessageTableViewCell.self), for: indexPath)
@@ -519,7 +519,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             
-            if chatMessage?.messageContent[indexPath.row].sendUserID != userID {
+            if chatMessage?.messageContent[indexPath.row].sendUserID != KeyToken().userID {
                 
                 cell = tableView.dequeueReusableCell(
                     withIdentifier: String(describing: ShareReceiveTableViewCell.self), for: indexPath)

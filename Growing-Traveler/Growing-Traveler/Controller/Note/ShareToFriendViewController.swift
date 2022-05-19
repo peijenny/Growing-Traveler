@@ -56,7 +56,7 @@ class ShareToFriendViewController: UIViewController {
     
     func listenFriendListData() {
         
-        friendManager.listenFriendListData(fetchUserID: userID) { [weak self] result in
+        friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -114,7 +114,7 @@ class ShareToFriendViewController: UIViewController {
 
             case .success(let usersInfo):
                 
-                strongSelf.userName = usersInfo.filter({ $0.userID == userID })[0].userName
+                strongSelf.userName = usersInfo.filter({ $0.userID == KeyToken().userID })[0].userName
                 
                 let usersInfo = usersInfo
                 
@@ -220,7 +220,7 @@ extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSourc
             let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
             
             selectChat.messageContent.append(MessageContent(
-                createTime: createTime, sendMessage: shareID ?? "", sendType: shareType ?? "", sendUserID: userID))
+                createTime: createTime, sendMessage: shareID ?? "", sendType: shareType ?? "", sendUserID: KeyToken().userID))
             
             chatRoomManager.addData(userName: userName ?? "", chat: selectChat)
             

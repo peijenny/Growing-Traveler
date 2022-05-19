@@ -144,7 +144,7 @@ class ApplyFriendViewController: BaseViewController {
                 
             case .success(let friend):
                 
-                if friendID == userID {
+                if friendID == KeyToken().userID {
                     
                     strongSelf.ownFriend = friend
                     
@@ -158,7 +158,7 @@ class ApplyFriendViewController: BaseViewController {
                         
                     }
                     
-                    if !friend.blockadeList.filter({ $0 == userID }).isEmpty {
+                    if !friend.blockadeList.filter({ $0 == KeyToken().userID }).isEmpty {
                         
                         strongSelf.hintTextLabel.text = SearchFriendStatus.noSearch.title
                         
@@ -216,7 +216,7 @@ class ApplyFriendViewController: BaseViewController {
                 
                 strongSelf.applyTableView.reloadData()
                 
-                strongSelf.fetchData(friendID: userID)
+                strongSelf.fetchData(friendID: KeyToken().userID)
 
             }
 
@@ -278,7 +278,7 @@ class ApplyFriendViewController: BaseViewController {
         
         if let searchUser = searchUser, let ownFriend = ownFriend {
             
-            if searchUser.userID == userID {
+            if searchUser.userID == KeyToken().userID {
                 
                 hintTextLabel.text = SearchFriendStatus.yourself.title
                 

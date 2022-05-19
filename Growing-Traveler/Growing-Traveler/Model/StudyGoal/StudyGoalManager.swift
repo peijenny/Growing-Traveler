@@ -18,9 +18,9 @@ class StudyGoalManager {
     // 監聽 即時修改的學習計劃 至 Firebase Firestore
     func listenData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
-        if userID != "" {
+        if KeyToken().userID != "" {
          
-            database.whereField("userID", isEqualTo: userID)
+            database.whereField("userID", isEqualTo: KeyToken().userID)
                 .addSnapshotListener { snapshot, error in
                 
                 var studyGoals: [StudyGoal] = []
@@ -89,10 +89,10 @@ class StudyGoalManager {
     // 取得 所有的學習計劃 至 StudyFoalViewController
     func fetchData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
-        if userID != "" {
+        if KeyToken().userID != "" {
             
             database
-                .whereField("userID", isEqualTo: userID)
+                .whereField("userID", isEqualTo: KeyToken().userID)
                 .getDocuments { snapshot, error in
                 
                 var studyGoals: [StudyGoal] = []

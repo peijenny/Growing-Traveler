@@ -89,11 +89,11 @@ class UserInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if selectUserID == userID {
+        if selectUserID == KeyToken().userID {
             
             friendStatusLabel.text = SearchFriendStatus.yourInfo.title
             
-        } else if userID == "" {
+        } else if KeyToken().userID == "" {
             
             friendStatusLabel.text = "請先登入會員才能加入或封鎖帳號！"
             
@@ -101,7 +101,7 @@ class UserInfoViewController: UIViewController {
         
         if !deleteAccount {
             
-            fetchFriendListData(userID: userID)
+            fetchFriendListData(userID: KeyToken().userID)
             
             fetchFriendListData(userID: selectUserID ?? "")
             
@@ -292,7 +292,7 @@ class UserInfoViewController: UIViewController {
             
             bothSides.owner.deliveryList.append(selectUserID ?? "")
             
-            bothSides.other.applyList.append(userID)
+            bothSides.other.applyList.append(KeyToken().userID)
             
             friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
             
@@ -323,7 +323,7 @@ class UserInfoViewController: UIViewController {
             
             let reportContent = ReportContent(
                 reportID: self.reportManager.database.document().documentID,
-                userID: userID, reportedUserID: self.selectUserID ?? "",
+                userID: KeyToken().userID, reportedUserID: self.selectUserID ?? "",
                 reportType: self.reportContentType ?? "", reportContent: reportInputText,
                 createTime: createTime, friendID: self.selectUserID ?? nil,
                 articleID: self.articleID ?? nil, articleMessage: self.articleMessage ?? nil)

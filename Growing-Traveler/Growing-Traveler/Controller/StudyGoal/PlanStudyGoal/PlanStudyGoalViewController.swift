@@ -307,7 +307,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         studyGoal = StudyGoal(
             id: id, title: title, category: selectCategoryItem, studyPeriod: studyPeriod,
-            studyItems: studyItems, createTime: createTime, userID: userID)
+            studyItems: studyItems, createTime: createTime, userID: KeyToken().userID)
         
         if let studyGoal = studyGoal, var user = userInfo {
             

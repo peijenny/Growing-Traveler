@@ -179,7 +179,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil), delay: 0.5)
                 
-                userID = user.uid
+                KeyToken().userID = user.uid
                 
                 self.view.window?.rootViewController?.viewWillAppear(true)
                 
@@ -243,7 +243,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 self.friendManager.updateData(friend: friend)
                 
-                userID = user.uid
+                KeyToken().userID = user.uid
 
                 self.view.window?.rootViewController?.viewWillAppear(true)
                 

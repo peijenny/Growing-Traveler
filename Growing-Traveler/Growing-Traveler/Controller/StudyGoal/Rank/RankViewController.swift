@@ -83,7 +83,7 @@ class RankViewController: UIViewController {
     func fetchUserFriendData() {
         
         friendManager.fetchFriendListData(
-        fetchUserID: userID) { [weak self] result in
+        fetchUserID: KeyToken().userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -125,7 +125,7 @@ class RankViewController: UIViewController {
                 
                 strongSelf.usersInfo = sortUserInfo
                 
-                if userID != "" {
+                if KeyToken().userID != "" {
                     
                     strongSelf.fetchUserFriendData()
                     

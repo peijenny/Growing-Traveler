@@ -100,7 +100,7 @@ class ArticleDetailViewController: UIViewController {
     func fetchFriendBlockadeListData() {
         
         friendManager.fetchFriendListData(
-        fetchUserID: userID) { [weak self] result in
+        fetchUserID: KeyToken().userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -446,7 +446,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     @objc func sendMessageButton(sender: UIButton) {
         
-        guard userID != "" else {
+        guard KeyToken().userID != "" else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)

@@ -179,7 +179,7 @@ class PublishNoteViewController: BaseViewController {
             let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
             
             let note = Note(
-                userID: userID, noteID: noteID, createTime: createTime, noteTitle: inputTitle, content: noteContents)
+                userID: KeyToken().userID, noteID: noteID, createTime: createTime, noteTitle: inputTitle, content: noteContents)
             
             HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
             

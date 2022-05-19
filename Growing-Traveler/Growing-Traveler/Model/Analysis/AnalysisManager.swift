@@ -16,10 +16,10 @@ class AnalysisManager {
     
     func fetchStudyData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
-        if userID != "" {
+        if KeyToken().userID != "" {
             
             database.collection("studyGoal")
-                .whereField("userID", isEqualTo: userID)
+                .whereField("userID", isEqualTo: KeyToken().userID)
                 .addSnapshotListener { snapshot, error in
                 
                 var studyGoals: [StudyGoal] = []

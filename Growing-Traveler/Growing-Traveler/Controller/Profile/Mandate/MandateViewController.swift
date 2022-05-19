@@ -99,7 +99,7 @@ class MandateViewController: UIViewController {
     
     func fetchFriendData() {
         
-        friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
+        friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             

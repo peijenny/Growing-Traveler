@@ -141,7 +141,7 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
         
         viewController.noteID = notes[indexPath.row].noteID
         
-        viewController.noteUserID = userID
+        viewController.noteUserID = KeyToken().userID
         
         navigationController?.pushViewController(viewController, animated: true)
         

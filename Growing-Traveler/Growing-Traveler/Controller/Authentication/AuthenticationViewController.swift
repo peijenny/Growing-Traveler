@@ -289,7 +289,7 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                         
                     }
                     
-                    userID = "\(Auth.auth().currentUser?.uid ?? "")"
+                    KeyToken().userID = "\(Auth.auth().currentUser?.uid ?? "")"
                     
                     if self.users.filter({ $0.userID == user.uid }).count == 0 {
                         

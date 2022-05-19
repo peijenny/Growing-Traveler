@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
 
         fetchUserInfoData()
         
-        if userID == "" {
+        if KeyToken().userID == "" {
             
             tabBarController?.selectedIndex = 0
             

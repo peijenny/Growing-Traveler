@@ -303,7 +303,7 @@ class StudyGoalViewController: UIViewController {
     
     @IBAction func addStudyGoalButton(_ sender: UIButton) {
         
-        guard userID != "" else {
+        guard KeyToken().userID != "" else {
             
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)
@@ -347,7 +347,7 @@ class StudyGoalViewController: UIViewController {
     
     func handleUserSignOut() {
         
-        if userID == "" {
+        if KeyToken().userID == "" {
             
             studyGoalBackgroundView.isHidden = false
             

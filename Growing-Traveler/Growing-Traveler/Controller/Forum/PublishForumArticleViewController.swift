@@ -141,7 +141,7 @@ class PublishForumArticleViewController: BaseViewController {
                 let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
                 
                 let forumArticle = ForumArticle(
-                    id: forumID, userID: userID, createTime: createTime, title: inputTitle,
+                    id: forumID, userID: KeyToken().userID, createTime: createTime, title: inputTitle,
                     category: selectCategoryItem, content: articleContents, forumType: forumType)
                 
                 forumArticleManager.addData(forumArticle: forumArticle)

@@ -103,7 +103,7 @@ class MoreArticlesViewController: UIViewController {
     func fetchFriendBlockadeListData() {
         
         friendManager.fetchFriendListData(
-        fetchUserID: userID) { [weak self] result in
+        fetchUserID: KeyToken().userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             
