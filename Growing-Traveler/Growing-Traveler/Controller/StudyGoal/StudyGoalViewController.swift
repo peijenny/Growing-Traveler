@@ -217,7 +217,7 @@ class StudyGoalViewController: UIViewController {
                 
                 strongSelf.user = user
                 
-                strongSelf.handleSignInCount()
+                strongSelf.handleSignInNumberOfTime()
                 
             case .failure:
                 
@@ -229,7 +229,7 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    func handleSignInCount() {
+    func handleSignInNumberOfTime() {
         
         let today = dateFormatter.string(from: Date())
         
