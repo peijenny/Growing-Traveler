@@ -37,7 +37,7 @@ class ShareToFriendViewController: UIViewController {
 
         title = "分享\(sendType)至好友聊天室"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         setTableView()
         

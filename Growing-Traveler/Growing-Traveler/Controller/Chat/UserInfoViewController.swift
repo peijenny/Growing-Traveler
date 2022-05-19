@@ -63,11 +63,11 @@ class UserInfoViewController: UIViewController {
         
         reportPublishedButton.setTitle(reportContentType ?? "", for: .normal)
         
-        blockUserButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        blockUserButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        addUserButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.salviaBlue.hexText)
+        addUserButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.salviaBlue.hexText)
         
-        reportPublishedButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        reportPublishedButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
         
         blockUserButton.cornerRadius = 5
 
@@ -75,7 +75,7 @@ class UserInfoViewController: UIViewController {
         
         reportPublishedButton.cornerRadius = 5
         
-        friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.lightRed.hexText)
+        friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChat.lightRed.hexText)
         
     }
     

@@ -57,7 +57,7 @@ class PublishForumArticleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         if modifyForumArticle == nil {
             
@@ -312,11 +312,9 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         
         if #available(iOS 15.0, *) {
 
-            if let sheetPresentationController = navController.sheetPresentationController {
-
-                sheetPresentationController.detents = [.medium()]
-
-            }
+            guard let sheetPresentationController = navController.sheetPresentationController else { return }
+            
+            sheetPresentationController.detents = [.medium()]
 
         } else {
             

@@ -29,7 +29,7 @@ class SignUpTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        uploadUserPhotoButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        uploadUserPhotoButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         uploadUserPhotoButton.cornerRadius = uploadUserPhotoButton.frame.width / 2
         
@@ -37,7 +37,7 @@ class SignUpTableViewCell: UITableViewCell {
 
         userPhotoImageView.cornerRadius = userPhotoImageView.frame.width / 2
         
-        signUpButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        signUpButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         signUpButton.cornerRadius = 10
         

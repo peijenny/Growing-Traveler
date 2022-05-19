@@ -22,9 +22,9 @@ class MandateTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
        
-        mandateProgressView.progressTintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        mandateProgressView.progressTintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        mandateProgressView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        mandateProgressView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
 

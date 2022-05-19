@@ -53,7 +53,7 @@ class RankTableViewCell: UITableViewCell {
             
         } else {
             
-            rankNumberBackgroundView.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+            rankNumberBackgroundView.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
             
         }
         

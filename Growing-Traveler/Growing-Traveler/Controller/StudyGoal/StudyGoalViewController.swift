@@ -180,9 +180,9 @@ class StudyGoalViewController: UIViewController {
     
     func setUIStyle() {
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
-        addGoalButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        addGoalButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         addGoalButton.tintColor = UIColor.white
         
@@ -190,13 +190,13 @@ class StudyGoalViewController: UIViewController {
         
         selectStatusColorButton(selectButton: statusButton[1])
         
-        studyGoalBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        studyGoalBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
-        selectlineBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        selectlineBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        headerAnimationView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        headerAnimationView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         lottieAnimation.backgroundColor = UIColor.clear
         
@@ -273,11 +273,11 @@ class StudyGoalViewController: UIViewController {
     
     func selectStatusColorButton(selectButton: UIButton) {
         
-        _ = statusButton.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText) })
+        _ = statusButton.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText) })
         
-        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText) })
+        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText) })
         
-        selectButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        selectButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
     }
     

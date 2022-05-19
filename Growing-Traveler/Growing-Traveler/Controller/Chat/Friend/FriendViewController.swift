@@ -61,9 +61,9 @@ class FriendViewController: UIViewController {
 
         registerTableViewCell()
         
-        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
     
@@ -184,7 +184,7 @@ class FriendViewController: UIViewController {
         
         badgeLabel.textColor = UIColor.white
         
-        badgeLabel.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightRed.hexText)
+        badgeLabel.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightRed.hexText)
         
         // rightBar button
         let rightBarButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))

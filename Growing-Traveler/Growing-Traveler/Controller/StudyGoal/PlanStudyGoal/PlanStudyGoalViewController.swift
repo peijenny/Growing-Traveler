@@ -55,7 +55,7 @@ class PlanStudyGoalViewController: BaseViewController {
         
         title = (studyGoal == nil) ? "新增個人學習計劃" : "編輯個人學習計劃"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         if selectedDate != nil {
             
@@ -463,11 +463,9 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         if #available(iOS 15.0, *) {
             
-            if let sheetPresentationController = navController.sheetPresentationController {
-                
-                sheetPresentationController.detents = [.medium()]
-                
-            }
+            guard let sheetPresentationController = navController.sheetPresentationController else { return }
+            
+            sheetPresentationController.detents = [.medium()]
             
         } else {
             

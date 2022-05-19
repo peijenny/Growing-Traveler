@@ -90,9 +90,9 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         viewControllers = tabs.map({ $0.controller() })
         
-        tabBar.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        tabBar.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        tabBar.barTintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        tabBar.barTintColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         delegate = self
         

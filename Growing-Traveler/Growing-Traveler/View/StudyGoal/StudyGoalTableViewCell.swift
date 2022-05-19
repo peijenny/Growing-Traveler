@@ -24,7 +24,7 @@ class StudyGoalTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        checkButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        checkButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         checkButton.cornerRadius = 5
         
@@ -41,7 +41,7 @@ class StudyGoalTableViewCell: UITableViewCell {
         
         if sender.tintColor?.cgColor == UIColor.clear.cgColor {
             
-            sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+            sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
             
             delegate?.checkItemCompleted(studyGoalTableViewCell: self, studyItemCompleted: true)
 
@@ -61,7 +61,7 @@ class StudyGoalTableViewCell: UITableViewCell {
         
         if isCompleted {
             
-            checkButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+            checkButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
             
             studyItemLabel.textColor = UIColor.lightGray
                    
@@ -74,7 +74,7 @@ class StudyGoalTableViewCell: UITableViewCell {
             
             attributedString.addAttribute(
                 .strikethroughColor,
-                value: UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText),
+                value: UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText),
                 range: NSRange(location: 0, length: attributedString.length)
             )
             

@@ -48,9 +48,9 @@ class SignInViewController: BaseViewController {
             UINib(nibName: String(describing: SignUpTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: SignUpTableViewCell.self))
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        backButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        backButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
     }
 

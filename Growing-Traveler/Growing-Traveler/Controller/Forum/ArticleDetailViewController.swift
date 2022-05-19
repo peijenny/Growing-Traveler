@@ -12,21 +12,21 @@ class ArticleDetailViewController: UIViewController {
     
     var articleDetailTableView = UITableView(frame: .zero, style: .grouped)
     
-    var forumArticle: ForumArticle?
-    
-    var formatter = DateFormatter()
+    let displayImageView = UIImageView()
     
     var forumArticleManager = ForumArticleManager()
     
-    var articleMessages: [ArticleMessage] = []
-    
-    let displayImageView = UIImageView()
+    var friendManager = FriendManager()
     
     var userManager = UserManager()
     
-    var usersInfo: [UserInfo] = []
+    var formatter = DateFormatter()
     
-    var friendManager = FriendManager()
+    var articleMessages: [ArticleMessage] = []
+    
+    var forumArticle: ForumArticle?
+    
+    var usersInfo: [UserInfo] = []
     
     var blockadeList: [String] = []
     
@@ -37,7 +37,7 @@ class ArticleDetailViewController: UIViewController {
         
         title = forumArticle?.forumType
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         setNavigationItem()
         
@@ -53,6 +53,21 @@ class ArticleDetailViewController: UIViewController {
         fetchFriendBlockadeListData()
         
         fetchUserInfoData()
+        
+    }
+    
+    
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
         
     }
     
@@ -99,8 +114,7 @@ class ArticleDetailViewController: UIViewController {
     
     func fetchFriendBlockadeListData() {
         
-        friendManager.fetchFriendListData(
-        fetchUserID: KeyToken().userID) { [weak self] result in
+        friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -114,9 +128,7 @@ class ArticleDetailViewController: UIViewController {
                 
                 strongSelf.articleDetailTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -140,9 +152,7 @@ class ArticleDetailViewController: UIViewController {
                 
                 strongSelf.articleDetailTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -170,9 +180,7 @@ class ArticleDetailViewController: UIViewController {
                     
                     strongSelf.articleDetailTableView.reloadData()
                     
-                case .failure(let error):
-                    
-                    print(error)
+                case .failure:
                     
                     HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                     
@@ -181,25 +189,11 @@ class ArticleDetailViewController: UIViewController {
         })
     }
     
-    override var hidesBottomBarWhenPushed: Bool {
-        
-        get {
-            
-            return navigationController?.topViewController == self
-            
-        } set {
-            
-            super.hidesBottomBarWhenPushed = newValue
-            
-        }
-        
-    }
-    
     func setBackgroundView() {
         
         let backgroundView = UIView()
         
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         view.addSubview(backgroundView)
         
@@ -416,10 +410,8 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             let userInfo = usersInfo.filter({ $0.userID == forumArticle.userID })
 
             if !userInfo.isEmpty {
-             
-                let userName = userInfo[0].userName
-
-                headerView.showArticleDetail(forumArticle: forumArticle, userName: userName)
+                
+                headerView.showArticleDetail(forumArticle: forumArticle, userName: userInfo[0].userName)
                 
             }
             
@@ -488,11 +480,9 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         
         if #available(iOS 15.0, *) {
             
-            if let sheetPresentationController = navController.sheetPresentationController {
-                
-                sheetPresentationController.detents = [.medium()]
-                
-            }
+            guard let sheetPresentationController = navController.sheetPresentationController else { return }
+            
+            sheetPresentationController.detents = [.medium()]
             
         } else {
 

@@ -32,7 +32,7 @@ class ArticleTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        loadMoreButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.gray.hexText)
+        loadMoreButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.gray.hexText)
         
         loadMoreButton.cornerRadius = 10
     }

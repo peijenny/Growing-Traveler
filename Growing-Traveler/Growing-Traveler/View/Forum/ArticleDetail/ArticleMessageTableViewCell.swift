@@ -30,11 +30,11 @@ class ArticleMessageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        orderIDLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.gray.hexText)
+        orderIDLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChat.gray.hexText)
         
-        createTimeLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.gray.hexText)
+        createTimeLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChat.gray.hexText)
         
     }
 

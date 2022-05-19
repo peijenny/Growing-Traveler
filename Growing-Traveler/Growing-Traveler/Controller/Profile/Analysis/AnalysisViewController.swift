@@ -78,8 +78,8 @@ class AnalysisViewController: UIViewController {
         super.viewDidLoad()
         
         analysisTableView.register(
-            UINib(nibName: String(describing: AnalysisBarChatTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: AnalysisBarChatTableViewCell.self))
+            UINib(nibName: String(describing: AnalysisBarChartTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: AnalysisBarChartTableViewCell.self))
         
         analysisTableView.register(
             UINib(nibName: String(describing: AnalysisPieChartTableViewCell.self), bundle: nil),
@@ -96,13 +96,13 @@ class AnalysisViewController: UIViewController {
         
         fetchStudyGoalData()
         
-        selectSegmentedControl.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        selectSegmentedControl.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        selectSegmentedControl.selectedSegmentTintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        selectSegmentedControl.selectedSegmentTintColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
-        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        analysisBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        analysisBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         handleAnalysisManager.delegate = self
         
@@ -200,9 +200,9 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
             if select == "近七天學習時間" {
                 
                 cell = tableView.dequeueReusableCell(
-                    withIdentifier: String(describing: AnalysisBarChatTableViewCell.self), for: indexPath)
+                    withIdentifier: String(describing: AnalysisBarChartTableViewCell.self), for: indexPath)
 
-                guard let cell = cell as? AnalysisBarChatTableViewCell else { return cell }
+                guard let cell = cell as? AnalysisBarChartTableViewCell else { return cell }
 
                 cell.updateChatsData(calculateStudyTime: calculateStudyTime, sevenDaysArray: sevenDaysArray)
 

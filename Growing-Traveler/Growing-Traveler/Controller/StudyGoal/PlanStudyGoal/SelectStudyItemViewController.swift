@@ -52,9 +52,9 @@ class SelectStudyItemViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        copyItemButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        copyItemButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
         
-        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         copyItemButton.layer.cornerRadius = 5
 
@@ -102,7 +102,7 @@ class SelectStudyItemViewController: BaseViewController {
             
             if "\(studyTime)" == timeButtons[index].titleLabel?.text {
                 
-                timeButtons[index].backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+                timeButtons[index].backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
                 
             }
                 
@@ -135,7 +135,7 @@ class SelectStudyItemViewController: BaseViewController {
             
             timeButton.setTitleColor(UIColor.white, for: .normal)
             
-            timeButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+            timeButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
             
             timeButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
             
@@ -162,9 +162,9 @@ class SelectStudyItemViewController: BaseViewController {
 
     @objc func clickButton(sender: UIButton) {
         
-        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText) })
+        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText) })
         
-        sender.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        sender.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         guard let selectSender = sender.titleLabel?.text else { return }
         

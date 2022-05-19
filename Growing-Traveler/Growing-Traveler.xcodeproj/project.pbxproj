@@ -12,8 +12,8 @@
 		2808C914280FECA800DC1EC5 /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C913280FECA800DC1EC5 /* AnalysisViewController.swift */; };
 		2808C918280FF2B700DC1EC5 /* AnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */; };
 		2808C91A28100F6000DC1EC5 /* CalculateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C91928100F6000DC1EC5 /* CalculateBar.swift */; };
-		2808C92128103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C91F28103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.swift */; };
-		2808C92228103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2808C92028103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.xib */; };
+		2808C92128103B1E00DC1EC5 /* AnalysisBarChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C91F28103B1E00DC1EC5 /* AnalysisBarChartTableViewCell.swift */; };
+		2808C92228103B1E00DC1EC5 /* AnalysisBarChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2808C92028103B1E00DC1EC5 /* AnalysisBarChartTableViewCell.xib */; };
 		2808C926281131A400DC1EC5 /* AnalysisContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C924281131A400DC1EC5 /* AnalysisContentTableViewCell.swift */; };
 		2808C927281131A400DC1EC5 /* AnalysisContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2808C925281131A400DC1EC5 /* AnalysisContentTableViewCell.xib */; };
 		2808C92A281131C700DC1EC5 /* AnalysisPieChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808C928281131C700DC1EC5 /* AnalysisPieChartTableViewCell.swift */; };
@@ -176,8 +176,8 @@
 		2808C913280FECA800DC1EC5 /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisManager.swift; sourceTree = "<group>"; };
 		2808C91928100F6000DC1EC5 /* CalculateBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateBar.swift; sourceTree = "<group>"; };
-		2808C91F28103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisBarChatTableViewCell.swift; sourceTree = "<group>"; };
-		2808C92028103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnalysisBarChatTableViewCell.xib; sourceTree = "<group>"; };
+		2808C91F28103B1E00DC1EC5 /* AnalysisBarChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisBarChartTableViewCell.swift; sourceTree = "<group>"; };
+		2808C92028103B1E00DC1EC5 /* AnalysisBarChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnalysisBarChartTableViewCell.xib; sourceTree = "<group>"; };
 		2808C924281131A400DC1EC5 /* AnalysisContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisContentTableViewCell.swift; sourceTree = "<group>"; };
 		2808C925281131A400DC1EC5 /* AnalysisContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnalysisContentTableViewCell.xib; sourceTree = "<group>"; };
 		2808C928281131C700DC1EC5 /* AnalysisPieChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisPieChartTableViewCell.swift; sourceTree = "<group>"; };
@@ -374,8 +374,8 @@
 		2808C90E280FEC2B00DC1EC5 /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
-				2808C91F28103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.swift */,
-				2808C92028103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.xib */,
+				2808C91F28103B1E00DC1EC5 /* AnalysisBarChartTableViewCell.swift */,
+				2808C92028103B1E00DC1EC5 /* AnalysisBarChartTableViewCell.xib */,
 				2808C928281131C700DC1EC5 /* AnalysisPieChartTableViewCell.swift */,
 				2808C929281131C700DC1EC5 /* AnalysisPieChartTableViewCell.xib */,
 				2808C924281131A400DC1EC5 /* AnalysisContentTableViewCell.swift */,
@@ -992,7 +992,7 @@
 				285F3F4B28018ED400E84CF2 /* CategoryTableViewCell.xib in Resources */,
 				28BB6F002807C86C002B0458 /* ArticleTableViewCell.xib in Resources */,
 				280C1B16280E58BB0091B9DC /* ReceiveMessageTableViewCell.xib in Resources */,
-				2808C92228103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.xib in Resources */,
+				2808C92228103B1E00DC1EC5 /* AnalysisBarChartTableViewCell.xib in Resources */,
 				2808C912280FEC7600DC1EC5 /* Note.storyboard in Resources */,
 				283E6583281797F300F1033F /* GoogleService-Info.plist in Resources */,
 				28C99864282383A900E3B4C0 /* ShareSendTableViewCell.xib in Resources */,
@@ -1142,7 +1142,7 @@
 				28BB6EF6280690EB002B0458 /* ForumArticleManager.swift in Sources */,
 				28BB6F2C28096AAA002B0458 /* MoreArticlesViewController.swift in Sources */,
 				281358E5281C2D2A000B0CAE /* NoteTableViewCell.swift in Sources */,
-				2808C92128103B1E00DC1EC5 /* AnalysisBarChatTableViewCell.swift in Sources */,
+				2808C92128103B1E00DC1EC5 /* AnalysisBarChartTableViewCell.swift in Sources */,
 				281358E8281C31AB000B0CAE /* PublishNoteViewController.swift in Sources */,
 				28DA8335281274E30081CB14 /* ProfileView.swift in Sources */,
 				28ABB20728334CC000A31030 /* Array+Extension.swift in Sources */,

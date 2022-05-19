@@ -80,15 +80,15 @@ class ApplyFriendViewController: BaseViewController {
         
         userInfoView.isHidden = true
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        applyFriendBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        applyFriendBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
-        userInfoView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        userInfoView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         userInfoView.cornerRadius = 10
         
-        addFriendButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        addFriendButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
     }
     

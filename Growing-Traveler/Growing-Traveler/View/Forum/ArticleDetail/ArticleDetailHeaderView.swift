@@ -34,17 +34,17 @@ class ArticleDetailHeaderView: UITableViewHeaderFooterView {
     override func awakeFromNib() {
         super.awakeFromNib()
        
-        headerBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        headerBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        categoryStackView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        categoryStackView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         categoryStackView.cornerRadius = 10
         
-        categoryBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        categoryBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
         
         categoryBackgroundView.cornerRadius = 10
         
-        middleBackgoundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        middleBackgoundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
         
     }
     

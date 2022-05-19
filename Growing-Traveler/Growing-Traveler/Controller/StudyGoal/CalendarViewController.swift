@@ -88,13 +88,13 @@ class CalendarViewController: UIViewController {
         
         title = "成長日曆"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        calendarBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        calendarBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         calendarView.appearance.titleWeekendColor = UIColor.lightGray
         
-        calendarView.appearance.todayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        calendarView.appearance.todayColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         calendarView.appearance.titleTodayColor = UIColor.white
         
@@ -184,7 +184,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
         
         calendarView.appearance.todayColor = UIColor.clear
         
-        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         selectedDate = date
         

@@ -25,11 +25,11 @@ class ArticleMessageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         submitButton.cornerRadius = 5
         
-        selectImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        selectImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
 
         selectImageButton.cornerRadius = 5
         
