@@ -86,6 +86,7 @@
 		28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */; };
 		28A6F466280AED1600EFCC2C /* ArticleMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */; };
 		28ABB20728334CC000A31030 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB20628334CC000A31030 /* Array+Extension.swift */; };
+		28ABB2092835D18E00A31030 /* HandleAnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB2082835D18E00A31030 /* HandleAnalysisManager.swift */; };
 		28AF15AD2804033B004E97B8 /* StudyGoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */; };
 		28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */; };
 		28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */; };
@@ -249,6 +250,7 @@
 		28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleMessageTableViewCell.swift; sourceTree = "<group>"; };
 		28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleMessageTableViewCell.xib; sourceTree = "<group>"; };
 		28ABB20628334CC000A31030 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		28ABB2082835D18E00A31030 /* HandleAnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleAnalysisManager.swift; sourceTree = "<group>"; };
 		28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalTableViewCell.swift; sourceTree = "<group>"; };
 		28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalTableViewCell.xib; sourceTree = "<group>"; };
 		28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				2808C917280FF2B700DC1EC5 /* AnalysisManager.swift */,
 				2808C91928100F6000DC1EC5 /* CalculateBar.swift */,
 				2857035B28118F8D00849FAA /* Feedback.swift */,
+				28ABB2082835D18E00A31030 /* HandleAnalysisManager.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -1127,6 +1130,7 @@
 				28B76527282CC53C009EFA0A /* SelectDateType.swift in Sources */,
 				28D79FDC2817F53D00505B5B /* SignInTableViewCell.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
+				28ABB2092835D18E00A31030 /* HandleAnalysisManager.swift in Sources */,
 				283E65892817D19C00F1033F /* SettingImageTableViewCell.swift in Sources */,
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				281358DD281BD0D5000B0CAE /* PublishCertificationViewController.swift in Sources */,

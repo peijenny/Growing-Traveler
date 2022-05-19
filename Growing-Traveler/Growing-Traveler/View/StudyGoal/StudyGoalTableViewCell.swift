@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CheckStudyItemDelegate {
+protocol CheckStudyItemDelegate: AnyObject {
     
     func checkItemCompleted(studyGoalTableViewCell: StudyGoalTableViewCell, studyItemCompleted: Bool)
     
@@ -19,7 +19,7 @@ class StudyGoalTableViewCell: UITableViewCell {
     
     @IBOutlet weak var studyItemLabel: UILabel!
     
-    var delegate: CheckStudyItemDelegate?
+    weak var delegate: CheckStudyItemDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,8 +54,6 @@ class StudyGoalTableViewCell: UITableViewCell {
         }
 
     }
-    
-    
     
     func checkIsCompleted(isCompleted: Bool) {
         
