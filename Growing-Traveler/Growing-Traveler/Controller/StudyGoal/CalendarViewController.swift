@@ -10,7 +10,8 @@ import FSCalendar
 import PKHUD
 
 class CalendarViewController: UIViewController {
-
+    
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var calendarView: FSCalendar! {
         
         didSet {
@@ -39,6 +40,7 @@ class CalendarViewController: UIViewController {
     
     @IBOutlet weak var calendarBackgroundView: UIView!
     
+    // MARK: - Property
     var studyGoalManager = StudyGoalManager()
     
     var studyGoals: [StudyGoal] = [] {
@@ -53,35 +55,15 @@ class CalendarViewController: UIViewController {
     
     var selectedDate = Date()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "成長日曆"
+        setUIStyle()
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        registerTableViewCell()
         
-        calendarBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
-        
-        displayTableView.register(
-            UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: TopTableViewCell.self))
-        
-        calendarView.appearance.titleWeekendColor = UIColor.lightGray
-        
-        calendarView.appearance.todayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
-        
-        calendarView.appearance.titleTodayColor = UIColor.white
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(
-           title: "", style: .plain, target: nil, action: nil)
-        
-        displayBackgroundView.isHidden = (KeyToken().userID == "") ? false : true
-        
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "yyyy.MM.dd"
-        
-        selectedDate = formatter.date(from: formatter.string(from: Date())) ?? Date()
+        showSelectedDateData()
 
         listenStudyGoalData()
         
@@ -101,6 +83,54 @@ class CalendarViewController: UIViewController {
         
     }
     
+    // MARK: - Set UI and default data
+    func setUIStyle() {
+        
+        title = "成長日曆"
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        
+        calendarBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        
+        calendarView.appearance.titleWeekendColor = UIColor.lightGray
+        
+        calendarView.appearance.todayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        
+        calendarView.appearance.titleTodayColor = UIColor.white
+        
+        if KeyToken().userID == "" {
+            
+            displayBackgroundView.isHidden = false
+        
+        } else {
+            
+            displayBackgroundView.isHidden = true
+        
+        }
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+    }
+    
+    func registerTableViewCell() {
+        
+        displayTableView.register(
+            UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: TopTableViewCell.self))
+        
+    }
+    
+    func showSelectedDateData() {
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        selectedDate = formatter.date(from: formatter.string(from: Date())) ?? Date()
+        
+    }
+    
+    // MARK: - Method
     func listenStudyGoalData() {
  
         studyGoalManager.listenData { [weak self] result in
@@ -147,9 +177,9 @@ class CalendarViewController: UIViewController {
 
 }
 
+// MARK: - calendar delegate / dataSource
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
-    // MARK: - calendar delegate
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
         calendarView.appearance.todayColor = UIColor.clear
@@ -164,6 +194,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
 }
 
+// MARK: - tableView delegate / dataSource
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
