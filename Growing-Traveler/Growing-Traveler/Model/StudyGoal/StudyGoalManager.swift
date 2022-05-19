@@ -16,7 +16,7 @@ class StudyGoalManager {
     let database = Firestore.firestore().collection("studyGoal")
     
     // 監聽 即時修改的學習計劃 至 Firebase Firestore
-    func listenData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
+    func listenData(completion: @escaping (Result<[StudyGoal]>) -> Void) { //
         
         if KeyToken().userID != "" {
          

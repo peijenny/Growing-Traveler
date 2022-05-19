@@ -9,7 +9,7 @@ import UIKit
 import PKHUD
 import Lottie
 
-enum TableViewCellType {
+enum TableViewCellType: CaseIterable {
     
     case header
     
@@ -21,11 +21,11 @@ enum TableViewCellType {
         
         switch self {
             
-        case .header: return String(describing: TopTableViewCell.self)
+        case .header: return "\(TopTableViewCell.self)" //
             
-        case .body: return String(describing: StudyGoalTableViewCell.self)
+        case .body: return "\(StudyGoalTableViewCell.self)"
             
-        case .footer: return String(describing: BottomTableViewCell.self)
+        case .footer: return "\(BottomTableViewCell.self)"
             
         }
         
@@ -50,17 +50,17 @@ class StudyGoalViewController: UIViewController {
     
     @IBOutlet weak var addGoalButton: UIButton!
     
-    @IBOutlet var statusButton: [UIButton]!
+    @IBOutlet var statusButtons: [UIButton]! //
     
-    @IBOutlet weak var selectlineBackgroundView: UIView!
+    @IBOutlet weak var selectedLineBackgroundView: UIView! // ed
     
     @IBOutlet weak var headerAnimationView: UIView!
     
     @IBOutlet weak var studyGoalBackgroundView: UIView!
     
-    var selectLineView = UIView()
+    var selectedLineView = UIView() //
     
-    var lottieAnimation = AnimationView()
+    var animationView = AnimationView() //
     
     // MARK: - Property
     var studyGoalManager = StudyGoalManager()
@@ -71,11 +71,20 @@ class StudyGoalViewController: UIViewController {
     
     var user: UserInfo?
     
-    var titleText = StatusType.running.title
+//    var titleText = StatusType.running.title // x
     
-    var tableViewCellType: [TableViewCellType] = [.header, .body, .footer]
+    var selectedStatus: StatusType = .running
+    
+    let handleStatus: [StatusType] = [.pending, .running, .finished]
+    
+    let tableViewCellType: [TableViewCellType] = [.header, .body, .footer]
     
     let dateFormatter = DateFormatter()
+    /*
+    = {
+    
+     }()
+     */
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -83,7 +92,7 @@ class StudyGoalViewController: UIViewController {
         
         setUIStyle()
         
-        setHeaserLottieView()
+        setHeaderLottieView()
         
         setSelectLineView()
         
@@ -107,11 +116,11 @@ class StudyGoalViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        lottieAnimation.play()
+        animationView.play()
         
         fetchUserInfo()
         
-        listenStudyGoals(status: titleText)
+        listenStudyGoals(status: selectedStatus)
         
         handleUserSignOut()
         
@@ -146,35 +155,35 @@ class StudyGoalViewController: UIViewController {
     
     func setSelectLineView() {
         
-        selectlineBackgroundView.addSubview(selectLineView)
+        selectedLineBackgroundView.addSubview(selectedLineView)
         
-        selectLineView.translatesAutoresizingMaskIntoConstraints = false
+        selectedLineView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            selectLineView.topAnchor.constraint(equalTo: selectlineBackgroundView.topAnchor),
-            selectLineView.centerXAnchor.constraint(equalTo: selectlineBackgroundView.centerXAnchor),
-            selectLineView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / CGFloat(3.0)),
-            selectLineView.heightAnchor.constraint(equalToConstant: selectlineBackgroundView.frame.height)
+            selectedLineView.topAnchor.constraint(equalTo: selectedLineBackgroundView.topAnchor),
+            selectedLineView.centerXAnchor.constraint(equalTo: selectedLineBackgroundView.centerXAnchor),
+            selectedLineView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / CGFloat(3.0)),
+            selectedLineView.heightAnchor.constraint(equalToConstant: selectedLineBackgroundView.frame.height)
         ])
         
     }
     
-    func setHeaserLottieView() {
+    func setHeaderLottieView() { //
         
-        lottieAnimation = AnimationView(name: "101546-study-abroad")
+        animationView = AnimationView(name: "101546-study-abroad")
         
-        headerAnimationView.addSubview(lottieAnimation)
+        headerAnimationView.addSubview(animationView)
         
-        lottieAnimation.translatesAutoresizingMaskIntoConstraints = false
+        animationView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            lottieAnimation.centerXAnchor.constraint(equalTo: headerAnimationView.centerXAnchor),
-            lottieAnimation.centerYAnchor.constraint(equalTo: headerAnimationView.centerYAnchor, constant: 50),
-            lottieAnimation.widthAnchor.constraint(equalToConstant: headerAnimationView.frame.height * CGFloat(0.8)),
-            lottieAnimation.heightAnchor.constraint(equalToConstant: headerAnimationView.frame.height * CGFloat(0.8))
+            animationView.centerXAnchor.constraint(equalTo: headerAnimationView.centerXAnchor),
+            animationView.centerYAnchor.constraint(equalTo: headerAnimationView.centerYAnchor, constant: 50),
+            animationView.widthAnchor.constraint(equalToConstant: headerAnimationView.frame.height * CGFloat(0.8)),
+            animationView.heightAnchor.constraint(equalToConstant: headerAnimationView.frame.height * CGFloat(0.8))
         ])
         
-        lottieAnimation.loopMode = .loop
+        animationView.loopMode = .loop
         
     }
     
@@ -188,19 +197,26 @@ class StudyGoalViewController: UIViewController {
         
         studyGoalTableView.backgroundColor = UIColor.clear
         
-        selectStatusColorButton(selectButton: statusButton[1])
-        
         studyGoalBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
-        selectlineBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        selectedLineBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
+        selectedLineView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         headerAnimationView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        lottieAnimation.backgroundColor = UIColor.clear
+        animationView.backgroundColor = UIColor.clear
         
-        lottieAnimation.contentMode = .scaleAspectFit
+        animationView.contentMode = .scaleAspectFit
+        
+        for index in 0..<handleStatus.count {
+            
+            if handleStatus[index] == selectedStatus {
+                
+                selectStatusColorButton(selectButton: statusButtons[index]) //
+                
+            }
+        }
         
     }
     
@@ -209,19 +225,19 @@ class StudyGoalViewController: UIViewController {
         
         userManager.listenData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let user):
                 
-                strongSelf.user = user
+                self.user = user
                 
-                strongSelf.handleSignInNumberOfTime()
+                self.handleSignInNumberOfTime()
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5) //
                 
             }
             
@@ -245,25 +261,25 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    func listenStudyGoals(status: String) {
+    func listenStudyGoals(status: StatusType) { //
         
         studyGoalManager.listenData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let data):
                 
-                strongSelf.studyGoals = strongSelf.handleSelectStudyGoals(status: status, studyGoals: data)
+                self.studyGoals = self.handleSelectStudyGoals(status: status.title, studyGoals: data)
                 
-                strongSelf.studyGoalBackgroundView.isHidden = (strongSelf.studyGoals.isEmpty) ? false : true
+                self.studyGoalBackgroundView.isHidden = !self.studyGoals.isEmpty
                 
-                strongSelf.studyGoalTableView.reloadData()
+                self.studyGoalTableView.reloadData()
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5) //
                 
             }
             
@@ -273,9 +289,17 @@ class StudyGoalViewController: UIViewController {
     
     func selectStatusColorButton(selectButton: UIButton) {
         
-        _ = statusButton.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText) })
+        for index in 0..<statusButtons.count {
+            
+            statusButtons[index].backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+            
+            statusButtons[index].tintColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
+            
+        }
         
-        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText) })
+//        _ = statusButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText) }) //
+//
+//        _ = statusButtons.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText) }) //
         
         selectButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
@@ -306,7 +330,7 @@ class StudyGoalViewController: UIViewController {
     
     @IBAction func addStudyGoalButton(_ sender: UIButton) {
         
-        guard KeyToken().userID != "" else {
+        guard !KeyToken().userID.isEmpty else { //
             
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)
@@ -320,7 +344,7 @@ class StudyGoalViewController: UIViewController {
             
         }
         
-        pushToPlanStudyGoalPage(studyGoal: nil)
+        pushToPlanStudyGoalPage()
         
     }
     
@@ -328,29 +352,41 @@ class StudyGoalViewController: UIViewController {
         
         handleUserSignOut()
         
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+        UIView.animate(withDuration: 0.3) { [weak self] in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
-            strongSelf.selectLineView.frame.origin.x = sender.frame.origin.x
+            self.selectedLineView.frame.origin.x = sender.frame.origin.x
             
-        })
+        }
         
         selectStatusColorButton(selectButton: sender)
         
-        if let titleText = sender.titleLabel?.text {
+        for index in 0..<statusButtons.count {
             
-            listenStudyGoals(status: titleText)
-            
-            self.titleText = titleText
+            if sender == statusButtons[index] {
+                
+                selectedStatus = handleStatus[index]
+                
+                listenStudyGoals(status: selectedStatus)
+                
+            }
             
         }
+        
+//        if let titleText = sender.titleLabel?.text { //
+//
+//            listenStudyGoals(status: titleText)
+//
+//            self.titleText = titleText
+//
+//        }
         
     }
     
     func handleUserSignOut() {
         
-        if KeyToken().userID == "" {
+        if KeyToken().userID.isEmpty {
             
             studyGoalBackgroundView.isHidden = false
             
@@ -362,7 +398,7 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    func pushToPlanStudyGoalPage(studyGoal: StudyGoal?) {
+    func pushToPlanStudyGoalPage(studyGoal: StudyGoal? = nil) { // ?
         
         let viewController = UIStoryboard.studyGoal.instantiateViewController(
             withIdentifier: String(describing: PlanStudyGoalViewController.self))
@@ -381,9 +417,9 @@ class StudyGoalViewController: UIViewController {
         
         for index in 0..<studyGoals.count {
             
-            let isPending = studyGoals[index].studyItems.allSatisfy({ $0.isCompleted == false })
+            let isPending = studyGoals[index].studyItems.allSatisfy({ !$0.isCompleted })
             
-            let isFinish = studyGoals[index].studyItems.allSatisfy({ $0.isCompleted == true })
+            let isFinish = studyGoals[index].studyItems.allSatisfy({ $0.isCompleted })
             
             let startDate = Date(timeIntervalSince1970: studyGoals[index].studyPeriod.startDate)
             
@@ -428,7 +464,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = UITableViewCell()
+        var cell: UITableViewCell
         
         switch indexPath.row {
             
@@ -482,6 +518,8 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.delegate = self
         
+        // comment
+        
         cell.checkIsCompleted(isCompleted: studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted)
         
         cell.showStudyItem(studyItem: studyGoals[indexPath.section].studyItems[indexPath.row - 1])
@@ -510,9 +548,9 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
         let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
-            strongSelf.deleteStudyGoal(section: indexPath.section)
+            self.deleteStudyGoal(section: indexPath.section)
             
             HUD.flash(.labeledSuccess(title: "計劃已刪除！", subtitle: nil), delay: 0.5)
             
@@ -544,9 +582,10 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func handleStudyItemComplete(isCompleted: Bool, section: Int, row: Int) {
         
+        //
         studyGoals[section].studyItems[row - 1].isCompleted = isCompleted
         
-        user?.achievement.experienceValue += (isCompleted) ? 50: -50
+        user?.achievement.experienceValue += isCompleted ? 50: -50
         
         studyGoalManager.updateData(studyGoal: studyGoals[section])
         
@@ -554,9 +593,13 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func handleStudyItemFinish(section: Int, row: Int) {
         
-        guard let studyGoalsID = user?.achievement.completionGoals else { return }
+        //
         
-        let allSatisfy = studyGoals[section].studyItems.allSatisfy({ $0.isCompleted == true })
+        guard var user = user else { return } //
+        
+        let studyGoalsID = user.achievement.completionGoals
+        
+        let allSatisfy = studyGoals[section].studyItems.allSatisfy({ $0.isCompleted })
         
         let isEmpty = studyGoalsID.filter({ $0 == studyGoals[section].id }).isEmpty
         
@@ -564,7 +607,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
             HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
             
-            user?.achievement.completionGoals.append(studyGoals[section].id)
+            user.achievement.completionGoals.append(studyGoals[section].id)
             
         } else if allSatisfy && !isEmpty {
             
@@ -574,15 +617,9 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
             let deleteIndex = studyGoalsID.getArrayIndex(studyGoals[section].id)[0]
             
-            user?.achievement.completionGoals.remove(at: deleteIndex)
-            
-        } else {
-            
-            return
+            user.achievement.completionGoals.remove(at: deleteIndex)
             
         }
-        
-        guard let user = user else { return }
         
         userManager.updateData(user: user)
         

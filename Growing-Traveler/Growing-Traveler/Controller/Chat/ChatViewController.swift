@@ -68,21 +68,7 @@ class ChatViewController: BaseViewController {
         
         didSet {
             
-            title = "\(chatMessage?.friendName ?? "")"
-            
-            chatTableView.reloadData()
-            
-            if let messageCount = chatMessage?.messageContent.count {
-
-                if chatMessage?.messageContent.count != 0 {
-
-                    let indexPath = IndexPath(row: messageCount - 1, section: 0)
-
-                    chatTableView.scrollToRow(at: indexPath, at: .top, animated: false)
-
-                }
-
-            }
+            scrollChatTableViewRow(chatMessage: chatMessage)
             
         }
         
@@ -105,6 +91,78 @@ class ChatViewController: BaseViewController {
         
         setNavigationItems()
         
+        registerTableViewCell()
+        
+        setUIStyle()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if deleteAccount {
+            
+            friendStatusLabel.text = "此帳號已刪除，無法發送訊息！"
+            
+            friendStatusLabel.isHidden = false
+            
+        }
+
+        if isBlock {
+            
+            friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
+            
+            friendStatusLabel.isHidden = false
+            
+        }
+        
+        fetchFriendInfoData()
+        
+    }
+    
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
+    func scrollChatTableViewRow(chatMessage: Chat?) {
+        
+        title = "\(chatMessage?.friendName ?? "")"
+        
+        chatTableView.reloadData()
+        
+        if let messageCount = chatMessage?.messageContent.count {
+
+            if chatMessage?.messageContent.count != 0 {
+
+                let indexPath = IndexPath(row: messageCount - 1, section: 0)
+
+                chatTableView.scrollToRow(at: indexPath, at: .top, animated: false)
+
+            }
+
+        }
+        
+    }
+
+    func setNavigationItems() {
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.user), style: .plain, target: self, action: #selector(friendInfoButton))
+
+    }
+    
+    func registerTableViewCell() {
+        
         chatTableView.register(
             UINib(nibName: String(describing: ReceiveMessageTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: ReceiveMessageTableViewCell.self))
@@ -121,13 +179,9 @@ class ChatViewController: BaseViewController {
             UINib(nibName: String(describing: ShareSendTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: ShareSendTableViewCell.self))
         
-        if deleteAccount {
-            
-            friendStatusLabel.text = "此帳號已刪除，無法發送訊息！"
-            
-            friendStatusLabel.isHidden = false
-            
-        }
+    }
+    
+    func setUIStyle() {
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
@@ -141,13 +195,6 @@ class ChatViewController: BaseViewController {
         
         sendMessageButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-    }
-
-    func setNavigationItems() {
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage.asset(.user), style: .plain, target: self, action: #selector(friendInfoButton))
-
     }
     
     @objc func friendInfoButton(sender: UIButton) {
@@ -186,35 +233,6 @@ class ChatViewController: BaseViewController {
         
     }
     
-    override var hidesBottomBarWhenPushed: Bool {
-        
-        get {
-            
-            return navigationController?.topViewController == self
-            
-        } set {
-            
-            super.hidesBottomBarWhenPushed = newValue
-            
-        }
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if isBlock {
-            
-            friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
-            
-            friendStatusLabel.isHidden = false
-            
-        }
-        
-        fetchFriendInfoData()
-        
-    }
-    
     func fetchFriendInfoData() {
         
         userManager.fetchData(fetchUserID: friendID) { [weak self] result in
@@ -235,9 +253,7 @@ class ChatViewController: BaseViewController {
                 
                 strongSelf.chatTableView.reloadData()
 
-            case .failure(let error):
-
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
@@ -267,9 +283,7 @@ class ChatViewController: BaseViewController {
                     
                 }
                 
-            case .failure(let error):
-
-                print(error)
+            case .failure:
 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -291,32 +305,36 @@ class ChatViewController: BaseViewController {
 
                 strongSelf.chatMessage = chatMessage
                 
-                for index in 0..<chatMessage.messageContent.count {
-                    
-                    if chatMessage.messageContent[index].sendType == SendType.noteID.title {
-                        
-                        strongSelf.fetchshareNoteData(
-                            shareUserID: chatMessage.messageContent[index].sendUserID,
-                            noteID: chatMessage.messageContent[index].sendMessage)
-                        
-                    } else if chatMessage.messageContent[index].sendType == SendType.articleID.title {
-                        
-                        strongSelf.fetchShareArticleData(articleID: chatMessage.messageContent[index].sendMessage)
-                        
-                    }
-                    
-                }
+                strongSelf.handleChatMessage(chatMessage: chatMessage)
                 
-            case .failure(let error):
+            case .failure:
 
-                print(error)
-                
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
             }
 
         }
 
+    }
+    
+    func handleChatMessage(chatMessage: Chat) {
+        
+        for index in 0..<chatMessage.messageContent.count {
+            
+            if chatMessage.messageContent[index].sendType == SendType.noteID.title {
+                
+                fetchshareNoteData(
+                    shareUserID: chatMessage.messageContent[index].sendUserID,
+                    noteID: chatMessage.messageContent[index].sendMessage)
+                
+            } else if chatMessage.messageContent[index].sendType == SendType.articleID.title {
+                
+                fetchShareArticleData(articleID: chatMessage.messageContent[index].sendMessage)
+                
+            }
+            
+        }
+        
     }
     
     func fetchshareNoteData(shareUserID: String, noteID: String) {
@@ -335,10 +353,8 @@ class ChatViewController: BaseViewController {
                 
                 strongSelf.chatTableView.reloadData()
                 
-            case .failure(let error):
+            case .failure:
 
-                print(error)
-                
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
             }
@@ -359,15 +375,11 @@ class ChatViewController: BaseViewController {
                 
                 let forumArticle = forumArticle
                 
-                print("TEST \(forumArticle)")
-                
                 strongSelf.forumArticles.append(forumArticle)
                 
                 strongSelf.chatTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -442,21 +454,18 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
         var cell = UITableViewCell()
         
-        if chatMessage?.messageContent[indexPath.row].sendType == SendType.image.title ||
-            chatMessage?.messageContent[indexPath.row].sendType == SendType.string.title {
+        guard let messageContent = chatMessage?.messageContent[indexPath.row] else { return cell }
+        
+        if messageContent.sendType == SendType.image.title || messageContent.sendType == SendType.string.title {
             
-            if chatMessage?.messageContent[indexPath.row].sendUserID != KeyToken().userID {
+            if messageContent.sendUserID != KeyToken().userID {
                 
                 cell = tableView.dequeueReusableCell(
                     withIdentifier: String(describing: ReceiveMessageTableViewCell.self), for: indexPath)
                 
                 guard let cell = cell as? ReceiveMessageTableViewCell else { return cell }
                 
-                if let receiveMessage = chatMessage?.messageContent[indexPath.row] {
-                    
-                    cell.showMessage(receiveMessage: receiveMessage, friendPhoto: friendInfo?.userPhoto)
-                    
-                }
+                cell.showMessage(receiveMessage: messageContent, friendPhoto: friendInfo?.userPhoto)
                 
             } else {
                 
@@ -465,26 +474,22 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 guard let cell = cell as? SendMessageTableViewCell else { return cell }
                 
-                if let sendMessage = chatMessage?.messageContent[indexPath.row] {
-                    
-                    cell.showMessage(sendMessage: sendMessage)
-                    
-                }
+                cell.showMessage(sendMessage: messageContent)
                 
             }
             
         } else {
             
-            if chatMessage?.messageContent[indexPath.row].sendUserID != KeyToken().userID {
+            if messageContent.sendUserID != KeyToken().userID {
                 
                 cell = tableView.dequeueReusableCell(
                     withIdentifier: String(describing: ShareReceiveTableViewCell.self), for: indexPath)
                 
                 guard let cell = cell as? ShareReceiveTableViewCell else { return cell }
                 
-                let note = notes.filter({ $0.noteID == chatMessage?.messageContent[indexPath.row].sendMessage })
+                let note = notes.filter({ $0.noteID == messageContent.sendMessage })
                 
-                let article = forumArticles.filter({ $0.id == chatMessage?.messageContent[indexPath.row].sendMessage })
+                let article = forumArticles.filter({ $0.id == messageContent.sendMessage })
                 
                 if !note.isEmpty {
                     
@@ -606,10 +611,8 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
                     strongSelf.addMessageData(inputContent: imageLink)
 
-                case .failure(let error):
+                case .failure:
 
-                    print(error)
-                    
                     HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }

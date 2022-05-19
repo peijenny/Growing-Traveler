@@ -164,12 +164,12 @@
                     <connections>
                         <outlet property="addGoalButton" destination="t1D-fh-S7D" id="VSr-sw-hdW"/>
                         <outlet property="headerAnimationView" destination="I0E-VG-B8O" id="oCF-u2-6lS"/>
-                        <outlet property="selectlineBackgroundView" destination="yw1-6K-0DR" id="rtV-WF-B7k"/>
+                        <outlet property="selectedLineBackgroundView" destination="yw1-6K-0DR" id="rtV-WF-B7k"/>
                         <outlet property="studyGoalBackgroundView" destination="VFk-re-Iup" id="lkj-sd-Vmv"/>
                         <outlet property="studyGoalTableView" destination="s7B-ph-YYk" id="6FP-c5-7Eg"/>
-                        <outletCollection property="statusButton" destination="5Nz-We-I3v" collectionClass="NSMutableArray" id="M4A-uG-aIL"/>
-                        <outletCollection property="statusButton" destination="azx-6w-Wlk" collectionClass="NSMutableArray" id="py3-pL-kz1"/>
-                        <outletCollection property="statusButton" destination="M9f-0F-UcN" collectionClass="NSMutableArray" id="XgY-Vh-uVc"/>
+                        <outletCollection property="statusButtons" destination="5Nz-We-I3v" collectionClass="NSMutableArray" id="M4A-uG-aIL"/>
+                        <outletCollection property="statusButtons" destination="azx-6w-Wlk" collectionClass="NSMutableArray" id="py3-pL-kz1"/>
+                        <outletCollection property="statusButtons" destination="M9f-0F-UcN" collectionClass="NSMutableArray" id="XgY-Vh-uVc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
