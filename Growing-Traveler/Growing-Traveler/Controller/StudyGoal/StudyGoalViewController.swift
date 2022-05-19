@@ -21,7 +21,7 @@ enum TableViewCellType: CaseIterable {
         
         switch self {
             
-        case .header: return "\(TopTableViewCell.self)" //
+        case .header: return "\(TopTableViewCell.self)"
             
         case .body: return "\(StudyGoalTableViewCell.self)"
             
@@ -50,42 +50,43 @@ class StudyGoalViewController: UIViewController {
     
     @IBOutlet weak var addGoalButton: UIButton!
     
-    @IBOutlet var statusButtons: [UIButton]! //
+    @IBOutlet var statusButtons: [UIButton]!
     
-    @IBOutlet weak var selectedLineBackgroundView: UIView! // ed
+    @IBOutlet weak var selectedLineBackgroundView: UIView!
     
     @IBOutlet weak var headerAnimationView: UIView!
     
     @IBOutlet weak var studyGoalBackgroundView: UIView!
     
-    var selectedLineView = UIView() //
+    var selectedLineView = UIView()
     
-    var animationView = AnimationView() //
+    var animationView = AnimationView()
     
     // MARK: - Property
     var studyGoalManager = StudyGoalManager()
     
     var userManager = UserManager()
     
+    var selectedStatus: StatusType = .running
+    
+    let studyStatus: [StatusType] = [.pending, .running, .finished]
+    
+    let tableViewCellType: [TableViewCellType] = [.header, .body, .footer]
+    
     var studyGoals: [StudyGoal] = []
     
     var user: UserInfo?
     
-//    var titleText = StatusType.running.title // x
-    
-    var selectedStatus: StatusType = .running
-    
-    let handleStatus: [StatusType] = [.pending, .running, .finished]
-    
-    let tableViewCellType: [TableViewCellType] = [.header, .body, .footer]
-    
-    let dateFormatter = DateFormatter()
-    /*
-    = {
-    
-     }()
-     */
-    
+    private let dateFormatter: DateFormatter = {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        return dateFormatter
+        
+    }()
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,9 +100,7 @@ class StudyGoalViewController: UIViewController {
         setNavigationItems()
         
         registerTableViewCell()
-        
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -168,7 +167,7 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    func setHeaderLottieView() { //
+    func setHeaderLottieView() {
         
         animationView = AnimationView(name: "101546-study-abroad")
         
@@ -209,11 +208,11 @@ class StudyGoalViewController: UIViewController {
         
         animationView.contentMode = .scaleAspectFit
         
-        for index in 0..<handleStatus.count {
+        for index in 0..<studyStatus.count {
             
-            if handleStatus[index] == selectedStatus {
+            if studyStatus[index] == selectedStatus {
                 
-                selectStatusColorButton(selectButton: statusButtons[index]) //
+                selectStatusColorButton(selectButton: statusButtons[index])
                 
             }
         }
@@ -261,7 +260,7 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    func listenStudyGoals(status: StatusType) { //
+    func listenStudyGoals(status: StatusType) {
         
         studyGoalManager.listenData { [weak self] result in
             
@@ -297,10 +296,6 @@ class StudyGoalViewController: UIViewController {
             
         }
         
-//        _ = statusButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText) }) //
-//
-//        _ = statusButtons.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText) }) //
-        
         selectButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
     }
@@ -330,7 +325,7 @@ class StudyGoalViewController: UIViewController {
     
     @IBAction func addStudyGoalButton(_ sender: UIButton) {
         
-        guard !KeyToken().userID.isEmpty else { //
+        guard !KeyToken().userID.isEmpty else {
             
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)
@@ -366,21 +361,13 @@ class StudyGoalViewController: UIViewController {
             
             if sender == statusButtons[index] {
                 
-                selectedStatus = handleStatus[index]
+                selectedStatus = studyStatus[index]
                 
                 listenStudyGoals(status: selectedStatus)
                 
             }
             
         }
-        
-//        if let titleText = sender.titleLabel?.text { //
-//
-//            listenStudyGoals(status: titleText)
-//
-//            self.titleText = titleText
-//
-//        }
         
     }
     
@@ -398,7 +385,7 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    func pushToPlanStudyGoalPage(studyGoal: StudyGoal? = nil) { // ?
+    func pushToPlanStudyGoalPage(studyGoal: StudyGoal? = nil) {
         
         let viewController = UIStoryboard.studyGoal.instantiateViewController(
             withIdentifier: String(describing: PlanStudyGoalViewController.self))
@@ -518,11 +505,12 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.delegate = self
         
-        // comment
+        // study item row - indexPath.row minus header row cell
+        let studyItemRow = indexPath.row - 1
         
-        cell.checkIsCompleted(isCompleted: studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted)
+        cell.checkIsCompleted(isCompleted: studyGoals[indexPath.section].studyItems[studyItemRow].isCompleted)
         
-        cell.showStudyItem(studyItem: studyGoals[indexPath.section].studyItems[indexPath.row - 1])
+        cell.showStudyItem(studyItem: studyGoals[indexPath.section].studyItems[studyItemRow])
         
     }
     
@@ -550,7 +538,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
             guard let self = self else { return }
             
-            self.deleteStudyGoal(section: indexPath.section)
+            self.deleteStudyGoal(indexPath: indexPath)
             
             HUD.flash(.labeledSuccess(title: "計劃已刪除！", subtitle: nil), delay: 0.5)
             
@@ -566,48 +554,48 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    func deleteStudyGoal(section: Int) {
+    func deleteStudyGoal(indexPath: IndexPath) {
         
-        studyGoalManager.deleteData(studyGoal: studyGoals[section])
+        studyGoalManager.deleteData(studyGoal: studyGoals[indexPath.section])
         
-        studyGoals.remove(at: section)
+        studyGoals.remove(at: indexPath.section)
         
         let indexSet = NSMutableIndexSet()
         
-        indexSet.add(section)
+        indexSet.add(indexPath.section)
         
         studyGoalTableView.deleteSections(indexSet as IndexSet, with: UITableView.RowAnimation.left)
         
     }
     
-    func handleStudyItemComplete(isCompleted: Bool, section: Int, row: Int) {
+    func handleStudyItemComplete(isCompleted: Bool, indexPath: IndexPath) {
+       
+        // study item row - indexPath.row minus header row cell
+        let studyItemRow = indexPath.row - 1
         
-        //
-        studyGoals[section].studyItems[row - 1].isCompleted = isCompleted
+        studyGoals[indexPath.section].studyItems[studyItemRow].isCompleted = isCompleted
         
         user?.achievement.experienceValue += isCompleted ? 50: -50
         
-        studyGoalManager.updateData(studyGoal: studyGoals[section])
+        studyGoalManager.updateData(studyGoal: studyGoals[indexPath.section])
         
     }
     
-    func handleStudyItemFinish(section: Int, row: Int) {
+    func handleStudyItemFinish(indexPath: IndexPath) {
         
-        //
-        
-        guard var user = user else { return } //
+        guard var user = user else { return }
         
         let studyGoalsID = user.achievement.completionGoals
         
-        let allSatisfy = studyGoals[section].studyItems.allSatisfy({ $0.isCompleted })
+        let allSatisfy = studyGoals[indexPath.section].studyItems.allSatisfy({ $0.isCompleted })
         
-        let isEmpty = studyGoalsID.filter({ $0 == studyGoals[section].id }).isEmpty
+        let isEmpty = studyGoalsID.filter({ $0 == studyGoals[indexPath.section].id }).isEmpty
         
         if allSatisfy && isEmpty {
             
             HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
             
-            user.achievement.completionGoals.append(studyGoals[section].id)
+            user.achievement.completionGoals.append(studyGoals[indexPath.section].id)
             
         } else if allSatisfy && !isEmpty {
             
@@ -615,7 +603,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
         } else if !allSatisfy && !isEmpty {
             
-            let deleteIndex = studyGoalsID.getArrayIndex(studyGoals[section].id)[0]
+            let deleteIndex = studyGoalsID.getArrayIndex(studyGoals[indexPath.section].id)[0]
             
             user.achievement.completionGoals.remove(at: deleteIndex)
             
@@ -634,9 +622,9 @@ extension StudyGoalViewController: CheckStudyItemDelegate {
         
         guard let indexPath = studyGoalTableView.indexPath(for: studyGoalTableViewCell) else { return }
         
-        handleStudyItemComplete(isCompleted: studyItemCompleted, section: indexPath.section, row: indexPath.row)
+        handleStudyItemComplete(isCompleted: studyItemCompleted, indexPath: indexPath)
         
-        handleStudyItemFinish(section: indexPath.section, row: indexPath.row)
+        handleStudyItemFinish(indexPath: indexPath)
         
     }
     
