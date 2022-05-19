@@ -126,11 +126,8 @@ class SelectStudyItemViewController: BaseViewController {
     func createTimeButton() {
         
         for index in 0..<studyTime.count {
-            
-            let originX = (studyTimeStackView.frame.height * CGFloat(index)) + 5 * CGFloat(index)
 
-            let timeButton = UIButton(frame: CGRect(
-                x: originX, y: 0, width: studyTimeStackView.frame.height, height: studyTimeStackView.frame.height))
+            let timeButton = UIButton()
             
             timeButton.cornerRadius = 5
             
@@ -147,6 +144,17 @@ class SelectStudyItemViewController: BaseViewController {
             timeButtons.append(timeButton)
             
             studyTimeStackView.addSubview(timeButton)
+            
+            timeButton.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                timeButton.leadingAnchor.constraint(
+                    equalTo: studyTimeStackView.leadingAnchor,
+                    constant: studyTimeStackView.frame.height * CGFloat(index) * CGFloat(1.1)),
+                timeButton.centerYAnchor.constraint(equalTo: studyTimeStackView.centerYAnchor),
+                timeButton.widthAnchor.constraint(equalToConstant: studyTimeStackView.frame.height),
+                timeButton.heightAnchor.constraint(equalToConstant: studyTimeStackView.frame.height)
+            ])
 
         }
         
