@@ -9,7 +9,7 @@ import UIKit
 import PKHUD
 import Lottie
 
-enum TableViewCellType: CaseIterable { // have to modify
+enum TableViewCellType: CaseIterable {
     
     case header
     
@@ -68,10 +68,6 @@ class StudyGoalViewController: UIViewController {
     var userManager = UserManager()
     
     var selectedStatus: StatusType = .running
-    
-    let studyStatus: [StatusType] = [.pending, .running, .finished]
-    
-    let tableViewCellType: [TableViewCellType] = [.header, .body, .footer]
     
     var studyGoals: [StudyGoal] = []
     
@@ -138,17 +134,13 @@ class StudyGoalViewController: UIViewController {
     
     func registerTableViewCell() {
         
-        studyGoalTableView.register(
-            UINib(nibName: TableViewCellType.header.identifier, bundle: nil),
-            forCellReuseIdentifier: TableViewCellType.header.identifier)
-        
-        studyGoalTableView.register(
-            UINib(nibName: TableViewCellType.body.identifier, bundle: nil),
-            forCellReuseIdentifier: TableViewCellType.body.identifier)
-        
-        studyGoalTableView.register(
-            UINib(nibName: TableViewCellType.footer.identifier, bundle: nil),
-            forCellReuseIdentifier: TableViewCellType.footer.identifier)
+        for index in 0..<TableViewCellType.allCases.count {
+            
+            studyGoalTableView.register(
+                UINib(nibName: TableViewCellType.allCases[index].identifier, bundle: nil),
+                forCellReuseIdentifier: TableViewCellType.allCases[index].identifier)
+            
+        }
         
     }
     
@@ -208,13 +200,14 @@ class StudyGoalViewController: UIViewController {
         
         animationView.contentMode = .scaleAspectFit
         
-        for index in 0..<studyStatus.count {
+        for index in 0..<StatusType.allCases.count {
             
-            if studyStatus[index] == selectedStatus {
+            if StatusType.allCases[index] == selectedStatus {
                 
                 selectStatusColorButton(selectButton: statusButtons[index])
                 
             }
+            
         }
         
     }
@@ -361,7 +354,7 @@ class StudyGoalViewController: UIViewController {
             
             if sender == statusButtons[index] {
                 
-                selectedStatus = studyStatus[index]
+                selectedStatus = StatusType.allCases[index]
                 
                 listenStudyGoals(status: selectedStatus)
                 

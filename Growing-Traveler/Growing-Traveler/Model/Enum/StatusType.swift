@@ -7,13 +7,13 @@
 
 import UIKit
 
-enum StatusType: Int {
+enum StatusType: Int, CaseIterable {
     
-    case pending
+    case pending = 0
     
-    case running
+    case running = 1
     
-    case finished
+    case finished = 2
     
     var title: String {
         
