@@ -7,18 +7,28 @@
 
 import UIKit
 
+protocol CheckStudyItemDelegate: AnyObject {
+    
+    func checkItemCompleted(studyGoalTableViewCell: StudyGoalTableViewCell, studyItemCompleted: Bool)
+    
+}
+
 class StudyGoalTableViewCell: UITableViewCell {
 
     @IBOutlet weak var checkButton: UIButton!
     
     @IBOutlet weak var studyItemLabel: UILabel!
     
+    weak var delegate: CheckStudyItemDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        checkButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        checkButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         checkButton.cornerRadius = 5
+        
+        checkButton.addTarget(self, action: #selector(checkItemButton), for: .touchUpInside)
         
     }
 
@@ -27,13 +37,31 @@ class StudyGoalTableViewCell: UITableViewCell {
         
     }
     
+    @objc func checkItemButton(sender: UIButton) {
+        
+        if sender.tintColor?.cgColor == UIColor.clear.cgColor {
+            
+            sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
+            
+            delegate?.checkItemCompleted(studyGoalTableViewCell: self, studyItemCompleted: true)
+
+        } else {
+            
+            sender.tintColor = UIColor.clear
+            
+            delegate?.checkItemCompleted(studyGoalTableViewCell: self, studyItemCompleted: false)
+            
+        }
+
+    }
+    
     func checkIsCompleted(isCompleted: Bool) {
         
         let attributedString = NSMutableAttributedString(string: studyItemLabel.text ?? "")
         
         if isCompleted {
             
-            checkButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+            checkButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
             
             studyItemLabel.textColor = UIColor.lightGray
                    
@@ -46,7 +74,7 @@ class StudyGoalTableViewCell: UITableViewCell {
             
             attributedString.addAttribute(
                 .strikethroughColor,
-                value: UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText),
+                value: UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText),
                 range: NSRange(location: 0, length: attributedString.length)
             )
             

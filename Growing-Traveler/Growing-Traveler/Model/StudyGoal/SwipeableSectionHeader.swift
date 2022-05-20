@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SwipeableSectionHeaderDelegate{
+protocol SwipeableSectionHeaderDelegate: AnyObject {
     
     func deleteSection(section: Int)
     
@@ -15,19 +15,19 @@ protocol SwipeableSectionHeaderDelegate{
 
 class SwipeableSectionHeader: UIView {
     
-    var section:Int = 0
+    var section: Int = 0
     
-    var container:UIView!
+    var container: UIView!
     
-    var titleLabel:UILabel!
+    var titleLabel: UILabel!
     
-    var deleteButton:UIButton!
+    var deleteButton: UIButton!
     
-    var delegate:SwipeableSectionHeaderDelegate?
+    weak var delegate: SwipeableSectionHeaderDelegate?
     
-    var swipeLeft:UISwipeGestureRecognizer!
+    var swipeLeft: UISwipeGestureRecognizer!
     
-    var swipeRight:UISwipeGestureRecognizer!
+    var swipeRight: UISwipeGestureRecognizer!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,23 +51,23 @@ class SwipeableSectionHeader: UIView {
         self.deleteButton.backgroundColor = UIColor(
             red: 0xfc/255, green: 0x21/255, blue: 0x25/255, alpha: 1)
         
-        self.deleteButton.setTitle("刪除目標", for:.normal)
+        self.deleteButton.setTitle("刪除目標", for: .normal)
         
         self.deleteButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         
-        self.deleteButton.addTarget(self, action:#selector(buttonTapped(_:)), for:.touchUpInside)
+        self.deleteButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         
         self.container.addSubview(self.deleteButton)
         
         self.swipeLeft = UISwipeGestureRecognizer(
-            target:self, action:#selector(headerViewSwiped(_:)))
+            target: self, action: #selector(headerViewSwiped(_:)))
         
         self.swipeLeft.direction = .left
         
         self.addGestureRecognizer(self.swipeLeft)
         
         self.swipeRight = UISwipeGestureRecognizer(
-            target:self, action:#selector(headerViewSwiped(_:)))
+            target: self, action: #selector(headerViewSwiped(_:)))
         
         self.swipeRight.direction = .right
         
@@ -81,7 +81,7 @@ class SwipeableSectionHeader: UIView {
         
     }
     
-    @objc func headerViewSwiped(_ recognizer:UISwipeGestureRecognizer) {
+    @objc func headerViewSwiped(_ recognizer: UISwipeGestureRecognizer) {
         
         if recognizer.state == .ended {
             
@@ -91,7 +91,7 @@ class SwipeableSectionHeader: UIView {
                 
                 newFrame.origin.x = -self.deleteButton.frame.width
                 
-            }else {
+            } else {
                 
                 newFrame.origin.x = 0
                 
@@ -99,7 +99,7 @@ class SwipeableSectionHeader: UIView {
             
             UIView.animate(withDuration: 0.25, animations: {
                 
-                ()-> Void in
+                () -> Void in
                 
                 self.container.frame = newFrame
                 
@@ -109,7 +109,7 @@ class SwipeableSectionHeader: UIView {
         
     }
     
-    @objc func buttonTapped(_ button:UIButton) {
+    @objc func buttonTapped(_ button: UIButton) {
         
         delegate?.deleteSection(section: section)
         
@@ -118,11 +118,11 @@ class SwipeableSectionHeader: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.container.frame = CGRect(x: 0, y:0, width:self.frame.width + 74, height:self.frame.height)
+        self.container.frame = CGRect(x: 0, y: 0, width: self.frame.width + 74, height: self.frame.height)
         
-        self.titleLabel.frame = CGRect(x: 0, y:0, width:self.frame.width, height:self.frame.height)
+        self.titleLabel.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         
-        self.deleteButton.frame = CGRect(x: self.frame.size.width, y:0, width:74, height:self.frame.height)
+        self.deleteButton.frame = CGRect(x: self.frame.size.width, y: 0, width: 74, height: self.frame.height)
         
     }
     

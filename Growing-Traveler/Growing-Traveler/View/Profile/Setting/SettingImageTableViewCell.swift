@@ -16,7 +16,7 @@ class SettingImageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        modifyUserPhotoButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        modifyUserPhotoButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         modifyUserPhotoButton.cornerRadius = modifyUserPhotoButton.frame.width / 2
         
@@ -33,7 +33,7 @@ class SettingImageTableViewCell: UITableViewCell {
     
     func setUserPhoto(userPhotoLink: String) {
         
-        if userPhotoLink != "" {
+        if !userPhotoLink.isEmpty {
             
             userPhotoImageView.loadImage(userPhotoLink)
             

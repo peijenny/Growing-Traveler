@@ -15,23 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var isForcePortrait: Bool = false
     
-    var isForceAllDerictions: Bool = false //支援所有方向
+    var isForceAllDerictions: Bool = false // support all orientations
     
-    /// 設定螢幕支援的方向
+    // Set screen support orientation
     func application(
         _ application: UIApplication,
         supportedInterfaceOrientationsFor window: UIWindow?)
     -> UIInterfaceOrientationMask {
         
-        if isForceAllDerictions == true {
+        if isForceAllDerictions {
             
             return .all
             
-        } else if isForceLandscape == true {
+        } else if isForceLandscape {
             
             return .landscape
             
-        } else if isForcePortrait == true {
+        } else if isForcePortrait {
             
             return .portrait
             
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             print("You're sign in as \(user.uid), email: \(user.email ?? "")")
             
-            userID = "\(Auth.auth().currentUser?.uid ?? "")"
+            KeyToken().userID = "\(Auth.auth().currentUser?.uid ?? "")"
 
         }
 

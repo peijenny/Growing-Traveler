@@ -11,7 +11,7 @@ import PKHUD
 
 class UploadImageManager {
     
-    let headers: HTTPHeaders = ["Authorization": "Client-ID \(imgurClientID)"]
+    let headers: HTTPHeaders = ["Authorization": "Client-ID \(ClientID().imgurClientID)"]
     
     let apiURL: String = "https://api.imgur.com/3/image"
     

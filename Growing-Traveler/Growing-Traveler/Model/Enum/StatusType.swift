@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum StatusType {
+enum StatusType: Int {
     
     case pending
     

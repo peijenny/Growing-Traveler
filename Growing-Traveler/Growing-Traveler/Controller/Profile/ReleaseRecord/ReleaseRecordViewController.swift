@@ -31,7 +31,7 @@ class ReleaseRecordViewController: UIViewController {
         
         title = "發佈文章紀錄"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
 
         setNavigationItem()
         
@@ -81,7 +81,7 @@ class ReleaseRecordViewController: UIViewController {
     
     @objc func addForumArticle(sender: UIButton) {
         
-        guard userID != "" else {
+        guard !KeyToken().userID.isEmpty else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)
@@ -105,19 +105,17 @@ class ReleaseRecordViewController: UIViewController {
         
         userManager.fetchUsersData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let usersInfo):
                 
-                strongSelf.usersInfo = usersInfo
+                self.usersInfo = usersInfo
                 
-                strongSelf.releaseRecordTableView.reloadData()
+                self.releaseRecordTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -131,31 +129,29 @@ class ReleaseRecordViewController: UIViewController {
         
         forumArticleManager.fetchSearchData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let forumArticles):
                 
-                let filterArticles = forumArticles.filter({ $0.userID == userID })
+                let filterArticles = forumArticles.filter({ $0.userID == KeyToken().userID })
                 
-                strongSelf.forumArticles = filterArticles
+                self.forumArticles = filterArticles
                 
-                if strongSelf.forumArticles.count == 0 {
+                if self.forumArticles.count == 0 {
                     
-                    strongSelf.resleaseBackgroundView.isHidden = false
+                    self.resleaseBackgroundView.isHidden = false
                     
                 } else {
                     
-                    strongSelf.resleaseBackgroundView.isHidden = true
+                    self.resleaseBackgroundView.isHidden = true
                     
                 }
                 
-                strongSelf.releaseRecordTableView.reloadData()
+                self.releaseRecordTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -169,7 +165,7 @@ class ReleaseRecordViewController: UIViewController {
         
         let backgroundView = UIView()
         
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         view.addSubview(backgroundView)
         
@@ -213,7 +209,8 @@ class ReleaseRecordViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             placeHolderImageView.topAnchor.constraint(equalTo: resleaseBackgroundView.topAnchor, constant: 50),
-            placeHolderImageView.trailingAnchor.constraint(equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
+            placeHolderImageView.trailingAnchor.constraint(
+                equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
             placeHolderImageView.leadingAnchor.constraint(equalTo: resleaseBackgroundView.leadingAnchor, constant: 50),
             placeHolderImageView.heightAnchor.constraint(equalToConstant: 200)
         ])

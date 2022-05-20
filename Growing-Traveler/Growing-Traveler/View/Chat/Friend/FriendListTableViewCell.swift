@@ -22,9 +22,9 @@ class FriendListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        friendListBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        friendListBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        unblockButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        unblockButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         unblockButton.cornerRadius = 10
         
@@ -45,7 +45,7 @@ class FriendListTableViewCell: UITableViewCell {
         
         friendStatusLabel.text = ""
         
-        if friendInfo.userPhoto != "" {
+        if !friendInfo.userPhoto.isEmpty {
             
             friendIconImageView.loadImage(friendInfo.userPhoto)
             
@@ -83,7 +83,7 @@ class FriendListTableViewCell: UITableViewCell {
         
         friendStatusLabel.text = ""
         
-        if friendInfo.userPhoto != "" {
+        if !friendInfo.userPhoto.isEmpty {
             
             friendIconImageView.loadImage(friendInfo.userPhoto)
             
@@ -105,7 +105,7 @@ class FriendListTableViewCell: UITableViewCell {
         
         friendNameLabel.text = friendInfo.userName
         
-        if friendInfo.userPhoto != "" {
+        if !friendInfo.userPhoto.isEmpty {
             
             friendIconImageView.loadImage(friendInfo.userPhoto)
             

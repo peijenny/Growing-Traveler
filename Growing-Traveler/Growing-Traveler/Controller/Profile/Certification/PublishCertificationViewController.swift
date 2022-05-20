@@ -53,11 +53,11 @@ class PublishCertificationViewController: BaseViewController {
 
         certificationContentTextView.delegate = self
         
-        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         uploadImageButton.cornerRadius = 5
         
-        confirmButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        confirmButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         confirmButton.cornerRadius = 5
         
@@ -96,7 +96,7 @@ class PublishCertificationViewController: BaseViewController {
     @IBAction func confirm(_ sender: UIButton) {
         
         guard let certificationTitle = certificationTitleTextField.text,
-              certificationTitleTextField.text != "" else {
+              !certificationTitle.isEmpty else {
             
                   HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
                   
@@ -105,7 +105,7 @@ class PublishCertificationViewController: BaseViewController {
         }
         
         guard let certificationImage = certificationImageTextField.text,
-              certificationImageTextField.text != "" else {
+              !certificationImage.isEmpty else {
             
             HUD.flash(.label("請上傳認證照！"), delay: 0.5)
             
@@ -114,7 +114,7 @@ class PublishCertificationViewController: BaseViewController {
         }
         
         guard let certificationContent = certificationContentTextView.text,
-              certificationContentTextView.text != "" else {
+              !certificationContent.isEmpty else {
             
             HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
             
@@ -172,17 +172,15 @@ extension PublishCertificationViewController: UIImagePickerControllerDelegate, U
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
 
-                    strongSelf.certificationImageTextField.text = "\(imageLink)"
+                    self.certificationImageTextField.text = "\(imageLink)"
 
-                case .failure(let error):
-
-                    print(error)
+                case .failure:
                     
                     HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 

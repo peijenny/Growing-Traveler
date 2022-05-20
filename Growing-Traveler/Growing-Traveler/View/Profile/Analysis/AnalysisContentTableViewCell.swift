@@ -9,7 +9,6 @@ import UIKit
 
 class AnalysisContentTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var topTitleLabel: UILabel!
     
     @IBOutlet weak var topContentLabel: UILabel!
@@ -50,7 +49,7 @@ class AnalysisContentTableViewCell: UITableViewCell {
         
         topContentLabel.attributedText = interesteAttributes
         
-        if certificateText == "" {
+        if certificateText.isEmpty {
             
             certificateText = "目前暫無推薦考取的證照！"
             

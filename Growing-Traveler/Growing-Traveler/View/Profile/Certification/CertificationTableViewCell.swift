@@ -21,11 +21,11 @@ class CertificationTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        certificationBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        certificationBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         certificationBackgroundView.cornerRadius = 10
         
-        middleBackgroundVIew.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        middleBackgroundVIew.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
     }
 
@@ -39,7 +39,7 @@ class CertificationTableViewCell: UITableViewCell {
         
         certificationTitleLabel.text = certification.title
         
-        if certification.imageLink != "" {
+        if !certification.imageLink.isEmpty {
             
             certificationImageView.loadImage(certification.imageLink)
             

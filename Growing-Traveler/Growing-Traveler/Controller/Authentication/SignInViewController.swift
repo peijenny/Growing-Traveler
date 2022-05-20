@@ -48,9 +48,9 @@ class SignInViewController: BaseViewController {
             UINib(nibName: String(describing: SignUpTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: SignUpTableViewCell.self))
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        backButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        backButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
     }
 
@@ -81,7 +81,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard let cell = cell as? SignInTableViewCell else { return cell }
             
-            if isCheck == true {
+            if isCheck {
                 
                 isCheck = false
                 
@@ -100,7 +100,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
             
             guard let cell = cell as? SignUpTableViewCell else { return cell }
             
-            if isCheck == true {
+            if isCheck {
                 
                 isCheck = false
                 
@@ -146,7 +146,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
     
     func sendSignInData(signInContent: SignIn) {
 
-        if signInContent.email != "" &&  signInContent.password != "" {
+        if !signInContent.email.isEmpty &&  !signInContent.password.isEmpty {
             
             HUD.show(.labeledProgress(title: "登入中...", subtitle: nil))
             
@@ -157,12 +157,8 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     if let error = error as? NSError {
                         
-                        print(error)
-                        
                         guard let errorCode = AuthErrorCode(rawValue: error.code) else {
-                            
-                            print("登入錯誤，於 firebase 無法找到配對的帳號！")
-                            
+
                             HUD.flash(.labeledError(title: "登入失敗！", subtitle: "無法找到配對的帳號"))
                             
                             return
@@ -179,7 +175,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 HUD.flash(.labeledSuccess(title: "登入成功！", subtitle: nil), delay: 0.5)
                 
-                userID = user.uid
+                KeyToken().userID = user.uid
                 
                 self.view.window?.rootViewController?.viewWillAppear(true)
                 
@@ -193,7 +189,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
     
     func sendSignUpData(signUpContent: SignUp) {
 
-        if signUpContent.email != "" &&  signUpContent.password != "" {
+        if !signUpContent.email.isEmpty &&  !signUpContent.password.isEmpty {
             
             HUD.show(.labeledProgress(title: "註冊中...", subtitle: nil))
             
@@ -204,11 +200,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     if let error = error as? NSError {
                         
-                        print(error)
-                        
                         guard let errorCode = AuthErrorCode(rawValue: error.code) else {
-                            
-                            print("註冊錯誤，於 firebase 無法找到配對的帳號！")
                             
                             HUD.flash(.labeledError(title: "註冊失敗！", subtitle: "無法找到配對的帳號"))
                             
@@ -232,9 +224,11 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
                 let today = dateFormatter.string(from: Date())
                 
-                let userInfo = UserInfo(userID: user.uid, userName: signUpContent.userName,
-                    userEmail: signUpContent.email, userPhoto: signUpContent.userPhotoLink, userPhone: "", signInType: "email",
-                    achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [today]), certification: [])
+                let userInfo = UserInfo(
+                    userID: user.uid, userName: signUpContent.userName, userEmail: signUpContent.email,
+                    userPhoto: signUpContent.userPhotoLink, userPhone: "", signInType: "email",
+                    achievement: Achievement(
+                        experienceValue: 0, completionGoals: [], loginDates: [today]), certification: [])
                 
                 self.userManager.addData(user: userInfo)
                 
@@ -243,7 +237,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 self.friendManager.updateData(friend: friend)
                 
-                userID = user.uid
+                KeyToken().userID = user.uid
 
                 self.view.window?.rootViewController?.viewWillAppear(true)
                 
@@ -269,7 +263,9 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SignInViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 
@@ -277,19 +273,17 @@ extension SignInViewController: UIImagePickerControllerDelegate, UINavigationCon
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
                     
-                    strongSelf.userImageLink = "\(imageLink)"
+                    self.userImageLink = "\(imageLink)"
 
-                    strongSelf.signTableView.reloadData()
+                    self.signTableView.reloadData()
                     
-                case .failure(let error):
-
-                    print(error)
+                case .failure:
                     
                     HUD.flash(.labeledError(title: "上傳失敗！", subtitle: "請稍後再試"), delay: 0.5)
 

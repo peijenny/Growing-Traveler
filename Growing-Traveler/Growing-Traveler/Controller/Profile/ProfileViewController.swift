@@ -35,9 +35,9 @@ class ProfileViewController: UIViewController {
         
         setNavigationItems()
         
-        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        profileBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        profileBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
     
@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
 
         fetchUserInfoData()
         
-        if userID == "" {
+        if KeyToken().userID.isEmpty {
             
             tabBarController?.selectedIndex = 0
             
@@ -84,19 +84,17 @@ class ProfileViewController: UIViewController {
         
         userManager.listenData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let userInfo):
                 
-                strongSelf.userInfo = userInfo
+                self.userInfo = userInfo
                 
-                strongSelf.setProfileView()
+                self.setProfileView()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -112,7 +110,7 @@ class ProfileViewController: UIViewController {
         
         profileView.userNameLabel.text = userInfo.userName
         
-        if userInfo.userPhoto != "" {
+        if !userInfo.userPhoto.isEmpty {
             
             profileView.userPhotoImageView.loadImage(userInfo.userPhoto)
             

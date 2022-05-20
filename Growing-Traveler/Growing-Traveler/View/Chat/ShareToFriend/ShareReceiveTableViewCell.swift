@@ -20,12 +20,13 @@ class ShareReceiveTableViewCell: UITableViewCell {
     @IBOutlet weak var receiveTimeLabel: UILabel!
     
     @IBOutlet weak var receiveBackgroundVIew: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        shareTypeLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        shareTypeLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
         
-        receiveBackgroundVIew.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.gray.hexText)
+        receiveBackgroundVIew.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.gray.hexText)
         
         receiveBackgroundVIew.cornerRadius = 10
         

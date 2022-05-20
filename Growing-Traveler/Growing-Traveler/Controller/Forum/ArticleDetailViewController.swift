@@ -12,21 +12,21 @@ class ArticleDetailViewController: UIViewController {
     
     var articleDetailTableView = UITableView(frame: .zero, style: .grouped)
     
-    var forumArticle: ForumArticle?
-    
-    var formatter = DateFormatter()
+    let displayImageView = UIImageView()
     
     var forumArticleManager = ForumArticleManager()
     
-    var articleMessages: [ArticleMessage] = []
-    
-    let displayImageView = UIImageView()
+    var friendManager = FriendManager()
     
     var userManager = UserManager()
     
-    var usersInfo: [UserInfo] = []
+    var formatter = DateFormatter()
     
-    var friendManager = FriendManager()
+    var articleMessages: [ArticleMessage] = []
+    
+    var forumArticle: ForumArticle?
+    
+    var usersInfo: [UserInfo] = []
     
     var blockadeList: [String] = []
     
@@ -37,7 +37,7 @@ class ArticleDetailViewController: UIViewController {
         
         title = forumArticle?.forumType
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         setNavigationItem()
         
@@ -53,6 +53,20 @@ class ArticleDetailViewController: UIViewController {
         fetchFriendBlockadeListData()
         
         fetchUserInfoData()
+        
+    }
+    
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
         
     }
     
@@ -85,11 +99,11 @@ class ArticleDetailViewController: UIViewController {
         
         viewController.getFriendStatus = { [weak self] isBlock in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             if isBlock {
                 
-                strongSelf.navigationController?.popViewController(animated: true)
+                self.navigationController?.popViewController(animated: true)
                 
             }
             
@@ -99,24 +113,21 @@ class ArticleDetailViewController: UIViewController {
     
     func fetchFriendBlockadeListData() {
         
-        friendManager.fetchFriendListData(
-        fetchUserID: userID) { [weak self] result in
+        friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let userFriend):
                 
-                strongSelf.blockadeList = userFriend.blockadeList
+                self.blockadeList = userFriend.blockadeList
                 
-                strongSelf.listenMessageData()
+                self.listenMessageData()
                 
-                strongSelf.articleDetailTableView.reloadData()
+                self.articleDetailTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -130,19 +141,17 @@ class ArticleDetailViewController: UIViewController {
         
         userManager.fetchUsersData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let usersInfo):
                 
-                strongSelf.usersInfo = usersInfo
+                self.usersInfo = usersInfo
                 
-                strongSelf.articleDetailTableView.reloadData()
+                self.articleDetailTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -160,19 +169,17 @@ class ArticleDetailViewController: UIViewController {
             articleID: articleID,
             completion: { [weak self] result in
                 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
             
                 switch result {
                     
                 case .success(let data):
                     
-                    strongSelf.articleMessages = data
+                    self.articleMessages = data
                     
-                    strongSelf.articleDetailTableView.reloadData()
+                    self.articleDetailTableView.reloadData()
                     
-                case .failure(let error):
-                    
-                    print(error)
+                case .failure:
                     
                     HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                     
@@ -181,25 +188,11 @@ class ArticleDetailViewController: UIViewController {
         })
     }
     
-    override var hidesBottomBarWhenPushed: Bool {
-        
-        get {
-            
-            return navigationController?.topViewController == self
-            
-        } set {
-            
-            super.hidesBottomBarWhenPushed = newValue
-            
-        }
-        
-    }
-    
     func setBackgroundView() {
         
         let backgroundView = UIView()
         
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         view.addSubview(backgroundView)
         
@@ -354,19 +347,19 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
                 
                 viewController.getFriendStatus = { [weak self] isBlock in
                     
-                    guard let strongSelf = self else { return }
+                    guard let self = self else { return }
                     
                     if isBlock {
                         
-                        if viewController.selectUserID == strongSelf.forumArticle?.userID {
+                        if viewController.selectUserID == self.forumArticle?.userID {
                             
-                            strongSelf.navigationController?.popViewController(animated: true)
+                            self.navigationController?.popViewController(animated: true)
                             
                         }
                         
-                        strongSelf.fetchFriendBlockadeListData()
+                        self.fetchFriendBlockadeListData()
                         
-                        strongSelf.articleDetailTableView.reloadData()
+                        self.articleDetailTableView.reloadData()
                         
                     }
                     
@@ -416,10 +409,8 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
             let userInfo = usersInfo.filter({ $0.userID == forumArticle.userID })
 
             if !userInfo.isEmpty {
-             
-                let userName = userInfo[0].userName
-
-                headerView.showArticleDetail(forumArticle: forumArticle, userName: userName)
+                
+                headerView.showArticleDetail(forumArticle: forumArticle, userName: userInfo[0].userName)
                 
             }
             
@@ -446,7 +437,7 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     @objc func sendMessageButton(sender: UIButton) {
         
-        guard userID != "" else {
+        guard !KeyToken().userID.isEmpty else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)
@@ -488,11 +479,9 @@ extension ArticleDetailViewController: UITableViewDelegate, UITableViewDataSourc
         
         if #available(iOS 15.0, *) {
             
-            if let sheetPresentationController = navController.sheetPresentationController {
-                
-                sheetPresentationController.detents = [.medium()]
-                
-            }
+            guard let sheetPresentationController = navController.sheetPresentationController else { return }
+            
+            sheetPresentationController.detents = [.medium()]
             
         } else {
 

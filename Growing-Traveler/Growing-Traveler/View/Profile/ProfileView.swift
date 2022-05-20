@@ -43,7 +43,7 @@ class ProfileView: UIView, NibOwnerLoadable {
 
         userPhotoImageView.cornerRadius = userPhotoImageView.frame.width / 2
         
-        userNameLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        userNameLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
     }
 

@@ -52,9 +52,9 @@ class SelectStudyItemViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        copyItemButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        copyItemButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
         
-        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         copyItemButton.layer.cornerRadius = 5
 
@@ -102,7 +102,7 @@ class SelectStudyItemViewController: BaseViewController {
             
             if "\(studyTime)" == timeButtons[index].titleLabel?.text {
                 
-                timeButtons[index].backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+                timeButtons[index].backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
                 
             }
                 
@@ -126,11 +126,8 @@ class SelectStudyItemViewController: BaseViewController {
     func createTimeButton() {
         
         for index in 0..<studyTime.count {
-            
-            let originX = (studyTimeStackView.frame.height * CGFloat(index)) + 5 * CGFloat(index)
 
-            let timeButton = UIButton(frame: CGRect(
-                x: originX, y: 0, width: studyTimeStackView.frame.height, height: studyTimeStackView.frame.height))
+            let timeButton = UIButton()
             
             timeButton.cornerRadius = 5
             
@@ -138,7 +135,7 @@ class SelectStudyItemViewController: BaseViewController {
             
             timeButton.setTitleColor(UIColor.white, for: .normal)
             
-            timeButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+            timeButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
             
             timeButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
             
@@ -147,6 +144,17 @@ class SelectStudyItemViewController: BaseViewController {
             timeButtons.append(timeButton)
             
             studyTimeStackView.addSubview(timeButton)
+            
+            timeButton.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                timeButton.leadingAnchor.constraint(
+                    equalTo: studyTimeStackView.leadingAnchor,
+                    constant: studyTimeStackView.frame.height * CGFloat(index) * CGFloat(1.1)),
+                timeButton.centerYAnchor.constraint(equalTo: studyTimeStackView.centerYAnchor),
+                timeButton.widthAnchor.constraint(equalToConstant: studyTimeStackView.frame.height),
+                timeButton.heightAnchor.constraint(equalToConstant: studyTimeStackView.frame.height)
+            ])
 
         }
         
@@ -154,9 +162,9 @@ class SelectStudyItemViewController: BaseViewController {
 
     @objc func clickButton(sender: UIButton) {
         
-        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText) })
+        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText) })
         
-        sender.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        sender.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         guard let selectSender = sender.titleLabel?.text else { return }
         
@@ -180,7 +188,7 @@ class SelectStudyItemViewController: BaseViewController {
     
     func handleStudyItem(status: String) {
         
-        guard let itemTitle = itemTextField?.text, itemTextField?.text != "" else {
+        guard let itemTitle = itemTextField?.text, !itemTitle.isEmpty else {
             
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             

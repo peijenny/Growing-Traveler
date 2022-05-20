@@ -27,17 +27,17 @@ class PublishArticleTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        selectCategoryButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        selectCategoryButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         selectCategoryButton.cornerRadius = 5
         
-        addImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        addImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         addImageButton.cornerRadius = 5
         
-        typeSegmentedControl.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue  .hexText)
+        typeSegmentedControl.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue  .hexText)
         
-        typeSegmentedControl.selectedSegmentTintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        typeSegmentedControl.selectedSegmentTintColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
     }
 
@@ -128,7 +128,7 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         if contentTextView.text.range(of: "https://i.imgur.com") == nil {
             
-            if contentTextView.text != "" {
+            if !contentTextView.text.isEmpty {
                 
                 contentArray = [contentTextView.text]
                 

@@ -47,7 +47,7 @@ class MandateViewController: UIViewController {
 
         title = "學習成就"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         setBackgroundView()
         
@@ -75,19 +75,17 @@ class MandateViewController: UIViewController {
         
         userManager.listenData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let user):
                 
-                strongSelf.user = user
+                self.user = user
                 
-                strongSelf.handleMandateData()
+                self.handleMandateData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -99,21 +97,19 @@ class MandateViewController: UIViewController {
     
     func fetchFriendData() {
         
-        friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
+        friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let friend):
                 
-                strongSelf.friend = friend
+                self.friend = friend
                 
-                strongSelf.handleMandateData()
+                self.handleMandateData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -167,7 +163,7 @@ class MandateViewController: UIViewController {
         
         mandateManager.fetchOwnerData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
             
@@ -175,23 +171,21 @@ class MandateViewController: UIViewController {
                 
                 if mandates.isEmpty {
                  
-                    strongSelf.mandateManager.addData(mandates: strongSelf.mandates)
+                    self.mandateManager.addData(mandates: self.mandates)
                     
-                    strongSelf.ownMandates = strongSelf.mandates
+                    self.ownMandates = self.mandates
                     
                 } else {
                     
-                    strongSelf.ownMandates = mandates
+                    self.ownMandates = mandates
 
                 }
                 
-                strongSelf.fetchFriendData()
+                self.fetchFriendData()
                 
-                strongSelf.fetchUserData()
+                self.fetchUserData()
 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -205,17 +199,15 @@ class MandateViewController: UIViewController {
         
         mandateManager.fetchMandateData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
             
             case .success(let mandates):
                 
-                strongSelf.mandates = mandates
+                self.mandates = mandates
 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -229,7 +221,7 @@ class MandateViewController: UIViewController {
         
         let backgroundView = UIView()
         
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         view.addSubview(backgroundView)
         

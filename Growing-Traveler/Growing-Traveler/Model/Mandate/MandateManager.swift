@@ -21,11 +21,11 @@ class MandateManager {
         
         do {
             
-            if userID != "" {
+            if !KeyToken().userID.isEmpty {
                 
                 for index in 0..<mandates.count {
                     
-                    try database.collection("user").document(userID)
+                    try database.collection("user").document(KeyToken().userID)
                         .collection("mandate").document(mandates[index].mandateTitle)
                         .setData(from: mandates[index], merge: true)
                     
@@ -87,9 +87,9 @@ class MandateManager {
     
     func fetchOwnerData(completion: @escaping (Result<[Mandate]>) -> Void) {
         
-        if userID != "" {
+        if !KeyToken().userID.isEmpty {
             
-            database.collection("user").document(userID)
+            database.collection("user").document(KeyToken().userID)
                 .collection("mandate").addSnapshotListener { snapshot, error in
                 
                 var mandates: [Mandate] = []

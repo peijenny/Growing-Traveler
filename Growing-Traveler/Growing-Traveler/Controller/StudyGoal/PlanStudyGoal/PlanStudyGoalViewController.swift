@@ -55,7 +55,7 @@ class PlanStudyGoalViewController: BaseViewController {
         
         title = (studyGoal == nil) ? "新增個人學習計劃" : "編輯個人學習計劃"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         if selectedDate != nil {
             
@@ -91,19 +91,17 @@ class PlanStudyGoalViewController: BaseViewController {
         
         userManager.listenData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let user):
                 
-                strongSelf.userInfo = user
+                self.userInfo = user
                 
-                strongSelf.planStudyGoalTableView.reloadData()
+                self.planStudyGoalTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -307,7 +305,7 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         studyGoal = StudyGoal(
             id: id, title: title, category: selectCategoryItem, studyPeriod: studyPeriod,
-            studyItems: studyItems, createTime: createTime, userID: userID)
+            studyItems: studyItems, createTime: createTime, userID: KeyToken().userID)
         
         if let studyGoal = studyGoal, var user = userInfo {
             
@@ -349,13 +347,13 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         selectCalenderViewController.getSelectDate = { [weak self] date in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
-            strongSelf.selectStartDate = date
+            self.selectStartDate = date
             
-            strongSelf.selectDateType = SelectDateType.startDate.title
+            self.selectDateType = SelectDateType.startDate.title
             
-            strongSelf.planStudyGoalTableView.reloadData()
+            self.planStudyGoalTableView.reloadData()
             
         }
         
@@ -369,13 +367,13 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         selectCalenderViewController.getSelectDate = { [weak self] date in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
-            strongSelf.selectEndDate = date
+            self.selectEndDate = date
             
-            strongSelf.selectDateType = SelectDateType.endDate.title
+            self.selectDateType = SelectDateType.endDate.title
             
-            strongSelf.planStudyGoalTableView.reloadData()
+            self.planStudyGoalTableView.reloadData()
             
         }
         
@@ -401,11 +399,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         categoryViewController.getSelectCategoryItem = { [weak self] item in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
-            strongSelf.selectCategoryItem = item
+            self.selectCategoryItem = item
             
-            strongSelf.planStudyGoalTableView.reloadData()
+            self.planStudyGoalTableView.reloadData()
             
         }
         
@@ -441,19 +439,19 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         selectStudyItemViewController.getStudyItem = { [weak self] studyItem, whetherToUpdate in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             if !whetherToUpdate {
                 
-                strongSelf.studyItems.append(studyItem)
+                self.studyItems.append(studyItem)
                 
             } else {
                 
-                strongSelf.studyItems[selectRow ?? 0] = studyItem
+                self.studyItems[selectRow ?? 0] = studyItem
                 
             }
             
-            strongSelf.planStudyGoalTableView.reloadData()
+            self.planStudyGoalTableView.reloadData()
             
         }
         
@@ -463,11 +461,9 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
         if #available(iOS 15.0, *) {
             
-            if let sheetPresentationController = navController.sheetPresentationController {
-                
-                sheetPresentationController.detents = [.medium()]
-                
-            }
+            guard let sheetPresentationController = navController.sheetPresentationController else { return }
+            
+            sheetPresentationController.detents = [.medium()]
             
         } else {
             

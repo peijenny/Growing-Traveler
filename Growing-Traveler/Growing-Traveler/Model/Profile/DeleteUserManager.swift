@@ -134,7 +134,7 @@ class DeleteUserManager {
     func fetchStudyGoalsData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
 
         database.collection("studyGoal")
-        .whereField("userID", isEqualTo: userID).getDocuments { snapshot, error in
+        .whereField("userID", isEqualTo: KeyToken().userID).getDocuments { snapshot, error in
             
             var studyGoals: [StudyGoal] = []
             
@@ -177,7 +177,7 @@ class DeleteUserManager {
         var forumArticles: [ForumArticle] = []
 
         database.collection("forum")
-        .whereField("userID", isEqualTo: userID).getDocuments { snapshot, error in
+        .whereField("userID", isEqualTo: KeyToken().userID).getDocuments { snapshot, error in
 
             guard let snapshot = snapshot else {
                 
@@ -216,7 +216,7 @@ class DeleteUserManager {
     func fetchFriendListData(completion: @escaping (Result<Friend>) -> Void) {
         
         database.collection("friend")
-        .document(userID).getDocument { snapshot, error in
+        .document(KeyToken().userID).getDocument { snapshot, error in
             
             guard let snapshot = snapshot else {
                 
@@ -249,7 +249,7 @@ class DeleteUserManager {
     func fetchUserInfoData(completion: @escaping (Result<UserInfo>) -> Void) {
         
         database.collection("user")
-        .document(userID).getDocument { snapshot, error in
+        .document(KeyToken().userID).getDocument { snapshot, error in
             
             guard let snapshot = snapshot else {
                 
@@ -279,7 +279,8 @@ class DeleteUserManager {
         
     }
     
-    func fetchArticleMessagesData(allForumArticles: [ForumArticle], completion: @escaping (Result<[DeleteArticle]>) -> Void) {
+    func fetchArticleMessagesData(
+        allForumArticles: [ForumArticle], completion: @escaping (Result<[DeleteArticle]>) -> Void) {
         
         var deleteArticleMessages: [DeleteArticle] = []
         

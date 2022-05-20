@@ -57,7 +57,7 @@ class PublishForumArticleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         if modifyForumArticle == nil {
             
@@ -141,7 +141,7 @@ class PublishForumArticleViewController: BaseViewController {
                 let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
                 
                 let forumArticle = ForumArticle(
-                    id: forumID, userID: userID, createTime: createTime, title: inputTitle,
+                    id: forumID, userID: KeyToken().userID, createTime: createTime, title: inputTitle,
                     category: selectCategoryItem, content: articleContents, forumType: forumType)
                 
                 forumArticleManager.addData(forumArticle: forumArticle)
@@ -312,11 +312,9 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         
         if #available(iOS 15.0, *) {
 
-            if let sheetPresentationController = navController.sheetPresentationController {
-
-                sheetPresentationController.detents = [.medium()]
-
-            }
+            guard let sheetPresentationController = navController.sheetPresentationController else { return }
+            
+            sheetPresentationController.detents = [.medium()]
 
         } else {
             
@@ -342,18 +340,16 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
 
-                    strongSelf.imageLink = imageLink
+                    self.imageLink = imageLink
 
-                case .failure(let error):
+                case .failure:
 
-                    print(error)
-                    
                     HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }

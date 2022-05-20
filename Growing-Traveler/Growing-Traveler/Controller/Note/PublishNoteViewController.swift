@@ -67,9 +67,9 @@ class PublishNoteViewController: BaseViewController {
 
         noteTextView.delegate = self
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         uploadImageButton.cornerRadius = 5
         
@@ -140,7 +140,7 @@ class PublishNoteViewController: BaseViewController {
     
     func checkFullIn() {
         
-        guard let inputTitle = noteTitleTextField.text, noteTitleTextField.text != "" else {
+        guard let !inputTitle = noteTitleTextField.text, noteTitleTextField.text?.isEmpty else {
             
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
@@ -179,7 +179,8 @@ class PublishNoteViewController: BaseViewController {
             let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
             
             let note = Note(
-                userID: userID, noteID: noteID, createTime: createTime, noteTitle: inputTitle, content: noteContents)
+                userID: KeyToken().userID, noteID: noteID, createTime: createTime,
+                noteTitle: inputTitle, content: noteContents)
             
             HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
             
@@ -250,7 +251,7 @@ class PublishNoteViewController: BaseViewController {
         
         if noteTextView.text.range(of: "https://i.imgur.com") == nil {
             
-            if noteTextView.text != "" {
+            if !noteTextView.text.isEmpty {
                 
                 contentArray = [noteTextView.text]
                 
@@ -284,20 +285,18 @@ extension PublishNoteViewController: UIImagePickerControllerDelegate, UINavigati
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
 
-                    strongSelf.imageLink = imageLink
+                    self.imageLink = imageLink
                     
-                    strongSelf.insertPictureToTextView(imageLink: imageLink)
+                    self.insertPictureToTextView(imageLink: imageLink)
 
-                case .failure(let error):
+                case .failure:
 
-                    print(error)
-                    
                     HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 }

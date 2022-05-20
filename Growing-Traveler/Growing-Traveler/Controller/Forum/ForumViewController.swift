@@ -65,9 +65,9 @@ class ForumViewController: BaseViewController {
         
         searchBar.delegate = self
         
-        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        articleBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        articleBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
     
@@ -80,7 +80,7 @@ class ForumViewController: BaseViewController {
         
         fetchUserInfoData()
         
-        if userID == "" {
+        if KeyToken().userID.isEmpty {
             
             listenForumArticleData()
             
@@ -107,7 +107,7 @@ class ForumViewController: BaseViewController {
     
     @objc func addForumArticle(sender: UIButton) {
         
-        guard userID != "" else {
+        guard !KeyToken().userID.isEmpty else {
 
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)
@@ -129,25 +129,23 @@ class ForumViewController: BaseViewController {
     
     func fetchFriendBlockadeListData() {
         
-        friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
+        friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let userFriend):
                 
-                strongSelf.blockadeList = userFriend.blockadeList
+                self.blockadeList = userFriend.blockadeList
                 
-                strongSelf.listenForumArticleData()
+                self.listenForumArticleData()
                 
-                strongSelf.fetchSearchData()
+                self.fetchSearchData()
                 
-                strongSelf.articleTableView.reloadData()
+                self.articleTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -161,19 +159,17 @@ class ForumViewController: BaseViewController {
         
         userManager.fetchUsersData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let usersInfo):
                 
-                strongSelf.usersInfo = usersInfo
+                self.usersInfo = usersInfo
                 
-                strongSelf.articleTableView.reloadData()
+                self.articleTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -187,7 +183,7 @@ class ForumViewController: BaseViewController {
         
         forumArticleManager.listenData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
@@ -195,9 +191,9 @@ class ForumViewController: BaseViewController {
 
                 var filterData = data
                 
-                for index in 0..<strongSelf.blockadeList.count {
+                for index in 0..<self.blockadeList.count {
                     
-                    filterData = filterData.filter({ $0.userID != strongSelf.blockadeList[index] })
+                    filterData = filterData.filter({ $0.userID != self.blockadeList[index] })
                     
                 }
                 
@@ -213,9 +209,9 @@ class ForumViewController: BaseViewController {
                 
                 chat = (chat.count > 5) ? Array(chat[0..<5]) : chat
                 
-                strongSelf.allForumArticles = [essay, question, chat]
+                self.allForumArticles = [essay, question, chat]
                 
-                strongSelf.articleTableView.reloadData()
+                self.articleTableView.reloadData()
                 
                 HUD.hide()
                 
@@ -233,7 +229,7 @@ class ForumViewController: BaseViewController {
         
         forumArticleManager.fetchSearchData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
@@ -241,17 +237,15 @@ class ForumViewController: BaseViewController {
 
                 var filterData = data
                 
-                for index in 0..<strongSelf.blockadeList.count {
+                for index in 0..<self.blockadeList.count {
                     
-                    filterData = filterData.filter({ $0.userID != strongSelf.blockadeList[index] })
+                    filterData = filterData.filter({ $0.userID != self.blockadeList[index] })
                     
                 }
                 
-                strongSelf.forumArticles = filterData
+                self.forumArticles = filterData
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -375,13 +369,13 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
             
             viewController.getFriendStatus = { [weak self] isBlock in
                 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 
                 if isBlock {
                     
-                    strongSelf.fetchFriendBlockadeListData()
+                    self.fetchFriendBlockadeListData()
                     
-                    strongSelf.fetchUserInfoData()
+                    self.fetchUserInfoData()
                     
                 }
                 
@@ -443,7 +437,7 @@ extension ForumViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        inputText = (searchText == "") ? nil : searchText.lowercased()
+        inputText = searchText.isEmpty ? nil : searchText.lowercased()
         
         searchForumArticles = forumArticles.filter({ $0.title.lowercased().range(of: searchText.lowercased()) != nil })
 

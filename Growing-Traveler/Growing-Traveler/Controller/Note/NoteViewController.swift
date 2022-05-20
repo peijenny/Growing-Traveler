@@ -43,9 +43,9 @@ class NoteViewController: BaseViewController {
         
         noteSearchBar.delegate = self
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        bottomBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        bottomBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
     
@@ -60,29 +60,27 @@ class NoteViewController: BaseViewController {
         
         userManager.fetchUserNoteData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let notes):
                 
-                strongSelf.notes = notes
+                self.notes = notes
                 
-                if strongSelf.notes.isEmpty {
+                if self.notes.isEmpty {
                     
-                    strongSelf.noteBackgroundView.isHidden = false
+                    self.noteBackgroundView.isHidden = false
                     
                 } else {
                     
-                    strongSelf.noteBackgroundView.isHidden = true
+                    self.noteBackgroundView.isHidden = true
                     
                 }
                 
-                strongSelf.noteTableView.reloadData()
+                self.noteTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -141,7 +139,7 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
         
         viewController.noteID = notes[indexPath.row].noteID
         
-        viewController.noteUserID = userID
+        viewController.noteUserID = KeyToken().userID
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -201,7 +199,7 @@ extension NoteViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if searchText == "" {
+        if searchText.isEmpty {
             
             fetchNoteData()
             

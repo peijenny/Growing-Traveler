@@ -122,16 +122,16 @@ extension SelectCalendarViewController {
         calendarView.appearance.titleWeekendColor = UIColor.lightGray
         
         calendarView.appearance.headerTitleColor = UIColor.hexStringToUIColor(
-            hex: ColorChart.darkBlue.hexText)
+            hex: ColorChat.darkBlue.hexText)
         
         calendarView.appearance.weekdayTextColor = UIColor.hexStringToUIColor(
-            hex: ColorChart.darkBlue.hexText)
+            hex: ColorChat.darkBlue.hexText)
         
         calendarView.appearance.todayColor = UIColor.clear
         
-        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        calendarView.appearance.selectionColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        calendarView.appearance.selectionColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
     }
     

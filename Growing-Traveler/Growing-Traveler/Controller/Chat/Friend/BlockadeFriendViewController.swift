@@ -25,7 +25,7 @@ class BlockadeFriendViewController: UIViewController {
         
         title = "封鎖列表"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         setBackgroundView()
         
@@ -60,19 +60,17 @@ class BlockadeFriendViewController: UIViewController {
         
         userManager.fetchUsersData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let usersInfo):
                 
-                strongSelf.usersInfo = usersInfo
+                self.usersInfo = usersInfo
                 
-                strongSelf.blockadeTableView.reloadData()
+                self.blockadeTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -83,21 +81,19 @@ class BlockadeFriendViewController: UIViewController {
     
     func fetchBlockadeData() {
         
-        friendManager.listenFriendListData(fetchUserID: userID) { [weak self] result in
+        friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let friend):
                 
-                strongSelf.friend = friend
+                self.friend = friend
                 
-                strongSelf.blockadeTableView.reloadData()
+                self.blockadeTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -111,7 +107,7 @@ class BlockadeFriendViewController: UIViewController {
         
         let backgroundView = UIView()
         
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         view.addSubview(backgroundView)
         

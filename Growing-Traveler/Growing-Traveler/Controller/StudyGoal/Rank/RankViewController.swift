@@ -45,15 +45,15 @@ class RankViewController: UIViewController {
 
         title = "成長排行榜"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         listenUsersInfoData()
         
         registerTableViewCell()
         
-        rankBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        rankBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
-        rankCircleView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        rankCircleView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
     
@@ -83,21 +83,19 @@ class RankViewController: UIViewController {
     func fetchUserFriendData() {
         
         friendManager.fetchFriendListData(
-        fetchUserID: userID) { [weak self] result in
+        fetchUserID: KeyToken().userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let userFriend):
                 
-                strongSelf.blockadeList = userFriend.blockadeList
+                self.blockadeList = userFriend.blockadeList
                 
-                strongSelf.rankTableView.reloadData()
+                self.rankTableView.reloadData()
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -111,7 +109,7 @@ class RankViewController: UIViewController {
         
         friendManager.listenFriendInfoData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
@@ -123,17 +121,15 @@ class RankViewController: UIViewController {
                     
                 }
                 
-                strongSelf.usersInfo = sortUserInfo
+                self.usersInfo = sortUserInfo
                 
-                if userID != "" {
+                if !KeyToken().userID.isEmpty {
                     
-                    strongSelf.fetchUserFriendData()
+                    self.fetchUserFriendData()
                     
                 }
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -197,11 +193,11 @@ extension RankViewController: UITableViewDelegate, UITableViewDataSource {
             
             viewController.getFriendStatus = { [weak self] isBlock in
                 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 
                 if isBlock {
                     
-                    strongSelf.listenUsersInfoData()
+                    self.listenUsersInfoData()
                     
                 }
                 

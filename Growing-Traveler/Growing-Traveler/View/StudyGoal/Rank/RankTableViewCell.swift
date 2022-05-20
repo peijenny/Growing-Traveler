@@ -53,7 +53,7 @@ class RankTableViewCell: UITableViewCell {
             
         } else {
             
-            rankNumberBackgroundView.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+            rankNumberBackgroundView.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
             
         }
         
@@ -63,7 +63,7 @@ class RankTableViewCell: UITableViewCell {
         
         if blockadeList.filter({ $0 == userInfo.userID }).count == 0 {
             
-            if userInfo.userPhoto != "" {
+            if !userInfo.userPhoto.isEmpty {
                 
                 userPhotoImageView.loadImage(userInfo.userPhoto)
                 

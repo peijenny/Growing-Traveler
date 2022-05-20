@@ -22,11 +22,11 @@ class TopTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        topView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        topView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         topView.cornerRadius = 15
         
-        backgroundBottomView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        backgroundBottomView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
     }
 
@@ -53,7 +53,7 @@ class TopTableViewCell: UITableViewCell {
             
         }
         
-        let finishItems = studyGoal.studyItems.filter({ $0.isCompleted == true }).count
+        let finishItems = studyGoal.studyItems.filter({ $0.isCompleted }).count
         
         let totalItems = studyGoal.studyItems.count
         

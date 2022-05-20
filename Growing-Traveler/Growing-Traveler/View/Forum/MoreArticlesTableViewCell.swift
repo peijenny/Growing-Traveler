@@ -36,13 +36,13 @@ class MoreArticlesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        articleTypeBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        articleTypeBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        categoryBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        categoryBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         categoryBackgroundView.cornerRadius = 10
         
-        middleBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        middleBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         articleTypeBackgroundView.cornerRadius = 10
         
@@ -71,8 +71,6 @@ class MoreArticlesTableViewCell: UITableViewCell {
         
         createTimeLabel.text = formatter.string(from: createTime)
 
-//        userIDLabel.text = forumArticle.userID
-        
         userIDLabel.text = userName
         
     }
@@ -94,6 +92,7 @@ class MoreArticlesTableViewCell: UITableViewCell {
             imageViewWidthConstraint.constant = 0.0
             
             imageViewLeadingConstraint.constant = 0.0
+            
         }
         
     }

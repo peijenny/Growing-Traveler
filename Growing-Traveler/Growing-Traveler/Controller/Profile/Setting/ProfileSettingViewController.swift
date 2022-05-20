@@ -44,7 +44,7 @@ class ProfileSettingViewController: BaseViewController {
         
         title = "個人設定"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
 
         setBackgroundView()
         
@@ -71,7 +71,7 @@ class ProfileSettingViewController: BaseViewController {
         
         let backgroundView = UIView()
         
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         view.addSubview(backgroundView)
         
@@ -125,17 +125,15 @@ class ProfileSettingViewController: BaseViewController {
         
         userManger.listenData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let user):
                 
-                strongSelf.userInfo = user
+                self.userInfo = user
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -281,7 +279,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
             try firebaseAuth.signOut()
 
-            userID = ""
+            KeyToken().userID = ""
             
             navigationController?.popViewController(animated: true)
             
@@ -289,8 +287,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
         } catch let signOutError as NSError {
 
-            print("Error signing out: %@", signOutError)
-            
             HUD.flash(.labeledError(title: "登出失敗！", subtitle: "請稍候嘗試"), delay: 0.5)
 
         }
@@ -308,10 +304,8 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
             user?.delete { error in
 
-                if let error = error {
+                if error != nil {
 
-                    print(error)
-                    
                     HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
 
                 } else {
@@ -336,15 +330,15 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     
     func deleteAllData() {
         
-        deleteUserManager.deleteUserInfoData(deleteUserID: userID)
+        deleteUserManager.deleteUserInfoData(deleteUserID: KeyToken().userID)
         
         deleteUserManager.deleteStudyGoalsData(studyGoals: studyGoals)
         
         deleteUserManager.deleteForumArticlesData(forumArticles: forumArticles)
         
-        deleteUserManager.deleteFriendListData(deleteUserID: userID)
+        deleteUserManager.deleteFriendListData(deleteUserID: KeyToken().userID)
 
-        userID = ""
+        KeyToken().userID = ""
         
         self.navigationController?.popViewController(animated: true)
         
@@ -356,17 +350,15 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         
         deleteUserManager.fetchStudyGoalsData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let studyGoals):
                 
-                strongSelf.studyGoals = studyGoals
+                self.studyGoals = studyGoals
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -376,17 +368,15 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         
         deleteUserManager.fetchForumArticlesData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let forumArticles):
                 
-                strongSelf.forumArticles = forumArticles
+                self.forumArticles = forumArticles
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -396,17 +386,15 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         
         deleteUserManager.fetchFriendListData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let friendList):
                 
-                strongSelf.friendList = friendList
+                self.friendList = friendList
                 
-            case .failure(let error):
-                
-                print(error)
+            case .failure:
                 
                 HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
                 
@@ -440,19 +428,18 @@ extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavig
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
                     
-                    strongSelf.userImageLink = "\(imageLink)"
+                    self.userImageLink = "\(imageLink)"
 
-                    strongSelf.profileSettingTableView.reloadData()
+                    self.profileSettingTableView.reloadData()
                     
-                case .failure(let error):
+                case .failure:
 
-                    print(error)
                     
                     HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 

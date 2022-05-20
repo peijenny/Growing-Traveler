@@ -25,11 +25,11 @@ class ArticleMessageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        submitButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         submitButton.cornerRadius = 5
         
-        selectImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        selectImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
 
         selectImageButton.cornerRadius = 5
         
@@ -71,7 +71,7 @@ class ArticleMessageViewController: BaseViewController {
         
         guard let contentText = messageTextField.text else { return }
         
-        if contentText == "" {
+        if contentText.isEmpty {
             
             HUD.flash(.label("留言不可為空！"), delay: 0.5)
             
@@ -86,7 +86,7 @@ class ArticleMessageViewController: BaseViewController {
                 orderID: orderID, contentType: contentType, contentText: contentText)
 
             let articleMessage = ArticleMessage(
-                userID: userID, articleID: articleID, createTime: createTime, message: message)
+                userID: KeyToken().userID, articleID: articleID, createTime: createTime, message: message)
 
             forumArticleManager.addMessageData(articleMessage: articleMessage)
             
@@ -104,7 +104,7 @@ extension ArticleMessageViewController: UIImagePickerControllerDelegate, UINavig
     
     func imagePickerController(
         _ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let image = info[.originalImage] as? UIImage {
 
@@ -112,17 +112,15 @@ extension ArticleMessageViewController: UIImagePickerControllerDelegate, UINavig
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
 
-                    strongSelf.messageTextField.text = "\(imageLink)"
+                    self.messageTextField.text = "\(imageLink)"
 
-                case .failure(let error):
-
-                    print(error)
+                case .failure:
                     
                     HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
 

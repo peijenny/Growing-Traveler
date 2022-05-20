@@ -22,9 +22,9 @@ class ConfirmApplyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cancelButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        cancelButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        agreeButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        agreeButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
 
     }
     
