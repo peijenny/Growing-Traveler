@@ -184,7 +184,7 @@ class PublishNoteViewController: BaseViewController {
             
             HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
             
-            userManager.updateUserNoteData(note: note)
+            userManager.updateUserNote(note: note)
             
             navigationController?.popViewController(animated: true)
             
@@ -200,7 +200,7 @@ class PublishNoteViewController: BaseViewController {
             
             HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
             
-            userManager.updateUserNoteData(note: modifyNote)
+            userManager.updateUserNote(note: modifyNote)
             
             navigationController?.popToViewController(
                 navigationController?.viewControllers[1] ?? UIViewController(), animated: true)

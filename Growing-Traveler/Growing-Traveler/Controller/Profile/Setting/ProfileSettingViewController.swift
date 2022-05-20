@@ -123,7 +123,7 @@ class ProfileSettingViewController: BaseViewController {
     
     func fetchUserInfoData() {
         
-        userManger.listenData { [weak self] result in
+        userManger.listenUserInfo { [weak self] result in
             
             guard let self = self else { return }
             
@@ -201,13 +201,13 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                     
                     if let updateUserInfo = self.userInfo {
                         
-                        userManger.updateData(user: updateUserInfo)
+                        userManger.updateUserInfo(user: updateUserInfo)
                         
                         friendList?.userName = cell.userNameTextField.text ?? ""
                         
                         if let friendList = friendList {
                             
-                            friendManager.updateData(friend: friendList)
+                            friendManager.updateFriendList(friend: friendList)
                             
                         }
                         

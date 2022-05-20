@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 import Lottie
 
 enum TableViewCellType: CaseIterable {
@@ -215,7 +214,7 @@ class StudyGoalViewController: UIViewController {
     // MARK: - Method
     func fetchUserInfo() {
         
-        userManager.listenData { [weak self] result in
+        userManager.listenUserInfo { [weak self] result in
             
             guard let self = self else { return }
             
@@ -229,7 +228,7 @@ class StudyGoalViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5) //
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -247,7 +246,7 @@ class StudyGoalViewController: UIViewController {
             
             user.achievement.loginDates.append(today)
             
-            userManager.updateData(user: user)
+            userManager.updateUserInfo(user: user)
             
         }
         
@@ -255,7 +254,7 @@ class StudyGoalViewController: UIViewController {
     
     func listenStudyGoals(status: StatusType) {
         
-        studyGoalManager.listenData { [weak self] result in
+        studyGoalManager.listenStudyGoals { [weak self] result in
             
             guard let self = self else { return }
             
@@ -271,7 +270,7 @@ class StudyGoalViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5) //
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -533,8 +532,6 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
             self.deleteStudyGoal(indexPath: indexPath)
             
-            HUD.flash(.labeledSuccess(title: "計劃已刪除！", subtitle: nil), delay: 0.5)
-            
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
@@ -549,7 +546,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func deleteStudyGoal(indexPath: IndexPath) {
         
-        studyGoalManager.deleteData(studyGoal: studyGoals[indexPath.section])
+        studyGoalManager.deleteStudyGoal(studyGoal: studyGoals[indexPath.section])
         
         studyGoals.remove(at: indexPath.section)
         
@@ -570,7 +567,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
         user?.achievement.experienceValue += isCompleted ? 50: -50
         
-        studyGoalManager.updateData(studyGoal: studyGoals[indexPath.section])
+        studyGoalManager.updateStudyGoal(studyGoal: studyGoals[indexPath.section])
         
     }
     
@@ -586,13 +583,13 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
         if allSatisfy && isEmpty {
             
-            HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
+            HandleResult.finishedStudyItem.messageHUD
             
             user.achievement.completionGoals.append(studyGoals[indexPath.section].id)
             
         } else if allSatisfy && !isEmpty {
             
-            HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
+            HandleResult.finishedStudyItem.messageHUD
             
         } else if !allSatisfy && !isEmpty {
             
@@ -602,7 +599,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
         }
         
-        userManager.updateData(user: user)
+        userManager.updateUserInfo(user: user)
         
     }
     

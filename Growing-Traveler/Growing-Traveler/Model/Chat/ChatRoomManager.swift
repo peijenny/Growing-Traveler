@@ -9,7 +9,6 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import PKHUD
 
 class ChatRoomManager {
     
@@ -21,13 +20,10 @@ class ChatRoomManager {
         
         if !KeyToken().userID.isEmpty {
             
-            database.document(KeyToken().userID).collection("message")
-            .getDocuments { snapshot, error in
+            database.document(KeyToken().userID).collection("message").getDocuments { snapshot, error in
                 
                 guard let snapshot = snapshot else {
-                    
-                    print("Error fetching document: \(error!)")
-                    
+                 
                     completion(Result.failure(error!))
                     
                     return
@@ -45,8 +41,6 @@ class ChatRoomManager {
                         }
                         
                     } catch {
-                        
-                        print(error)
                         
                         completion(Result.failure(error))
                         
@@ -72,8 +66,6 @@ class ChatRoomManager {
                 
                 guard let snapshot = snapshot else {
                     
-                    print("Error fetching document: \(error!)")
-                    
                     completion(Result.failure(error!))
                     
                     return
@@ -91,8 +83,6 @@ class ChatRoomManager {
                     }
                     
                 } catch {
-                    
-                    print(error)
                     
                     completion(Result.failure(error))
                     
@@ -116,22 +106,20 @@ class ChatRoomManager {
             
             if !KeyToken().userID.isEmpty {
                 
-                // 修改自己的 Document
+                // add message - self
                 try database.document(KeyToken().userID).collection("message")
                     .document(chat.friendID).setData(from: chat, merge: true)
                 
-                // 修改朋友的 Document
+                // add message - friend
                 try database.document(chat.friendID).collection("message")
                     .document(KeyToken().userID).setData(from: friendChat, merge: true)
                 
             }
 
         } catch {
-
-            print(error)
             
-            HUD.flash(.labeledError(title: "訊息傳送失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+            HandleResult.sendMassageFailed.messageHUD
+            
         }
         
     }

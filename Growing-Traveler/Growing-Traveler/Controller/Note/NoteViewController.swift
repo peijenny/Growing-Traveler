@@ -58,7 +58,7 @@ class NoteViewController: BaseViewController {
     
     func fetchNoteData() {
         
-        userManager.fetchUserNoteData { [weak self] result in
+        userManager.fetchUserNote { [weak self] result in
             
             guard let self = self else { return }
             
@@ -169,7 +169,7 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
 
                 let note = self.notes[indexPath.row]
                 
-                self.userManager.deleteUserNoteData(note: note)
+                self.userManager.deleteUserNote(note: note)
                 
                 self.notes.remove(at: indexPath.row)
                 

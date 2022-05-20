@@ -58,7 +58,7 @@ class BlockadeFriendViewController: UIViewController {
     
     func fetchUsersInfoData() {
         
-        userManager.fetchUsersData { [weak self] result in
+        userManager.fetchUsersInfo { [weak self] result in
             
             guard let self = self else { return }
             
@@ -191,7 +191,7 @@ extension BlockadeFriendViewController: UITableViewDelegate, UITableViewDataSour
             
             friend.blockadeList.remove(at: indexPath.row)
             
-            friendManager.updateData(friend: friend)
+            friendManager.updateFriendList(friend: friend)
             
             HUD.flash(.labeledSuccess(title: "已解除封鎖此帳號", subtitle: nil), delay: 0.5)
             

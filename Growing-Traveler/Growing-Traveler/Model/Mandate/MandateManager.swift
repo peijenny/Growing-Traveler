@@ -9,19 +9,16 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import PKHUD
 
 class MandateManager {
     
     let database = Firestore.firestore()
     
-    // .collection("mandate")
-    
     func addData(mandates: [Mandate]) {
         
-        do {
+        if !KeyToken().userID.isEmpty {
             
-            if !KeyToken().userID.isEmpty {
+            do {
                 
                 for index in 0..<mandates.count {
                     
@@ -31,13 +28,11 @@ class MandateManager {
                     
                 }
                 
+            } catch {
+                
+                HandleResult.addDataFailed.messageHUD
+                
             }
-            
-        } catch {
-            
-            print(error)
-            
-            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
             
         }
         
@@ -50,8 +45,6 @@ class MandateManager {
             var mandates: [Mandate] = []
             
             guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
                 
                 completion(Result.failure(error!))
                 
@@ -70,8 +63,6 @@ class MandateManager {
                     }
                     
                 } catch {
-                    
-                    print(error)
                     
                     completion(Result.failure(error))
                     
@@ -96,8 +87,6 @@ class MandateManager {
                 
                 guard let snapshot = snapshot else {
                     
-                    print("Error fetching document: \(error!)")
-                    
                     completion(Result.failure(error!))
                     
                     return
@@ -115,8 +104,6 @@ class MandateManager {
                         }
                         
                     } catch {
-                        
-                        print(error)
                         
                         completion(Result.failure(error))
                         

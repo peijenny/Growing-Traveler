@@ -230,12 +230,12 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     achievement: Achievement(
                         experienceValue: 0, completionGoals: [], loginDates: [today]), certification: [])
                 
-                self.userManager.addData(user: userInfo)
+                self.userManager.addUserInfo(user: userInfo)
                 
                 let friend = Friend(userID: user.uid, userName: signUpContent.userName,
                     friendList: [], blockadeList: [], applyList: [], deliveryList: [])
                 
-                self.friendManager.updateData(friend: friend)
+                self.friendManager.updateFriendList(friend: friend)
                 
                 KeyToken().userID = user.uid
 

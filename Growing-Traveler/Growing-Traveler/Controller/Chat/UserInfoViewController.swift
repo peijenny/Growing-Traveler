@@ -144,7 +144,7 @@ class UserInfoViewController: UIViewController {
     
     func fetchUserInfoData(userID: String) {
         
-        userManager.fetchData(fetchUserID: userID) { [weak self] result in
+        userManager.fetchUserInfo(fetchUserID: userID) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -233,7 +233,7 @@ class UserInfoViewController: UIViewController {
                 
                 ownerFriend.blockadeList.append(self.selectUserID ?? "")
                 
-                self.friendManager.updateData(friend: ownerFriend)
+                self.friendManager.updateFriendList(friend: ownerFriend)
                 
                 self.view.removeFromSuperview()
                 

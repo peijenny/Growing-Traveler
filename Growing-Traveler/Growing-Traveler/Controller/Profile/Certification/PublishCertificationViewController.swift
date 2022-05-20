@@ -148,7 +148,7 @@ class PublishCertificationViewController: BaseViewController {
                 
             }
 
-            userManager.updateData(user: userInfo)
+            userManager.updateUserInfo(user: userInfo)
             
             self.navigationController?.isNavigationBarHidden = false
             

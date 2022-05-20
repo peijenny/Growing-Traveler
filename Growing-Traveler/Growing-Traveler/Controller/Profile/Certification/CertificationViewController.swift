@@ -47,7 +47,7 @@ class CertificationViewController: UIViewController {
     
     func fetchUserInfoData() {
         
-        userManager.listenData { [weak self] result in
+        userManager.listenUserInfo { [weak self] result in
             
             guard let self = self else { return }
             
@@ -297,7 +297,7 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
                 
                 if let userInfo = self.userInfo {
                  
-                    self.userManager.updateData(user: userInfo)
+                    self.userManager.updateUserInfo(user: userInfo)
                     
                 }
                 

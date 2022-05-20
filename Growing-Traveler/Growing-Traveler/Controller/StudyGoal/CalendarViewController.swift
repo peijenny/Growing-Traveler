@@ -7,7 +7,6 @@
 
 import UIKit
 import FSCalendar
-import PKHUD
 
 class CalendarViewController: UIViewController {
     
@@ -133,7 +132,7 @@ class CalendarViewController: UIViewController {
     // MARK: - Method
     func listenStudyGoalData() {
  
-        studyGoalManager.listenData { [weak self] result in
+        studyGoalManager.listenStudyGoals { [weak self] result in
             
             guard let self = self else { return }
             
@@ -147,7 +146,7 @@ class CalendarViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             

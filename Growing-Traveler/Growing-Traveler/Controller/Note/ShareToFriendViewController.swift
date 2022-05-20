@@ -102,7 +102,7 @@ class ShareToFriendViewController: UIViewController {
     
     func fetchUserInfoData() {
         
-        userManager.fetchUsersData { [weak self] result in
+        userManager.fetchUsersInfo { [weak self] result in
             
             guard let self = self else { return }
 

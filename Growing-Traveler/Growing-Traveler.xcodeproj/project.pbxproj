@@ -85,6 +85,7 @@
 		28A6F45E280ADAC900EFCC2C /* ArticleMessageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A6F45D280ADAC900EFCC2C /* ArticleMessageHeaderView.xib */; };
 		28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */; };
 		28A6F466280AED1600EFCC2C /* ArticleMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */; };
+		28A981D82837735700C0D590 /* HandleResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A981D72837735700C0D590 /* HandleResultManager.swift */; };
 		28ABB20728334CC000A31030 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB20628334CC000A31030 /* Array+Extension.swift */; };
 		28ABB2092835D18E00A31030 /* HandleAnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB2082835D18E00A31030 /* HandleAnalysisManager.swift */; };
 		28ABB21128364C6A00A31030 /* Growing_TravelerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB21028364C6A00A31030 /* Growing_TravelerTests.swift */; };
@@ -261,6 +262,7 @@
 		28A6F45D280ADAC900EFCC2C /* ArticleMessageHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleMessageHeaderView.xib; sourceTree = "<group>"; };
 		28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleMessageTableViewCell.swift; sourceTree = "<group>"; };
 		28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleMessageTableViewCell.xib; sourceTree = "<group>"; };
+		28A981D72837735700C0D590 /* HandleResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleResultManager.swift; sourceTree = "<group>"; };
 		28ABB20628334CC000A31030 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		28ABB2082835D18E00A31030 /* HandleAnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleAnalysisManager.swift; sourceTree = "<group>"; };
 		28ABB20E28364C6900A31030 /* Growing-TravelerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Growing-TravelerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -602,6 +604,7 @@
 				28D702BB28019CB300FE9AEA /* StudyGoal */,
 				282522DA280FE5520008B916 /* KeyToken.swift */,
 				28DA8332281274BF0081CB14 /* NibOwnerLoadable.swift */,
+				28A981D72837735700C0D590 /* HandleResultManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1290,6 +1293,7 @@
 				283D2C3E2803E63C004D19E4 /* BaseViewController.swift in Sources */,
 				285F3F4A28018ED400E84CF2 /* CategoryTableViewCell.swift in Sources */,
 				280C1B0A280D78B90091B9DC /* FriendListTableViewCell.swift in Sources */,
+				28A981D82837735700C0D590 /* HandleResultManager.swift in Sources */,
 				280C1B10280E42780091B9DC /* UserInfo.swift in Sources */,
 				28BB6EEB28066926002B0458 /* PublishForumArticleViewController.swift in Sources */,
 				28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */,

@@ -70,7 +70,7 @@ class NoteDetailViewController: UIViewController {
     
     func fetchNoteData() {
         
-        userManager.fetchshareNoteData(shareUserID: noteUserID ?? "", noteID: noteID ?? "") { [weak self] result in
+        userManager.fetchshareFriendNote(shareUserID: noteUserID ?? "", noteID: noteID ?? "") { [weak self] result in
             
             guard let self = self else { return }
             

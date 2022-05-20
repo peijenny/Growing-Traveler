@@ -235,7 +235,7 @@ class ChatViewController: BaseViewController {
     
     func fetchFriendInfoData() {
         
-        userManager.fetchData(fetchUserID: friendID) { [weak self] result in
+        userManager.fetchUserInfo(fetchUserID: friendID) { [weak self] result in
             
             guard let self = self else { return }
 
@@ -339,7 +339,7 @@ class ChatViewController: BaseViewController {
     
     func fetchshareNoteData(shareUserID: String, noteID: String) {
         
-        userManager.fetchshareNoteData(shareUserID: shareUserID, noteID: noteID) { [weak self] result in
+        userManager.fetchshareFriendNote(shareUserID: shareUserID, noteID: noteID) { [weak self] result in
             
             guard let self = self else { return }
 

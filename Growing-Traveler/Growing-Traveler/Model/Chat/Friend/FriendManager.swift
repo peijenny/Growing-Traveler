@@ -9,7 +9,6 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import PKHUD
 
 class FriendManager {
     
@@ -22,8 +21,6 @@ class FriendManager {
             var users: [UserInfo] = []
             
             guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
                 
                 completion(Result.failure(error!))
                 
@@ -43,8 +40,6 @@ class FriendManager {
                     
                 } catch {
                     
-                    print(error)
-                    
                     completion(Result.failure(error))
                     
                 }
@@ -57,18 +52,53 @@ class FriendManager {
         
     }
     
-    // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
+    func fetchFriendInfoData(friendList: [String], completion: @escaping (Result<[UserInfo]>) -> Void) {
+        
+        var friendsInfo: [UserInfo] = []
+        
+        for index in 0..<friendList.count {
+            
+            database.collection("user").document(friendList[index])
+            .getDocument { snapshot, error in
+                
+                guard let snapshot = snapshot else {
+                    
+                    completion(Result.failure(error!))
+                    
+                    return
+                    
+                }
+                
+                do {
+                    
+                    if let friendInfo = try snapshot.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
+                        
+                        friendsInfo.append(friendInfo)
+                        
+                        completion(Result.success(friendsInfo))
+                        
+                    }
+                    
+                } catch {
+                    
+                    completion(Result.failure(error))
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
     func listenFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
         
         if !fetchUserID.isEmpty {
          
-            database.collection("friend")
-            .whereField("userID", isEqualTo: fetchUserID)
+            database.collection("friend").whereField("userID", isEqualTo: fetchUserID)
             .addSnapshotListener { snapshot, error in
             
                 guard let snapshot = snapshot else {
-                    
-                    print("Error fetching document: \(error!)")
                     
                     completion(Result.failure(error!))
                     
@@ -88,8 +118,6 @@ class FriendManager {
                     
                 } catch {
                     
-                    print(error)
-                    
                     completion(Result.failure(error))
                     
                 }
@@ -100,13 +128,11 @@ class FriendManager {
         
     }
     
-    // 取得好友名單 (聊天頁使用)，只需取得屬於本人的資料
     func fetchFriendListData(fetchUserID: String, completion: @escaping (Result<Friend>) -> Void) {
         
         if !fetchUserID.isEmpty {
          
-            database.collection("friend")
-            .whereField("userID", isEqualTo: fetchUserID)
+            database.collection("friend").whereField("userID", isEqualTo: fetchUserID)
             .getDocuments { snapshot, error in
             
                 guard let snapshot = snapshot else {
@@ -131,57 +157,10 @@ class FriendManager {
                     
                 } catch {
                     
-                    print(error)
-                    
                     completion(Result.failure(error))
                     
                 }
                     
-            }
-            
-        }
-        
-    }
-    
-    // 取得好友姓名
-    func fetchFriendInfoData(friendList: [String], completion: @escaping (Result<[UserInfo]>) -> Void) {
-        
-        var friendsInfo: [UserInfo] = []
-        
-        for index in 0..<friendList.count {
-            
-            database
-            .collection("user").document(friendList[index])
-            .getDocument { snapshot, error in
-                
-                guard let snapshot = snapshot else {
-                    
-                    print("Error fetching document: \(error!)")
-                    
-                    completion(Result.failure(error!))
-                    
-                    return
-                    
-                }
-                
-                do {
-                    
-                    if let friendInfo = try snapshot.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
-                        
-                        friendsInfo.append(friendInfo)
-                        
-                        completion(Result.success(friendsInfo))
-                        
-                    }
-                    
-                } catch {
-                    
-                    print(error)
-                    
-                    completion(Result.failure(error))
-                    
-                }
-                
             }
             
         }
@@ -196,51 +175,41 @@ class FriendManager {
         
         do {
             
-            // MARK: - 修改好友狀態
-            // 修改自己的好友狀態 Document
+            // MARK: - modify friend status
             try database.collection("friend").document(bothSides.owner.userID)
                 .setData(from: bothSides.owner, merge: true)
             
-            // 修改對方的好友狀態 Document
             try database.collection("friend").document(bothSides.other.userID)
                 .setData(from: bothSides.other, merge: false)
             
-            // MARK: - 加入聊天室
+            // MARK: - add chat room
             if confirmType == ConfirmType.agree.title {
                 
-                // 修改自己的聊天室 Document
                 try database.collection("friend").document(bothSides.owner.userID).collection("message")
                     .document(bothSides.other.userID).setData(from: ownChat, merge: true)
                 
-                // 修改對方的聊天室 Document
                 try database.collection("friend").document(bothSides.other.userID).collection("message")
                     .document(bothSides.owner.userID).setData(from: otherChat, merge: true)
                 
             }
             
         } catch {
-
-            print(error)
             
-            HUD.flash(.labeledError(title: "狀態修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+            HandleResult.modifyFriendStatusFailed.messageHUD
+            
         }
         
     }
     
-    func updateData(friend: Friend) {
+    func updateFriendList(friend: Friend) {
         
         do {
             
-            // 新增使用者帳號
-            try database.collection("friend")
-                .document(friend.userID).setData(from: friend, merge: true)
+            try database.collection("friend").document(friend.userID).setData(from: friend, merge: true)
             
         } catch {
-
-            print(error)
             
-            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
+            HandleResult.updateDataFailed.messageHUD
 
         }
         

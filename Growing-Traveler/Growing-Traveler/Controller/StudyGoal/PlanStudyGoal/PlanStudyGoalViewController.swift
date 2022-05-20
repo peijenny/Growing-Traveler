@@ -89,7 +89,7 @@ class PlanStudyGoalViewController: BaseViewController {
     
     func fetchUserInfoData() {
         
-        userManager.listenData { [weak self] result in
+        userManager.listenUserInfo { [weak self] result in
             
             guard let self = self else { return }
             
@@ -321,11 +321,11 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
                 
                 user.achievement.completionGoals.remove(at: deleteIndex ?? 0)
                 
-                userManager.updateData(user: user)
+                userManager.updateUserInfo(user: user)
                 
             }
             
-            studyGoalManager.addData(studyGoal: studyGoal)
+            studyGoalManager.addStudyGoal(studyGoal: studyGoal)
             
             navigationController?.popViewController(animated: true)
             

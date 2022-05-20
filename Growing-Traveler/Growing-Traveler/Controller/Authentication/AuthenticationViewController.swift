@@ -280,12 +280,12 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
                             achievement: Achievement(experienceValue: 0, completionGoals: [], loginDates: [today]),
                             certification: [])
                         
-                        self.userManager.addData(user: userInfo)
+                        self.userManager.addUserInfo(user: userInfo)
                         
                         let friend = Friend(userID: user.uid, userName: "\(givenName) \(familyName)",
                             friendList: [], blockadeList: [], applyList: [], deliveryList: [])
                         
-                        self.friendManager.updateData(friend: friend)
+                        self.friendManager.updateFriendList(friend: friend)
                         
                     }
                     

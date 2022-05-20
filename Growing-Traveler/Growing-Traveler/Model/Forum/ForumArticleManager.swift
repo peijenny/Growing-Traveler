@@ -9,13 +9,13 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import PKHUD
+//import PKHUD
 
 class ForumArticleManager {
     
     let database = Firestore.firestore().collection("forum")
     
-    // 監聽 討論區的文章 從 Firebase Firestore
+    // listen forum articles
     func listenData(completion: @escaping (Result<[ForumArticle]>) -> Void) {
         
         var forumArticles: [ForumArticle] = []
@@ -28,16 +28,11 @@ class ForumArticleManager {
 
         for index in 0..<forumTypes.count {
             
-            database
-                .whereField("forumType", isEqualTo: forumTypes[index])
-//                .whereField("userID", isNotEqualTo: "ve40GsMc8bVA7u99neqM3wxR7ev2")
-                .order(by: "createTime", descending: true)
-//                .limit(to: 5)
-                .addSnapshotListener { snapshot, error in
+            database.whereField("forumType", isEqualTo: forumTypes[index])
+            .order(by: "createTime", descending: true)
+            .addSnapshotListener { snapshot, error in
                 
                 guard let snapshot = snapshot else {
-                    
-                    print("Error fetching document: \(error!)")
                     
                     completion(Result.failure(error!))
                     
@@ -57,8 +52,6 @@ class ForumArticleManager {
                         
                     } catch {
                         
-                        print(error)
-                        
                         completion(Result.failure(error))
                         
                     }
@@ -73,7 +66,7 @@ class ForumArticleManager {
 
     }
     
-    // 上傳 新的論壇文章 至 Firebase Firestore
+    // upload new forum aritlce
     func addData(forumArticle: ForumArticle) {
         
         do {
@@ -82,15 +75,13 @@ class ForumArticleManager {
             
         } catch {
             
-            print(error)
-            
-            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
+            HandleResult.addDataFailed.messageHUD
             
         }
         
     }
     
-    // 更新 論壇文章 至 Firebase Firestore
+    // modify forum article
     func updateArticleData(forumArticle: ForumArticle) {
         
         do {
@@ -99,15 +90,13 @@ class ForumArticleManager {
             
         } catch {
             
-            print(error)
-            
-            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
+            HandleResult.updateDataFailed.messageHUD
             
         }
         
     }
     
-    // 取得 屬於論壇的所有文章 至 ArticleViewController
+    // fetch forum articles
     func fetchData(forumType: String, completion: @escaping (Result<[ForumArticle]>) -> Void) {
         
         database.whereField("forumType", isEqualTo: forumType)
@@ -116,8 +105,6 @@ class ForumArticleManager {
                 var forumArticles: [ForumArticle] = []
                 
                 guard let snapshot = snapshot else {
-                    
-                    print("Error fetching document: \(error!)")
                     
                     completion(Result.failure(error!))
                     
@@ -157,7 +144,7 @@ class ForumArticleManager {
         
     }
     
-    // 取得 屬於論壇的所有文章 至 ArticleViewController
+    // fetch forum articles
     func fetchSearchData(completion: @escaping (Result<[ForumArticle]>) -> Void) {
         
         database.order(by: "createTime", descending: true)
@@ -166,8 +153,6 @@ class ForumArticleManager {
                 var forumArticles: [ForumArticle] = []
                 
                 guard let snapshot = snapshot else {
-                    
-                    print("Error fetching document: \(error!)")
                     
                     completion(Result.failure(error!))
                     
@@ -187,8 +172,6 @@ class ForumArticleManager {
                         
                     } catch {
                         
-                        print(error)
-                        
                         completion(Result.failure(error))
                         
                     }
@@ -201,13 +184,12 @@ class ForumArticleManager {
         
     }
     
+    // fetch forum article
     func fetchForumArticleData(articleID: String, completion: @escaping (Result<ForumArticle>) -> Void) {
         
         database.document(articleID).getDocument { snapshot, error in
             
             guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
                 
                 completion(Result.failure(error!))
                 
@@ -225,8 +207,6 @@ class ForumArticleManager {
                 
             } catch {
                 
-                print(error)
-                
                 completion(Result.failure(error))
                 
             }
@@ -235,7 +215,7 @@ class ForumArticleManager {
         
     }
     
-    // 修改 論壇區的文章 至 Firebase Firestore
+    // modify forum article
     func updateData(forumArticle: ForumArticle) {
         
         do {
@@ -243,29 +223,25 @@ class ForumArticleManager {
             try database.document(forumArticle.id).setData(from: forumArticle, merge: true)
 
         } catch {
-
-            print(error)
             
-            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
+            HandleResult.updateDataFailed.messageHUD
 
         }
 
     }
     
-    // 刪除 論壇區的文章 至 Firebase Firestore
+    // delete forum article
     func deleteData(forumArticle: ForumArticle) {
         
         database.document(forumArticle.id).delete { error in
             
-            if let error = error {
+            if error != nil {
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.deleteDataFailed.messageHUD
                 
             } else {
                 
-                print("Success")
+                HandleResult.deleteDataSuccessed.messageHUD
                 
             }
             
@@ -277,7 +253,7 @@ class ForumArticleManager {
 
 extension ForumArticleManager {
     
-    //  監聽 論壇區的文章留言 從 Firebase Firestore
+    // listen article messages
     func listenMessageData(articleID: String, completion: @escaping (Result<[ArticleMessage]>) -> Void) {
         
         database.document(articleID).collection("message").addSnapshotListener { snapshot, error in
@@ -285,8 +261,6 @@ extension ForumArticleManager {
             var articleMessages: [ArticleMessage] = []
             
             guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
                 
                 completion(Result.failure(error!))
                 
@@ -306,8 +280,6 @@ extension ForumArticleManager {
                     
                 } catch {
                     
-                    print(error)
-                    
                     completion(Result.failure(error))
                     
                 }
@@ -319,22 +291,17 @@ extension ForumArticleManager {
         }
     }
     
-    //  新增 論壇區的文章留言 到 Firebase Firestore
+    // new article messages
     func addMessageData(articleMessage: ArticleMessage) {
         
         do {
             
-            try database
-                .document(articleMessage.articleID)
-                .collection("message")
-                .document("\(Int(articleMessage.createTime))")
-                .setData(from: articleMessage)
+            try database.document(articleMessage.articleID).collection("message")
+                .document("\(Int(articleMessage.createTime))").setData(from: articleMessage)
             
         } catch {
             
-            print(error)
-            
-            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
+            HandleResult.addDataFailed.messageHUD
             
         }
         
