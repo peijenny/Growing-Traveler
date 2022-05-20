@@ -18,7 +18,7 @@ class StudyItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        studyItemBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        studyItemBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
         
         studyItemBackgroundView.cornerRadius = 10
         
