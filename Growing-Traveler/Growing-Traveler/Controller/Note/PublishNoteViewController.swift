@@ -140,7 +140,7 @@ class PublishNoteViewController: BaseViewController {
     
     func checkFullIn() {
         
-        guard let !inputTitle = noteTitleTextField.text, noteTitleTextField.text?.isEmpty else {
+        guard let inputTitle = noteTitleTextField.text, !inputTitle.isEmpty else {
             
             HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             

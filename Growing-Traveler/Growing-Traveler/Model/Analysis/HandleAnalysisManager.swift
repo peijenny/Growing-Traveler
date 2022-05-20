@@ -319,25 +319,27 @@ class HandleAnalysisManager {
 
     }
     
-    private func handleSevenDays(yesterday: Date) {
+    func handleSevenDays(yesterday: Date) {
+    
+    sevenDaysArray = []
+    
+    let sevenDaysAgo = Date().addingTimeInterval(-Double((day * 7))).addingTimeInterval(Double(day / 3))
+    
+    for index in 0..<7 {
         
-        sevenDaysArray = []
+        let formatter = DateFormatter()
         
-        let sevenDaysAgo = Date().addingTimeInterval(-Double((day * 7))).addingTimeInterval(Double(day / 3))
+        formatter.dateFormat = "MM.dd"
         
-        for index in 0..<7 {
-            
-            let formatter = DateFormatter()
-            
-            formatter.dateFormat = "MM.dd"
-            
-            let displayDay = formatter.string(from: sevenDaysAgo.addingTimeInterval(Double(day * index)))
-            
-            sevenDaysArray.append(displayDay)
-            
-        }
+        let displayDay = formatter.string(from: sevenDaysAgo.addingTimeInterval(Double(day * index)))
+        
+        sevenDaysArray.append(displayDay)
         
     }
+        
+    print("TEST \(sevenDaysArray)")
+    
+}
     
     private func calculateSevenDayStudyTime() {
         

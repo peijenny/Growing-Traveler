@@ -32,7 +32,7 @@ class SignInTableViewCell: UITableViewCell {
     
     func getSignInData() -> SignIn? {
         
-        guard let accountEmail = !userAccountTextField.text, userAccountTextField.text?.isEmpty else {
+        guard let accountEmail = userAccountTextField.text, !accountEmail.isEmpty else {
             
             HUD.flash(.label("請輸入帳號！"), delay: 0.5)
             
@@ -40,7 +40,7 @@ class SignInTableViewCell: UITableViewCell {
             
         }
         
-        guard let accountPassword = !userPasswordTextField.text, userPasswordTextField.text?.isEmpty else {
+        guard let accountPassword = userPasswordTextField.text, !accountPassword.isEmpty else {
             
             HUD.flash(.label("請輸入密碼！"), delay: 0.5)
             

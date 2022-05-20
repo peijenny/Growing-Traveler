@@ -87,6 +87,7 @@
 		28A6F466280AED1600EFCC2C /* ArticleMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */; };
 		28ABB20728334CC000A31030 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB20628334CC000A31030 /* Array+Extension.swift */; };
 		28ABB2092835D18E00A31030 /* HandleAnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB2082835D18E00A31030 /* HandleAnalysisManager.swift */; };
+		28ABB21128364C6A00A31030 /* Growing_TravelerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB21028364C6A00A31030 /* Growing_TravelerTests.swift */; };
 		28AF15AD2804033B004E97B8 /* StudyGoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */; };
 		28AF15AE2804033B004E97B8 /* StudyGoalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */; };
 		28AF15BA2804EDFF004E97B8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */; };
@@ -168,7 +169,18 @@
 		28FF433D2813D08E00C58E6B /* Mandate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF433C2813D08E00C58E6B /* Mandate.swift */; };
 		28FF433F2813D12200C58E6B /* MandateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF433E2813D12200C58E6B /* MandateManager.swift */; };
 		6DAAA26455954CD3CA3F47AE /* Pods_Growing_Traveler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */; };
+		BD2E5AEBB4B5E290DDEF6F20 /* Pods_Growing_TravelerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407F5D85123C3070F0A534F0 /* Pods_Growing_TravelerTests.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		28ABB21228364C6A00A31030 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28CE2D3327FECBF400ACA813 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28CE2D3A27FECBF400ACA813;
+			remoteInfo = "Growing-Traveler";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2803AD212817F30F00AF3AD3 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -251,6 +263,8 @@
 		28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleMessageTableViewCell.xib; sourceTree = "<group>"; };
 		28ABB20628334CC000A31030 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		28ABB2082835D18E00A31030 /* HandleAnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleAnalysisManager.swift; sourceTree = "<group>"; };
+		28ABB20E28364C6900A31030 /* Growing-TravelerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Growing-TravelerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28ABB21028364C6A00A31030 /* Growing_TravelerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Growing_TravelerTests.swift; sourceTree = "<group>"; };
 		28AF15AB2804033B004E97B8 /* StudyGoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalTableViewCell.swift; sourceTree = "<group>"; };
 		28AF15AC2804033B004E97B8 /* StudyGoalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudyGoalTableViewCell.xib; sourceTree = "<group>"; };
 		28AF15B92804EDFF004E97B8 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -334,12 +348,23 @@
 		28F7C971280347F200BE4C76 /* StudyGoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalManager.swift; sourceTree = "<group>"; };
 		28FF433C2813D08E00C58E6B /* Mandate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mandate.swift; sourceTree = "<group>"; };
 		28FF433E2813D12200C58E6B /* MandateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateManager.swift; sourceTree = "<group>"; };
+		407F5D85123C3070F0A534F0 /* Pods_Growing_TravelerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Growing_TravelerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59D1AA67F7C7E82E240245D2 /* Pods-Growing-Traveler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.release.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.release.xcconfig"; sourceTree = "<group>"; };
+		6EF44AFD2367AE8AE195EC2A /* Pods-Growing-TravelerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-TravelerTests.release.xcconfig"; path = "Target Support Files/Pods-Growing-TravelerTests/Pods-Growing-TravelerTests.release.xcconfig"; sourceTree = "<group>"; };
 		A54E3632DB38C498B42C6229 /* Pods-Growing-Traveler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-Traveler.debug.xcconfig"; path = "Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler.debug.xcconfig"; sourceTree = "<group>"; };
+		BC78B88D21FE209416B6BA71 /* Pods-Growing-TravelerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Growing-TravelerTests.debug.xcconfig"; path = "Target Support Files/Pods-Growing-TravelerTests/Pods-Growing-TravelerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Growing_Traveler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		28ABB20B28364C6900A31030 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD2E5AEBB4B5E290DDEF6F20 /* Pods_Growing_TravelerTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28CE2D3827FECBF400ACA813 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -356,6 +381,8 @@
 			children = (
 				A54E3632DB38C498B42C6229 /* Pods-Growing-Traveler.debug.xcconfig */,
 				59D1AA67F7C7E82E240245D2 /* Pods-Growing-Traveler.release.xcconfig */,
+				BC78B88D21FE209416B6BA71 /* Pods-Growing-TravelerTests.debug.xcconfig */,
+				6EF44AFD2367AE8AE195EC2A /* Pods-Growing-TravelerTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -619,6 +646,14 @@
 			path = StudyGoal;
 			sourceTree = "<group>";
 		};
+		28ABB20F28364C6A00A31030 /* Growing-TravelerTests */ = {
+			isa = PBXGroup;
+			children = (
+				28ABB21028364C6A00A31030 /* Growing_TravelerTests.swift */,
+			);
+			path = "Growing-TravelerTests";
+			sourceTree = "<group>";
+		};
 		28AF15AF2804090D004E97B8 /* PlanStudyGoal */ = {
 			isa = PBXGroup;
 			children = (
@@ -756,6 +791,7 @@
 			isa = PBXGroup;
 			children = (
 				28CE2D3D27FECBF400ACA813 /* Growing-Traveler */,
+				28ABB20F28364C6A00A31030 /* Growing-TravelerTests */,
 				28CE2D3C27FECBF400ACA813 /* Products */,
 				0054609D10F3AA20D5FD8BE3 /* Pods */,
 				53CE560C6C7735E585252070 /* Frameworks */,
@@ -766,6 +802,7 @@
 			isa = PBXGroup;
 			children = (
 				28CE2D3B27FECBF400ACA813 /* Growing-Traveler.app */,
+				28ABB20E28364C6900A31030 /* Growing-TravelerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -903,6 +940,7 @@
 			isa = PBXGroup;
 			children = (
 				D6535E9AD2C3D2FC32302DD1 /* Pods_Growing_Traveler.framework */,
+				407F5D85123C3070F0A534F0 /* Pods_Growing_TravelerTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -910,6 +948,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		28ABB20D28364C6900A31030 /* Growing-TravelerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28ABB21428364C6A00A31030 /* Build configuration list for PBXNativeTarget "Growing-TravelerTests" */;
+			buildPhases = (
+				B99468BE19BCCE68D37B29F6 /* [CP] Check Pods Manifest.lock */,
+				28ABB20A28364C6900A31030 /* Sources */,
+				28ABB20B28364C6900A31030 /* Frameworks */,
+				28ABB20C28364C6900A31030 /* Resources */,
+				24AD499E771E5FA264A28758 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28ABB21328364C6A00A31030 /* PBXTargetDependency */,
+			);
+			name = "Growing-TravelerTests";
+			productName = "Growing-TravelerTests";
+			productReference = 28ABB20E28364C6900A31030 /* Growing-TravelerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		28CE2D3A27FECBF400ACA813 /* Growing-Traveler */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28CE2D4F27FECBF500ACA813 /* Build configuration list for PBXNativeTarget "Growing-Traveler" */;
@@ -941,6 +999,10 @@
 				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
+					28ABB20D28364C6900A31030 = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = 28CE2D3A27FECBF400ACA813;
+					};
 					28CE2D3A27FECBF400ACA813 = {
 						CreatedOnToolsVersion = 13.3;
 					};
@@ -960,11 +1022,19 @@
 			projectRoot = "";
 			targets = (
 				28CE2D3A27FECBF400ACA813 /* Growing-Traveler */,
+				28ABB20D28364C6900A31030 /* Growing-TravelerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		28ABB20C28364C6900A31030 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28CE2D3927FECBF400ACA813 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1022,6 +1092,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		24AD499E771E5FA264A28758 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Growing-TravelerTests/Pods-Growing-TravelerTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Growing-TravelerTests/Pods-Growing-TravelerTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Growing-TravelerTests/Pods-Growing-TravelerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		285F3F412801756000E84CF2 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1098,9 +1185,39 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Growing-Traveler/Pods-Growing-Traveler-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B99468BE19BCCE68D37B29F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Growing-TravelerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		28ABB20A28364C6900A31030 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28ABB21128364C6A00A31030 /* Growing_TravelerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28CE2D3727FECBF400ACA813 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1223,6 +1340,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		28ABB21328364C6A00A31030 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28CE2D3A27FECBF400ACA813 /* Growing-Traveler */;
+			targetProxy = 28ABB21228364C6A00A31030 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		28CE2D4427FECBF400ACA813 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1243,6 +1368,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		28ABB21528364C6A00A31030 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC78B88D21FE209416B6BA71 /* Pods-Growing-TravelerTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jenny.Growing-TravelerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Growing-Traveler.app/Growing-Traveler";
+			};
+			name = Debug;
+		};
+		28ABB21628364C6A00A31030 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6EF44AFD2367AE8AE195EC2A /* Pods-Growing-TravelerTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jenny.Growing-TravelerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Growing-Traveler.app/Growing-Traveler";
+			};
+			name = Release;
+		};
 		28CE2D4D27FECBF500ACA813 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1428,6 +1591,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		28ABB21428364C6A00A31030 /* Build configuration list for PBXNativeTarget "Growing-TravelerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28ABB21528364C6A00A31030 /* Debug */,
+				28ABB21628364C6A00A31030 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		28CE2D3627FECBF400ACA813 /* Build configuration list for PBXProject "Growing-Traveler" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
