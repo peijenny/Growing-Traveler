@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class SelectCategoryViewController: UIViewController {
     
@@ -57,7 +56,7 @@ class SelectCategoryViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -91,7 +90,7 @@ class SelectCategoryViewController: UIViewController {
             
         } else {
             
-            HUD.flash(.label("請選擇標籤！"), delay: 0.5)
+            HandleInputResult.selectCategory.messageHUD
             
         }
         

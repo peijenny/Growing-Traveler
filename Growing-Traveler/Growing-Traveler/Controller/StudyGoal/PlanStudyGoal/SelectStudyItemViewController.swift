@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class SelectStudyItemViewController: BaseViewController {
 
@@ -190,7 +189,7 @@ class SelectStudyItemViewController: BaseViewController {
         
         guard let itemTitle = itemTextField?.text, !itemTitle.isEmpty else {
             
-            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
+            HandleInputResult.titleEmpty.messageHUD
             
             return
             
@@ -198,7 +197,7 @@ class SelectStudyItemViewController: BaseViewController {
         
         guard let selectTime = selectStudyTime, selectStudyTime != nil else {
             
-            HUD.flash(.label(InputError.studyTimeEmpty.title), delay: 0.5)
+            HandleInputResult.studyItemEmpty.messageHUD
             
             return
             
@@ -206,7 +205,7 @@ class SelectStudyItemViewController: BaseViewController {
         
         guard let content = contentTextView?.text, contentTextView.text != "請描述內容......." else {
             
-            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
+            HandleInputResult.contentEmpty.messageHUD
             
             return
             

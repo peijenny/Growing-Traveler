@@ -8,6 +8,7 @@
 import UIKit
 import PKHUD
 
+
 class ForumViewController: BaseViewController {
 
     @IBOutlet weak var articleTableView: UITableView! {
@@ -147,7 +148,7 @@ class ForumViewController: BaseViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
                 
@@ -171,7 +172,7 @@ class ForumViewController: BaseViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -247,7 +248,7 @@ class ForumViewController: BaseViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             

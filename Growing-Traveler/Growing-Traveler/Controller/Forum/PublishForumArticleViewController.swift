@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class PublishForumArticleViewController: BaseViewController {
 
@@ -146,7 +145,7 @@ class PublishForumArticleViewController: BaseViewController {
                 
                 forumArticleManager.addData(forumArticle: forumArticle)
                 
-                HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+                HandleResult.addDataSuccess.messageHUD
                 
             } else {
                 
@@ -162,7 +161,7 @@ class PublishForumArticleViewController: BaseViewController {
                 
                 forumArticleManager.updateArticleData(forumArticle: modifyForumArticle)
                 
-                HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                HandleResult.updateDataSuccess.messageHUD
                 
             }
             
@@ -350,8 +349,8 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
 
                 case .failure:
 
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+                    HandleResult.readDataFailed.messageHUD
+                    
                 }
 
             })

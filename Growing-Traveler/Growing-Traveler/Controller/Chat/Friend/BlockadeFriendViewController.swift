@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class BlockadeFriendViewController: UIViewController {
     
@@ -72,7 +71,7 @@ class BlockadeFriendViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -95,7 +94,7 @@ class BlockadeFriendViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -193,7 +192,7 @@ extension BlockadeFriendViewController: UITableViewDelegate, UITableViewDataSour
             
             friendManager.updateFriendList(friend: friend)
             
-            HUD.flash(.labeledSuccess(title: "已解除封鎖此帳號", subtitle: nil), delay: 0.5)
+            HandleResult.isUnBlockUser.messageHUD
             
         }
         

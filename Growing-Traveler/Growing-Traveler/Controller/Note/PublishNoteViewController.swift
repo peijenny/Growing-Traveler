@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class PublishNoteViewController: BaseViewController {
 
@@ -142,7 +141,7 @@ class PublishNoteViewController: BaseViewController {
         
         guard let inputTitle = noteTitleTextField.text, !inputTitle.isEmpty else {
             
-            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
+            HandleInputResult.titleEmpty.messageHUD
             
             return
         }
@@ -182,7 +181,7 @@ class PublishNoteViewController: BaseViewController {
                 userID: KeyToken().userID, noteID: noteID, createTime: createTime,
                 noteTitle: inputTitle, content: noteContents)
             
-            HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+            HandleResult.addDataFailed.messageHUD
             
             userManager.updateUserNote(note: note)
             
@@ -198,7 +197,7 @@ class PublishNoteViewController: BaseViewController {
             
             modifyNote.content = noteContents
             
-            HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+            HandleResult.updateDataFailed.messageHUD
             
             userManager.updateUserNote(note: modifyNote)
             
@@ -257,7 +256,7 @@ class PublishNoteViewController: BaseViewController {
                 
             } else {
                 
-                HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
+                HandleInputResult.contentEmpty.messageHUD
                 
             }
             
@@ -296,8 +295,8 @@ extension PublishNoteViewController: UIImagePickerControllerDelegate, UINavigati
                     self.insertPictureToTextView(imageLink: imageLink)
 
                 case .failure:
-
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    
+                    HandleResult.readDataFailed.messageHUD
 
                 }
 

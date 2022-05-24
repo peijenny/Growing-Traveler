@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class SettingContentTableViewCell: UITableViewCell {
 
@@ -47,7 +46,7 @@ class SettingContentTableViewCell: UITableViewCell {
         guard let userName = userNameTextField.text,
               userNameTextField.text != nil else {
             
-            HUD.flash(.label("姓名欄位不可為空！"), delay: 0.5)
+            HandleInputResult.nameEmpty.messageHUD
             
             return nil
             
@@ -56,7 +55,7 @@ class SettingContentTableViewCell: UITableViewCell {
         guard let userEmail = userEmailTextField.text,
                 userEmailTextField.text != nil else {
             
-            HUD.flash(.label("Email 欄位不可為空！"), delay: 0.5)
+            HandleInputResult.emailEmpty.messageHUD
             
             return nil
             

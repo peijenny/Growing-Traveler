@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 struct InCludedData: Codable {
     
@@ -140,7 +139,7 @@ class AnalysisViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -164,7 +163,7 @@ class AnalysisViewController: UIViewController {
             
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             

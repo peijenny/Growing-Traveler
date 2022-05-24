@@ -7,7 +7,6 @@
 
 import UIKit
 import Firebase
-import PKHUD
 
 class ProfileSettingViewController: BaseViewController {
     
@@ -135,7 +134,7 @@ class ProfileSettingViewController: BaseViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -211,7 +210,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                             
                         }
                         
-                        HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                        HandleResult.updateDataSuccess.messageHUD
                         
                     }
                     
@@ -285,10 +284,10 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             
             tabBarController?.selectedIndex = 0
 
-        } catch let signOutError as NSError {
-
-            HUD.flash(.labeledError(title: "登出失敗！", subtitle: "請稍候嘗試"), delay: 0.5)
-
+        } catch {
+            
+            HandleResult.signOutFailed.messageHUD
+            
         }
         
     }
@@ -306,7 +305,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
                 if error != nil {
 
-                    HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.deleteDataFailed.messageHUD
 
                 } else {
                     
@@ -360,7 +359,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -378,7 +377,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -396,7 +395,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -439,9 +438,8 @@ extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavig
                     self.profileSettingTableView.reloadData()
                     
                 case .failure:
-
                     
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.readDataFailed.messageHUD
 
                 }
 

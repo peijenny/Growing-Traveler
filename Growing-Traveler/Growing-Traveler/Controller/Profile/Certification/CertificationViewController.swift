@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class CertificationViewController: UIViewController {
     
@@ -71,7 +70,7 @@ class CertificationViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             

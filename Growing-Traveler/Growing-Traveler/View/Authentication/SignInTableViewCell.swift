@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class SignInTableViewCell: UITableViewCell {
 
@@ -34,7 +33,7 @@ class SignInTableViewCell: UITableViewCell {
         
         guard let accountEmail = userAccountTextField.text, !accountEmail.isEmpty else {
             
-            HUD.flash(.label("請輸入帳號！"), delay: 0.5)
+            HandleInputResult.emailEmpty.messageHUD
             
             return nil
             
@@ -42,7 +41,7 @@ class SignInTableViewCell: UITableViewCell {
         
         guard let accountPassword = userPasswordTextField.text, !accountPassword.isEmpty else {
             
-            HUD.flash(.label("請輸入密碼！"), delay: 0.5)
+            HandleInputResult.passwordEmpty.messageHUD
             
             return nil
             
@@ -50,7 +49,7 @@ class SignInTableViewCell: UITableViewCell {
         
         guard accountEmail.range(of: "@") != nil else {
             
-            HUD.flash(.label("帳號格式錯誤！"), delay: 0.5)
+            HandleInputResult.formatFailed.messageHUD
             
             return nil
             

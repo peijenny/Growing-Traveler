@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class ShareToFriendViewController: UIViewController {
     
@@ -70,7 +69,7 @@ class ShareToFriendViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -91,9 +90,9 @@ class ShareToFriendViewController: UIViewController {
                 self.chats = chats
                 
             case .failure:
-
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+                
+                HandleResult.readDataFailed.messageHUD
+                
             }
 
         }
@@ -129,8 +128,8 @@ class ShareToFriendViewController: UIViewController {
 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+                HandleResult.readDataFailed.messageHUD
+                
             }
             
         }
@@ -219,7 +218,7 @@ extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSourc
             
             chatRoomManager.addData(userName: userName ?? "", chat: selectChat)
             
-            HUD.flash(.labeledSuccess(title: "傳送成功", subtitle: nil), delay: 0.5)
+            HandleResult.shareToFriendSuccess.messageHUD
             
         }
         

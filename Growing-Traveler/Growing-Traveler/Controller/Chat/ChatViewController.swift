@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class ChatViewController: BaseViewController {
     
@@ -255,8 +254,8 @@ class ChatViewController: BaseViewController {
 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+                HandleResult.readDataFailed.messageHUD
+                
             }
 
         }
@@ -285,7 +284,7 @@ class ChatViewController: BaseViewController {
                 
             case .failure:
 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
 
@@ -308,8 +307,8 @@ class ChatViewController: BaseViewController {
                 self.handleChatMessage(chatMessage: chatMessage)
                 
             case .failure:
-
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
+                HandleResult.readDataFailed.messageHUD
 
             }
 
@@ -354,8 +353,8 @@ class ChatViewController: BaseViewController {
                 self.chatTableView.reloadData()
                 
             case .failure:
-
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
+                HandleResult.readDataFailed.messageHUD
 
             }
             
@@ -381,7 +380,7 @@ class ChatViewController: BaseViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -575,7 +574,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
             if forumArticle.isEmpty {
                 
-                HUD.flash(.label("該文章已被刪除！"), delay: 0.5)
+                HandleResult.articleDelete.messageHUD
                 
             } else {
                 
@@ -613,8 +612,8 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
                 case .failure:
 
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+                    HandleResult.readDataFailed.messageHUD
+                    
                 }
 
             })

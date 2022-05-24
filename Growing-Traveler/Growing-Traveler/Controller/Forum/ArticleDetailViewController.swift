@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class ArticleDetailViewController: UIViewController {
     
@@ -129,7 +128,7 @@ class ArticleDetailViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
                 
@@ -153,7 +152,7 @@ class ArticleDetailViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -181,7 +180,7 @@ class ArticleDetailViewController: UIViewController {
                     
                 case .failure:
                     
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.readDataFailed.messageHUD
                     
                 }
             

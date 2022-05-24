@@ -7,7 +7,6 @@
 
 import UIKit
 import Charts
-import PKHUD
 
 class FriendViewController: UIViewController {
 
@@ -94,7 +93,7 @@ class FriendViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -122,7 +121,7 @@ class FriendViewController: UIViewController {
 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
 
             }
 
@@ -148,7 +147,7 @@ class FriendViewController: UIViewController {
 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class PublishCertificationViewController: BaseViewController {
 
@@ -98,8 +97,8 @@ class PublishCertificationViewController: BaseViewController {
         guard let certificationTitle = certificationTitleTextField.text,
               !certificationTitle.isEmpty else {
             
-                  HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
-                  
+            HandleInputResult.titleEmpty.messageHUD
+            
             return
             
         }
@@ -107,7 +106,7 @@ class PublishCertificationViewController: BaseViewController {
         guard let certificationImage = certificationImageTextField.text,
               !certificationImage.isEmpty else {
             
-            HUD.flash(.label("請上傳認證照！"), delay: 0.5)
+            HandleInputResult.uploadImage.messageHUD
             
             return
             
@@ -116,7 +115,7 @@ class PublishCertificationViewController: BaseViewController {
         guard let certificationContent = certificationContentTextView.text,
               !certificationContent.isEmpty else {
             
-            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
+            HandleInputResult.contentEmpty.messageHUD
             
             return
             
@@ -132,7 +131,7 @@ class PublishCertificationViewController: BaseViewController {
                     createTime: createTime, title: certificationTitle,
                     imageLink: certificationImage, content: certificationContent))
                 
-                HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+                HandleResult.addDataSuccess.messageHUD
                 
             } else {
                 
@@ -144,7 +143,7 @@ class PublishCertificationViewController: BaseViewController {
                 
                 userInfo.certification[index].content = certificationContent
                 
-                HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                HandleResult.updateDataSuccess.messageHUD
                 
             }
 
@@ -182,8 +181,8 @@ extension PublishCertificationViewController: UIImagePickerControllerDelegate, U
 
                 case .failure:
                     
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+                    HandleResult.readDataFailed.messageHUD
+                    
                 }
 
             })

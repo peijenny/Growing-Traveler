@@ -7,7 +7,6 @@
 
 import UIKit
 import FSCalendar
-import PKHUD
 
 class SelectCalendarViewController: UIViewController {
     
@@ -70,7 +69,7 @@ class SelectCalendarViewController: UIViewController {
             
         } else {
             
-            HUD.flash(.label("請選擇日期！"), delay: 0.5)
+            HandleInputResult.selectDate.messageHUD
             
         }
         

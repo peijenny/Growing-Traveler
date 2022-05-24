@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class UserInfoViewController: UIViewController {
   
@@ -134,7 +133,7 @@ class UserInfoViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -158,7 +157,7 @@ class UserInfoViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -263,7 +262,7 @@ class UserInfoViewController: UIViewController {
             
             friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
             
-            HUD.flash(.labeledSuccess(title: "已發送好友邀請!", subtitle: "請等待對方的回覆"), delay: 0.5)
+            HandleResult.sendFriendApply.messageHUD
             
             self.view.removeFromSuperview()
             
@@ -297,7 +296,7 @@ class UserInfoViewController: UIViewController {
             
             self.reportManager.addReportData(reportContent: reportContent)
             
-            HUD.flash(.labeledSuccess(title: "檢舉成功！", subtitle: "站方會盡快處理此檢舉"), delay: 0.5)
+            HandleResult.reportSuccess.messageHUD
             
             self.view.removeFromSuperview()
             

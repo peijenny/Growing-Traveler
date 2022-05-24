@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class ArticleMessageViewController: BaseViewController {
 
@@ -73,7 +72,7 @@ class ArticleMessageViewController: BaseViewController {
         
         if contentText.isEmpty {
             
-            HUD.flash(.label("留言不可為空！"), delay: 0.5)
+            HandleInputResult.messageEmpty.messageHUD
             
         } else {
 
@@ -122,7 +121,7 @@ extension ArticleMessageViewController: UIImagePickerControllerDelegate, UINavig
 
                 case .failure:
                     
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.readDataFailed.messageHUD
 
                 }
 
