@@ -13,6 +13,7 @@ import PKHUD
 
 class AuthenticationViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var signInWithAppleButtonView: UIView!
 
     @IBOutlet weak var signInButton: UIButton!
@@ -23,6 +24,7 @@ class AuthenticationViewController: UIViewController {
     
     @IBOutlet weak var eulaButton: UIButton!
     
+    // MARK: - Property
     var friendManager = FriendManager()
     
     var errorManager = ErrorManager()
@@ -33,6 +35,7 @@ class AuthenticationViewController: UIViewController {
     
     fileprivate var currentNonce: String?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,6 +63,96 @@ class AuthenticationViewController: UIViewController {
         signInButton.layer.cornerRadius = 5
         
         signUpButton.layer.cornerRadius = 5
+        
+    }
+    
+    // MARK: - Set UI
+    func setupProviderLoginView() {
+
+        let authorizationButton = ASAuthorizationAppleIDButton(type: .default, style: .black)
+        
+        authorizationButton.addTarget(
+            self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+        
+        authorizationButton.frame = signInWithAppleButtonView.bounds
+        
+        self.signInWithAppleButtonView.addSubview(authorizationButton)
+        
+    }
+    
+    // MARK: - Method
+    func fetchUserData() {
+        
+        friendManager.listenFriendInfoData { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                self.users = usersInfo
+                
+            case .failure:
+                
+                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
+            }
+            
+        }
+        
+    }
+    
+    func performSignIn() {
+        
+        let request = createAppleIDRequest()
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        
+        authorizationController.delegate = self
+        
+        authorizationController.presentationContextProvider = self
+        
+        authorizationController.performRequests()
+        
+    }
+    
+    func presentToSignPage(signType: String) {
+        
+        guard let viewController = UIStoryboard.auth.instantiateViewController(
+            withIdentifier: String(describing: SignInViewController.self)
+        ) as? SignInViewController else { return }
+        
+        viewController.modalPresentationStyle = .fullScreen
+        
+        viewController.signType = signType
+
+        present(viewController, animated: true, completion: nil)
+        
+    }
+    
+    func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
+        
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        
+        let request = appleIDProvider.createRequest()
+        
+        request.requestedScopes = [.fullName, .email]
+        
+        let nonce = randomNonceString()
+        
+        request.nonce = sha256(nonce)
+        
+        currentNonce = nonce
+        
+        return request
+        
+    }
+    
+    // MARK: - Target / IBAction
+    @objc func handleAuthorizationAppleIDButtonPress(sender: UIButton) {
+
+        performSignIn()
         
     }
     
@@ -101,79 +194,6 @@ class AuthenticationViewController: UIViewController {
         
     }
     
-    func fetchUserData() {
-        
-        friendManager.listenFriendInfoData { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-                
-            case .success(let usersInfo):
-                
-                self.users = usersInfo
-                
-            case .failure:
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
-    func setupProviderLoginView() {
-
-        let authorizationButton = ASAuthorizationAppleIDButton(type: .default, style: .black)
-        
-        authorizationButton.addTarget(
-            self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
-        
-        authorizationButton.frame = signInWithAppleButtonView.bounds
-        
-        self.signInWithAppleButtonView.addSubview(authorizationButton)
-        
-    }
-    
-    func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
-        
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        
-        let request = appleIDProvider.createRequest()
-        
-        request.requestedScopes = [.fullName, .email]
-        
-        let nonce = randomNonceString()
-        
-        request.nonce = sha256(nonce)
-        
-        currentNonce = nonce
-        
-        return request
-        
-    }
-    
-    func performSignIn() {
-        
-        let request = createAppleIDRequest()
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        
-        authorizationController.delegate = self
-        
-        authorizationController.presentationContextProvider = self
-        
-        authorizationController.performRequests()
-        
-    }
-    
-    @objc func handleAuthorizationAppleIDButtonPress(sender: UIButton) {
-
-        performSignIn()
-        
-    }
-    
     @IBAction func closeButton(_ sender: UIButton) {
         
         dismiss(animated: true, completion: nil)
@@ -192,22 +212,9 @@ class AuthenticationViewController: UIViewController {
         
     }
     
-    func presentToSignPage(signType: String) {
-        
-        guard let viewController = UIStoryboard.auth.instantiateViewController(
-            withIdentifier: String(describing: SignInViewController.self)
-        ) as? SignInViewController else { return }
-        
-        viewController.modalPresentationStyle = .fullScreen
-        
-        viewController.signType = signType
-
-        present(viewController, animated: true, completion: nil)
-        
-    }
-    
 }
 
+// MARK: - Auth delegate
 extension AuthenticationViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(
@@ -303,6 +310,7 @@ extension AuthenticationViewController: ASAuthorizationControllerDelegate {
     
 }
 
+// MARK: - Auth PresentationContextProviding
 extension AuthenticationViewController: ASAuthorizationControllerPresentationContextProviding {
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {

@@ -9,7 +9,8 @@ import UIKit
 import PKHUD
 
 class PlanStudyGoalViewController: BaseViewController {
-
+    
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var planStudyGoalTableView: UITableView! {
         
         didSet {
@@ -22,12 +23,7 @@ class PlanStudyGoalViewController: BaseViewController {
 
     }
     
-    var selectStartDate = Date()
-    
-    var selectEndDate = Date()
-    
-    var selectCategoryItem: CategoryItem?
-    
+    // MARK: - Property
     var selectCalenderViewController = SelectCalendarViewController()
     
     var getSelectedDate: ((_ selectedDate: Date) -> Void)?
@@ -36,11 +32,17 @@ class PlanStudyGoalViewController: BaseViewController {
     
     var userManager = UserManager()
     
+    var selectCategoryItem: CategoryItem?
+    
     var studyItems: [StudyItem] = []
     
     var studyGoal: StudyGoal?
     
     var userInfo: UserInfo?
+    
+    var selectStartDate = Date()
+    
+    var selectEndDate = Date()
     
     var selectedDate: Date?
     
@@ -50,6 +52,7 @@ class PlanStudyGoalViewController: BaseViewController {
     
     var isOpenEdited = false
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,6 +90,27 @@ class PlanStudyGoalViewController: BaseViewController {
         
     }
     
+    // MARK: - Set UI
+    func registerTableViewCell() {
+        
+        planStudyGoalTableView.register(
+            UINib(nibName: String(describing: PlanStudyGoalHeaderView.self), bundle: nil),
+            forHeaderFooterViewReuseIdentifier: String(describing: PlanStudyGoalHeaderView.self))
+        
+        planStudyGoalTableView.register(
+            UINib(nibName: String(describing: StudyItemTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: String(describing: StudyItemTableViewCell.self)))
+        
+    }
+    
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done, target: self, action: #selector(submitButton))
+        
+    }
+    
+    // MARK: Method
     func fetchUserInfoData() {
         
         userManager.listenUserInfo { [weak self] result in
@@ -123,13 +147,7 @@ class PlanStudyGoalViewController: BaseViewController {
         
     }
     
-    func setNavigationItem() {
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done, target: self, action: #selector(submitButton))
-        
-    }
-    
+    // MARK: - Target / IBAction
     @objc func submitButton(sender: UIButton) {
         
         checkStudyGoalFillIn = true
@@ -138,20 +156,9 @@ class PlanStudyGoalViewController: BaseViewController {
             
     }
     
-    func registerTableViewCell() {
-        
-        planStudyGoalTableView.register(
-            UINib(nibName: String(describing: PlanStudyGoalHeaderView.self), bundle: nil),
-            forHeaderFooterViewReuseIdentifier: String(describing: PlanStudyGoalHeaderView.self))
-        
-        planStudyGoalTableView.register(
-            UINib(nibName: String(describing: StudyItemTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: StudyItemTableViewCell.self))
-        
-    }
-    
 }
 
+// MARK: - TableView dataSource
 extension PlanStudyGoalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -184,14 +191,14 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
 
     }
     
-    // MARK: - tableView row can be modify
+    // MARK: TableView row can be modify
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         
         return true
         
     }
     
-    // MARK: - move tableView row (sort by id)
+    // MARK: Move tableView row (sort by id)
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
         studyItems[sourceIndexPath.row].id = destinationIndexPath.row
@@ -200,7 +207,7 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
         
     }
     
-    // MARK: - delete TableView Row
+    // MARK: Delete TableView Row
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
     -> UISwipeActionsConfiguration? {
         
@@ -218,6 +225,7 @@ extension PlanStudyGoalViewController: UITableViewDataSource {
 
 }
 
+// MARK: - TableView delegate
 extension PlanStudyGoalViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -381,18 +389,6 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
         
     }
     
-    func setSelectCalenderViewController() {
-        
-        selectCalenderViewController.calendarView.reloadData()
-        
-        let navController = UINavigationController(rootViewController: selectCalenderViewController)
-        
-        setSheetPresentation(navController: navController)
-        
-        self.present(navController, animated: true, completion: nil)
-        
-    }
-    
     @objc func selectCategoryTagButton(sender: UIButton) {
         
         let categoryViewController = SelectCategoryViewController()
@@ -418,6 +414,18 @@ extension PlanStudyGoalViewController: UITableViewDelegate {
     @objc func addStudyItemButton(sender: UIButton) {
 
         popupSelectStudyItemPage(studyItem: nil, selectRow: nil)
+        
+    }
+    
+    func setSelectCalenderViewController() {
+        
+        selectCalenderViewController.calendarView.reloadData()
+        
+        let navController = UINavigationController(rootViewController: selectCalenderViewController)
+        
+        setSheetPresentation(navController: navController)
+        
+        self.present(navController, animated: true, completion: nil)
         
     }
     

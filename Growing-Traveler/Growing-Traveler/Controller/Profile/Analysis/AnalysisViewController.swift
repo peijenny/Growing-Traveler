@@ -7,30 +7,9 @@
 
 import UIKit
 
-struct InCludedData: Codable {
-    
-    var includedDays: Int
-    
-    var includedArray: [Included]
-    
-}
-
-struct CountDate {
-    
-    var startDate: Date
-    
-    var endDate: Date
-    
-    var yesterday: Date
-    
-    var sevenDaysAgo: Date
-    
-    var averageTime: Int
-    
-}
-
 class AnalysisViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var analysisTableView: UITableView! {
         
         didSet {
@@ -51,55 +30,40 @@ class AnalysisViewController: UIViewController {
     
     @IBOutlet weak var analysisBackgroundView: UIView!
     
+    // MARK: - Property
+    var handleAnalysisManager = HandleAnalysisManager()
+    
     var analysisManager = AnalysisManager()
     
     var categoryManager = CategoryManager()
     
     var userManager = UserManager()
     
-    var handleAnalysisManager = HandleAnalysisManager()
+    var feedback = Feedback(title: "", timeLimit: TimeLimit(lower: 0, upper: 0), comment: "")
     
     var spendStudyItem = CalculateSpendStudyItem(itemsTime: [], itemsTitle: [])
     
-    var feedback = Feedback(title: "", timeLimit: TimeLimit(lower: 0, upper: 0), comment: "")
+    var calculateStudyTime: [Double] = []
+    
+    var sevenDaysArray: [String] = []
+    
+    var experienceValue = Int()
     
     var certificateText = ""
     
     var interesteText = ""
     
-    var experienceValue = Int()
-    
-    var sevenDaysArray: [String] = []
-    
-    var calculateStudyTime: [Double] = []
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        analysisTableView.register(
-            UINib(nibName: String(describing: AnalysisBarChartTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: AnalysisBarChartTableViewCell.self))
+        setUIStyle()
         
-        analysisTableView.register(
-            UINib(nibName: String(describing: AnalysisPieChartTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: AnalysisPieChartTableViewCell.self))
+        setNavigationItem()
         
-        analysisTableView.register(
-            UINib(nibName: String(describing: AnalysisContentTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: AnalysisContentTableViewCell.self))
+        registerTableViewCell()
         
-        selectSegmentedControl.addTarget(
-            self, action: #selector(selectIndexChanged(_:)), for: .valueChanged)
-
         fetchStudyGoalData()
-        
-        selectSegmentedControl.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
-        
-        selectSegmentedControl.selectedSegmentTintColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
-        
-        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
-        
-        analysisBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         handleAnalysisManager.delegate = self
         
@@ -119,12 +83,43 @@ class AnalysisViewController: UIViewController {
         
     }
     
-    @objc func selectIndexChanged(_ send: UISegmentedControl) {
+    // MARK: - Set UI
+    func setNavigationItem() {
         
-        analysisTableView.reloadData()
+        selectSegmentedControl.addTarget(
+            self, action: #selector(selectIndexChanged(_:)), for: .valueChanged)
         
     }
     
+    func registerTableViewCell() {
+        
+        analysisTableView.register(
+            UINib(nibName: String(describing: AnalysisBarChartTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: AnalysisBarChartTableViewCell.self))
+        
+        analysisTableView.register(
+            UINib(nibName: String(describing: AnalysisPieChartTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: AnalysisPieChartTableViewCell.self))
+        
+        analysisTableView.register(
+            UINib(nibName: String(describing: AnalysisContentTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: AnalysisContentTableViewCell.self))
+        
+    }
+    
+    func setUIStyle() {
+        
+        selectSegmentedControl.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
+        
+        selectSegmentedControl.selectedSegmentTintColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
+        
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        
+        analysisBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
+        
+    }
+    
+    // MARK: - Method
     func fetchStudyGoalData() {
         
         analysisManager.fetchStudyData { [weak self] result in
@@ -170,9 +165,17 @@ class AnalysisViewController: UIViewController {
         }
         
     }
+    
+    // MARK: - Target / IBAction
+    @objc func selectIndexChanged(_ send: UISegmentedControl) {
+        
+        analysisTableView.reloadData()
+        
+    }
 
 }
 
+// MARK: - TableView delegate / dataSource
 extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -237,6 +240,7 @@ extension AnalysisViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: - Handle  analysis Delegate
 extension AnalysisViewController: HandleAnalysisDelegate {
     
     func handleAnalysisBar(_ manager: HandleAnalysisManager, calculateStudyTime: [Double], sevenDaysArray: [String]) {

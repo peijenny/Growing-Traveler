@@ -86,6 +86,7 @@
 		28A6F465280AED1600EFCC2C /* ArticleMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */; };
 		28A6F466280AED1600EFCC2C /* ArticleMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */; };
 		28A981D82837735700C0D590 /* HandleResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A981D72837735700C0D590 /* HandleResultManager.swift */; };
+		28A981DA283CAE8E00C0D590 /* NavigationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A981D9283CAE8E00C0D590 /* NavigationTitle.swift */; };
 		28ABB20728334CC000A31030 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB20628334CC000A31030 /* Array+Extension.swift */; };
 		28ABB2092835D18E00A31030 /* HandleAnalysisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB2082835D18E00A31030 /* HandleAnalysisManager.swift */; };
 		28ABB21128364C6A00A31030 /* Growing_TravelerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ABB21028364C6A00A31030 /* Growing_TravelerTests.swift */; };
@@ -164,6 +165,7 @@
 		28DA833F2812AB940081CB14 /* MandateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA833D2812AB940081CB14 /* MandateTableViewCell.swift */; };
 		28DA83402812AB940081CB14 /* MandateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DA833E2812AB940081CB14 /* MandateTableViewCell.xib */; };
 		28DA83432812AF950081CB14 /* 93125-progress-bar.json in Resources */ = {isa = PBXBuildFile; fileRef = 28DA83422812AF950081CB14 /* 93125-progress-bar.json */; };
+		28E0DFA0283F86300084A6BF /* InCludedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E0DF9F283F86300084A6BF /* InCludedData.swift */; };
 		28EB79DB282A5258007B0677 /* BottomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EB79D9282A5258007B0677 /* BottomTableViewCell.swift */; };
 		28EB79DC282A5258007B0677 /* BottomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EB79DA282A5258007B0677 /* BottomTableViewCell.xib */; };
 		28F7C972280347F200BE4C76 /* StudyGoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F7C971280347F200BE4C76 /* StudyGoalManager.swift */; };
@@ -263,6 +265,7 @@
 		28A6F463280AED1600EFCC2C /* ArticleMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleMessageTableViewCell.swift; sourceTree = "<group>"; };
 		28A6F464280AED1600EFCC2C /* ArticleMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleMessageTableViewCell.xib; sourceTree = "<group>"; };
 		28A981D72837735700C0D590 /* HandleResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleResultManager.swift; sourceTree = "<group>"; };
+		28A981D9283CAE8E00C0D590 /* NavigationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitle.swift; sourceTree = "<group>"; };
 		28ABB20628334CC000A31030 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		28ABB2082835D18E00A31030 /* HandleAnalysisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleAnalysisManager.swift; sourceTree = "<group>"; };
 		28ABB20E28364C6900A31030 /* Growing-TravelerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Growing-TravelerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -345,6 +348,7 @@
 		28DA833D2812AB940081CB14 /* MandateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandateTableViewCell.swift; sourceTree = "<group>"; };
 		28DA833E2812AB940081CB14 /* MandateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MandateTableViewCell.xib; sourceTree = "<group>"; };
 		28DA83422812AF950081CB14 /* 93125-progress-bar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "93125-progress-bar.json"; sourceTree = "<group>"; };
+		28E0DF9F283F86300084A6BF /* InCludedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InCludedData.swift; sourceTree = "<group>"; };
 		28EB79D9282A5258007B0677 /* BottomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTableViewCell.swift; sourceTree = "<group>"; };
 		28EB79DA282A5258007B0677 /* BottomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomTableViewCell.xib; sourceTree = "<group>"; };
 		28F7C971280347F200BE4C76 /* StudyGoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGoalManager.swift; sourceTree = "<group>"; };
@@ -420,6 +424,7 @@
 				2808C91928100F6000DC1EC5 /* CalculateBar.swift */,
 				2857035B28118F8D00849FAA /* Feedback.swift */,
 				28ABB2082835D18E00A31030 /* HandleAnalysisManager.swift */,
+				28E0DF9F283F86300084A6BF /* InCludedData.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -698,6 +703,7 @@
 				28B76538282CFCF7009EFA0A /* PrivacyPolicy.swift */,
 				28B7653A282CFF7C009EFA0A /* MandateType.swift */,
 				28B7653C282D0634009EFA0A /* SignType.swift */,
+				28A981D9283CAE8E00C0D590 /* NavigationTitle.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1251,6 +1257,7 @@
 				28D79FDC2817F53D00505B5B /* SignInTableViewCell.swift in Sources */,
 				28BB6F2F28096C40002B0458 /* MoreArticlesTableViewCell.swift in Sources */,
 				28ABB2092835D18E00A31030 /* HandleAnalysisManager.swift in Sources */,
+				28A981DA283CAE8E00C0D590 /* NavigationTitle.swift in Sources */,
 				283E65892817D19C00F1033F /* SettingImageTableViewCell.swift in Sources */,
 				285F3F402801586200E84CF2 /* SelectCalendarViewController.swift in Sources */,
 				281358DD281BD0D5000B0CAE /* PublishCertificationViewController.swift in Sources */,
@@ -1275,6 +1282,7 @@
 				281358F5281E7BE2000B0CAE /* UIColor+Extension.swift in Sources */,
 				28B7653F282DE523009EFA0A /* ReportContentType.swift in Sources */,
 				288367A7280126FE0010CEAD /* UIStoryboard+Extension.swift in Sources */,
+				28E0DFA0283F86300084A6BF /* InCludedData.swift in Sources */,
 				280C1B01280D772E0091B9DC /* ChatRoomManager.swift in Sources */,
 				28DA8333281274BF0081CB14 /* NibOwnerLoadable.swift in Sources */,
 				28CE2D4127FECBF400ACA813 /* SceneDelegate.swift in Sources */,

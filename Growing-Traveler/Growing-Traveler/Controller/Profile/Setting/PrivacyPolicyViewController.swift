@@ -10,16 +10,19 @@ import WebKit
 
 class PrivacyPolicyViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet var webView: WKWebView!
     
     @IBOutlet weak var privacyPolicyBackgroundView: UIView!
     
+    // MARK: - Property
     var privacyTitle = String()
     
     var privacyURL = String()
     
     var comePage = String()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,21 +58,6 @@ class PrivacyPolicyViewController: UIViewController {
 
     }
     
-    func setNavigationItem() {
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop, target: self, action: #selector(closePage))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
-    }
-    
-    @objc func closePage(sender: UIButton) {
-        
-        dismiss(animated: true, completion: nil)
-        
-    }
-    
     override var hidesBottomBarWhenPushed: Bool {
         
         get {
@@ -83,9 +71,27 @@ class PrivacyPolicyViewController: UIViewController {
         }
         
     }
+    
+    // MARK: - Set UI
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .stop, target: self, action: #selector(closePage))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    // MARK: - Method
+    @objc func closePage(sender: UIButton) {
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
 
 }
 
+// MARK: - WebView delegate
 extension PrivacyPolicyViewController: WKNavigationDelegate {
     
     override func loadView() {

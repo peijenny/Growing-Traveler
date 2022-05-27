@@ -9,6 +9,7 @@ import UIKit
 
 class SelectStudyItemViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var itemTextField: UITextField!
     
     @IBOutlet weak var studyTimeStackView: UIStackView!
@@ -19,18 +20,20 @@ class SelectStudyItemViewController: BaseViewController {
     
     @IBOutlet weak var submitButton: UIButton!
     
+    // MARK: - Property
     var getStudyItem: ((_ studyItem: StudyItem, _ whetherToUpdate: Bool) -> Void)?
-    
-    var modifyStudyItem: StudyItem?
 
     var studyTime = [30, 60, 90, 120, 150]
     
     var timeButtons: [UIButton] = []
     
+    var modifyStudyItem: StudyItem?
+    
     var selectStudyTime: Int?
     
     var itemNumber: Int?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +64,7 @@ class SelectStudyItemViewController: BaseViewController {
         
     }
     
+    // MARK: - Set UI
     func setTextViewAndTextField() {
         
         contentTextView.layer.borderColor = UIColor.systemGray5.cgColor
@@ -87,6 +91,7 @@ class SelectStudyItemViewController: BaseViewController {
         
     }
     
+    // MARK: - Method
     func modifyStudyItemData() {
         
         itemTextField.text = modifyStudyItem?.itemTitle
@@ -106,20 +111,6 @@ class SelectStudyItemViewController: BaseViewController {
             }
                 
         }
-    }
-    
-    @IBAction func closeButton(_ sender: UIButton) {
-        
-        self.navigationController?.isNavigationBarHidden = false
-        
-        self.view.removeFromSuperview()
-        
-    }
-    
-    @IBAction func copyButton(_ sender: UIButton) {
-        
-        handleStudyItem(status: SelectStatus.add.title)
-        
     }
     
     func createTimeButton() {
@@ -155,32 +146,6 @@ class SelectStudyItemViewController: BaseViewController {
                 timeButton.heightAnchor.constraint(equalToConstant: studyTimeStackView.frame.height)
             ])
 
-        }
-        
-    }
-
-    @objc func clickButton(sender: UIButton) {
-        
-        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText) })
-        
-        sender.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
-        
-        guard let selectSender = sender.titleLabel?.text else { return }
-        
-        selectStudyTime = Int(selectSender)
-        
-    }
-    
-    @IBAction func confirmButton(_ sender: UIButton) {
-        
-        if modifyStudyItem != nil {
-            
-            handleStudyItem(status: SelectStatus.modify.title)
-            
-        } else {
-            
-            handleStudyItem(status: SelectStatus.add.title)
-            
         }
         
     }
@@ -233,8 +198,50 @@ class SelectStudyItemViewController: BaseViewController {
         
     }
     
+    // MARK: - Target / IBAction
+    @objc func clickButton(sender: UIButton) {
+        
+        _ = timeButtons.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText) })
+        
+        sender.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
+        
+        guard let selectSender = sender.titleLabel?.text else { return }
+        
+        selectStudyTime = Int(selectSender)
+        
+    }
+    
+    @IBAction func closeButton(_ sender: UIButton) {
+        
+        self.navigationController?.isNavigationBarHidden = false
+        
+        self.view.removeFromSuperview()
+        
+    }
+    
+    @IBAction func copyButton(_ sender: UIButton) {
+        
+        handleStudyItem(status: SelectStatus.add.title)
+        
+    }
+    
+    @IBAction func confirmButton(_ sender: UIButton) {
+        
+        if modifyStudyItem != nil {
+            
+            handleStudyItem(status: SelectStatus.modify.title)
+            
+        } else {
+            
+            handleStudyItem(status: SelectStatus.add.title)
+            
+        }
+        
+    }
+    
 }
 
+// MARK: - TextView delegate
 extension SelectStudyItemViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {

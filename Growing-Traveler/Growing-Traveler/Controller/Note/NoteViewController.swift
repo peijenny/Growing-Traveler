@@ -9,6 +9,7 @@ import UIKit
 
 class NoteViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var noteTableView: UITableView! {
         
         didSet {
@@ -27,24 +28,22 @@ class NoteViewController: BaseViewController {
     
     @IBOutlet weak var bottomBackgroundView: UIView!
     
+    // MARK: - Property
     var userManager = UserManager()
     
     var notes: [Note] = []
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUIStyle()
+        
         setNavigationItems()
         
-        noteTableView.register(
-            UINib(nibName: String(describing: NoteTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: NoteTableViewCell.self))
+        registerTableViewCell()
         
         noteSearchBar.delegate = self
-        
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
-        
-        bottomBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
     
@@ -55,6 +54,31 @@ class NoteViewController: BaseViewController {
         
     }
     
+    // MARK: - Set UI
+    func setUIStyle() {
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        
+        bottomBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
+        
+    }
+    
+    func setNavigationItems() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage.asset(.create), style: .plain, target: self, action: #selector(addNewNote))
+        
+    }
+    
+    func registerTableViewCell() {
+        
+        noteTableView.register(
+            UINib(nibName: String(describing: NoteTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: NoteTableViewCell.self))
+        
+    }
+    
+    // MARK: - Method
     func fetchNoteData() {
         
         userManager.fetchUserNote { [weak self] result in
@@ -89,13 +113,7 @@ class NoteViewController: BaseViewController {
         
     }
     
-    func setNavigationItems() {
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage.asset(.create), style: .plain, target: self, action: #selector(addNewNote))
-        
-    }
-    
+    // MARK: - Target / IBAction
     @objc func addNewNote(sender: UIButton) {
         
         guard let viewController = UIStoryboard.note.instantiateViewController(
@@ -108,6 +126,7 @@ class NoteViewController: BaseViewController {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -194,6 +213,7 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: - SearchBar delegate
 extension NoteViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

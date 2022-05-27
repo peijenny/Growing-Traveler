@@ -9,6 +9,7 @@ import UIKit
 
 class PublishNoteViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var noteTitleTextField: UITextField!
     
     @IBOutlet weak var modifyTimeLabel: UILabel!
@@ -17,15 +18,40 @@ class PublishNoteViewController: BaseViewController {
     
     @IBOutlet weak var uploadImageButton: UIButton!
     
+    // MARK: - Property
     var userManager = UserManager()
     
     var modifyNote: Note?
     
     var imageLink: String?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setNavigationItem()
+       
+        setUIStyle()
+        
+    }
+    
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
+    // MARK: - Set UI
+    func setUIStyle() {
+     
         let formatter = DateFormatter()
         
         formatter.dateFormat = "yyyy.MM.dd HH:mm"
@@ -45,8 +71,7 @@ class PublishNoteViewController: BaseViewController {
         }
         
         modifyTimeLabel.text = formatter.string(from: createTime)
-        
-        setNavigationItem()
+
         
         noteTextView.layer.borderColor = UIColor.hexStringToUIColor(hex: "9C8F96").cgColor
         
@@ -74,69 +99,14 @@ class PublishNoteViewController: BaseViewController {
         
     }
     
-    override var hidesBottomBarWhenPushed: Bool {
-        
-        get {
-            
-            return navigationController?.topViewController == self
-            
-        } set {
-            
-            super.hidesBottomBarWhenPushed = newValue
-            
-        }
-        
-    }
-    
     func setNavigationItem() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .done, target: self, action: #selector(checkNote))
         
     }
-    
-    @objc func checkNote(sender: UIButton) {
-        
-        checkFullIn()
-        
-    }
-     
-    @IBAction func uploadImageButton(_ sender: UIButton) {
-     
-        let picker = UIImagePickerController()
-        
-        picker.delegate = self
-        
-        present(picker, animated: true)
-        
-    }
-    
-    func setModifyData() {
-        
-        noteTitleTextField.text = modifyNote?.noteTitle
-        
-        var contentText = ""
-        
-        guard let modifyNote = modifyNote else { return }
 
-        for index in 0..<modifyNote.content.count {
-            
-            if modifyNote.content[index].contentType == SendType.image.title {
-                
-                contentText += "\0\(modifyNote.content[index].contentText)\0"
-                 
-            } else if modifyNote.content[index].contentType == SendType.string.title {
-                
-                contentText += modifyNote.content[index].contentText
-                
-            }
-            
-        }
-        
-        noteTextView.text = contentText
-        
-    }
-    
+    // MARK: - Method
     func checkFullIn() {
         
         guard let inputTitle = noteTitleTextField.text, !inputTitle.isEmpty else {
@@ -208,6 +178,32 @@ class PublishNoteViewController: BaseViewController {
         
     }
     
+    func setModifyData() {
+        
+        noteTitleTextField.text = modifyNote?.noteTitle
+        
+        var contentText = ""
+        
+        guard let modifyNote = modifyNote else { return }
+
+        for index in 0..<modifyNote.content.count {
+            
+            if modifyNote.content[index].contentType == SendType.image.title {
+                
+                contentText += "\0\(modifyNote.content[index].contentText)\0"
+                 
+            } else if modifyNote.content[index].contentType == SendType.string.title {
+                
+                contentText += modifyNote.content[index].contentText
+                
+            }
+            
+        }
+        
+        noteTextView.text = contentText
+        
+    }
+    
     func insertPictureToTextView(imageLink: String) {
 
         guard let imageURL = URL(string: imageLink) else { return }
@@ -270,8 +266,26 @@ class PublishNoteViewController: BaseViewController {
         
     }
     
+    // MARK: - Target / IBAction
+    @objc func checkNote(sender: UIButton) {
+        
+        checkFullIn()
+        
+    }
+     
+    @IBAction func uploadImageButton(_ sender: UIButton) {
+     
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        
+        present(picker, animated: true)
+        
+    }
+    
 }
 
+// MARK: - ImagePickerController delegate
 extension PublishNoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
@@ -310,6 +324,7 @@ extension PublishNoteViewController: UIImagePickerControllerDelegate, UINavigati
     
 }
 
+// MARK: - TextView delegate
 extension PublishNoteViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {

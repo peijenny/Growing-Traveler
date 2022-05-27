@@ -9,27 +9,15 @@ import UIKit
 
 class MandateViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     var mandateTableView = UITableView()
     
+    // MARK: - Property
     var mandateManager = MandateManager()
     
     var friendManager = FriendManager()
     
     var userManager = UserManager()
-    
-    var user: UserInfo?
-    
-    var friend: Friend?
-    
-    var mandates: [Mandate] = [] {
-        
-        didSet {
-            
-            fetchOwnerData()
-            
-        }
-        
-    }
     
     var ownMandates: [Mandate] = [] {
         
@@ -41,6 +29,21 @@ class MandateViewController: UIViewController {
         
     }
     
+    var mandates: [Mandate] = [] {
+        
+        didSet {
+            
+            fetchOwnerData()
+            
+        }
+        
+    }
+    
+    var user: UserInfo?
+    
+    var friend: Friend?
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,7 +55,7 @@ class MandateViewController: UIViewController {
         
         setTableView()
         
-        fetchData()
+        fetchMandateData()
         
     }
     
@@ -67,6 +70,54 @@ class MandateViewController: UIViewController {
             super.hidesBottomBarWhenPushed = newValue
             
         }
+        
+    }
+    
+    // MARK: - Set UI
+    func setBackgroundView() {
+        
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+        
+    }
+    
+    // MARK: - Method
+    func setTableView() {
+        
+        mandateTableView.backgroundColor = UIColor.clear
+        
+        mandateTableView.separatorStyle = .none
+        
+        view.addSubview(mandateTableView)
+        
+        mandateTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            mandateTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100.0),
+            mandateTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mandateTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            mandateTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -130.0)
+        ])
+        
+        mandateTableView.register(
+            UINib(nibName: String(describing: MandateTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: MandateTableViewCell.self))
+
+        mandateTableView.delegate = self
+        
+        mandateTableView.dataSource = self
         
     }
     
@@ -194,7 +245,7 @@ class MandateViewController: UIViewController {
         
     }
     
-    func fetchData() {
+    func fetchMandateData() {
         
         mandateManager.fetchMandateData { [weak self] result in
             
@@ -216,54 +267,9 @@ class MandateViewController: UIViewController {
         
     }
     
-    func setBackgroundView() {
-        
-        let backgroundView = UIView()
-        
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
-        
-        view.addSubview(backgroundView)
-        
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
-            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
-        ])
-        
-    }
-    
-    func setTableView() {
-        
-        mandateTableView.backgroundColor = UIColor.clear
-        
-        mandateTableView.separatorStyle = .none
-        
-        view.addSubview(mandateTableView)
-        
-        mandateTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            mandateTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100.0),
-            mandateTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mandateTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            mandateTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -130.0)
-        ])
-        
-        mandateTableView.register(
-            UINib(nibName: String(describing: MandateTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: MandateTableViewCell.self))
-
-        mandateTableView.delegate = self
-        
-        mandateTableView.dataSource = self
-        
-    }
-    
 }
 
+// MARK: - TableView delegate / dataSource
 extension MandateViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {

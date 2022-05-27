@@ -65,12 +65,9 @@ class StudyGoalTableViewCell: UITableViewCell {
             
             studyItemLabel.textColor = UIColor.lightGray
                    
-            // 刪除線
+            // strikethrough setting
             attributedString.addAttribute(
-                .strikethroughStyle,
-                value: 1,
-                range: NSRange(location: 0, length: attributedString.length)
-            )
+                .strikethroughStyle, value: 1, range: NSRange(location: 0, length: attributedString.length))
             
             attributedString.addAttribute(
                 .strikethroughColor,
@@ -84,18 +81,12 @@ class StudyGoalTableViewCell: UITableViewCell {
             
             studyItemLabel.textColor = UIColor.black
             
-            // 刪除線
+            // strikethrough setting
             attributedString.addAttribute(
-                .strikethroughStyle,
-                value: 0,
-                range: NSRange(location: 0, length: attributedString.length)
-            )
+                .strikethroughStyle, value: 0, range: NSRange(location: 0, length: attributedString.length))
 
             attributedString.addAttribute(
-                .strikethroughColor,
-                value: UIColor.clear,
-                range: NSRange(location: 0, length: attributedString.length)
-            )
+                .strikethroughColor, value: UIColor.clear, range: NSRange(location: 0, length: attributedString.length))
             
         }
         

@@ -9,6 +9,7 @@ import UIKit
 
 class UserInfoViewController: UIViewController {
   
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var userNameLabel: UILabel!
     
     @IBOutlet weak var friendStatusLabel: UILabel!
@@ -19,34 +20,37 @@ class UserInfoViewController: UIViewController {
     
     @IBOutlet weak var reportPublishedButton: UIButton!
     
+    // MARK: - Property
     var friendManager = FriendManager()
-    
-    var userManager = UserManager()
     
     var reportManager = ReportManager()
     
-    var userInfo: UserInfo?
+    var userManager = UserManager()
+    
+    var getFriendStatus: ((_ isBlock: Bool) -> Void)?
+    
+    var blockContentType: String?
+    
+    var bothSides: BothSides?
     
     var ownerFriend: Friend?
     
     var otherFriend: Friend?
     
-    var bothSides: BothSides?
+    var userInfo: UserInfo?
     
     var selectUserID: String?
     
     var deleteAccount = Bool()
+    
+    // MARK: for report use
+    var articleID: String?
+    
+    var articleMessage: ArticleMessage?
+    
+    var reportContentType: String?
 
-    var getFriendStatus: ((_ isBlock: Bool) -> Void)?
-    
-    var articleID: String?  // report articleID
-    
-    var articleMessage: ArticleMessage? // report message
-    
-    var reportContentType: String? // report content type
-    
-    var blockContentType: String?
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,6 +113,7 @@ class UserInfoViewController: UIViewController {
         
     }
     
+    // MARK: - Method
     func fetchFriendListData(userID: String) {
         
         friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
@@ -215,6 +220,7 @@ class UserInfoViewController: UIViewController {
         
     }
     
+    // MARK: - Target / IBAction
     @IBAction func closeButton(_ sender: UIButton) {
         
         self.view.removeFromSuperview()

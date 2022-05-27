@@ -10,6 +10,7 @@ import Charts
 
 class FriendViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var friendListTableView: UITableView! {
         
         didSet {
@@ -33,6 +34,7 @@ class FriendViewController: UIViewController {
     
     let badgeLabel = UILabel()
     
+    // MARK: - Property
     var chatRoomManager = ChatRoomManager()
     
     var friendManager = FriendManager()
@@ -53,6 +55,7 @@ class FriendViewController: UIViewController {
         
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,6 +80,54 @@ class FriendViewController: UIViewController {
         
     }
     
+    // MARK: - Set UI
+    func setNavigationItems() {
+        
+        // badge label
+        badgeLabel.frame = CGRect(x: 20, y: -5, width: 20, height: 20)
+        
+        badgeLabel.layer.borderColor = UIColor.clear.cgColor
+        
+        badgeLabel.layer.borderWidth = 2
+        
+        badgeLabel.layer.cornerRadius = badgeLabel.bounds.size.height / 2
+        
+        badgeLabel.textAlignment = .center
+        
+        badgeLabel.layer.masksToBounds = true
+        
+        badgeLabel.font = UIFont(name: "PingFang TC", size: 12)
+        
+        badgeLabel.textColor = UIColor.white
+        
+        badgeLabel.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightRed.hexText)
+        
+        // rightBar button
+        let rightBarButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
+        
+        rightBarButton.setBackgroundImage(UIImage.asset(.add), for: .normal)
+        
+        rightBarButton.addTarget(self, action: #selector(applyFriendButton), for: .touchUpInside)
+        
+        if badgeLabel.text != nil {
+            
+            rightBarButton.addSubview(badgeLabel)
+            
+        }
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
+        
+    }
+    
+    func registerTableViewCell() {
+        
+        friendListTableView.register(
+            UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self))
+        
+    }
+    
+    // MARK: - Method
     func fetchUserInfoData() {
         
         userManager.fetchUsersInfo { [weak self] result in
@@ -155,44 +206,7 @@ class FriendViewController: UIViewController {
         
     }
     
-    func setNavigationItems() {
-        
-        // badge label
-        badgeLabel.frame = CGRect(x: 20, y: -5, width: 20, height: 20)
-        
-        badgeLabel.layer.borderColor = UIColor.clear.cgColor
-        
-        badgeLabel.layer.borderWidth = 2
-        
-        badgeLabel.layer.cornerRadius = badgeLabel.bounds.size.height / 2
-        
-        badgeLabel.textAlignment = .center
-        
-        badgeLabel.layer.masksToBounds = true
-        
-        badgeLabel.font = UIFont(name: "PingFang TC", size: 12)
-        
-        badgeLabel.textColor = UIColor.white
-        
-        badgeLabel.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightRed.hexText)
-        
-        // rightBar button
-        let rightBarButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
-        
-        rightBarButton.setBackgroundImage(UIImage.asset(.add), for: .normal)
-        
-        rightBarButton.addTarget(self, action: #selector(applyFriendButton), for: .touchUpInside)
-        
-        if badgeLabel.text != nil {
-            
-            rightBarButton.addSubview(badgeLabel)
-            
-        }
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
-        
-    }
-    
+    // MARK: - Target / IBAction
     @objc func applyFriendButton(sender: UIButton) {
         
         let viewController = UIStoryboard.chat.instantiateViewController(
@@ -210,16 +224,9 @@ class FriendViewController: UIViewController {
         
     }
     
-    func registerTableViewCell() {
-        
-        friendListTableView.register(
-            UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self))
-        
-    }
-    
 }
 
+// MARK: - TableView delegate / dataSource
 extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

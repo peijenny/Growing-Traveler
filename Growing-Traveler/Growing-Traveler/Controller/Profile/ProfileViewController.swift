@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var profileView: ProfileView!
     
     @IBOutlet weak var featureCollectionView: UICollectionView!
@@ -17,6 +18,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileBackgroundView: UIView!
     
+    // MARK: - Property
     private var dataSource: UICollectionViewDiffableDataSource<Int, FeatureType>?
     
     var userManager = UserManager()
@@ -27,6 +29,7 @@ class ProfileViewController: UIViewController {
     
     let featureImage: [ImageAsset] = [.undrawTask, .undrawChart, .undrawFAQ, .undrawExperience]
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,6 +56,7 @@ class ProfileViewController: UIViewController {
         
     }
     
+    // MARK: - Set UI
     func setNavigationItems() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -63,22 +67,27 @@ class ProfileViewController: UIViewController {
         
     }
     
-    @objc func blockadeFriendButton(sender: UIButton) {
+    func setProfileView() {
         
-        let viewController = BlockadeFriendViewController()
+        guard let userInfo = userInfo else { return }
         
-        navigationController?.pushViewController(viewController, animated: true)
+        profileView.userNameLabel.text = userInfo.userName
+        
+        if !userInfo.userPhoto.isEmpty {
+            
+            profileView.userPhotoImageView.loadImage(userInfo.userPhoto)
+            
+        } else {
+            
+            profileView.userPhotoImageView.image = UIImage.asset(.userIcon)
+            
+        }
+        
+        profileView.experienceValueLabel.text = "Ex. \(userInfo.achievement.experienceValue)"
         
     }
     
-    @objc func setProfileButton(sender: UIButton) {
-        
-        let viewController = ProfileSettingViewController()
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
+    // MARK: - Method
     func fetchUserInfoData() {
         
         userManager.listenUserInfo { [weak self] result in
@@ -100,26 +109,6 @@ class ProfileViewController: UIViewController {
             }
             
         }
-        
-    }
-    
-    func setProfileView() {
-        
-        guard let userInfo = userInfo else { return }
-        
-        profileView.userNameLabel.text = userInfo.userName
-        
-        if !userInfo.userPhoto.isEmpty {
-            
-            profileView.userPhotoImageView.loadImage(userInfo.userPhoto)
-            
-        } else {
-            
-            profileView.userPhotoImageView.image = UIImage.asset(.userIcon)
-            
-        }
-        
-        profileView.experienceValueLabel.text = "Ex. \(userInfo.achievement.experienceValue)"
         
     }
     
@@ -185,9 +174,27 @@ class ProfileViewController: UIViewController {
         return UICollectionViewCompositionalLayout(section: section)
         
     }
+    
+    // MARK: - Target / IBAction
+    @objc func blockadeFriendButton(sender: UIButton) {
+        
+        let viewController = BlockadeFriendViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    @objc func setProfileButton(sender: UIButton) {
+        
+        let viewController = ProfileSettingViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
 
 }
 
+// MARK: - Collection delegate
 extension ProfileViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

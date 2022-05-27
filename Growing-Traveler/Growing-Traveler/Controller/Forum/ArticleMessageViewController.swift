@@ -9,18 +9,21 @@ import UIKit
 
 class ArticleMessageViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var messageTextField: UITextField!
     
     @IBOutlet weak var submitButton: UIButton!
     
     @IBOutlet weak var selectImageButton: UIButton!
     
+    // MARK: - Property
     var forumArticleManager = ForumArticleManager()
     
     var articleID = String()
     
     var orderID = Int()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,6 +51,7 @@ class ArticleMessageViewController: BaseViewController {
         
     }
     
+    // MARK: - Target / IBAction
     @IBAction func closeButton(_ sender: UIButton) {
         
         self.navigationController?.isNavigationBarHidden = false
@@ -99,6 +103,7 @@ class ArticleMessageViewController: BaseViewController {
     
 }
 
+// MARK: - ImageViewController delegate
 extension ArticleMessageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(

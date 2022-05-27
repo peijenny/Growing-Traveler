@@ -9,6 +9,7 @@ import UIKit
 
 class ApplyFriendViewController: BaseViewController {
     
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var applyTableView: UITableView! {
         
         didSet {
@@ -33,7 +34,21 @@ class ApplyFriendViewController: BaseViewController {
     
     @IBOutlet weak var addFriendButton: UIButton!
     
+    // MARK: - Property
     var friendManager = FriendManager()
+    
+    var ownFriend: Friend? {
+        
+        didSet {
+            
+            if let applyList = ownFriend?.applyList {
+                
+                fetchFriendInfoData(friendList: applyList)
+                
+            }
+            
+        }
+    }
     
     var otherFriend: Friend?
     
@@ -51,19 +66,7 @@ class ApplyFriendViewController: BaseViewController {
         
     }
     
-    var ownFriend: Friend? {
-        
-        didSet {
-            
-            if let applyList = ownFriend?.applyList {
-                
-                fetchFriendInfoData(friendList: applyList)
-                
-            }
-            
-        }
-    }
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -131,7 +134,7 @@ class ApplyFriendViewController: BaseViewController {
         
     }
     
-    func fetchData(friendID: String) {
+    func fetchFriendListData(friendID: String) {
         
         friendManager.fetchFriendListData(fetchUserID: friendID) { [weak self] result in
             
@@ -162,6 +165,28 @@ class ApplyFriendViewController: BaseViewController {
                     }
                     
                 }
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    func fetchUserData() {
+        
+        friendManager.listenFriendInfoData { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let users):
+                
+                self.allUsers = users
                 
             case .failure:
                 
@@ -211,59 +236,13 @@ class ApplyFriendViewController: BaseViewController {
                 
                 self.applyTableView.reloadData()
                 
-                self.fetchData(friendID: KeyToken().userID)
+                self.fetchFriendListData(friendID: KeyToken().userID)
 
             }
 
         }
 
         self.addChild(viewController)
-        
-    }
-    
-    func fetchUserData() {
-        
-        friendManager.listenFriendInfoData { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-                
-            case .success(let users):
-                
-                self.allUsers = users
-                
-            case .failure:
-                
-                HandleResult.readDataFailed.messageHUD
-                
-            }
-            
-        }
-        
-    }
-    
-    @IBAction func searchUserButton(_ sender: UIButton) {
-        
-        guard let inputEmail = inputEmailTextField.text else { return }
-        
-        let filterUsers = allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() })
-        
-        if !filterUsers.isEmpty {
-            
-            userInfoView.isHidden = true
-            
-            searchUser = filterUsers[0]
-
-            fetchData(friendID: filterUsers[0].userID)
-            
-            handleFriendStatus(searchUser: filterUsers[0])
-
-        } else {
-
-            hintTextLabel.text = SearchFriendStatus.noSearch.title
-
-        }
         
     }
     
@@ -309,6 +288,31 @@ class ApplyFriendViewController: BaseViewController {
             
     }
     
+    // MARK: - Target / IBAction
+    @IBAction func searchUserButton(_ sender: UIButton) {
+        
+        guard let inputEmail = inputEmailTextField.text else { return }
+        
+        let filterUsers = allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() })
+        
+        if !filterUsers.isEmpty {
+            
+            userInfoView.isHidden = true
+            
+            searchUser = filterUsers[0]
+
+            fetchFriendListData(friendID: filterUsers[0].userID)
+            
+            handleFriendStatus(searchUser: filterUsers[0])
+
+        } else {
+
+            hintTextLabel.text = SearchFriendStatus.noSearch.title
+
+        }
+        
+    }
+    
     @IBAction func sendApplyButton(_ sender: UIButton) {
 
         if var ownFriend = ownFriend, var otherFriend = otherFriend {
@@ -335,6 +339,7 @@ class ApplyFriendViewController: BaseViewController {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -361,7 +366,7 @@ extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        fetchData(friendID: friendsInfo[indexPath.row].userID)
+        fetchFriendListData(friendID: friendsInfo[indexPath.row].userID)
         
     }
     

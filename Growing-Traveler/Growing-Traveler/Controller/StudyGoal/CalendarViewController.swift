@@ -191,7 +191,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
 }
 
-// MARK: - tableView delegate / dataSource
+// MARK: - TableView delegate / dataSource
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -207,8 +207,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: TopTableViewCell.self), for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(TopTableViewCell.self)", for: indexPath)
 
         guard let cell = cell as? TopTableViewCell else { return cell }
         

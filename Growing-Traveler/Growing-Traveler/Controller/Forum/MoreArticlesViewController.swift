@@ -9,15 +9,15 @@ import UIKit
 
 class MoreArticlesViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     var moreArticlesTableView = UITableView()
     
-    var forumType: String?
-    
+    // MARK: - Property
     var forumArticleManager = ForumArticleManager()
     
-    var userManager = UserManager()
+    var friendManager = FriendManager()
     
-    var usersInfo: [UserInfo] = []
+    var userManager = UserManager()
     
     var forumArticles: [ForumArticle] = [] {
         
@@ -29,10 +29,13 @@ class MoreArticlesViewController: UIViewController {
         
     }
     
-    var friendManager = FriendManager()
+    var usersInfo: [UserInfo] = []
     
     var blockadeList: [String] = []
+    
+    var forumType: String?
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,90 +76,7 @@ class MoreArticlesViewController: UIViewController {
         
     }
     
-    func fetchUserInfoData() {
-        
-        userManager.fetchUsersInfo { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-                
-            case .success(let usersInfo):
-                
-                self.usersInfo = usersInfo
-                
-                self.moreArticlesTableView.reloadData()
-                
-            case .failure:
-                
-                HandleResult.readDataFailed.messageHUD
-                
-            }
-            
-        }
-        
-    }
-    
-    func fetchFriendBlockadeListData() {
-        
-        friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-                
-            case .success(let userFriend):
-                
-                self.blockadeList = userFriend.blockadeList
-                
-                self.fetchData()
-                
-                self.moreArticlesTableView.reloadData()
-                
-            case .failure:
-                
-                HandleResult.readDataFailed.messageHUD
-                
-            }
-                
-        }
-        
-    }
-    
-    func fetchData() {
-        
-        forumArticleManager.fetchData(forumType: forumType ?? "") { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-                
-            case .success(let data):
-                
-                var filterData = data
-                
-                if self.blockadeList != [] {
-                    
-                    for index in 0..<self.blockadeList.count {
-                        
-                        filterData = filterData.filter({ $0.userID != self.blockadeList[index] })
-                        
-                    }
-                    
-                }
-
-                self.forumArticles = filterData
-                
-            case .failure:
-                
-                HandleResult.readDataFailed.messageHUD
-                
-            }
-            
-        }
-        
-    }
-    
+    // MARK: - Set UI
     func setBackgroundView() {
         
         let backgroundView = UIView()
@@ -203,9 +123,95 @@ class MoreArticlesViewController: UIViewController {
         moreArticlesTableView.dataSource = self
         
     }
+    
+    // MARK: - Method
+    func fetchUserInfoData() {
+        
+        userManager.fetchUsersInfo { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                self.usersInfo = usersInfo
+                
+                self.moreArticlesTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    func fetchFriendBlockadeListData() {
+        
+        friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let userFriend):
+                
+                self.blockadeList = userFriend.blockadeList
+                
+                self.fetchForumArticlesData()
+                
+                self.moreArticlesTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+                
+        }
+        
+    }
+    
+    func fetchForumArticlesData() {
+        
+        forumArticleManager.fetchData(forumType: forumType ?? "") { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let data):
+                
+                var filterData = data
+                
+                if self.blockadeList != [] {
+                    
+                    for index in 0..<self.blockadeList.count {
+                        
+                        filterData = filterData.filter({ $0.userID != self.blockadeList[index] })
+                        
+                    }
+                    
+                }
+
+                self.forumArticles = filterData
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
 
 }
 
+// MARK: - TableView delegate / dataSource
 extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

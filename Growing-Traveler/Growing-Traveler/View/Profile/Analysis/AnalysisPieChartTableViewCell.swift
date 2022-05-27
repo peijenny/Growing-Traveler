@@ -28,23 +28,22 @@ class AnalysisPieChartTableViewCell: UITableViewCell {
         
         analysisPieChartView.transparentCircleRadiusPercent = 0.5
         
-        // 存放資料的陣列，型態為 PieChartDataEntry
+        // Access data array, type - PieChartDataEntry
         var dataEntries: [ChartDataEntry] = []
 
-        // 使用迴圈將資料加入存放資料的陣列中
+        // Use for loop to put the data into array
         for index in 0..<spendStudyItem.itemsTime.count {
 
-            // 設定 x, y 座標要顯示的東西有哪些
+            // Set x, y
             let dataEntry = PieChartDataEntry(
-                value: spendStudyItem.itemsTime[index],
-                label: spendStudyItem.itemsTitle[index])
+                value: spendStudyItem.itemsTime[index], label: spendStudyItem.itemsTitle[index])
 
-            // 將資料加入到陣列中
+            // Put the data into array
             dataEntries.append(dataEntry)
 
         }
 
-        // 設定 PieChartDataSet 設定要顯示的資料是什麼，以及圖表下方的 Label
+        // Set PieChartDataSet display data and label
         let chartDataSet = PieChartDataSet(entries: dataEntries, label: "過去七天完成的學習項目")
         
         chartDataSet.colors = ChartColorTemplates.pastel()

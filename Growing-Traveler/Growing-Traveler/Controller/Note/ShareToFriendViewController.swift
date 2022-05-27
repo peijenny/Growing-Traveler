@@ -9,8 +9,10 @@ import UIKit
 
 class ShareToFriendViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     var shareToFriendTableView = UITableView()
     
+    // MARK: - Property
     var chatRoomManager = ChatRoomManager()
     
     var friendManager = FriendManager()
@@ -31,6 +33,7 @@ class ShareToFriendViewController: UIViewController {
     
     var sendType = ""
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,7 +43,7 @@ class ShareToFriendViewController: UIViewController {
         
         setTableView()
         
-        setNavigationItems()
+        setNavigationItem()
         
     }
     
@@ -53,6 +56,43 @@ class ShareToFriendViewController: UIViewController {
         
     }
     
+    
+    // MARK: - Set UI
+    func setTableView() {
+        
+        shareToFriendTableView.backgroundColor = UIColor.clear
+        
+        shareToFriendTableView.separatorStyle = .none
+        
+        view.addSubview(shareToFriendTableView)
+        
+        shareToFriendTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            shareToFriendTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            shareToFriendTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            shareToFriendTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            shareToFriendTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
+        ])
+        
+        shareToFriendTableView.register(
+            UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self))
+
+        shareToFriendTableView.delegate = self
+        
+        shareToFriendTableView.dataSource = self
+        
+    }
+    
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .close, target: self, action: #selector(closeFriendListButton))
+
+    }
+    
+    // MARK: - Method
     func listenFriendListData() {
         
         friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
@@ -135,40 +175,7 @@ class ShareToFriendViewController: UIViewController {
         }
     }
     
-    func setTableView() {
-        
-        shareToFriendTableView.backgroundColor = UIColor.clear
-        
-        shareToFriendTableView.separatorStyle = .none
-        
-        view.addSubview(shareToFriendTableView)
-        
-        shareToFriendTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            shareToFriendTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            shareToFriendTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            shareToFriendTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            shareToFriendTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
-        ])
-        
-        shareToFriendTableView.register(
-            UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self))
-
-        shareToFriendTableView.delegate = self
-        
-        shareToFriendTableView.dataSource = self
-        
-    }
-    
-    func setNavigationItems() {
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .close, target: self, action: #selector(closeFriendListButton))
-
-    }
-    
+    // MARK: - Target / IBAction
     @objc func closeFriendListButton(sender: UIButton) {
         
         dismiss(animated: true, completion: nil)
@@ -177,6 +184,7 @@ class ShareToFriendViewController: UIViewController {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

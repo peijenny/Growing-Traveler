@@ -8,30 +8,6 @@
 import UIKit
 import Lottie
 
-enum TableViewCellType: CaseIterable {
-    
-    case header
-    
-    case body
-    
-    case footer
-    
-    var identifier: String {
-        
-        switch self {
-            
-        case .header: return "\(TopTableViewCell.self)"
-            
-        case .body: return "\(StudyGoalTableViewCell.self)"
-            
-        case .footer: return "\(BottomTableViewCell.self)"
-            
-        }
-        
-    }
-    
-}
-
 class StudyGoalViewController: UIViewController {
     
     // MARK: - IBOutlet / Components
@@ -424,9 +400,33 @@ class StudyGoalViewController: UIViewController {
         
     }
     
+    enum TableViewCellType: CaseIterable {
+        
+        case header
+        
+        case body
+        
+        case footer
+        
+        var identifier: String {
+            
+            switch self {
+                
+            case .header: return "\(TopTableViewCell.self)"
+                
+            case .body: return "\(StudyGoalTableViewCell.self)"
+                
+            case .footer: return "\(BottomTableViewCell.self)"
+                
+            }
+            
+        }
+        
+    }
+
 }
 
-// MARK: - tableView delegate / dataSource
+// MARK: - TableView delegate / dataSource
 extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -605,7 +605,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-// MARK: - check study item is complete delegate
+// MARK: - Check study item is complete delegate
 extension StudyGoalViewController: CheckStudyItemDelegate {
     
     func checkItemCompleted(studyGoalTableViewCell: StudyGoalTableViewCell, studyItemCompleted: Bool) {

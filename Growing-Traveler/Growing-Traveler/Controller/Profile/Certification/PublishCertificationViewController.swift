@@ -9,6 +9,7 @@ import UIKit
 
 class PublishCertificationViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var certificationTitleTextField: UITextField!
     
     @IBOutlet weak var certificationImageTextField: UITextField!
@@ -19,12 +20,14 @@ class PublishCertificationViewController: BaseViewController {
     
     @IBOutlet weak var confirmButton: UIButton!
     
+    // MARK: - Property
     var userManager = UserManager()
     
     var userInfo: UserInfo?
     
     var modifyCertificationIndex: Int?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,6 +65,7 @@ class PublishCertificationViewController: BaseViewController {
         
     }
     
+    // MARK: - Method
     func modifyCertification(index: Int) {
         
         guard let certification = userInfo?.certification[index] else { return }
@@ -74,6 +78,7 @@ class PublishCertificationViewController: BaseViewController {
 
     }
 
+    // MARK: - Target / IBAction
     @IBAction func closeButton(_ sender: UIButton) {
         
         self.navigationController?.isNavigationBarHidden = false
@@ -159,6 +164,7 @@ class PublishCertificationViewController: BaseViewController {
     
 }
 
+// MARK: - ImagePickerController delegate
 extension PublishCertificationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
@@ -195,6 +201,7 @@ extension PublishCertificationViewController: UIImagePickerControllerDelegate, U
     
 }
 
+// MARK: - TextView delegate
 extension PublishCertificationViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {

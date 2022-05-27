@@ -9,8 +9,10 @@ import UIKit
 
 class SelectCategoryViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     var categoryTableView = UITableView()
     
+    // MARK: - Property
     var getSelectCategoryItem: ((_ item: CategoryItem) -> Void)?
     
     var categoryManager = CategoryManager()
@@ -27,6 +29,7 @@ class SelectCategoryViewController: UIViewController {
         
     }
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +45,43 @@ class SelectCategoryViewController: UIViewController {
         
     }
     
+    // MARK: - Set UI
+    func setNavigationBar() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done, target: self, action: #selector(selectCategoryButton))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .cancel, target: self, action: #selector(setClosePageButton))
+        
+    }
+    
+    func setTableView() {
+        
+        categoryTableView.separatorInset.right = 15.0
+        
+        view.addSubview(categoryTableView)
+        
+        categoryTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            categoryTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            categoryTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            categoryTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            categoryTableView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+        
+        categoryTableView.register(
+            UINib(nibName: String(describing: CategoryTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: CategoryTableViewCell.self))
+
+        categoryTableView.delegate = self
+        
+        categoryTableView.dataSource = self
+        
+    }
+    
+    // MARK: - Method
     func fetchCategoryData() {
         
         categoryManager.fetchData { [weak self] result in
@@ -64,16 +104,7 @@ class SelectCategoryViewController: UIViewController {
         
     }
     
-    func setNavigationBar() {
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done, target: self, action: #selector(selectCategoryButton))
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .cancel, target: self, action: #selector(setClosePageButton))
-        
-    }
-    
+    // MARK: - Target / IBAction
     @objc func setClosePageButton(sender: UIButton) {
         
         dismiss(animated: true, completion: .none)
@@ -98,6 +129,7 @@ class SelectCategoryViewController: UIViewController {
 
 }
 
+// MARK: - TableView delegate / dataSource
 extension SelectCategoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -136,35 +168,6 @@ extension SelectCategoryViewController: UITableViewDelegate, UITableViewDataSour
         guard let selectItem = category?[indexPath.section].items[indexPath.row] else { return }
         
         self.selectItem = selectItem
-        
-    }
-    
-}
-
-extension SelectCategoryViewController {
-    
-    func setTableView() {
-        
-        categoryTableView.separatorInset.right = 15.0
-        
-        view.addSubview(categoryTableView)
-        
-        categoryTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            categoryTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            categoryTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            categoryTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            categoryTableView.heightAnchor.constraint(equalTo: view.heightAnchor)
-        ])
-        
-        categoryTableView.register(
-            UINib(nibName: String(describing: CategoryTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: CategoryTableViewCell.self))
-
-        categoryTableView.delegate = self
-        
-        categoryTableView.dataSource = self
         
     }
     

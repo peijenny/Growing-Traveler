@@ -9,39 +9,11 @@ import UIKit
 
 class PublishForumArticleViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     var publishArticleTableView = UITableView()
     
-    var selectCategoryItem: CategoryItem? {
-        
-        didSet {
-        
-            publishArticleTableView.reloadData()
-            
-        }
-        
-    }
-
-    var imageLink: String? {
-        
-        didSet {
-        
-            publishArticleTableView.reloadData()
-            
-        }
-        
-    }
-    
-    var contentArray: [String] = []
-    
-    var checkArticleFullIn = false
-    
+    // MARK: - Property
     var forumArticleManager = ForumArticleManager()
-    
-    var inputTitle: String?
-    
-    var forumType: String?
-    
-    var isModify = false
     
     var modifyForumArticle: ForumArticle? {
         
@@ -53,10 +25,39 @@ class PublishForumArticleViewController: BaseViewController {
         
     }
     
+    var selectCategoryItem: CategoryItem? {
+        
+        didSet {
+        
+            publishArticleTableView.reloadData()
+            
+        }
+        
+    }
+    
+    var contentArray: [String] = []
+    
+    var imageLink: String? {
+        
+        didSet {
+        
+            publishArticleTableView.reloadData()
+            
+        }
+        
+    }
+    
+    var inputTitle: String?
+    
+    var forumType: String?
+    
+    var checkArticleFullIn = false
+    
+    var isModify = false
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         if modifyForumArticle == nil {
             
@@ -70,10 +71,11 @@ class PublishForumArticleViewController: BaseViewController {
             
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done, target: self, action: #selector(submitButton))
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         setTableView()
+        
+        setNavigationItem()
 
     }
     
@@ -91,14 +93,43 @@ class PublishForumArticleViewController: BaseViewController {
         
     }
     
-    @objc func submitButton(sender: UIButton) {
+    // MARK: - Set UI
+    func setTableView() {
         
-        checkArticleFullIn = true
+        publishArticleTableView.backgroundColor = UIColor.white
         
-        publishArticleTableView.reloadData()
+        publishArticleTableView.separatorStyle = .none
+        
+        view.addSubview(publishArticleTableView)
+        
+        publishArticleTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            publishArticleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            publishArticleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -140.0)
+        ])
+        
+        publishArticleTableView.register(
+            UINib(nibName: String(describing: PublishArticleTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: PublishArticleTableViewCell.self)
+        )
+
+        publishArticleTableView.delegate = self
+        
+        publishArticleTableView.dataSource = self
         
     }
     
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done, target: self, action: #selector(submitButton))
+        
+    }
+    
+    // MARK: - Method
     func handleArticleContentData() {
         
         var articleContents: [ArticleContent] = []
@@ -173,36 +204,18 @@ class PublishForumArticleViewController: BaseViewController {
 
     }
     
-    func setTableView() {
+    // MARK: - Target / IBAction
+    @objc func submitButton(sender: UIButton) {
         
-        publishArticleTableView.backgroundColor = UIColor.white
+        checkArticleFullIn = true
         
-        publishArticleTableView.separatorStyle = .none
-        
-        view.addSubview(publishArticleTableView)
-        
-        publishArticleTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            publishArticleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            publishArticleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -140.0)
-        ])
-        
-        publishArticleTableView.register(
-            UINib(nibName: String(describing: PublishArticleTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: PublishArticleTableViewCell.self)
-        )
-
-        publishArticleTableView.delegate = self
-        
-        publishArticleTableView.dataSource = self
+        publishArticleTableView.reloadData()
         
     }
 
 }
 
+// MARK: - TableView delegate / dataSource
 extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -327,6 +340,7 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
 
 }
 
+// MARK: - ImagePickerController delegate
 extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
@@ -363,6 +377,7 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
     
 }
 
+// MARK: - textView delegate
 extension PublishForumArticleViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {

@@ -10,19 +10,19 @@ import Firebase
 
 class ProfileSettingViewController: BaseViewController {
     
+    // MARK: - IBOutlet / Components
     var profileSettingTableView = UITableView()
     
-    var userManger = UserManager()
+    // MARK: - Property
+    var deleteUserManager = DeleteUserManager()
     
     var friendManager = FriendManager()
     
-    var deleteUserManager = DeleteUserManager()
+    var userManger = UserManager()
     
     var forumArticles: [ForumArticle] = []
     
     var studyGoals: [StudyGoal] = []
-    
-    var friendList: Friend?
     
     var userInfo: UserInfo? {
         
@@ -34,10 +34,13 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
+    var friendList: Friend?
+    
     var userImageLink: String?
     
     var isCheck = false
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,14 +61,7 @@ class ProfileSettingViewController: BaseViewController {
 
     }
     
-    @objc func submitButton(sender: UIButton) {
-        
-        isCheck = true
-        
-        profileSettingTableView.reloadData()
-        
-    }
-    
+    // MARK: - Set UI
     func setBackgroundView() {
         
         let backgroundView = UIView()
@@ -120,6 +116,7 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
+    // MARK: - Method
     func fetchUserInfoData() {
         
         userManger.listenUserInfo { [weak self] result in
@@ -142,8 +139,18 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
+    // MARK: - Target / IBAction
+    @objc func submitButton(sender: UIButton) {
+        
+        isCheck = true
+        
+        profileSettingTableView.reloadData()
+        
+    }
+    
 }
 
+// MARK: - TableView delegate / dataSource
 extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -154,7 +161,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = UITableViewCell()
+        var cell: UITableViewCell
         
         if indexPath.row == 0 {
             
@@ -257,19 +264,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         
     }
     
-    func pushToPrivacyPolicyPage(privacyPolicyType: String) {
-        
-        let viewController = UIStoryboard.profile.instantiateViewController(
-            withIdentifier: String(describing: PrivacyPolicyViewController.self))
-        
-        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
-        
-        viewController.privacyTitle = privacyPolicyType
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
     @objc func signOutAccount(sender: UIButton) {
         
         let firebaseAuth = Auth.auth()
@@ -324,6 +318,29 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    @objc func modifyUserPhoto(sender: UIButton) {
+        
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        
+        present(picker, animated: true)
+        
+    }
+    
+    func pushToPrivacyPolicyPage(privacyPolicyType: String) {
+        
+        let viewController = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.privacyTitle = privacyPolicyType
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
     
@@ -402,19 +419,10 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         }
         
     }
-
-    @objc func modifyUserPhoto(sender: UIButton) {
-        
-        let picker = UIImagePickerController()
-        
-        picker.delegate = self
-        
-        present(picker, animated: true)
-        
-    }
     
 }
 
+// MARK: - ImagePickerController delegate
 extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
