@@ -9,7 +9,7 @@
 <BR><BR>
 -->
 
-[![AppStore](https://i.imgur.com/Ue5FJ7R.png =82x30)](https://apps.apple.com/tw/app/成長旅客/id1619736522)
+[![AppStore](https://i.imgur.com/Ue5FJ7R.png)](https://apps.apple.com/tw/app/成長旅客/id1619736522)
 
 <p>
     <img src="https://img.shields.io/badge/platform-iOS-lightgrey">
