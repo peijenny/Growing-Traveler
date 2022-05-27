@@ -4,13 +4,11 @@
 
 
 <a href="https://apps.apple.com/tw/app/成長旅客/id1619736522">
-    <img src="https://i.imgur.com/Ue5FJ7R.png" alt="AppStore" width="82px" height="30px"/>
+    <img src="https://i.imgur.com/XVAqDys.png" alt="AppStore" width="120px" height="40px"/>
 </a>
+
 <BR><BR>
 
-<!--
-[![AppStore](https://i.imgur.com/Ue5FJ7R.png)](https://apps.apple.com/tw/app/成長旅客/id1619736522)
--->
 <p>
     <img src="https://img.shields.io/badge/platform-iOS-lightgrey">
     <img src="https://img.shields.io/badge/version-1.1-yellow">
