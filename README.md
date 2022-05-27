@@ -7,8 +7,6 @@
     <img src="https://i.imgur.com/XVAqDys.png" alt="AppStore" width="120px" height="40px"/>
 </a>
 
-<BR><BR>
-
 <p>
     <img src="https://img.shields.io/badge/platform-iOS-lightgrey">
     <img src="https://img.shields.io/badge/version-1.1-yellow">
