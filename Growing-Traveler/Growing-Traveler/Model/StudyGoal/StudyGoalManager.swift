@@ -9,25 +9,20 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import PKHUD
 
 class StudyGoalManager {
     
     let database = Firestore.firestore().collection("studyGoal")
     
-    // 監聽 即時修改的學習計劃 至 Firebase Firestore
-    func listenData(completion: @escaping (Result<[StudyGoal]>) -> Void) { //
+    func listenStudyGoals(completion: @escaping (Result<[StudyGoal]>) -> Void) { //
         
         if !KeyToken().userID.isEmpty {
          
-            database.whereField("userID", isEqualTo: KeyToken().userID)
-                .addSnapshotListener { snapshot, error in
+            database.whereField("userID", isEqualTo: KeyToken().userID).addSnapshotListener { snapshot, error in
                 
                 var studyGoals: [StudyGoal] = []
                 
                 guard let snapshot = snapshot else {
-                    
-                    print("Error fetching document: \(error!)")
                     
                     completion(Result.failure(error!))
                     
@@ -46,8 +41,6 @@ class StudyGoalManager {
                         }
                         
                     } catch {
-                        
-                        print(error)
                         
                         completion(Result.failure(error))
                         
@@ -68,38 +61,16 @@ class StudyGoalManager {
         }
         
     }
-    
-    // 上傳 新建的學習計劃 至 Firebase Firestore
-    func addData(studyGoal: StudyGoal) {
-        
-        do {
-            
-            try database.document(studyGoal.id).setData(from: studyGoal)
-            
-        } catch {
-            
-            print(error)
-            
-            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
-            
-        }
-        
-    }
-    
-    // 取得 所有的學習計劃 至 StudyFoalViewController
-    func fetchData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
+
+    func fetchStudyGoals(completion: @escaping (Result<[StudyGoal]>) -> Void) {
         
         if !KeyToken().userID.isEmpty {
             
-            database
-                .whereField("userID", isEqualTo: KeyToken().userID)
-                .getDocuments { snapshot, error in
+            database.whereField("userID", isEqualTo: KeyToken().userID).getDocuments { snapshot, error in
                 
                 var studyGoals: [StudyGoal] = []
                 
                 guard let snapshot = snapshot else {
-                    
-                    print("Error fetching document: \(error!)")
                     
                     completion(Result.failure(error!))
                     
@@ -119,8 +90,6 @@ class StudyGoalManager {
                         
                     } catch {
                         
-                        print(error)
-                        
                         completion(Result.failure(error))
                         
                     }
@@ -135,38 +104,46 @@ class StudyGoalManager {
         
     }
     
-    // 修改 選取的學習計劃 至 Firebase Firestore
-    func updateData(studyGoal: StudyGoal) {
+    func addStudyGoal(studyGoal: StudyGoal) {
+        
+        do {
+            
+            try database.document(studyGoal.id).setData(from: studyGoal)
+            
+        } catch {
+            
+            HandleResult.addDataFailed.messageHUD
+            
+        }
+        
+    }
+    
+    func updateStudyGoal(studyGoal: StudyGoal) {
         
         do {
 
             try database.document(studyGoal.id).setData(from: studyGoal, merge: true)
 
         } catch {
-
-            print(error)
             
-            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+            HandleResult.updateDataFailed.messageHUD
+            
         }
 
     }
-    
-    // 刪除 選取的學習計劃 至 Firebase Firestore
-    
-    func deleteData(studyGoal: StudyGoal) {
+
+    func deleteStudyGoal(studyGoal: StudyGoal) {
         
         database.document(studyGoal.id).delete { error in
             
-            if let error = error {
+            if error != nil {
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.deleteDataFailed.messageHUD
                 
             } else {
                 
-                print("Success")
+                HandleResult.deleteDataSuccessed.messageHUD
+                
             }
             
         }

@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class UserInfoViewController: UIViewController {
   
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var userNameLabel: UILabel!
     
     @IBOutlet weak var friendStatusLabel: UILabel!
@@ -20,34 +20,37 @@ class UserInfoViewController: UIViewController {
     
     @IBOutlet weak var reportPublishedButton: UIButton!
     
+    // MARK: - Property
     var friendManager = FriendManager()
-    
-    var userManager = UserManager()
     
     var reportManager = ReportManager()
     
-    var userInfo: UserInfo?
+    var userManager = UserManager()
+    
+    var getFriendStatus: ((_ isBlock: Bool) -> Void)?
+    
+    var blockContentType: String?
+    
+    var bothSides: BothSides?
     
     var ownerFriend: Friend?
     
     var otherFriend: Friend?
     
-    var bothSides: BothSides?
+    var userInfo: UserInfo?
     
     var selectUserID: String?
     
     var deleteAccount = Bool()
+    
+    // MARK: for report use
+    var articleID: String?
+    
+    var articleMessage: ArticleMessage?
+    
+    var reportContentType: String?
 
-    var getFriendStatus: ((_ isBlock: Bool) -> Void)?
-    
-    var articleID: String?  // report articleID
-    
-    var articleMessage: ArticleMessage? // report message
-    
-    var reportContentType: String? // report content type
-    
-    var blockContentType: String?
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,6 +113,7 @@ class UserInfoViewController: UIViewController {
         
     }
     
+    // MARK: - Method
     func fetchFriendListData(userID: String) {
         
         friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
@@ -134,7 +138,7 @@ class UserInfoViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -144,7 +148,7 @@ class UserInfoViewController: UIViewController {
     
     func fetchUserInfoData(userID: String) {
         
-        userManager.fetchData(fetchUserID: userID) { [weak self] result in
+        userManager.fetchUserInfo(fetchUserID: userID) { [weak self] result in
             
             guard let self = self else { return }
             
@@ -158,7 +162,7 @@ class UserInfoViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -216,6 +220,7 @@ class UserInfoViewController: UIViewController {
         
     }
     
+    // MARK: - Target / IBAction
     @IBAction func closeButton(_ sender: UIButton) {
         
         self.view.removeFromSuperview()
@@ -233,7 +238,7 @@ class UserInfoViewController: UIViewController {
                 
                 ownerFriend.blockadeList.append(self.selectUserID ?? "")
                 
-                self.friendManager.updateData(friend: ownerFriend)
+                self.friendManager.updateFriendList(friend: ownerFriend)
                 
                 self.view.removeFromSuperview()
                 
@@ -263,7 +268,7 @@ class UserInfoViewController: UIViewController {
             
             friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
             
-            HUD.flash(.labeledSuccess(title: "已發送好友邀請!", subtitle: "請等待對方的回覆"), delay: 0.5)
+            HandleResult.sendFriendApply.messageHUD
             
             self.view.removeFromSuperview()
             
@@ -297,7 +302,7 @@ class UserInfoViewController: UIViewController {
             
             self.reportManager.addReportData(reportContent: reportContent)
             
-            HUD.flash(.labeledSuccess(title: "檢舉成功！", subtitle: "站方會盡快處理此檢舉"), delay: 0.5)
+            HandleResult.reportSuccess.messageHUD
             
             self.view.removeFromSuperview()
             

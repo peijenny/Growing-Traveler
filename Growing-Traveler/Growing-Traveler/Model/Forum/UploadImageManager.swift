@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import PKHUD
 
 class UploadImageManager {
     
@@ -17,7 +16,7 @@ class UploadImageManager {
     
     func uploadImage(uiImage: UIImage, completion: @escaping (Result<String>) -> Void) {
         
-        HUD.show(.labeledProgress(title: "圖片上傳中...", subtitle: nil))
+        HandleResult.imageUpload.messageHUD
         
         AF.upload(multipartFormData: { data in
             
@@ -33,14 +32,14 @@ class UploadImageManager {
             switch response.result {
                 
             case .success(let result):
-
-                HUD.flash(.labeledSuccess(title: "圖片上傳成功！", subtitle: nil))
                 
+                HandleResult.imageUploadSuccess.messageHUD
+
                 completion(Result.success("\(result.data.link)"))
                 
             case .failure(let error):
                 
-                HUD.flash(.labeledError(title: "圖片上傳失敗！", subtitle: nil))
+                HandleResult.imageUploadFailed.messageHUD
                 
                 completion(Result.failure(error))
                 

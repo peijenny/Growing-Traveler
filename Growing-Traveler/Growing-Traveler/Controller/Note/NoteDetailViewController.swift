@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class NoteDetailViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var noteCreateTimeLabel: UILabel!
     
     @IBOutlet weak var noteDatailTableView: UITableView! {
@@ -26,6 +26,7 @@ class NoteDetailViewController: UIViewController {
     
     @IBOutlet weak var noteDetailBackgroundView: UIView!
     
+    // MARK: - Property
     var userManager = UserManager()
     
     var note: Note?
@@ -34,16 +35,13 @@ class NoteDetailViewController: UIViewController {
     
     var noteUserID: String?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        noteDatailTableView.register(
-            UINib(nibName: String(describing: ArticleDetailTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self))
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        setUIStyle()
         
-        noteDetailBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
+        registerTableViewCell()
         
     }
     
@@ -68,9 +66,38 @@ class NoteDetailViewController: UIViewController {
         
     }
     
+    // MARK: - Set UI
+    func setUIStyle() {
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        
+        noteDetailBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
+        
+    }
+    
+    func setNavigationItems() {
+        
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(
+                image: UIImage.asset(.edit), style: .plain, target: self, action: #selector(modifyNoteData)),
+            UIBarButtonItem(
+                image: UIImage.asset(.share), style: .plain, target: self, action: #selector(shareToFriendButton))
+        ]
+        
+    }
+    
+    func registerTableViewCell() {
+        
+        noteDatailTableView.register(
+            UINib(nibName: String(describing: ArticleDetailTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self))
+        
+    }
+    
+    // MARK: - Method
     func fetchNoteData() {
         
-        userManager.fetchshareNoteData(shareUserID: noteUserID ?? "", noteID: noteID ?? "") { [weak self] result in
+        userManager.fetchshareFriendNote(shareUserID: noteUserID ?? "", noteID: noteID ?? "") { [weak self] result in
             
             guard let self = self else { return }
             
@@ -100,7 +127,7 @@ class NoteDetailViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -108,17 +135,7 @@ class NoteDetailViewController: UIViewController {
         
     }
     
-    func setNavigationItems() {
-        
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(
-                image: UIImage.asset(.edit), style: .plain, target: self, action: #selector(modifyNoteData)),
-            UIBarButtonItem(
-                image: UIImage.asset(.share), style: .plain, target: self, action: #selector(shareToFriendButton))
-        ]
-        
-    }
-    
+    // MARK: - Target / IBAction
     @objc func shareToFriendButton(sender: UIButton) {
         
         let viewController = ShareToFriendViewController()
@@ -158,6 +175,7 @@ class NoteDetailViewController: UIViewController {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension NoteDetailViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -7,23 +7,22 @@
 
 import UIKit
 import Firebase
-import PKHUD
 
 class ProfileSettingViewController: BaseViewController {
     
+    // MARK: - IBOutlet / Components
     var profileSettingTableView = UITableView()
     
-    var userManger = UserManager()
+    // MARK: - Property
+    var deleteUserManager = DeleteUserManager()
     
     var friendManager = FriendManager()
     
-    var deleteUserManager = DeleteUserManager()
+    var userManger = UserManager()
     
     var forumArticles: [ForumArticle] = []
     
     var studyGoals: [StudyGoal] = []
-    
-    var friendList: Friend?
     
     var userInfo: UserInfo? {
         
@@ -35,10 +34,13 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
+    var friendList: Friend?
+    
     var userImageLink: String?
     
     var isCheck = false
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,14 +61,7 @@ class ProfileSettingViewController: BaseViewController {
 
     }
     
-    @objc func submitButton(sender: UIButton) {
-        
-        isCheck = true
-        
-        profileSettingTableView.reloadData()
-        
-    }
-    
+    // MARK: - Set UI
     func setBackgroundView() {
         
         let backgroundView = UIView()
@@ -121,9 +116,10 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
+    // MARK: - Method
     func fetchUserInfoData() {
         
-        userManger.listenData { [weak self] result in
+        userManger.listenUserInfo { [weak self] result in
             
             guard let self = self else { return }
             
@@ -135,7 +131,7 @@ class ProfileSettingViewController: BaseViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -143,8 +139,18 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
+    // MARK: - Target / IBAction
+    @objc func submitButton(sender: UIButton) {
+        
+        isCheck = true
+        
+        profileSettingTableView.reloadData()
+        
+    }
+    
 }
 
+// MARK: - TableView delegate / dataSource
 extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -155,7 +161,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = UITableViewCell()
+        var cell: UITableViewCell
         
         if indexPath.row == 0 {
             
@@ -201,17 +207,17 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                     
                     if let updateUserInfo = self.userInfo {
                         
-                        userManger.updateData(user: updateUserInfo)
+                        userManger.updateUserInfo(user: updateUserInfo)
                         
                         friendList?.userName = cell.userNameTextField.text ?? ""
                         
                         if let friendList = friendList {
                             
-                            friendManager.updateData(friend: friendList)
+                            friendManager.updateFriendList(friend: friendList)
                             
                         }
                         
-                        HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                        HandleResult.updateDataSuccess.messageHUD
                         
                     }
                     
@@ -258,19 +264,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         
     }
     
-    func pushToPrivacyPolicyPage(privacyPolicyType: String) {
-        
-        let viewController = UIStoryboard.profile.instantiateViewController(
-            withIdentifier: String(describing: PrivacyPolicyViewController.self))
-        
-        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
-        
-        viewController.privacyTitle = privacyPolicyType
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
     @objc func signOutAccount(sender: UIButton) {
         
         let firebaseAuth = Auth.auth()
@@ -285,10 +278,10 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
             
             tabBarController?.selectedIndex = 0
 
-        } catch let signOutError as NSError {
-
-            HUD.flash(.labeledError(title: "登出失敗！", subtitle: "請稍候嘗試"), delay: 0.5)
-
+        } catch {
+            
+            HandleResult.signOutFailed.messageHUD
+            
         }
         
     }
@@ -306,7 +299,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
                 if error != nil {
 
-                    HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.deleteDataFailed.messageHUD
 
                 } else {
                     
@@ -325,6 +318,29 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    @objc func modifyUserPhoto(sender: UIButton) {
+        
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        
+        present(picker, animated: true)
+        
+    }
+    
+    func pushToPrivacyPolicyPage(privacyPolicyType: String) {
+        
+        let viewController = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.privacyTitle = privacyPolicyType
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
     
@@ -360,7 +376,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -378,7 +394,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -396,26 +412,17 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
         }
         
     }
-
-    @objc func modifyUserPhoto(sender: UIButton) {
-        
-        let picker = UIImagePickerController()
-        
-        picker.delegate = self
-        
-        present(picker, animated: true)
-        
-    }
     
 }
 
+// MARK: - ImagePickerController delegate
 extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
@@ -439,9 +446,8 @@ extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavig
                     self.profileSettingTableView.reloadData()
                     
                 case .failure:
-
                     
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.readDataFailed.messageHUD
 
                 }
 

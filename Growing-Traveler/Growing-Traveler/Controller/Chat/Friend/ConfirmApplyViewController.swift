@@ -9,16 +9,19 @@ import UIKit
 
 class ConfirmApplyViewController: UIViewController {
     
-    var friendManager = FriendManager()
-    
-    var bothSides: BothSides?
-    
-    var getConfirmStatus: ((_ isConfirm: Bool) -> Void)?
-
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var agreeButton: UIButton!
     
+    // MARK: - Property
+    var friendManager = FriendManager()
+    
+    var getConfirmStatus: ((_ isConfirm: Bool) -> Void)?
+    
+    var bothSides: BothSides?
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +45,7 @@ class ConfirmApplyViewController: UIViewController {
         
     }
     
+    // MARK: - Target / IBAction
     @IBAction func closeButton(_ sender: UIButton) {
         
         self.navigationController?.isNavigationBarHidden = false

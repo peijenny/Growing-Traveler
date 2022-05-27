@@ -6,12 +6,13 @@
 //
 
 import UIKit
-import PKHUD
 
 class ShareToFriendViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     var shareToFriendTableView = UITableView()
     
+    // MARK: - Property
     var chatRoomManager = ChatRoomManager()
     
     var friendManager = FriendManager()
@@ -32,6 +33,7 @@ class ShareToFriendViewController: UIViewController {
     
     var sendType = ""
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,7 +43,7 @@ class ShareToFriendViewController: UIViewController {
         
         setTableView()
         
-        setNavigationItems()
+        setNavigationItem()
         
     }
     
@@ -54,88 +56,8 @@ class ShareToFriendViewController: UIViewController {
         
     }
     
-    func listenFriendListData() {
-        
-        friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-                
-            case .success(let friend):
-                
-                self.friendList = friend.friendList
-                
-                self.fetchUserInfoData()
-                
-            case .failure:
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
     
-    func fetchChatRoomData() {
-
-        chatRoomManager.fetchFriendsChatData { [weak self] result in
-
-            guard let self = self else { return }
-
-            switch result {
-
-            case .success(let chats):
-
-                self.chats = chats
-                
-            case .failure:
-
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
-            }
-
-        }
-
-    }
-    
-    func fetchUserInfoData() {
-        
-        userManager.fetchUsersData { [weak self] result in
-            
-            guard let self = self else { return }
-
-            switch result {
-
-            case .success(let usersInfo):
-                
-                self.userName = usersInfo.filter({ $0.userID == KeyToken().userID })[0].userName
-                
-                let usersInfo = usersInfo
-                
-                for index in 0..<self.friendList.count {
-                    
-                    let filterUserInfo = usersInfo.filter({ $0.userID == self.friendList[index] })
-                    
-                    if filterUserInfo.count != 0 {
-                        
-                        self.usersInfo.append(filterUserInfo[0])
-                    }
-                    
-                }
-                
-                self.shareToFriendTableView.reloadData()
-
-            case .failure:
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
-            }
-            
-        }
-    }
-    
+    // MARK: - Set UI
     func setTableView() {
         
         shareToFriendTableView.backgroundColor = UIColor.clear
@@ -163,13 +85,97 @@ class ShareToFriendViewController: UIViewController {
         
     }
     
-    func setNavigationItems() {
+    func setNavigationItem() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .close, target: self, action: #selector(closeFriendListButton))
 
     }
     
+    // MARK: - Method
+    func listenFriendListData() {
+        
+        friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let friend):
+                
+                self.friendList = friend.friendList
+                
+                self.fetchUserInfoData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    func fetchChatRoomData() {
+
+        chatRoomManager.fetchFriendsChatData { [weak self] result in
+
+            guard let self = self else { return }
+
+            switch result {
+
+            case .success(let chats):
+
+                self.chats = chats
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+
+        }
+
+    }
+    
+    func fetchUserInfoData() {
+        
+        userManager.fetchUsersInfo { [weak self] result in
+            
+            guard let self = self else { return }
+
+            switch result {
+
+            case .success(let usersInfo):
+                
+                self.userName = usersInfo.filter({ $0.userID == KeyToken().userID })[0].userName
+                
+                let usersInfo = usersInfo
+                
+                for index in 0..<self.friendList.count {
+                    
+                    let filterUserInfo = usersInfo.filter({ $0.userID == self.friendList[index] })
+                    
+                    if filterUserInfo.count != 0 {
+                        
+                        self.usersInfo.append(filterUserInfo[0])
+                    }
+                    
+                }
+                
+                self.shareToFriendTableView.reloadData()
+
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+    }
+    
+    // MARK: - Target / IBAction
     @objc func closeFriendListButton(sender: UIButton) {
         
         dismiss(animated: true, completion: nil)
@@ -178,6 +184,7 @@ class ShareToFriendViewController: UIViewController {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -219,7 +226,7 @@ extension ShareToFriendViewController: UITableViewDelegate, UITableViewDataSourc
             
             chatRoomManager.addData(userName: userName ?? "", chat: selectChat)
             
-            HUD.flash(.labeledSuccess(title: "傳送成功", subtitle: nil), delay: 0.5)
+            HandleResult.shareToFriendSuccess.messageHUD
             
         }
         

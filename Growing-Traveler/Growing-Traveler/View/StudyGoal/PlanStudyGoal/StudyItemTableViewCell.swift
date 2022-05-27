@@ -18,7 +18,7 @@ class StudyItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        studyItemBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        studyItemBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
         
         studyItemBackgroundView.cornerRadius = 10
         
@@ -27,7 +27,6 @@ class StudyItemTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
     func showStudyItem(itemTitle: String, studyTime: Int) {

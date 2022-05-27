@@ -6,32 +6,7 @@
 //
 
 import UIKit
-import PKHUD
 import Lottie
-
-enum TableViewCellType: CaseIterable { // have to modify
-    
-    case header
-    
-    case body
-    
-    case footer
-    
-    var identifier: String {
-        
-        switch self {
-            
-        case .header: return "\(TopTableViewCell.self)"
-            
-        case .body: return "\(StudyGoalTableViewCell.self)"
-            
-        case .footer: return "\(BottomTableViewCell.self)"
-            
-        }
-        
-    }
-    
-}
 
 class StudyGoalViewController: UIViewController {
     
@@ -68,10 +43,6 @@ class StudyGoalViewController: UIViewController {
     var userManager = UserManager()
     
     var selectedStatus: StatusType = .running
-    
-    let studyStatus: [StatusType] = [.pending, .running, .finished]
-    
-    let tableViewCellType: [TableViewCellType] = [.header, .body, .footer]
     
     var studyGoals: [StudyGoal] = []
     
@@ -138,17 +109,13 @@ class StudyGoalViewController: UIViewController {
     
     func registerTableViewCell() {
         
-        studyGoalTableView.register(
-            UINib(nibName: TableViewCellType.header.identifier, bundle: nil),
-            forCellReuseIdentifier: TableViewCellType.header.identifier)
-        
-        studyGoalTableView.register(
-            UINib(nibName: TableViewCellType.body.identifier, bundle: nil),
-            forCellReuseIdentifier: TableViewCellType.body.identifier)
-        
-        studyGoalTableView.register(
-            UINib(nibName: TableViewCellType.footer.identifier, bundle: nil),
-            forCellReuseIdentifier: TableViewCellType.footer.identifier)
+        for index in 0..<TableViewCellType.allCases.count {
+            
+            studyGoalTableView.register(
+                UINib(nibName: TableViewCellType.allCases[index].identifier, bundle: nil),
+                forCellReuseIdentifier: TableViewCellType.allCases[index].identifier)
+            
+        }
         
     }
     
@@ -208,13 +175,14 @@ class StudyGoalViewController: UIViewController {
         
         animationView.contentMode = .scaleAspectFit
         
-        for index in 0..<studyStatus.count {
+        for index in 0..<StatusType.allCases.count {
             
-            if studyStatus[index] == selectedStatus {
+            if StatusType.allCases[index] == selectedStatus {
                 
                 selectStatusColorButton(selectButton: statusButtons[index])
                 
             }
+            
         }
         
     }
@@ -222,7 +190,7 @@ class StudyGoalViewController: UIViewController {
     // MARK: - Method
     func fetchUserInfo() {
         
-        userManager.listenData { [weak self] result in
+        userManager.listenUserInfo { [weak self] result in
             
             guard let self = self else { return }
             
@@ -236,7 +204,7 @@ class StudyGoalViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5) //
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -254,7 +222,7 @@ class StudyGoalViewController: UIViewController {
             
             user.achievement.loginDates.append(today)
             
-            userManager.updateData(user: user)
+            userManager.updateUserInfo(user: user)
             
         }
         
@@ -262,7 +230,7 @@ class StudyGoalViewController: UIViewController {
     
     func listenStudyGoals(status: StatusType) {
         
-        studyGoalManager.listenData { [weak self] result in
+        studyGoalManager.listenStudyGoals { [weak self] result in
             
             guard let self = self else { return }
             
@@ -278,7 +246,7 @@ class StudyGoalViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5) //
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -361,7 +329,7 @@ class StudyGoalViewController: UIViewController {
             
             if sender == statusButtons[index] {
                 
-                selectedStatus = studyStatus[index]
+                selectedStatus = StatusType.allCases[index]
                 
                 listenStudyGoals(status: selectedStatus)
                 
@@ -432,9 +400,33 @@ class StudyGoalViewController: UIViewController {
         
     }
     
+    enum TableViewCellType: CaseIterable {
+        
+        case header
+        
+        case body
+        
+        case footer
+        
+        var identifier: String {
+            
+            switch self {
+                
+            case .header: return "\(TopTableViewCell.self)"
+                
+            case .body: return "\(StudyGoalTableViewCell.self)"
+                
+            case .footer: return "\(BottomTableViewCell.self)"
+                
+            }
+            
+        }
+        
+    }
+
 }
 
-// MARK: - tableView delegate / dataSource
+// MARK: - TableView delegate / dataSource
 extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -540,8 +532,6 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
             self.deleteStudyGoal(indexPath: indexPath)
             
-            HUD.flash(.labeledSuccess(title: "計劃已刪除！", subtitle: nil), delay: 0.5)
-            
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
@@ -556,7 +546,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func deleteStudyGoal(indexPath: IndexPath) {
         
-        studyGoalManager.deleteData(studyGoal: studyGoals[indexPath.section])
+        studyGoalManager.deleteStudyGoal(studyGoal: studyGoals[indexPath.section])
         
         studyGoals.remove(at: indexPath.section)
         
@@ -577,7 +567,7 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
         user?.achievement.experienceValue += isCompleted ? 50: -50
         
-        studyGoalManager.updateData(studyGoal: studyGoals[indexPath.section])
+        studyGoalManager.updateStudyGoal(studyGoal: studyGoals[indexPath.section])
         
     }
     
@@ -593,13 +583,13 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
         if allSatisfy && isEmpty {
             
-            HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
+            HandleResult.finishedStudyItem.messageHUD
             
             user.achievement.completionGoals.append(studyGoals[indexPath.section].id)
             
         } else if allSatisfy && !isEmpty {
             
-            HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
+            HandleResult.finishedStudyItem.messageHUD
             
         } else if !allSatisfy && !isEmpty {
             
@@ -609,13 +599,13 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
             
         }
         
-        userManager.updateData(user: user)
+        userManager.updateUserInfo(user: user)
         
     }
     
 }
 
-// MARK: - check study item is complete delegate
+// MARK: - Check study item is complete delegate
 extension StudyGoalViewController: CheckStudyItemDelegate {
     
     func checkItemCompleted(studyGoalTableViewCell: StudyGoalTableViewCell, studyItemCompleted: Bool) {

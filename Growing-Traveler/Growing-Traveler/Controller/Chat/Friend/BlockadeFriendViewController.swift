@@ -6,12 +6,13 @@
 //
 
 import UIKit
-import PKHUD
 
 class BlockadeFriendViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     var blockadeTableView = UITableView()
     
+    // MARK: - Property
     var friendManager = FriendManager()
     
     var userManager = UserManager()
@@ -20,6 +21,7 @@ class BlockadeFriendViewController: UIViewController {
     
     var friend: Friend?
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,53 +58,7 @@ class BlockadeFriendViewController: UIViewController {
         
     }
     
-    func fetchUsersInfoData() {
-        
-        userManager.fetchUsersData { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-                
-            case .success(let usersInfo):
-                
-                self.usersInfo = usersInfo
-                
-                self.blockadeTableView.reloadData()
-                
-            case .failure:
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-    }
-    
-    func fetchBlockadeData() {
-        
-        friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
-            
-            guard let self = self else { return }
-            
-            switch result {
-                
-            case .success(let friend):
-                
-                self.friend = friend
-                
-                self.blockadeTableView.reloadData()
-                
-            case .failure:
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
+    // MARK: - Set UI
     func setBackgroundView() {
         
         let backgroundView = UIView()
@@ -148,14 +104,64 @@ class BlockadeFriendViewController: UIViewController {
         blockadeTableView.dataSource = self
         
     }
+    
+    // MARK: - Method
+    func fetchUsersInfoData() {
+        
+        userManager.fetchUsersInfo { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                self.usersInfo = usersInfo
+                
+                self.blockadeTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+    }
+    
+    func fetchBlockadeData() {
+        
+        friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let friend):
+                
+                self.friend = friend
+                
+                self.blockadeTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
 
 }
 
+// MARK: - TableView delegate / dataSource
 extension BlockadeFriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return friend?.blockadeList.count ?? 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -191,9 +197,9 @@ extension BlockadeFriendViewController: UITableViewDelegate, UITableViewDataSour
             
             friend.blockadeList.remove(at: indexPath.row)
             
-            friendManager.updateData(friend: friend)
+            friendManager.updateFriendList(friend: friend)
             
-            HUD.flash(.labeledSuccess(title: "已解除封鎖此帳號", subtitle: nil), delay: 0.5)
+            HandleResult.isUnBlockUser.messageHUD
             
         }
         

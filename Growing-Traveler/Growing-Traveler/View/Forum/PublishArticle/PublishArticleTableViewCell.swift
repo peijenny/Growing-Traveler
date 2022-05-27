@@ -6,13 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class PublishArticleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
-    
-//    @IBOutlet weak var categoryTextField: UITextField!
     
     @IBOutlet weak var categoryLabel: UILabel!
     
@@ -65,16 +62,16 @@ class PublishArticleTableViewCell: UITableViewCell {
     func checkInputType() -> Bool {
         
         if titleTextField.text == "" {
-
-            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
             
+            HandleInputResult.titleEmpty.messageHUD
+
         } else if categoryLabel.text == "請選擇分類標籤" {
             
-            HUD.flash(.label(InputError.categoryEmpty.title), delay: 0.5)
+            HandleInputResult.categoryEmpty.messageHUD
             
         } else if contentTextView.text == "請描述內容......" {
 
-            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
+            HandleInputResult.contentEmpty.messageHUD
             
         } else {
             
@@ -92,14 +89,14 @@ class PublishArticleTableViewCell: UITableViewCell {
         
         let data = try? Data(contentsOf: imageURL)
         
-        // 建立圖檔
+        // Add image link text
         let attachment = NSTextAttachment()
         
         guard let image = UIImage(data: data ?? Data()) else { return }
         
         attachment.image = image
 
-        // 設定圖檔的大小
+        // Set text style
         let imageAspectRatio = CGFloat(image.size.height / image.size.width)
 
         let imageWidth = contentTextView.frame.width - 2 * CGFloat(0)
@@ -108,10 +105,10 @@ class PublishArticleTableViewCell: UITableViewCell {
 
         attachment.bounds = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
 
-        // 取得 textView 所有的內容，轉成可以修改的
+        // Get textView content
         let mutableStr = NSMutableAttributedString(attributedString: contentTextView.attributedText)
         
-        // 取得目前游標的位置
+        // Get cursor
         let selectedRange = contentTextView.selectedRange
         
         mutableStr.insert(NSAttributedString(string: "\n\0\(imageLink)\0\n\n"), at: selectedRange.location)
@@ -134,7 +131,7 @@ class PublishArticleTableViewCell: UITableViewCell {
                 
             } else {
                 
-                HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
+                HandleInputResult.nameEmpty.messageHUD
                 
             }
             

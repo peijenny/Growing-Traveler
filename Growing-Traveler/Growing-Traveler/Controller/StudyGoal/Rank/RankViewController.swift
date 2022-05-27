@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class RankViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var rankTableView: UITableView! {
         
         didSet {
@@ -26,6 +26,7 @@ class RankViewController: UIViewController {
     
     @IBOutlet weak var rankCircleView: UIView!
     
+    // MARK: - Property
     var friendManager = FriendManager()
     
     var blockadeList: [String] = []
@@ -40,6 +41,7 @@ class RankViewController: UIViewController {
         
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -80,6 +82,16 @@ class RankViewController: UIViewController {
         
     }
     
+    // MARK: - Set UI
+    func registerTableViewCell() {
+        
+        rankTableView.register(
+            UINib(nibName: String(describing: RankTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: RankTableViewCell.self))
+        
+    }
+    
+    // MARK: - Method
     func fetchUserFriendData() {
         
         friendManager.fetchFriendListData(
@@ -97,7 +109,7 @@ class RankViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
                 
@@ -131,7 +143,7 @@ class RankViewController: UIViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -139,16 +151,9 @@ class RankViewController: UIViewController {
         
     }
     
-    func registerTableViewCell() {
-        
-        rankTableView.register(
-            UINib(nibName: String(describing: RankTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: RankTableViewCell.self))
-        
-    }
-    
 }
 
+// MARK: - TableView delegate / dataSource
 extension RankViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

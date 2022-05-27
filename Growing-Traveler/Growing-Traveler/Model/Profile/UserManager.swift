@@ -9,21 +9,18 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import PKHUD
 
 class UserManager {
     
     let database = Firestore.firestore().collection("user")
     
-    func fetchUsersData(completion: @escaping (Result<[UserInfo]>) -> Void) {
+    func fetchUsersInfo(completion: @escaping (Result<[UserInfo]>) -> Void) {
         
         var usersInfo: [UserInfo] = []
         
         database.getDocuments { snapshot, error in
             
             guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
                 
                 completion(Result.failure(error!))
                 
@@ -43,8 +40,6 @@ class UserManager {
                     
                 } catch {
                     
-                    print(error)
-                    
                     completion(Result.failure(error))
 
                 }
@@ -57,13 +52,11 @@ class UserManager {
         
     }
     
-    func fetchData(fetchUserID: String, completion: @escaping (Result<UserInfo>) -> Void) {
+    func fetchUserInfo(fetchUserID: String, completion: @escaping (Result<UserInfo>) -> Void) {
         
         database.document(fetchUserID).getDocument { snapshot, error in
             
             guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
                 
                 completion(Result.failure(error!))
                 
@@ -81,8 +74,6 @@ class UserManager {
                 
             } catch {
                 
-                print(error)
-                
                 completion(Result.failure(error))
                 
             }
@@ -91,15 +82,13 @@ class UserManager {
         
     }
     
-    func listenData(completion: @escaping (Result<UserInfo>) -> Void) {
+    func listenUserInfo(completion: @escaping (Result<UserInfo>) -> Void) {
         
         if !KeyToken().userID.isEmpty {
             
             database.document(KeyToken().userID).addSnapshotListener { snapshot, error in
                 
                 guard let snapshot = snapshot else {
-                    
-                    print("Error fetching document: \(error!)")
                     
                     completion(Result.failure(error!))
                     
@@ -117,8 +106,6 @@ class UserManager {
                     
                 } catch {
                     
-                    print(error)
-                    
                     completion(Result.failure(error))
                     
                 }
@@ -129,53 +116,45 @@ class UserManager {
         
     }
     
-    func updateData(user: UserInfo) {
+    func updateUserInfo(user: UserInfo) {
         
         do {
             
             if !KeyToken().userID.isEmpty {
                 
-                // 修改 使用者資料
                 try database.document(KeyToken().userID).setData(from: user, merge: true)
                 
             }
             
         } catch {
-
-            print(error)
             
-            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+            HandleResult.updateDataFailed.messageHUD
+            
         }
         
     }
     
-    func addData(user: UserInfo) {
+    func addUserInfo(user: UserInfo) {
         
         do {
             
-            // 新增使用者帳號
             try database.document(user.userID).setData(from: user, merge: true)
             
         } catch {
-
-            print(error)
             
-            HUD.flash(.labeledError(title: "新增失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+            HandleResult.addDataFailed.messageHUD
+            
         }
         
     }
     
-    func fetchshareNoteData(shareUserID: String, noteID: String, completion: @escaping (Result<Note>) -> Void) {
+    func fetchshareFriendNote(shareUserID: String, noteID: String, completion: @escaping (Result<Note>) -> Void) {
         
         database.document(shareUserID).collection("note")
             .whereField("noteID", isEqualTo: noteID)
             .getDocuments { snapshot, error in
             
             guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
                 
                 completion(Result.failure(error!))
                 
@@ -193,8 +172,6 @@ class UserManager {
                 
             } catch {
                 
-                print(error)
-                
                 completion(Result.failure(error))
                 
             }
@@ -203,7 +180,7 @@ class UserManager {
         
     }
     
-    func fetchUserNoteData(completion: @escaping (Result<[Note]>) -> Void) {
+    func fetchUserNote(completion: @escaping (Result<[Note]>) -> Void) {
         
         database.document(KeyToken().userID).collection("note")
             .getDocuments { snapshot, error in
@@ -211,8 +188,6 @@ class UserManager {
             var notes: [Note] = []
             
             guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
                 
                 return
                 
@@ -230,8 +205,6 @@ class UserManager {
                     
                 } catch {
                     
-                    print(error)
-                    
                     completion(Result.failure(error))
 
                 }
@@ -244,7 +217,7 @@ class UserManager {
         
     }
     
-    func updateUserNoteData(note: Note) {
+    func updateUserNote(note: Note) {
      
         do {
             
@@ -252,29 +225,25 @@ class UserManager {
                 .document(note.noteID).setData(from: note, merge: true)
             
         } catch {
-
-            print(error)
             
-            HUD.flash(.labeledError(title: "修改失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+            HandleResult.updateDataFailed.messageHUD
+            
         }
         
     }
     
-    func deleteUserNoteData(note: Note) {
+    func deleteUserNote(note: Note) {
         
-        database.document(KeyToken().userID).collection("note")
-        .document(note.noteID).delete { error in
+        database.document(KeyToken().userID).collection("note").document(note.noteID).delete { error in
             
-            if let error = error {
+            if error != nil {
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.deleteDataFailed.messageHUD
                 
             } else {
                 
-                print("Success")
+                HandleResult.deleteDataSuccessed.messageHUD
+                
             }
             
         }

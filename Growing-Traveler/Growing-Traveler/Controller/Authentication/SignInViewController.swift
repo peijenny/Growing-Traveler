@@ -11,6 +11,7 @@ import PKHUD
 
 class SignInViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var signTableView: UITableView! {
         
         didSet {
@@ -25,6 +26,7 @@ class SignInViewController: BaseViewController {
     
     @IBOutlet weak var backButton: UIButton!
     
+    // MARK: - Property
     var friendManager = FriendManager()
     
     var errorManager = ErrorManager()
@@ -37,9 +39,18 @@ class SignInViewController: BaseViewController {
     
     var isCheck = false
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        registerTableViewCell()
+        
+        setUIStyle()
+    }
+    
+    // MARK: - Set UI
+    func registerTableViewCell() {
+        
         signTableView.register(
             UINib(nibName: String(describing: SignInTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: SignInTableViewCell.self))
@@ -48,12 +59,18 @@ class SignInViewController: BaseViewController {
             UINib(nibName: String(describing: SignUpTableViewCell.self), bundle: nil),
             forCellReuseIdentifier: String(describing: SignUpTableViewCell.self))
         
+    }
+    
+    func setUIStyle() {
+        
         view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         backButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
+        
     }
 
+    // MARK: - Target / IBAction
     @IBAction func backAuthPage(_ sender: UIButton) {
         
         dismiss(animated: true, completion: nil)
@@ -62,6 +79,7 @@ class SignInViewController: BaseViewController {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -125,22 +143,6 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         
         return cell
-        
-    }
-    
-    @objc func signInWithEmail(sender: UIButton) {
-        
-        isCheck = true
-        
-        signTableView.reloadData()
-        
-    }
-    
-    @objc func signUpWithEmail(sender: UIButton) {
-        
-        isCheck = true
-        
-        signTableView.reloadData()
         
     }
     
@@ -230,12 +232,12 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
                     achievement: Achievement(
                         experienceValue: 0, completionGoals: [], loginDates: [today]), certification: [])
                 
-                self.userManager.addData(user: userInfo)
+                self.userManager.addUserInfo(user: userInfo)
                 
                 let friend = Friend(userID: user.uid, userName: signUpContent.userName,
                     friendList: [], blockadeList: [], applyList: [], deliveryList: [])
                 
-                self.friendManager.updateData(friend: friend)
+                self.friendManager.updateFriendList(friend: friend)
                 
                 KeyToken().userID = user.uid
 
@@ -246,6 +248,22 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
         }
+        
+    }
+    
+    @objc func signInWithEmail(sender: UIButton) {
+        
+        isCheck = true
+        
+        signTableView.reloadData()
+        
+    }
+    
+    @objc func signUpWithEmail(sender: UIButton) {
+        
+        isCheck = true
+        
+        signTableView.reloadData()
         
     }
     
@@ -261,6 +279,7 @@ extension SignInViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: - ImagePickerController delegate
 extension SignInViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(

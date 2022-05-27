@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class ChatViewController: BaseViewController {
     
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var chatTableView: UITableView! {
         
         didSet {
@@ -32,6 +32,7 @@ class ChatViewController: BaseViewController {
     
     var displayImageView = UIImageView()
     
+    // MARK: - Property
     var forumArticleManager = ForumArticleManager()
     
     var chatRoomManager = ChatRoomManager()
@@ -86,6 +87,7 @@ class ChatViewController: BaseViewController {
     
     var forumArticles: [ForumArticle] = []
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -134,26 +136,7 @@ class ChatViewController: BaseViewController {
         
     }
     
-    func scrollChatTableViewRow(chatMessage: Chat?) {
-        
-        title = "\(chatMessage?.friendName ?? "")"
-        
-        chatTableView.reloadData()
-        
-        if let messageCount = chatMessage?.messageContent.count {
-
-            if chatMessage?.messageContent.count != 0 {
-
-                let indexPath = IndexPath(row: messageCount - 1, section: 0)
-
-                chatTableView.scrollToRow(at: indexPath, at: .top, animated: false)
-
-            }
-
-        }
-        
-    }
-
+    // MARK: - Set UI
     func setNavigationItems() {
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -197,45 +180,10 @@ class ChatViewController: BaseViewController {
         
     }
     
-    @objc func friendInfoButton(sender: UIButton) {
-        
-        guard let viewController = UIStoryboard.chat.instantiateViewController(
-            withIdentifier: String(describing: UserInfoViewController.self)
-        ) as? UserInfoViewController else { return }
-        
-        viewController.deleteAccount = false
-        
-        viewController.selectUserID = friendID
-        
-        viewController.reportContentType = ReportContentType.chat.title
-        
-        viewController.blockContentType = BlockContentType.chat.title
-        
-        viewController.getFriendStatus = { [weak self] isBlock in
-            
-            guard let self = self else { return }
-            
-            if isBlock {
-                
-                self.friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
-                
-                self.friendStatusLabel.isHidden = false
-                
-                self.navigationController?.popViewController(animated: true)
-                
-            }
-            
-        }
-        
-        self.view.addSubview(viewController.view)
-
-        self.addChild(viewController)
-        
-    }
-    
+    // MARK: - Method
     func fetchFriendInfoData() {
         
-        userManager.fetchData(fetchUserID: friendID) { [weak self] result in
+        userManager.fetchUserInfo(fetchUserID: friendID) { [weak self] result in
             
             guard let self = self else { return }
 
@@ -255,8 +203,8 @@ class ChatViewController: BaseViewController {
 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+                HandleResult.readDataFailed.messageHUD
+                
             }
 
         }
@@ -285,7 +233,7 @@ class ChatViewController: BaseViewController {
                 
             case .failure:
 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
 
@@ -308,13 +256,33 @@ class ChatViewController: BaseViewController {
                 self.handleChatMessage(chatMessage: chatMessage)
                 
             case .failure:
-
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
+                HandleResult.readDataFailed.messageHUD
 
             }
 
         }
 
+    }
+    
+    func scrollChatTableViewRow(chatMessage: Chat?) {
+        
+        title = "\(chatMessage?.friendName ?? "")"
+        
+        chatTableView.reloadData()
+        
+        if let messageCount = chatMessage?.messageContent.count {
+
+            if chatMessage?.messageContent.count != 0 {
+
+                let indexPath = IndexPath(row: messageCount - 1, section: 0)
+
+                chatTableView.scrollToRow(at: indexPath, at: .top, animated: false)
+
+            }
+
+        }
+        
     }
     
     func handleChatMessage(chatMessage: Chat) {
@@ -339,7 +307,7 @@ class ChatViewController: BaseViewController {
     
     func fetchshareNoteData(shareUserID: String, noteID: String) {
         
-        userManager.fetchshareNoteData(shareUserID: shareUserID, noteID: noteID) { [weak self] result in
+        userManager.fetchshareFriendNote(shareUserID: shareUserID, noteID: noteID) { [weak self] result in
             
             guard let self = self else { return }
 
@@ -354,8 +322,8 @@ class ChatViewController: BaseViewController {
                 self.chatTableView.reloadData()
                 
             case .failure:
-
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                
+                HandleResult.readDataFailed.messageHUD
 
             }
             
@@ -381,19 +349,11 @@ class ChatViewController: BaseViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
         }
-        
-    }
-    
-    @IBAction func sendInputMessageButton(_ sender: UIButton) {
-        
-        guard let sendInput = snedInputTextView.text else { return }
-        
-        addMessageData(inputContent: sendInput)
         
     }
     
@@ -430,6 +390,51 @@ class ChatViewController: BaseViewController {
         
     }
     
+    // MARK: - Target / IBAction
+    @objc func friendInfoButton(sender: UIButton) {
+        
+        guard let viewController = UIStoryboard.chat.instantiateViewController(
+            withIdentifier: String(describing: UserInfoViewController.self)
+        ) as? UserInfoViewController else { return }
+        
+        viewController.deleteAccount = false
+        
+        viewController.selectUserID = friendID
+        
+        viewController.reportContentType = ReportContentType.chat.title
+        
+        viewController.blockContentType = BlockContentType.chat.title
+        
+        viewController.getFriendStatus = { [weak self] isBlock in
+            
+            guard let self = self else { return }
+            
+            if isBlock {
+                
+                self.friendStatusLabel.text = "此帳號已封鎖，無法發送訊息！"
+                
+                self.friendStatusLabel.isHidden = false
+                
+                self.navigationController?.popViewController(animated: true)
+                
+            }
+            
+        }
+        
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
+        
+    }
+    
+    @IBAction func sendInputMessageButton(_ sender: UIButton) {
+        
+        guard let sendInput = snedInputTextView.text else { return }
+        
+        addMessageData(inputContent: sendInput)
+        
+    }
+    
     @IBAction func sendImageButton(_ sender: UIButton) {
         
         let picker = UIImagePickerController()
@@ -442,6 +447,7 @@ class ChatViewController: BaseViewController {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -575,7 +581,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             
             if forumArticle.isEmpty {
                 
-                HUD.flash(.label("該文章已被刪除！"), delay: 0.5)
+                HandleResult.articleDelete.messageHUD
                 
             } else {
                 
@@ -591,6 +597,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: - ImagePickerController delegate
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
@@ -613,8 +620,8 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
                 case .failure:
 
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+                    HandleResult.readDataFailed.messageHUD
+                    
                 }
 
             })

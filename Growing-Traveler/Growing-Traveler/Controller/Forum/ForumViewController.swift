@@ -10,6 +10,7 @@ import PKHUD
 
 class ForumViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var articleTableView: UITableView! {
         
         didSet {
@@ -28,6 +29,7 @@ class ForumViewController: BaseViewController {
     
     @IBOutlet weak var articleBackgroundView: UIView!
     
+    // MARK: - Property
     var forumArticleManager = ForumArticleManager()
     
     var friendManager = FriendManager()
@@ -56,6 +58,7 @@ class ForumViewController: BaseViewController {
     
     var inputText: String?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -90,6 +93,7 @@ class ForumViewController: BaseViewController {
         
     }
     
+    // MARK: - Set UI
     func registerTableViewCell() {
         
         articleTableView.register(
@@ -105,28 +109,7 @@ class ForumViewController: BaseViewController {
 
     }
     
-    @objc func addForumArticle(sender: UIButton) {
-        
-        guard !KeyToken().userID.isEmpty else {
-
-            guard let authViewController = UIStoryboard.auth.instantiateViewController(
-                withIdentifier: String(describing: AuthenticationViewController.self)
-            ) as? AuthenticationViewController else { return }
-            
-            authViewController.modalPresentationStyle = .formSheet
-
-            present(authViewController, animated: true, completion: nil)
-            
-            return
-            
-        }
-
-        let viewController = PublishForumArticleViewController()
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
+    // MARK: - Method
     func fetchFriendBlockadeListData() {
         
         friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
@@ -147,7 +130,7 @@ class ForumViewController: BaseViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
                 
@@ -157,7 +140,7 @@ class ForumViewController: BaseViewController {
     
     func fetchUserInfoData() {
         
-        userManager.fetchUsersData { [weak self] result in
+        userManager.fetchUsersInfo { [weak self] result in
             
             guard let self = self else { return }
             
@@ -171,7 +154,7 @@ class ForumViewController: BaseViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -247,7 +230,7 @@ class ForumViewController: BaseViewController {
                 
             case .failure:
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -255,8 +238,32 @@ class ForumViewController: BaseViewController {
         
     }
     
+    // MARK: - Target / IBAction
+    @objc func addForumArticle(sender: UIButton) {
+        
+        guard !KeyToken().userID.isEmpty else {
+
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                withIdentifier: String(describing: AuthenticationViewController.self)
+            ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .formSheet
+
+            present(authViewController, animated: true, completion: nil)
+            
+            return
+            
+        }
+
+        let viewController = PublishForumArticleViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
 }
 
+// MARK: - TableView delegate / dataSource
 extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -333,6 +340,32 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let viewController = ArticleDetailViewController()
+        
+        let noSearchArticle = allForumArticles[indexPath.section][indexPath.row]
+        
+        let searchAllArticles = searchForumArticles.filter({ $0.forumType == forumType[indexPath.section].title })
+        
+        viewController.forumArticle = (inputText == nil) ? noSearchArticle : searchAllArticles[indexPath.row]
+
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return forumType[section].title
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 40.0
+        
+    }
+    
     @objc func showUserInfoButton(sender: UIButton) {
         
         let point = sender.convert(CGPoint.zero, to: articleTableView)
@@ -405,34 +438,9 @@ extension ForumViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        let viewController = ArticleDetailViewController()
-        
-        let noSearchArticle = allForumArticles[indexPath.section][indexPath.row]
-        
-        let searchAllArticles = searchForumArticles.filter({ $0.forumType == forumType[indexPath.section].title })
-        
-        viewController.forumArticle = (inputText == nil) ? noSearchArticle : searchAllArticles[indexPath.row]
-
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return forumType[section].title
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        return 40.0
-        
-    }
-    
 }
 
+// MARK: - search delegate
 extension ForumViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
