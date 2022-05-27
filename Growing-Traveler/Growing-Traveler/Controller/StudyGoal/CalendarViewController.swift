@@ -7,10 +7,10 @@
 
 import UIKit
 import FSCalendar
-import PKHUD
 
 class CalendarViewController: UIViewController {
-
+    
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var calendarView: FSCalendar! {
         
         didSet {
@@ -39,6 +39,7 @@ class CalendarViewController: UIViewController {
     
     @IBOutlet weak var calendarBackgroundView: UIView!
     
+    // MARK: - Property
     var studyGoalManager = StudyGoalManager()
     
     var studyGoals: [StudyGoal] = [] {
@@ -53,35 +54,15 @@ class CalendarViewController: UIViewController {
     
     var selectedDate = Date()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "成長日曆"
+        setUIStyle()
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        registerTableViewCell()
         
-        calendarBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
-        
-        displayTableView.register(
-            UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: TopTableViewCell.self))
-        
-        calendarView.appearance.titleWeekendColor = UIColor.lightGray
-        
-        calendarView.appearance.todayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
-        
-        calendarView.appearance.titleTodayColor = UIColor.white
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(
-           title: "", style: .plain, target: nil, action: nil)
-        
-        displayBackgroundView.isHidden = (userID == "") ? false : true
-        
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "yyyy.MM.dd"
-        
-        selectedDate = formatter.date(from: formatter.string(from: Date())) ?? Date()
+        showSelectedDateData()
 
         listenStudyGoalData()
         
@@ -101,25 +82,71 @@ class CalendarViewController: UIViewController {
         
     }
     
+    // MARK: - Set UI and default data
+    func setUIStyle() {
+        
+        title = "成長日曆"
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        
+        calendarBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
+        
+        calendarView.appearance.titleWeekendColor = UIColor.lightGray
+        
+        calendarView.appearance.todayColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
+        
+        calendarView.appearance.titleTodayColor = UIColor.white
+        
+        if KeyToken().userID.isEmpty {
+            
+            displayBackgroundView.isHidden = false
+        
+        } else {
+            
+            displayBackgroundView.isHidden = true
+        
+        }
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+    }
+    
+    func registerTableViewCell() {
+        
+        displayTableView.register(
+            UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: TopTableViewCell.self))
+        
+    }
+    
+    func showSelectedDateData() {
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        selectedDate = formatter.date(from: formatter.string(from: Date())) ?? Date()
+        
+    }
+    
+    // MARK: - Method
     func listenStudyGoalData() {
  
-        studyGoalManager.listenData { [weak self] result in
+        studyGoalManager.listenStudyGoals { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let data):
                 
-                strongSelf.studyGoals = strongSelf.handleStudyGoal(studyGoals: data)
+                self.studyGoals = self.handleStudyGoal(studyGoals: data)
 
-                strongSelf.displayTableView.reloadData()
+                self.displayTableView.reloadData()
                 
-            case .failure(let error):
+            case .failure:
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -147,14 +174,14 @@ class CalendarViewController: UIViewController {
 
 }
 
+// MARK: - calendar delegate / dataSource
 extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
-    // MARK: - calendar delegate
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
         calendarView.appearance.todayColor = UIColor.clear
         
-        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         selectedDate = date
         
@@ -164,6 +191,7 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -179,8 +207,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: TopTableViewCell.self), for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(TopTableViewCell.self)", for: indexPath)
 
         guard let cell = cell as? TopTableViewCell else { return cell }
         
@@ -205,11 +232,11 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
 
         viewController.getSelectedDate = { [weak self] selectedDate in
 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
-            strongSelf.selectedDate = selectedDate
+            self.selectedDate = selectedDate
 
-            strongSelf.listenStudyGoalData()
+            self.listenStudyGoalData()
 
         }
 

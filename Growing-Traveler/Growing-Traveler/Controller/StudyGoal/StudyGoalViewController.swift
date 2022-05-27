@@ -6,11 +6,11 @@
 //
 
 import UIKit
-import PKHUD
 import Lottie
 
 class StudyGoalViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var studyGoalTableView: UITableView! {
         
         didSet {
@@ -25,136 +25,79 @@ class StudyGoalViewController: UIViewController {
     
     @IBOutlet weak var addGoalButton: UIButton!
     
-    @IBOutlet var statusButton: [UIButton]!
+    @IBOutlet var statusButtons: [UIButton]!
     
-    @IBOutlet weak var underlineView: UIView!
+    @IBOutlet weak var selectedLineBackgroundView: UIView!
     
     @IBOutlet weak var headerAnimationView: UIView!
     
     @IBOutlet weak var studyGoalBackgroundView: UIView!
     
-    var lottieAnimation = AnimationView()
+    var selectedLineView = UIView()
     
-    var selectLineView = UIView()
+    var animationView = AnimationView()
     
+    // MARK: - Property
     var studyGoalManager = StudyGoalManager()
     
     var userManager = UserManager()
+    
+    var selectedStatus: StatusType = .running
     
     var studyGoals: [StudyGoal] = []
     
     var user: UserInfo?
     
-    var titleText = StatusType.running.title
-    
+    private let dateFormatter: DateFormatter = {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        return dateFormatter
+        
+    }()
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUIStyle()
         
-        setHeaserLottieView()
+        setHeaderLottieView()
         
         setSelectLineView()
         
-        setNavigationBar()
+        setNavigationItems()
         
         registerTableViewCell()
 
-    }
- 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        lottieAnimation.play()
-        
-        fetchUserData()
-        
-        listenData(status: titleText)
-        
-        // MARK: login out and not login behavior
-        handleUserIDIsEmpty()
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        // MARK: - set add study goal button style
         addGoalButton.imageView?.contentMode = .scaleAspectFill
-
+        
         addGoalButton.layer.cornerRadius = addGoalButton.frame.width / 2
         
     }
     
-    func fetchUserData() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        userManager.listenData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-            case .success(let user):
-                
-                strongSelf.user = user
-                
-                // MARK: - calculation number of times
-                let dateFormatter = DateFormatter()
-
-                dateFormatter.dateFormat = "yyyy.MM.dd"
-
-                let today = dateFormatter.string(from: Date())
-
-                guard var user = strongSelf.user else { return }
-                
-                if user.achievement.loginDates.filter({ $0 == today }).isEmpty {
-                    
-                    user.achievement.loginDates.append(today)
-                    
-                    strongSelf.userManager.updateData(user: user)
-                    
-                }
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
+        animationView.play()
+        
+        fetchUserInfo()
+        
+        listenStudyGoals(status: selectedStatus)
+        
+        handleUserSignOut()
         
     }
     
-    func listenData(status: String) {
-        
-        studyGoalManager.listenData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let data):
-                
-                strongSelf.studyGoals = strongSelf.handleSelectStudyGoals(status: status, studyGoals: data)
-                
-                strongSelf.studyGoalBackgroundView.isHidden = (strongSelf.studyGoals.isEmpty) ? false : true
-                
-                strongSelf.studyGoalTableView.reloadData()
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
-    func setNavigationBar() {
+    // MARK: - Set UI
+    func setNavigationItems() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage.asset(.calendar), style: .plain, target: self, action: #selector(pushToCalenderPage))
@@ -164,6 +107,168 @@ class StudyGoalViewController: UIViewController {
         
     }
     
+    func registerTableViewCell() {
+        
+        for index in 0..<TableViewCellType.allCases.count {
+            
+            studyGoalTableView.register(
+                UINib(nibName: TableViewCellType.allCases[index].identifier, bundle: nil),
+                forCellReuseIdentifier: TableViewCellType.allCases[index].identifier)
+            
+        }
+        
+    }
+    
+    func setSelectLineView() {
+        
+        selectedLineBackgroundView.addSubview(selectedLineView)
+        
+        selectedLineView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            selectedLineView.topAnchor.constraint(equalTo: selectedLineBackgroundView.topAnchor),
+            selectedLineView.centerXAnchor.constraint(equalTo: selectedLineBackgroundView.centerXAnchor),
+            selectedLineView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / CGFloat(3.0)),
+            selectedLineView.heightAnchor.constraint(equalToConstant: selectedLineBackgroundView.frame.height)
+        ])
+        
+    }
+    
+    func setHeaderLottieView() {
+        
+        animationView = AnimationView(name: "101546-study-abroad")
+        
+        headerAnimationView.addSubview(animationView)
+        
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            animationView.centerXAnchor.constraint(equalTo: headerAnimationView.centerXAnchor),
+            animationView.centerYAnchor.constraint(equalTo: headerAnimationView.centerYAnchor, constant: 50),
+            animationView.widthAnchor.constraint(equalToConstant: headerAnimationView.frame.height * CGFloat(0.8)),
+            animationView.heightAnchor.constraint(equalToConstant: headerAnimationView.frame.height * CGFloat(0.8))
+        ])
+        
+        animationView.loopMode = .loop
+        
+    }
+    
+    func setUIStyle() {
+        
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
+        
+        addGoalButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
+        
+        addGoalButton.tintColor = UIColor.white
+        
+        studyGoalTableView.backgroundColor = UIColor.clear
+        
+        studyGoalBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
+        
+        selectedLineBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        
+        selectedLineView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
+        
+        headerAnimationView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        
+        animationView.backgroundColor = UIColor.clear
+        
+        animationView.contentMode = .scaleAspectFit
+        
+        for index in 0..<StatusType.allCases.count {
+            
+            if StatusType.allCases[index] == selectedStatus {
+                
+                selectStatusColorButton(selectButton: statusButtons[index])
+                
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Method
+    func fetchUserInfo() {
+        
+        userManager.listenUserInfo { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let user):
+                
+                self.user = user
+                
+                self.handleSignInNumberOfTime()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    func handleSignInNumberOfTime() {
+        
+        let today = dateFormatter.string(from: Date())
+        
+        guard var user = user else { return }
+        
+        if user.achievement.loginDates.filter({ $0 == today }).isEmpty {
+            
+            user.achievement.loginDates.append(today)
+            
+            userManager.updateUserInfo(user: user)
+            
+        }
+        
+    }
+    
+    func listenStudyGoals(status: StatusType) {
+        
+        studyGoalManager.listenStudyGoals { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let data):
+                
+                self.studyGoals = self.handleSelectStudyGoals(status: status.title, studyGoals: data)
+                
+                self.studyGoalBackgroundView.isHidden = !self.studyGoals.isEmpty
+                
+                self.studyGoalTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    func selectStatusColorButton(selectButton: UIButton) {
+        
+        for index in 0..<statusButtons.count {
+            
+            statusButtons[index].backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+            
+            statusButtons[index].tintColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
+            
+        }
+        
+        selectButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
+        
+    }
+    
+    // MARK: - Target / IBAction
     @objc func pushToRankPage(sender: UIButton) {
         
         let viewController = UIStoryboard.studyGoal.instantiateViewController(
@@ -174,7 +279,7 @@ class StudyGoalViewController: UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
         
     }
-
+    
     @objc func pushToCalenderPage(sender: UIButton) {
         
         let viewController = UIStoryboard.studyGoal.instantiateViewController(
@@ -188,51 +293,55 @@ class StudyGoalViewController: UIViewController {
     
     @IBAction func addStudyGoalButton(_ sender: UIButton) {
         
-        guard userID != "" else {
+        guard !KeyToken().userID.isEmpty else {
             
             guard let authViewController = UIStoryboard.auth.instantiateViewController(
                 withIdentifier: String(describing: AuthenticationViewController.self)
             ) as? AuthenticationViewController else { return }
             
             authViewController.modalPresentationStyle = .formSheet
-
+            
             present(authViewController, animated: true, completion: nil)
             
             return
             
         }
         
-        pushToPlanStudyGoalPage(studyGoal: nil)
+        pushToPlanStudyGoalPage()
         
     }
-
+    
     @IBAction func handleStatusButton(_ sender: UIButton) {
         
-        handleUserIDIsEmpty()
+        handleUserSignOut()
         
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
-
-            guard let strongSelf = self else { return }
+        UIView.animate(withDuration: 0.3) { [weak self] in
             
-            strongSelf.selectLineView.frame.origin.x = sender.frame.origin.x
+            guard let self = self else { return }
             
-        })
+            self.selectedLineView.frame.origin.x = sender.frame.origin.x
+            
+        }
         
         selectStatusColorButton(selectButton: sender)
         
-        if let titleText = sender.titleLabel?.text {
+        for index in 0..<statusButtons.count {
             
-            listenData(status: titleText)
-            
-            self.titleText = titleText
+            if sender == statusButtons[index] {
+                
+                selectedStatus = StatusType.allCases[index]
+                
+                listenStudyGoals(status: selectedStatus)
+                
+            }
             
         }
         
     }
     
-    func handleUserIDIsEmpty() {
+    func handleUserSignOut() {
         
-        if userID == "" {
+        if KeyToken().userID.isEmpty {
             
             studyGoalBackgroundView.isHidden = false
             
@@ -244,7 +353,7 @@ class StudyGoalViewController: UIViewController {
         
     }
     
-    func pushToPlanStudyGoalPage(studyGoal: StudyGoal?) {
+    func pushToPlanStudyGoalPage(studyGoal: StudyGoal? = nil) {
         
         let viewController = UIStoryboard.studyGoal.instantiateViewController(
             withIdentifier: String(describing: PlanStudyGoalViewController.self))
@@ -259,46 +368,65 @@ class StudyGoalViewController: UIViewController {
     
     func handleSelectStudyGoals(status: String, studyGoals: [StudyGoal]) -> [StudyGoal] {
         
-        var resultData: [StudyGoal] = []
+        var resultStudyGoals: [StudyGoal] = []
         
-        if status == StatusType.pending.title {
-
-            resultData = studyGoals.filter({
-                
-                let isPending = $0.studyPeriod.startDate > Date().timeIntervalSince1970
-                
-                let notStartDoing = $0.studyItems.allSatisfy({ $0.isCompleted == false })
-                
-                return (notStartDoing && isPending) ? true : false
-                
-            })
+        for index in 0..<studyGoals.count {
             
-        } else if status == StatusType.running.title {
+            let isPending = studyGoals[index].studyItems.allSatisfy({ !$0.isCompleted })
             
-            resultData = studyGoals.filter({
-                
-                let isRunning = $0.studyPeriod.startDate > Date().timeIntervalSince1970
-                
-                let isStartDoing = $0.studyItems.allSatisfy({ $0.isCompleted == true })
-                
-                let isDoing = $0.studyItems.allSatisfy({ $0.isCompleted == false })
-                
-                return (isStartDoing || isDoing && isRunning) ? false : true
-
-            })
+            let isFinish = studyGoals[index].studyItems.allSatisfy({ $0.isCompleted })
             
-        } else {
+            let startDate = Date(timeIntervalSince1970: studyGoals[index].studyPeriod.startDate)
             
-            resultData = studyGoals.filter({ $0.studyItems.allSatisfy({ $0.isCompleted == true }) })
-
+            let today = dateFormatter.date(from: dateFormatter.string(from: Date())) ?? Date()
+            
+            if status == StatusType.pending.title && isPending && startDate > today {
+                
+                resultStudyGoals.append(studyGoals[index])
+                
+            } else if status == StatusType.running.title && !isFinish && startDate <= today {
+                
+                resultStudyGoals.append(studyGoals[index])
+                
+            } else if status == StatusType.finished.title && isFinish {
+                
+                resultStudyGoals.append(studyGoals[index])
+                
+            }
+            
         }
         
-        return resultData
+        return resultStudyGoals
         
     }
     
+    enum TableViewCellType: CaseIterable {
+        
+        case header
+        
+        case body
+        
+        case footer
+        
+        var identifier: String {
+            
+            switch self {
+                
+            case .header: return "\(TopTableViewCell.self)"
+                
+            case .body: return "\(StudyGoalTableViewCell.self)"
+                
+            case .footer: return "\(BottomTableViewCell.self)"
+                
+            }
+            
+        }
+        
+    }
+
 }
 
+// MARK: - TableView delegate / dataSource
 extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -315,158 +443,33 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = UITableViewCell()
+        var cell: UITableViewCell
         
-        if indexPath.row == 0 {
+        switch indexPath.row {
             
-            cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: TopTableViewCell.self), for: indexPath)
-
-            guard let cell = cell as? TopTableViewCell else { return cell }
+        case 0:
             
-            cell.showStudyGoalHeader(studyGoal: studyGoals[indexPath.section], isCalendar: false)
+            cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellType.header.identifier, for: indexPath)
             
-        } else if indexPath.row - 1 < studyGoals[indexPath.section].studyItems.count {
+            showStudyGoalHeaderCell(indexPath: indexPath, cell)
             
-            cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: StudyGoalTableViewCell.self), for: indexPath)
-
-            guard let cell = cell as? StudyGoalTableViewCell else { return cell }
+        case tableView.numberOfRows(inSection: indexPath.section) - 1:
             
-            cell.checkButton.addTarget(self, action: #selector(checkItemButton), for: .touchUpInside)
+            cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellType.footer.identifier, for: indexPath)
             
-            cell.checkIsCompleted(isCompleted: studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted)
-
-            cell.showStudyItem(studyItem: studyGoals[indexPath.section].studyItems[indexPath.row - 1])
+            showStudyGoalFooterCell(indexPath: indexPath, cell)
             
-        } else {
+        default:
             
-            cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: BottomTableViewCell.self), for: indexPath)
-
-            guard let cell = cell as? BottomTableViewCell else { return cell }
+            cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellType.body.identifier, for: indexPath)
             
-            cell.showStudyGoalBottom(studyGoal: studyGoals[indexPath.section])
-            
-            cell.deleteButton.addTarget(self, action: #selector(deleteStudyGoalButton), for: .touchUpInside)
+            showStudyGoalItemCell(indexPath: indexPath, cell)
             
         }
         
         cell.selectionStyle = .none
         
         return cell
-        
-    }
-    
-    @objc func deleteStudyGoalButton(sender: UIButton) {
-        
-        let point = sender.convert(CGPoint.zero, to: studyGoalTableView)
-
-        if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
-            
-            let alertController = UIAlertController(
-                title: "刪除個人學習計劃", message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
-                preferredStyle: .alert)
-            
-            let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
-                
-                guard let strongSelf = self else { return }
-                
-                strongSelf.studyGoalManager.deleteData(studyGoal: strongSelf.studyGoals[indexPath.section])
-                
-                strongSelf.studyGoals.remove(at: indexPath.section)
-                
-                strongSelf.studyGoalTableView.beginUpdates()
-                
-                let indexSet = NSMutableIndexSet()
-                
-                indexSet.add(indexPath.section)
-
-                strongSelf.studyGoalTableView.deleteSections(
-                    indexSet as IndexSet, with: UITableView.RowAnimation.left)
-
-                strongSelf.studyGoalTableView.endUpdates()
-                
-                HUD.flash(.labeledSuccess(title: "計劃已刪除！", subtitle: nil), delay: 0.5)
-                
-            }
-            
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel)
-            
-            alertController.addAction(agreeAction)
-            
-            alertController.addAction(cancelAction)
-            
-            present(alertController, animated: true, completion: nil)
-            
-        }
-    }
-    
-    @objc func checkItemButton(sender: UIButton) {
-        
-        let point = sender.convert(CGPoint.zero, to: studyGoalTableView)
-
-        if let indexPath = studyGoalTableView.indexPathForRow(at: point) {
-            
-            guard var user = user else { return }
-
-            if sender.tintColor?.cgColor == UIColor.clear.cgColor {
-                
-                sender.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
-                
-                studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted = true
-                
-                user.achievement.experienceValue += 50
-
-            } else {
-                
-                sender.tintColor = UIColor.clear
-                
-                studyGoals[indexPath.section].studyItems[indexPath.row - 1].isCompleted = false
-                
-                user.achievement.experienceValue -= 50
-
-            }
-            
-            studyGoalManager.updateData(studyGoal: studyGoals[indexPath.section])
-            
-            if studyGoals[indexPath.section].studyItems.allSatisfy({ $0.isCompleted == true}) {
-                
-                HUD.flash(.labeledSuccess(title: "學習項目完成！", subtitle: nil))
-                
-                if user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).isEmpty {
-                    
-                    user.achievement.completionGoals.append(studyGoals[indexPath.section].id)
-                    
-                }
-                
-            } else {
-                
-                if !user.achievement.completionGoals.filter({ $0 == studyGoals[indexPath.section].id }).isEmpty {
-                    
-                    var deleteIndex = Int()
-                    
-                    for index in 0..<user.achievement.completionGoals.count {
-
-                        if user.achievement.completionGoals[index] == studyGoals[indexPath.section].id {
-
-                            deleteIndex = index
-                            
-                        }
-
-                    }
-                    
-                    user.achievement.completionGoals.remove(at: deleteIndex)
-                    
-                }
-                
-            }
-            
-            listenData(status: titleText)
-            
-            userManager.updateData(user: user)
-            
-        }
         
     }
     
@@ -480,89 +483,138 @@ extension StudyGoalViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     
+    private func showStudyGoalHeaderCell(indexPath: IndexPath, _ cell: UITableViewCell) {
+        
+        guard let cell = cell as? TopTableViewCell else { return }
+        
+        cell.showStudyGoalHeader(studyGoal: studyGoals[indexPath.section], isCalendar: false)
+        
+    }
+    
+    private func showStudyGoalItemCell(indexPath: IndexPath, _ cell: UITableViewCell) {
+        
+        guard let cell = cell as? StudyGoalTableViewCell else { return }
+        
+        cell.delegate = self
+        
+        // study item row - indexPath.row minus header row cell
+        let studyItemRow = indexPath.row - 1
+        
+        cell.checkIsCompleted(isCompleted: studyGoals[indexPath.section].studyItems[studyItemRow].isCompleted)
+        
+        cell.showStudyItem(studyItem: studyGoals[indexPath.section].studyItems[studyItemRow])
+        
+    }
+    
+    private func showStudyGoalFooterCell(indexPath: IndexPath, _ cell: UITableViewCell) {
+        
+        guard let cell = cell as? BottomTableViewCell else { return }
+        
+        cell.showStudyGoalBottom(studyGoal: studyGoals[indexPath.section])
+        
+        cell.deleteButton.addTarget(self, action: #selector(deleteStudyGoalButton), for: .touchUpInside)
+        
+    }
+    
+    @objc func deleteStudyGoalButton(sender: UIButton) {
+        
+        let point = sender.convert(CGPoint.zero, to: studyGoalTableView)
+        
+        guard let indexPath = studyGoalTableView.indexPathForRow(at: point) else { return }
+        
+        let alertController = UIAlertController(
+            title: "刪除個人學習計劃", message: "請問確定刪除此計劃嗎？\n 刪除行為不可逆，將無法再瀏覽此計劃！",
+            preferredStyle: .alert)
+        
+        let agreeAction = UIAlertAction(title: "確認", style: .destructive) { [weak self] _ in
+            
+            guard let self = self else { return }
+            
+            self.deleteStudyGoal(indexPath: indexPath)
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        
+        alertController.addAction(agreeAction)
+        
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func deleteStudyGoal(indexPath: IndexPath) {
+        
+        studyGoalManager.deleteStudyGoal(studyGoal: studyGoals[indexPath.section])
+        
+        studyGoals.remove(at: indexPath.section)
+        
+        let indexSet = NSMutableIndexSet()
+        
+        indexSet.add(indexPath.section)
+        
+        studyGoalTableView.deleteSections(indexSet as IndexSet, with: UITableView.RowAnimation.left)
+        
+    }
+    
+    func handleStudyItemComplete(isCompleted: Bool, indexPath: IndexPath) {
+       
+        // study item row - indexPath.row minus header row cell
+        let studyItemRow = indexPath.row - 1
+        
+        studyGoals[indexPath.section].studyItems[studyItemRow].isCompleted = isCompleted
+        
+        user?.achievement.experienceValue += isCompleted ? 50: -50
+        
+        studyGoalManager.updateStudyGoal(studyGoal: studyGoals[indexPath.section])
+        
+    }
+    
+    func handleStudyItemFinish(indexPath: IndexPath) {
+        
+        guard var user = user else { return }
+        
+        let studyGoalsID = user.achievement.completionGoals
+        
+        let allSatisfy = studyGoals[indexPath.section].studyItems.allSatisfy({ $0.isCompleted })
+        
+        let isEmpty = studyGoalsID.filter({ $0 == studyGoals[indexPath.section].id }).isEmpty
+        
+        if allSatisfy && isEmpty {
+            
+            HandleResult.finishedStudyItem.messageHUD
+            
+            user.achievement.completionGoals.append(studyGoals[indexPath.section].id)
+            
+        } else if allSatisfy && !isEmpty {
+            
+            HandleResult.finishedStudyItem.messageHUD
+            
+        } else if !allSatisfy && !isEmpty {
+            
+            let deleteIndex = studyGoalsID.getArrayIndex(studyGoals[indexPath.section].id)[0]
+            
+            user.achievement.completionGoals.remove(at: deleteIndex)
+            
+        }
+        
+        userManager.updateUserInfo(user: user)
+        
+    }
+    
 }
 
-// MARK: - set StudyGoal page UI style
-extension StudyGoalViewController {
+// MARK: - Check study item is complete delegate
+extension StudyGoalViewController: CheckStudyItemDelegate {
     
-    func registerTableViewCell() {
+    func checkItemCompleted(studyGoalTableViewCell: StudyGoalTableViewCell, studyItemCompleted: Bool) {
         
-        studyGoalTableView.register(
-            UINib(nibName: String(describing: TopTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: TopTableViewCell.self))
+        guard let indexPath = studyGoalTableView.indexPath(for: studyGoalTableViewCell) else { return }
         
-        studyGoalTableView.register(
-            UINib(nibName: String(describing: StudyGoalTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: StudyGoalTableViewCell.self))
+        handleStudyItemComplete(isCompleted: studyItemCompleted, indexPath: indexPath)
         
-        studyGoalTableView.register(
-            UINib(nibName: String(describing: BottomTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: BottomTableViewCell.self))
-        
-    }
-    
-    func setSelectLineView() {
-        
-        let viewWidth = UIScreen.main.bounds.width / CGFloat(3.0)
-        
-        selectLineView.frame = CGRect(x: viewWidth, y: 0, width: viewWidth, height: underlineView.frame.height)
-        
-        underlineView.addSubview(selectLineView)
-        
-    }
-    
-    func setHeaserLottieView() {
-        
-        lottieAnimation = AnimationView(name: "101546-study-abroad")
-
-        headerAnimationView.addSubview(lottieAnimation)
-        
-        lottieAnimation.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            lottieAnimation.centerXAnchor.constraint(equalTo: headerAnimationView.centerXAnchor),
-            lottieAnimation.centerYAnchor.constraint(equalTo: headerAnimationView.centerYAnchor, constant: 50),
-            lottieAnimation.widthAnchor.constraint(equalToConstant: headerAnimationView.frame.height * CGFloat(0.8)),
-            lottieAnimation.heightAnchor.constraint(equalToConstant: headerAnimationView.frame.height * CGFloat(0.8))
-        ])
-        
-        lottieAnimation.loopMode = .loop
-
-    }
-    
-    func setUIStyle() {
-        
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
-        
-        addGoalButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
-        
-        addGoalButton.tintColor = UIColor.white
-        
-        studyGoalTableView.backgroundColor = UIColor.clear
-        
-        selectStatusColorButton(selectButton: statusButton[1])
-        
-        studyGoalBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
-        
-        underlineView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
-        
-        selectLineView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
-        
-        headerAnimationView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
-        
-        lottieAnimation.backgroundColor = UIColor.clear
-        
-        lottieAnimation.contentMode = .scaleAspectFit
-        
-    }
-    
-    func selectStatusColorButton(selectButton: UIButton) {
-        
-        _ = statusButton.map({ $0.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText) })
-        
-        _ = statusButton.map({ $0.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText) })
-        
-        selectButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        handleStudyItemFinish(indexPath: indexPath)
         
     }
     

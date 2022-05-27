@@ -32,7 +32,7 @@ class ReceiveMessageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        receiveBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.gray.hexText)
+        receiveBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.gray.hexText)
         
         receiveBackgroundView.cornerRadius = 15
         

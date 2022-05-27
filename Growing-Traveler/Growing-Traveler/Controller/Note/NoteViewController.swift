@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class NoteViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var noteTableView: UITableView! {
         
         didSet {
@@ -28,24 +28,22 @@ class NoteViewController: BaseViewController {
     
     @IBOutlet weak var bottomBackgroundView: UIView!
     
+    // MARK: - Property
     var userManager = UserManager()
     
     var notes: [Note] = []
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUIStyle()
+        
         setNavigationItems()
         
-        noteTableView.register(
-            UINib(nibName: String(describing: NoteTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: NoteTableViewCell.self))
+        registerTableViewCell()
         
         noteSearchBar.delegate = self
-        
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
-        
-        bottomBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
         
     }
     
@@ -56,39 +54,12 @@ class NoteViewController: BaseViewController {
         
     }
     
-    func fetchNoteData() {
+    // MARK: - Set UI
+    func setUIStyle() {
         
-        userManager.fetchUserNoteData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let notes):
-                
-                strongSelf.notes = notes
-                
-                if strongSelf.notes.isEmpty {
-                    
-                    strongSelf.noteBackgroundView.isHidden = false
-                    
-                } else {
-                    
-                    strongSelf.noteBackgroundView.isHidden = true
-                    
-                }
-                
-                strongSelf.noteTableView.reloadData()
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        
+        bottomBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
     
@@ -99,6 +70,50 @@ class NoteViewController: BaseViewController {
         
     }
     
+    func registerTableViewCell() {
+        
+        noteTableView.register(
+            UINib(nibName: String(describing: NoteTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: NoteTableViewCell.self))
+        
+    }
+    
+    // MARK: - Method
+    func fetchNoteData() {
+        
+        userManager.fetchUserNote { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let notes):
+                
+                self.notes = notes
+                
+                if self.notes.isEmpty {
+                    
+                    self.noteBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    self.noteBackgroundView.isHidden = true
+                    
+                }
+                
+                self.noteTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Target / IBAction
     @objc func addNewNote(sender: UIButton) {
         
         guard let viewController = UIStoryboard.note.instantiateViewController(
@@ -111,6 +126,7 @@ class NoteViewController: BaseViewController {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,7 +157,7 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
         
         viewController.noteID = notes[indexPath.row].noteID
         
-        viewController.noteUserID = userID
+        viewController.noteUserID = KeyToken().userID
         
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -171,7 +187,7 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
 
                 let note = self.notes[indexPath.row]
                 
-                self.userManager.deleteUserNoteData(note: note)
+                self.userManager.deleteUserNote(note: note)
                 
                 self.notes.remove(at: indexPath.row)
                 
@@ -197,11 +213,12 @@ extension NoteViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: - SearchBar delegate
 extension NoteViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if searchText == "" {
+        if searchText.isEmpty {
             
             fetchNoteData()
             

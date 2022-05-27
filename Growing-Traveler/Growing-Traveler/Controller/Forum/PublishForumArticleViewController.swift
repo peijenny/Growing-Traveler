@@ -6,43 +6,14 @@
 //
 
 import UIKit
-import PKHUD
 
 class PublishForumArticleViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     var publishArticleTableView = UITableView()
     
-    var selectCategoryItem: CategoryItem? {
-        
-        didSet {
-        
-            publishArticleTableView.reloadData()
-            
-        }
-        
-    }
-
-    var imageLink: String? {
-        
-        didSet {
-        
-            publishArticleTableView.reloadData()
-            
-        }
-        
-    }
-    
-    var contentArray: [String] = []
-    
-    var checkArticleFullIn = false
-    
+    // MARK: - Property
     var forumArticleManager = ForumArticleManager()
-    
-    var inputTitle: String?
-    
-    var forumType: String?
-    
-    var isModify = false
     
     var modifyForumArticle: ForumArticle? {
         
@@ -54,10 +25,39 @@ class PublishForumArticleViewController: BaseViewController {
         
     }
     
+    var selectCategoryItem: CategoryItem? {
+        
+        didSet {
+        
+            publishArticleTableView.reloadData()
+            
+        }
+        
+    }
+    
+    var contentArray: [String] = []
+    
+    var imageLink: String? {
+        
+        didSet {
+        
+            publishArticleTableView.reloadData()
+            
+        }
+        
+    }
+    
+    var inputTitle: String?
+    
+    var forumType: String?
+    
+    var checkArticleFullIn = false
+    
+    var isModify = false
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
         
         if modifyForumArticle == nil {
             
@@ -71,10 +71,11 @@ class PublishForumArticleViewController: BaseViewController {
             
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .done, target: self, action: #selector(submitButton))
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         setTableView()
+        
+        setNavigationItem()
 
     }
     
@@ -92,14 +93,43 @@ class PublishForumArticleViewController: BaseViewController {
         
     }
     
-    @objc func submitButton(sender: UIButton) {
+    // MARK: - Set UI
+    func setTableView() {
         
-        checkArticleFullIn = true
+        publishArticleTableView.backgroundColor = UIColor.white
         
-        publishArticleTableView.reloadData()
+        publishArticleTableView.separatorStyle = .none
+        
+        view.addSubview(publishArticleTableView)
+        
+        publishArticleTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            publishArticleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            publishArticleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -140.0)
+        ])
+        
+        publishArticleTableView.register(
+            UINib(nibName: String(describing: PublishArticleTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: PublishArticleTableViewCell.self)
+        )
+
+        publishArticleTableView.delegate = self
+        
+        publishArticleTableView.dataSource = self
         
     }
     
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done, target: self, action: #selector(submitButton))
+        
+    }
+    
+    // MARK: - Method
     func handleArticleContentData() {
         
         var articleContents: [ArticleContent] = []
@@ -141,12 +171,12 @@ class PublishForumArticleViewController: BaseViewController {
                 let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
                 
                 let forumArticle = ForumArticle(
-                    id: forumID, userID: userID, createTime: createTime, title: inputTitle,
+                    id: forumID, userID: KeyToken().userID, createTime: createTime, title: inputTitle,
                     category: selectCategoryItem, content: articleContents, forumType: forumType)
                 
                 forumArticleManager.addData(forumArticle: forumArticle)
                 
-                HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+                HandleResult.addDataSuccess.messageHUD
                 
             } else {
                 
@@ -162,7 +192,7 @@ class PublishForumArticleViewController: BaseViewController {
                 
                 forumArticleManager.updateArticleData(forumArticle: modifyForumArticle)
                 
-                HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                HandleResult.updateDataSuccess.messageHUD
                 
             }
             
@@ -174,36 +204,18 @@ class PublishForumArticleViewController: BaseViewController {
 
     }
     
-    func setTableView() {
+    // MARK: - Target / IBAction
+    @objc func submitButton(sender: UIButton) {
         
-        publishArticleTableView.backgroundColor = UIColor.white
+        checkArticleFullIn = true
         
-        publishArticleTableView.separatorStyle = .none
-        
-        view.addSubview(publishArticleTableView)
-        
-        publishArticleTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            publishArticleTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            publishArticleTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            publishArticleTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            publishArticleTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -140.0)
-        ])
-        
-        publishArticleTableView.register(
-            UINib(nibName: String(describing: PublishArticleTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: PublishArticleTableViewCell.self)
-        )
-
-        publishArticleTableView.delegate = self
-        
-        publishArticleTableView.dataSource = self
+        publishArticleTableView.reloadData()
         
     }
 
 }
 
+// MARK: - TableView delegate / dataSource
 extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -312,11 +324,9 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
         
         if #available(iOS 15.0, *) {
 
-            if let sheetPresentationController = navController.sheetPresentationController {
-
-                sheetPresentationController.detents = [.medium()]
-
-            }
+            guard let sheetPresentationController = navController.sheetPresentationController else { return }
+            
+            sheetPresentationController.detents = [.medium()]
 
         } else {
             
@@ -330,6 +340,7 @@ extension PublishForumArticleViewController: UITableViewDelegate, UITableViewDat
 
 }
 
+// MARK: - ImagePickerController delegate
 extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
@@ -342,20 +353,18 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
 
-                    strongSelf.imageLink = imageLink
+                    self.imageLink = imageLink
 
-                case .failure(let error):
+                case .failure:
 
-                    print(error)
+                    HandleResult.readDataFailed.messageHUD
                     
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
                 }
 
             })
@@ -368,6 +377,7 @@ extension PublishForumArticleViewController: UIImagePickerControllerDelegate, UI
     
 }
 
+// MARK: - textView delegate
 extension PublishForumArticleViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {

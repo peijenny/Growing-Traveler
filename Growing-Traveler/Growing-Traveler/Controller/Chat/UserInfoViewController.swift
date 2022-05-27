@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class UserInfoViewController: UIViewController {
-
-//    @IBOutlet weak var userPhotoImageView: UIImageView!
-    
+  
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var userNameLabel: UILabel!
     
     @IBOutlet weak var friendStatusLabel: UILabel!
@@ -22,34 +20,37 @@ class UserInfoViewController: UIViewController {
     
     @IBOutlet weak var reportPublishedButton: UIButton!
     
+    // MARK: - Property
     var friendManager = FriendManager()
-    
-    var userManager = UserManager()
     
     var reportManager = ReportManager()
     
-    var userInfo: UserInfo?
+    var userManager = UserManager()
+    
+    var getFriendStatus: ((_ isBlock: Bool) -> Void)?
+    
+    var blockContentType: String?
+    
+    var bothSides: BothSides?
     
     var ownerFriend: Friend?
     
     var otherFriend: Friend?
     
-    var bothSides: BothSides?
+    var userInfo: UserInfo?
     
     var selectUserID: String?
     
     var deleteAccount = Bool()
+    
+    // MARK: for report use
+    var articleID: String?
+    
+    var articleMessage: ArticleMessage?
+    
+    var reportContentType: String?
 
-    var getFriendStatus: ((_ isBlock: Bool) -> Void)?
-    
-    var articleID: String?  // 檢舉文章
-    
-    var articleMessage: ArticleMessage? // 檢舉留言
-    
-    var reportContentType: String? // 檢舉類型
-    
-    var blockContentType: String?
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,16 +59,14 @@ class UserInfoViewController: UIViewController {
             reportPublishedButton.isHidden = true
 
         }
-        
-//        blockUserButton.setTitle(blockContentType ?? "", for: .normal)
-        
+
         reportPublishedButton.setTitle(reportContentType ?? "", for: .normal)
         
-        blockUserButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        blockUserButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        addUserButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.salviaBlue.hexText)
+        addUserButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.salviaBlue.hexText)
         
-        reportPublishedButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        reportPublishedButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
         
         blockUserButton.cornerRadius = 5
 
@@ -75,25 +74,18 @@ class UserInfoViewController: UIViewController {
         
         reportPublishedButton.cornerRadius = 5
         
-        friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.lightRed.hexText)
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-//        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
+        friendStatusLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChat.lightRed.hexText)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if selectUserID == userID {
+        if selectUserID == KeyToken().userID {
             
             friendStatusLabel.text = SearchFriendStatus.yourInfo.title
             
-        } else if userID == "" {
+        } else if KeyToken().userID.isEmpty {
             
             friendStatusLabel.text = "請先登入會員才能加入或封鎖帳號！"
             
@@ -101,7 +93,7 @@ class UserInfoViewController: UIViewController {
         
         if !deleteAccount {
             
-            fetchFriendListData(userID: userID)
+            fetchFriendListData(userID: KeyToken().userID)
             
             fetchFriendListData(userID: selectUserID ?? "")
             
@@ -121,33 +113,32 @@ class UserInfoViewController: UIViewController {
         
     }
     
+    // MARK: - Method
     func fetchFriendListData(userID: String) {
         
         friendManager.fetchFriendListData(fetchUserID: userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let friendList):
                 
-                if userID == strongSelf.selectUserID {
+                if userID == self.selectUserID {
                     
-                    strongSelf.otherFriend = friendList
+                    self.otherFriend = friendList
                     
                 } else {
                     
-                    strongSelf.ownerFriend = friendList
+                    self.ownerFriend = friendList
                     
                 }
                 
-                strongSelf.handleFriendStatus()
+                self.handleFriendStatus()
                 
-            case .failure(let error):
+            case .failure:
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -157,43 +148,25 @@ class UserInfoViewController: UIViewController {
     
     func fetchUserInfoData(userID: String) {
         
-        userManager.fetchData(fetchUserID: userID) { [weak self] result in
+        userManager.fetchUserInfo(fetchUserID: userID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let userInfo):
                 
-                strongSelf.userInfo = userInfo
+                self.userInfo = userInfo
                 
-                strongSelf.showUserInfo()
+                self.userNameLabel.text = userInfo.userName
                 
-            case .failure(let error):
+            case .failure:
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
         }
-        
-    }
-    
-    func showUserInfo() {
-        
-//        if userInfo?.userPhoto != "" {
-//
-//            userPhotoImageView.loadImage(userInfo?.userPhoto)
-//
-//        } else {
-//
-//            userPhotoImageView.image = UIImage.asset(.userIcon)
-//
-//        }
-        
-        userNameLabel.text = userInfo?.userName ?? ""
         
     }
     
@@ -206,8 +179,6 @@ class UserInfoViewController: UIViewController {
         guard let friendList = ownerFriend else { return }
 
         if !friendList.blockadeList.filter({ $0 == selectUserID }).isEmpty {
-            
-//            userPhotoImageView.image = UIImage.asset(.block)
             
             userNameLabel.text = "已封鎖的使用者"
             
@@ -249,6 +220,7 @@ class UserInfoViewController: UIViewController {
         
     }
     
+    // MARK: - Target / IBAction
     @IBAction func closeButton(_ sender: UIButton) {
         
         self.view.removeFromSuperview()
@@ -266,7 +238,7 @@ class UserInfoViewController: UIViewController {
                 
                 ownerFriend.blockadeList.append(self.selectUserID ?? "")
                 
-                self.friendManager.updateData(friend: ownerFriend)
+                self.friendManager.updateFriendList(friend: ownerFriend)
                 
                 self.view.removeFromSuperview()
                 
@@ -292,11 +264,11 @@ class UserInfoViewController: UIViewController {
             
             bothSides.owner.deliveryList.append(selectUserID ?? "")
             
-            bothSides.other.applyList.append(userID)
+            bothSides.other.applyList.append(KeyToken().userID)
             
             friendManager.addFriendData(bothSides: bothSides, confirmType: ConfirmType.apply.title)
             
-            HUD.flash(.labeledSuccess(title: "已發送好友邀請!", subtitle: "請等待對方的回覆"), delay: 0.5)
+            HandleResult.sendFriendApply.messageHUD
             
             self.view.removeFromSuperview()
             
@@ -323,14 +295,14 @@ class UserInfoViewController: UIViewController {
             
             let reportContent = ReportContent(
                 reportID: self.reportManager.database.document().documentID,
-                userID: userID, reportedUserID: self.selectUserID ?? "",
+                userID: KeyToken().userID, reportedUserID: self.selectUserID ?? "",
                 reportType: self.reportContentType ?? "", reportContent: reportInputText,
                 createTime: createTime, friendID: self.selectUserID ?? nil,
                 articleID: self.articleID ?? nil, articleMessage: self.articleMessage ?? nil)
             
             self.reportManager.addReportData(reportContent: reportContent)
             
-            HUD.flash(.labeledSuccess(title: "檢舉成功！", subtitle: "站方會盡快處理此檢舉"), delay: 0.5)
+            HandleResult.reportSuccess.messageHUD
             
             self.view.removeFromSuperview()
             

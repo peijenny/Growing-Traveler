@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
   
@@ -31,23 +30,23 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        startDateCalenderButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        startDateCalenderButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         startDateCalenderButton.cornerRadius = 5
         
-        endDateCalenderButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        endDateCalenderButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         endDateCalenderButton.cornerRadius = 5
         
-        categoryTagButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        categoryTagButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         categoryTagButton.cornerRadius = 5
         
-        addStudyItemButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        addStudyItemButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         addStudyItemButton.cornerRadius = 5
         
-        openEditButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        openEditButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         openEditButton.cornerRadius = 5
         
@@ -121,27 +120,27 @@ class PlanStudyGoalHeaderView: UITableViewHeaderFooterView {
         
         if studyGoalTitleTextField.text == "" {
             
-            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
+            HandleInputResult.titleEmpty.messageHUD
 
         } else if startDateLabel.text == "請選擇開始日期" {
             
-            HUD.flash(.label(InputError.startDateEmpty.title), delay: 0.5)
-
+            HandleInputResult.startDateEmpty.messageHUD
+            
         } else if endDateLabel.text == "請選擇結束日期" {
             
-            HUD.flash(.label(InputError.endDateEmpty.title), delay: 0.5)
+            HandleInputResult.endDateEmpty.messageHUD
 
         } else if categoryLabel.text == "請選擇分類標籤" {
             
-            HUD.flash(.label(InputError.categoryEmpty.title), delay: 0.5)
-
+            HandleInputResult.categoryEmpty.messageHUD
+            
         } else if itemCount == 0 {
             
-            HUD.flash(.label(InputError.studyItemEmpty.title), delay: 0.5)
-
+            HandleInputResult.studyItemEmpty.messageHUD
+            
         } else if startDate > endDate {
             
-            HUD.flash(.label(InputError.startDatereLativelyLate.title), delay: 0.5)
+            HandleInputResult.startDatereLativelyLate.messageHUD
             
         } else {
             

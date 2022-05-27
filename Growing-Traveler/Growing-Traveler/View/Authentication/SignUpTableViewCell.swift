@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class SignUpTableViewCell: UITableViewCell {
 
@@ -29,7 +28,7 @@ class SignUpTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        uploadUserPhotoButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        uploadUserPhotoButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         uploadUserPhotoButton.cornerRadius = uploadUserPhotoButton.frame.width / 2
         
@@ -37,7 +36,7 @@ class SignUpTableViewCell: UITableViewCell {
 
         userPhotoImageView.cornerRadius = userPhotoImageView.frame.width / 2
         
-        signUpButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        signUpButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         signUpButton.cornerRadius = 10
         
@@ -60,32 +59,32 @@ class SignUpTableViewCell: UITableViewCell {
         
         let userPhotoLink = userPhotoLinkLabel.text ?? ""
         
-        guard let accountName = userNameTextField.text, userNameTextField.text != ""  else {
+        guard let accountName = userNameTextField.text, !accountName.isEmpty else {
             
-            HUD.flash(.label("請輸入姓名！"), delay: 0.5)
+            HandleInputResult.nameEmpty.messageHUD
             
             return nil
         }
         
-        guard let accountEmail = userAccountTextField.text, userAccountTextField.text != ""  else {
+        guard let accountEmail = userAccountTextField.text, !accountEmail.isEmpty else {
 
-            HUD.flash(.label("請輸入帳號！"), delay: 0.5)
+            HandleInputResult.emailEmpty.messageHUD
             
             return nil
             
         }
         
-        guard let accountPassword = userPasswordTextField.text, userPasswordTextField.text != "" else {
+        guard let accountPassword = userPasswordTextField.text, !accountPassword.isEmpty else {
 
-            HUD.flash(.label("請輸入密碼！"), delay: 0.5)
+            HandleInputResult.passwordEmpty.messageHUD
             
             return nil
             
         }
         
-        guard userCheckPasswordTextField.text != "" else {
+        guard let checkPassword = userPasswordTextField.text, !checkPassword.isEmpty else {
             
-            HUD.flash(.label("請輸入檢查碼！"), delay: 0.5)
+            HandleInputResult.checkEmpty.messageHUD
             
             return nil
             
@@ -93,16 +92,16 @@ class SignUpTableViewCell: UITableViewCell {
         
         guard userPasswordTextField.text == userCheckPasswordTextField.text else {
             
-            HUD.flash(.label("密碼與檢查碼不一致！"), delay: 0.5)
+            HandleInputResult.passwordIsDifferent.messageHUD
             
             return nil
             
         }
         
         guard accountEmail.range(of: "@") != nil else {
-
-            HUD.flash(.label("帳號格式錯誤！"), delay: 0.5)
             
+            HandleInputResult.formatFailed.messageHUD
+
             return nil
             
         }

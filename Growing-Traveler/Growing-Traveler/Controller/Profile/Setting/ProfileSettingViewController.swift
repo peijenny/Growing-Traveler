@@ -7,23 +7,22 @@
 
 import UIKit
 import Firebase
-import PKHUD
 
 class ProfileSettingViewController: BaseViewController {
     
+    // MARK: - IBOutlet / Components
     var profileSettingTableView = UITableView()
     
-    var userManger = UserManager()
+    // MARK: - Property
+    var deleteUserManager = DeleteUserManager()
     
     var friendManager = FriendManager()
     
-    var deleteUserManager = DeleteUserManager()
+    var userManger = UserManager()
     
     var forumArticles: [ForumArticle] = []
     
     var studyGoals: [StudyGoal] = []
-    
-    var friendList: Friend?
     
     var userInfo: UserInfo? {
         
@@ -35,16 +34,19 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
+    var friendList: Friend?
+    
     var userImageLink: String?
     
     var isCheck = false
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "個人設定"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
 
         setBackgroundView()
         
@@ -59,19 +61,12 @@ class ProfileSettingViewController: BaseViewController {
 
     }
     
-    @objc func submitButton(sender: UIButton) {
-        
-        isCheck = true
-        
-        profileSettingTableView.reloadData()
-        
-    }
-    
+    // MARK: - Set UI
     func setBackgroundView() {
         
         let backgroundView = UIView()
         
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         view.addSubview(backgroundView)
         
@@ -121,23 +116,22 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
+    // MARK: - Method
     func fetchUserInfoData() {
         
-        userManger.listenData { [weak self] result in
+        userManger.listenUserInfo { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let user):
                 
-                strongSelf.userInfo = user
+                self.userInfo = user
                 
-            case .failure(let error):
+            case .failure:
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -145,8 +139,18 @@ class ProfileSettingViewController: BaseViewController {
         
     }
     
+    // MARK: - Target / IBAction
+    @objc func submitButton(sender: UIButton) {
+        
+        isCheck = true
+        
+        profileSettingTableView.reloadData()
+        
+    }
+    
 }
 
+// MARK: - TableView delegate / dataSource
 extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -157,7 +161,7 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = UITableViewCell()
+        var cell: UITableViewCell
         
         if indexPath.row == 0 {
             
@@ -203,17 +207,17 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
                     
                     if let updateUserInfo = self.userInfo {
                         
-                        userManger.updateData(user: updateUserInfo)
+                        userManger.updateUserInfo(user: updateUserInfo)
                         
                         friendList?.userName = cell.userNameTextField.text ?? ""
                         
                         if let friendList = friendList {
                             
-                            friendManager.updateData(friend: friendList)
+                            friendManager.updateFriendList(friend: friendList)
                             
                         }
                         
-                        HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                        HandleResult.updateDataSuccess.messageHUD
                         
                     }
                     
@@ -260,19 +264,6 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         
     }
     
-    func pushToPrivacyPolicyPage(privacyPolicyType: String) {
-        
-        let viewController = UIStoryboard.profile.instantiateViewController(
-            withIdentifier: String(describing: PrivacyPolicyViewController.self))
-        
-        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
-        
-        viewController.privacyTitle = privacyPolicyType
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
     @objc func signOutAccount(sender: UIButton) {
         
         let firebaseAuth = Auth.auth()
@@ -281,18 +272,16 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
             try firebaseAuth.signOut()
 
-            userID = ""
+            KeyToken().userID = ""
             
             navigationController?.popViewController(animated: true)
             
             tabBarController?.selectedIndex = 0
 
-        } catch let signOutError as NSError {
-
-            print("Error signing out: %@", signOutError)
+        } catch {
             
-            HUD.flash(.labeledError(title: "登出失敗！", subtitle: "請稍候嘗試"), delay: 0.5)
-
+            HandleResult.signOutFailed.messageHUD
+            
         }
         
     }
@@ -308,11 +297,9 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
 
             user?.delete { error in
 
-                if let error = error {
+                if error != nil {
 
-                    print(error)
-                    
-                    HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.deleteDataFailed.messageHUD
 
                 } else {
                     
@@ -334,17 +321,40 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         
     }
     
+    @objc func modifyUserPhoto(sender: UIButton) {
+        
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        
+        present(picker, animated: true)
+        
+    }
+    
+    func pushToPrivacyPolicyPage(privacyPolicyType: String) {
+        
+        let viewController = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: String(describing: PrivacyPolicyViewController.self))
+        
+        guard let viewController = viewController as? PrivacyPolicyViewController else { return }
+        
+        viewController.privacyTitle = privacyPolicyType
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
     func deleteAllData() {
         
-        deleteUserManager.deleteUserInfoData(deleteUserID: userID)
+        deleteUserManager.deleteUserInfoData(deleteUserID: KeyToken().userID)
         
         deleteUserManager.deleteStudyGoalsData(studyGoals: studyGoals)
         
         deleteUserManager.deleteForumArticlesData(forumArticles: forumArticles)
         
-        deleteUserManager.deleteFriendListData(deleteUserID: userID)
+        deleteUserManager.deleteFriendListData(deleteUserID: KeyToken().userID)
 
-        userID = ""
+        KeyToken().userID = ""
         
         self.navigationController?.popViewController(animated: true)
         
@@ -356,19 +366,17 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         
         deleteUserManager.fetchStudyGoalsData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let studyGoals):
                 
-                strongSelf.studyGoals = studyGoals
+                self.studyGoals = studyGoals
                 
-            case .failure(let error):
+            case .failure:
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -376,19 +384,17 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         
         deleteUserManager.fetchForumArticlesData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let forumArticles):
                 
-                strongSelf.forumArticles = forumArticles
+                self.forumArticles = forumArticles
                 
-            case .failure(let error):
+            case .failure:
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -396,38 +402,27 @@ extension ProfileSettingViewController: UITableViewDelegate, UITableViewDataSour
         
         deleteUserManager.fetchFriendListData { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let friendList):
                 
-                strongSelf.friendList = friendList
+                self.friendList = friendList
                 
-            case .failure(let error):
+            case .failure:
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
         }
         
     }
-
-    @objc func modifyUserPhoto(sender: UIButton) {
-        
-        let picker = UIImagePickerController()
-        
-        picker.delegate = self
-        
-        present(picker, animated: true)
-        
-    }
     
 }
 
+// MARK: - ImagePickerController delegate
 extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
@@ -440,21 +435,19 @@ extension ProfileSettingViewController: UIImagePickerControllerDelegate, UINavig
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
                     
-                    strongSelf.userImageLink = "\(imageLink)"
+                    self.userImageLink = "\(imageLink)"
 
-                    strongSelf.profileSettingTableView.reloadData()
+                    self.profileSettingTableView.reloadData()
                     
-                case .failure(let error):
-
-                    print(error)
+                case .failure:
                     
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.readDataFailed.messageHUD
 
                 }
 

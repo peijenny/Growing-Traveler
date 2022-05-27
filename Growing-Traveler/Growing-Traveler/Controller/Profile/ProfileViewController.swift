@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class ProfileViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var profileView: ProfileView!
     
     @IBOutlet weak var featureCollectionView: UICollectionView!
@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileBackgroundView: UIView!
     
+    // MARK: - Property
     private var dataSource: UICollectionViewDiffableDataSource<Int, FeatureType>?
     
     var userManager = UserManager()
@@ -28,6 +29,7 @@ class ProfileViewController: UIViewController {
     
     let featureImage: [ImageAsset] = [.undrawTask, .undrawChart, .undrawFAQ, .undrawExperience]
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,9 +37,9 @@ class ProfileViewController: UIViewController {
         
         setNavigationItems()
         
-        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        profileBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        profileBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
     
@@ -46,7 +48,7 @@ class ProfileViewController: UIViewController {
 
         fetchUserInfoData()
         
-        if userID == "" {
+        if KeyToken().userID.isEmpty {
             
             tabBarController?.selectedIndex = 0
             
@@ -54,6 +56,7 @@ class ProfileViewController: UIViewController {
         
     }
     
+    // MARK: - Set UI
     func setNavigationItems() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -64,55 +67,13 @@ class ProfileViewController: UIViewController {
         
     }
     
-    @objc func blockadeFriendButton(sender: UIButton) {
-        
-        let viewController = BlockadeFriendViewController()
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
-    @objc func setProfileButton(sender: UIButton) {
-        
-        let viewController = ProfileSettingViewController()
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-    
-    func fetchUserInfoData() {
-        
-        userManager.listenData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let userInfo):
-                
-                strongSelf.userInfo = userInfo
-                
-                strongSelf.setProfileView()
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
     func setProfileView() {
         
         guard let userInfo = userInfo else { return }
         
         profileView.userNameLabel.text = userInfo.userName
         
-        if userInfo.userPhoto != "" {
+        if !userInfo.userPhoto.isEmpty {
             
             profileView.userPhotoImageView.loadImage(userInfo.userPhoto)
             
@@ -123,6 +84,31 @@ class ProfileViewController: UIViewController {
         }
         
         profileView.experienceValueLabel.text = "Ex. \(userInfo.achievement.experienceValue)"
+        
+    }
+    
+    // MARK: - Method
+    func fetchUserInfoData() {
+        
+        userManager.listenUserInfo { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let userInfo):
+                
+                self.userInfo = userInfo
+                
+                self.setProfileView()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
         
     }
     
@@ -188,9 +174,27 @@ class ProfileViewController: UIViewController {
         return UICollectionViewCompositionalLayout(section: section)
         
     }
+    
+    // MARK: - Target / IBAction
+    @objc func blockadeFriendButton(sender: UIButton) {
+        
+        let viewController = BlockadeFriendViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
+    @objc func setProfileButton(sender: UIButton) {
+        
+        let viewController = ProfileSettingViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
 
 }
 
+// MARK: - Collection delegate
 extension ProfileViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

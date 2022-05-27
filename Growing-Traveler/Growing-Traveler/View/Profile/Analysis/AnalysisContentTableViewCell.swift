@@ -9,7 +9,6 @@ import UIKit
 
 class AnalysisContentTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var topTitleLabel: UILabel!
     
     @IBOutlet weak var topContentLabel: UILabel!
@@ -22,13 +21,12 @@ class AnalysisContentTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
     func showPieText(certificateText: String, interesteText: String) {
@@ -50,7 +48,7 @@ class AnalysisContentTableViewCell: UITableViewCell {
         
         topContentLabel.attributedText = interesteAttributes
         
-        if certificateText == "" {
+        if certificateText.isEmpty {
             
             certificateText = "目前暫無推薦考取的證照！"
             

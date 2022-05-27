@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class SignInTableViewCell: UITableViewCell {
 
@@ -19,7 +18,7 @@ class SignInTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        signInButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        signInButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         signInButton.cornerRadius = 10
         
@@ -32,17 +31,17 @@ class SignInTableViewCell: UITableViewCell {
     
     func getSignInData() -> SignIn? {
         
-        guard let accountEmail = userAccountTextField.text, userAccountTextField.text != "" else {
+        guard let accountEmail = userAccountTextField.text, !accountEmail.isEmpty else {
             
-            HUD.flash(.label("請輸入帳號！"), delay: 0.5)
+            HandleInputResult.emailEmpty.messageHUD
             
             return nil
             
         }
         
-        guard let accountPassword = userPasswordTextField.text, userPasswordTextField.text != "" else {
+        guard let accountPassword = userPasswordTextField.text, !accountPassword.isEmpty else {
             
-            HUD.flash(.label("請輸入密碼！"), delay: 0.5)
+            HandleInputResult.passwordEmpty.messageHUD
             
             return nil
             
@@ -50,7 +49,7 @@ class SignInTableViewCell: UITableViewCell {
         
         guard accountEmail.range(of: "@") != nil else {
             
-            HUD.flash(.label("帳號格式錯誤！"), delay: 0.5)
+            HandleInputResult.formatFailed.messageHUD
             
             return nil
             

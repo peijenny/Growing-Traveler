@@ -22,9 +22,9 @@ class ShareSendTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        shareTypeLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChart.blue.hexText)
+        shareTypeLabel.textColor = UIColor.hexStringToUIColor(hex: ColorChat.blue.hexText)
         
-        sendBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        sendBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         sendBackgroundView.cornerRadius = 10
         

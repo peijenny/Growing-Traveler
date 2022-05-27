@@ -55,23 +55,28 @@ private enum Tab {
             
         case .studyGoal:
 
-            return UITabBarItem(title: "目標", image: UIImage.asset(.archery), selectedImage: UIImage.asset(.archery))
+            return UITabBarItem(
+                title: "目標", image: UIImage.asset(.archery), selectedImage: UIImage.asset(.archery))
             
         case .note:
             
-            return UITabBarItem(title: "筆記", image: UIImage.asset(.book), selectedImage: UIImage.asset(.book))
+            return UITabBarItem(
+                title: "筆記", image: UIImage.asset(.book), selectedImage: UIImage.asset(.book))
         
         case .chat:
             
-            return UITabBarItem(title: "聊天室", image: UIImage.asset(.speechBubble), selectedImage: UIImage.asset(.speechBubble))
+            return UITabBarItem(
+                title: "聊天室", image: UIImage.asset(.speechBubble), selectedImage: UIImage.asset(.speechBubble))
             
         case .forum:
 
-            return UITabBarItem(title: "討論區", image: UIImage.asset(.speaker), selectedImage: UIImage.asset(.speaker))
+            return UITabBarItem(
+                title: "討論區", image: UIImage.asset(.speaker), selectedImage: UIImage.asset(.speaker))
             
         case .profile:
             
-            return UITabBarItem(title: "個人", image: UIImage.asset(.idCard), selectedImage: UIImage.asset(.idCard))
+            return UITabBarItem(
+                title: "個人", image: UIImage.asset(.idCard), selectedImage: UIImage.asset(.idCard))
             
         }
          
@@ -90,9 +95,9 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         viewControllers = tabs.map({ $0.controller() })
         
-        tabBar.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        tabBar.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        tabBar.barTintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        tabBar.barTintColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         delegate = self
         
@@ -105,7 +110,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         if let viewControllers = tabBarController.viewControllers,
         viewController != viewControllers[0] && viewController != viewControllers[3] {
             
-            guard userID != "" else {
+            guard !KeyToken().userID.isEmpty else {
 
                 if let authViewController = UIStoryboard.auth.instantiateInitialViewController() {
 

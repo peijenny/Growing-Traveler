@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class PublishCertificationViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var certificationTitleTextField: UITextField!
     
     @IBOutlet weak var certificationImageTextField: UITextField!
@@ -20,12 +20,14 @@ class PublishCertificationViewController: BaseViewController {
     
     @IBOutlet weak var confirmButton: UIButton!
     
+    // MARK: - Property
     var userManager = UserManager()
     
     var userInfo: UserInfo?
     
     var modifyCertificationIndex: Int?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,16 +55,17 @@ class PublishCertificationViewController: BaseViewController {
 
         certificationContentTextView.delegate = self
         
-        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         uploadImageButton.cornerRadius = 5
         
-        confirmButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        confirmButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         confirmButton.cornerRadius = 5
         
     }
     
+    // MARK: - Method
     func modifyCertification(index: Int) {
         
         guard let certification = userInfo?.certification[index] else { return }
@@ -75,6 +78,7 @@ class PublishCertificationViewController: BaseViewController {
 
     }
 
+    // MARK: - Target / IBAction
     @IBAction func closeButton(_ sender: UIButton) {
         
         self.navigationController?.isNavigationBarHidden = false
@@ -96,27 +100,27 @@ class PublishCertificationViewController: BaseViewController {
     @IBAction func confirm(_ sender: UIButton) {
         
         guard let certificationTitle = certificationTitleTextField.text,
-              certificationTitleTextField.text != "" else {
+              !certificationTitle.isEmpty else {
             
-                  HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
-                  
+            HandleInputResult.titleEmpty.messageHUD
+            
             return
             
         }
         
         guard let certificationImage = certificationImageTextField.text,
-              certificationImageTextField.text != "" else {
+              !certificationImage.isEmpty else {
             
-            HUD.flash(.label("請上傳認證照！"), delay: 0.5)
+            HandleInputResult.uploadImage.messageHUD
             
             return
             
         }
         
         guard let certificationContent = certificationContentTextView.text,
-              certificationContentTextView.text != "" else {
+              !certificationContent.isEmpty else {
             
-            HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
+            HandleInputResult.contentEmpty.messageHUD
             
             return
             
@@ -132,7 +136,7 @@ class PublishCertificationViewController: BaseViewController {
                     createTime: createTime, title: certificationTitle,
                     imageLink: certificationImage, content: certificationContent))
                 
-                HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+                HandleResult.addDataSuccess.messageHUD
                 
             } else {
                 
@@ -144,11 +148,11 @@ class PublishCertificationViewController: BaseViewController {
                 
                 userInfo.certification[index].content = certificationContent
                 
-                HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+                HandleResult.updateDataSuccess.messageHUD
                 
             }
 
-            userManager.updateData(user: userInfo)
+            userManager.updateUserInfo(user: userInfo)
             
             self.navigationController?.isNavigationBarHidden = false
             
@@ -160,6 +164,7 @@ class PublishCertificationViewController: BaseViewController {
     
 }
 
+// MARK: - ImagePickerController delegate
 extension PublishCertificationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
@@ -172,20 +177,18 @@ extension PublishCertificationViewController: UIImagePickerControllerDelegate, U
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
 
-                    strongSelf.certificationImageTextField.text = "\(imageLink)"
+                    self.certificationImageTextField.text = "\(imageLink)"
 
-                case .failure(let error):
-
-                    print(error)
+                case .failure:
                     
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+                    HandleResult.readDataFailed.messageHUD
+                    
                 }
 
             })
@@ -198,6 +201,7 @@ extension PublishCertificationViewController: UIImagePickerControllerDelegate, U
     
 }
 
+// MARK: - TextView delegate
 extension PublishCertificationViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {

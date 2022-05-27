@@ -7,15 +7,14 @@
 
 import UIKit
 import FSCalendar
-import PKHUD
 
 class SelectCalendarViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     var calendarView = FSCalendar()
     
+    // MARK: - Property
     var getSelectDate: ((_ date: Date) -> Void)?
-    
-    var selectDate: Date?
     
     var startDate: Date? {
         
@@ -28,7 +27,10 @@ class SelectCalendarViewController: UIViewController {
         }
         
     }
+    
+    var selectDate: Date?
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +46,7 @@ class SelectCalendarViewController: UIViewController {
         
     }
     
+    // MARK: - Set UI
     func setNavigationBar() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -54,50 +57,6 @@ class SelectCalendarViewController: UIViewController {
         
     }
     
-    @objc func setClosePageButton(sender: UIButton) {
-        
-        dismiss(animated: true, completion: .none)
-        
-    }
-    
-    @objc func selectDateButton(sender: UIButton) {
-        
-        if let selectDate = selectDate {
-            
-            getSelectDate?(selectDate)
-            
-            dismiss(animated: true, completion: .none)
-            
-        } else {
-            
-            HUD.flash(.label("請選擇日期！"), delay: 0.5)
-            
-        }
-        
-    }
-
-}
-
-extension SelectCalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
-    
-    // MARK: - Calendar DataSource
-    func minimumDate(for calendar: FSCalendar) -> Date {
-        
-        return startDate ?? Date()
-        
-    }
-    
-    // MARK: - Calendar Delegate
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        
-        selectDate = date
-        
-    }
-    
-}
-
-extension SelectCalendarViewController {
- 
     func setCalenderFrame() {
         
         view.addSubview(calendarView)
@@ -122,16 +81,56 @@ extension SelectCalendarViewController {
         calendarView.appearance.titleWeekendColor = UIColor.lightGray
         
         calendarView.appearance.headerTitleColor = UIColor.hexStringToUIColor(
-            hex: ColorChart.darkBlue.hexText)
+            hex: ColorChat.darkBlue.hexText)
         
         calendarView.appearance.weekdayTextColor = UIColor.hexStringToUIColor(
-            hex: ColorChart.darkBlue.hexText)
+            hex: ColorChat.darkBlue.hexText)
         
         calendarView.appearance.todayColor = UIColor.clear
         
-        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        calendarView.appearance.titleTodayColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
-        calendarView.appearance.selectionColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        calendarView.appearance.selectionColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
+        
+    }
+    
+    // MARK: - Target / IBAction
+    @objc func setClosePageButton(sender: UIButton) {
+        
+        dismiss(animated: true, completion: .none)
+        
+    }
+    
+    @objc func selectDateButton(sender: UIButton) {
+        
+        if let selectDate = selectDate {
+            
+            getSelectDate?(selectDate)
+            
+            dismiss(animated: true, completion: .none)
+            
+        } else {
+            
+            HandleInputResult.selectDate.messageHUD
+            
+        }
+        
+    }
+
+}
+
+// MARK: - Calendar dataSource and delegate
+extension SelectCalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
+    
+    func minimumDate(for calendar: FSCalendar) -> Date {
+        
+        return startDate ?? Date()
+        
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        
+        selectDate = date
         
     }
     

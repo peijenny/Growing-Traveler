@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class NoteDetailViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var noteCreateTimeLabel: UILabel!
     
     @IBOutlet weak var noteDatailTableView: UITableView! {
@@ -26,6 +26,7 @@ class NoteDetailViewController: UIViewController {
     
     @IBOutlet weak var noteDetailBackgroundView: UIView!
     
+    // MARK: - Property
     var userManager = UserManager()
     
     var note: Note?
@@ -34,16 +35,13 @@ class NoteDetailViewController: UIViewController {
     
     var noteUserID: String?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        noteDatailTableView.register(
-            UINib(nibName: String(describing: ArticleDetailTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self))
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        setUIStyle()
         
-        noteDetailBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        registerTableViewCell()
         
     }
     
@@ -68,45 +66,12 @@ class NoteDetailViewController: UIViewController {
         
     }
     
-    func fetchNoteData() {
+    // MARK: - Set UI
+    func setUIStyle() {
         
-        userManager.fetchshareNoteData(shareUserID: noteUserID ?? "", noteID: noteID ?? "") { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let note):
-                
-                strongSelf.note = note
-                
-                if userID == strongSelf.note?.userID {
-                    
-                    strongSelf.setNavigationItems()
-                    
-                }
-                
-                strongSelf.title = note.noteTitle
-                
-                let formatter = DateFormatter()
-                
-                formatter.dateFormat = "yyyy.MM.dd HH:mm"
-                
-                let createTime = Date(timeIntervalSince1970: note.createTime)
-                
-                strongSelf.noteCreateTimeLabel.text = formatter.string(from: createTime)
-                
-                strongSelf.noteDatailTableView.reloadData()
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
+        
+        noteDetailBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
     
@@ -121,6 +86,56 @@ class NoteDetailViewController: UIViewController {
         
     }
     
+    func registerTableViewCell() {
+        
+        noteDatailTableView.register(
+            UINib(nibName: String(describing: ArticleDetailTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: ArticleDetailTableViewCell.self))
+        
+    }
+    
+    // MARK: - Method
+    func fetchNoteData() {
+        
+        userManager.fetchshareFriendNote(shareUserID: noteUserID ?? "", noteID: noteID ?? "") { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let note):
+                
+                self.note = note
+                
+                if KeyToken().userID == self.note?.userID {
+                    
+                    self.setNavigationItems()
+                    
+                }
+                
+                self.title = note.noteTitle
+                
+                let formatter = DateFormatter()
+                
+                formatter.dateFormat = "yyyy.MM.dd HH:mm"
+                
+                let createTime = Date(timeIntervalSince1970: note.createTime)
+                
+                self.noteCreateTimeLabel.text = formatter.string(from: createTime)
+                
+                self.noteDatailTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Target / IBAction
     @objc func shareToFriendButton(sender: UIButton) {
         
         let viewController = ShareToFriendViewController()
@@ -133,11 +148,9 @@ class NoteDetailViewController: UIViewController {
         
         if #available(iOS 15.0, *) {
             
-            if let sheetPresentationController = navController.sheetPresentationController {
-                
-                sheetPresentationController.detents = [.medium()]
-                
-            }
+            guard let sheetPresentationController = navController.sheetPresentationController else { return }
+            
+            sheetPresentationController.detents = [.medium()]
             
         } else {
 
@@ -162,6 +175,7 @@ class NoteDetailViewController: UIViewController {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension NoteDetailViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

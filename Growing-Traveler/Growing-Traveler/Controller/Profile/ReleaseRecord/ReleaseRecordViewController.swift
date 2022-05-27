@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class ReleaseRecordViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     var releaseRecordTableView = UITableView()
     
     var resleaseBackgroundView = UIView()
@@ -18,20 +18,22 @@ class ReleaseRecordViewController: UIViewController {
     
     var placeHolderLabel = UILabel()
     
+    // MARK: - Property
     var forumArticleManager = ForumArticleManager()
     
     var userManager = UserManager()
     
-    var usersInfo: [UserInfo] = []
-    
     var forumArticles: [ForumArticle] = []
     
+    var usersInfo: [UserInfo] = []
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "發佈文章紀錄"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
 
         setNavigationItem()
         
@@ -70,6 +72,7 @@ class ReleaseRecordViewController: UIViewController {
         
     }
     
+    // MARK: - Method
     func setNavigationItem() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -79,97 +82,11 @@ class ReleaseRecordViewController: UIViewController {
         
     }
     
-    @objc func addForumArticle(sender: UIButton) {
-        
-        guard userID != "" else {
-
-            guard let authViewController = UIStoryboard.auth.instantiateViewController(
-                withIdentifier: String(describing: AuthenticationViewController.self)
-            ) as? AuthenticationViewController else { return }
-            
-            authViewController.modalPresentationStyle = .formSheet
-
-            present(authViewController, animated: true, completion: nil)
-            
-            return
-            
-        }
-
-        let viewController = PublishForumArticleViewController()
-        
-        navigationController?.pushViewController(viewController, animated: true)
-        
-    }
-
-    func fetchUserInfoData() {
-        
-        userManager.fetchUsersData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let usersInfo):
-                
-                strongSelf.usersInfo = usersInfo
-                
-                strongSelf.releaseRecordTableView.reloadData()
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
-    func fetchReleaseData() {
-        
-        forumArticleManager.fetchSearchData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let forumArticles):
-                
-                let filterArticles = forumArticles.filter({ $0.userID == userID })
-                
-                strongSelf.forumArticles = filterArticles
-                
-                if strongSelf.forumArticles.count == 0 {
-                    
-                    strongSelf.resleaseBackgroundView.isHidden = false
-                    
-                } else {
-                    
-                    strongSelf.resleaseBackgroundView.isHidden = true
-                    
-                }
-                
-                strongSelf.releaseRecordTableView.reloadData()
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
     func setBackgroundView() {
         
         let backgroundView = UIView()
         
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         view.addSubview(backgroundView)
         
@@ -213,7 +130,8 @@ class ReleaseRecordViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             placeHolderImageView.topAnchor.constraint(equalTo: resleaseBackgroundView.topAnchor, constant: 50),
-            placeHolderImageView.trailingAnchor.constraint(equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
+            placeHolderImageView.trailingAnchor.constraint(
+                equalTo: resleaseBackgroundView.trailingAnchor, constant: -50),
             placeHolderImageView.leadingAnchor.constraint(equalTo: resleaseBackgroundView.leadingAnchor, constant: 50),
             placeHolderImageView.heightAnchor.constraint(equalToConstant: 200)
         ])
@@ -266,8 +184,92 @@ class ReleaseRecordViewController: UIViewController {
         
     }
 
+    func fetchUserInfoData() {
+        
+        userManager.fetchUsersInfo { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                self.usersInfo = usersInfo
+                
+                self.releaseRecordTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    func fetchReleaseData() {
+        
+        forumArticleManager.fetchSearchData { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let forumArticles):
+                
+                let filterArticles = forumArticles.filter({ $0.userID == KeyToken().userID })
+                
+                self.forumArticles = filterArticles
+                
+                if self.forumArticles.count == 0 {
+                    
+                    self.resleaseBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    self.resleaseBackgroundView.isHidden = true
+                    
+                }
+                
+                self.releaseRecordTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Target / IBAction
+    @objc func addForumArticle(sender: UIButton) {
+        
+        guard !KeyToken().userID.isEmpty else {
+
+            guard let authViewController = UIStoryboard.auth.instantiateViewController(
+                withIdentifier: String(describing: AuthenticationViewController.self)
+            ) as? AuthenticationViewController else { return }
+            
+            authViewController.modalPresentationStyle = .formSheet
+
+            present(authViewController, animated: true, completion: nil)
+            
+            return
+            
+        }
+
+        let viewController = PublishForumArticleViewController()
+        
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+
 }
 
+// MARK: - TableView delegate / dataSource
 extension ReleaseRecordViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

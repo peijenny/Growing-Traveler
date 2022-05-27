@@ -10,16 +10,19 @@ import WebKit
 
 class PrivacyPolicyViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet var webView: WKWebView!
     
     @IBOutlet weak var privacyPolicyBackgroundView: UIView!
     
+    // MARK: - Property
     var privacyTitle = String()
     
     var privacyURL = String()
     
     var comePage = String()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,25 +52,10 @@ class PrivacyPolicyViewController: UIViewController {
             
         }
         
-        privacyPolicyBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        privacyPolicyBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
 
-    }
-    
-    func setNavigationItem() {
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop, target: self, action: #selector(closePage))
-        
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
-    }
-    
-    @objc func closePage(sender: UIButton) {
-        
-        dismiss(animated: true, completion: nil)
-        
     }
     
     override var hidesBottomBarWhenPushed: Bool {
@@ -83,9 +71,27 @@ class PrivacyPolicyViewController: UIViewController {
         }
         
     }
+    
+    // MARK: - Set UI
+    func setNavigationItem() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .stop, target: self, action: #selector(closePage))
+        
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        
+    }
+    
+    // MARK: - Method
+    @objc func closePage(sender: UIButton) {
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
 
 }
 
+// MARK: - WebView delegate
 extension PrivacyPolicyViewController: WKNavigationDelegate {
     
     override func loadView() {

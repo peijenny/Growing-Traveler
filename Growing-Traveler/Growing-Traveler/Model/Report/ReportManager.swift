@@ -9,7 +9,6 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import PKHUD
 
 class ReportManager {
     
@@ -22,11 +21,9 @@ class ReportManager {
             try database.document(reportContent.reportID).setData(from: reportContent, merge: true)
             
         } catch {
-
-            print(error)
             
-            HUD.flash(.labeledError(title: "檢舉失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
+            HandleResult.reportFailed.messageHUD
+            
         }
         
     }

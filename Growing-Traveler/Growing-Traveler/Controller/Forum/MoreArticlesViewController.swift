@@ -6,19 +6,18 @@
 //
 
 import UIKit
-import PKHUD
 
 class MoreArticlesViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     var moreArticlesTableView = UITableView()
     
-    var forumType: String?
-    
+    // MARK: - Property
     var forumArticleManager = ForumArticleManager()
     
-    var userManager = UserManager()
+    var friendManager = FriendManager()
     
-    var usersInfo: [UserInfo] = []
+    var userManager = UserManager()
     
     var forumArticles: [ForumArticle] = [] {
         
@@ -30,10 +29,13 @@ class MoreArticlesViewController: UIViewController {
         
     }
     
-    var friendManager = FriendManager()
+    var usersInfo: [UserInfo] = []
     
     var blockadeList: [String] = []
+    
+    var forumType: String?
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +45,7 @@ class MoreArticlesViewController: UIViewController {
             
         }
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         setBackgroundView()
         
@@ -74,102 +76,12 @@ class MoreArticlesViewController: UIViewController {
         
     }
     
-    func fetchUserInfoData() {
-        
-        userManager.fetchUsersData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let usersInfo):
-                
-                strongSelf.usersInfo = usersInfo
-                
-                strongSelf.moreArticlesTableView.reloadData()
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
-    func fetchFriendBlockadeListData() {
-        
-        friendManager.fetchFriendListData(
-        fetchUserID: userID) { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let userFriend):
-                
-                strongSelf.blockadeList = userFriend.blockadeList
-                
-                strongSelf.fetchData()
-                
-                strongSelf.moreArticlesTableView.reloadData()
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-                
-        }
-        
-    }
-    
-    func fetchData() {
-        
-        forumArticleManager.fetchData(forumType: forumType ?? "") { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let data):
-                
-                var filterData = data
-                
-                if strongSelf.blockadeList != [] {
-                    
-                    for index in 0..<strongSelf.blockadeList.count {
-                        
-                        filterData = filterData.filter({ $0.userID != strongSelf.blockadeList[index] })
-                        
-                    }
-                    
-                }
-
-                strongSelf.forumArticles = filterData
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
+    // MARK: - Set UI
     func setBackgroundView() {
         
         let backgroundView = UIView()
         
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
         view.addSubview(backgroundView)
         
@@ -211,9 +123,95 @@ class MoreArticlesViewController: UIViewController {
         moreArticlesTableView.dataSource = self
         
     }
+    
+    // MARK: - Method
+    func fetchUserInfoData() {
+        
+        userManager.fetchUsersInfo { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                self.usersInfo = usersInfo
+                
+                self.moreArticlesTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    func fetchFriendBlockadeListData() {
+        
+        friendManager.fetchFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let userFriend):
+                
+                self.blockadeList = userFriend.blockadeList
+                
+                self.fetchForumArticlesData()
+                
+                self.moreArticlesTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+                
+        }
+        
+    }
+    
+    func fetchForumArticlesData() {
+        
+        forumArticleManager.fetchData(forumType: forumType ?? "") { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let data):
+                
+                var filterData = data
+                
+                if self.blockadeList != [] {
+                    
+                    for index in 0..<self.blockadeList.count {
+                        
+                        filterData = filterData.filter({ $0.userID != self.blockadeList[index] })
+                        
+                    }
+                    
+                }
+
+                self.forumArticles = filterData
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
 
 }
 
+// MARK: - TableView delegate / dataSource
 extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -271,13 +269,13 @@ extension MoreArticlesViewController: UITableViewDelegate, UITableViewDataSource
             
             viewController.getFriendStatus = { [weak self] isBlock in
                 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 
                 if isBlock {
                     
-                    strongSelf.forumArticles = strongSelf.forumArticles.filter({
+                    self.forumArticles = self.forumArticles.filter({
                         
-                        $0.userID != strongSelf.forumArticles[indexPath.row].userID
+                        $0.userID != self.forumArticles[indexPath.row].userID
                         
                     })
                     

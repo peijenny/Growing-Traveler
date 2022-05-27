@@ -6,12 +6,13 @@
 //
 
 import UIKit
-import PKHUD
 
 class SelectCategoryViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     var categoryTableView = UITableView()
     
+    // MARK: - Property
     var getSelectCategoryItem: ((_ item: CategoryItem) -> Void)?
     
     var categoryManager = CategoryManager()
@@ -28,6 +29,7 @@ class SelectCategoryViewController: UIViewController {
         
     }
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,30 +45,7 @@ class SelectCategoryViewController: UIViewController {
         
     }
     
-    func fetchCategoryData() {
-        
-        categoryManager.fetchData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let data):
-                
-                strongSelf.category = data
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
+    // MARK: - Set UI
     func setNavigationBar() {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -77,6 +56,55 @@ class SelectCategoryViewController: UIViewController {
         
     }
     
+    func setTableView() {
+        
+        categoryTableView.separatorInset.right = 15.0
+        
+        view.addSubview(categoryTableView)
+        
+        categoryTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            categoryTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            categoryTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            categoryTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            categoryTableView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+        
+        categoryTableView.register(
+            UINib(nibName: String(describing: CategoryTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: CategoryTableViewCell.self))
+
+        categoryTableView.delegate = self
+        
+        categoryTableView.dataSource = self
+        
+    }
+    
+    // MARK: - Method
+    func fetchCategoryData() {
+        
+        categoryManager.fetchData { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let data):
+                
+                self.category = data
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Target / IBAction
     @objc func setClosePageButton(sender: UIButton) {
         
         dismiss(animated: true, completion: .none)
@@ -93,7 +121,7 @@ class SelectCategoryViewController: UIViewController {
             
         } else {
             
-            HUD.flash(.label("請選擇標籤！"), delay: 0.5)
+            HandleInputResult.selectCategory.messageHUD
             
         }
         
@@ -101,6 +129,7 @@ class SelectCategoryViewController: UIViewController {
 
 }
 
+// MARK: - TableView delegate / dataSource
 extension SelectCategoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -139,35 +168,6 @@ extension SelectCategoryViewController: UITableViewDelegate, UITableViewDataSour
         guard let selectItem = category?[indexPath.section].items[indexPath.row] else { return }
         
         self.selectItem = selectItem
-        
-    }
-    
-}
-
-extension SelectCategoryViewController {
-    
-    func setTableView() {
-        
-        categoryTableView.separatorInset.right = 15.0
-        
-        view.addSubview(categoryTableView)
-        
-        categoryTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            categoryTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            categoryTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            categoryTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            categoryTableView.heightAnchor.constraint(equalTo: view.heightAnchor)
-        ])
-        
-        categoryTableView.register(
-            UINib(nibName: String(describing: CategoryTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: CategoryTableViewCell.self))
-
-        categoryTableView.delegate = self
-        
-        categoryTableView.dataSource = self
         
     }
     

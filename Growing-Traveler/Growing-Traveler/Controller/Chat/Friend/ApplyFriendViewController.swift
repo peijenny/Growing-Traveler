@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class ApplyFriendViewController: BaseViewController {
     
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var applyTableView: UITableView! {
         
         didSet {
@@ -34,7 +34,21 @@ class ApplyFriendViewController: BaseViewController {
     
     @IBOutlet weak var addFriendButton: UIButton!
     
+    // MARK: - Property
     var friendManager = FriendManager()
+    
+    var ownFriend: Friend? {
+        
+        didSet {
+            
+            if let applyList = ownFriend?.applyList {
+                
+                fetchFriendInfoData(friendList: applyList)
+                
+            }
+            
+        }
+    }
     
     var otherFriend: Friend?
     
@@ -52,19 +66,7 @@ class ApplyFriendViewController: BaseViewController {
         
     }
     
-    var ownFriend: Friend? {
-        
-        didSet {
-            
-            if let applyList = ownFriend?.applyList {
-                
-                fetchFriendInfoData(friendList: applyList)
-                
-            }
-            
-        }
-    }
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -80,15 +82,15 @@ class ApplyFriendViewController: BaseViewController {
         
         userInfoView.isHidden = true
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        applyFriendBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        applyFriendBackgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
-        userInfoView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.darkBlue.hexText)
+        userInfoView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.darkBlue.hexText)
         
         userInfoView.cornerRadius = 10
         
-        addFriendButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        addFriendButton.tintColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
     }
     
@@ -110,7 +112,7 @@ class ApplyFriendViewController: BaseViewController {
         
         friendManager.fetchFriendInfoData(friendList: friendList) { [weak self] result in
                 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
@@ -118,15 +120,13 @@ class ApplyFriendViewController: BaseViewController {
                 
                 if friendsInfo.count == friendList.count {
                     
-                    strongSelf.friendsInfo = friendsInfo
+                    self.friendsInfo = friendsInfo
                     
                 }
                 
-            case .failure(let error):
+            case .failure:
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -134,43 +134,63 @@ class ApplyFriendViewController: BaseViewController {
         
     }
     
-    func fetchData(friendID: String) {
+    func fetchFriendListData(friendID: String) {
         
         friendManager.fetchFriendListData(fetchUserID: friendID) { [weak self] result in
             
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
             switch result {
                 
             case .success(let friend):
                 
-                if friendID == userID {
+                if friendID == KeyToken().userID {
                     
-                    strongSelf.ownFriend = friend
+                    self.ownFriend = friend
                     
                 } else {
                     
-                    strongSelf.otherFriend = friend
+                    self.otherFriend = friend
 
-                    if friendID != strongSelf.searchUser?.userID {
+                    if friendID != self.searchUser?.userID {
                         
-                        strongSelf.popupConfirmApplyPage()
+                        self.popupConfirmApplyPage()
                         
                     }
                     
-                    if !friend.blockadeList.filter({ $0 == userID }).isEmpty {
+                    if !friend.blockadeList.filter({ $0 == KeyToken().userID }).isEmpty {
                         
-                        strongSelf.hintTextLabel.text = SearchFriendStatus.noSearch.title
+                        self.hintTextLabel.text = SearchFriendStatus.noSearch.title
                         
                     }
                     
                 }
                 
-            case .failure(let error):
+            case .failure:
                 
-                print(error)
+                HandleResult.readDataFailed.messageHUD
                 
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+            }
+            
+        }
+        
+    }
+    
+    func fetchUserData() {
+        
+        friendManager.listenFriendInfoData { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let users):
+                
+                self.allUsers = users
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
                 
             }
             
@@ -196,17 +216,17 @@ class ApplyFriendViewController: BaseViewController {
         
         viewController.getConfirmStatus = { [weak self] isConfirm in
 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
-            guard let otherFriend = strongSelf.otherFriend else { return }
+            guard let otherFriend = self.otherFriend else { return }
 
             if isConfirm {
                 
-                for index in 0..<strongSelf.friendsInfo.count {
+                for index in 0..<self.friendsInfo.count {
 
-                    if strongSelf.friendsInfo[index].userID == otherFriend.userID {
+                    if self.friendsInfo[index].userID == otherFriend.userID {
 
-                        strongSelf.friendsInfo.remove(at: index)
+                        self.friendsInfo.remove(at: index)
                         
                         break
 
@@ -214,9 +234,9 @@ class ApplyFriendViewController: BaseViewController {
 
                 }
                 
-                strongSelf.applyTableView.reloadData()
+                self.applyTableView.reloadData()
                 
-                strongSelf.fetchData(friendID: userID)
+                self.fetchFriendListData(friendID: KeyToken().userID)
 
             }
 
@@ -226,59 +246,11 @@ class ApplyFriendViewController: BaseViewController {
         
     }
     
-    func fetchUserData() {
-        
-        friendManager.listenFriendInfoData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let users):
-                
-                strongSelf.allUsers = users
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
-    @IBAction func searchUserButton(_ sender: UIButton) {
-        
-        guard let inputEmail = inputEmailTextField.text else { return }
-        
-        let filterUsers = allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() })
-        
-        if !filterUsers.isEmpty {
-            
-            userInfoView.isHidden = true
-            
-            searchUser = filterUsers[0]
-
-            fetchData(friendID: filterUsers[0].userID)
-            
-            handleFriendStatus(searchUser: filterUsers[0])
-
-        } else {
-
-            hintTextLabel.text = SearchFriendStatus.noSearch.title
-
-        }
-        
-    }
-    
     func handleFriendStatus(searchUser: UserInfo?) {
         
         if let searchUser = searchUser, let ownFriend = ownFriend {
             
-            if searchUser.userID == userID {
+            if searchUser.userID == KeyToken().userID {
                 
                 hintTextLabel.text = SearchFriendStatus.yourself.title
                 
@@ -316,6 +288,31 @@ class ApplyFriendViewController: BaseViewController {
             
     }
     
+    // MARK: - Target / IBAction
+    @IBAction func searchUserButton(_ sender: UIButton) {
+        
+        guard let inputEmail = inputEmailTextField.text else { return }
+        
+        let filterUsers = allUsers.filter({ $0.userEmail.lowercased() == inputEmail.lowercased() })
+        
+        if !filterUsers.isEmpty {
+            
+            userInfoView.isHidden = true
+            
+            searchUser = filterUsers[0]
+
+            fetchFriendListData(friendID: filterUsers[0].userID)
+            
+            handleFriendStatus(searchUser: filterUsers[0])
+
+        } else {
+
+            hintTextLabel.text = SearchFriendStatus.noSearch.title
+
+        }
+        
+    }
+    
     @IBAction func sendApplyButton(_ sender: UIButton) {
 
         if var ownFriend = ownFriend, var otherFriend = otherFriend {
@@ -342,6 +339,7 @@ class ApplyFriendViewController: BaseViewController {
     
 }
 
+// MARK: - TableView delegate / dataSource
 extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -368,7 +366,7 @@ extension ApplyFriendViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        fetchData(friendID: friendsInfo[indexPath.row].userID)
+        fetchFriendListData(friendID: friendsInfo[indexPath.row].userID)
         
     }
     

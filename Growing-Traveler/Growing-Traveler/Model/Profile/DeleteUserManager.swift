@@ -9,7 +9,6 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import PKHUD
 
 class DeleteUserManager {
     
@@ -21,15 +20,14 @@ class DeleteUserManager {
             
             database.collection("studyGoal").document(studyGoals[index].id).delete { error in
                 
-                if let error = error {
+                if error != nil {
                     
-                    print(error)
-                    
-                    HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.deleteDataFailed.messageHUD
                     
                 } else {
                     
-                    print("Success")
+                    HandleResult.deleteDataSuccessed.messageHUD
+
                 }
                 
             }
@@ -44,15 +42,14 @@ class DeleteUserManager {
             
             database.collection("forum").document(forumArticles[index].id).delete { error in
                 
-                if let error = error {
+                if error != nil {
                     
-                    print(error)
-                    
-                    HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.deleteDataFailed.messageHUD
                     
                 } else {
                     
-                    print("Success")
+                    HandleResult.deleteDataSuccessed.messageHUD
+
                 }
                 
             }
@@ -71,15 +68,14 @@ class DeleteUserManager {
                 .document("\(Int(deleteArticleMessages[index].articleMessage[itemIndex].createTime))")
                 .delete { error in
                     
-                    if let error = error {
+                    if error != nil {
                         
-                        print(error)
-                        
-                        HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                        
+                        HandleResult.deleteDataFailed.messageHUD
+                       
                     } else {
                         
-                        print("Success")
+                        HandleResult.deleteDataSuccessed.messageHUD
+
                     }
                     
                 }
@@ -94,15 +90,14 @@ class DeleteUserManager {
 
         database.collection("friend").document(deleteUserID).delete { error in
             
-            if let error = error {
+            if error != nil {
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.deleteDataFailed.messageHUD
                 
             } else {
                 
-                print("Success")
+                HandleResult.deleteDataSuccessed.messageHUD
+
             }
             
         }
@@ -113,18 +108,14 @@ class DeleteUserManager {
 
         database.collection("user").document(deleteUserID).delete { error in
             
-            if let error = error {
+            if error != nil {
                 
-                print(error)
-                
-                HUD.flash(.labeledError(title: "刪除失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                HandleResult.deleteDataFailed.messageHUD
                 
             } else {
                 
-                print("Success")
-                
-//                userID = ""
-//
+                HandleResult.deleteDataSuccessed.messageHUD
+
             }
             
         }
@@ -134,14 +125,12 @@ class DeleteUserManager {
     func fetchStudyGoalsData(completion: @escaping (Result<[StudyGoal]>) -> Void) {
 
         database.collection("studyGoal")
-        .whereField("userID", isEqualTo: userID).getDocuments { snapshot, error in
+        .whereField("userID", isEqualTo: KeyToken().userID).getDocuments { snapshot, error in
             
             var studyGoals: [StudyGoal] = []
             
             guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
-                
+
                 return
                 
             }
@@ -157,8 +146,6 @@ class DeleteUserManager {
                     }
                     
                 } catch {
-                    
-                    print(error)
                     
                     completion(Result.failure(error))
 
@@ -176,13 +163,11 @@ class DeleteUserManager {
         
         var forumArticles: [ForumArticle] = []
 
-        database.collection("forum")
-        .whereField("userID", isEqualTo: userID).getDocuments { snapshot, error in
+        database.collection("forum").whereField("userID", isEqualTo: KeyToken().userID)
+        .getDocuments { snapshot, error in
 
             guard let snapshot = snapshot else {
                 
-                print("Error fetching document: \(error!)")
-
                 return
                 
             }
@@ -199,8 +184,6 @@ class DeleteUserManager {
                     
                 } catch {
                     
-                    print(error)
-                    
                     completion(Result.failure(error))
 
                 }
@@ -215,12 +198,9 @@ class DeleteUserManager {
     
     func fetchFriendListData(completion: @escaping (Result<Friend>) -> Void) {
         
-        database.collection("friend")
-        .document(userID).getDocument { snapshot, error in
+        database.collection("friend").document(KeyToken().userID).getDocument { snapshot, error in
             
             guard let snapshot = snapshot else {
-                
-                print("Error fetching document: \(error!)")
                 
                 return
                 
@@ -236,8 +216,6 @@ class DeleteUserManager {
                 
             } catch {
                 
-                print(error)
-                
                 completion(Result.failure(error))
                 
             }
@@ -248,13 +226,10 @@ class DeleteUserManager {
     
     func fetchUserInfoData(completion: @escaping (Result<UserInfo>) -> Void) {
         
-        database.collection("user")
-        .document(userID).getDocument { snapshot, error in
+        database.collection("user").document(KeyToken().userID).getDocument { snapshot, error in
             
             guard let snapshot = snapshot else {
                 
-                print("Error fetching document: \(error!)")
-
                 return
                 
             }
@@ -269,8 +244,6 @@ class DeleteUserManager {
                 
             } catch {
                 
-                print(error)
-                
                 completion(Result.failure(error))
  
             }
@@ -279,20 +252,18 @@ class DeleteUserManager {
         
     }
     
-    func fetchArticleMessagesData(allForumArticles: [ForumArticle], completion: @escaping (Result<[DeleteArticle]>) -> Void) {
+    func fetchArticleMessagesData(
+        allForumArticles: [ForumArticle], completion: @escaping (Result<[DeleteArticle]>) -> Void) {
         
         var deleteArticleMessages: [DeleteArticle] = []
         
         for index in 0..<allForumArticles.count {
             
-            database.document(allForumArticles[index].id).collection("message")
-            .getDocuments { snapshot, error in
+            database.document(allForumArticles[index].id).collection("message").getDocuments { snapshot, error in
 
                 var articleMessages: [ArticleMessage] = []
 
                 guard let snapshot = snapshot else {
-
-                    print("Error fetching document: \(error!)")
 
                     return
 
@@ -302,16 +273,13 @@ class DeleteUserManager {
 
                     do {
 
-                        if let articleMessage = try document.data(
-                            as: ArticleMessage.self, decoder: Firestore.Decoder()) {
+                        if let articleMessage = try document.data(as: ArticleMessage.self, decoder: Firestore.Decoder()) {
 
                             articleMessages.append(articleMessage)
 
                         }
 
                     } catch {
-
-                        print(error)
 
                         completion(Result.failure(error))
 
@@ -338,8 +306,6 @@ class DeleteUserManager {
 
             guard let snapshot = snapshot else {
                 
-                print("Error fetching document: \(error!)")
-                
                 return
                 
             }
@@ -355,8 +321,6 @@ class DeleteUserManager {
                     }
                     
                 } catch {
-                    
-                    print(error)
                     
                     completion(Result.failure(error))
                     

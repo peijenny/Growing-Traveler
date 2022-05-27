@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class CertificationViewController: UIViewController {
     
+    // MARK: - IBOutlet / Components
     var certificationTableView = UITableView()
     
     var certificationBackgroundView = UIView()
@@ -18,16 +18,18 @@ class CertificationViewController: UIViewController {
     
     var placeHolderLabel = UILabel()
     
+    // MARK: - Property
     var userManager = UserManager()
     
     var userInfo: UserInfo?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "個人認證"
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         setNavigationItem()
         
@@ -35,72 +37,13 @@ class CertificationViewController: UIViewController {
         
         setTableView()
         
-        setcertificationBackgroundView()
+        setCertificationBackgroundView()
         
         setImageView()
         
         setLabel()
         
         fetchUserInfoData()
-        
-    }
-    
-    func fetchUserInfoData() {
-        
-        userManager.listenData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let userInfo):
-                
-                strongSelf.userInfo = userInfo
-                
-                if strongSelf.userInfo?.certification.count == 0 {
-                    
-                    strongSelf.certificationBackgroundView.isHidden = false
-                    
-                } else {
-                    
-                    strongSelf.certificationBackgroundView.isHidden = true
-                    
-                }
-                
-                strongSelf.certificationTableView.reloadData()
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
-    func setNavigationItem() {
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self, action: #selector(addCertification))
-        
-    }
-    
-    @objc func addCertification(sender: UIButton) {
-        
-        guard let viewController = UIStoryboard.profile.instantiateViewController(
-            withIdentifier: String(describing: PublishCertificationViewController.self)
-        ) as? PublishCertificationViewController else { return }
-        
-        viewController.userInfo = userInfo
-        
-        self.navigationController?.isNavigationBarHidden = true
-        
-        self.view.addSubview(viewController.view)
-
-        self.addChild(viewController)
         
     }
     
@@ -118,26 +61,15 @@ class CertificationViewController: UIViewController {
         
     }
     
-    func setBackgroundView() {
+    // MARK: - Set UI
+    func setNavigationItem() {
         
-        let backgroundView = UIView()
-        
-        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
-        
-        view.addSubview(backgroundView)
-        
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
-            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
-        ])
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(addCertification))
         
     }
     
-    func setcertificationBackgroundView() {
+    func setCertificationBackgroundView() {
         
         certificationBackgroundView.backgroundColor = UIColor.clear
         
@@ -152,6 +84,25 @@ class CertificationViewController: UIViewController {
             certificationBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             certificationBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             certificationBackgroundView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -110.0)
+        ])
+        
+    }
+    
+    func setBackgroundView() {
+        
+        let backgroundView = UIView()
+        
+        backgroundView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
+        
+        view.addSubview(backgroundView)
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor)
         ])
         
     }
@@ -221,9 +172,62 @@ class CertificationViewController: UIViewController {
         certificationTableView.dataSource = self
         
     }
+    
+    // MARK: - Method
+    func fetchUserInfoData() {
+        
+        userManager.listenUserInfo { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let userInfo):
+                
+                self.userInfo = userInfo
+                
+                if self.userInfo?.certification.count == 0 {
+                    
+                    self.certificationBackgroundView.isHidden = false
+                    
+                } else {
+                    
+                    self.certificationBackgroundView.isHidden = true
+                    
+                }
+                
+                self.certificationTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Target / IBAction
+    @objc func addCertification(sender: UIButton) {
+        
+        guard let viewController = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: String(describing: PublishCertificationViewController.self)
+        ) as? PublishCertificationViewController else { return }
+        
+        viewController.userInfo = userInfo
+        
+        self.navigationController?.isNavigationBarHidden = true
+        
+        self.view.addSubview(viewController.view)
+
+        self.addChild(viewController)
+        
+    }
 
 }
 
+// MARK: - TableView delegate / dataSource
 extension CertificationViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -299,7 +303,7 @@ extension CertificationViewController: UITableViewDelegate, UITableViewDataSourc
                 
                 if let userInfo = self.userInfo {
                  
-                    self.userManager.updateData(user: userInfo)
+                    self.userManager.updateUserInfo(user: userInfo)
                     
                 }
                 

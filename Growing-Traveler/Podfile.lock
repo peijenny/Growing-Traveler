@@ -223,6 +223,8 @@ PODS:
     - Charts/Core (= 4.0.2)
   - Charts/Core (4.0.2):
     - SwiftAlgorithms (~> 1.0)
+  - Firebase (6.34.0):
+    - Firebase/Core (= 6.34.0)
   - Firebase/Analytics (6.34.0):
     - Firebase/Core
   - Firebase/Auth (6.34.0):
@@ -358,6 +360,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.5)
   - Charts
+  - Firebase
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Crashlytics
@@ -436,6 +439,6 @@ SPEC CHECKSUMS:
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
 
-PODFILE CHECKSUM: b4d752a719438344bb489c65f2e5315dc2bb7a8e
+PODFILE CHECKSUM: 45ede6cdd70b6cb7cb26e73f32de4c8efac5f0d5
 
 COCOAPODS: 1.11.2

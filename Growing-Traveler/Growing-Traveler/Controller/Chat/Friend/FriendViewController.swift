@@ -7,10 +7,10 @@
 
 import UIKit
 import Charts
-import PKHUD
 
 class FriendViewController: UIViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var friendListTableView: UITableView! {
         
         didSet {
@@ -34,6 +34,7 @@ class FriendViewController: UIViewController {
     
     let badgeLabel = UILabel()
     
+    // MARK: - Property
     var chatRoomManager = ChatRoomManager()
     
     var friendManager = FriendManager()
@@ -54,6 +55,7 @@ class FriendViewController: UIViewController {
         
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,9 +63,9 @@ class FriendViewController: UIViewController {
 
         registerTableViewCell()
         
-        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        headerView.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightGary.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightGary.hexText)
         
     }
     
@@ -78,94 +80,8 @@ class FriendViewController: UIViewController {
         
     }
     
-    func fetchUserInfoData() {
-        
-        userManager.fetchUsersData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let usersInfo):
-                
-                strongSelf.usersInfo = usersInfo
-                
-                strongSelf.friendListTableView.reloadData()
-                
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
-    func listenFriendListData() {
-
-        friendManager.listenFriendListData(fetchUserID: userID) { [weak self] result in
-
-            guard let strongSelf = self else { return }
-
-            switch result {
-
-            case .success(let friend):
-
-                strongSelf.ownerfriend = friend
-                
-                strongSelf.badgeLabel.text = (!friend.applyList.isEmpty) ? "\(friend.applyList.count)" : nil
-                
-                strongSelf.setNavigationItems()
-                
-                strongSelf.friendListTableView.reloadData()
-
-            case .failure(let error):
-
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-
-            }
-
-        }
-
-    }
-    
-    func fetchFriendsChatData() {
-        
-        chatRoomManager.fetchFriendsChatData { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-                
-            case .success(let friendsChat):
-                
-                strongSelf.friendsChat = friendsChat
-                
-                strongSelf.friendBackgroundView.isHidden = (friendsChat.count == 0) ? false : true
-                
-                strongSelf.friendListTableView.reloadData()
-
-            case .failure(let error):
-                
-                print(error)
-                
-                HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
-                
-            }
-            
-        }
-        
-    }
-    
+    // MARK: - Set UI
     func setNavigationItems() {
-        
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(
-//            image: UIImage.asset(.add), style: .plain, target: self, action: #selector(applyFriendButton))
         
         // badge label
         badgeLabel.frame = CGRect(x: 20, y: -5, width: 20, height: 20)
@@ -184,7 +100,7 @@ class FriendViewController: UIViewController {
         
         badgeLabel.textColor = UIColor.white
         
-        badgeLabel.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightRed.hexText)
+        badgeLabel.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightRed.hexText)
         
         // rightBar button
         let rightBarButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
@@ -203,6 +119,94 @@ class FriendViewController: UIViewController {
         
     }
     
+    func registerTableViewCell() {
+        
+        friendListTableView.register(
+            UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
+            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self))
+        
+    }
+    
+    // MARK: - Method
+    func fetchUserInfoData() {
+        
+        userManager.fetchUsersInfo { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let usersInfo):
+                
+                self.usersInfo = usersInfo
+                
+                self.friendListTableView.reloadData()
+                
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    func listenFriendListData() {
+
+        friendManager.listenFriendListData(fetchUserID: KeyToken().userID) { [weak self] result in
+
+            guard let self = self else { return }
+
+            switch result {
+
+            case .success(let friend):
+
+                self.ownerfriend = friend
+                
+                self.badgeLabel.text = (!friend.applyList.isEmpty) ? "\(friend.applyList.count)" : nil
+                
+                self.setNavigationItems()
+                
+                self.friendListTableView.reloadData()
+
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+
+            }
+
+        }
+
+    }
+    
+    func fetchFriendsChatData() {
+        
+        chatRoomManager.fetchFriendsChatData { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+                
+            case .success(let friendsChat):
+                
+                self.friendsChat = friendsChat
+                
+                self.friendBackgroundView.isHidden = (friendsChat.count == 0) ? false : true
+                
+                self.friendListTableView.reloadData()
+
+            case .failure:
+                
+                HandleResult.readDataFailed.messageHUD
+                
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Target / IBAction
     @objc func applyFriendButton(sender: UIButton) {
         
         let viewController = UIStoryboard.chat.instantiateViewController(
@@ -220,16 +224,9 @@ class FriendViewController: UIViewController {
         
     }
     
-    func registerTableViewCell() {
-        
-        friendListTableView.register(
-            UINib(nibName: String(describing: FriendListTableViewCell.self), bundle: nil),
-            forCellReuseIdentifier: String(describing: FriendListTableViewCell.self))
-        
-    }
-    
 }
 
+// MARK: - TableView delegate / dataSource
 extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

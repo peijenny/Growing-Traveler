@@ -32,7 +32,7 @@ class ArticleTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        loadMoreButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.gray.hexText)
+        loadMoreButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.gray.hexText)
         
         loadMoreButton.cornerRadius = 10
     }
@@ -40,7 +40,6 @@ class ArticleTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
     func showForumArticle(forumArticle: ForumArticle, userName: String) {

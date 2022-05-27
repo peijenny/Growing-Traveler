@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import PKHUD
 
 class PublishNoteViewController: BaseViewController {
 
+    // MARK: - IBOutlet / Components
     @IBOutlet weak var noteTitleTextField: UITextField!
     
     @IBOutlet weak var modifyTimeLabel: UILabel!
@@ -18,15 +18,40 @@ class PublishNoteViewController: BaseViewController {
     
     @IBOutlet weak var uploadImageButton: UIButton!
     
+    // MARK: - Property
     var userManager = UserManager()
     
     var modifyNote: Note?
     
     var imageLink: String?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setNavigationItem()
+       
+        setUIStyle()
+        
+    }
+    
+    override var hidesBottomBarWhenPushed: Bool {
+        
+        get {
+            
+            return navigationController?.topViewController == self
+            
+        } set {
+            
+            super.hidesBottomBarWhenPushed = newValue
+            
+        }
+        
+    }
+    
+    // MARK: - Set UI
+    func setUIStyle() {
+     
         let formatter = DateFormatter()
         
         formatter.dateFormat = "yyyy.MM.dd HH:mm"
@@ -46,8 +71,7 @@ class PublishNoteViewController: BaseViewController {
         }
         
         modifyTimeLabel.text = formatter.string(from: createTime)
-        
-        setNavigationItem()
+
         
         noteTextView.layer.borderColor = UIColor.hexStringToUIColor(hex: "9C8F96").cgColor
         
@@ -67,25 +91,11 @@ class PublishNoteViewController: BaseViewController {
 
         noteTextView.delegate = self
         
-        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        view.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
-        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChart.lightBlue.hexText)
+        uploadImageButton.backgroundColor = UIColor.hexStringToUIColor(hex: ColorChat.lightBlue.hexText)
         
         uploadImageButton.cornerRadius = 5
-        
-    }
-    
-    override var hidesBottomBarWhenPushed: Bool {
-        
-        get {
-            
-            return navigationController?.topViewController == self
-            
-        } set {
-            
-            super.hidesBottomBarWhenPushed = newValue
-            
-        }
         
     }
     
@@ -95,54 +105,13 @@ class PublishNoteViewController: BaseViewController {
             barButtonSystemItem: .done, target: self, action: #selector(checkNote))
         
     }
-    
-    @objc func checkNote(sender: UIButton) {
-        
-        checkFullIn()
-        
-    }
-     
-    @IBAction func uploadImageButton(_ sender: UIButton) {
-     
-        let picker = UIImagePickerController()
-        
-        picker.delegate = self
-        
-        present(picker, animated: true)
-        
-    }
-    
-    func setModifyData() {
-        
-        noteTitleTextField.text = modifyNote?.noteTitle
-        
-        var contentText = ""
-        
-        guard let modifyNote = modifyNote else { return }
 
-        for index in 0..<modifyNote.content.count {
-            
-            if modifyNote.content[index].contentType == SendType.image.title {
-                
-                contentText += "\0\(modifyNote.content[index].contentText)\0"
-                 
-            } else if modifyNote.content[index].contentType == SendType.string.title {
-                
-                contentText += modifyNote.content[index].contentText
-                
-            }
-            
-        }
-        
-        noteTextView.text = contentText
-        
-    }
-    
+    // MARK: - Method
     func checkFullIn() {
         
-        guard let inputTitle = noteTitleTextField.text, noteTitleTextField.text != "" else {
+        guard let inputTitle = noteTitleTextField.text, !inputTitle.isEmpty else {
             
-            HUD.flash(.label(InputError.titleEmpty.title), delay: 0.5)
+            HandleInputResult.titleEmpty.messageHUD
             
             return
         }
@@ -179,11 +148,12 @@ class PublishNoteViewController: BaseViewController {
             let createTime = TimeInterval(Int(Date().timeIntervalSince1970))
             
             let note = Note(
-                userID: userID, noteID: noteID, createTime: createTime, noteTitle: inputTitle, content: noteContents)
+                userID: KeyToken().userID, noteID: noteID, createTime: createTime,
+                noteTitle: inputTitle, content: noteContents)
             
-            HUD.flash(.labeledSuccess(title: "新增成功！", subtitle: nil), delay: 0.5)
+            HandleResult.addDataFailed.messageHUD
             
-            userManager.updateUserNoteData(note: note)
+            userManager.updateUserNote(note: note)
             
             navigationController?.popViewController(animated: true)
             
@@ -197,14 +167,40 @@ class PublishNoteViewController: BaseViewController {
             
             modifyNote.content = noteContents
             
-            HUD.flash(.labeledSuccess(title: "修改成功！", subtitle: nil), delay: 0.5)
+            HandleResult.updateDataFailed.messageHUD
             
-            userManager.updateUserNoteData(note: modifyNote)
+            userManager.updateUserNote(note: modifyNote)
             
             navigationController?.popToViewController(
                 navigationController?.viewControllers[1] ?? UIViewController(), animated: true)
             
         }
+        
+    }
+    
+    func setModifyData() {
+        
+        noteTitleTextField.text = modifyNote?.noteTitle
+        
+        var contentText = ""
+        
+        guard let modifyNote = modifyNote else { return }
+
+        for index in 0..<modifyNote.content.count {
+            
+            if modifyNote.content[index].contentType == SendType.image.title {
+                
+                contentText += "\0\(modifyNote.content[index].contentText)\0"
+                 
+            } else if modifyNote.content[index].contentType == SendType.string.title {
+                
+                contentText += modifyNote.content[index].contentText
+                
+            }
+            
+        }
+        
+        noteTextView.text = contentText
         
     }
     
@@ -250,13 +246,13 @@ class PublishNoteViewController: BaseViewController {
         
         if noteTextView.text.range(of: "https://i.imgur.com") == nil {
             
-            if noteTextView.text != "" {
+            if !noteTextView.text.isEmpty {
                 
                 contentArray = [noteTextView.text]
                 
             } else {
                 
-                HUD.flash(.label(InputError.contentEmpty.title), delay: 0.5)
+                HandleInputResult.contentEmpty.messageHUD
                 
             }
             
@@ -270,8 +266,26 @@ class PublishNoteViewController: BaseViewController {
         
     }
     
+    // MARK: - Target / IBAction
+    @objc func checkNote(sender: UIButton) {
+        
+        checkFullIn()
+        
+    }
+     
+    @IBAction func uploadImageButton(_ sender: UIButton) {
+     
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        
+        present(picker, animated: true)
+        
+    }
+    
 }
 
+// MARK: - ImagePickerController delegate
 extension PublishNoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
@@ -284,21 +298,19 @@ extension PublishNoteViewController: UIImagePickerControllerDelegate, UINavigati
 
             uploadImageManager.uploadImage(uiImage: image, completion: { [weak self] result in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch result {
 
                 case.success(let imageLink):
 
-                    strongSelf.imageLink = imageLink
+                    self.imageLink = imageLink
                     
-                    strongSelf.insertPictureToTextView(imageLink: imageLink)
+                    self.insertPictureToTextView(imageLink: imageLink)
 
-                case .failure(let error):
-
-                    print(error)
+                case .failure:
                     
-                    HUD.flash(.labeledError(title: "資料獲取失敗！", subtitle: "請稍後再試"), delay: 0.5)
+                    HandleResult.readDataFailed.messageHUD
 
                 }
 
@@ -312,6 +324,7 @@ extension PublishNoteViewController: UIImagePickerControllerDelegate, UINavigati
     
 }
 
+// MARK: - TextView delegate
 extension PublishNoteViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
