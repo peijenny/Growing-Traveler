@@ -2,17 +2,15 @@
 
 ![Banner](https://i.imgur.com/N2ozLuu.png)
 
-<!-- [![AppStore](https://i.imgur.com/Ue5FJ7R.png =82x30)](https://apps.apple.com/tw/app/成長旅客/id1619736522)
- -->
- 
- <!--
-<img src="https://i.imgur.com/Ue5FJ7R.png" alt="AppStore" width="82px" height="30px"/>
--->
-
+<!--
 <a href="https://apps.apple.com/tw/app/成長旅客/id1619736522">
-    <img src="https://i.imgur.com/Ue5FJ7R.png" alt="AppStore"/>
+    <img src="https://i.imgur.com/Ue5FJ7R.png" alt="AppStore" width="82px" height="30px"/>
 </a>
 <BR><BR>
+-->
+
+[![AppStore](https://i.imgur.com/Ue5FJ7R.png =82x30)](https://apps.apple.com/tw/app/成長旅客/id1619736522)
+
 <p>
     <img src="https://img.shields.io/badge/platform-iOS-lightgrey">
     <img src="https://img.shields.io/badge/version-1.1-yellow">
