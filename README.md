@@ -17,12 +17,12 @@
 ### About
 When we study, it is easy to stop halfway because we don't understandor don't havea goal, so we need to
 plan well, execute according to the plan, and review then improve after completion. Growing-Traveler can help.
- - UsedMVC to slice and dice the duties of Model, View, Controller to make code clean
- - UsedGit to track project for good version control
+ - Used MVC to slice and dice the duties of Model, View, Controller to make code clean
+ - Used Git to track project for good version control
  - Followed Git Flow to track development progress
- - Called Sign in with Apple and Firebase Authentication SDKfor quick login
- - UsedFirebase Firestore as database for reading, inserting, updating and deleting data
- - Used Imgur'sAPI toupload image to save database space and access images easily
+ - Called Sign in with Apple and Firebase Authentication SDK for quick login
+ - Used Firebase Firestore as database for reading, inserting, updating and deleting data
+ - Used Imgur's API to upload image to save database space and access images easily
 
 ### Features
  - Plan personal study goals and items
